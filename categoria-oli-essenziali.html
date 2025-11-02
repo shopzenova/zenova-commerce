@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oli Essenziali - Zenova</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-11.png" alt="Zenova Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">Zenova</a></h1>
+                        <p class="tagline">where technology meets calm</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+                <div class="nav-icons">
+                    <button class="search-btn" id="searchBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="cart-btn" id="cartBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Category Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> /
+                <a href="prodotti.html">Prodotti</a> /
+                <span>Oli Essenziali</span>
+            </div>
+
+            <div class="page-header-simple">
+                <h1 class="page-title">🌿 Oli Essenziali</h1>
+                <p class="page-subtitle">Essenze pure per il tuo benessere</p>
+            </div>
+
+            <div class="category-intro">
+                <p>Scopri la nostra selezione di oli essenziali puri al 100%, estratti dalle migliori piante aromatiche. Perfetti per aromaterapia, diffusori e rituali di benessere quotidiano.</p>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be added here -->
+                <div class="product-card">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <div class="product-category">OLI ESSENZIALI</div>
+                        <h3 class="product-name">Olio Essenziale Lavanda</h3>
+                        <p class="product-description">Puro al 100%, perfetto per rilassamento e sonno profondo.</p>
+                        <div class="product-footer">
+                            <span class="product-price">€19.90</span>
+                            <button class="add-to-cart-btn">Aggiungi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🍊</div>
+                    <div class="product-info">
+                        <div class="product-category">OLI ESSENZIALI</div>
+                        <h3 class="product-name">Olio Essenziale Arancia</h3>
+                        <p class="product-description">Energizzante e rinfrescante, ideale per la mattina.</p>
+                        <div class="product-footer">
+                            <span class="product-price">€16.90</span>
+                            <button class="add-to-cart-btn">Aggiungi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🌲</div>
+                    <div class="product-info">
+                        <div class="product-category">OLI ESSENZIALI</div>
+                        <h3 class="product-name">Olio Essenziale Eucalipto</h3>
+                        <p class="product-description">Purificante e balsamico, perfetto per la respirazione.</p>
+                        <div class="product-footer">
+                            <span class="product-price">€18.50</span>
+                            <button class="add-to-cart-btn">Aggiungi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Il Tuo Carrello</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Il tuo carrello è vuoto</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totale:</span>
+                <span id="cartTotal">€0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">Procedi all'acquisto</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em; opacity: 0.8;">Foto fornite da <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Unsplash</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

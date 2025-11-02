@@ -1,0 +1,376 @@
+/* Zen Diffuser - Fixed Bottom Left - Modern Design */
+.zen-diffuser {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 90px;
+    height: 140px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.zen-diffuser.diffuser-ready {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Diffuser Body */
+.diffuser-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Diffuser Top (Narrow Opening) */
+.diffuser-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg,
+        #E8DCC4 0%,
+        #D9C7A8 50%,
+        #C8B89C 100%);
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+    box-shadow:
+        0 -2px 10px rgba(168, 181, 160, 0.4),
+        inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.diffuser-top::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle,
+        rgba(50, 50, 50, 0.6) 0%,
+        rgba(30, 30, 30, 0.8) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Diffuser Middle (Wider Elegant Body) */
+.diffuser-middle {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 85px;
+    background: linear-gradient(180deg,
+        #F5F1E8 0%,
+        #E8DCC4 30%,
+        #D9C7A8 70%,
+        #C8B89C 100%);
+    border-radius: 0 0 45% 45% / 0 0 30% 30%;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15),
+        inset -3px 0 10px rgba(0, 0, 0, 0.05),
+        inset 3px 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Elegant Lines */
+.wood-grain {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75px;
+    height: 80px;
+    background:
+        linear-gradient(90deg,
+            transparent 48%,
+            rgba(200, 184, 156, 0.3) 49%,
+            rgba(200, 184, 156, 0.3) 51%,
+            transparent 52%
+        );
+    border-radius: 0 0 45% 45% / 0 0 30% 30%;
+    pointer-events: none;
+}
+
+/* Diffuser Base (Minimal) */
+.diffuser-base {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85px;
+    height: 30px;
+    background: linear-gradient(180deg,
+        #C8B89C 0%,
+        #B8A88C 50%,
+        #A89878 100%);
+    border-radius: 0 0 15px 15px;
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.diffuser-base::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75px;
+    height: 2px;
+    background: rgba(139, 111, 71, 0.3);
+    border-radius: 50%;
+}
+
+/* Mist Container - Wider */
+.diffuser-mist {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 120px;
+    pointer-events: none;
+}
+
+/* Mist Particles - Larger and More Realistic */
+.mist-particle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(200, 220, 240, 0.7) 20%,
+        rgba(168, 181, 160, 0.5) 40%,
+        rgba(150, 170, 190, 0.3) 60%,
+        transparent 80%);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.3);
+    filter: blur(2px);
+}
+
+/* Spraying Animation - Wider Spread */
+.zen-diffuser.spraying .mist-particle {
+    animation: mist-spray-wide 3s ease-out forwards;
+}
+
+.zen-diffuser.spraying .mist-1 {
+    animation-delay: 0s;
+    left: 50%;
+}
+
+.zen-diffuser.spraying .mist-2 {
+    animation-delay: 0.2s;
+    left: 30%;
+    animation-name: mist-spray-left;
+}
+
+.zen-diffuser.spraying .mist-3 {
+    animation-delay: 0.4s;
+    left: 70%;
+    animation-name: mist-spray-right;
+}
+
+.zen-diffuser.spraying .mist-4 {
+    animation-delay: 0.6s;
+    left: 40%;
+    animation-name: mist-spray-left;
+}
+
+.zen-diffuser.spraying .mist-5 {
+    animation-delay: 0.8s;
+    left: 60%;
+    animation-name: mist-spray-right;
+}
+
+/* Main Mist Animation - Center */
+@keyframes mist-spray-wide {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(0.3);
+        filter: blur(1px);
+    }
+    10% {
+        opacity: 0.9;
+        transform: translateX(-50%) translateY(-15px) scale(0.6);
+        filter: blur(2px);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-35px) scale(1.2);
+        filter: blur(3px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(-60px) scale(2);
+        filter: blur(5px);
+    }
+    75% {
+        opacity: 0.4;
+        transform: translateX(-50%) translateY(-90px) scale(3);
+        filter: blur(8px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-120px) scale(4);
+        filter: blur(10px);
+    }
+}
+
+/* Left Side Mist */
+@keyframes mist-spray-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(0.3);
+        filter: blur(1px);
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(-60%) translateY(-12px) scale(0.5);
+        filter: blur(2px);
+    }
+    25% {
+        opacity: 0.9;
+        transform: translateX(-70%) translateY(-30px) scale(1);
+        filter: blur(4px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-80%) translateY(-55px) scale(1.8);
+        filter: blur(6px);
+    }
+    75% {
+        opacity: 0.3;
+        transform: translateX(-90%) translateY(-85px) scale(2.5);
+        filter: blur(9px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%) translateY(-110px) scale(3.5);
+        filter: blur(12px);
+    }
+}
+
+/* Right Side Mist */
+@keyframes mist-spray-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scale(0.3);
+        filter: blur(1px);
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(-40%) translateY(-12px) scale(0.5);
+        filter: blur(2px);
+    }
+    25% {
+        opacity: 0.9;
+        transform: translateX(-30%) translateY(-30px) scale(1);
+        filter: blur(4px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-20%) translateY(-55px) scale(1.8);
+        filter: blur(6px);
+    }
+    75% {
+        opacity: 0.3;
+        transform: translateX(-10%) translateY(-85px) scale(2.5);
+        filter: blur(9px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(0%) translateY(-110px) scale(3.5);
+        filter: blur(12px);
+    }
+}
+
+/* Subtle Pulse on Body */
+.zen-diffuser.spraying .diffuser-middle {
+    animation: body-pulse 0.3s ease;
+}
+
+@keyframes body-pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.02);
+    }
+}
+
+/* Hover Effect */
+.zen-diffuser:hover {
+    transform: translateY(-5px) scale(1.05);
+    cursor: pointer;
+}
+
+.zen-diffuser:hover .diffuser-middle {
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.4),
+        inset -2px 0 5px rgba(0, 0, 0, 0.2),
+        inset 2px 0 5px rgba(255, 255, 255, 0.15);
+}
+
+/* LED Light Effect - More Visible */
+.diffuser-middle::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle,
+        rgba(168, 181, 160, 1),
+        rgba(168, 181, 160, 0.5) 50%,
+        transparent);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: led-pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(168, 181, 160, 0.6);
+}
+
+@keyframes led-pulse {
+    0%, 100% {
+        opacity: 0.5;
+        box-shadow: 0 0 8px rgba(168, 181, 160, 0.4);
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 15px rgba(168, 181, 160, 0.8);
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .zen-diffuser {
+        bottom: 20px;
+        left: 20px;
+        width: 80px;
+        height: 100px;
+    }
+
+    .diffuser-middle {
+        width: 55px;
+        height: 60px;
+    }
+
+    .diffuser-base {
+        width: 65px;
+        height: 20px;
+    }
+
+    .diffuser-top {
+        width: 38px;
+        height: 12px;
+    }
+}
