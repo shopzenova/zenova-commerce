@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadCart();
     loadWishlist();
     setupEventListeners();
-    setupCategorySidebar();
+    // setupCategorySidebar(); // REMOVED - sidebar.js handles category accordion
     initDarkMode();
 });
 
@@ -951,111 +951,111 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Setup Category Sidebar
-function setupCategorySidebar() {
-    const categoryBtns = document.querySelectorAll('.category-btn');
-
-    console.log('Setting up sidebar, found buttons:', categoryBtns.length);
-
-    if (categoryBtns.length === 0) {
-        console.log('No category buttons found, exiting');
-        // Show message on page if buttons not found
-        const sidebar = document.querySelector('.categories-sidebar');
-        if (sidebar) {
-            const msg = document.createElement('div');
-            msg.style.cssText = 'color: red; padding: 10px; background: #fff;';
-            msg.textContent = 'ERRORE: Pulsanti non trovati!';
-            sidebar.prepend(msg);
-        }
-        return; // Exit if no sidebar exists
-    }
-
-    // Show success message
-    const sidebar = document.querySelector('.categories-sidebar');
-    if (sidebar) {
-        const msg = document.createElement('div');
-        msg.style.cssText = 'color: green; padding: 10px; background: #e8f5e9; margin-bottom: 10px; border-radius: 5px; font-size: 12px;';
-        msg.textContent = `✓ Sidebar attiva! Trovati ${categoryBtns.length} pulsanti`;
-        sidebar.querySelector('.sidebar-header').after(msg);
-
-        // Remove message after 3 seconds
-        setTimeout(() => msg.remove(), 3000);
-    }
-
-    categoryBtns.forEach((btn, index) => {
-        console.log('Adding listener to button', index);
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            alert('Click rilevato su categoria ' + index);
-            console.log('Button clicked!', index);
-
-            const categoryItem = this.parentElement;
-            console.log('Category item:', categoryItem);
-
-            // Close all other categories
-            document.querySelectorAll('.category-item').forEach(item => {
-                if (item !== categoryItem) {
-                    item.classList.remove('active');
-                    const sublist = item.querySelector('.subcategory-list');
-                    if (sublist) sublist.style.maxHeight = '0px';
-                }
-            });
-
-            // Toggle current category
-            const wasActive = categoryItem.classList.contains('active');
-            const subcategoryList = categoryItem.querySelector('.subcategory-list');
-
-            if (wasActive) {
-                categoryItem.classList.remove('active');
-                if (subcategoryList) subcategoryList.style.maxHeight = '0px';
-                console.log('Closed category');
-            } else {
-                categoryItem.classList.add('active');
-                if (subcategoryList) subcategoryList.style.maxHeight = '500px';
-                console.log('Opened category');
-            }
-
-            // Visual debug - change button color
-            this.style.background = wasActive ? '' : 'rgba(212, 163, 115, 0.3)';
-        });
-    });
-
-    // Handle subcategory clicks - filter products on page
-    const subcategoryLinks = document.querySelectorAll('.subcategory-link');
-
-    subcategoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const subcategory = link.dataset.subcategory;
-            console.log('Filtering by subcategory:', subcategory);
-
-            // Remove active class from all links
-            subcategoryLinks.forEach(l => l.classList.remove('active'));
-            // Add active class to clicked link
-            link.classList.add('active');
-
-            // Filter products
-            const productCards = document.querySelectorAll('.product-card');
-            productCards.forEach(card => {
-                if (subcategory === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const cardSubcategory = card.getAttribute('data-subcategory');
-                    if (cardSubcategory === subcategory) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-
-            // Scroll to products section
-            document.querySelector('.products-grid').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-}
+// Setup Category Sidebar - DISABLED: sidebar.js handles this
+// function setupCategorySidebar() {
+//     const categoryBtns = document.querySelectorAll('.category-btn');
+//
+//     console.log('Setting up sidebar, found buttons:', categoryBtns.length);
+//
+//     if (categoryBtns.length === 0) {
+//         console.log('No category buttons found, exiting');
+//         // Show message on page if buttons not found
+//         const sidebar = document.querySelector('.categories-sidebar');
+//         if (sidebar) {
+//             const msg = document.createElement('div');
+//             msg.style.cssText = 'color: red; padding: 10px; background: #fff;';
+//             msg.textContent = 'ERRORE: Pulsanti non trovati!';
+//             sidebar.prepend(msg);
+//         }
+//         return; // Exit if no sidebar exists
+//     }
+//
+//     // Show success message
+//     const sidebar = document.querySelector('.categories-sidebar');
+//     if (sidebar) {
+//         const msg = document.createElement('div');
+//         msg.style.cssText = 'color: green; padding: 10px; background: #e8f5e9; margin-bottom: 10px; border-radius: 5px; font-size: 12px;';
+//         msg.textContent = `✓ Sidebar attiva! Trovati ${categoryBtns.length} pulsanti`;
+//         sidebar.querySelector('.sidebar-header').after(msg);
+//
+//         // Remove message after 3 seconds
+//         setTimeout(() => msg.remove(), 3000);
+//     }
+//
+//     categoryBtns.forEach((btn, index) => {
+//         console.log('Adding listener to button', index);
+//         btn.addEventListener('click', function(e) {
+//             e.preventDefault();
+//             e.stopPropagation();
+//
+//             alert('Click rilevato su categoria ' + index);
+//             console.log('Button clicked!', index);
+//
+//             const categoryItem = this.parentElement;
+//             console.log('Category item:', categoryItem);
+//
+//             // Close all other categories
+//             document.querySelectorAll('.category-item').forEach(item => {
+//                 if (item !== categoryItem) {
+//                     item.classList.remove('active');
+//                     const sublist = item.querySelector('.subcategory-list');
+//                     if (sublist) sublist.style.maxHeight = '0px';
+//                 }
+//             });
+//
+//             // Toggle current category
+//             const wasActive = categoryItem.classList.contains('active');
+//             const subcategoryList = categoryItem.querySelector('.subcategory-list');
+//
+//             if (wasActive) {
+//                 categoryItem.classList.remove('active');
+//                 if (subcategoryList) subcategoryList.style.maxHeight = '0px';
+//                 console.log('Closed category');
+//             } else {
+//                 categoryItem.classList.add('active');
+//                 if (subcategoryList) subcategoryList.style.maxHeight = '500px';
+//                 console.log('Opened category');
+//             }
+//
+//             // Visual debug - change button color
+//             this.style.background = wasActive ? '' : 'rgba(212, 163, 115, 0.3)';
+//         });
+//     });
+//
+//     // Handle subcategory clicks - filter products on page
+//     const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+//
+//     subcategoryLinks.forEach(link => {
+//         link.addEventListener('click', (e) => {
+//             e.preventDefault();
+//             const subcategory = link.dataset.subcategory;
+//             console.log('Filtering by subcategory:', subcategory);
+//
+//             // Remove active class from all links
+//             subcategoryLinks.forEach(l => l.classList.remove('active'));
+//             // Add active class to clicked link
+//             link.classList.add('active');
+//
+//             // Filter products
+//             const productCards = document.querySelectorAll('.product-card');
+//             productCards.forEach(card => {
+//                 if (subcategory === 'all') {
+//                     card.style.display = 'block';
+//                 } else {
+//                     const cardSubcategory = card.getAttribute('data-subcategory');
+//                     if (cardSubcategory === subcategory) {
+//                         card.style.display = 'block';
+//                     } else {
+//                         card.style.display = 'none';
+//                     }
+//                 }
+//             });
+//
+//             // Scroll to products section
+//             document.querySelector('.products-grid').scrollIntoView({ behavior: 'smooth' });
+//         });
+//     });
+// }
 
 // ============ SEARCH FUNCTIONALITY ============
 
