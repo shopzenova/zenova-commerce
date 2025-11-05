@@ -173,14 +173,28 @@ router.get('/mock/:sessionId', (req, res) => {
 
       <script>
         function simulateSuccess() {
+          console.log('✅ Simula Successo clicked');
           alert('Pagamento simulato con successo!');
-          window.location.href = '${process.env.FRONTEND_URL}/checkout-success.html?session_id=${sessionId}';
+          const successUrl = '${process.env.FRONTEND_URL || 'http://127.0.0.1:8080'}/checkout-success.html?session_id=${sessionId}';
+          console.log('Redirecting to:', successUrl);
+          setTimeout(() => {
+            window.location.href = successUrl;
+          }, 500);
         }
 
         function simulateCancel() {
+          console.log('❌ Annulla clicked');
           alert('Pagamento annullato');
-          window.location.href = '${process.env.FRONTEND_URL}/checkout.html?canceled=true';
+          const cancelUrl = '${process.env.FRONTEND_URL || 'http://127.0.0.1:8080'}/checkout.html?canceled=true';
+          console.log('Redirecting to:', cancelUrl);
+          setTimeout(() => {
+            window.location.href = cancelUrl;
+          }, 500);
         }
+
+        console.log('Mock checkout page loaded');
+        console.log('Session ID:', '${sessionId}');
+        console.log('Frontend URL:', '${process.env.FRONTEND_URL || 'http://127.0.0.1:8080'}');
       </script>
     </body>
     </html>

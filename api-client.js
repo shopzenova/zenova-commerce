@@ -75,41 +75,55 @@ class ZenovaAPI {
    */
   static async createCheckout(cartItems, customer) {
     try {
+      console.log('🔄 API createCheckout chiamata');
+      console.log('📡 URL:', `${API_BASE_URL}/checkout`);
+      console.log('📦 Items:', cartItems);
+      console.log('👤 Customer:', customer);
+
+      const requestBody = {
+        items: cartItems.map(item => ({
+          productId: item.id,
+          bigbuyId: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: item.quantity,
+          images: item.images
+        })),
+        customer: {
+          email: customer.email,
+          name: customer.name,
+          phone: customer.phone
+        }
+      };
+
+      console.log('📤 Request body:', JSON.stringify(requestBody, null, 2));
+
       const response = await fetch(`${API_BASE_URL}/checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          items: cartItems.map(item => ({
-            productId: item.id,
-            bigbuyId: item.id,
-            name: item.name,
-            description: item.description,
-            price: item.price,
-            quantity: item.quantity,
-            images: item.images
-          })),
-          customer: {
-            email: customer.email,
-            name: customer.name,
-            phone: customer.phone
-          }
-        })
+        body: JSON.stringify(requestBody)
       });
 
+      console.log('📥 Response status:', response.status);
+
       const data = await response.json();
+      console.log('📥 Response data:', data);
 
       if (data.success) {
+        console.log('✅ Checkout creato! Redirect a:', data.data.url);
         // Redirect a Stripe checkout
         window.location.href = data.data.url;
       } else {
+        console.error('❌ Errore dal backend:', data.error);
         alert(data.error || 'Errore durante il checkout');
       }
 
       return data;
     } catch (error) {
-      console.error('Errore createCheckout:', error);
+      console.error('❌ Errore createCheckout:', error);
       alert('Errore durante il checkout. Riprova.');
       return { success: false };
     }

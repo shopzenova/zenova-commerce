@@ -22,25 +22,21 @@ router.post('/validate', async (req, res) => {
     const stockData = await bigbuy.checkMultipleStock(productIds);
 
     // Controlla disponibilità
-    const validation = {
-      valid: true,
-      items: [],
-      errors: []
-    };
+    const issues = [];
+    const items_validated = [];
 
     for (const item of items) {
       const productId = item.productId || item.bigbuyId;
       const stock = stockData.stocks?.find(s => s.productId === productId);
 
       if (!stock || !stock.available || stock.quantity < item.quantity) {
-        validation.valid = false;
-        validation.errors.push({
+        issues.push({
           productId,
           message: `Prodotto non disponibile o quantità insufficiente (disponibili: ${stock?.quantity || 0})`
         });
       }
 
-      validation.items.push({
+      items_validated.push({
         productId,
         requestedQuantity: item.quantity,
         availableQuantity: stock?.quantity || 0,
@@ -50,7 +46,11 @@ router.post('/validate', async (req, res) => {
 
     res.json({
       success: true,
-      data: validation
+      data: {
+        valid: issues.length === 0,
+        issues: issues,
+        items: items_validated
+      }
     });
 
   } catch (error) {

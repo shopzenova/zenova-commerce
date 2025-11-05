@@ -10,12 +10,30 @@ const PORT = process.env.PORT || 3000;
 
 // ===== MIDDLEWARE =====
 
-// Sicurezza
-app.use(helmet());
+// Sicurezza - Helmet con CSP configurato per development
+app.use(helmet({
+  contentSecurityPolicy: process.env.NODE_ENV === 'production' ? undefined : {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrcAttr: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+    },
+  },
+}));
 
 // CORS - permetti richieste dal frontend Zenova
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5500',
+  origin: function(origin, callback) {
+    // In development, permetti tutte le porte localhost
+    if (!origin || origin.match(/^http:\/\/(localhost|127\.0\.0\.1):\d+$/)) {
+      callback(null, true);
+    } else if (process.env.NODE_ENV === 'production' && origin === process.env.FRONTEND_URL) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 

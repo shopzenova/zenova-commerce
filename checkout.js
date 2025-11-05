@@ -131,10 +131,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create Stripe Checkout session via backend
         try {
             console.log('🔄 Creazione sessione Stripe Checkout...');
+            console.log('📦 Dati spedizione:', shippingData);
 
             // Check if ZenovaAPI is available
             if (typeof ZenovaAPI === 'undefined') {
                 throw new Error('ZenovaAPI non disponibile');
+            }
+
+            // Verify shipping data is complete
+            if (!shippingData.email || !shippingData.firstName) {
+                throw new Error('Dati di spedizione mancanti. Compila il form di spedizione prima di procedere.');
             }
 
             // Prepare cart items with full data
@@ -148,12 +154,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 images: item.images || []
             }));
 
+            console.log('🛒 Carrello da inviare:', cartItems);
+
             // Create checkout session via backend
+            console.log('📡 Chiamata API createCheckout...');
             const result = await ZenovaAPI.createCheckout(cartItems, {
                 email: shippingData.email,
                 name: `${shippingData.firstName} ${shippingData.lastName}`,
                 phone: shippingData.phone
             });
+
+            console.log('📥 Risposta ricevuta:', result);
 
             // If successful, user will be redirected to Stripe Checkout
             // (the redirect happens inside ZenovaAPI.createCheckout)

@@ -271,17 +271,7 @@
                 <span>Totale:</span>
                 <span id="cartTotal">€0.00</span>
             </div>
-            <button class="btn btn-primary btn-checkout" onclick="
-                if (!cart || cart.length === 0) {
-                    alert('Il tuo carrello è vuoto!');
-                    return;
-                }
-                this.textContent = 'Validazione...';
-                this.disabled = true;
-                setTimeout(() => {
-                    window.location.href = 'checkout.html';
-                }, 500);
-            ">Procedi all'acquisto</button>
+            <button class="btn btn-primary btn-checkout">Procedi all'acquisto</button>
         </div>
     </div>
 
