@@ -42,9 +42,9 @@
 
 /* Dark Mode Variables */
 body.dark-mode {
-    --primary-cream: #1a1612;
-    --secondary-beige: #2a2318;
-    --warm-sand: #3a3228;
+    --primary-cream: #3d3530;
+    --secondary-beige: #4a443c;
+    --warm-sand: #5a544c;
     --soft-terracotta: #D4A373;
     --warm-brown: #b8935f;
     --deep-brown: #e8c89d;
@@ -873,14 +873,14 @@ body {
 }
 
 .subcategory-list {
-    max-height: 0;
+    max-height: 0 !important;
     overflow: hidden;
     transition: max-height 0.3s ease;
     padding-left: var(--spacing-md);
 }
 
 .category-item.active .subcategory-list {
-    max-height: 500px;
+    max-height: 500px !important;
     padding-top: var(--spacing-xs);
     padding-bottom: var(--spacing-sm);
 }
@@ -3869,6 +3869,46 @@ body.dark-mode .header {
 
 body.dark-mode .hero-title-translation {
     color: #b8935f;
+}
+
+/* Dark mode product cards */
+body.dark-mode .product-card {
+    border: 1px solid rgba(232, 220, 196, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .product-card:hover {
+    border-color: rgba(212, 163, 115, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode categories navigation */
+body.dark-mode .categories-nav {
+    background: #2a2520;
+    border-bottom: 2px solid rgba(212, 163, 115, 0.3);
+}
+
+body.dark-mode .category-nav-item {
+    color: #e8dcc4;
+}
+
+body.dark-mode .category-nav-item:hover {
+    background: rgba(212, 163, 115, 0.2);
+    color: #D4A373;
+}
+
+body.dark-mode .category-dropdown {
+    background: #3a342c;
+    border: 1px solid rgba(212, 163, 115, 0.3);
+}
+
+body.dark-mode .category-dropdown-item {
+    color: #ddd3c0;
+}
+
+body.dark-mode .category-dropdown-item:hover {
+    background: rgba(212, 163, 115, 0.2);
+    color: #D4A373;
 }
 
 /* Responsive Design */

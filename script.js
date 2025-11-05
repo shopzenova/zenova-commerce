@@ -988,6 +988,7 @@ function setupCategorySidebar() {
             e.preventDefault();
             e.stopPropagation();
 
+            alert('Click rilevato su categoria ' + index);
             console.log('Button clicked!', index);
 
             const categoryItem = this.parentElement;
@@ -997,32 +998,61 @@ function setupCategorySidebar() {
             document.querySelectorAll('.category-item').forEach(item => {
                 if (item !== categoryItem) {
                     item.classList.remove('active');
+                    const sublist = item.querySelector('.subcategory-list');
+                    if (sublist) sublist.style.maxHeight = '0px';
                 }
             });
 
             // Toggle current category
             const wasActive = categoryItem.classList.contains('active');
+            const subcategoryList = categoryItem.querySelector('.subcategory-list');
+
             if (wasActive) {
                 categoryItem.classList.remove('active');
-                console.log('Removed active class');
+                if (subcategoryList) subcategoryList.style.maxHeight = '0px';
+                console.log('Closed category');
             } else {
                 categoryItem.classList.add('active');
-                console.log('Added active class');
+                if (subcategoryList) subcategoryList.style.maxHeight = '500px';
+                console.log('Opened category');
             }
+
+            // Visual debug - change button color
+            this.style.background = wasActive ? '' : 'rgba(212, 163, 115, 0.3)';
         });
     });
 
-    // Handle subcategory clicks - navigate to subcategory page
+    // Handle subcategory clicks - filter products on page
     const subcategoryLinks = document.querySelectorAll('.subcategory-link');
 
     subcategoryLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const subcategory = link.dataset.subcategory;
-            console.log('Navigating to:', `categoria-${subcategory}.html`);
+            console.log('Filtering by subcategory:', subcategory);
 
-            // Navigate to subcategory page
-            window.location.href = `categoria-${subcategory}.html`;
+            // Remove active class from all links
+            subcategoryLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            link.classList.add('active');
+
+            // Filter products
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                if (subcategory === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardSubcategory = card.getAttribute('data-subcategory');
+                    if (cardSubcategory === subcategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Scroll to products section
+            document.querySelector('.products-grid').scrollIntoView({ behavior: 'smooth' });
         });
     });
 }
