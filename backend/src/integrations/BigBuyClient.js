@@ -217,61 +217,36 @@ class BigBuyClient {
 
   _getMockProducts(page = 1, pageSize = 100) {
     const mockProducts = [
-      {
-        id: 123456,
-        sku: 'MOCK-DIFF-001',
-        name: 'Diffusore Aromi Ultrasonico 400ml',
-        description: 'Diffusore di aromi con tecnologia ultrasonica, LED RGB e timer programmabile',
-        inShopsPrice: 35.00,
-        wholesalePrice: 15.00,
-        retailPrice: 35.00,
-        taxRate: 22,
-        categories: [{ id: 456, name: 'Aromatherapy' }],
-        images: [
-          { url: 'https://via.placeholder.com/400/E8DCC4/8B6F47?text=Diffusore+Aromi' },
-          { url: 'https://via.placeholder.com/400/F5F1E8/8B6F47?text=Diffusore+2' }
-        ],
-        weight: 0.5,
-        width: 15,
-        height: 20,
-        depth: 15
-      },
-      {
-        id: 123457,
-        sku: 'MOCK-LAMP-001',
-        name: 'Lampada Sale Himalayano',
-        description: 'Lampada di sale naturale dell\'Himalaya con base in legno',
-        inShopsPrice: 28.00,
-        wholesalePrice: 12.00,
-        retailPrice: 28.00,
-        taxRate: 22,
-        categories: [{ id: 456, name: 'Home Fragrance' }],
-        images: [
-          { url: 'https://via.placeholder.com/400/D9C7A8/8B6F47?text=Lampada+Sale' }
-        ],
-        weight: 2.0,
-        width: 12,
-        height: 18,
-        depth: 12
-      },
-      {
-        id: 123458,
-        sku: 'MOCK-YOGA-001',
-        name: 'Tappetino Yoga Premium',
-        description: 'Tappetino yoga ecologico antiscivolo 6mm',
-        inShopsPrice: 42.00,
-        wholesalePrice: 18.00,
-        retailPrice: 42.00,
-        taxRate: 22,
-        categories: [{ id: 458, name: 'Mindfulness' }],
-        images: [
-          { url: 'https://via.placeholder.com/400/A8B5A0/8B6F47?text=Tappetino+Yoga' }
-        ],
-        weight: 1.2,
-        width: 60,
-        height: 180,
-        depth: 0.6
-      }
+      { id: 1, sku: 'ZN-001', name: 'Olio Essenziale Lavanda', description: 'Olio essenziale puro di lavanda biologica. Perfetto per rilassamento e sonno.', retailPrice: 24.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&h=600&fit=crop' }] },
+      { id: 2, sku: 'ZN-002', name: 'Diffusore Ultrasonico', description: 'Diffusore elegante con luci LED. Silenzioso e efficace per ogni ambiente.', retailPrice: 49.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1584993766449-a40e2ec95e99?w=600&h=600&fit=crop' }] },
+      { id: 3, sku: 'ZN-003', name: 'Nebulizzatore Premium', description: 'Tecnologia avanzata per diffusione ottimale degli oli essenziali.', retailPrice: 89.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1600428854537-7ea552fb4371?w=600&h=600&fit=crop' }] },
+      { id: 4, sku: 'ZN-004', name: 'Candela Profumata Vaniglia', description: 'Candela in cera di soia naturale con fragranza di vaniglia e legno di sandalo.', retailPrice: 34.90, categories: [{ id: 457, name: 'Home Fragrance' }], images: [{ url: 'https://images.unsplash.com/photo-1602874801006-2c9a268d0d6e?w=600&h=600&fit=crop' }] },
+      { id: 5, sku: 'ZN-005', name: 'Lampada di Sale Himalayano', description: 'Autentica lampada di sale con effetto ionizzante e luce calda.', retailPrice: 45.90, categories: [{ id: 457, name: 'Home Fragrance' }], images: [{ url: 'https://images.unsplash.com/photo-1578332617099-390b6a6e8b8b?w=600&h=600&fit=crop' }] },
+      { id: 6, sku: 'ZN-006', name: 'Incensi Naturali Sandalo', description: 'Set di 50 bastoncini di incenso naturale al legno di sandalo.', retailPrice: 19.90, categories: [{ id: 457, name: 'Home Fragrance' }], images: [{ url: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&h=600&fit=crop' }] },
+      { id: 7, sku: 'ZN-007', name: 'Tappetino Yoga Premium', description: 'Tappetino yoga ecologico in gomma naturale, antiscivolo e confortevole.', retailPrice: 54.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=600&h=600&fit=crop' }] },
+      { id: 8, sku: 'ZN-008', name: 'Cuscino Meditazione Zafu', description: 'Cuscino rotondo tradizionale per meditazione, imbottitura in grano saraceno.', retailPrice: 39.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&h=600&fit=crop' }] },
+      { id: 9, sku: 'ZN-009', name: 'Massaggiatore Smart Cervicale', description: 'Massaggiatore intelligente con controllo app e funzione calore.', retailPrice: 79.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop' }] },
+      { id: 10, sku: 'ZN-010', name: 'Lampada Smart RGB', description: 'Lampada Wi-Fi controllabile da app con 16 milioni di colori.', retailPrice: 64.90, categories: [{ id: 459, name: 'Smart Lighting' }], images: [{ url: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&h=600&fit=crop' }] },
+      { id: 11, sku: 'ZN-011', name: 'Lampada Sensoriale Aurora', description: 'Proiettore di luci aurora boreale con suoni rilassanti integrati.', retailPrice: 99.90, categories: [{ id: 459, name: 'Smart Lighting' }], images: [{ url: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop' }] },
+      { id: 12, sku: 'ZN-012', name: 'Campana Tibetana Artigianale', description: 'Campana tibetana fatta a mano con batacchio in legno incluso.', retailPrice: 69.90, categories: [{ id: 460, name: 'Sound Therapy' }], images: [{ url: 'https://images.unsplash.com/photo-1599507593499-a3f7d7d97667?w=600&h=600&fit=crop' }] },
+      { id: 13, sku: 'ZN-013', name: 'Sound Machine White Noise', description: 'Generatore di suoni rilassanti con 20 tracce naturali.', retailPrice: 59.90, categories: [{ id: 460, name: 'Sound Therapy' }], images: [{ url: 'https://images.unsplash.com/photo-1545987796-200677ee1011?w=600&h=600&fit=crop' }] },
+      { id: 14, sku: 'ZN-014', name: "Purificatore d'Aria HEPA", description: 'Purificatore con filtro HEPA H13 e ionizzatore integrato.', retailPrice: 149.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=600&fit=crop' }] },
+      { id: 15, sku: 'ZN-015', name: 'Umidificatore Smart', description: 'Umidificatore ultrasonico con controllo umidità automatico.', retailPrice: 89.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1585421514738-01798e348b17?w=600&h=600&fit=crop' }] },
+      { id: 16, sku: 'ZN-016', name: 'Diffusore Smart Alexa', description: 'Diffusore intelligente con controllo vocale Alexa e Google Home, programmazione automatica.', retailPrice: 119.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=600&fit=crop' }] },
+      { id: 17, sku: 'ZN-017', name: 'Smart Speaker Meditazione', description: 'Speaker intelligente con 500+ meditazioni guidate, suoni binaurali e controllo app dedicata.', retailPrice: 159.90, categories: [{ id: 460, name: 'Sound Therapy' }], images: [{ url: 'https://images.unsplash.com/photo-1589003077984-894e133dabab?w=600&h=600&fit=crop' }] },
+      { id: 18, sku: 'ZN-018', name: 'Smartwatch Wellness Pro', description: 'Smartwatch per tracking stress, HRV, qualità sonno, respirazione guidata e mindfulness.', retailPrice: 249.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&h=600&fit=crop' }] },
+      { id: 19, sku: 'ZN-019', name: 'Anello Smart Sleep Tracker', description: 'Anello intelligente per monitoraggio avanzato del sonno, temperatura corporea e recupero.', retailPrice: 299.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1611652022419-a9419f74343a?w=600&h=600&fit=crop' }] },
+      { id: 20, sku: 'ZN-020', name: 'Lampada Circadiana Smart', description: 'Lampada che simula il ciclo solare naturale per migliorare sonno e energia durante il giorno.', retailPrice: 179.90, categories: [{ id: 459, name: 'Smart Lighting' }], images: [{ url: 'https://images.unsplash.com/photo-1565183928294-7d22ff5c4212?w=600&h=600&fit=crop' }] },
+      { id: 21, sku: 'ZN-021', name: 'Occhiali Light Therapy', description: 'Occhiali per terapia della luce contro jet-lag, disturbi stagionali e per boost energetico.', retailPrice: 199.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=600&fit=crop' }] },
+      { id: 22, sku: 'ZN-022', name: 'Braccialetto Respirazione Zen', description: 'Dispositivo indossabile che vibra dolcemente per guidare la respirazione e ridurre stress.', retailPrice: 79.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop' }] },
+      { id: 23, sku: 'ZN-023', name: 'Tappetino Yoga Smart', description: 'Tappetino con sensori di pressione e app per correzione posture in tempo reale.', retailPrice: 189.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop' }] },
+      { id: 24, sku: 'ZN-024', name: 'Specchio Smart Yoga', description: 'Specchio interattivo con lezioni live di yoga, pilates e meditazione. AI personal trainer.', retailPrice: 1299.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=600&h=600&fit=crop' }] },
+      { id: 25, sku: 'ZN-025', name: 'Monitor Qualità Aria Smart', description: 'Monitora CO2, VOC, PM2.5, temperatura e umidità. Notifiche app e integrazione smart home.', retailPrice: 129.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop' }] },
+      { id: 26, sku: 'ZN-026', name: 'Termometro Ambientale Smart', description: 'Sensore smart per temperatura e umidità con storico dati e automazioni.', retailPrice: 59.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&h=600&fit=crop' }] },
+      { id: 27, sku: 'ZN-027', name: 'Bilancia Smart Wellness', description: 'Bilancia intelligente che misura peso, massa grassa, muscolare, idratazione e metabolismo.', retailPrice: 89.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1622782914767-404fb9ab3f57?w=600&h=600&fit=crop' }] },
+      { id: 28, sku: 'ZN-028', name: 'Ionizzatore Portatile', description: 'Ionizzatore personale USB per purificare aria intorno a te. Perfetto per ufficio e viaggi.', retailPrice: 69.90, categories: [{ id: 461, name: 'Wellness Tech' }], images: [{ url: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&h=600&fit=crop' }] },
+      { id: 29, sku: 'ZN-029', name: 'Cuffie Meditazione Neurosensoriali', description: 'Cuffie con tecnologia neurosensoriale per meditazione profonda e miglioramento focus.', retailPrice: 349.90, categories: [{ id: 460, name: 'Sound Therapy' }], images: [{ url: 'https://images.unsplash.com/photo-1545127398-14699f92334b?w=600&h=600&fit=crop' }] },
+      { id: 30, sku: 'ZN-030', name: 'Pod Meditazione Immersiva', description: 'Capsula di meditazione con luci, suoni 3D, aromaterapia e vibrazione per esperienza totale.', retailPrice: 2499.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=600&h=600&fit=crop' }] }
     ];
 
     return {
