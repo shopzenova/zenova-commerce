@@ -1,5 +1,8 @@
-// Product Data
-const products = [
+// Product Data - Will be loaded from backend
+let products = [];
+
+// Static products as fallback (kept for offline mode)
+const staticProducts = [
     {
         id: 1,
         name: "Olio Essenziale Lavanda",
@@ -308,14 +311,148 @@ const products = [
     }
 ];
 
+// ============ BACKEND INTEGRATION ============
+
+/**
+ * Map backend product to frontend format
+ */
+function mapBackendProductToFrontend(backendProduct) {
+    // Extract category name (first category)
+    const categoryName = backendProduct.categories && backendProduct.categories.length > 0
+        ? backendProduct.categories[0].name
+        : 'Uncategorized';
+
+    // Extract first image URL
+    const imageUrl = backendProduct.images && backendProduct.images.length > 0
+        ? backendProduct.images[0].url
+        : null;
+
+    // Determine subcategory based on category (you can customize this mapping)
+    const subcategoryMap = {
+        'Aromatherapy': 'diffusori',
+        'Home Fragrance': 'lampade-sale',
+        'Mindfulness': 'yoga',
+        'Wellness Tech': 'purificatori'
+    };
+
+    return {
+        id: backendProduct.id,
+        sku: backendProduct.sku,
+        name: backendProduct.name,
+        category: categoryName,
+        subcategory: subcategoryMap[categoryName] || 'general',
+        price: backendProduct.retailPrice || backendProduct.inShopsPrice || 0,
+        description: backendProduct.description || '',
+        icon: getIconForCategory(categoryName),
+        image: imageUrl,
+        // Keep backend data for cart/checkout
+        bigbuyId: backendProduct.id,
+        images: backendProduct.images || []
+    };
+}
+
+/**
+ * Get icon for category
+ */
+function getIconForCategory(category) {
+    const iconMap = {
+        'Aromatherapy': '🌿',
+        'Home Fragrance': '🕯️',
+        'Mindfulness': '🧘',
+        'Smart Lighting': '💡',
+        'Sound Therapy': '🔔',
+        'Wellness Tech': '🌬️',
+        'Natural Skincare': '🌸',
+        'Fragrances': '🌺',
+        'Apparel': '👕',
+        'Tea & Infusions': '🍵'
+    };
+    return iconMap[category] || '✨';
+}
+
+/**
+ * Load products from backend
+ */
+async function loadProductsFromBackend() {
+    console.log('🔄 Caricamento prodotti dal backend...');
+
+    try {
+        // Check if ZenovaAPI is available
+        if (typeof ZenovaAPI === 'undefined') {
+            console.warn('⚠️ ZenovaAPI non disponibile, uso prodotti statici');
+            products = staticProducts;
+            return false;
+        }
+
+        // Call backend API
+        const backendProducts = await ZenovaAPI.getProducts(1, 100);
+
+        if (backendProducts && backendProducts.length > 0) {
+            console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
+
+            // Map backend products to frontend format
+            products = backendProducts.map(mapBackendProductToFrontend);
+
+            console.log('✅ Prodotti convertiti e pronti:', products.length);
+            return true;
+        } else {
+            console.warn('⚠️ Nessun prodotto ricevuto dal backend, uso prodotti statici');
+            products = staticProducts;
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Errore caricamento prodotti dal backend:', error);
+        console.log('📦 Fallback: uso prodotti statici');
+        products = staticProducts;
+        return false;
+    }
+}
+
 // Cart State
 let cart = [];
 
 // Wishlist State
 let wishlist = [];
 
+// ============ GLOBAL CHECKOUT FUNCTION ============
+// This function is called directly from the button's onclick attribute
+window.handleCheckoutClick = async function() {
+    console.log('🛒 handleCheckoutClick chiamata!');
+    console.log('📦 Carrello:', cart);
+
+    if (cart.length === 0) {
+        alert('Il tuo carrello è vuoto. Aggiungi dei prodotti prima di procedere.');
+        return;
+    }
+
+    const checkoutBtn = document.querySelector('.btn-checkout');
+    if (checkoutBtn) {
+        checkoutBtn.textContent = 'Validazione in corso...';
+        checkoutBtn.disabled = true;
+    }
+
+    console.log('🔄 Inizio validazione carrello...');
+    const isValid = await validateCartWithBackend();
+    console.log('✅ Validazione completata:', isValid);
+
+    if (isValid) {
+        console.log('➡️ Reindirizzamento a checkout.html');
+        window.location.href = 'checkout.html';
+    } else {
+        console.log('❌ Validazione fallita');
+        if (checkoutBtn) {
+            checkoutBtn.textContent = 'Procedi all\'acquisto';
+            checkoutBtn.disabled = false;
+        }
+    }
+};
+
 // Initialize App
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load products from backend first
+    await loadProductsFromBackend();
+
+    // Then render and setup everything
     renderProducts();
     loadCart();
     loadWishlist();
@@ -447,6 +584,59 @@ function loadCart() {
     if (savedCart) {
         cart = JSON.parse(savedCart);
         updateCart();
+    }
+}
+
+// ============ CART VALIDATION WITH BACKEND ============
+
+/**
+ * Validate cart with backend before checkout
+ * Checks product availability, prices, and stock
+ */
+async function validateCartWithBackend() {
+    try {
+        console.log('🔄 Validazione carrello con backend...');
+
+        // Check if ZenovaAPI is available
+        if (typeof ZenovaAPI === 'undefined') {
+            console.warn('⚠️ ZenovaAPI non disponibile, skip validazione');
+            return true; // Allow checkout without validation in development
+        }
+
+        // Prepare cart items for validation
+        const cartItems = cart.map(item => ({
+            productId: item.id,
+            bigbuyId: item.bigbuyId || item.id,
+            quantity: item.quantity
+        }));
+
+        // Call backend validation API
+        const result = await ZenovaAPI.validateCart(cartItems);
+
+        if (result.success) {
+            console.log('✅ Carrello validato con successo');
+
+            // Check if there are any issues
+            if (result.data.issues && result.data.issues.length > 0) {
+                // Show issues to user
+                let message = 'Attenzione:\n\n';
+                result.data.issues.forEach(issue => {
+                    message += `- ${issue.message}\n`;
+                });
+                alert(message);
+                return false;
+            }
+
+            return true;
+        } else {
+            console.error('❌ Errore validazione carrello:', result.error);
+            alert('Errore durante la validazione del carrello. Riprova.');
+            return false;
+        }
+    } catch (error) {
+        console.error('❌ Errore validazione carrello:', error);
+        alert('Errore di connessione. Verifica la tua connessione e riprova.');
+        return false;
     }
 }
 
@@ -649,11 +839,13 @@ function setupEventListeners() {
     }
 
     // Close modal when clicking outside
-    aboutModal.addEventListener('click', (e) => {
-        if (e.target === aboutModal) {
-            aboutModal.classList.remove('active');
-        }
-    });
+    if (aboutModal) {
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('active');
+            }
+        });
+    }
 
     // Smooth scrolling for other navigation links
     document.querySelectorAll('a[href^="#"]:not([href="#about"])').forEach(anchor => {
@@ -671,11 +863,39 @@ function setupEventListeners() {
 
     // Checkout button
     const checkoutBtn = document.querySelector('.btn-checkout');
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length > 0) {
+
+    if (!checkoutBtn) {
+        console.warn('⚠️ Pulsante checkout non trovato nel DOM');
+        return;
+    }
+
+    console.log('✅ Pulsante checkout trovato, aggiunto event listener');
+
+    checkoutBtn.addEventListener('click', async () => {
+        console.log('🛒 Click su pulsante checkout');
+        console.log('📦 Carrello:', cart);
+
+        if (cart.length === 0) {
+            alert('Il tuo carrello è vuoto. Aggiungi dei prodotti prima di procedere.');
+            return;
+        }
+
+        // Validate cart with backend before checkout
+        console.log('🔄 Inizio validazione carrello...');
+        checkoutBtn.textContent = 'Validazione in corso...';
+        checkoutBtn.disabled = true;
+
+        const isValid = await validateCartWithBackend();
+
+        console.log('✅ Validazione completata:', isValid);
+
+        if (isValid) {
+            console.log('➡️ Reindirizzamento a checkout.html');
             window.location.href = 'checkout.html';
         } else {
-            alert('Il tuo carrello è vuoto. Aggiungi dei prodotti prima di procedere.');
+            console.log('❌ Validazione fallita');
+            checkoutBtn.textContent = 'Procedi all\'acquisto';
+            checkoutBtn.disabled = false;
         }
     });
 }

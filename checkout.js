@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Get cart data
-    const cart = JSON.parse(localStorage.getItem('zenova_cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
     let shippingData = {};
     let currentStep = 1;
 
@@ -128,22 +128,45 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonText.classList.add('hidden');
         spinner.classList.remove('hidden');
 
-        // In a real implementation, you would:
-        // 1. Create a payment intent on your server
-        // 2. Confirm the payment with Stripe
-        // 3. Handle the result
+        // Create Stripe Checkout session via backend
+        try {
+            console.log('🔄 Creazione sessione Stripe Checkout...');
 
-        // For demo purposes, we'll simulate success after 2 seconds
-        setTimeout(() => {
-            // Simulate successful payment
-            const orderId = generateOrderId();
-            saveOrder(orderId, shippingData, 'card');
-            goToStep(3);
+            // Check if ZenovaAPI is available
+            if (typeof ZenovaAPI === 'undefined') {
+                throw new Error('ZenovaAPI non disponibile');
+            }
 
+            // Prepare cart items with full data
+            const cartItems = cart.map(item => ({
+                productId: item.id,
+                bigbuyId: item.bigbuyId || item.id,
+                name: item.name,
+                description: item.description || '',
+                price: item.price,
+                quantity: item.quantity,
+                images: item.images || []
+            }));
+
+            // Create checkout session via backend
+            const result = await ZenovaAPI.createCheckout(cartItems, {
+                email: shippingData.email,
+                name: `${shippingData.firstName} ${shippingData.lastName}`,
+                phone: shippingData.phone
+            });
+
+            // If successful, user will be redirected to Stripe Checkout
+            // (the redirect happens inside ZenovaAPI.createCheckout)
+
+            console.log('✅ Checkout creato con successo');
+
+        } catch (error) {
+            console.error('❌ Errore checkout:', error);
+            document.getElementById('card-errors').textContent = 'Errore durante il checkout. Riprova.';
             submitButton.disabled = false;
             buttonText.classList.remove('hidden');
             spinner.classList.add('hidden');
-        }, 2000);
+        }
 
         /* REAL IMPLEMENTATION (uncomment when ready):
 
@@ -277,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculateTotal() {
-        const cart = JSON.parse(localStorage.getItem('zenova_cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
         let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
         const promo = JSON.parse(localStorage.getItem('zenova_promo') || 'null');
@@ -350,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('orderNumber').textContent = `#${orderId}`;
 
         // Clear cart and promo
-        localStorage.removeItem('zenova_cart');
+        localStorage.removeItem('zenova-cart');
         localStorage.removeItem('zenova_promo');
 
         // In a REAL implementation, send order to your server
