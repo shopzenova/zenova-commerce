@@ -13,7 +13,18 @@ class BigBuyClient {
 
     if (this.isMockMode) {
       logger.warn('⚠️  BigBuy in MOCK MODE - usando dati finti');
+    } else {
+      logger.info('✅ BigBuy in REAL API MODE - usando API reali');
     }
+
+    // Cache per ridurre chiamate API (24 ore - aggressivo per rispettare rate limits)
+    this.cache = new Map();
+    this.CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore
+
+    // Rate limiting - ritardo tra richieste per evitare 429
+    this.lastRequestTime = 0;
+    this.MIN_REQUEST_DELAY = 3000; // 3 secondi tra ogni richiesta (aumentato)
+    this.requestQueue = Promise.resolve();
 
     this.client = axios.create({
       baseURL: this.baseURL,
@@ -25,6 +36,47 @@ class BigBuyClient {
     });
   }
 
+  _getCacheKey(method, params) {
+    return `${method}_${JSON.stringify(params)}`;
+  }
+
+  _getFromCache(key) {
+    const cached = this.cache.get(key);
+    if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
+      logger.info(`📦 Cache HIT: ${key}`);
+      return cached.data;
+    }
+    this.cache.delete(key);
+    return null;
+  }
+
+  _setCache(key, data) {
+    this.cache.set(key, { data, timestamp: Date.now() });
+  }
+
+  // Rate limiting: ritarda la richiesta se necessario
+  async _waitForRateLimit() {
+    const now = Date.now();
+    const timeSinceLastRequest = now - this.lastRequestTime;
+
+    if (timeSinceLastRequest < this.MIN_REQUEST_DELAY) {
+      const waitTime = this.MIN_REQUEST_DELAY - timeSinceLastRequest;
+      logger.info(`⏳ Rate limit: attendo ${waitTime}ms prima della prossima richiesta`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+
+    this.lastRequestTime = Date.now();
+  }
+
+  // Esegue una richiesta con rate limiting automatico
+  async _makeRequest(method, url, config = {}) {
+    // Accoda la richiesta per eseguirla in sequenza
+    return this.requestQueue = this.requestQueue.then(async () => {
+      await this._waitForRateLimit();
+      return this.client[method](url, config);
+    });
+  }
+
   // ===== PRODOTTI =====
 
   async getProducts(page = 1, pageSize = 20) {
@@ -32,15 +84,40 @@ class BigBuyClient {
       return this._getMockProducts(page, pageSize);
     }
 
+    // Controlla cache
+    const cacheKey = this._getCacheKey('getProducts', { page, pageSize });
+    const cached = this._getFromCache(cacheKey);
+    if (cached) return cached;
+
     try {
-      const response = await this.client.get('/rest/catalog/products.json', {
+      logger.info(`🔄 Richiesta BigBuy: getProducts (page=${page}, pageSize=${pageSize})`);
+
+      // Usa _makeRequest con rate limiting automatico
+      const response = await this._makeRequest('get', '/rest/catalog/products.json', {
         params: { isoCode: 'it', page, pageSize }
       });
-      logger.info(`BigBuy: Ricevuti ${response.data.products?.length || 0} prodotti`);
+
+      logger.info(`✅ BigBuy: Ricevuti ${response.data.products?.length || 0} prodotti REALI`);
+
+      // Salva in cache
+      this._setCache(cacheKey, response.data);
+
       return response.data;
     } catch (error) {
-      logger.error('Errore BigBuy getProducts:', error.message);
-      throw error;
+      logger.error('❌ Errore BigBuy getProducts:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data
+      });
+      // Se rate limit o errore auth, usa dati mock temporaneamente
+      if (error.response?.status === 429 || error.response?.status === 401 || error.response?.status === 403) {
+        logger.warn(`⚠️  BigBuy error ${error.response?.status} - uso dati MOCK temporanei`);
+        return this._getMockProducts(page, pageSize);
+      }
+      // Per altri errori, usa comunque mock come fallback
+      logger.warn('⚠️  Errore API BigBuy - uso dati MOCK come fallback');
+      return this._getMockProducts(page, pageSize);
     }
   }
 
