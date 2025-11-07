@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 const logger = require('./src/utils/logger');
 
 const app = express();
@@ -58,6 +59,9 @@ app.use((req, res, next) => {
   logger.info(`${req.method} ${req.path}`);
   next();
 });
+
+// Serve file statici del frontend (dalla directory parent)
+app.use(express.static(path.join(__dirname, '..')));
 
 // ===== ROUTES =====
 

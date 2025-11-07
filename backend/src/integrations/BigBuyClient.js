@@ -21,13 +21,13 @@ class BigBuyClient {
         'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json'
       },
-      timeout: 30000 // 30 secondi timeout
+      timeout: 90000 // 90 secondi timeout (BigBuy può essere lento)
     });
   }
 
   // ===== PRODOTTI =====
 
-  async getProducts(page = 1, pageSize = 100) {
+  async getProducts(page = 1, pageSize = 20) {
     if (this.isMockMode) {
       return this._getMockProducts(page, pageSize);
     }

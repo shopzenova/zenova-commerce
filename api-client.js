@@ -16,7 +16,7 @@ class ZenovaAPI {
       const data = await response.json();
 
       if (data.success) {
-        return data.data.products;
+        return data.data; // Fix: data.data è già l'array dei prodotti
       }
       throw new Error('Errore caricamento prodotti');
     } catch (error) {
