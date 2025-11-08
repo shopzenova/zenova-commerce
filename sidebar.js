@@ -1,38 +1,18 @@
-// Mapping subcategories to parent categories
+// Mapping subcategories to parent categories (BigBuy)
 const subcategoryToCategoryMap = {
-    'oli-essenziali': 'aromatherapy',
-    'diffusori': 'aromatherapy',
-    'nebulizzatori': 'aromatherapy',
-    'candele': 'home-fragrance',
-    'lampade-sale': 'home-fragrance',
-    'incensi': 'home-fragrance',
-    'eau-de-parfum': 'fragrances',
-    'eau-de-toilette': 'fragrances',
-    'profumi-naturali': 'fragrances',
-    'yoga': 'mindfulness',
-    'meditazione': 'mindfulness',
-    'massaggiatori': 'mindfulness',
-    'wearables-mindfulness': 'mindfulness',
-    'smart-mirror': 'mindfulness',
-    'luci-smart': 'smart-lighting',
-    'lampade-sensoriali': 'smart-lighting',
-    'campane-tibetane': 'sound-therapy',
-    'sound-machine': 'sound-therapy',
-    'purificatori': 'wellness-tech',
-    'umidificatori': 'wellness-tech',
-    'ionizzatori': 'wellness-tech',
-    'wearables': 'wellness-tech',
-    'light-therapy': 'wellness-tech',
-    'smart-sensors': 'wellness-tech',
-    'smart-health': 'wellness-tech',
-    'oli-naturali': 'skincare',
-    'maschere': 'skincare',
-    'yoga-wear': 'apparel',
-    'loungewear': 'apparel',
-    'accessori': 'apparel',
-    'te-verde': 'tea',
-    'tisane': 'tea',
-    'matcha': 'tea'
+    // BENESSERE
+    'accessori-saune': 'benessere',
+    'lampade-abbronzanti': 'benessere',
+    'massaggio-rilassamento': 'benessere',
+
+    // BELLEZZA
+    'bagno-igiene': 'bellezza',
+    'cura-capelli': 'bellezza',
+    'cura-pelle': 'bellezza',
+    'profumi-fragranze': 'bellezza',
+    'rasatura-depilazione': 'bellezza',
+    'trucco': 'bellezza',
+    'utensili-accessori': 'bellezza'
 };
 
 // Sidebar Category Accordion - Simple and Direct
@@ -158,27 +138,19 @@ function filterProductsBySubcategory(subcategory) {
     const pageTitle = document.querySelector('.page-title');
     if (pageTitle) {
         const subcategoryNames = {
-            'oli-essenziali': 'Oli Essenziali',
-            'diffusori': 'Diffusori',
-            'nebulizzatori': 'Nebulizzatori',
-            'candele': 'Candele Profumate',
-            'lampade-sale': 'Lampade di Sale',
-            'incensi': 'Incensi Naturali',
-            'yoga': 'Tappetini Yoga',
-            'meditazione': 'Cuscini Meditazione',
-            'massaggiatori': 'Massaggiatori Smart',
-            'luci-smart': 'Luci Smart',
-            'lampade-sensoriali': 'Lampade Sensoriali',
-            'campane-tibetane': 'Campane Tibetane',
-            'sound-machine': 'Sound Machine',
-            'purificatori': 'Purificatori d\'Aria',
-            'umidificatori': 'Umidificatori Smart',
-            'ionizzatori': 'Ionizzatori',
-            'oli-naturali': 'Oli Naturali',
-            'maschere': 'Maschere Viso',
-            'te-verde': 'Tè Verde',
-            'tisane': 'Tisane Rilassanti',
-            'matcha': 'Matcha Premium'
+            // BENESSERE (BigBuy)
+            'accessori-saune': 'Accessori per saune',
+            'lampade-abbronzanti': 'Lampade abbronzanti',
+            'massaggio-rilassamento': 'Massaggio e rilassamento',
+
+            // BELLEZZA (BigBuy)
+            'bagno-igiene': 'Bagno e igiene personale',
+            'cura-capelli': 'Cura dei capelli',
+            'cura-pelle': 'Cura della pelle',
+            'profumi-fragranze': 'Profumi e fragranze',
+            'rasatura-depilazione': 'Rasatura e depilazione',
+            'trucco': 'Trucco',
+            'utensili-accessori': 'Utensili e accessori'
         };
 
         if (subcategory === 'all') {

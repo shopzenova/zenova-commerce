@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Zenova</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="styles.css?v=20251108f">
+    <link rel="stylesheet" href="checkout.css?v=20251108">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -136,8 +136,8 @@
 
                         <div class="payment-methods">
                             <div class="payment-method" data-method="card">
-                                <input type="radio" id="paymentCard" name="paymentMethod" value="card" checked>
-                                <label for="paymentCard">
+                                <input type="radio" id="paymentMethodCard" name="paymentMethod" value="card" checked>
+                                <label for="paymentMethodCard">
                                     <div class="method-icon">💳</div>
                                     <div class="method-details">
                                         <span class="method-name">Carta di Credito/Debito</span>
@@ -147,8 +147,8 @@
                             </div>
 
                             <div class="payment-method" data-method="paypal">
-                                <input type="radio" id="paymentPaypal" name="paymentMethod" value="paypal">
-                                <label for="paymentPaypal">
+                                <input type="radio" id="paymentMethodPaypal" name="paymentMethod" value="paypal">
+                                <label for="paymentMethodPaypal">
                                     <div class="method-icon">
                                         <svg width="24" height="24" viewBox="0 0 24 24">
                                             <path fill="#003087" d="M8.32 21.97a.546.546 0 0 1-.54-.46L6.47 15.3a.815.815 0 0 1 .81-.95h2.43c4.46 0 6.49-2.16 6.93-5.42.04-.31.07-.6.09-.87.34 1.75.02 3.44-.94 4.94-1.15 1.77-3.16 2.69-5.98 2.69H7.58c-.44 0-.83.32-.9.76l-.97 5.08a.546.546 0 0 1-.54.46h-2.85z"/>
@@ -163,8 +163,8 @@
                             </div>
 
                             <div class="payment-method" data-method="bank">
-                                <input type="radio" id="paymentBank" name="paymentMethod" value="bank">
-                                <label for="paymentBank">
+                                <input type="radio" id="paymentMethodBank" name="paymentMethod" value="bank">
+                                <label for="paymentMethodBank">
                                     <div class="method-icon">🏦</div>
                                     <div class="method-details">
                                         <span class="method-name">Bonifico Bancario</span>
@@ -316,6 +316,6 @@
 
     <script src="api-client.js?v=20251105e"></script>
     <script src="auth.js?v=20251105e"></script>
-    <script src="checkout.js?v=20251105e"></script>
+    <script src="checkout.js?v=20251108b"></script>
 </body>
 </html>

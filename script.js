@@ -317,44 +317,117 @@ const staticProducts = [
  * Map backend product to frontend format
  */
 function mapBackendProductToFrontend(backendProduct) {
-    // Extract category name - usa il campo category direttamente o prende il primo
-    const categoryName = backendProduct.category ||
-        (backendProduct.categories && backendProduct.categories.length > 0
-            ? backendProduct.categories[0].name
-            : 'Benessere');
-
-    // Extract first image URL - FIX: le immagini sono già stringhe, non oggetti!
+    // Extract first image URL
     const imageUrl = backendProduct.image ||
         (backendProduct.images && backendProduct.images.length > 0
-            ? backendProduct.images[0]  // ✅ CORRETTO: è già una stringa URL
+            ? backendProduct.images[0]
             : null);
 
-    // Determine subcategory based on category (you can customize this mapping)
-    const subcategoryMap = {
-        'Aromatherapy': 'diffusori',
-        'Home Fragrance': 'lampade-sale',
-        'Mindfulness': 'yoga',
-        'Wellness Tech': 'purificatori',
-        'benessere': 'benessere',
-        'smartHome': 'smart',
-        'design': 'design'
-    };
+    // Determine category and subcategory based on product name
+    const productName = backendProduct.name.toLowerCase();
+    let category = null; // null = nascosto
+    let subcategory = 'altro';
+    let icon = '✨';
+
+    // ESCLUDI prodotti indesiderati (cucce cani, ecc.)
+    if (productName.includes('cuccia') || productName.includes('cani') || productName.includes('cane') ||
+        productName.includes('giocattolo') || productName.includes('videocamera') ||
+        productName.includes('luce galleggiante') || productName.includes('piscina') ||
+        backendProduct.category === 'Home & Garden') {
+        return null; // Nascondi questi prodotti
+    }
+
+    // === BENESSERE (BigBuy) ===
+
+    // Massaggio e rilassamento
+    if (productName.includes('massaggiatore') || productName.includes('idromassaggio') ||
+        productName.includes('set regalo') && productName.includes('medisana') ||
+        productName.includes('testina') && productName.includes('therabody')) {
+        category = 'Benessere';
+        subcategory = 'massaggio-rilassamento';
+        icon = '💆';
+    }
+    // Lampade abbronzanti (vuota per ora)
+    // Accessori per saune (vuota per ora)
+
+    // === BELLEZZA (BigBuy) ===
+
+    // Profumi e fragranze
+    else if (productName.includes('profumo') || productName.includes('eau de') ||
+             productName.includes('edt') || productName.includes('edp')) {
+        category = 'Bellezza';
+        subcategory = 'profumi-fragranze';
+        icon = '🌺';
+    }
+    // Cura dei capelli
+    else if (productName.includes('phon') || productName.includes('spazzola') ||
+             productName.includes('arricciacapelli') ||
+             productName.includes('balsamo') && !productName.includes('labbra') ||
+             productName.includes('spray') && !productName.includes('protezione solare') ||
+             (productName.includes('babyliss') && !productName.includes('rasoio')) ||
+             (productName.includes('revlon') && !productName.includes('rasoio'))) {
+        category = 'Bellezza';
+        subcategory = 'cura-capelli';
+        icon = '💇';
+    }
+    // Rasatura e depilazione
+    else if (productName.includes('epilatore') || productName.includes('rasoio') ||
+             productName.includes('depilazione') || productName.includes('pulitore')) {
+        category = 'Bellezza';
+        subcategory = 'rasatura-depilazione';
+        icon = '✂️';
+    }
+    // Cura della pelle
+    else if (productName.includes('crema') || productName.includes('essenza') ||
+             productName.includes('protezione solare')) {
+        category = 'Bellezza';
+        subcategory = 'cura-pelle';
+        icon = '🌸';
+    }
+    // Bagno e igiene personale
+    else if (productName.includes('integratore') || productName.includes('balsamo labbra') ||
+             productName.includes('gel doccia')) {
+        category = 'Bellezza';
+        subcategory = 'bagno-igiene';
+        icon = '🧴';
+    }
+    // Utensili e accessori
+    else if (productName.includes('caricabatterie')) {
+        category = 'Bellezza';
+        subcategory = 'utensili-accessori';
+        icon = '🔌';
+    }
+    // Trucco (vuota per ora)
+    // Solo prodotti Health & Beauty (NO Home & Garden)
+    else if (backendProduct.category === 'Health & Beauty') {
+        category = 'Bellezza';
+        subcategory = 'altro';
+        icon = '✨';
+    }
+    // Tutti gli altri prodotti (Home & Garden, ecc.) = null = nascosti
+    else {
+        return null;
+    }
 
     return {
         id: backendProduct.id,
         sku: backendProduct.sku || backendProduct.id,
         name: backendProduct.name,
-        category: categoryName,
-        subcategory: subcategoryMap[categoryName] || 'general',
+        category: category,
+        subcategory: subcategory,
         price: backendProduct.retailPrice || backendProduct.price || 0,
         description: backendProduct.description || '',
-        icon: getIconForCategory(categoryName),
+        icon: icon,
         image: imageUrl,
         // Keep backend data for cart/checkout
         bigbuyId: backendProduct.id,
         images: backendProduct.images || [],
         stock: backendProduct.stock || 0,
-        brand: backendProduct.brand || 'Zenova'
+        brand: backendProduct.brand || 'Zenova',
+        ean: backendProduct.ean,
+        dimensions: backendProduct.dimensions,
+        weight: backendProduct.weight,
+        zenovaCategories: backendProduct.zenovaCategories || []
     };
 }
 
@@ -397,10 +470,13 @@ async function loadProductsFromBackend() {
         if (backendProducts && backendProducts.length > 0) {
             console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
 
-            // Map backend products to frontend format
-            products = backendProducts.map(mapBackendProductToFrontend);
+            // Map backend products to frontend format and filter out hidden products
+            products = backendProducts
+                .map(mapBackendProductToFrontend)
+                .filter(p => p !== null); // Rimuovi prodotti nascosti
 
             console.log('✅ Prodotti convertiti e pronti:', products.length);
+            console.log('📊 Prodotti visibili: Benessere + Bellezza solamente');
             return true;
         } else {
             console.warn('⚠️ Nessun prodotto ricevuto dal backend, uso prodotti statici');
@@ -561,20 +637,33 @@ function updateCart() {
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="empty-cart">Il tuo carrello è vuoto</p>';
     } else {
-        cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-image">${item.icon}</div>
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">€${item.price.toFixed(2)}</div>
-                    <div class="cart-item-quantity">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+        cartItems.innerHTML = cart.map(item => {
+            // Get image URL or fallback
+            let imageHtml = '';
+            if (item.image && item.image.startsWith('http')) {
+                imageHtml = `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            } else if (item.icon) {
+                imageHtml = item.icon;
+            } else {
+                imageHtml = '📦';
+            }
+
+            return `
+                <div class="cart-item">
+                    <div class="cart-item-image">${imageHtml}</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">€${item.price.toFixed(2)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                        </div>
                     </div>
+                    <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Rimuovi">×</button>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     // Update total
@@ -1238,11 +1327,91 @@ function openProductDetailModal(productId) {
     // Update gallery
     updateGallery();
 
-    document.getElementById('productDetailCategory').textContent = product.category;
+    // Breadcrumb
+    const breadcrumbCategory = document.getElementById('breadcrumbCategory');
+    breadcrumbCategory.textContent = product.category || 'Prodotti';
+
+    // Brand Badge
+    const brandBadge = document.getElementById('productBrand');
+    if (product.brand) {
+        brandBadge.textContent = `Brand: ${product.brand}`;
+        brandBadge.style.display = 'inline-block';
+    } else {
+        brandBadge.style.display = 'none';
+    }
+
+    // Product Name
     document.getElementById('productDetailName').textContent = product.name;
+
+    // Tags (from zenovaCategories)
+    const tagsContainer = document.getElementById('productTags');
+    if (product.zenovaCategories && product.zenovaCategories.length > 0) {
+        tagsContainer.innerHTML = product.zenovaCategories
+            .map(tag => `<span class="product-tag">${tag}</span>`)
+            .join('');
+        tagsContainer.style.display = 'flex';
+    } else if (product.category) {
+        const categories = product.category.split(',').map(c => c.trim());
+        tagsContainer.innerHTML = categories
+            .map(tag => `<span class="product-tag">${tag}</span>`)
+            .join('');
+        tagsContainer.style.display = 'flex';
+    } else {
+        tagsContainer.style.display = 'none';
+    }
+
+    // Price
     document.getElementById('productDetailPrice').textContent = `€${product.price.toFixed(2)}`;
-    // ✅ FIX: usa innerHTML per mostrare l'HTML della descrizione BigBuy
+
+    // Stock
+    const stockElement = document.getElementById('productStock');
+    if (product.stock !== undefined) {
+        if (product.stock > 50) {
+            stockElement.textContent = `✓ Disponibile (${product.stock} unità)`;
+            stockElement.className = 'product-stock';
+        } else if (product.stock > 0) {
+            stockElement.textContent = `⚠ Poche disponibilità (${product.stock} unità)`;
+            stockElement.className = 'product-stock low-stock';
+        } else {
+            stockElement.textContent = '✗ Non disponibile';
+            stockElement.className = 'product-stock out-of-stock';
+        }
+    } else {
+        stockElement.textContent = '✓ Disponibile';
+        stockElement.className = 'product-stock';
+    }
+
+    // Description
     document.getElementById('productDetailDescription').innerHTML = product.description || 'Descrizione non disponibile';
+
+    // Technical Info
+    const techInfoGrid = document.getElementById('techInfoGrid');
+    const techInfo = [];
+
+    if (product.ean) techInfo.push({ label: 'EAN', value: product.ean });
+    if (product.dimensions) {
+        const dims = product.dimensions;
+        techInfo.push({
+            label: 'Dimensioni',
+            value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
+        });
+    }
+    if (product.weight) techInfo.push({ label: 'Peso', value: `${product.weight} kg` });
+    if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
+
+    if (techInfo.length > 0) {
+        techInfoGrid.innerHTML = techInfo
+            .map(item => `
+                <div class="tech-info-item">
+                    <div class="tech-info-label">${item.label}</div>
+                    <div class="tech-info-value">${item.value}</div>
+                </div>
+            `)
+            .join('');
+        document.getElementById('productTechnicalInfo').style.display = 'block';
+    } else {
+        document.getElementById('productTechnicalInfo').style.display = 'none';
+    }
 
     // Generate features with REAL product data
     const features = getProductFeatures(product);
@@ -1254,6 +1423,12 @@ function openProductDetailModal(productId) {
 
     // Show modal
     modal.classList.add('active');
+
+    // Scrolla sempre in alto all'apertura del modal
+    const modalContent = document.querySelector('.product-detail-content');
+    if (modalContent) {
+        modalContent.scrollTop = 0;
+    }
 }
 
 // Update gallery display
@@ -1315,40 +1490,59 @@ function closeProductDetailModal() {
 function getProductFeatures(product) {
     const features = [];
 
-    // Stock disponibilità
-    if (product.stock > 0) {
-        features.push(`✅ Disponibile: ${product.stock} pezzi in stock`);
-    } else {
-        features.push('⚠️ Temporaneamente non disponibile');
+    // Estrai caratteristiche REALI dalla descrizione HTML di BigBuy
+    if (product.description) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = product.description;
+
+        // Trova tutte le liste <ul> nella descrizione
+        const lists = tempDiv.querySelectorAll('ul');
+
+        lists.forEach(ul => {
+            // Prendi solo gli <li> di primo livello (non nested)
+            const items = ul.querySelectorAll(':scope > li');
+            items.forEach(li => {
+                // Pulisci il testo da HTML interno
+                let text = li.textContent.trim();
+
+                // Rimuovi liste interne se presenti
+                const nestedUl = li.querySelector('ul');
+                if (nestedUl) {
+                    // Estrai i valori delle liste interne e uniscili
+                    const nestedItems = Array.from(nestedUl.querySelectorAll('li'))
+                        .map(item => item.textContent.trim())
+                        .filter(item => item.length > 0);
+
+                    if (nestedItems.length > 0) {
+                        // Rimuovi il testo della lista interna dal testo principale
+                        text = text.split('\n')[0].trim();
+                        text += `: ${nestedItems.join(', ')}`;
+                    }
+                }
+
+                // Aggiungi solo se il testo è valido e non troppo lungo
+                if (text && text.length > 3 && text.length < 200) {
+                    features.push(text);
+                }
+            });
+        });
     }
 
-    // Brand
-    if (product.brand) {
-        features.push(`🏷️ Brand: ${product.brand}`);
-    }
-
-    // Peso
-    if (product.weight && product.weight > 0) {
-        features.push(`⚖️ Peso: ${product.weight} kg`);
-    }
-
-    // Dimensioni
-    if (product.dimensions && (product.dimensions.width || product.dimensions.height || product.dimensions.depth)) {
-        const dims = product.dimensions;
-        if (dims.width && dims.height && dims.depth) {
-            features.push(`📦 Dimensioni: ${dims.width} x ${dims.height} x ${dims.depth} cm`);
+    // Se non abbiamo trovato caratteristiche dalla descrizione, mostra info base
+    if (features.length === 0) {
+        if (product.stock > 0) {
+            features.push(`Disponibilità: ${product.stock} unità`);
+        }
+        if (product.weight) {
+            features.push(`Peso: ${product.weight} kg`);
+        }
+        if (product.dimensions) {
+            const dims = product.dimensions;
+            if (dims.width && dims.height && dims.depth) {
+                features.push(`Dimensioni: ${dims.width} x ${dims.height} x ${dims.depth} cm`);
+            }
         }
     }
-
-    // EAN
-    if (product.ean) {
-        features.push(`🔢 EAN: ${product.ean}`);
-    }
-
-    // Features comuni
-    features.push('🚚 Spedizione tracciata');
-    features.push('↩️ Reso facile entro 14 giorni');
-    features.push('💳 Pagamento sicuro con Stripe');
 
     return features;
 }

@@ -2,34 +2,49 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Checkout system loaded');
 
-    // Initialize Stripe (REPLACE WITH YOUR STRIPE PUBLISHABLE KEY)
-    const stripe = Stripe('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE');
-    const elements = stripe.elements();
+    // Initialize Stripe (MOCK for development - replace with real key in production)
+    let stripe, elements, cardElement;
+    try {
+        // Try to initialize Stripe, but don't block if key is invalid
+        stripe = Stripe('pk_test_51234567890abcdefghijklmnopqrstuvwxyz123456');
+        elements = stripe.elements();
 
-    // Create card element
-    const cardElement = elements.create('card', {
-        style: {
-            base: {
-                fontSize: '16px',
-                color: '#32325d',
-                fontFamily: 'Quicksand, sans-serif',
-                '::placeholder': {
-                    color: '#aab7c4'
+        // Create card element
+        cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    fontFamily: 'Quicksand, sans-serif',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    }
                 }
             }
-        }
-    });
-    cardElement.mount('#card-element');
+        });
 
-    // Handle card errors
-    cardElement.on('change', function(event) {
-        const displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
+        // Try to mount card element
+        const cardElementContainer = document.getElementById('card-element');
+        if (cardElementContainer) {
+            cardElement.mount('#card-element');
         }
-    });
+
+        // Handle card errors
+        if (cardElement) {
+            cardElement.on('change', function(event) {
+                const displayError = document.getElementById('card-errors');
+                if (displayError) {
+                    if (event.error) {
+                        displayError.textContent = event.error.message;
+                    } else {
+                        displayError.textContent = '';
+                    }
+                }
+            });
+        }
+    } catch (error) {
+        console.warn('⚠️ Stripe non inizializzato (modalità sviluppo):', error.message);
+    }
 
     // Get cart data
     const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
@@ -65,8 +80,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Shipping form handler
     const shippingForm = document.getElementById('shippingForm');
+    if (!shippingForm) {
+        console.error('❌ Form spedizione non trovato!');
+        return;
+    }
+
+    console.log('✅ Form spedizione trovato, aggiunto listener submit');
+
     shippingForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        console.log('📝 Form spedizione submitted!');
 
         // Save shipping data
         shippingData = {
@@ -81,12 +104,15 @@ document.addEventListener('DOMContentLoaded', function() {
             notes: document.getElementById('notes').value
         };
 
+        console.log('Dati spedizione salvati:', shippingData);
+
         // Save address for logged in users
         if (currentUser) {
             localStorage.setItem(`zenova_address_${currentUser.email}`, JSON.stringify(shippingData));
         }
 
         // Move to payment step
+        console.log('➡️ Passo allo step 2 (pagamento)...');
         goToStep(2);
     });
 
@@ -340,10 +366,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function goToStep(step) {
+        console.log(`🔄 goToStep chiamata con step: ${step}`);
         currentStep = step;
 
         // Update steps indicator
-        document.querySelectorAll('.step').forEach((s, index) => {
+        const steps = document.querySelectorAll('.step');
+        console.log(`   Found ${steps.length} step indicators`);
+        steps.forEach((s, index) => {
             if (index + 1 <= step) {
                 s.classList.add('active');
             } else {
@@ -352,21 +381,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Show/hide cards
+        const shippingCard = document.getElementById('shippingCard');
+        const paymentCard = document.getElementById('paymentCard');
+        const confirmationCard = document.getElementById('confirmationCard');
+
+        console.log('   Cards trovate:', {
+            shipping: !!shippingCard,
+            payment: !!paymentCard,
+            confirmation: !!confirmationCard
+        });
+
         if (step === 1) {
-            document.getElementById('shippingCard').classList.remove('hidden');
-            document.getElementById('paymentCard').classList.add('hidden');
-            document.getElementById('confirmationCard').classList.add('hidden');
+            console.log('   👉 Mostro card SPEDIZIONE');
+            if (shippingCard) shippingCard.classList.remove('hidden');
+            if (paymentCard) paymentCard.classList.add('hidden');
+            if (confirmationCard) confirmationCard.classList.add('hidden');
         } else if (step === 2) {
-            document.getElementById('shippingCard').classList.add('hidden');
-            document.getElementById('paymentCard').classList.remove('hidden');
-            document.getElementById('confirmationCard').classList.add('hidden');
+            console.log('   👉 Mostro card PAGAMENTO');
+            if (shippingCard) shippingCard.classList.add('hidden');
+            if (paymentCard) paymentCard.classList.remove('hidden');
+            if (confirmationCard) confirmationCard.classList.add('hidden');
         } else if (step === 3) {
-            document.getElementById('shippingCard').classList.add('hidden');
-            document.getElementById('paymentCard').classList.add('hidden');
-            document.getElementById('confirmationCard').classList.remove('hidden');
+            console.log('   👉 Mostro card CONFERMA');
+            if (shippingCard) shippingCard.classList.add('hidden');
+            if (paymentCard) paymentCard.classList.add('hidden');
+            if (confirmationCard) confirmationCard.classList.remove('hidden');
         }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        console.log('✅ goToStep completata');
     }
 
     function generateOrderId() {
