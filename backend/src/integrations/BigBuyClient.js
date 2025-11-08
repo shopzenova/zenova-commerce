@@ -79,7 +79,7 @@ class BigBuyClient {
 
   // ===== PRODOTTI =====
 
-  async getProducts(page = 1, pageSize = 20) {
+  async getProducts(page = 1, pageSize = 10) { // Ridotto da 20 a 10 per risparmiare API calls
     if (this.isMockMode) {
       return this._getMockProducts(page, pageSize);
     }
@@ -92,17 +92,28 @@ class BigBuyClient {
     try {
       logger.info(`🔄 Richiesta BigBuy: getProducts (page=${page}, pageSize=${pageSize})`);
 
-      // Usa _makeRequest con rate limiting automatico
-      const response = await this._makeRequest('get', '/rest/catalog/products.json', {
+      // Usa solo l'endpoint products.json (singola chiamata, più veloce!)
+      const productsResponse = await this._makeRequest('get', '/rest/catalog/products.json', {
         params: { isoCode: 'it', page, pageSize }
       });
 
-      logger.info(`✅ BigBuy: Ricevuti ${response.data.products?.length || 0} prodotti REALI`);
+      const baseProducts = Array.isArray(productsResponse.data) ? productsResponse.data : [];
+      logger.info(`✅ BigBuy: Ricevuti ${baseProducts.length} prodotti`);
+
+      if (baseProducts.length === 0) {
+        this._setCache(cacheKey, []);
+        return [];
+      }
+
+      // Arricchisci i prodotti con dati leggibili generati dai campi disponibili
+      const enrichedProducts = baseProducts.map(product => this._enrichProduct(product));
+
+      logger.info(`✅ BigBuy: ${enrichedProducts.length} prodotti pronti`);
 
       // Salva in cache
-      this._setCache(cacheKey, response.data);
+      this._setCache(cacheKey, enrichedProducts);
 
-      return response.data;
+      return enrichedProducts;
     } catch (error) {
       logger.error('❌ Errore BigBuy getProducts:', {
         message: error.message,
@@ -119,6 +130,60 @@ class BigBuyClient {
       logger.warn('⚠️  Errore API BigBuy - uso dati MOCK come fallback');
       return this._getMockProducts(page, pageSize);
     }
+  }
+
+  // Arricchisce un prodotto BigBuy con dati leggibili
+  _enrichProduct(product) {
+    const productFilters = require('../../config/product-filters');
+
+    // Genera nome leggibile dal SKU o usa ID
+    const name = this._generateProductName(product);
+
+    // Mappa category ID a nome leggibile
+    const categoryName = productFilters.categoryMapping[product.category] || 'Wellness';
+
+    // Genera descrizione base
+    const description = `${name} - Codice: ${product.sku}`;
+
+    // Usa immagine placeholder se non disponibile
+    const images = this._getProductImages(product, categoryName);
+
+    // Costruisci categorie array (frontend si aspetta questo formato)
+    const categories = [{ id: product.category, name: categoryName }];
+
+    return {
+      ...product,
+      name,
+      description,
+      categories,
+      images
+    };
+  }
+
+  // Genera nome prodotto leggibile
+  _generateProductName(product) {
+    // Se c'è un part number, usalo
+    if (product.partNumber) {
+      return product.partNumber.replace(/_/g, ' ').replace(/-/g, ' ');
+    }
+    // Altrimenti usa SKU formattato
+    return `Prodotto ${product.sku}`;
+  }
+
+  // Ottiene immagini prodotto o placeholder
+  _getProductImages(product, categoryName) {
+    // Per ora usa placeholder basati sulla categoria
+    const placeholders = {
+      'Aromatherapy': 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&h=600&fit=crop',
+      'Wellness': 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=600&fit=crop',
+      'Fitness': 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=600&h=600&fit=crop',
+      'Beauty': 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&h=600&fit=crop',
+      'Lighting': 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&h=600&fit=crop'
+    };
+
+    const placeholderUrl = placeholders[categoryName] || placeholders['Wellness'];
+
+    return [{ url: placeholderUrl }];
   }
 
   async getProduct(productId) {
@@ -294,7 +359,7 @@ class BigBuyClient {
 
   _getMockProducts(page = 1, pageSize = 100) {
     const mockProducts = [
-      { id: 1, sku: 'ZN-001', name: 'Olio Essenziale Lavanda', description: 'Olio essenziale puro di lavanda biologica. Perfetto per rilassamento e sonno.', retailPrice: 24.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&h=600&fit=crop' }] },
+      { id: 1, sku: 'ZN-001', name: 'Olio Essenziale Lavanda', description: 'Olio essenziale puro di lavanda biologica. Perfetto per rilassamento e sonno.', retailPrice: 24.90, category: 456, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&h=600&fit=crop' }] },
       { id: 2, sku: 'ZN-002', name: 'Diffusore Ultrasonico', description: 'Diffusore elegante con luci LED. Silenzioso e efficace per ogni ambiente.', retailPrice: 49.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1584993766449-a40e2ec95e99?w=600&h=600&fit=crop' }] },
       { id: 3, sku: 'ZN-003', name: 'Nebulizzatore Premium', description: 'Tecnologia avanzata per diffusione ottimale degli oli essenziali.', retailPrice: 89.90, categories: [{ id: 456, name: 'Aromatherapy' }], images: [{ url: 'https://images.unsplash.com/photo-1600428854537-7ea552fb4371?w=600&h=600&fit=crop' }] },
       { id: 4, sku: 'ZN-004', name: 'Candela Profumata Vaniglia', description: 'Candela in cera di soia naturale con fragranza di vaniglia e legno di sandalo.', retailPrice: 34.90, categories: [{ id: 457, name: 'Home Fragrance' }], images: [{ url: 'https://images.unsplash.com/photo-1602874801006-2c9a268d0d6e?w=600&h=600&fit=crop' }] },
@@ -326,17 +391,12 @@ class BigBuyClient {
       { id: 30, sku: 'ZN-030', name: 'Pod Meditazione Immersiva', description: 'Capsula di meditazione con luci, suoni 3D, aromaterapia e vibrazione per esperienza totale.', retailPrice: 2499.90, categories: [{ id: 458, name: 'Mindfulness' }], images: [{ url: 'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?w=600&h=600&fit=crop' }] }
     ];
 
-    return {
-      products: mockProducts,
-      page,
-      pageSize,
-      totalPages: 1,
-      totalProducts: mockProducts.length
-    };
+    // Ritorna solo l'array (come fa BigBuy reale)
+    return mockProducts;
   }
 
   _getMockProduct(productId) {
-    const products = this._getMockProducts().products;
+    const products = this._getMockProducts();
     return products.find(p => p.id === parseInt(productId)) || products[0];
   }
 }

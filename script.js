@@ -317,37 +317,44 @@ const staticProducts = [
  * Map backend product to frontend format
  */
 function mapBackendProductToFrontend(backendProduct) {
-    // Extract category name (first category)
-    const categoryName = backendProduct.categories && backendProduct.categories.length > 0
-        ? backendProduct.categories[0].name
-        : 'Uncategorized';
+    // Extract category name - usa il campo category direttamente o prende il primo
+    const categoryName = backendProduct.category ||
+        (backendProduct.categories && backendProduct.categories.length > 0
+            ? backendProduct.categories[0].name
+            : 'Benessere');
 
-    // Extract first image URL
-    const imageUrl = backendProduct.images && backendProduct.images.length > 0
-        ? backendProduct.images[0].url
-        : null;
+    // Extract first image URL - FIX: le immagini sono già stringhe, non oggetti!
+    const imageUrl = backendProduct.image ||
+        (backendProduct.images && backendProduct.images.length > 0
+            ? backendProduct.images[0]  // ✅ CORRETTO: è già una stringa URL
+            : null);
 
     // Determine subcategory based on category (you can customize this mapping)
     const subcategoryMap = {
         'Aromatherapy': 'diffusori',
         'Home Fragrance': 'lampade-sale',
         'Mindfulness': 'yoga',
-        'Wellness Tech': 'purificatori'
+        'Wellness Tech': 'purificatori',
+        'benessere': 'benessere',
+        'smartHome': 'smart',
+        'design': 'design'
     };
 
     return {
         id: backendProduct.id,
-        sku: backendProduct.sku,
+        sku: backendProduct.sku || backendProduct.id,
         name: backendProduct.name,
         category: categoryName,
         subcategory: subcategoryMap[categoryName] || 'general',
-        price: backendProduct.retailPrice || backendProduct.inShopsPrice || 0,
+        price: backendProduct.retailPrice || backendProduct.price || 0,
         description: backendProduct.description || '',
         icon: getIconForCategory(categoryName),
         image: imageUrl,
         // Keep backend data for cart/checkout
         bigbuyId: backendProduct.id,
-        images: backendProduct.images || []
+        images: backendProduct.images || [],
+        stock: backendProduct.stock || 0,
+        brand: backendProduct.brand || 'Zenova'
     };
 }
 
@@ -479,7 +486,7 @@ function renderProducts() {
 
         productCard.innerHTML = `
             ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
-            <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}" onclick="event.stopPropagation(); toggleWishlist(${product.id}); updateProductCardsWishlist();">
+            <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}" onclick="event.stopPropagation(); toggleWishlist('${product.id}'); updateProductCardsWishlist();">
                 ${wishlistIcon}
             </button>
             <div class="product-image">
@@ -488,9 +495,11 @@ function renderProducts() {
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
                 <h3 class="product-name">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
                 <div class="product-footer">
                     <span class="product-price">€${product.price.toFixed(2)}</span>
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('${product.id}');">
+                        Aggiungi al carrello
+                    </button>
                 </div>
             </div>
         `;
@@ -717,7 +726,7 @@ function updateWishlist() {
                     <div class="wishlist-item-name">${item.name}</div>
                     <div class="wishlist-item-price">€${item.price.toFixed(2)}</div>
                     <div class="wishlist-item-actions">
-                        <button class="wishlist-add-cart-btn" onclick="addToCartFromWishlist(${item.id})">
+                        <button class="wishlist-add-cart-btn" onclick="addToCartFromWishlist('${item.id}')">
                             Aggiungi al Carrello
                         </button>
                     </div>
@@ -1161,7 +1170,7 @@ function setupSearch() {
             const highlightedDesc = highlightText(product.description, query);
 
             return `
-                <div class="search-result-item" onclick="handleSearchResultClick(${product.id})">
+                <div class="search-result-item" onclick="handleSearchResultClick('${product.id}')">
                     <div class="search-result-icon">
                         ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : product.icon}
                     </div>
@@ -1216,8 +1225,14 @@ function openProductDetailModal(productId) {
 
     const modal = document.getElementById('productDetailModal');
 
-    // Create gallery images (demo: 3 copies of same image, you can customize later)
-    currentGalleryImages = product.image ? [product.image, product.image, product.image] : [product.icon];
+    // Use ALL product images from BigBuy (not just 1 repeated)
+    if (product.images && product.images.length > 0) {
+        currentGalleryImages = product.images; // Tutte le immagini reali!
+    } else if (product.image) {
+        currentGalleryImages = [product.image];
+    } else {
+        currentGalleryImages = [product.icon];
+    }
     currentGalleryIndex = 0;
 
     // Update gallery
@@ -1226,9 +1241,10 @@ function openProductDetailModal(productId) {
     document.getElementById('productDetailCategory').textContent = product.category;
     document.getElementById('productDetailName').textContent = product.name;
     document.getElementById('productDetailPrice').textContent = `€${product.price.toFixed(2)}`;
-    document.getElementById('productDetailDescription').textContent = product.description;
+    // ✅ FIX: usa innerHTML per mostrare l'HTML della descrizione BigBuy
+    document.getElementById('productDetailDescription').innerHTML = product.description || 'Descrizione non disponibile';
 
-    // Generate features based on category
+    // Generate features with REAL product data
     const features = getProductFeatures(product);
     const featuresList = document.getElementById('productDetailFeatures');
     featuresList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
@@ -1295,24 +1311,46 @@ function closeProductDetailModal() {
     }, 0);
 }
 
-// Get product features based on category
+// Get product features based on REAL product data from BigBuy
 function getProductFeatures(product) {
-    const commonFeatures = ['Spedizione gratuita', 'Garanzia 2 anni', 'Reso facile entro 30 giorni'];
+    const features = [];
 
-    const categoryFeatures = {
-        'Aromatherapy': ['100% naturale', 'Biologico certificato', 'Non testato su animali'],
-        'Home Fragrance': ['Lunga durata', 'Fragranza naturale', 'Senza sostanze tossiche'],
-        'Mindfulness': ['Materiali eco-friendly', 'Design ergonomico', 'Qualità premium'],
-        'Smart Lighting': ['Controllo Wi-Fi', 'Compatibile Alexa/Google', 'RGB multicolore'],
-        'Sound Therapy': ['Suoni HD', 'Volume regolabile', 'Timer integrato'],
-        'Wellness Tech': ['Filtro HEPA', 'Basso consumo', 'Silenzioso'],
-        'Natural Skincare': ['Ingredienti biologici', 'Vegan', 'Senza parabeni'],
-        'Tea & Infusions': ['Biologico', 'Fair trade', 'Confezione eco']
-    };
+    // Stock disponibilità
+    if (product.stock > 0) {
+        features.push(`✅ Disponibile: ${product.stock} pezzi in stock`);
+    } else {
+        features.push('⚠️ Temporaneamente non disponibile');
+    }
 
-    const specificFeatures = categoryFeatures[product.category] || ['Qualità garantita', 'Made in Italy', 'Design elegante'];
+    // Brand
+    if (product.brand) {
+        features.push(`🏷️ Brand: ${product.brand}`);
+    }
 
-    return [...specificFeatures, ...commonFeatures];
+    // Peso
+    if (product.weight && product.weight > 0) {
+        features.push(`⚖️ Peso: ${product.weight} kg`);
+    }
+
+    // Dimensioni
+    if (product.dimensions && (product.dimensions.width || product.dimensions.height || product.dimensions.depth)) {
+        const dims = product.dimensions;
+        if (dims.width && dims.height && dims.depth) {
+            features.push(`📦 Dimensioni: ${dims.width} x ${dims.height} x ${dims.depth} cm`);
+        }
+    }
+
+    // EAN
+    if (product.ean) {
+        features.push(`🔢 EAN: ${product.ean}`);
+    }
+
+    // Features comuni
+    features.push('🚚 Spedizione tracciata');
+    features.push('↩️ Reso facile entro 14 giorni');
+    features.push('💳 Pagamento sicuro con Stripe');
+
+    return features;
 }
 
 // Setup product detail modal
@@ -1394,7 +1432,7 @@ function getProductIdFromCard(card) {
     if (wishlistBtn) {
         const productId = wishlistBtn.getAttribute('data-product-id');
         if (productId) {
-            return parseInt(productId);
+            return productId; // ✅ FIX: ritorna stringa, non parseInt (BigBuy usa ID alfanumerici)
         }
     }
     return null;

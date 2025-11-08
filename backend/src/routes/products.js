@@ -1,29 +1,74 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 const bigbuy = require('../integrations/BigBuyClient');
 const logger = require('../utils/logger');
 const productFilters = require('../../config/product-filters');
 
-// GET /api/products - Lista tutti i prodotti (filtrati per Zenova)
+// Carica i TOP 100 prodotti dal file JSON
+let TOP_PRODUCTS = [];
+try {
+  const jsonPath = path.join(__dirname, '../../top-100-products.json');
+  const rawData = fs.readFileSync(jsonPath, 'utf-8');
+  TOP_PRODUCTS = JSON.parse(rawData);
+  logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti TOP dal file JSON`);
+} catch (error) {
+  logger.error('❌ Errore caricamento top-100-products.json:', error);
+}
+
+// GET /api/products - Lista tutti i prodotti (da JSON locale)
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 50;
-    const filtered = req.query.filtered !== 'false'; // Default: true
+    const category = req.query.category; // Filtro per categoria Zenova
 
-    let products = await bigbuy.getProducts(page, pageSize);
+    let products = [...TOP_PRODUCTS];
 
-    // Applica filtri Zenova se richiesto
-    if (filtered && products && Array.isArray(products)) {
-      products = filterProductsForZenova(products);
-      logger.info(`Filtrati ${products.length} prodotti per Zenova`);
+    // Filtra per categoria Zenova se richiesto
+    if (category) {
+      products = products.filter(p =>
+        p.zenovaCategories && p.zenovaCategories.includes(category)
+      );
+      logger.info(`Filtrati per categoria '${category}': ${products.length} prodotti`);
     }
+
+    // Paginazione
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedProducts = products.slice(startIndex, endIndex);
+
+    // Trasforma nel formato che si aspetta il frontend
+    const formattedProducts = paginatedProducts.map(p => ({
+      id: p.id,
+      name: p.name,
+      description: p.description,
+      brand: p.brand || 'Zenova',
+      category: p.zenovaCategories ? p.zenovaCategories.join(', ') : p.category,
+      price: parseFloat(p.price),
+      retailPrice: parseFloat(p.pvd) || parseFloat(p.price) * 2.5, // Se non c'è PVD, markup 2.5x
+      stock: p.stock,
+      images: p.images,
+      image: p.images && p.images[0] ? p.images[0] : null,
+      ean: p.ean,
+      weight: parseFloat(p.weight) || 0,
+      dimensions: {
+        width: parseFloat(p.width) || 0,
+        height: parseFloat(p.height) || 0,
+        depth: parseFloat(p.depth) || 0
+      },
+      active: true
+    }));
 
     res.json({
       success: true,
-      data: products,
-      count: products ? products.length : 0,
-      filtered: filtered
+      data: formattedProducts,
+      count: formattedProducts.length,
+      total: products.length,
+      page: page,
+      pageSize: pageSize,
+      source: 'json-file'
     });
   } catch (error) {
     logger.error('Errore /api/products:', error);
@@ -75,11 +120,42 @@ function filterProductsForZenova(products) {
 router.get('/:id', async (req, res) => {
   try {
     const productId = req.params.id;
-    const product = await bigbuy.getProduct(productId);
+
+    // Cerca prima nel JSON locale
+    const product = TOP_PRODUCTS.find(p => p.id === productId);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    // Formatta nel formato atteso
+    const formattedProduct = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      brand: product.brand || 'Zenova',
+      category: product.zenovaCategories ? product.zenovaCategories.join(', ') : product.category,
+      price: parseFloat(product.price),
+      retailPrice: parseFloat(product.pvd) || parseFloat(product.price) * 2.5,
+      stock: product.stock,
+      images: product.images,
+      video: product.video,
+      ean: product.ean,
+      weight: parseFloat(product.weight) || 0,
+      dimensions: {
+        width: parseFloat(product.width) || 0,
+        height: parseFloat(product.height) || 0,
+        depth: parseFloat(product.depth) || 0
+      },
+      active: true
+    };
 
     res.json({
       success: true,
-      data: product
+      data: formattedProduct
     });
   } catch (error) {
     logger.error(`Errore /api/products/${req.params.id}:`, error);
