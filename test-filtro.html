@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Filtro Categorie</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test-result { padding: 10px; margin: 10px 0; background: #f0f0f0; }
+        .success { background: #d4edda; }
+        .error { background: #f8d7da; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Test Filtro Categorie Zenova</h1>
+
+    <h2>1. Test Valori Sottocategorie</h2>
+    <div id="subcategories-test"></div>
+
+    <h2>2. Test Confronto Stringhe</h2>
+    <div id="string-test"></div>
+
+    <h2>3. Apri Console Browser (F12) per vedere i log dettagliati</h2>
+
+    <script src="api-client.js"></script>
+    <script>
+        async function testSubcategories() {
+            console.log('=== TEST SOTTOCATEGORIE ===');
+
+            // Carica prodotti
+            const backendProducts = await ZenovaAPI.getProducts(1, 400);
+            console.log(`Ricevuti ${backendProducts.length} prodotti`);
+
+            // Conta sottocategorie uniche
+            const subcats = {};
+            backendProducts.forEach(p => {
+                const cat = p.category;
+                if (!subcats[cat]) subcats[cat] = 0;
+                subcats[cat]++;
+            });
+
+            // Mostra risultati
+            let html = '<h3>Sottocategorie presenti nei prodotti:</h3>';
+            Object.keys(subcats).sort((a, b) => subcats[b] - subcats[a]).forEach(cat => {
+                html += `<div class="test-result success">
+                    <strong>"${cat}"</strong>: ${subcats[cat]} prodotti
+                </div>`;
+                console.log(`Sottocategoria: "${cat}" = ${subcats[cat]} prodotti`);
+            });
+            document.getElementById('subcategories-test').innerHTML = html;
+
+            // Test confronto stringhe
+            const sidebarValues = [
+                '2609,2617,2909',
+                '2609,2617,2937',
+                'Home & Garden',
+                '2501,2502,2504',
+                'Health & Beauty',
+                '2501,2540,2546',
+                '2501,2552,2554',
+                '2501,2552,2556',
+                '2501,2552,2568',
+                'Tech & Electronics'
+            ];
+
+            let testHtml = '<h3>Test confronto valori sidebar vs prodotti:</h3>';
+            sidebarValues.forEach(sidebarVal => {
+                const found = Object.keys(subcats).includes(sidebarVal);
+                const cssClass = found ? 'success' : 'error';
+                const status = found ? '✅ TROVATO' : '❌ NON TROVATO';
+                testHtml += `<div class="test-result ${cssClass}">
+                    Sidebar: "<strong>${sidebarVal}</strong>" → ${status}
+                    ${found ? `(${subcats[sidebarVal]} prodotti)` : ''}
+                </div>`;
+            });
+            document.getElementById('string-test').innerHTML = testHtml;
+        }
+
+        // Esegui test al caricamento
+        testSubcategories();
+    </script>
+</body>
+</html>

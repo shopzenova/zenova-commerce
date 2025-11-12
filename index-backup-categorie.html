@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenova - E-commerce Zen & Naturale</title>
+    <link rel="stylesheet" href="styles.css?v=20251105j">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        // Load saved theme immediately to prevent flash
+        (function() {
+            if (localStorage.getItem('zenova-theme') === 'dark') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('dark-mode');
+                });
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1>ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></h1>
+                        <p class="logo-experience">Experience</p>
+                        <p class="tagline">where technology meets calm and wellness</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+                <div class="whatsapp-contact">
+                    <span class="whatsapp-label">WhatsApp</span>
+                    <a href="https://wa.me/393201234567" class="whatsapp-number" target="_blank">+39 320 123 4567</a>
+                </div>
+                <div class="nav-icons">
+                    <button class="theme-toggle-btn" id="themeToggle" title="Cambia tema">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="search-btn" id="searchBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="wishlist-btn" id="wishlistBtn" title="I miei preferiti">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="wishlist-count" id="wishlistCount">0</span>
+                    </button>
+                    <a href="auth.html" class="user-btn" id="userBtn" title="Accedi / Registrati">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M5 20c0-4 3-6 7-6s7 2 7 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <button class="cart-btn" id="cartBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Categories Navigation Bar -->
+    <nav class="categories-nav">
+        <div class="container">
+            <div class="categories-nav-list">
+                <div class="category-nav-item-wrapper">
+                    <a href="prodotti.html#smart-home" class="category-nav-item">Smart Home</a>
+                    <div class="category-dropdown">
+                        <a href="prodotti.html#smart-lighting" class="category-dropdown-item">Smart Lighting</a>
+                        <a href="prodotti.html#smart-diffusers" class="category-dropdown-item">Smart Diffusers</a>
+                        <a href="prodotti.html#smart-sleep" class="category-dropdown-item">Smart Sleep</a>
+                        <a href="prodotti.html#home-devices" class="category-dropdown-item">Home Devices</a>
+                    </div>
+                </div>
+
+                <div class="category-nav-item-wrapper">
+                    <a href="prodotti.html#meditazione-zen" class="category-nav-item">Meditazione e Zen</a>
+                    <div class="category-dropdown">
+                        <a href="prodotti.html#aromatherapy" class="category-dropdown-item">Aromatherapy</a>
+                        <a href="prodotti.html#incensi" class="category-dropdown-item">& Incensi</a>
+                        <a href="prodotti.html#sound-therapy" class="category-dropdown-item">Sound Therapy</a>
+                        <a href="prodotti.html#mindfulness-tools" class="category-dropdown-item">Mindfulness Tools</a>
+                        <a href="prodotti.html#relax-massage" class="category-dropdown-item">Relax & Massage</a>
+                    </div>
+                </div>
+
+                <div class="category-nav-item-wrapper">
+                    <a href="prodotti.html#cura-corpo-skin" class="category-nav-item">Cura del Corpo e Skin</a>
+                    <div class="category-dropdown">
+                        <a href="prodotti.html#natural-skincare" class="category-dropdown-item">Natural Skincare</a>
+                        <a href="prodotti.html#body-care" class="category-dropdown-item">Body Care</a>
+                        <a href="prodotti.html#fragranze-profumi" class="category-dropdown-item">Fragranze & Profumi</a>
+                        <a href="prodotti.html#accessori-wellness" class="category-dropdown-item">Accessori Wellness</a>
+                    </div>
+                </div>
+
+                <div class="category-nav-item-wrapper">
+                    <a href="prodotti.html#design-atmosfera" class="category-nav-item">Design & Atmosfera</a>
+                    <div class="category-dropdown">
+                        <a href="prodotti.html#decor-minimal" class="category-dropdown-item">Decor Minimal</a>
+                        <a href="prodotti.html#luci-profumi" class="category-dropdown-item">Luci & Profumi</a>
+                        <a href="prodotti.html#complementi-arredo" class="category-dropdown-item">Complementi d'Arredo</a>
+                    </div>
+                </div>
+
+                <div class="category-nav-item-wrapper">
+                    <a href="prodotti.html#zen-lifestyle" class="category-nav-item">Zen Lifestyle</a>
+                    <div class="category-dropdown">
+                        <a href="prodotti.html#abbigliamento-orientale" class="category-dropdown-item">Abbigliamento Orientale</a>
+                        <a href="prodotti.html#stoffe-federe" class="category-dropdown-item">Stoffe & Federe</a>
+                        <a href="prodotti.html#borse-accessori" class="category-dropdown-item">Borse & Accessori</a>
+                        <a href="prodotti.html#mindfulness-essentials" class="category-dropdown-item">Mindfulness Essentials</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-wrapper">
+                <div class="hero-content">
+                    <h2 class="hero-title">Trova la tua serenità</h2>
+                    <p class="hero-title-translation">Find your serenity</p>
+                    <p class="hero-description">Dove la tecnologia incontra la calma</p>
+                    <p class="hero-text">Scopri prodotti innovativi che trasformano i tuoi spazi in oasi di pace e benessere. Design, tecnologia e armonia in perfetto equilibrio.</p>
+                </div>
+                <div class="hero-image-container">
+                    <img src="unsplash-3.avif" alt="Ambiente Zen Rilassante con Piante e Vetrata" class="hero-image">
+                    <div class="hero-image-caption">Smart Wellness Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Features Section -->
+    <section class="tech-features">
+        <div class="container">
+            <div class="tech-features-header">
+                <h2 class="section-title">Where Technology Meets Calm</h2>
+                <p class="section-subtitle">Innovazione al servizio del benessere</p>
+            </div>
+            <div class="tech-features-grid">
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">📱</div>
+                    <h3 class="tech-feature-title">App Companion</h3>
+                    <p class="tech-feature-description">Controllo completo da smartphone iOS e Android</p>
+                </div>
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">🤖</div>
+                    <h3 class="tech-feature-title">AI & Sensori</h3>
+                    <p class="tech-feature-description">Intelligenza artificiale per personalizzazione automatica</p>
+                </div>
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">🏠</div>
+                    <h3 class="tech-feature-title">Smart Home</h3>
+                    <p class="tech-feature-description">Compatibile con ecosistemi smart home esistenti</p>
+                </div>
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">💡</div>
+                    <h3 class="tech-feature-title">Light Therapy</h3>
+                    <p class="tech-feature-description">Tecnologia per migliorare sonno e ritmo circadiano</p>
+                </div>
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">☁️</div>
+                    <h3 class="tech-feature-title">Wi-Fi & Bluetooth</h3>
+                    <p class="tech-feature-description">Connettività wireless per controllo remoto</p>
+                </div>
+                <div class="tech-feature-card">
+                    <div class="tech-feature-icon">📊</div>
+                    <h3 class="tech-feature-title">Data Tracking</h3>
+                    <p class="tech-feature-description">Monitoraggio avanzato di sonno, stress e ambiente</p>
+                </div>
+                <div class="tech-feature-card video-card">
+                    <video class="tech-video" autoplay muted loop playsinline>
+                        <source src="video-zenova.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="tech-features-cta-container">
+                <a href="prodotti.html" class="btn btn-primary btn-cta">
+                    Scopri la collezione
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-preview-layout">
+                <!-- Left Tech Cards -->
+                <div class="about-preview-cards-left">
+                    <div class="about-preview-card">
+                        <img src="tech-2.jpg" alt="Smart Technology">
+                        <div class="about-preview-card-title">Smart Tech</div>
+                    </div>
+                    <div class="about-preview-card">
+                        <img src="tech-1.jpg" alt="Innovation">
+                        <div class="about-preview-card-title">Innovation</div>
+                    </div>
+                </div>
+
+                <!-- Center Content -->
+                <div class="about-preview-content">
+                    <h2 class="section-title">ZENOVA</h2>
+                    <p class="section-subtitle">Where Technology Meets Calm</p>
+                    <a href="chi-siamo.html" class="btn btn-secondary">Scopri di più su di noi</a>
+                </div>
+
+                <!-- Right Zen Cards -->
+                <div class="about-preview-cards-right">
+                    <div class="about-preview-card">
+                        <img src="relax-3.jpg" alt="Zen Meditation">
+                        <div class="about-preview-card-title">Relax</div>
+                    </div>
+                    <div class="about-preview-card">
+                        <img src="esperienza-1.png" alt="Wellness">
+                        <div class="about-preview-card-title">Wellness</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="how-it-works-header">
+                <h2 class="section-title">Come Funziona</h2>
+                <p class="section-subtitle">Semplice, veloce e rilassante</p>
+            </div>
+            <div class="how-it-works-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🛍️</div>
+                    <h3 class="step-title">Scegli</h3>
+                    <p class="step-description">Esplora la nostra collezione curata di prodotti zen e tecnologici per il tuo benessere</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📦</div>
+                    <h3 class="step-title">Ricevi</h3>
+                    <p class="step-description">Spedizione tracciata e imballaggio eco-friendly. Ricevi comodamente a casa tua</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">✨</div>
+                    <h3 class="step-title">Vivi Zen</h3>
+                    <p class="step-description">Trasforma i tuoi spazi in oasi di pace e inizia il tuo viaggio verso il benessere</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2 class="section-title">Cosa Dicono i Nostri Clienti</h2>
+                <p class="section-subtitle">Storie di benessere e serenità</p>
+            </div>
+            <div class="testimonials-slider">
+                <button class="testimonial-nav testimonial-prev" id="testimonialPrev">‹</button>
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Testimonials will be injected here by JS -->
+                </div>
+                <button class="testimonial-nav testimonial-next" id="testimonialNext">›</button>
+            </div>
+            <div class="testimonials-dots" id="testimonialsDots"></div>
+        </div>
+    </section>
+
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAboutModal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-logo">
+                    <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
+                </div>
+                <h2 class="modal-title">ZENOVA</h2>
+                <p class="modal-subtitle">Where Technology Meets Calm</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-text-content">
+                    <p class="modal-intro"><strong>ZENOVA — Where Technology Meets Calm</strong></p>
+
+                    <p class="modal-main-text"><em><strong>Crediamo che la tecnologia possa migliorare il benessere quotidiano. I nostri prodotti combinano design, innovazione e armonia per creare spazi che calmano, rigenerano e ispirano.</strong></em></p>
+
+                    <p class="modal-main-text"><em><strong>Dalle lampade sensoriali ai diffusori smart, ogni oggetto ZENOVA è pensato per trasformare la tua casa in un luogo di equilibrio e serenità.</strong></em></p>
+
+                    <p class="modal-closing"><em><strong>Respira. Connettiti. Vivi ZENOVA.</strong></em></p>
+                </div>
+
+                <div class="modal-divider"></div>
+
+                <div class="modal-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">💡</span>
+                        <h4>Design Innovativo</h4>
+                        <p>Tecnologia e bellezza in armonia</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🧘</span>
+                        <h4>Benessere Smart</h4>
+                        <p>Prodotti intelligenti per la tua serenità</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✨</span>
+                        <h4>Esperienza Totale</h4>
+                        <p>Trasforma i tuoi spazi in oasi di pace</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Il Tuo Carrello</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Il tuo carrello è vuoto</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totale:</span>
+                <span id="cartTotal">€0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">Procedi all'acquisto</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>I Miei Preferiti</h3>
+            <button class="close-btn" id="closeWishlist">&times;</button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Non hai ancora prodotti preferiti</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-detail-modal" id="productDetailModal">
+        <div class="product-detail-content">
+            <button class="product-detail-close" id="closeProductDetail">&times;</button>
+            <div class="product-detail-layout">
+                <div class="product-detail-image-section">
+                    <div class="product-gallery">
+                        <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+                        <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
+                        <div class="product-detail-image" id="productDetailImage"></div>
+                        <button class="gallery-nav gallery-next" id="galleryNext">›</button>
+                    </div>
+                    <div class="gallery-dots" id="galleryDots"></div>
+                </div>
+                <div class="product-detail-info-section">
+                    <div class="product-detail-category" id="productDetailCategory"></div>
+                    <h2 class="product-detail-name" id="productDetailName"></h2>
+                    <div class="product-detail-price" id="productDetailPrice"></div>
+                    <div class="product-detail-divider"></div>
+                    <p class="product-detail-description" id="productDetailDescription"></p>
+                    <div class="product-detail-features">
+                        <h4>Caratteristiche</h4>
+                        <ul id="productDetailFeatures"></ul>
+                    </div>
+                    <div class="product-detail-actions">
+                        <button class="product-detail-add-btn" id="productDetailAddBtn">
+                            Aggiungi al Carrello
+                        </button>
+                        <button class="product-detail-wishlist-btn" title="Aggiungi ai preferiti">
+                            ♡
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <div class="search-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Cerca prodotti, categorie, marchi..." autofocus>
+                    <button class="search-close" id="closeSearch">&times;</button>
+                </div>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Results will be injected here -->
+            </div>
+            <div class="search-suggestions">
+                <div class="search-suggestions-title">Suggerimenti popolari</div>
+                <div class="search-suggestion-tags">
+                    <span class="search-suggestion-tag" data-search="lavanda">Lavanda</span>
+                    <span class="search-suggestion-tag" data-search="diffusore">Diffusore</span>
+                    <span class="search-suggestion-tag" data-search="yoga">Yoga</span>
+                    <span class="search-suggestion-tag" data-search="lampada">Lampada</span>
+                    <span class="search-suggestion-tag" data-search="candela">Candela</span>
+                    <span class="search-suggestion-tag" data-search="meditazione">Meditazione</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-text">
+                        <strong>Pagamenti Sicuri</strong>
+                        <span>Protetti SSL</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">📦</div>
+                    <div class="trust-text">
+                        <strong>Spedizione Tracciata</strong>
+                        <span>Consegna garantita</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">✓</div>
+                    <div class="trust-text">
+                        <strong>Garanzia 2 Anni</strong>
+                        <span>Su tutti i prodotti</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">↩</div>
+                    <div class="trust-text">
+                        <strong>Resi Facili</strong>
+                        <span>Entro 30 giorni</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Assistenza</h4>
+                    <p>
+                        <a href="https://wa.me/393201234567" target="_blank" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            📞 WhatsApp
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em; opacity: 0.8;">Foto fornite da <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Unsplash</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Newsletter Pop-up -->
+    <div class="newsletter-popup" id="newsletterPopup">
+        <div class="newsletter-popup-content">
+            <button class="newsletter-close" id="closeNewsletterPopup">&times;</button>
+            <div class="newsletter-icon">✨</div>
+            <h3 class="newsletter-title">Benvenuto in Zenova!</h3>
+            <p class="newsletter-subtitle">Iscriviti alla newsletter e ricevi <strong>10% di sconto</strong> sul tuo primo ordine</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" placeholder="La tua email" required id="newsletterEmail">
+                <button type="submit" class="newsletter-submit">Ottieni il 10% di sconto</button>
+            </form>
+            <p class="newsletter-privacy">Rispettiamo la tua privacy. Niente spam, solo offerte esclusive!</p>
+        </div>
+    </div>
+
+    <!-- WhatsApp Widget -->
+    <a href="https://wa.me/393201234567" class="whatsapp-widget" target="_blank" title="Chatta con noi su WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.488 2.045 7.793L0 32l8.36-2.025A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.512 0-4.942-.708-7.053-2.042l-.507-.32-5.262 1.273 1.291-5.13-.336-.528A13.277 13.277 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
+            <path d="M23.547 19.427c-.36-.18-2.133-1.053-2.463-1.173-.33-.12-.57-.18-.81.18-.24.36-.93 1.173-1.14 1.413-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.895-1.787-1.07-.954-1.792-2.133-2.002-2.493-.21-.36-.022-.554.158-.733.162-.162.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.953-1.11-2.673-.293-.7-.59-.605-.81-.617-.21-.011-.45-.013-.69-.013-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3.003s1.29 3.483 1.47 3.723c.18.24 2.535 3.87 6.142 5.426.857.37 1.527.591 2.048.757.86.273 1.643.235 2.262.142.69-.103 2.133-.872 2.433-1.713.3-.842.3-1.563.21-1.713-.09-.15-.33-.24-.69-.42z" fill="currentColor"/>
+        </svg>
+    </a>
+
+    <script src="api-client.js?v=20251107B"></script>
+    <script src="script.js?v=20251107B"></script>
+</body>
+</html>

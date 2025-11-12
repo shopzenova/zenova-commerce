@@ -323,91 +323,41 @@ function mapBackendProductToFrontend(backendProduct) {
             ? backendProduct.images[0]
             : null);
 
-    // Determine category and subcategory based on product name
-    const productName = backendProduct.name.toLowerCase();
-    let category = null; // null = nascosto
-    let subcategory = 'altro';
+    // === MAPPATURA AUTOMATICA CATEGORIE BIGBUY ===
+    const bigbuyCategory = backendProduct.category;
+    let category = 'Prodotti';
+    let subcategory = bigbuyCategory; // Usa ESATTAMENTE la categoria BigBuy
     let icon = '✨';
 
-    // ESCLUDI prodotti indesiderati (cucce cani, ecc.)
-    if (productName.includes('cuccia') || productName.includes('cani') || productName.includes('cane') ||
-        productName.includes('giocattolo') || productName.includes('videocamera') ||
-        productName.includes('luce galleggiante') || productName.includes('piscina') ||
-        backendProduct.category === 'Home & Garden') {
-        return null; // Nascondi questi prodotti
-    }
-
-    // === BENESSERE (BigBuy) ===
-
-    // Massaggio e rilassamento
-    if (productName.includes('massaggiatore') || productName.includes('idromassaggio') ||
-        productName.includes('set regalo') && productName.includes('medisana') ||
-        productName.includes('testina') && productName.includes('therabody')) {
-        category = 'Benessere';
-        subcategory = 'massaggio-rilassamento';
+    // Assegna la categoria principale in base alla sottocategoria BigBuy
+    if (bigbuyCategory === '2609,2617,2909' || bigbuyCategory === '2609,2617,2937') {
+        category = 'Smart Living';
+        icon = '📱';
+    } else if (bigbuyCategory === 'Home & Garden') {
+        category = 'Smart Living';
+        icon = '🏡';
+    } else if (bigbuyCategory === '2501,2502,2504') {
+        category = 'Meditazione e Zen';
         icon = '💆';
-    }
-    // Lampade abbronzanti (vuota per ora)
-    // Accessori per saune (vuota per ora)
+    } else if (bigbuyCategory === 'Health & Beauty' ||
+               bigbuyCategory === '2501,2540,2546' ||
+               bigbuyCategory === '2501,2552,2554' ||
+               bigbuyCategory === '2501,2552,2556' ||
+               bigbuyCategory === '2501,2552,2568' ||
+               bigbuyCategory === 'Tech & Electronics') {
+        category = 'Cura del Corpo e Skin';
 
-    // === BELLEZZA (BigBuy) ===
+        // Icone specifiche per protezione solare
+        if (bigbuyCategory.includes('2552')) {
+            icon = '☀️';
+        } else if (bigbuyCategory === 'Tech & Electronics') {
+            icon = '🌺';
+        } else if (bigbuyCategory === '2501,2540,2546') {
+            icon = '🤲';
+        }
+    }
 
-    // Profumi e fragranze
-    else if (productName.includes('profumo') || productName.includes('eau de') ||
-             productName.includes('edt') || productName.includes('edp')) {
-        category = 'Bellezza';
-        subcategory = 'profumi-fragranze';
-        icon = '🌺';
-    }
-    // Cura dei capelli
-    else if (productName.includes('phon') || productName.includes('spazzola') ||
-             productName.includes('arricciacapelli') ||
-             productName.includes('balsamo') && !productName.includes('labbra') ||
-             productName.includes('spray') && !productName.includes('protezione solare') ||
-             (productName.includes('babyliss') && !productName.includes('rasoio')) ||
-             (productName.includes('revlon') && !productName.includes('rasoio'))) {
-        category = 'Bellezza';
-        subcategory = 'cura-capelli';
-        icon = '💇';
-    }
-    // Rasatura e depilazione
-    else if (productName.includes('epilatore') || productName.includes('rasoio') ||
-             productName.includes('depilazione') || productName.includes('pulitore')) {
-        category = 'Bellezza';
-        subcategory = 'rasatura-depilazione';
-        icon = '✂️';
-    }
-    // Cura della pelle
-    else if (productName.includes('crema') || productName.includes('essenza') ||
-             productName.includes('protezione solare')) {
-        category = 'Bellezza';
-        subcategory = 'cura-pelle';
-        icon = '🌸';
-    }
-    // Bagno e igiene personale
-    else if (productName.includes('integratore') || productName.includes('balsamo labbra') ||
-             productName.includes('gel doccia')) {
-        category = 'Bellezza';
-        subcategory = 'bagno-igiene';
-        icon = '🧴';
-    }
-    // Utensili e accessori
-    else if (productName.includes('caricabatterie')) {
-        category = 'Bellezza';
-        subcategory = 'utensili-accessori';
-        icon = '🔌';
-    }
-    // Trucco (vuota per ora)
-    // Solo prodotti Health & Beauty (NO Home & Garden)
-    else if (backendProduct.category === 'Health & Beauty') {
-        category = 'Bellezza';
-        subcategory = 'altro';
-        icon = '✨';
-    }
-    // Tutti gli altri prodotti (Home & Garden, ecc.) = null = nascosti
-    else {
-        return null;
-    }
+    // NON usare zenovaSubcategory - usa SEMPRE la categoria BigBuy originale
 
     return {
         id: backendProduct.id,
@@ -465,7 +415,7 @@ async function loadProductsFromBackend() {
         }
 
         // Call backend API
-        const backendProducts = await ZenovaAPI.getProducts(1, 100);
+        const backendProducts = await ZenovaAPI.getProducts(1, 400);
 
         if (backendProducts && backendProducts.length > 0) {
             console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
@@ -476,7 +426,7 @@ async function loadProductsFromBackend() {
                 .filter(p => p !== null); // Rimuovi prodotti nascosti
 
             console.log('✅ Prodotti convertiti e pronti:', products.length);
-            console.log('📊 Prodotti visibili: Benessere + Bellezza solamente');
+            console.log('📦 Tutte le categorie BigBuy caricate correttamente');
             return true;
         } else {
             console.warn('⚠️ Nessun prodotto ricevuto dal backend, uso prodotti statici');
@@ -542,6 +492,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupEventListeners();
     // setupCategorySidebar(); // REMOVED - sidebar.js handles category accordion
     initDarkMode();
+
+    // Apply hash-based filtering AFTER products are rendered
+    if (typeof window.autoOpenCategoryFromHash === 'function') {
+        console.log('🎯 Calling autoOpenCategoryFromHash after products loaded');
+        window.autoOpenCategoryFromHash();
+    }
 });
 
 // Render Products
@@ -551,6 +507,18 @@ function renderProducts() {
 
     productsGrid.innerHTML = '';
 
+    console.log(`🎨 Rendering ${products.length} products`);
+
+    // Count subcategories
+    const subcategoryCounts = {};
+    products.forEach(p => {
+        subcategoryCounts[p.subcategory] = (subcategoryCounts[p.subcategory] || 0) + 1;
+    });
+    console.log('📊 Subcategories being rendered:');
+    Object.keys(subcategoryCounts).sort((a, b) => subcategoryCounts[b] - subcategoryCounts[a]).forEach(sub => {
+        console.log(`  "${sub}": ${subcategoryCounts[sub]} prodotti`);
+    });
+
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
@@ -559,6 +527,8 @@ function renderProducts() {
         const isInWishlist = wishlist.some(item => item.id === product.id);
         const wishlistClass = isInWishlist ? 'in-wishlist' : '';
         const wishlistIcon = isInWishlist ? '♥' : '♡';
+
+        const productPrice = (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
 
         productCard.innerHTML = `
             ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
@@ -572,7 +542,7 @@ function renderProducts() {
                 <div class="product-category">${product.category}</div>
                 <h3 class="product-name">${product.name}</h3>
                 <div class="product-footer">
-                    <span class="product-price">€${product.price.toFixed(2)}</span>
+                    <span class="product-price">€${productPrice}</span>
                     <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('${product.id}');">
                         Aggiungi al carrello
                     </button>
@@ -653,7 +623,7 @@ function updateCart() {
                     <div class="cart-item-image">${imageHtml}</div>
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">€${item.price.toFixed(2)}</div>
+                        <div class="cart-item-price">€${(item.price || 0).toFixed(2)}</div>
                         <div class="cart-item-quantity">
                             <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
                             <span>${item.quantity}</span>
@@ -667,7 +637,7 @@ function updateCart() {
     }
 
     // Update total
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const total = cart.reduce((sum, item) => sum + ((item.price || 0) * item.quantity), 0);
     cartTotal.textContent = `€${total.toFixed(2)}`;
 }
 
@@ -813,7 +783,7 @@ function updateWishlist() {
                 <div class="wishlist-item-info">
                     <div class="wishlist-item-category">${item.category}</div>
                     <div class="wishlist-item-name">${item.name}</div>
-                    <div class="wishlist-item-price">€${item.price.toFixed(2)}</div>
+                    <div class="wishlist-item-price">€${(item.price || 0).toFixed(2)}</div>
                     <div class="wishlist-item-actions">
                         <button class="wishlist-add-cart-btn" onclick="addToCartFromWishlist('${item.id}')">
                             Aggiungi al Carrello
@@ -953,8 +923,13 @@ function setupEventListeners() {
     // Smooth scrolling for other navigation links
     document.querySelectorAll('a[href^="#"]:not([href="#about"])').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            // Ignora link con solo "#" o "#" vuoto
+            if (!href || href === '#' || href.length <= 1) {
+                return;
+            }
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
@@ -1268,7 +1243,7 @@ function setupSearch() {
                         <div class="search-result-name">${highlightedName}</div>
                         <div class="search-result-description">${highlightedDesc}</div>
                     </div>
-                    <div class="search-result-price">€${product.price.toFixed(2)}</div>
+                    <div class="search-result-price">€${(product.price || 0).toFixed(2)}</div>
                 </div>
             `;
         }).join('');
@@ -1361,7 +1336,7 @@ function openProductDetailModal(productId) {
     }
 
     // Price
-    document.getElementById('productDetailPrice').textContent = `€${product.price.toFixed(2)}`;
+    document.getElementById('productDetailPrice').textContent = `€${(product.price || 0).toFixed(2)}`;
 
     // Stock
     const stockElement = document.getElementById('productStock');

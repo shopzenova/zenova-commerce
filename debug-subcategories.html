@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Subcategories</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .subcat { padding: 5px; margin: 5px 0; background: #f0f0f0; }
+        .count { color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Debug: Subcategories in Products</h1>
+    <div id="output"></div>
+
+    <script src="api-client.js"></script>
+    <script>
+        async function debugSubcategories() {
+            console.log('Loading products...');
+            const backendProducts = await ZenovaAPI.getProducts(1, 400);
+
+            // Extract unique categories from backend
+            const backendCategories = {};
+            backendProducts.forEach(p => {
+                const cat = p.category;
+                if (!backendCategories[cat]) {
+                    backendCategories[cat] = [];
+                }
+                backendCategories[cat].push(p.name);
+            });
+
+            let html = '<h2>Backend Product Categories (campo "category"):</h2>';
+            Object.keys(backendCategories).sort().forEach(cat => {
+                html += `<div class="subcat">
+                    <span class="count">${backendCategories[cat].length}</span> prodotti →
+                    Category: <strong>"${cat}"</strong>
+                    <br>Esempio: ${backendCategories[cat][0]}
+                </div>`;
+            });
+
+            document.getElementById('output').innerHTML = html;
+
+            console.log('=== BACKEND CATEGORIES ===');
+            Object.keys(backendCategories).forEach(cat => {
+                console.log(`"${cat}": ${backendCategories[cat].length} prodotti`);
+            });
+        }
+
+        debugSubcategories();
+    </script>
+</body>
+</html>

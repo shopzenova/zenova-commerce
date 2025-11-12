@@ -45,9 +45,9 @@ router.get('/', async (req, res) => {
       name: p.name,
       description: p.description,
       brand: p.brand || 'Zenova',
-      category: p.zenovaCategories ? p.zenovaCategories.join(', ') : p.category,
-      price: parseFloat(p.price),
-      retailPrice: parseFloat(p.pvd) || parseFloat(p.price) * 2.5, // Se non c'è PVD, markup 2.5x
+      category: p.category,  // USA SEMPRE la categoria BigBuy originale
+      price: parseFloat(p.pvd),           // Prezzo di acquisto da BigBuy
+      retailPrice: parseFloat(p.price),   // Prezzo di vendita consigliato
       stock: p.stock,
       images: p.images,
       image: p.images && p.images[0] ? p.images[0] : null,
@@ -58,6 +58,7 @@ router.get('/', async (req, res) => {
         height: parseFloat(p.height) || 0,
         depth: parseFloat(p.depth) || 0
       },
+      // Non inviare zenovaSubcategory e zenovaCategories - usiamo solo categorie BigBuy
       active: true
     }));
 
@@ -138,8 +139,8 @@ router.get('/:id', async (req, res) => {
       description: product.description,
       brand: product.brand || 'Zenova',
       category: product.zenovaCategories ? product.zenovaCategories.join(', ') : product.category,
-      price: parseFloat(product.price),
-      retailPrice: parseFloat(product.pvd) || parseFloat(product.price) * 2.5,
+      price: parseFloat(product.pvd),           // Prezzo di acquisto da BigBuy
+      retailPrice: parseFloat(product.price),   // Prezzo di vendita consigliato
       stock: product.stock,
       images: product.images,
       video: product.video,
@@ -150,6 +151,8 @@ router.get('/:id', async (req, res) => {
         height: parseFloat(product.height) || 0,
         depth: parseFloat(product.depth) || 0
       },
+      zenovaSubcategory: product.zenovaSubcategory,  // Sotto-categoria per filtri
+      zenovaCategories: product.zenovaCategories || [],
       active: true
     };
 
