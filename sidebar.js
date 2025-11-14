@@ -10,18 +10,19 @@ const anchorToSubcategoryMap = {
     // SMART LIVING
     'ebook-tech': '2609,2617,2909',
     'accessori-tech': '2609,2617,2937',
-    'home-garden': 'Home & Garden',
+    'lampade-luci-led': '2399,2400,2421',  // Solo la lampada Elgato specifica
+    'home-garden': '2399',  // Tutti i prodotti Home & Garden (include anche LED per ora)
 
     // MEDITAZIONE E ZEN
-    'massaggiatori': '2501,2502,2504',
+    // (massaggiatori spostati in Cura del Corpo)
 
     // CURA DEL CORPO E SKIN
-    'beauty-personal': 'Health & Beauty',
     'creme-mani-piedi': '2501,2540,2546',
     'protezione-viso': '2501,2552,2554',
     'protezione-corpo': '2501,2552,2556',
     'doposole': '2501,2552,2568',
-    'fragranze': 'Tech & Electronics',
+    'massaggio-rilassamento': '2501,2502,2504',
+    'fragranze': '2507,2508,2510',
 
     // DESIGN & ATMOSFERA
     'home-decor': 'Home & Garden',
@@ -35,28 +36,29 @@ const subcategoryToCategoryMap = {
     // SMART LIVING
     'ebook-tech': 'smart-living',
     'accessori-tech': 'smart-living',
+    'lampade-luci-led': 'smart-living',
     'home-garden': 'smart-living',
     '2609,2617,2909': 'smart-living',
     '2609,2617,2937': 'smart-living',
-    'Home & Garden': 'smart-living',
+    '2399': 'smart-living',
+    '2399,2400,2421': 'smart-living',
 
     // MEDITAZIONE E ZEN
-    'massaggiatori': 'meditazione-zen',
-    '2501,2502,2504': 'meditazione-zen',
+    // (massaggiatori spostati in Cura del Corpo)
 
     // CURA DEL CORPO E SKIN
-    'beauty-personal': 'cura-corpo-skin',
     'creme-mani-piedi': 'cura-corpo-skin',
     'protezione-viso': 'cura-corpo-skin',
     'protezione-corpo': 'cura-corpo-skin',
     'doposole': 'cura-corpo-skin',
+    'massaggio-rilassamento': 'cura-corpo-skin',
     'fragranze': 'cura-corpo-skin',
-    'Health & Beauty': 'cura-corpo-skin',
+    '2501,2502,2504': 'cura-corpo-skin',
     '2501,2540,2546': 'cura-corpo-skin',
     '2501,2552,2554': 'cura-corpo-skin',
     '2501,2552,2556': 'cura-corpo-skin',
     '2501,2552,2568': 'cura-corpo-skin',
-    'Tech & Electronics': 'cura-corpo-skin',
+    '2507,2508,2510': 'cura-corpo-skin',
 
     // DESIGN & ATMOSFERA
     'home-decor': 'design-atmosfera',
@@ -188,11 +190,11 @@ function autoOpenCategoryFromHash() {
     const actualSubcategory = anchorToSubcategoryMap[hash] || hash;
     console.log('📦 Mapped to subcategory:', actualSubcategory);
 
-    // Skip filtering if it's 'all'
+    // Handle 'all' category - show 4 products per subcategory
     if (actualSubcategory === 'all') {
-        console.log('ℹ️ Category link clicked - showing all products');
+        console.log('ℹ️ Category link clicked - applying "4 products per category" filter');
 
-        // Just open the parent category
+        // Open the parent category
         const parentCategory = subcategoryToCategoryMap[hash];
         if (parentCategory) {
             const categoryBtn = document.querySelector(`[data-category="${parentCategory}"]`);
@@ -200,6 +202,9 @@ function autoOpenCategoryFromHash() {
                 categoryBtn.parentElement.classList.add('active');
             }
         }
+
+        // Apply the "4 products per category" filter
+        filterProductsBySubcategory('all');
         return;
     }
 
@@ -251,7 +256,7 @@ function autoOpenCategoryFromHash() {
 
 // Filter products by subcategory
 function filterProductsBySubcategory(subcategory) {
-    console.log('🔍 Filtering products by:', subcategory);
+    console.log('🔍 [SIDEBAR.JS] Filtering products by:', subcategory);
 
     // Get all product cards
     const productCards = document.querySelectorAll('.product-card');
@@ -267,15 +272,50 @@ function filterProductsBySubcategory(subcategory) {
     const uniqueSubcategories = new Set();
 
     // Show/hide products based on subcategory
-    productCards.forEach(card => {
+    productCards.forEach((card, index) => {
         const productSubcategory = card.dataset.subcategory;
         uniqueSubcategories.add(productSubcategory);
 
-        if (subcategory === 'all' || productSubcategory === subcategory) {
+        // Debug first 3 products
+        if (index < 3) {
+            console.log(`Card ${index}: subcategory="${productSubcategory}", searching for="${subcategory}"`);
+        }
+
+        if (subcategory === 'all') {
             card.style.display = 'block';
             visibleCount++;
         } else {
-            card.style.display = 'none';
+            let hasMatch = false;
+
+            // Prima prova match ESATTO (per categorie specifiche come "2399,2400,2421")
+            if (productSubcategory === subcategory) {
+                hasMatch = true;
+                if (index < 3) console.log(`  -> EXACT match!`);
+            } else {
+                // Poi prova match PARZIALE (per categorie generiche come "2399")
+                // Se la subcategory cercata è singola (senza virgole), fa match parziale
+                // Se la subcategory cercata ha virgole multiple, richiede match esatto
+                const searchCategories = subcategory.split(',');
+
+                if (searchCategories.length === 1) {
+                    // Match parziale: "2399" matcha con "2399,2435,2440"
+                    const productCategories = productSubcategory ? productSubcategory.split(',') : [];
+                    hasMatch = productCategories.some(cat => cat.trim() === subcategory.trim());
+                } else {
+                    // Per categorie multiple, richiediamo che TUTTE le categorie corrispondano
+                    const productCategories = productSubcategory ? productSubcategory.split(',').map(c => c.trim()) : [];
+                    hasMatch = searchCategories.every(searchCat =>
+                        productCategories.includes(searchCat.trim())
+                    ) && searchCategories.length === productCategories.length;
+                }
+            }
+
+            if (hasMatch) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
         }
     });
 
@@ -293,18 +333,19 @@ function filterProductsBySubcategory(subcategory) {
             // SMART LIVING
             '2609,2617,2909': 'eBook & Tech',
             '2609,2617,2937': 'Accessori Tech',
+            '2399,2400,2421': 'Lampade e Luci LED',
+            '2399': 'Smart Home',
             'Home & Garden': 'Smart Home',
 
             // MEDITAZIONE E ZEN
             '2501,2502,2504': 'Massaggiatori & Relax',
 
             // CURA DEL CORPO E SKIN
-            'Health & Beauty': 'Beauty & Personal Care',
             '2501,2540,2546': 'Creme Mani e Piedi',
             '2501,2552,2554': 'Protezione Solare - Viso',
             '2501,2552,2556': 'Protezione Solare - Corpo',
             '2501,2552,2568': 'Doposole',
-            'Tech & Electronics': 'Fragranze & Profumi'
+            '2507,2508,2510': 'Fragranze & Profumi'
         };
 
         if (subcategory === 'all') {

@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
       name: p.name,
       description: p.description,
       brand: p.brand || 'Zenova',
-      category: p.category,  // USA SEMPRE la categoria BigBuy originale
+      category: p.raw && p.raw.CATEGORY ? p.raw.CATEGORY : p.category,  // USA categorie ID BigBuy raw
       price: parseFloat(p.pvd),           // Prezzo di acquisto da BigBuy
       retailPrice: parseFloat(p.price),   // Prezzo di vendita consigliato
       stock: p.stock,

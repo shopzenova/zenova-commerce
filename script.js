@@ -324,7 +324,7 @@ function mapBackendProductToFrontend(backendProduct) {
             : null);
 
     // === MAPPATURA AUTOMATICA CATEGORIE BIGBUY ===
-    const bigbuyCategory = backendProduct.category;
+    const bigbuyCategory = backendProduct.category ? String(backendProduct.category) : '';
     let category = 'Prodotti';
     let subcategory = bigbuyCategory; // Usa ESATTAMENTE la categoria BigBuy
     let icon = '✨';
@@ -333,24 +333,30 @@ function mapBackendProductToFrontend(backendProduct) {
     if (bigbuyCategory === '2609,2617,2909' || bigbuyCategory === '2609,2617,2937') {
         category = 'Smart Living';
         icon = '📱';
+    } else if (bigbuyCategory && bigbuyCategory.includes('2399')) {
+        // Tutti i prodotti Home & Garden (categoria BigBuy 2399)
+        category = 'Smart Living';
+
+        // Icona specifica per lampade LED
+        if (bigbuyCategory === '2399,2400,2421') {
+            icon = '💡';
+        } else {
+            icon = '🏡';
+        }
     } else if (bigbuyCategory === 'Home & Garden') {
         category = 'Smart Living';
         icon = '🏡';
     } else if (bigbuyCategory === '2501,2502,2504') {
         category = 'Meditazione e Zen';
         icon = '💆';
-    } else if (bigbuyCategory === 'Health & Beauty' ||
-               bigbuyCategory === '2501,2540,2546' ||
-               bigbuyCategory === '2501,2552,2554' ||
-               bigbuyCategory === '2501,2552,2556' ||
-               bigbuyCategory === '2501,2552,2568' ||
-               bigbuyCategory === 'Tech & Electronics') {
+    } else if ((bigbuyCategory && bigbuyCategory.startsWith('2501')) ||
+               bigbuyCategory === '2507,2508,2510') {
         category = 'Cura del Corpo e Skin';
 
         // Icone specifiche per protezione solare
-        if (bigbuyCategory.includes('2552')) {
+        if (bigbuyCategory && bigbuyCategory.includes('2552')) {
             icon = '☀️';
-        } else if (bigbuyCategory === 'Tech & Electronics') {
+        } else if (bigbuyCategory === '2507,2508,2510') {
             icon = '🌺';
         } else if (bigbuyCategory === '2501,2540,2546') {
             icon = '🤲';
@@ -493,12 +499,136 @@ document.addEventListener('DOMContentLoaded', async () => {
     // setupCategorySidebar(); // REMOVED - sidebar.js handles category accordion
     initDarkMode();
 
-    // Apply hash-based filtering AFTER products are rendered
-    if (typeof window.autoOpenCategoryFromHash === 'function') {
-        console.log('🎯 Calling autoOpenCategoryFromHash after products loaded');
-        window.autoOpenCategoryFromHash();
-    }
+    // ✅ FIX: Inizializza click sulle card SUBITO dopo il rendering
+    makeProductCardsClickable();
+    setupProductDetailModal();
+    setupSearch();
+
+    // Wait for DOM to be fully ready, then apply filtering
+    setTimeout(() => {
+        console.log('⏰ Timeout reached, checking products in DOM...');
+        const cardsCheck = document.querySelectorAll('.product-card');
+        console.log(`🔍 Cards in DOM: ${cardsCheck.length}`);
+
+        // Apply hash-based filtering AFTER products are rendered
+        if (typeof window.autoOpenCategoryFromHash === 'function' && window.location.hash) {
+            console.log('🎯 Calling autoOpenCategoryFromHash after products loaded');
+            window.autoOpenCategoryFromHash();
+        } else {
+            // Se non c'è un hash nell'URL, applica il filtro "Tutti i Prodotti" (4 per categoria)
+            console.log('📊 Nessun hash o hash vuoto: applico filtro "Tutti i Prodotti" (4 per categoria)');
+            filterProductsBySubcategory('all');
+        }
+    }, 500);
 });
+
+// Filter Products By Subcategory
+window.filterProductsBySubcategory = function(subcategory) {
+    console.log('🔍 Filtraggio prodotti per subcategory:', subcategory);
+
+    const productCards = document.querySelectorAll('.product-card');
+    let visibleCount = 0;
+
+    console.log(`📦 Totale product-card trovate: ${productCards.length}`);
+
+    if (subcategory === 'all') {
+        // TUTTI I PRODOTTI: mostra solo 4 prodotti per categoria ordinati per prezzo
+        console.log('📊 Modalità "Tutti i Prodotti": 4 prodotti per categoria');
+        console.log('📦 Totale card trovate:', productCards.length);
+
+        // Raggruppa le card per subcategory
+        const cardsBySubcategory = {};
+
+        productCards.forEach((card, idx) => {
+            const cardSubcategory = card.getAttribute('data-subcategory');
+
+            if (idx < 3) {
+                console.log(`  Debug card ${idx}: subcategory="${cardSubcategory}"`);
+            }
+
+            if (!cardSubcategory) {
+                console.warn(`  ⚠️ Card ${idx} non ha data-subcategory`);
+                return;
+            }
+
+            if (!cardsBySubcategory[cardSubcategory]) {
+                cardsBySubcategory[cardSubcategory] = [];
+            }
+            cardsBySubcategory[cardSubcategory].push(card);
+        });
+
+        console.log('📊 Sottocategorie trovate:', Object.keys(cardsBySubcategory).length);
+
+        // Per ogni sottocategoria, ordina per prezzo e mostra solo i primi 4
+        Object.keys(cardsBySubcategory).forEach(subcat => {
+            const cards = cardsBySubcategory[subcat];
+
+            // Ordina le card per prezzo crescente
+            cards.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
+                const priceB = parseFloat(b.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
+                return priceA - priceB;
+            });
+
+            // Mostra solo i primi 4
+            let hiddenCount = 0;
+            cards.forEach((card, index) => {
+                if (index < 4) {
+                    card.style.display = 'block';
+                    visibleCount++;
+
+                    // Debug: verifica che lo stile sia stato applicato
+                    if (index === 0 && Object.keys(cardsBySubcategory).indexOf(subcat) < 2) {
+                        console.log(`    ✅ Card ${index} display set to: "${card.style.display}"`);
+                    }
+                } else {
+                    card.style.display = 'none';
+                    hiddenCount++;
+
+                    // Debug: verifica che lo stile sia stato applicato
+                    if (index === 4 && Object.keys(cardsBySubcategory).indexOf(subcat) < 2) {
+                        console.log(`    ❌ Card ${index} display set to: "${card.style.display}"`);
+                    }
+                }
+            });
+
+            console.log(`  📂 ${subcat}: mostra ${Math.min(4, cards.length)}/${cards.length} (nascosti: ${hiddenCount})`);
+        });
+    } else {
+        // SOTTOCATEGORIA SPECIFICA: mostra TUTTI i prodotti
+        console.log('📂 Modalità sottocategoria specifica: mostra tutti i prodotti');
+
+        productCards.forEach((card, index) => {
+            const cardSubcategory = card.getAttribute('data-subcategory');
+
+            if (index < 3) {
+                console.log(`  Card ${index}: subcategory="${cardSubcategory}"`);
+            }
+
+            // Check se la categoria del prodotto contiene la subcategory cercata
+            // Es: cardSubcategory = "2399,2435,2440" contiene subcategory = "2399"
+            const categories = cardSubcategory ? cardSubcategory.split(',') : [];
+            const searchCategories = subcategory.split(',');
+
+            // Match se almeno una categoria corrisponde
+            const hasMatch = searchCategories.some(searchCat =>
+                categories.some(cat => cat.trim() === searchCat.trim())
+            );
+
+            if (hasMatch || cardSubcategory === subcategory) {
+                card.style.display = 'block';
+                visibleCount++;
+                if (visibleCount <= 3) {
+                    console.log(`  ✅ MATCH: "${cardSubcategory}" contiene "${subcategory}"`);
+                }
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    console.log(`✅ Mostrati ${visibleCount} prodotti su ${productCards.length}`);
+};
 
 // Render Products
 function renderProducts() {
@@ -523,6 +653,7 @@ function renderProducts() {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.setAttribute('data-subcategory', product.subcategory);
+        productCard.setAttribute('data-product-id', product.id); // ✅ FIX: Aggiungi ID direttamente sulla card
 
         const isInWishlist = wishlist.some(item => item.id === product.id);
         const wishlistClass = isInWishlist ? 'in-wishlist' : '';
@@ -532,25 +663,43 @@ function renderProducts() {
 
         productCard.innerHTML = `
             ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
-            <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}" onclick="event.stopPropagation(); toggleWishlist('${product.id}'); updateProductCardsWishlist();">
+            <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}">
                 ${wishlistIcon}
             </button>
             <div class="product-image">
-                ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover;">` : product.icon}
+                ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.icon}
             </div>
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
                 <h3 class="product-name">${product.name}</h3>
                 <div class="product-footer">
                     <span class="product-price">€${productPrice}</span>
-                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('${product.id}');">
+                    <button class="add-to-cart-btn" data-product-id="${product.id}">
                         Aggiungi al carrello
                     </button>
                 </div>
             </div>
         `;
+
+        // ✅ FIX: Aggiungi event listener dopo aver creato l'HTML
+        const wishlistBtn = productCard.querySelector('.product-card-wishlist-btn');
+        const cartBtn = productCard.querySelector('.add-to-cart-btn');
+
+        wishlistBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleWishlist(product.id);
+            updateProductCardsWishlist();
+        });
+
+        cartBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            addToCart(product.id);
+        });
         productsGrid.appendChild(productCard);
     });
+
+    // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
+    console.log('✅ Prodotti renderizzati, cards ora cliccabili');
 }
 
 // Add to Cart
@@ -1411,24 +1560,39 @@ function updateGallery() {
     const imageContainer = document.getElementById('productDetailImage');
     const dotsContainer = document.getElementById('galleryDots');
     const counterElement = document.getElementById('galleryCounter');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
 
     // Update image
     const currentImage = currentGalleryImages[currentGalleryIndex];
     if (currentImage.startsWith('http')) {
-        imageContainer.innerHTML = `<img src="${currentImage}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">`;
+        imageContainer.innerHTML = `<img src="${currentImage}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
     } else {
         imageContainer.innerHTML = currentImage;
     }
 
-    // Update counter
+    // Le frecce sono sempre visibili
+    const hasMultipleImages = currentGalleryImages.length > 1;
+
+    // Nascondi solo dots e counter se c'è una sola immagine
+    if (dotsContainer) {
+        dotsContainer.style.display = hasMultipleImages ? 'flex' : 'none';
+    }
     if (counterElement) {
+        counterElement.style.display = hasMultipleImages ? 'block' : 'none';
+    }
+
+    // Update counter
+    if (counterElement && hasMultipleImages) {
         counterElement.textContent = `${currentGalleryIndex + 1} / ${currentGalleryImages.length}`;
     }
 
     // Update dots
-    dotsContainer.innerHTML = currentGalleryImages.map((img, index) =>
-        `<div class="gallery-dot ${index === currentGalleryIndex ? 'active' : ''}" onclick="goToGalleryImage(${index})"></div>`
-    ).join('');
+    if (hasMultipleImages) {
+        dotsContainer.innerHTML = currentGalleryImages.map((img, index) =>
+            `<div class="gallery-dot ${index === currentGalleryIndex ? 'active' : ''}" onclick="goToGalleryImage(${index})"></div>`
+        ).join('');
+    }
 }
 
 // Navigate gallery
@@ -1580,15 +1744,36 @@ function setupProductDetailModal() {
     }
 }
 
+// Flag per evitare di aggiungere l'event listener più volte
+let isProductCardsClickableInitialized = false;
+
 // Make product cards clickable
 function makeProductCardsClickable() {
+    if (isProductCardsClickableInitialized) {
+        console.log('⚠️ makeProductCardsClickable() già inizializzata, skip');
+        return;
+    }
+
+    console.log('🎯 makeProductCardsClickable() - attivazione event listener per product cards');
+    isProductCardsClickableInitialized = true;
+
     // Use event delegation for dynamically added cards
     document.addEventListener('click', (e) => {
         const productCard = e.target.closest('.product-card');
-        if (productCard && !e.target.closest('.add-to-cart-btn') && !e.target.closest('.product-card-wishlist-btn')) {
-            const productId = getProductIdFromCard(productCard);
-            if (productId) {
-                openProductDetailModal(productId);
+
+        if (productCard) {
+            const isCartBtn = e.target.closest('.add-to-cart-btn');
+            const isWishlistBtn = e.target.closest('.product-card-wishlist-btn');
+
+            if (!isCartBtn && !isWishlistBtn) {
+                const productId = getProductIdFromCard(productCard);
+
+                if (productId) {
+                    console.log('🛍️ Apertura dettaglio prodotto:', productId);
+                    openProductDetailModal(productId);
+                } else {
+                    console.error('❌ Product ID non trovato sulla card!');
+                }
             }
         }
     });
@@ -1596,7 +1781,13 @@ function makeProductCardsClickable() {
 
 // Get product ID from card element
 function getProductIdFromCard(card) {
-    // Find the wishlist button and extract ID from data attribute
+    // ✅ FIX: Leggi ID direttamente dalla card
+    const productId = card.getAttribute('data-product-id');
+    if (productId) {
+        return productId;
+    }
+
+    // Fallback: prova dal bottone wishlist
     const wishlistBtn = card.querySelector('.product-card-wishlist-btn');
     if (wishlistBtn) {
         const productId = wishlistBtn.getAttribute('data-product-id');
@@ -1607,13 +1798,14 @@ function getProductIdFromCard(card) {
     return null;
 }
 
+// ✅ REMOVED: Moved to main DOMContentLoaded to avoid race conditions
 // Initialize product detail modal when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    setupSearch();
-    setupProductDetailModal();
-    makeProductCardsClickable();
-    initDarkMode();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     setupSearch();
+//     setupProductDetailModal();
+//     makeProductCardsClickable();
+//     initDarkMode();
+// });
 
 // ============ DARK MODE FUNCTIONALITY ============
 
