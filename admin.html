@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannello Admin - ZENOVA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>ZENOVA <span style="color: var(--accent-color);">|</span> ADMIN</h1>
+                <p>Pannello di Controllo</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Inserisci username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Inserisci password" required>
+                </div>
+                <button type="submit" class="btn-login">Accedi</button>
+                <p class="login-hint">Demo: admin / admin123</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>ZENOVA</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="admin-nav">
+                <a href="#dashboard" class="admin-nav-link active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#products" class="admin-nav-link" data-section="products">
+                    <span class="nav-icon">📦</span>
+                    <span>Gestione Prodotti</span>
+                </a>
+                <a href="#layout" class="admin-nav-link" data-section="layout">
+                    <span class="nav-icon">🎨</span>
+                    <span>Layout Sito</span>
+                </a>
+                <a href="#pricing" class="admin-nav-link" data-section="pricing">
+                    <span class="nav-icon">💰</span>
+                    <span>Calcolatore Prezzi</span>
+                </a>
+                <a href="#sync" class="admin-nav-link" data-section="sync">
+                    <span class="nav-icon">🔄</span>
+                    <span>Sincronizzazione</span>
+                </a>
+                <a href="#orders" class="admin-nav-link" data-section="orders">
+                    <span class="nav-icon">🛒</span>
+                    <span>Ordini</span>
+                </a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">Esci</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <div class="section-header">
+                    <h1>Dashboard</h1>
+                    <p>Panoramica generale del tuo e-commerce</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📦</div>
+                        <div class="stat-info">
+                            <h3>247</h3>
+                            <p>Prodotti Totali</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">✅</div>
+                        <div class="stat-info">
+                            <h3>231</h3>
+                            <p>Disponibili</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🛒</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Ordini Oggi</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">💰</div>
+                        <div class="stat-info">
+                            <h3>€ 1,247</h3>
+                            <p>Vendite Oggi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Azioni Rapide</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="switchSection('products')">
+                            <span>📦</span>
+                            Gestisci Prodotti
+                        </button>
+                        <button class="action-btn" onclick="switchSection('sync')">
+                            <span>🔄</span>
+                            Sincronizza BigBuy
+                        </button>
+                        <button class="action-btn" onclick="switchSection('pricing')">
+                            <span>💰</span>
+                            Calcola Prezzi
+                        </button>
+                        <button class="action-btn" onclick="window.open('index.html', '_blank')">
+                            <span>🌐</span>
+                            Vedi Sito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Attività Recente</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <span class="activity-icon">🔄</span>
+                            <div class="activity-info">
+                                <p><strong>Sincronizzazione completata</strong></p>
+                                <small>2 ore fa - 247 prodotti aggiornati</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-icon">🛒</span>
+                            <div class="activity-info">
+                                <p><strong>Nuovo ordine #1234</strong></p>
+                                <small>3 ore fa - Set Oli Essenziali Premium</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-icon">⚠️</span>
+                            <div class="activity-info">
+                                <p><strong>3 prodotti esauriti</strong></p>
+                                <small>5 ore fa - Stock BigBuy aggiornato</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products" class="admin-section">
+                <div class="section-header">
+                    <h1>Gestione Prodotti</h1>
+                    <p>Organizza i prodotti sul tuo sito con drag & drop</p>
+                </div>
+
+                <div class="products-layout">
+                    <!-- Home Products -->
+                    <div class="product-zone">
+                        <div class="zone-header">
+                            <h3>🏠 Home - Vetrina Principale</h3>
+                            <span class="zone-count">6 prodotti</span>
+                        </div>
+                        <div id="homeProducts" class="product-drop-zone">
+                            <div class="product-card-admin" draggable="true" data-id="1">
+                                <span class="drag-handle">⋮⋮</span>
+                                <img src="https://via.placeholder.com/80" alt="Prodotto">
+                                <div class="product-admin-info">
+                                    <h4>Diffusore Aromi Premium</h4>
+                                    <p class="product-price">€ 29.90</p>
+                                    <span class="product-status available">✅ Disponibile</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-icon" title="Modifica">✏️</button>
+                                    <button class="btn-icon" title="Nascondi">👁️</button>
+                                </div>
+                            </div>
+                            <div class="product-card-admin" draggable="true" data-id="2">
+                                <span class="drag-handle">⋮⋮</span>
+                                <img src="https://via.placeholder.com/80" alt="Prodotto">
+                                <div class="product-admin-info">
+                                    <h4>Set Oli Essenziali Bio</h4>
+                                    <p class="product-price">€ 45.90</p>
+                                    <span class="product-status available">✅ Disponibile</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-icon" title="Modifica">✏️</button>
+                                    <button class="btn-icon" title="Nascondi">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Products -->
+                    <div class="product-zone">
+                        <div class="zone-header">
+                            <h3>📌 Sidebar - Prodotti in Evidenza</h3>
+                            <span class="zone-count">4 prodotti</span>
+                        </div>
+                        <div id="sidebarProducts" class="product-drop-zone">
+                            <div class="product-card-admin" draggable="true" data-id="3">
+                                <span class="drag-handle">⋮⋮</span>
+                                <img src="https://via.placeholder.com/80" alt="Prodotto">
+                                <div class="product-admin-info">
+                                    <h4>Olio Lavanda Bio</h4>
+                                    <p class="product-price">€ 12.90</p>
+                                    <span class="product-status available">✅ Disponibile</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-icon" title="Modifica">✏️</button>
+                                    <button class="btn-icon" title="Nascondi">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hidden Products -->
+                    <div class="product-zone">
+                        <div class="zone-header">
+                            <h3>🚫 Prodotti Nascosti</h3>
+                            <span class="zone-count">2 prodotti</span>
+                        </div>
+                        <div id="hiddenProducts" class="product-drop-zone">
+                            <div class="product-card-admin" draggable="true" data-id="4">
+                                <span class="drag-handle">⋮⋮</span>
+                                <img src="https://via.placeholder.com/80" alt="Prodotto">
+                                <div class="product-admin-info">
+                                    <h4>Candela Aromatica</h4>
+                                    <p class="product-price">€ 15.90</p>
+                                    <span class="product-status unavailable">❌ Esaurito</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-icon" title="Modifica">✏️</button>
+                                    <button class="btn-icon" title="Mostra">👁️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All Products List with Zone Selection -->
+                <div class="all-products-section">
+                    <div class="section-header">
+                        <h2>Tutti i Prodotti (325)</h2>
+                        <input type="text" id="productSearch" class="search-input" placeholder="🔍 Cerca prodotto per nome...">
+                    </div>
+                    <div id="allProductsList" class="all-products-list">
+                        <!-- Products will be loaded here by JavaScript -->
+                        <div class="loading-message">Caricamento prodotti...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Layout Section -->
+            <section id="layout" class="admin-section">
+                <div class="section-header">
+                    <h1>Layout Sito</h1>
+                    <p>Personalizza l'aspetto delle pagine</p>
+                </div>
+
+                <div class="layout-settings">
+                    <div class="setting-card">
+                        <h3>Homepage</h3>
+                        <div class="setting-option">
+                            <label>Prodotti in evidenza:</label>
+                            <select class="form-select">
+                                <option value="3">3 prodotti</option>
+                                <option value="6" selected>6 prodotti</option>
+                                <option value="9">9 prodotti</option>
+                            </select>
+                        </div>
+                        <div class="setting-option">
+                            <label>Layout griglia:</label>
+                            <select class="form-select">
+                                <option value="2">2 colonne</option>
+                                <option value="3" selected>3 colonne</option>
+                                <option value="4">4 colonne</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-card">
+                        <h3>Sidebar</h3>
+                        <div class="setting-option">
+                            <label>Mostra sidebar:</label>
+                            <input type="checkbox" checked> Attiva
+                        </div>
+                        <div class="setting-option">
+                            <label>Prodotti sidebar:</label>
+                            <select class="form-select">
+                                <option value="3">3 prodotti</option>
+                                <option value="4" selected>4 prodotti</option>
+                                <option value="5">5 prodotti</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Calculator Section -->
+            <section id="pricing" class="admin-section">
+                <div class="section-header">
+                    <h1>Calcolatore Prezzi</h1>
+                    <p>Calcola automaticamente i prezzi di vendita</p>
+                </div>
+
+                <div class="pricing-calculator">
+                    <div class="calculator-form">
+                        <h3>Calcola Prezzo Prodotto</h3>
+                        <div class="form-group">
+                            <label>Prezzo BigBuy (all'ingrosso):</label>
+                            <input type="number" id="bigbuyPrice" placeholder="15.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Costo Spedizione:</label>
+                            <input type="number" id="shippingCost" placeholder="3.50" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Costi Gestione (€):</label>
+                            <input type="number" id="managementCost" placeholder="2.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Margine Desiderato (%):</label>
+                            <input type="number" id="profitMargin" placeholder="50" step="1">
+                        </div>
+                        <button class="btn-primary" onclick="calculatePrice()">Calcola Prezzo</button>
+                    </div>
+
+                    <div class="calculator-result">
+                        <h3>Risultato Calcolo</h3>
+                        <div class="result-breakdown">
+                            <div class="result-row">
+                                <span>Costo Totale Prodotto:</span>
+                                <strong id="totalCost">€ 0.00</strong>
+                            </div>
+                            <div class="result-row">
+                                <span>Margine Applicato:</span>
+                                <strong id="marginAmount">€ 0.00</strong>
+                            </div>
+                            <div class="result-row highlight">
+                                <span>Prezzo Vendita Consigliato:</span>
+                                <strong id="finalPrice" class="final-price">€ 0.00</strong>
+                            </div>
+                            <div class="result-row">
+                                <span>Tuo Guadagno Netto:</span>
+                                <strong id="netProfit" class="profit">€ 0.00</strong>
+                            </div>
+                        </div>
+                        <div class="pricing-tips">
+                            <h4>💡 Suggerimenti</h4>
+                            <ul>
+                                <li>Margine standard dropshipping: 50-100%</li>
+                                <li>Prodotti premium: fino a 200%</li>
+                                <li>Considera i competitor</li>
+                                <li>Arrotonda sempre a .90 o .99</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Pricing -->
+                <div class="bulk-pricing">
+                    <h3>Impostazioni Prezzi Multipli</h3>
+                    <div class="bulk-options">
+                        <div class="bulk-category">
+                            <label>Categoria: Diffusori</label>
+                            <input type="number" placeholder="Margine %" value="100">
+                            <button class="btn-secondary">Applica a tutti</button>
+                        </div>
+                        <div class="bulk-category">
+                            <label>Categoria: Oli Essenziali</label>
+                            <input type="number" placeholder="Margine %" value="80">
+                            <button class="btn-secondary">Applica a tutti</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sync Section -->
+            <section id="sync" class="admin-section">
+                <div class="section-header">
+                    <h1>Sincronizzazione BigBuy</h1>
+                    <p>Gestisci la sincronizzazione con il catalogo BigBuy</p>
+                </div>
+
+                <!-- Sync Status -->
+                <div class="sync-status-card">
+                    <div class="sync-icon">
+                        <div class="sync-spinner">🔄</div>
+                    </div>
+                    <div class="sync-info">
+                        <h3>Stato Sincronizzazione</h3>
+                        <p class="sync-status-text">✅ Sincronizzato - Tutto aggiornato</p>
+                        <small>Ultima sincronizzazione: Oggi alle 14:05</small>
+                    </div>
+                    <button class="btn-sync" onclick="syncNow()">Sincronizza Ora</button>
+                </div>
+
+                <!-- Sync Schedule -->
+                <div class="sync-schedule">
+                    <h3>Pianificazione Aggiornamenti</h3>
+                    <p>BigBuy aggiorna il catalogo 3 volte al giorno</p>
+                    <div class="schedule-times">
+                        <div class="schedule-item">
+                            <span class="time-icon">🕐</span>
+                            <div>
+                                <strong>08:00</strong>
+                                <p>Mattina</p>
+                            </div>
+                            <span class="status-badge done">✅ Completato</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span class="time-icon">🕒</span>
+                            <div>
+                                <strong>14:00</strong>
+                                <p>Pomeriggio</p>
+                            </div>
+                            <span class="status-badge done">✅ Completato</span>
+                        </div>
+                        <div class="schedule-item">
+                            <span class="time-icon">🕗</span>
+                            <div>
+                                <strong>20:00</strong>
+                                <p>Sera</p>
+                            </div>
+                            <span class="status-badge pending">⏳ In attesa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sync Details -->
+                <div class="sync-details">
+                    <h3>Dettagli Ultimo Aggiornamento</h3>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-icon">📦</span>
+                            <div>
+                                <strong>247</strong>
+                                <p>Prodotti totali</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🆕</span>
+                            <div>
+                                <strong>7</strong>
+                                <p>Nuovi disponibili</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">❌</span>
+                            <div>
+                                <strong>3</strong>
+                                <p>Esauriti</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">💰</span>
+                            <div>
+                                <strong>12</strong>
+                                <p>Prezzi aggiornati</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sync Log -->
+                <div class="sync-log">
+                    <h3>Log Sincronizzazioni</h3>
+                    <div class="log-list">
+                        <div class="log-item success">
+                            <span class="log-icon">✅</span>
+                            <div class="log-info">
+                                <strong>Sincronizzazione completata</strong>
+                                <p>14:05 - 247 prodotti aggiornati, 3 esauriti, 7 nuovi disponibili</p>
+                            </div>
+                        </div>
+                        <div class="log-item success">
+                            <span class="log-icon">✅</span>
+                            <div class="log-info">
+                                <strong>Sincronizzazione completata</strong>
+                                <p>08:05 - 247 prodotti aggiornati, 1 esaurito</p>
+                            </div>
+                        </div>
+                        <div class="log-item warning">
+                            <span class="log-icon">⚠️</span>
+                            <div class="log-info">
+                                <strong>Sincronizzazione con avvisi</strong>
+                                <p>Ieri 20:05 - 245 prodotti aggiornati, 5 prodotti con immagini mancanti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders" class="admin-section">
+                <div class="section-header">
+                    <h1>Gestione Ordini</h1>
+                    <p>Visualizza e gestisci gli ordini ricevuti</p>
+                </div>
+
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-id">#1234</span>
+                            <span class="order-status pending">In elaborazione</span>
+                        </div>
+                        <div class="order-details">
+                            <p><strong>Cliente:</strong> Mario Rossi</p>
+                            <p><strong>Prodotto:</strong> Set Oli Essenziali Premium</p>
+                            <p><strong>Totale:</strong> € 45.90</p>
+                            <p><strong>Data:</strong> 15/11/2025 - 11:30</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-small">Invia a BigBuy</button>
+                            <button class="btn-small">Dettagli</button>
+                        </div>
+                    </div>
+
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-id">#1233</span>
+                            <span class="order-status shipped">Spedito</span>
+                        </div>
+                        <div class="order-details">
+                            <p><strong>Cliente:</strong> Laura Bianchi</p>
+                            <p><strong>Prodotto:</strong> Diffusore Aromi Premium</p>
+                            <p><strong>Totale:</strong> € 29.90</p>
+                            <p><strong>Data:</strong> 14/11/2025 - 16:20</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-small">Tracking</button>
+                            <button class="btn-small">Dettagli</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

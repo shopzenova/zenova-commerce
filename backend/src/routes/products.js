@@ -17,6 +17,92 @@ try {
   logger.error('❌ Errore caricamento top-100-products.json:', error);
 }
 
+// GET /api/products/categories - Ottieni categorie
+router.get('/categories', async (req, res) => {
+  try {
+    const categories = {};
+
+    TOP_PRODUCTS.forEach(product => {
+      const cats = product.zenovaCategories || ['Generale'];
+      const subcat = product.zenovaSubcategory || null;
+
+      cats.forEach(cat => {
+        if (!categories[cat]) {
+          categories[cat] = {
+            name: cat,
+            displayName: getCategoryDisplayName(cat),
+            icon: getCategoryIcon(cat),
+            count: 0,
+            subcategories: {}
+          };
+        }
+
+        categories[cat].count++;
+
+        if (subcat) {
+          if (!categories[cat].subcategories[subcat]) {
+            categories[cat].subcategories[subcat] = {
+              name: subcat,
+              displayName: getSubcategoryDisplayName(subcat),
+              count: 0
+            };
+          }
+          categories[cat].subcategories[subcat].count++;
+        }
+      });
+    });
+
+    const categoriesArray = Object.values(categories).map(cat => ({
+      ...cat,
+      subcategories: Object.values(cat.subcategories)
+    }));
+
+    res.json({
+      success: true,
+      data: categoriesArray
+    });
+  } catch (error) {
+    logger.error('Errore /api/products/categories:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore recupero categorie'
+    });
+  }
+});
+
+// Helper functions
+function getCategoryDisplayName(cat) {
+  const names = {
+    'benessere': 'Benessere',
+    'bellezza': 'Bellezza',
+    'smartHome': 'Smart Home',
+    'design': 'Design'
+  };
+  return names[cat] || cat;
+}
+
+function getCategoryIcon(cat) {
+  const icons = {
+    'benessere': '💆',
+    'bellezza': '💄',
+    'smartHome': '🏠',
+    'design': '🎨'
+  };
+  return icons[cat] || '📦';
+}
+
+function getSubcategoryDisplayName(subcat) {
+  const names = {
+    'cura-pelle-mani-piedi': 'Mani e Piedi',
+    'cura-pelle-set-regalo': 'Set Regalo',
+    'cura-pelle-solare': 'Protezione Solare',
+    'cura-pelle-corpo': 'Cura Corpo',
+    'cura-pelle-viso': 'Cura Viso',
+    'cura-pelle-labbra': 'Labbra'
+  };
+  return names[subcat] || subcat;
+}
+
 // GET /api/products - Lista tutti i prodotti (da JSON locale)
 router.get('/', async (req, res) => {
   try {

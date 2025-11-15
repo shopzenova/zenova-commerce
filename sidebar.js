@@ -254,6 +254,69 @@ function autoOpenCategoryFromHash() {
     }
 }
 
+/**
+ * Update category counters based on loaded products
+ */
+function updateCategoryCounters() {
+    console.log('📊 Updating category counters...');
+
+    const productCards = document.querySelectorAll('.product-card');
+
+    if (productCards.length === 0) {
+        console.log('⚠️ No products loaded yet');
+        return;
+    }
+
+    // Count products per subcategory
+    const subcategoryCounts = {};
+
+    productCards.forEach(card => {
+        const subcategory = card.dataset.subcategory;
+        if (!subcategory) return;
+
+        // Increment exact match
+        subcategoryCounts[subcategory] = (subcategoryCounts[subcategory] || 0) + 1;
+
+        // Also increment for parent categories (single IDs)
+        // E.g. "2399,2400,2421" should also count for "2399"
+        const categories = subcategory.split(',');
+        categories.forEach(cat => {
+            const trimmedCat = cat.trim();
+            subcategoryCounts[trimmedCat] = (subcategoryCounts[trimmedCat] || 0) + 1;
+        });
+    });
+
+    console.log('📊 Subcategory counts:', subcategoryCounts);
+
+    // Update all subcategory links
+    const subcategoryLinks = document.querySelectorAll('.subcategory-link, .sub-subcategory-link');
+
+    subcategoryLinks.forEach(link => {
+        const subcategory = link.dataset.subcategory;
+
+        if (subcategory === 'all') {
+            // "Tutti i Prodotti" should show total count
+            const countElement = link.querySelector('.subcategory-count');
+            if (countElement) {
+                countElement.textContent = `(${productCards.length})`;
+            }
+            return;
+        }
+
+        const count = subcategoryCounts[subcategory] || 0;
+        const countElement = link.querySelector('.subcategory-count');
+
+        if (countElement) {
+            countElement.textContent = `(${count})`;
+        }
+    });
+
+    console.log('✅ Category counters updated');
+}
+
+// Make function globally accessible
+window.updateCategoryCounters = updateCategoryCounters;
+
 // Filter products by subcategory
 function filterProductsBySubcategory(subcategory) {
     console.log('🔍 [SIDEBAR.JS] Filtering products by:', subcategory);

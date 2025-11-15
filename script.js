@@ -1,6 +1,9 @@
 // Product Data - Will be loaded from backend
 let products = [];
 
+// Product Layout - Controls visibility (home/sidebar/hidden)
+let productLayout = { home: [], sidebar: [], hidden: [] };
+
 // Static products as fallback (kept for offline mode)
 const staticProducts = [
     {
@@ -420,18 +423,36 @@ async function loadProductsFromBackend() {
             return false;
         }
 
+        // Load layout first (to know which products to hide)
+        console.log('📂 Caricamento layout prodotti...');
+        productLayout = await ZenovaAPI.getLayout();
+        console.log('✅ Layout caricato:', {
+            inVetrina: productLayout.home.length,
+            nascosti: productLayout.hidden.length
+        });
+
         // Call backend API
         const backendProducts = await ZenovaAPI.getProducts(1, 400);
 
         if (backendProducts && backendProducts.length > 0) {
             console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
 
-            // Map backend products to frontend format and filter out hidden products
-            products = backendProducts
+            // Map backend products to frontend format
+            const mappedProducts = backendProducts
                 .map(mapBackendProductToFrontend)
-                .filter(p => p !== null); // Rimuovi prodotti nascosti
+                .filter(p => p !== null);
+
+            // Filter out HIDDEN products (not visible anywhere)
+            products = mappedProducts.filter(p => {
+                const isHidden = productLayout.hidden.includes(p.id);
+                if (isHidden) {
+                    console.log(`🚫 Prodotto nascosto: ${p.name}`);
+                }
+                return !isHidden;
+            });
 
             console.log('✅ Prodotti convertiti e pronti:', products.length);
+            console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
             console.log('📦 Tutte le categorie BigBuy caricate correttamente');
             return true;
         } else {
@@ -492,7 +513,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadProductsFromBackend();
 
     // Then render and setup everything
-    renderProducts();
+    renderProducts(); // For prodotti.html
+    renderFeaturedProducts(); // For index.html (homepage)
     loadCart();
     loadWishlist();
     setupEventListeners();
@@ -509,6 +531,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('⏰ Timeout reached, checking products in DOM...');
         const cardsCheck = document.querySelectorAll('.product-card');
         console.log(`🔍 Cards in DOM: ${cardsCheck.length}`);
+
+        // Update category counters with actual product counts
+        if (typeof window.updateCategoryCounters === 'function') {
+            window.updateCategoryCounters();
+        }
 
         // Apply hash-based filtering AFTER products are rendered
         if (typeof window.autoOpenCategoryFromHash === 'function' && window.location.hash) {
@@ -630,7 +657,180 @@ window.filterProductsBySubcategory = function(subcategory) {
     console.log(`✅ Mostrati ${visibleCount} prodotti su ${productCards.length}`);
 };
 
-// Render Products
+// ===== PRODUCT CARD CREATION =====
+
+/**
+ * Create a product card element
+ */
+function createProductCard(product) {
+    const productCard = document.createElement('div');
+    productCard.className = 'product-card';
+    productCard.setAttribute('data-subcategory', product.subcategory);
+    productCard.setAttribute('data-product-id', product.id);
+
+    const isInWishlist = wishlist.some(item => item.id === product.id);
+    const wishlistClass = isInWishlist ? 'in-wishlist' : '';
+    const wishlistIcon = isInWishlist ? '♥' : '♡';
+
+    const productPrice = (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
+
+    productCard.innerHTML = `
+        ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
+        <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}">
+            ${wishlistIcon}
+        </button>
+        <div class="product-image">
+            ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.icon}
+        </div>
+        <div class="product-info">
+            <div class="product-category">${product.category}</div>
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-footer">
+                <span class="product-price">€${productPrice}</span>
+                <button class="add-to-cart-btn" data-product-id="${product.id}">
+                    Aggiungi al carrello
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Add event listeners
+    const wishlistBtn = productCard.querySelector('.product-card-wishlist-btn');
+    const cartBtn = productCard.querySelector('.add-to-cart-btn');
+
+    wishlistBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleWishlist(product.id);
+        updateProductCardsWishlist();
+    });
+
+    cartBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        addToCart(product.id);
+    });
+
+    return productCard;
+}
+
+// ===== RENDER PRODUCTS =====
+
+/**
+ * Render featured products (ONLY for homepage - index.html)
+ */
+function renderFeaturedProducts() {
+    const featuredGrid = document.getElementById('featuredProductsGrid');
+    if (!featuredGrid) return; // Not on homepage
+
+    console.log('🏠 Rendering featured products for homepage...');
+    featuredGrid.innerHTML = '';
+
+    // Filter products that are in the "home" layout
+    const featuredProducts = products.filter(p => productLayout.home.includes(p.id));
+
+    console.log(`✨ Featured products: ${featuredProducts.length} out of ${products.length} total`);
+
+    if (featuredProducts.length === 0) {
+        featuredGrid.innerHTML = `
+            <div class="no-products-message">
+                <p>Nessun prodotto in vetrina. <a href="admin.html">Vai al pannello admin</a> per selezionare i prodotti da mostrare in homepage.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Render featured products using same card template
+    featuredProducts.forEach(product => {
+        const card = createProductCard(product);
+        featuredGrid.appendChild(card);
+    });
+
+    console.log('✅ Featured products rendered');
+}
+
+/**
+ * Initialize featured products carousel
+ */
+function initFeaturedCarousel(totalProducts) {
+    if (totalProducts === 0) return;
+
+    let currentIndex = 0;
+    const track = document.getElementById('featuredProductsTrack');
+    const prevBtn = document.getElementById('featuredPrev');
+    const nextBtn = document.getElementById('featuredNext');
+    const dotsContainer = document.getElementById('featuredDots');
+
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+    // Create dots
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalProducts; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    }
+
+    function updateCarousel() {
+        // Mostra 3 prodotti alla volta
+        const itemsToShow = Math.min(3, totalProducts);
+        const offset = -(currentIndex * (100 / itemsToShow));
+        track.style.transform = `translateX(${offset}%)`;
+
+        // Update dots
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+        resetAutoplay();
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalProducts;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalProducts) % totalProducts;
+        updateCarousel();
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoplay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoplay();
+    });
+
+    // Auto-play carousel every 5 seconds
+    let autoplayInterval = setInterval(nextSlide, 5000);
+
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = setInterval(nextSlide, 5000);
+    }
+
+    // Pause on hover
+    track.addEventListener('mouseenter', () => {
+        clearInterval(autoplayInterval);
+    });
+
+    track.addEventListener('mouseleave', () => {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    });
+
+    updateCarousel();
+    console.log('🎠 Carousel initialized with auto-play');
+}
+
 function renderProducts() {
     const productsGrid = document.getElementById('productsGrid');
     if (!productsGrid) return;
@@ -650,51 +850,7 @@ function renderProducts() {
     });
 
     products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.setAttribute('data-subcategory', product.subcategory);
-        productCard.setAttribute('data-product-id', product.id); // ✅ FIX: Aggiungi ID direttamente sulla card
-
-        const isInWishlist = wishlist.some(item => item.id === product.id);
-        const wishlistClass = isInWishlist ? 'in-wishlist' : '';
-        const wishlistIcon = isInWishlist ? '♥' : '♡';
-
-        const productPrice = (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
-
-        productCard.innerHTML = `
-            ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
-            <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}">
-                ${wishlistIcon}
-            </button>
-            <div class="product-image">
-                ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.icon}
-            </div>
-            <div class="product-info">
-                <div class="product-category">${product.category}</div>
-                <h3 class="product-name">${product.name}</h3>
-                <div class="product-footer">
-                    <span class="product-price">€${productPrice}</span>
-                    <button class="add-to-cart-btn" data-product-id="${product.id}">
-                        Aggiungi al carrello
-                    </button>
-                </div>
-            </div>
-        `;
-
-        // ✅ FIX: Aggiungi event listener dopo aver creato l'HTML
-        const wishlistBtn = productCard.querySelector('.product-card-wishlist-btn');
-        const cartBtn = productCard.querySelector('.add-to-cart-btn');
-
-        wishlistBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleWishlist(product.id);
-            updateProductCardsWishlist();
-        });
-
-        cartBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            addToCart(product.id);
-        });
+        const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
 

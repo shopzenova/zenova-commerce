@@ -77,11 +77,12 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API routes (da implementare)
+// API routes
 app.use('/api/products', require('./src/routes/products'));
 app.use('/api/cart', require('./src/routes/cart'));
 app.use('/api/checkout', require('./src/routes/checkout'));
 app.use('/api/orders', require('./src/routes/orders'));
+app.use('/api/admin', require('./src/routes/admin'));  // Admin panel API
 app.use('/webhook', require('./src/routes/webhooks'));
 
 // 404 handler

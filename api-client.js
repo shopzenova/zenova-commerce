@@ -142,6 +142,42 @@ class ZenovaAPI {
       return null;
     }
   }
+
+  /**
+   * GET - Categorie prodotti
+   */
+  static async getCategories() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products/categories`);
+      const data = await response.json();
+
+      if (data.success) {
+        return data.data;
+      }
+      throw new Error('Errore caricamento categorie');
+    } catch (error) {
+      console.error('Errore getCategories:', error);
+      return [];
+    }
+  }
+
+  /**
+   * GET - Layout prodotti (home/sidebar/hidden)
+   */
+  static async getLayout() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/admin/products?zone=all`);
+      const data = await response.json();
+
+      if (data.success) {
+        return data.layout; // Returns { home: [], sidebar: [], hidden: [] }
+      }
+      throw new Error('Errore caricamento layout');
+    } catch (error) {
+      console.error('Errore getLayout:', error);
+      return { home: [], sidebar: [], hidden: [] };
+    }
+  }
 }
 
 // Export per uso in script.js
