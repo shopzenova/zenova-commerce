@@ -22,7 +22,10 @@ router.get('/categories', async (req, res) => {
   try {
     const categories = {};
 
-    TOP_PRODUCTS.forEach(product => {
+    // Filtra solo prodotti visibili
+    const visibleProducts = TOP_PRODUCTS.filter(p => p.visible !== false);
+
+    visibleProducts.forEach(product => {
       const cats = product.zenovaCategories || ['Generale'];
       const subcat = product.zenovaSubcategory || null;
 
@@ -111,6 +114,9 @@ router.get('/', async (req, res) => {
     const category = req.query.category; // Filtro per categoria Zenova
 
     let products = [...TOP_PRODUCTS];
+
+    // Filtra solo prodotti visibili (nasconde quelli con visible: false)
+    products = products.filter(p => p.visible !== false);
 
     // Filtra per categoria Zenova se richiesto
     if (category) {
@@ -215,6 +221,14 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({
         success: false,
         error: 'Prodotto non trovato'
+      });
+    }
+
+    // Nascondi prodotti con visible: false
+    if (product.visible === false) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non disponibile'
       });
     }
 

@@ -222,7 +222,8 @@ class BigBuyFTP {
         score: 50, // Score default per prodotti FTP
         source: 'bigbuy_ftp',
         categoryId: categoryId,
-        lastSync: new Date().toISOString()
+        lastSync: new Date().toISOString(),
+        visible: true // Prodotti importati sono visibili di default
       };
     } catch (error) {
       logger.error('❌ Errore formattazione prodotto:', error);

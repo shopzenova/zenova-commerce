@@ -466,6 +466,10 @@ function populateAllProductsList(products) {
                 <option value="home" ${product.zone === 'home' ? 'selected' : ''}>Home (Vetrina)</option>
                 <option value="hidden" ${product.zone === 'hidden' ? 'selected' : ''}>Nascosto</option>
             </select>
+            <button class="btn-icon" title="${product.visible ? 'Nascondi prodotto dal sito' : 'Rendi visibile sul sito'}" onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible})">
+                ${product.visible ? '👁️' : '👁️‍🗨️'}
+            </button>
+            <button class="btn-icon" title="Elimina prodotto" onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}')">🗑️</button>
         `;
 
         // Event listener per cambio zona
@@ -591,8 +595,10 @@ function createProductCard(product) {
             <span class="product-status ${statusClass}">${statusText}</span>
         </div>
         <div class="product-actions">
-            <button class="btn-icon" title="Modifica">✏️</button>
-            <button class="btn-icon" title="Nascondi">👁️</button>
+            <button class="btn-icon" title="${product.visible ? 'Nascondi' : 'Mostra'}" onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible})">
+                ${product.visible ? '👁️' : '👁️‍🗨️'}
+            </button>
+            <button class="btn-icon" title="Elimina" onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}')">🗑️</button>
         </div>
     `;
 
@@ -707,6 +713,110 @@ function importData(file) {
         }
     };
     reader.readAsText(file);
+}
+
+// ===== NUOVE FUNZIONALITÀ: IMPORTAZIONE ED ELIMINAZIONE PRODOTTI =====
+
+// Importa prodotto da BigBuy
+async function importProductFromBigBuy() {
+    const skuInput = document.getElementById('importSKU');
+    const sku = skuInput.value.trim();
+
+    if (!sku) {
+        alert('⚠️ Inserisci un SKU BigBuy valido');
+        return;
+    }
+
+    // Mostra loading
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Importazione...';
+    button.disabled = true;
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/import`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sku })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`✅ Prodotto importato con successo!\n\n${result.data.name}\nPrezzo: €${result.data.price}`);
+            skuInput.value = '';
+
+            // Ricarica i prodotti
+            await loadProducts();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore importazione:', error);
+        alert(`❌ Errore durante l'importazione: ${error.message}`);
+    } finally {
+        button.textContent = originalText;
+        button.disabled = false;
+    }
+}
+
+// Toggle visibilità prodotto
+async function toggleProductVisibility(productId, productName, currentVisibility) {
+    const newVisibility = !currentVisibility;
+    const action = newVisibility ? 'visibile' : 'nascosto';
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/${productId}/visibility`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ visible: newVisibility })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(`✅ Prodotto "${productName}" ora è ${action}`);
+
+            // Ricarica i prodotti per aggiornare l'UI
+            await loadProducts();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore toggle visibilità:', error);
+        alert(`❌ Errore durante l'aggiornamento: ${error.message}`);
+    }
+}
+
+// Elimina prodotto
+async function deleteProduct(productId, productName) {
+    const confirmed = confirm(`🗑️ Sei sicuro di voler eliminare questo prodotto?\n\n"${productName}"\n\nQuesta azione è irreversibile!`);
+
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/${productId}`, {
+            method: 'DELETE'
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`✅ Prodotto eliminato con successo!\n\n${result.data.name}\n\nProdotti rimanenti: ${result.data.totalProducts}`);
+
+            // Ricarica i prodotti
+            await loadProducts();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore eliminazione:', error);
+        alert(`❌ Errore durante l'eliminazione: ${error.message}`);
+    }
 }
 
 console.log('Pannello Admin Zenova caricato ✅');

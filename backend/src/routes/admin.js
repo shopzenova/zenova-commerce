@@ -76,6 +76,7 @@ router.get('/products', (req, res) => {
       available: p.stock > 0,
       image: p.images && p.images[0] ? p.images[0] : null,
       category: p.zenovaCategories ? p.zenovaCategories[0] : 'Generale',
+      visible: p.visible !== undefined ? p.visible : true, // Default true per retro-compatibilità
       // Determina la zona del prodotto
       zone: getProductZone(p.id)
     }));
@@ -303,6 +304,212 @@ router.get('/activity', (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Errore recupero attività'
+    });
+  }
+});
+
+// ===== NUOVE FUNZIONALITÀ: IMPORTAZIONE ED ELIMINAZIONE =====
+
+// Helper: Ricarica prodotti dal file JSON
+function reloadProducts() {
+  try {
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    const rawData = fs.readFileSync(jsonPath, 'utf-8');
+    PRODUCTS = JSON.parse(rawData);
+    logger.info(`✅ Prodotti ricaricati: ${PRODUCTS.length} prodotti`);
+    return true;
+  } catch (error) {
+    logger.error('❌ Errore ricaricamento prodotti:', error);
+    return false;
+  }
+}
+
+// POST /api/admin/products/import - Importa prodotto da BigBuy per SKU
+router.post('/products/import', async (req, res) => {
+  try {
+    const { sku } = req.body;
+
+    if (!sku) {
+      return res.status(400).json({
+        success: false,
+        error: 'SKU richiesto'
+      });
+    }
+
+    logger.info(`🔍 Ricerca prodotto BigBuy con SKU: ${sku}`);
+
+    // Importa BigBuyClient (è già un'istanza)
+    const bigbuy = require('../integrations/BigBuyClient');
+
+    // Cerca il prodotto su BigBuy
+    const product = await bigbuy.getProduct(sku);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato su BigBuy'
+      });
+    }
+
+    // Verifica che non esista già
+    const existingProduct = PRODUCTS.find(p => p.id === sku);
+    if (existingProduct) {
+      return res.status(409).json({
+        success: false,
+        error: 'Prodotto già presente nel catalogo'
+      });
+    }
+
+    // Formatta il prodotto nel formato del catalogo
+    const newProduct = {
+      id: sku,
+      name: product.name || `Prodotto ${sku}`,
+      description: product.description || '',
+      brand: product.brand || 'BigBuy',
+      category: product.category || 'Generale',
+      zenovaCategories: ['benessere'],
+      price: parseFloat(product.retailPrice || product.price || 0),
+      pvd: parseFloat(product.wholesalePrice || product.price || 0),
+      margin: product.margin || '0',
+      stock: product.quantity || 0,
+      imageCount: product.images ? product.images.length : 0,
+      images: product.images ? product.images.map(img => img.url || img) : [],
+      video: '0',
+      ean: product.ean || '',
+      width: product.width || '0',
+      height: product.height || '0',
+      depth: product.depth || '0',
+      weight: product.weight || '0',
+      score: 100,
+      raw: product
+    };
+
+    // Aggiungi al file JSON
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    PRODUCTS.push(newProduct);
+    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+
+    // Ricarica prodotti
+    reloadProducts();
+
+    logger.info(`✅ Prodotto importato: ${newProduct.name}`);
+
+    res.json({
+      success: true,
+      message: 'Prodotto importato con successo',
+      data: newProduct
+    });
+  } catch (error) {
+    logger.error('❌ Errore importazione prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Errore importazione prodotto'
+    });
+  }
+});
+
+// DELETE /api/admin/products/:id - Elimina prodotto dal catalogo
+router.delete('/products/:id', (req, res) => {
+  try {
+    const productId = req.params.id;
+
+    logger.info(`🗑️  Richiesta eliminazione prodotto: ${productId}`);
+
+    // Trova il prodotto
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    const productName = PRODUCTS[productIndex].name;
+
+    // Rimuovi dall'array
+    PRODUCTS.splice(productIndex, 1);
+
+    // Salva nel file JSON
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+
+    // Rimuovi anche dal layout se presente
+    productLayout.home = productLayout.home.filter(id => id !== productId);
+    productLayout.sidebar = productLayout.sidebar.filter(id => id !== productId);
+    productLayout.hidden = productLayout.hidden.filter(id => id !== productId);
+    fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
+
+    // Ricarica prodotti
+    reloadProducts();
+
+    logger.info(`✅ Prodotto eliminato: ${productName}`);
+
+    res.json({
+      success: true,
+      message: `Prodotto "${productName}" eliminato con successo`,
+      data: {
+        id: productId,
+        name: productName,
+        totalProducts: PRODUCTS.length
+      }
+    });
+  } catch (error) {
+    logger.error('❌ Errore eliminazione prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore eliminazione prodotto'
+    });
+  }
+});
+
+// PATCH /api/admin/products/:id/visibility - Toggle visibilità prodotto
+router.patch('/products/:id/visibility', (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { visible } = req.body;
+
+    logger.info(`👁️  Richiesta toggle visibilità prodotto: ${productId} -> ${visible}`);
+
+    // Trova il prodotto
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    // Aggiorna campo visible
+    PRODUCTS[productIndex].visible = visible !== undefined ? visible : !PRODUCTS[productIndex].visible;
+
+    const productName = PRODUCTS[productIndex].name;
+    const newVisibility = PRODUCTS[productIndex].visible;
+
+    // Salva nel file JSON
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+
+    // Ricarica prodotti
+    reloadProducts();
+
+    logger.info(`✅ Visibilità prodotto aggiornata: ${productName} -> ${newVisibility ? 'visibile' : 'nascosto'}`);
+
+    res.json({
+      success: true,
+      message: `Prodotto "${productName}" ora è ${newVisibility ? 'visibile' : 'nascosto'}`,
+      data: {
+        id: productId,
+        name: productName,
+        visible: newVisibility
+      }
+    });
+  } catch (error) {
+    logger.error('❌ Errore toggle visibilità prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore aggiornamento visibilità prodotto'
     });
   }
 });
