@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
 
-// Carica i prodotti dal file JSON
+// Carica i prodotti dal file JSON (include prodotti FTP)
 let PRODUCTS = [];
 try {
   const jsonPath = path.join(__dirname, '../../top-100-products.json');
