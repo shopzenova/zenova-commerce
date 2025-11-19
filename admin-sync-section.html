@@ -1,0 +1,119 @@
+<!-- Sync Section - NEW FTP VERSION -->
+<section id="sync" class="admin-section">
+    <div class="section-header">
+        <h1>Sincronizzazione BigBuy FTP</h1>
+        <p>Importa prodotti direttamente dal server FTP BigBuy</p>
+    </div>
+
+    <!-- Test Connection -->
+    <div class="sync-status-card" style="margin-bottom: 30px;">
+        <div class="sync-icon">
+            <div class="sync-spinner">🔌</div>
+        </div>
+        <div class="sync-info">
+            <h3>Test Connessione FTP</h3>
+            <p id="ftpConnectionStatus" class="sync-status-text">⏳ Pronto per il test</p>
+            <small>Server: www.dropshippers.com.es</small>
+        </div>
+        <button class="btn-sync" onclick="testFTPConnection()">Test Connessione</button>
+    </div>
+
+    <!-- Category Selection -->
+    <div class="sync-details" style="margin-bottom: 30px;">
+        <h3>📂 Seleziona Categorie da Sincronizzare</h3>
+        <p style="margin-bottom: 15px; color: #666;">Seleziona una o più categorie BigBuy da importare nel catalogo</p>
+
+        <div id="categoryList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2399" checked style="margin-right: 10px;">
+                <span><strong>Casa | Giardino</strong><br><small style="color: #666;">ID: 2399</small></span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2501" style="margin-right: 10px;">
+                <span><strong>Salute | Bellezza</strong><br><small style="color: #666;">ID: 2501</small></span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2507" style="margin-right: 10px;">
+                <span><strong>Profumeria | Cosmesi</strong><br><small style="color: #666;">ID: 2507</small></span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2491" style="margin-right: 10px;">
+                <span><strong>Sport | Fitness</strong><br><small style="color: #666;">ID: 2491</small></span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2609" style="margin-right: 10px;">
+                <span><strong>Informatica | Elettronica</strong><br><small style="color: #666;">ID: 2609</small></span>
+            </label>
+            <label style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; cursor: pointer;">
+                <input type="checkbox" class="category-checkbox" value="2403" style="margin-right: 10px;">
+                <span><strong>Cucina | Gourmet</strong><br><small style="color: #666;">ID: 2403</small></span>
+            </label>
+        </div>
+
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button class="btn-primary" onclick="startFTPSync()" style="flex: 1; max-width: 300px; padding: 15px; font-size: 16px; font-weight: 600;">
+                🔄 Avvia Sincronizzazione
+            </button>
+            <button class="btn-secondary" onclick="loadAvailableCategories()" style="padding: 15px;">
+                📋 Carica Tutte le Categorie
+            </button>
+        </div>
+    </div>
+
+    <!-- Sync Progress -->
+    <div id="syncProgress" style="display: none; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+        <h3 style="margin: 0 0 15px 0;">⏳ Sincronizzazione in corso...</h3>
+        <div style="background: rgba(255,255,255,0.2); border-radius: 8px; height: 8px; overflow: hidden; margin-bottom: 10px;">
+            <div id="syncProgressBar" style="background: white; height: 100%; width: 0%; transition: width 0.3s;"></div>
+        </div>
+        <p id="syncProgressText" style="margin: 0; font-size: 14px;">Inizializzazione...</p>
+    </div>
+
+    <!-- Sync Results -->
+    <div id="syncResults" class="sync-details" style="display: none;">
+        <h3>✅ Risultati Sincronizzazione</h3>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="detail-icon">📦</span>
+                <div>
+                    <strong id="resultTotalProducts">0</strong>
+                    <p>Prodotti totali</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">🆕</span>
+                <div>
+                    <strong id="resultNewProducts">0</strong>
+                    <p>Nuovi importati</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">🔄</span>
+                <div>
+                    <strong id="resultUpdatedProducts">0</strong>
+                    <p>Aggiornati</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">📂</span>
+                <div>
+                    <strong id="resultCategories">0</strong>
+                    <p>Categorie</p>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 15px; text-align: center; color: #666;">
+            <small id="resultTimestamp">-</small>
+        </p>
+    </div>
+
+    <!-- Sync Info -->
+    <div class="sync-schedule">
+        <h3>ℹ️ Informazioni Sincronizzazione</h3>
+        <p><strong>Metodo:</strong> FTP diretto (più veloce dell'API REST)</p>
+        <p><strong>Formato:</strong> CSV standard BigBuy</p>
+        <p><strong>Aggiornamenti:</strong> BigBuy aggiorna i file 3 volte al giorno (08:00, 14:00, 20:00)</p>
+        <p><strong>Raccomandazione:</strong> Sincronizza a mezzogiorno per ottenere i dati più recenti</p>
+        <p style="color: #d9534f; margin-top: 10px;"><strong>⚠️ Attenzione:</strong> Non saturare il servizio FTP. Sincronizza max 1 volta ogni 12 ore.</p>
+    </div>
+</section>

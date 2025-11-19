@@ -83,6 +83,7 @@ app.use('/api/cart', require('./src/routes/cart'));
 app.use('/api/checkout', require('./src/routes/checkout'));
 app.use('/api/orders', require('./src/routes/orders'));
 app.use('/api/admin', require('./src/routes/admin'));  // Admin panel API
+app.use('/api/admin/sync', require('./src/routes/admin-sync'));  // BigBuy FTP Sync
 app.use('/webhook', require('./src/routes/webhooks'));
 
 // 404 handler
