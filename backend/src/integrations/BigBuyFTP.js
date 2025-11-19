@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
 const logger = require('../utils/logger');
+const { categorizeProduct, getProductSubcategory } = require('../../config/category-mapping');
 
 class BigBuyFTP {
   constructor() {
@@ -187,13 +188,25 @@ class BigBuyFTP {
         return null;
       }
 
+      // Crea oggetto prodotto temporaneo per categorizzazione
+      const productForCategorization = {
+        categoryId: categoryId,
+        name: name,
+        description: description
+      };
+
+      // Usa il nuovo sistema di categorizzazione intelligente
+      const zenovaCategories = categorizeProduct(productForCategorization);
+      const subcategory = getProductSubcategory(productForCategorization);
+
       return {
         id: sku,
         name: name,
         description: description,
         brand: brand,
         category: `Category_${categoryId}`,
-        zenovaCategories: this._mapToZenovaCategory(categoryId),
+        zenovaCategories: zenovaCategories, // Array di categorie Zenova
+        subcategory: subcategory, // Subcategoria per filtri frontend
         price: price,
         pvd: wholesalePrice,
         margin: wholesalePrice > 0 ? ((price - wholesalePrice) / wholesalePrice * 100).toFixed(2) : '0',
@@ -217,21 +230,8 @@ class BigBuyFTP {
     }
   }
 
-  // Mappa categoria BigBuy a categoria Zenova
-  _mapToZenovaCategory(categoryId) {
-    // Mapping categorie BigBuy -> Zenova
-    const categoryMap = {
-      // Benessere e Salute
-      '2399': ['benessere', 'casa-giardino'],
-      '2409': ['benessere', 'salute'],
-      '2410': ['benessere', 'massaggio'],
-      // Elettronica
-      '2609': ['tecnologia', 'elettronica'],
-      // Aggiungi altre mappature secondo necessità
-    };
-
-    return categoryMap[categoryId.toString()] || ['generale'];
-  }
+  // NOTA: Categorizzazione ora gestita da config/category-mapping.js
+  // Usa categorizeProduct() e getProductSubcategory() per mappare BigBuy → Zenova
 
   // Sincronizza tutti i prodotti di categorie specifiche
   async syncCategories(categoryIds = ['2399', '2409', '2410'], language = 'it') {
