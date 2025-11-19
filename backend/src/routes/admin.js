@@ -514,4 +514,214 @@ router.patch('/products/:id/visibility', (req, res) => {
   }
 });
 
+// ===== BROWSER CATALOGO BIGBUY FTP =====
+
+// GET /api/admin/catalog/ftp - Lista prodotti dal catalogo BigBuy FTP
+router.get('/catalog/ftp', (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 20;
+    const category = req.query.category; // Filtro categoria
+    const search = req.query.search; // Ricerca nome/SKU
+
+    // Carica catalogo FTP
+    const ftpCatalogPath = path.join(__dirname, '../../top-products-updated.json');
+
+    if (!fs.existsSync(ftpCatalogPath)) {
+      return res.json({
+        success: true,
+        data: [],
+        total: 0,
+        filtered: 0,
+        imported: 0,
+        page: 1,
+        pageSize: pageSize,
+        totalPages: 0,
+        message: 'Nessun catalogo FTP sincronizzato. Usa la sezione Sincronizzazione per importare categorie.'
+      });
+    }
+
+    const ftpProducts = JSON.parse(fs.readFileSync(ftpCatalogPath, 'utf-8'));
+
+    // Filtra SOLO prodotti Zenova validi (escludi quelli con categoria "exclude")
+    const validZenovaCategories = [
+      'smart-living',
+      'cura-corpo-skin',
+      'meditazione-zen',
+      'design-atmosfera',
+      'gourmet-tea-coffee'
+    ];
+
+    let filtered = ftpProducts.filter(p => {
+      if (p.source !== 'bigbuy_ftp') return false;
+
+      // Escludi prodotti con categoria "exclude"
+      if (p.zenovaCategories && p.zenovaCategories.includes('exclude')) {
+        return false;
+      }
+
+      // Includi solo prodotti con almeno una categoria Zenova valida
+      if (!p.zenovaCategories || p.zenovaCategories.length === 0) {
+        return false;
+      }
+
+      return p.zenovaCategories.some(cat => validZenovaCategories.includes(cat));
+    });
+
+    // Filtra per categoria se specificata
+    if (category && category !== 'all') {
+      filtered = filtered.filter(p =>
+        p.zenovaCategories && p.zenovaCategories.includes(category)
+      );
+    }
+
+    // Ricerca per nome o SKU
+    if (search && search.trim()) {
+      const searchLower = search.toLowerCase().trim();
+      filtered = filtered.filter(p =>
+        (p.name && p.name.toLowerCase().includes(searchLower)) ||
+        (p.id && p.id.toLowerCase().includes(searchLower))
+      );
+    }
+
+    // Conta quanti prodotti FTP Zenova validi ci sono in totale
+    const totalFtpProducts = ftpProducts.filter(p => {
+      if (p.source !== 'bigbuy_ftp') return false;
+      if (p.zenovaCategories && p.zenovaCategories.includes('exclude')) return false;
+      if (!p.zenovaCategories || p.zenovaCategories.length === 0) return false;
+      return p.zenovaCategories.some(cat => validZenovaCategories.includes(cat));
+    }).length;
+
+    // Conta quanti prodotti sono già importati nel catalogo curato
+    const curatedProductIds = PRODUCTS.map(p => p.id);
+    const importedCount = filtered.filter(p => curatedProductIds.includes(p.id)).length;
+
+    // Paginazione
+    const filteredCount = filtered.length;
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedProducts = filtered.slice(startIndex, endIndex);
+
+    // Formatta prodotti e aggiungi flag "imported"
+    const formattedProducts = paginatedProducts.map(p => ({
+      id: p.id,
+      name: p.name,
+      brand: p.brand || 'BigBuy',
+      price: parseFloat(p.price),
+      pvd: parseFloat(p.pvd),
+      margin: p.margin || '0',
+      stock: p.stock,
+      images: p.images || [],
+      zenovaCategories: p.zenovaCategories || [],
+      categoryId: p.categoryId,
+      source: p.source,
+      imported: curatedProductIds.includes(p.id) // Flag per indicare se già importato
+    }));
+
+    res.json({
+      success: true,
+      data: formattedProducts,
+      total: totalFtpProducts,        // Totale prodotti FTP
+      filtered: filteredCount,         // Prodotti dopo filtri
+      imported: importedCount,         // Prodotti già importati
+      page: page,
+      pageSize: pageSize,
+      totalPages: Math.ceil(filteredCount / pageSize)
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore GET /api/admin/catalog/ftp:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore caricamento catalogo FTP'
+    });
+  }
+});
+
+// POST /api/admin/catalog/import/:id - Importa prodotto da catalogo FTP a catalogo curato
+router.post('/catalog/import/:id', (req, res) => {
+  try {
+    const productId = req.params.id;
+
+    logger.info(`📥 Richiesta import prodotto FTP: ${productId}`);
+
+    // Carica catalogo FTP
+    const ftpCatalogPath = path.join(__dirname, '../../top-products-updated.json');
+
+    if (!fs.existsSync(ftpCatalogPath)) {
+      return res.status(404).json({
+        success: false,
+        error: 'Catalogo FTP non trovato. Sincronizza prima una categoria.'
+      });
+    }
+
+    const ftpProducts = JSON.parse(fs.readFileSync(ftpCatalogPath, 'utf-8'));
+
+    // Trova prodotto nel catalogo FTP
+    const ftpProduct = ftpProducts.find(p => p.id === productId);
+
+    if (!ftpProduct) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato nel catalogo FTP'
+      });
+    }
+
+    // Verifica se già esiste nel catalogo curato
+    const existingIndex = PRODUCTS.findIndex(p => p.id === productId);
+
+    if (existingIndex !== -1) {
+      return res.status(409).json({
+        success: false,
+        error: 'Product already exists in curated catalog',
+        data: PRODUCTS[existingIndex]
+      });
+    }
+
+    // IMPORTANTE: Applica categorizzazione automatica al prodotto prima dell'import
+    const { categorizeProduct, getProductSubcategory } = require('../../config/category-mapping');
+
+    const productToImport = { ...ftpProduct };
+
+    // Ri-applica categorizzazione intelligente
+    productToImport.zenovaCategories = categorizeProduct(ftpProduct);
+    productToImport.zenovaSubcategory = getProductSubcategory(ftpProduct);
+
+    // Imposta campi necessari per l'admin
+    productToImport.zone = 'sidebar';  // Di default in sidebar
+    productToImport.visible = true;     // Visibile di default
+
+    logger.info(`📂 Categorizzazione applicata: ${JSON.stringify(productToImport.zenovaCategories)}`);
+
+    // Aggiungi al catalogo curato
+    PRODUCTS.push(productToImport);
+
+    // Salva nel file JSON
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+
+    // Ricarica prodotti
+    reloadProducts();
+
+    logger.info(`✅ Prodotto importato da FTP: ${ftpProduct.name}`);
+
+    res.json({
+      success: true,
+      message: `Prodotto "${ftpProduct.name}" importato con successo`,
+      data: {
+        id: ftpProduct.id,
+        name: ftpProduct.name,
+        totalProducts: PRODUCTS.length
+      }
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore POST /api/admin/catalog/import:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore importazione prodotto'
+    });
+  }
+});
+
 module.exports = router;

@@ -819,4 +819,261 @@ async function deleteProduct(productId, productName) {
     }
 }
 
+// ============================================
+// BROWSER CATALOGO BIGBUY FTP
+// ============================================
+
+let catalogState = {
+    currentPage: 1,
+    pageSize: 20,
+    totalProducts: 0,
+    filteredCount: 0,
+    importedCount: 0,
+    products: []
+};
+
+// Carica prodotti dal catalogo FTP
+async function loadCatalogProducts(page = 1) {
+    try {
+        const category = document.getElementById('catalogCategory').value;
+        const search = document.getElementById('catalogSearch').value;
+
+        // Build query string
+        const params = new URLSearchParams({
+            page: page,
+            pageSize: catalogState.pageSize
+        });
+
+        if (category && category !== 'all') {
+            params.append('category', category);
+        }
+
+        if (search && search.trim()) {
+            params.append('search', search.trim());
+        }
+
+        console.log('📥 Caricamento catalogo FTP...', {
+            page,
+            category,
+            search
+        });
+
+        const response = await fetch(`${API_BASE}/admin/catalog/ftp?${params.toString()}`);
+        const result = await response.json();
+
+        if (result.success) {
+            catalogState.currentPage = result.page;
+            catalogState.totalProducts = result.total;
+            catalogState.filteredCount = result.filtered;
+            catalogState.importedCount = result.imported;
+            catalogState.products = result.data;
+
+            // Update stats
+            document.getElementById('catalogTotalCount').textContent = result.total.toLocaleString();
+            document.getElementById('catalogFilteredCount').textContent = result.filtered.toLocaleString();
+            document.getElementById('catalogImportedCount').textContent = result.imported.toLocaleString();
+
+            // Render products
+            renderCatalogProducts(result.data);
+
+            // Render pagination
+            const totalPages = Math.ceil(result.filtered / catalogState.pageSize);
+            renderCatalogPagination(page, totalPages);
+
+            console.log('✅ Catalogo caricato:', {
+                prodotti: result.data.length,
+                totali: result.total,
+                filtrati: result.filtered,
+                importati: result.imported
+            });
+        } else {
+            alert(`❌ Errore caricamento catalogo: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('❌ Errore caricamento catalogo:', error);
+        alert(`❌ Errore: ${error.message}`);
+    }
+}
+
+// Render catalog products grid
+function renderCatalogProducts(products) {
+    const grid = document.getElementById('catalogProductsGrid');
+
+    if (!products || products.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: #999;">
+                <div style="font-size: 48px; margin-bottom: 20px;">📦</div>
+                <h3>Nessun prodotto trovato</h3>
+                <p>Prova a cambiare i filtri di ricerca</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = products.map(product => {
+        const image = product.images && product.images[0] ? product.images[0] : 'https://via.placeholder.com/250';
+        const price = parseFloat(product.pvd || 0).toFixed(2);
+        const retailPrice = parseFloat(product.price || 0).toFixed(2);
+        const margin = product.margin || '0';
+        const stock = product.stock || 0;
+        const categories = product.zenovaCategories ? product.zenovaCategories.join(', ') : 'N/A';
+        const isImported = product.imported || false;
+
+        return `
+            <div class="catalog-product-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s;"
+                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.15)'"
+                 onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                <div style="position: relative;">
+                    <img src="${image}" alt="${product.name}" style="width: 100%; height: 200px; object-fit: cover;">
+                    ${isImported ? '<div style="position: absolute; top: 10px; right: 10px; background: #43e97b; color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: bold;">✓ IMPORTATO</div>' : ''}
+                    <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px;">
+                        Stock: ${stock}
+                    </div>
+                </div>
+                <div style="padding: 15px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 14px; line-height: 1.3; height: 40px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">${product.name}</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-size: 11px; color: #999;">Acquisto</div>
+                            <div style="font-size: 16px; font-weight: bold; color: #667eea;">€ ${price}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 11px; color: #999;">Vendita</div>
+                            <div style="font-size: 16px; font-weight: bold; color: #43e97b;">€ ${retailPrice}</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 11px; color: #999; margin-bottom: 10px;">
+                        Margine: <span style="color: #43e97b; font-weight: bold;">${margin}%</span>
+                    </div>
+                    <div style="font-size: 11px; color: #666; margin-bottom: 10px; height: 30px; overflow: hidden;">
+                        📂 ${categories}
+                    </div>
+                    <div style="font-size: 10px; color: #999; margin-bottom: 15px;">
+                        SKU: ${product.id}
+                    </div>
+                    ${isImported ?
+                        '<button disabled style="width: 100%; padding: 10px; background: #e0e0e0; color: #999; border: none; border-radius: 8px; font-weight: 600; cursor: not-allowed;">✓ Già nel Catalogo</button>' :
+                        `<button onclick="importCatalogProduct('${product.id}')" style="width: 100%; padding: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                            ➕ Importa nel Catalogo
+                        </button>`
+                    }
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Render pagination controls
+function renderCatalogPagination(currentPage, totalPages) {
+    const pagination = document.getElementById('catalogPagination');
+
+    if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+    }
+
+    let html = '';
+
+    // Previous button
+    if (currentPage > 1) {
+        html += `<button onclick="loadCatalogProducts(${currentPage - 1})" style="padding: 8px 15px; background: white; border: 2px solid #667eea; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 600;">← Precedente</button>`;
+    }
+
+    // Page numbers
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+
+    if (startPage > 1) {
+        html += `<button onclick="loadCatalogProducts(1)" style="padding: 8px 12px; background: white; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer;">1</button>`;
+        if (startPage > 2) {
+            html += `<span style="padding: 8px;">...</span>`;
+        }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            html += `<button style="padding: 8px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 6px; font-weight: bold;">${i}</button>`;
+        } else {
+            html += `<button onclick="loadCatalogProducts(${i})" style="padding: 8px 12px; background: white; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer;">${i}</button>`;
+        }
+    }
+
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            html += `<span style="padding: 8px;">...</span>`;
+        }
+        html += `<button onclick="loadCatalogProducts(${totalPages})" style="padding: 8px 12px; background: white; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer;">${totalPages}</button>`;
+    }
+
+    // Next button
+    if (currentPage < totalPages) {
+        html += `<button onclick="loadCatalogProducts(${currentPage + 1})" style="padding: 8px 15px; background: white; border: 2px solid #667eea; color: #667eea; border-radius: 6px; cursor: pointer; font-weight: 600;">Successiva →</button>`;
+    }
+
+    pagination.innerHTML = html;
+}
+
+// Import product from catalog to curated catalog
+async function importCatalogProduct(productId) {
+    try {
+        const confirmed = confirm(`📦 Importare questo prodotto nel catalogo curato Zenova?\n\nSKU: ${productId}\n\nIl prodotto sarà subito disponibile sul sito.`);
+
+        if (!confirmed) return;
+
+        console.log(`📥 Importazione prodotto ${productId}...`);
+
+        const response = await fetch(`${API_BASE}/admin/catalog/import/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`✅ Prodotto importato con successo!\n\n${result.data.name}\n\nIl prodotto è ora disponibile sul tuo sito.`);
+
+            // Reload catalog to update "imported" status
+            await loadCatalogProducts(catalogState.currentPage);
+
+            // Also reload products in other sections
+            await loadProducts();
+        } else {
+            if (result.error === 'Product already exists in curated catalog') {
+                alert('⚠️ Questo prodotto è già nel tuo catalogo curato!');
+            } else {
+                alert(`❌ Errore: ${result.error}`);
+            }
+        }
+    } catch (error) {
+        console.error('❌ Errore importazione:', error);
+        alert(`❌ Errore durante l'importazione: ${error.message}`);
+    }
+}
+
+// Auto-load catalog when section is opened
+document.addEventListener('DOMContentLoaded', function() {
+    // Listen for navigation clicks
+    const catalogNavLink = document.querySelector('[data-section="catalog"]');
+    if (catalogNavLink) {
+        catalogNavLink.addEventListener('click', function() {
+            // Load catalog on first open
+            if (catalogState.products.length === 0) {
+                loadCatalogProducts(1);
+            }
+        });
+    }
+
+    // Search on Enter key
+    const searchInput = document.getElementById('catalogSearch');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loadCatalogProducts(1);
+            }
+        });
+    }
+});
+
 console.log('Pannello Admin Zenova caricato ✅');
