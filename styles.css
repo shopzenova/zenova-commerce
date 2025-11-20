@@ -533,6 +533,106 @@ body {
     padding-left: 1.3rem;
 }
 
+/* Category Mega Menu Dropdown - Hover */
+.category-nav-dropdown {
+    position: relative;
+}
+
+.category-nav-dropdown .dropdown-arrow {
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+}
+
+.category-nav-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.category-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--warm-white);
+    border: 2px solid var(--soft-terracotta);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 30px rgba(139, 111, 71, 0.2);
+    min-width: 220px;
+    padding: 0.75rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 0.5rem;
+}
+
+.category-nav-dropdown:hover .category-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.7rem 1.2rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.dropdown-link:hover {
+    background: var(--secondary-beige);
+    color: var(--soft-terracotta);
+    padding-left: 1.5rem;
+}
+
+/* Mega Menu for Beauty (4 columns) */
+.category-nav-mega-dropdown .category-dropdown-menu.mega-menu {
+    min-width: 800px;
+    max-width: 900px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.category-nav-mega-dropdown:hover .category-dropdown-menu.mega-menu {
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu-column h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--soft-terracotta);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-beige);
+}
+
+.mega-menu-column .mt-2 {
+    margin-top: 1rem;
+}
+
+.dropdown-sublink {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border-radius: var(--radius-sm);
+}
+
+.dropdown-sublink:hover {
+    background: var(--secondary-beige);
+    color: var(--soft-terracotta);
+    padding-left: 1rem;
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--secondary-beige) 0%, var(--warm-sand) 100%);

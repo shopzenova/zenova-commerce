@@ -1,0 +1,212 @@
+{
+  "description": "Nuova struttura ZENOVA - Where Technology Meets Calm",
+  "version": "2.0",
+  "lastUpdated": "2025-11-20",
+  "motto": "Where Technology Meets Calm",
+  "mainCategories": [
+    {
+      "id": "smart-living",
+      "name": "Smart Living",
+      "icon": "🏠",
+      "description": "Prodotti tech per la casa smart",
+      "type": "TECHNOLOGY",
+      "supplier": "BigBuy + Mix",
+      "hasSubcategories": true,
+      "subcategories": [
+        "Smart LED e illuminazione",
+        "Domotica",
+        "Dispositivi wireless",
+        "Smart home accessories"
+      ]
+    },
+    {
+      "id": "beauty",
+      "name": "Beauty",
+      "icon": "💄",
+      "description": "Bellezza e cosmesi - 8 sottocategorie BigBuy",
+      "type": "CALM",
+      "supplier": "BigBuy",
+      "hasSubcategories": true,
+      "bigbuyMainCategory": "2507",
+      "subcategories": [
+        {
+          "id": "bagno-igiene",
+          "name": "Bagno e igiene personale",
+          "subsubcategories": [
+            "Accessori da bagno",
+            "Additivi per il bagno",
+            "Deodoranti",
+            "Esfolianti e trattamenti per il corpo",
+            "Pulizia personale",
+            "Set"
+          ]
+        },
+        {
+          "id": "cura-capelli",
+          "name": "Cura dei capelli",
+          "subsubcategories": [
+            "Accessori per acconciature",
+            "Apparecchi e utensili per parrucchieri",
+            "Colorazione dei capelli",
+            "Extension, parrucche e accessori",
+            "Mobili e forniture per parrucchieri",
+            "Prodotti per acconciature",
+            "Prodotti per la cura dei capelli",
+            "Utensili per il taglio di capelli"
+          ]
+        },
+        {
+          "id": "cura-pelle",
+          "name": "Cura della pelle",
+          "subsubcategories": [
+            "Collo e décolleté",
+            "Corpo",
+            "Labbra",
+            "Mani e piedi",
+            "Occhi",
+            "Protezione solare e abbronzatura",
+            "Set regalo",
+            "Skincare con il sole e l'abbronzatura",
+            "Viso"
+          ]
+        },
+        {
+          "id": "manicure-pedicure",
+          "name": "Manicure e pedicure",
+          "subsubcategories": [
+            "Cura delle mani e dei piedi",
+            "Fantasie per unghie",
+            "Mani e piedi",
+            "Trattamenti per unghie",
+            "Utensili e accessori"
+          ]
+        },
+        {
+          "id": "profumi-fragranze",
+          "name": "Profumi e fragranze",
+          "subsubcategories": [
+            "Bambini",
+            "Candele ed essenze per la casa",
+            "Donne",
+            "Eau Fraiche e acqua profumata",
+            "Nebulizzatori e porta profumo",
+            "Oli essenziali",
+            "Profumi solidi",
+            "Set",
+            "Spray per il corpo",
+            "Talco profumato in polvere",
+            "Uomini"
+          ]
+        },
+        {
+          "id": "rasatura-depilazione",
+          "name": "Rasatura e depilazione",
+          "subsubcategories": [
+            "Cura post-depilazione e rasatura",
+            "Cura pre-depilazione e rasatura",
+            "Depilazione",
+            "Forbici",
+            "Rasatura manuale",
+            "Rasoi elettrici",
+            "Tagliacapelli, rifinitori e rasoi per il corpo"
+          ]
+        },
+        {
+          "id": "trucco",
+          "name": "Trucco",
+          "subsubcategories": [
+            "Corpo",
+            "Labbra",
+            "Occhi",
+            "Set di trucchi",
+            "Struccanti",
+            "Trousse",
+            "Viso"
+          ]
+        },
+        {
+          "id": "utensili-accessori",
+          "name": "Utensili e accessori",
+          "subsubcategories": [
+            "Borse e custodie",
+            "Forniture per tatuaggi",
+            "Palline, dischetti e bastoncini cotonati",
+            "Pennelli e utensili per il trucco",
+            "Specchi cosmetici e specchietti compatti",
+            "Strumenti e accessori per il trucco"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "health-personal-care",
+      "name": "Health & Personal Care",
+      "icon": "💆",
+      "description": "Salute e cura della persona - Benessere BigBuy",
+      "type": "CALM",
+      "supplier": "BigBuy",
+      "hasSubcategories": true,
+      "bigbuyMainCategory": "2501",
+      "subcategories": [
+        {
+          "id": "benessere",
+          "name": "Benessere",
+          "subsubcategories": [
+            "Accessori per saune",
+            "Lampade abbronzanti",
+            "Massaggio e rilassamento"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "natural-wellness",
+      "name": "Natural Wellness",
+      "icon": "🧘",
+      "description": "Benessere naturale - Prodotti AW dropship",
+      "type": "CALM",
+      "supplier": "AW Dropship",
+      "hasSubcategories": true,
+      "subcategories": [
+        "Oli essenziali",
+        "Aromaterapia",
+        "Yoga e meditazione",
+        "Incensi e candele naturali",
+        "Prodotti zen"
+      ]
+    },
+    {
+      "id": "tech-innovation",
+      "name": "Tech Innovation",
+      "icon": "⚡",
+      "description": "Prodotti tecnologici innovativi",
+      "type": "TECHNOLOGY",
+      "supplier": "Mix",
+      "hasSubcategories": true,
+      "subcategories": [
+        "Gadget tech",
+        "Smart devices",
+        "Wearable tech",
+        "Tech wellness",
+        "Innovazioni"
+      ]
+    }
+  ],
+  "summary": {
+    "totalCategories": 5,
+    "calmCategories": 3,
+    "techCategories": 2,
+    "bigbuyCategories": 2,
+    "awDropshipCategories": 1,
+    "beautySubcategories": 8,
+    "beautySubsubcategories": 59,
+    "healthCareSubcategories": 1,
+    "healthCareSubsubcategories": 3
+  },
+  "notes": [
+    "SOSTITUISCE le 5 vecchie categorie Zenova",
+    "Beauty e Health&Personal Care = BigBuy completo (struttura identica)",
+    "Natural Wellness = AW Dropship (da configurare)",
+    "Tech Innovation = prodotti nuovi innovativi (da definire fornitori)"
+  ]
+}

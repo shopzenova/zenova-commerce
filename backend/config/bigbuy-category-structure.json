@@ -1,0 +1,159 @@
+{
+  "description": "Struttura categorie BigBuy da sincronizzare - IDENTICA al catalogo BigBuy",
+  "lastUpdated": "2025-11-20",
+  "categories": [
+    {
+      "id": "bellezza",
+      "name": "Bellezza",
+      "bigbuyId": null,
+      "syncAll": true,
+      "subcategories": [
+        {
+          "id": "bagno-igiene",
+          "name": "Bagno e igiene personale",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Accessori da bagno" },
+            { "name": "Additivi per il bagno" },
+            { "name": "Deodoranti" },
+            { "name": "Esfolianti e trattamenti per il corpo" },
+            { "name": "Pulizia personale" },
+            { "name": "Set" }
+          ]
+        },
+        {
+          "id": "cura-capelli",
+          "name": "Cura dei capelli",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Accessori per acconciature" },
+            { "name": "Apparecchi e utensili per parrucchieri" },
+            { "name": "Colorazione dei capelli" },
+            { "name": "Extension, parrucche e accessori" },
+            { "name": "Mobili e forniture per parrucchieri" },
+            { "name": "Prodotti per acconciature" },
+            { "name": "Prodotti per la cura dei capelli" },
+            { "name": "Utensili per il taglio di capelli" }
+          ]
+        },
+        {
+          "id": "cura-pelle",
+          "name": "Cura della pelle",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Collo e décolleté" },
+            { "name": "Corpo" },
+            { "name": "Labbra" },
+            { "name": "Mani e piedi" },
+            { "name": "Occhi" },
+            { "name": "Protezione solare e abbronzatura" },
+            { "name": "Set regalo" },
+            { "name": "Skincare con il sole e l'abbronzatura" },
+            { "name": "Viso" }
+          ]
+        },
+        {
+          "id": "manicure-pedicure",
+          "name": "Manicure e pedicure",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Cura delle mani e dei piedi" },
+            { "name": "Fantasie per unghie" },
+            { "name": "Mani e piedi" },
+            { "name": "Trattamenti per unghie" },
+            { "name": "Utensili e accessori" }
+          ]
+        },
+        {
+          "id": "profumi-fragranze",
+          "name": "Profumi e fragranze",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Bambini" },
+            { "name": "Candele ed essenze per la casa" },
+            { "name": "Donne" },
+            { "name": "Eau Fraiche e acqua profumata" },
+            { "name": "Nebulizzatori e porta profumo" },
+            { "name": "Oli essenziali" },
+            { "name": "Profumi solidi" },
+            { "name": "Set" },
+            { "name": "Spray per il corpo" },
+            { "name": "Talco profumato in polvere" },
+            { "name": "Uomini" }
+          ]
+        },
+        {
+          "id": "rasatura-depilazione",
+          "name": "Rasatura e depilazione",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Cura post-depilazione e rasatura" },
+            { "name": "Cura pre-depilazione e rasatura" },
+            { "name": "Depilazione" },
+            { "name": "Forbici" },
+            { "name": "Rasatura manuale" },
+            { "name": "Rasoi elettrici" },
+            { "name": "Tagliacapelli, rifinitori e rasoi per il corpo" }
+          ]
+        },
+        {
+          "id": "trucco",
+          "name": "Trucco",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Corpo" },
+            { "name": "Labbra" },
+            { "name": "Occhi" },
+            { "name": "Set di trucchi" },
+            { "name": "Struccanti" },
+            { "name": "Trousse" },
+            { "name": "Viso" }
+          ]
+        },
+        {
+          "id": "utensili-accessori",
+          "name": "Utensili e accessori",
+          "bigbuyId": null,
+          "subsubcategories": [
+            { "name": "Borse e custodie" },
+            { "name": "Forniture per tatuaggi" },
+            { "name": "Palline, dischetti e bastoncini cotonati" },
+            { "name": "Pennelli e utensili per il trucco" },
+            { "name": "Specchi cosmetici e specchietti compatti" },
+            { "name": "Strumenti e accessori per il trucco" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "benessere",
+      "name": "Benessere",
+      "parentCategory": "Salute e cura della persona",
+      "bigbuyId": null,
+      "syncAll": true,
+      "subcategories": [
+        {
+          "id": "accessori-saune",
+          "name": "Accessori per saune",
+          "bigbuyId": null
+        },
+        {
+          "id": "lampade-abbronzanti",
+          "name": "Lampade abbronzanti",
+          "bigbuyId": null
+        },
+        {
+          "id": "massaggio-rilassamento",
+          "name": "Massaggio e rilassamento",
+          "bigbuyId": null
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Struttura IDENTICA al catalogo BigBuy",
+    "Bellezza: 8 sottocategorie + 59 sotto-sottocategorie",
+    "Benessere: 3 sottocategorie",
+    "bigbuyId da mappare analizzando i CSV FTP"
+  ]
+}

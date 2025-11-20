@@ -1,70 +1,210 @@
 // Mapping anchor links from home page to actual BigBuy categories
 const anchorToSubcategoryMap = {
-    // Categorie principali - mostrano tutti i prodotti
-    'smart-living': 'all',
-    'meditazione-zen': 'all',
-    'cura-corpo-skin': 'all',
-    'design-atmosfera': 'all',
-    'zen-lifestyle': 'all',
+    // ======== NUOVE 5 CATEGORIE ZENOVA ========
 
     // SMART LIVING
-    'ebook-tech': '2609,2617,2909',
-    'accessori-tech': '2609,2617,2937',
-    'lampade-luci-led': '2399,2400,2421',  // Solo la lampada Elgato specifica
-    'home-garden': '2399',  // Tutti i prodotti Home & Garden (include anche LED per ora)
+    'smart-led': '2399,2400,2421',
+    'domotica': '2399',
+    'wireless': '2609',
 
-    // MEDITAZIONE E ZEN
-    // (massaggiatori spostati in Cura del Corpo)
+    // BEAUTY - 8 sottocategorie BigBuy
+    'bagno-igiene': '2507',
+    'accessori-bagno': '2507',
+    'additivi-bagno': '2507',
+    'deodoranti': '2507',
+    'esfolianti-corpo': '2507',
+    'pulizia-personale': '2507',
+    'set-bagno': '2507',
 
-    // CURA DEL CORPO E SKIN
-    'creme-mani-piedi': '2501,2540,2546',
-    'protezione-viso': '2501,2552,2554',
-    'protezione-corpo': '2501,2552,2556',
-    'doposole': '2501,2552,2568',
+    'cura-capelli': '2507',
+    'accessori-acconciature': '2507',
+    'apparecchi-parrucchieri': '2507',
+    'colorazione-capelli': '2507',
+    'extension-parrucche': '2507',
+    'prodotti-acconciature': '2507',
+    'prodotti-cura-capelli': '2507',
+    'utensili-taglio': '2507',
+
+    'cura-pelle': '2507',
+    'collo-decollete': '2507',
+    'corpo-pelle': '2507',
+    'labbra-pelle': '2507',
+    'mani-piedi-pelle': '2507',
+    'occhi-pelle': '2507',
+    'protezione-solare': '2507',
+    'set-regalo-pelle': '2507',
+    'skincare-sole': '2507',
+    'viso-pelle': '2507',
+
+    'manicure-pedicure': '2507',
+    'cura-mani-piedi': '2507',
+    'fantasie-unghie': '2507',
+    'mani-piedi-manicure': '2507',
+    'trattamenti-unghie': '2507',
+    'utensili-manicure': '2507',
+
+    'profumi-fragranze': '2507,2508',
+    'profumi-bambini': '2507,2508',
+    'candele-essenze': '2507,2508',
+    'profumi-donne': '2507,2510',
+    'eau-fraiche': '2507,2508',
+    'nebulizzatori': '2507,2508',
+    'oli-essenziali-profumi': '2507,2508',
+    'profumi-solidi': '2507,2508',
+    'set-profumi': '2507,2508',
+    'spray-corpo': '2507,2508',
+    'talco-profumato': '2507,2508',
+    'profumi-uomini': '2507,2509',
+
+    'rasatura-depilazione': '2507',
+    'cura-post-rasatura': '2507',
+    'cura-pre-rasatura': '2507',
+    'depilazione': '2507',
+    'forbici': '2507',
+    'rasatura-manuale': '2507',
+    'rasoi-elettrici': '2507',
+    'tagliacapelli': '2507',
+
+    'trucco': '2507',
+    'trucco-corpo': '2507',
+    'trucco-labbra': '2507',
+    'trucco-occhi': '2507',
+    'set-trucchi': '2507',
+    'struccanti': '2507',
+    'trousse': '2507',
+    'trucco-viso': '2507',
+
+    'utensili-accessori': '2507',
+    'borse-custodie': '2507',
+    'forniture-tatuaggi': '2507',
+    'dischetti-cotonati': '2507',
+    'pennelli-trucco': '2507',
+    'specchi-cosmetici': '2507',
+    'strumenti-trucco': '2507',
+
+    // HEALTH & PERSONAL CARE
+    'benessere': '2501,2502',
+    'accessori-saune': '2501',
+    'lampade-abbronzanti': '2501',
     'massaggio-rilassamento': '2501,2502,2504',
-    'fragranze': '2507,2508,2510',
 
-    // DESIGN & ATMOSFERA
-    'home-decor': 'Home & Garden',
+    // NATURAL WELLNESS
+    'oli-essenziali': 'wellness',
+    'aromaterapia': 'wellness',
+    'yoga-meditazione': 'wellness',
+    'incensi-candele': 'wellness',
 
-    // ZEN LIFESTYLE
-    'wellness-lifestyle': 'Health & Beauty'
+    // TECH INNOVATION
+    'gadget-tech': 'tech',
+    'smart-devices': 'tech',
+    'wearable-tech': 'tech',
+    'tech-wellness': 'tech'
 };
 
 // Mapping subcategories to parent categories
 const subcategoryToCategoryMap = {
     // SMART LIVING
-    'ebook-tech': 'smart-living',
-    'accessori-tech': 'smart-living',
-    'lampade-luci-led': 'smart-living',
-    'home-garden': 'smart-living',
-    '2609,2617,2909': 'smart-living',
-    '2609,2617,2937': 'smart-living',
+    'smart-led': 'smart-living',
+    'domotica': 'smart-living',
+    'wireless': 'smart-living',
     '2399': 'smart-living',
     '2399,2400,2421': 'smart-living',
+    '2609': 'smart-living',
 
-    // MEDITAZIONE E ZEN
-    // (massaggiatori spostati in Cura del Corpo)
+    // BEAUTY - tutte le sotto-sottocategorie puntano a 'beauty'
+    'bagno-igiene': 'beauty',
+    'accessori-bagno': 'beauty',
+    'additivi-bagno': 'beauty',
+    'deodoranti': 'beauty',
+    'esfolianti-corpo': 'beauty',
+    'pulizia-personale': 'beauty',
+    'set-bagno': 'beauty',
+    'cura-capelli': 'beauty',
+    'accessori-acconciature': 'beauty',
+    'apparecchi-parrucchieri': 'beauty',
+    'colorazione-capelli': 'beauty',
+    'extension-parrucche': 'beauty',
+    'prodotti-acconciature': 'beauty',
+    'prodotti-cura-capelli': 'beauty',
+    'utensili-taglio': 'beauty',
+    'cura-pelle': 'beauty',
+    'collo-decollete': 'beauty',
+    'corpo-pelle': 'beauty',
+    'labbra-pelle': 'beauty',
+    'mani-piedi-pelle': 'beauty',
+    'occhi-pelle': 'beauty',
+    'protezione-solare': 'beauty',
+    'set-regalo-pelle': 'beauty',
+    'skincare-sole': 'beauty',
+    'viso-pelle': 'beauty',
+    'manicure-pedicure': 'beauty',
+    'cura-mani-piedi': 'beauty',
+    'fantasie-unghie': 'beauty',
+    'mani-piedi-manicure': 'beauty',
+    'trattamenti-unghie': 'beauty',
+    'utensili-manicure': 'beauty',
+    'profumi-fragranze': 'beauty',
+    'profumi-bambini': 'beauty',
+    'candele-essenze': 'beauty',
+    'profumi-donne': 'beauty',
+    'eau-fraiche': 'beauty',
+    'nebulizzatori': 'beauty',
+    'oli-essenziali-profumi': 'beauty',
+    'profumi-solidi': 'beauty',
+    'set-profumi': 'beauty',
+    'spray-corpo': 'beauty',
+    'talco-profumato': 'beauty',
+    'profumi-uomini': 'beauty',
+    'rasatura-depilazione': 'beauty',
+    'cura-post-rasatura': 'beauty',
+    'cura-pre-rasatura': 'beauty',
+    'depilazione': 'beauty',
+    'forbici': 'beauty',
+    'rasatura-manuale': 'beauty',
+    'rasoi-elettrici': 'beauty',
+    'tagliacapelli': 'beauty',
+    'trucco': 'beauty',
+    'trucco-corpo': 'beauty',
+    'trucco-labbra': 'beauty',
+    'trucco-occhi': 'beauty',
+    'set-trucchi': 'beauty',
+    'struccanti': 'beauty',
+    'trousse': 'beauty',
+    'trucco-viso': 'beauty',
+    'utensili-accessori': 'beauty',
+    'borse-custodie': 'beauty',
+    'forniture-tatuaggi': 'beauty',
+    'dischetti-cotonati': 'beauty',
+    'pennelli-trucco': 'beauty',
+    'specchi-cosmetici': 'beauty',
+    'strumenti-trucco': 'beauty',
+    '2507': 'beauty',
+    '2507,2508': 'beauty',
+    '2507,2509': 'beauty',
+    '2507,2510': 'beauty',
 
-    // CURA DEL CORPO E SKIN
-    'creme-mani-piedi': 'cura-corpo-skin',
-    'protezione-viso': 'cura-corpo-skin',
-    'protezione-corpo': 'cura-corpo-skin',
-    'doposole': 'cura-corpo-skin',
-    'massaggio-rilassamento': 'cura-corpo-skin',
-    'fragranze': 'cura-corpo-skin',
-    '2501,2502,2504': 'cura-corpo-skin',
-    '2501,2540,2546': 'cura-corpo-skin',
-    '2501,2552,2554': 'cura-corpo-skin',
-    '2501,2552,2556': 'cura-corpo-skin',
-    '2501,2552,2568': 'cura-corpo-skin',
-    '2507,2508,2510': 'cura-corpo-skin',
+    // HEALTH & PERSONAL CARE
+    'benessere': 'health-personal-care',
+    'accessori-saune': 'health-personal-care',
+    'lampade-abbronzanti': 'health-personal-care',
+    'massaggio-rilassamento': 'health-personal-care',
+    '2501': 'health-personal-care',
+    '2501,2502': 'health-personal-care',
+    '2501,2502,2504': 'health-personal-care',
 
-    // DESIGN & ATMOSFERA
-    'home-decor': 'design-atmosfera',
+    // NATURAL WELLNESS
+    'oli-essenziali': 'natural-wellness',
+    'aromaterapia': 'natural-wellness',
+    'yoga-meditazione': 'natural-wellness',
+    'incensi-candele': 'natural-wellness',
+    'wellness': 'natural-wellness',
 
-    // ZEN LIFESTYLE
-    'wellness-lifestyle': 'zen-lifestyle'
+    // TECH INNOVATION
+    'gadget-tech': 'tech-innovation',
+    'smart-devices': 'tech-innovation',
+    'wearable-tech': 'tech-innovation',
+    'tech-wellness': 'tech-innovation',
+    'tech': 'tech-innovation'
 };
 
 // Sidebar Category Accordion - Simple and Direct
@@ -163,19 +303,79 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Auto-open category from URL hash
+    // Auto-open category from URL hash IMMEDIATELY (without filtering products)
     const currentHash = window.location.hash;
     console.log('🔗 Current URL hash:', currentHash || '(nessun hash)');
-    // NOTE: autoOpenCategoryFromHash() is now called from script.js AFTER products are rendered
-    // This prevents the race condition where filtering happens before products are loaded
+
+    if (currentHash) {
+        console.log('⚡ Opening sidebar immediately from hash');
+        openSidebarFromHash(); // Open sidebar immediately
+    }
+    // NOTE: Product filtering happens later in script.js AFTER products are rendered
 
     console.log('Sidebar setup complete');
 });
 
-// Make autoOpenCategoryFromHash globally accessible so script.js can call it after products load
+// Make functions globally accessible
 window.autoOpenCategoryFromHash = autoOpenCategoryFromHash;
+window.openSidebarFromHash = openSidebarFromHash;
 
-// Auto-open category based on URL hash
+// Open sidebar IMMEDIATELY based on URL hash (without filtering products)
+function openSidebarFromHash() {
+    const hash = window.location.hash.substring(1);
+
+    if (!hash) {
+        console.log('⚠️ No hash in URL');
+        return;
+    }
+
+    console.log('⚡ Opening sidebar for hash:', hash);
+
+    // Convert anchor to actual BigBuy subcategory value
+    const actualSubcategory = anchorToSubcategoryMap[hash] || hash;
+    console.log('📦 Mapped to subcategory:', actualSubcategory);
+
+    // Find the parent category
+    const parentCategory = subcategoryToCategoryMap[hash] || subcategoryToCategoryMap[actualSubcategory];
+
+    if (!parentCategory) {
+        console.log('❌ No parent category found for:', hash);
+        return;
+    }
+
+    console.log('📂 Opening parent category:', parentCategory);
+
+    // Find and open the parent category
+    const categoryBtn = document.querySelector(`[data-category="${parentCategory}"]`);
+    if (categoryBtn) {
+        const categoryItem = categoryBtn.parentElement;
+        categoryItem.classList.add('active');
+        console.log('✅ Parent category opened');
+    }
+
+    // Find and activate the subcategory link using the HASH (unique identifier)
+    const subcategoryLink = document.querySelector(`a[href="#${hash}"].sub-subcategory-link, a[href="#${hash}"].subcategory-link`);
+    if (subcategoryLink) {
+        console.log('✅ Subcategory link found by hash:', hash);
+
+        // Remove active from all
+        document.querySelectorAll('.subcategory-link, .sub-subcategory-link').forEach(l => l.classList.remove('active'));
+
+        // Add active to this one
+        subcategoryLink.classList.add('active');
+
+        // Open nested category if needed (for 3rd level like "Labbra" inside "Cura della pelle")
+        const nestedParent = subcategoryLink.closest('.subcategory-item-nested');
+        if (nestedParent) {
+            nestedParent.classList.add('active');
+            console.log('✅ Nested category opened:', nestedParent.querySelector('.subcategory-name')?.textContent);
+        }
+    } else {
+        console.log('❌ Subcategory link not found for hash:', hash);
+    }
+}
+
+// Auto-open category based on URL hash (opens sidebar + filters products)
 function autoOpenCategoryFromHash() {
     const hash = window.location.hash.substring(1); // Remove the # symbol
 
@@ -228,10 +428,10 @@ function autoOpenCategoryFromHash() {
         console.log('❌ Category button not found for:', parentCategory);
     }
 
-    // Find and activate the subcategory link with the actual BigBuy value
-    const subcategoryLink = document.querySelector(`[data-subcategory="${actualSubcategory}"]`);
+    // Find and activate the subcategory link using the HASH (unique identifier)
+    const subcategoryLink = document.querySelector(`a[href="#${hash}"].sub-subcategory-link, a[href="#${hash}"].subcategory-link`);
     if (subcategoryLink) {
-        console.log('✅ Subcategory link found');
+        console.log('✅ Subcategory link found by hash:', hash);
 
         // Remove active from all
         document.querySelectorAll('.subcategory-link, .sub-subcategory-link').forEach(l => l.classList.remove('active'));
@@ -239,18 +439,18 @@ function autoOpenCategoryFromHash() {
         // Add active to this one
         subcategoryLink.classList.add('active');
 
-        // Open nested category if needed
+        // Open nested category if needed (for 3rd level like "Labbra" inside "Cura della pelle")
         const nestedParent = subcategoryLink.closest('.subcategory-item-nested');
         if (nestedParent) {
             nestedParent.classList.add('active');
-            console.log('✅ Nested category opened');
+            console.log('✅ Nested category opened:', nestedParent.querySelector('.subcategory-name')?.textContent);
         }
 
         // Filter products with the actual BigBuy value
         console.log('🎯 Filtering products for:', actualSubcategory);
         filterProductsBySubcategory(actualSubcategory);
     } else {
-        console.log('❌ Subcategory link not found for:', actualSubcategory);
+        console.log('❌ Subcategory link not found for hash:', hash);
     }
 }
 

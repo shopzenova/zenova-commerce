@@ -106,50 +106,112 @@
         </div>
     </header>
 
-    <!-- Categories Navigation Bar -->
-    <nav class="categories-nav">
+    <!-- Categories Navigation Bar with Mega Menu -->
+    <nav class="categories-nav categories-nav-mega">
         <div class="container">
             <div class="categories-nav-list">
-                <div class="category-nav-item-wrapper">
-                    <a href="prodotti.html#smart-living" class="category-nav-item">Smart Living</a>
-                    <div class="category-dropdown">
-                        <a href="prodotti.html#ebook-tech" class="category-dropdown-item">eBook & Tech</a>
-                        <a href="prodotti.html#accessori-tech" class="category-dropdown-item">Accessori Tech</a>
-                        <a href="prodotti.html#lampade-luci-led" class="category-dropdown-item">Lampade e Luci LED</a>
-                        <a href="prodotti.html#home-garden" class="category-dropdown-item">Smart Home</a>
+                <!-- SMART LIVING -->
+                <div class="category-nav-item-wrapper category-nav-dropdown">
+                    <a href="smart-living.html" class="category-nav-item">
+                        Smart Living
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="category-dropdown-menu">
+                        <a href="prodotti.html#smart-led" class="dropdown-link">Smart LED & Illuminazione</a>
+                        <a href="prodotti.html#domotica" class="dropdown-link">Domotica & Smart Home</a>
+                        <a href="prodotti.html#wireless" class="dropdown-link">Dispositivi Wireless</a>
                     </div>
                 </div>
 
-                <div class="category-nav-item-wrapper">
-                    <a href="prodotti.html#meditazione-zen" class="category-nav-item">Meditazione e Zen</a>
-                    <div class="category-dropdown">
-                        <!-- Massaggiatori spostati in Cura del Corpo -->
+                <!-- BEAUTY -->
+                <div class="category-nav-item-wrapper category-nav-dropdown category-nav-mega-dropdown">
+                    <a href="beauty.html" class="category-nav-item">
+                        Beauty
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="category-dropdown-menu mega-menu">
+                        <div class="mega-menu-column">
+                            <h4>Bagno e igiene personale</h4>
+                            <a href="prodotti.html#accessori-bagno" class="dropdown-sublink">Accessori da bagno</a>
+                            <a href="prodotti.html#additivi-bagno" class="dropdown-sublink">Additivi per il bagno</a>
+                            <a href="prodotti.html#deodoranti" class="dropdown-sublink">Deodoranti</a>
+                            <a href="prodotti.html#esfolianti-corpo" class="dropdown-sublink">Esfolianti e trattamenti</a>
+                            <a href="prodotti.html#pulizia-personale" class="dropdown-sublink">Pulizia personale</a>
+                            <a href="prodotti.html#set-bagno" class="dropdown-sublink">Set</a>
+                        </div>
+                        <div class="mega-menu-column">
+                            <h4>Cura dei capelli</h4>
+                            <a href="prodotti.html#accessori-acconciature" class="dropdown-sublink">Accessori acconciature</a>
+                            <a href="prodotti.html#apparecchi-parrucchieri" class="dropdown-sublink">Apparecchi parrucchieri</a>
+                            <a href="prodotti.html#colorazione-capelli" class="dropdown-sublink">Colorazione capelli</a>
+                            <a href="prodotti.html#extension-parrucche" class="dropdown-sublink">Extension e parrucche</a>
+                            <a href="prodotti.html#prodotti-acconciature" class="dropdown-sublink">Prodotti acconciature</a>
+                            <a href="prodotti.html#prodotti-cura-capelli" class="dropdown-sublink">Cura capelli</a>
+                        </div>
+                        <div class="mega-menu-column">
+                            <h4>Cura della pelle</h4>
+                            <a href="prodotti.html#collo-decollete" class="dropdown-sublink">Collo e décolleté</a>
+                            <a href="prodotti.html#corpo-pelle" class="dropdown-sublink">Corpo</a>
+                            <a href="prodotti.html#labbra-pelle" class="dropdown-sublink">Labbra</a>
+                            <a href="prodotti.html#mani-piedi-pelle" class="dropdown-sublink">Mani e piedi</a>
+                            <a href="prodotti.html#occhi-pelle" class="dropdown-sublink">Occhi</a>
+                            <a href="prodotti.html#protezione-solare" class="dropdown-sublink">Protezione solare</a>
+                            <a href="prodotti.html#viso-pelle" class="dropdown-sublink">Viso</a>
+                        </div>
+                        <div class="mega-menu-column">
+                            <h4>Profumi e fragranze</h4>
+                            <a href="prodotti.html#profumi-donne" class="dropdown-sublink">Donne</a>
+                            <a href="prodotti.html#profumi-uomini" class="dropdown-sublink">Uomini</a>
+                            <a href="prodotti.html#profumi-bambini" class="dropdown-sublink">Bambini</a>
+                            <a href="prodotti.html#oli-essenziali-profumi" class="dropdown-sublink">Oli essenziali</a>
+                            <a href="prodotti.html#candele-essenze" class="dropdown-sublink">Candele ed essenze</a>
+                            <h4 class="mt-2">Trucco</h4>
+                            <a href="prodotti.html#trucco-viso" class="dropdown-sublink">Viso</a>
+                            <a href="prodotti.html#trucco-occhi" class="dropdown-sublink">Occhi</a>
+                            <a href="prodotti.html#trucco-labbra" class="dropdown-sublink">Labbra</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="category-nav-item-wrapper">
-                    <a href="prodotti.html#cura-corpo-skin" class="category-nav-item">Cura del Corpo e Skin</a>
-                    <div class="category-dropdown">
-                        <a href="prodotti.html#creme-mani-piedi" class="category-dropdown-item">Creme Mani e Piedi</a>
-                        <a href="prodotti.html#protezione-viso" class="category-dropdown-item">Protezione Solare Viso</a>
-                        <a href="prodotti.html#protezione-corpo" class="category-dropdown-item">Protezione Solare Corpo</a>
-                        <a href="prodotti.html#doposole" class="category-dropdown-item">Doposole</a>
-                        <a href="prodotti.html#massaggio-rilassamento" class="category-dropdown-item">Massaggio e Rilassamento</a>
-                        <a href="prodotti.html#fragranze" class="category-dropdown-item">Fragranze & Profumi</a>
+                <!-- HEALTH & PERSONAL CARE -->
+                <div class="category-nav-item-wrapper category-nav-dropdown">
+                    <a href="health-personal-care.html" class="category-nav-item">
+                        Health & Personal Care
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="category-dropdown-menu">
+                        <a href="prodotti.html#benessere" class="dropdown-link">Benessere</a>
+                        <a href="prodotti.html#accessori-saune" class="dropdown-link">Accessori per saune</a>
+                        <a href="prodotti.html#lampade-abbronzanti" class="dropdown-link">Lampade abbronzanti</a>
+                        <a href="prodotti.html#massaggio-rilassamento" class="dropdown-link">Massaggio e rilassamento</a>
                     </div>
                 </div>
 
-                <div class="category-nav-item-wrapper">
-                    <a href="prodotti.html#design-atmosfera" class="category-nav-item">Design & Atmosfera</a>
-                    <div class="category-dropdown">
-                        <a href="prodotti.html#home-decor" class="category-dropdown-item">Home Decor</a>
+                <!-- NATURAL WELLNESS -->
+                <div class="category-nav-item-wrapper category-nav-dropdown">
+                    <a href="natural-wellness.html" class="category-nav-item">
+                        Natural Wellness
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="category-dropdown-menu">
+                        <a href="prodotti.html#oli-essenziali" class="dropdown-link">Oli essenziali</a>
+                        <a href="prodotti.html#aromaterapia" class="dropdown-link">Aromaterapia</a>
+                        <a href="prodotti.html#yoga-meditazione" class="dropdown-link">Yoga e meditazione</a>
+                        <a href="prodotti.html#incensi-candele" class="dropdown-link">Incensi e candele naturali</a>
                     </div>
                 </div>
 
-                <div class="category-nav-item-wrapper">
-                    <a href="prodotti.html#zen-lifestyle" class="category-nav-item">Zen Lifestyle</a>
-                    <div class="category-dropdown">
-                        <a href="prodotti.html#wellness-lifestyle" class="category-dropdown-item">Wellness & Lifestyle</a>
+                <!-- TECH INNOVATION -->
+                <div class="category-nav-item-wrapper category-nav-dropdown">
+                    <a href="tech-innovation.html" class="category-nav-item">
+                        Tech Innovation
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="category-dropdown-menu">
+                        <a href="prodotti.html#gadget-tech" class="dropdown-link">Gadget tech</a>
+                        <a href="prodotti.html#smart-devices" class="dropdown-link">Smart devices</a>
+                        <a href="prodotti.html#wearable-tech" class="dropdown-link">Wearable tech</a>
+                        <a href="prodotti.html#tech-wellness" class="dropdown-link">Tech wellness</a>
                     </div>
                 </div>
             </div>
