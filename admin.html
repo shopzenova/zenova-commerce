@@ -54,6 +54,10 @@
                     <span class="nav-icon">🔍</span>
                     <span>Browser Catalogo</span>
                 </a>
+                <a href="#categories" class="admin-nav-link" data-section="categories">
+                    <span class="nav-icon">📂</span>
+                    <span>Gestione Categorie</span>
+                </a>
                 <a href="#layout" class="admin-nav-link" data-section="layout">
                     <span class="nav-icon">🎨</span>
                     <span>Layout Sito</span>
@@ -347,6 +351,41 @@
                 <!-- Pagination -->
                 <div id="catalogPagination" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin: 30px 0;">
                     <!-- Pagination will be inserted here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Categories Management Section -->
+            <section id="categories" class="admin-section">
+                <div class="section-header">
+                    <h1>Gestione per Categorie</h1>
+                    <p>Organizza i prodotti per categoria e sottocategoria</p>
+                </div>
+
+                <!-- Filter by Main Category -->
+                <div style="margin-bottom: 30px;">
+                    <div style="display: flex; gap: 15px; align-items: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px;">
+                        <label style="color: white; font-weight: 600; min-width: 150px;">Categoria Principale:</label>
+                        <select id="mainCategoryFilter" onchange="loadProductsByCategory()" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                            <option value="all">📦 Tutte le Categorie</option>
+                            <option value="beauty">💄 Beauty</option>
+                            <option value="health">🏥 Health & Personal Care</option>
+                            <option value="smart-living">🏠 Smart Living</option>
+                            <option value="natural-wellness">🌿 Natural Wellness</option>
+                            <option value="tech">💻 Tech Innovation</option>
+                        </select>
+                        <button onclick="loadProductsByCategory()" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            🔄 Aggiorna
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Categories Grid -->
+                <div id="categoriesGrid" style="display: grid; gap: 30px;">
+                    <div style="text-align: center; padding: 60px; color: #999;">
+                        <div style="font-size: 48px; margin-bottom: 20px;">📂</div>
+                        <h3>Seleziona una categoria per iniziare</h3>
+                        <p>Clicca su "Aggiorna" per visualizzare i prodotti</p>
+                    </div>
                 </div>
             </section>
 

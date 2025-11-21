@@ -783,6 +783,12 @@ async function toggleProductVisibility(productId, productName, currentVisibility
 
             // Ricarica i prodotti per aggiornare l'UI
             await loadProducts();
+
+            // Se siamo nella sezione categorie, ricarica anche quella vista
+            const categoriesSection = document.getElementById('categories');
+            if (categoriesSection && categoriesSection.classList.contains('active')) {
+                await loadProductsByCategory();
+            }
         } else {
             alert(`❌ Errore: ${result.error}`);
         }
@@ -1075,5 +1081,290 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ============================================
+// GESTIONE PRODOTTI PER CATEGORIE
+// ============================================
+
+// Mappa nomi categorie user-friendly
+const categoryNames = {
+    'beauty': 'Beauty',
+    'health': 'Health & Personal Care',
+    'smart-living': 'Smart Living',
+    'natural-wellness': 'Natural Wellness',
+    'tech': 'Tech Innovation'
+};
+
+// Carica e visualizza prodotti raggruppati per categoria
+async function loadProductsByCategory() {
+    const mainCategory = document.getElementById('mainCategoryFilter').value;
+    const gridContainer = document.getElementById('categoriesGrid');
+
+    // Show loading
+    gridContainer.innerHTML = `
+        <div style="text-align: center; padding: 60px; color: #999;">
+            <div style="font-size: 48px; margin-bottom: 20px;">🔄</div>
+            <h3>Caricamento prodotti...</h3>
+        </div>
+    `;
+
+    try {
+        // Carica tutti i prodotti se non li abbiamo già
+        if (allProducts.length === 0) {
+            await loadProducts();
+        }
+
+        // Filtra prodotti per categoria principale
+        let filteredProducts = allProducts;
+        if (mainCategory !== 'all') {
+            filteredProducts = allProducts.filter(p => p.zenovaCategory === mainCategory);
+        }
+
+        console.log(`📊 Prodotti trovati per "${mainCategory}":`, filteredProducts.length);
+
+        if (filteredProducts.length === 0) {
+            gridContainer.innerHTML = `
+                <div style="text-align: center; padding: 60px; color: #999;">
+                    <div style="font-size: 48px; margin-bottom: 20px;">📦</div>
+                    <h3>Nessun prodotto trovato</h3>
+                    <p>Non ci sono prodotti per questa categoria</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Raggruppa per sottocategoria
+        const subcategoryGroups = {};
+        filteredProducts.forEach(product => {
+            const subcat = product.zenovaSubcategory || 'non-categorizzato';
+            if (!subcategoryGroups[subcat]) {
+                subcategoryGroups[subcat] = [];
+            }
+            subcategoryGroups[subcat].push(product);
+        });
+
+        console.log('📂 Sottocategorie trovate:', Object.keys(subcategoryGroups));
+
+        // Renderizza ogni sottocategoria
+        gridContainer.innerHTML = '';
+
+        // Ordina sottocategorie alfabeticamente
+        const sortedSubcategories = Object.keys(subcategoryGroups).sort();
+
+        sortedSubcategories.forEach(subcategory => {
+            const products = subcategoryGroups[subcategory];
+            const subcategoryCard = createSubcategoryCard(subcategory, products, mainCategory);
+            gridContainer.appendChild(subcategoryCard);
+        });
+
+    } catch (error) {
+        console.error('❌ Errore caricamento prodotti per categoria:', error);
+        gridContainer.innerHTML = `
+            <div style="text-align: center; padding: 60px; color: #e74c3c;">
+                <div style="font-size: 48px; margin-bottom: 20px;">❌</div>
+                <h3>Errore caricamento prodotti</h3>
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+// Crea card per una sottocategoria
+function createSubcategoryCard(subcategory, products, mainCategory) {
+    const card = document.createElement('div');
+    card.style.cssText = `
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    `;
+
+    // Header sottocategoria
+    const header = document.createElement('div');
+    header.style.cssText = `
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    `;
+
+    const subcategoryName = subcategory.split('-').map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+
+    header.innerHTML = `
+        <div>
+            <h3 style="margin: 0; font-size: 20px; color: #667eea;">📁 ${subcategoryName}</h3>
+            <p style="margin: 5px 0 0 0; font-size: 14px; color: #999;">
+                ${products.length} prodott${products.length === 1 ? 'o' : 'i'}
+                ${mainCategory !== 'all' ? `- ${categoryNames[mainCategory] || mainCategory}` : ''}
+            </p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="expandSubcategory('${subcategory}')"
+                    style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                👁️ Mostra Tutti
+            </button>
+        </div>
+    `;
+
+    card.appendChild(header);
+
+    // Products grid (mostra solo primi 6)
+    const productsGrid = document.createElement('div');
+    productsGrid.id = `subcategory-${subcategory}`;
+    productsGrid.style.cssText = `
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    `;
+
+    const visibleProducts = products.slice(0, 6);
+    visibleProducts.forEach(product => {
+        productsGrid.appendChild(createCategoryProductCard(product));
+    });
+
+    card.appendChild(productsGrid);
+
+    // Mostra messaggio se ci sono più prodotti
+    if (products.length > 6) {
+        const moreMessage = document.createElement('div');
+        moreMessage.style.cssText = `
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            color: #666;
+        `;
+        moreMessage.textContent = `... e altri ${products.length - 6} prodotti. Clicca "Mostra Tutti" per vederli.`;
+        card.appendChild(moreMessage);
+    }
+
+    return card;
+}
+
+// Crea card prodotto per la vista categorie
+function createCategoryProductCard(product) {
+    const card = document.createElement('div');
+    card.style.cssText = `
+        background: #fafafa;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: all 0.2s;
+        border: 2px solid ${product.visible === false ? '#e74c3c' : 'transparent'};
+    `;
+
+    card.innerHTML = `
+        <img src="${product.image || 'https://via.placeholder.com/150'}"
+             alt="${product.name}"
+             style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px;">
+        <div style="flex: 1;">
+            <h5 style="margin: 0 0 5px 0; font-size: 13px; line-height: 1.3; height: 40px; overflow: hidden;">
+                ${product.name.substring(0, 60)}${product.name.length > 60 ? '...' : ''}
+            </h5>
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #667eea;">€ ${product.price.toFixed(2)}</p>
+            ${product.visible === false ?
+                '<p style="margin: 5px 0 0 0; font-size: 11px; color: #e74c3c; font-weight: bold;">🚫 NASCOSTO</p>' :
+                '<p style="margin: 5px 0 0 0; font-size: 11px; color: #43e97b; font-weight: bold;">✅ VISIBILE</p>'
+            }
+        </div>
+        <div style="display: flex; gap: 5px; justify-content: space-between;">
+            <button onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible !== false})"
+                    title="${product.visible !== false ? 'Nascondi prodotto' : 'Mostra prodotto'}"
+                    style="flex: 1; padding: 8px; background: ${product.visible !== false ? '#f39c12' : '#43e97b'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">
+                ${product.visible !== false ? '🙈 Nascondi' : '👁️ Mostra'}
+            </button>
+            <button onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}'); loadProductsByCategory();"
+                    title="Elimina prodotto"
+                    style="padding: 8px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">
+                🗑️
+            </button>
+        </div>
+    `;
+
+    return card;
+}
+
+// Espandi sottocategoria per mostrare tutti i prodotti
+function expandSubcategory(subcategory) {
+    // Trova tutti i prodotti della sottocategoria
+    const mainCategory = document.getElementById('mainCategoryFilter').value;
+    let filteredProducts = allProducts;
+
+    if (mainCategory !== 'all') {
+        filteredProducts = allProducts.filter(p => p.zenovaCategory === mainCategory);
+    }
+
+    const products = filteredProducts.filter(p => (p.zenovaSubcategory || 'non-categorizzato') === subcategory);
+
+    // Crea modale per mostrare tutti i prodotti
+    showProductsModal(subcategory, products);
+}
+
+// Mostra modale con tutti i prodotti di una sottocategoria
+function showProductsModal(subcategory, products) {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    `;
+
+    const subcategoryName = subcategory.split('-').map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        max-width: 1200px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+    `;
+
+    modalContent.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #f0f0f0;">
+            <div>
+                <h2 style="margin: 0; color: #667eea;">📁 ${subcategoryName}</h2>
+                <p style="margin: 5px 0 0 0; color: #999;">${products.length} prodott${products.length === 1 ? 'o' : 'i'} totali</p>
+            </div>
+            <button onclick="this.closest('[style*=fixed]').remove()"
+                    style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">
+                ✕ Chiudi
+            </button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+            ${products.map(p => createCategoryProductCard(p).outerHTML).join('')}
+        </div>
+    `;
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Chiudi cliccando fuori
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
 
 console.log('Pannello Admin Zenova caricato ✅');

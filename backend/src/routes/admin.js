@@ -66,22 +66,30 @@ router.get('/products', (req, res) => {
     const zone = req.query.zone; // home, sidebar, hidden, all
 
     // Formatta prodotti per l'admin panel
-    const formattedProducts = PRODUCTS.map(p => ({
-      id: p.id,
-      name: p.name,
-      brand: p.brand || 'Zenova',
-      price: parseFloat(p.price),
-      retailPrice: parseFloat(p.price),
-      stock: p.stock,
-      available: p.stock > 0,
-      image: p.images && p.images[0] ? p.images[0] : null,
-      images: p.images || [],
-      category: p.zenovaCategories ? p.zenovaCategories[0] : 'Generale',
-      zenovaCategories: p.zenovaCategories || [], // IMPORTANTE: Campo per filtro categoria frontend
-      visible: p.visible !== undefined ? p.visible : true, // Default true per retro-compatibilità
-      // Determina la zona del prodotto
-      zone: getProductZone(p.id)
-    }));
+    const formattedProducts = PRODUCTS.map(p => {
+      // Gestisci sia zenovaCategory (stringa) che zenovaCategories (array) per retro-compatibilità
+      const zenovaCategory = p.zenovaCategory || (p.zenovaCategories && p.zenovaCategories[0]) || null;
+      const zenovaCategories = p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []);
+
+      return {
+        id: p.id,
+        name: p.name,
+        brand: p.brand || 'Zenova',
+        price: parseFloat(p.price),
+        retailPrice: parseFloat(p.price),
+        stock: p.stock,
+        available: p.stock > 0,
+        image: p.images && p.images[0] ? p.images[0] : (p.image || null),
+        images: p.images || [],
+        category: zenovaCategory || 'Generale',
+        zenovaCategory: zenovaCategory,  // Stringa singola per compatibility
+        zenovaCategories: zenovaCategories,  // Array per compatibility
+        zenovaSubcategory: p.zenovaSubcategory || null,  // IMPORTANTE per la vista categorie
+        visible: p.visible !== undefined ? p.visible : true, // Default true per retro-compatibilità
+        // Determina la zona del prodotto
+        zone: getProductZone(p.id)
+      };
+    });
 
     // Filtra per zona se richiesto
     let filteredProducts = formattedProducts;

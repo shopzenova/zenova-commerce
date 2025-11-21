@@ -1,55 +1,40 @@
 const fs = require('fs');
-const crypto = require('crypto');
+const path = require('path');
 
-// Leggi il catalogo
-const products = JSON.parse(fs.readFileSync('top-100-products.json', 'utf-8'));
+console.log('🔧 FIX: Aggiunta ID mancanti ai prodotti...\n');
 
-console.log('📦 Totale prodotti:', products.length);
+// Leggi il file JSON
+const jsonPath = path.join(__dirname, 'top-100-products.json');
+const data = require(jsonPath);
 
-// Trova prodotti senza ID
-const noId = products.filter(p => !p.id);
-console.log('❌ Prodotti SENZA ID:', noId.length);
+let fixedCount = 0;
 
-// Funzione per generare ID univoco basato sul nome
-function generateId(name, index) {
-    // Crea un hash del nome + index per garantire unicità
-    const hash = crypto.createHash('md5').update(name + index).digest('hex');
-    return 'ZENOVA-' + hash.substring(0, 8).toUpperCase();
-}
-
-// Set per tenere traccia degli ID usati
-const usedIds = new Set();
-products.forEach(p => {
-    if (p.id) usedIds.add(p.id);
-});
-
-// Aggiungi ID ai prodotti che non ce l'hanno
-let fixed = 0;
-products.forEach((product, index) => {
+// Per ogni prodotto, aggiungi ID se manca
+data.forEach(product => {
     if (!product.id) {
-        let newId;
-        let attempt = 0;
-
-        // Genera ID univoco
-        do {
-            newId = generateId(product.name, index + attempt);
-            attempt++;
-        } while (usedIds.has(newId));
-
-        product.id = newId;
-        usedIds.add(newId);
-        fixed++;
-
-        if (fixed <= 5) {
-            console.log(`✅ ${product.name.substring(0, 40)}... -> ID: ${newId}`);
+        // Usa EAN come ID se disponibile
+        if (product.ean) {
+            product.id = product.ean;
+            fixedCount++;
+        } else {
+            console.error(`❌ Prodotto senza ID e senza EAN: ${product.name}`);
         }
     }
 });
 
-console.log('\n✅ Aggiunti', fixed, 'ID');
-
 // Salva il file aggiornato
-fs.writeFileSync('top-100-products.json', JSON.stringify(products, null, 2));
+fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), 'utf-8');
 
-console.log('💾 File salvato: top-100-products.json');
-console.log('✅ Tutti i prodotti ora hanno un ID!');
+console.log(`✅ Fix completato!`);
+console.log(`📊 Prodotti totali: ${data.length}`);
+console.log(`🔧 ID aggiunti: ${fixedCount}`);
+
+// Verifica
+const noId = data.filter(p => !p.id);
+console.log(`\n✅ Verifica: ${noId.length} prodotti ancora senza ID`);
+
+if (noId.length === 0) {
+    console.log('\n🎉 SUCCESSO! Tutti i prodotti hanno ora un ID!');
+} else {
+    console.log('\n⚠️  Alcuni prodotti non hanno né ID né EAN');
+}

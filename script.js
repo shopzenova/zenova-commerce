@@ -852,9 +852,13 @@ function renderProducts() {
 
     console.log(`🎨 Rendering ${products.length} products`);
 
+    // IMPORTANTE: Filtra prodotti nascosti (visible: false)
+    const visibleProducts = products.filter(p => p.visible !== false);
+    console.log(`👁️  Prodotti visibili: ${visibleProducts.length} su ${products.length} totali`);
+
     // Count subcategories
     const subcategoryCounts = {};
-    products.forEach(p => {
+    visibleProducts.forEach(p => {
         subcategoryCounts[p.subcategory] = (subcategoryCounts[p.subcategory] || 0) + 1;
     });
     console.log('📊 Subcategories being rendered:');
@@ -862,7 +866,7 @@ function renderProducts() {
         console.log(`  "${sub}": ${subcategoryCounts[sub]} prodotti`);
     });
 
-    products.forEach(product => {
+    visibleProducts.forEach(product => {
         const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
@@ -881,8 +885,12 @@ function renderProductsByCategory(searchTerm) {
 
     console.log(`🎯 Rendering products for: ${searchTerm}`);
 
+    // IMPORTANTE: Prima filtra prodotti nascosti (visible: false)
+    const visibleProducts = products.filter(p => p.visible !== false);
+    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length}`);
+
     // Try filtering by zenovaSubcategory first (for anchor names like "profumi-donne")
-    let filteredProducts = products.filter(product => {
+    let filteredProducts = visibleProducts.filter(product => {
         return product.zenovaSubcategory === searchTerm;
     });
 
@@ -894,14 +902,14 @@ function renderProductsByCategory(searchTerm) {
 
         const searchNormalized = normalizeCategories(searchTerm);
 
-        filteredProducts = products.filter(product => {
+        filteredProducts = visibleProducts.filter(product => {
             if (!product.subcategory) return false;
             const productNormalized = normalizeCategories(product.subcategory);
             return productNormalized === searchNormalized;
         });
     }
 
-    console.log(`📦 Found ${filteredProducts.length} products for "${searchTerm}"`);
+    console.log(`📦 Found ${filteredProducts.length} visible products for "${searchTerm}"`);
 
     // Clear grid
     productsGrid.innerHTML = '';
