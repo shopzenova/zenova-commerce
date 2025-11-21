@@ -825,6 +825,34 @@ async function deleteProduct(productId, productName) {
     }
 }
 
+// Toggle featured product
+async function toggleFeatured(productId, productName, currentlyFeatured) {
+    try {
+        const action = currentlyFeatured ? 'rimuovere da' : 'mettere in';
+        const confirmed = confirm(`⭐ ${action.toUpperCase()} evidenza?\n\n"${productName}"\n\n${currentlyFeatured ? 'Non verrà più mostrato tra i prodotti in evidenza.' : 'Verrà mostrato tra i 100 prodotti in evidenza nello shop.'}`);
+
+        if (!confirmed) return;
+
+        const response = await fetch(`${API_BASE}/admin/products/${productId}/featured`, {
+            method: 'POST'
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`✅ ${result.message}\n\nTotale prodotti in evidenza: ${result.data.totalFeatured}`);
+
+            // Ricarica la vista corrente
+            await loadProductsByCategory();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore toggle featured:', error);
+        alert(`❌ Errore durante l'operazione: ${error.message}`);
+    }
+}
+
 // ============================================
 // BROWSER CATALOGO BIGBUY FTP
 // ============================================
@@ -1279,6 +1307,11 @@ function createCategoryProductCard(product) {
                     title="${product.visible !== false ? 'Nascondi prodotto' : 'Mostra prodotto'}"
                     style="flex: 1; padding: 8px; background: ${product.visible !== false ? '#f39c12' : '#43e97b'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">
                 ${product.visible !== false ? '🙈 Nascondi' : '👁️ Mostra'}
+            </button>
+            <button onclick="toggleFeatured('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.isFeatured || false})"
+                    title="${product.isFeatured ? 'Rimuovi da evidenza' : 'Metti in evidenza'}"
+                    style="padding: 8px 12px; background: ${product.isFeatured ? '#FFD700' : '#95a5a6'}; color: ${product.isFeatured ? '#000' : '#fff'}; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">
+                ⭐
             </button>
             <button onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}'); loadProductsByCategory();"
                     title="Elimina prodotto"

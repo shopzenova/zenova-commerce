@@ -19,11 +19,15 @@ try {
 const LAYOUT_FILE = path.join(__dirname, '../../config/product-layout.json');
 
 // Carica layout salvato (se esiste)
-let productLayout = { home: [], sidebar: [], hidden: [] };
+let productLayout = { home: [], sidebar: [], hidden: [], featured: [] };
 try {
   if (fs.existsSync(LAYOUT_FILE)) {
     const layoutData = fs.readFileSync(LAYOUT_FILE, 'utf-8');
     productLayout = JSON.parse(layoutData);
+    // Assicura che featured esista (retro-compatibilità)
+    if (!productLayout.featured) {
+      productLayout.featured = [];
+    }
   }
 } catch (error) {
   logger.error('❌ Errore caricamento layout:', error);
@@ -85,9 +89,11 @@ router.get('/products', (req, res) => {
         zenovaCategory: zenovaCategory,  // Stringa singola per compatibility
         zenovaCategories: zenovaCategories,  // Array per compatibility
         zenovaSubcategory: p.zenovaSubcategory || null,  // IMPORTANTE per la vista categorie
-        visible: p.visible !== undefined ? p.visible : true, // Default true per retro-compatibilità
+        // Se il prodotto è in hidden, visible deve essere false
+        visible: productLayout.hidden.includes(p.id) ? false : (p.visible !== undefined ? p.visible : true),
         // Determina la zona del prodotto
-        zone: getProductZone(p.id)
+        zone: getProductZone(p.id),
+        isFeatured: isFeatured(p.id)  // Nuovo: indica se è in evidenza
       };
     });
 
@@ -117,7 +123,13 @@ function getProductZone(productId) {
   if (productLayout.home.includes(productId)) return 'home';
   if (productLayout.sidebar.includes(productId)) return 'sidebar';
   if (productLayout.hidden.includes(productId)) return 'hidden';
+  if (productLayout.featured.includes(productId)) return 'featured';
   return 'none'; // Non assegnato
+}
+
+// Helper: verifica se un prodotto è featured
+function isFeatured(productId) {
+  return productLayout.featured.includes(productId);
 }
 
 // PUT /api/admin/products/layout - Salva layout prodotti
@@ -730,6 +742,58 @@ router.post('/catalog/import/:id', (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Errore importazione prodotto'
+    });
+  }
+});
+
+// POST /api/admin/products/:id/featured - Toggle prodotto featured
+router.post('/products/:id/featured', (req, res) => {
+  try {
+    const productId = req.params.id;
+
+    // Verifica che il prodotto esista
+    const product = PRODUCTS.find(p => p.id === productId);
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    // Toggle featured
+    const index = productLayout.featured.indexOf(productId);
+    let action = '';
+
+    if (index > -1) {
+      // Rimuovi da featured
+      productLayout.featured.splice(index, 1);
+      action = 'removed';
+      logger.info(`⭐ Prodotto rimosso da featured: ${product.name}`);
+    } else {
+      // Aggiungi a featured
+      productLayout.featured.push(productId);
+      action = 'added';
+      logger.info(`⭐ Prodotto aggiunto a featured: ${product.name}`);
+    }
+
+    // Salva layout
+    fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
+
+    res.json({
+      success: true,
+      message: action === 'added' ? 'Prodotto aggiunto in evidenza' : 'Prodotto rimosso da evidenza',
+      data: {
+        productId,
+        isFeatured: action === 'added',
+        totalFeatured: productLayout.featured.length
+      }
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore toggle featured:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore modifica prodotto featured'
     });
   }
 });

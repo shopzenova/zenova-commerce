@@ -859,37 +859,62 @@ function renderProducts() {
 
     productsGrid.innerHTML = '';
 
-    console.log(`🎨 Rendering featured products (4-5 per subcategory)`);
+    console.log(`🎨 Rendering featured products from admin selection`);
 
-    // IMPORTANTE: Filtra prodotti nascosti (visible: false)
-    const visibleProducts = products.filter(p => p.visible !== false);
-    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length}`);
-
-    // Raggruppa prodotti per sottocategoria
-    const productsBySubcategory = {};
-    visibleProducts.forEach(p => {
-        const subcat = p.zenovaSubcategory || p.subcategory || 'altri';
-        if (!productsBySubcategory[subcat]) {
-            productsBySubcategory[subcat] = [];
-        }
-        productsBySubcategory[subcat].push(p);
+    // IMPORTANTE: Filtra prodotti nascosti (visible: false) E prodotti nell'array hidden di productLayout
+    const hiddenIds = (productLayout && productLayout.hidden) ? productLayout.hidden : [];
+    const visibleProducts = products.filter(p => {
+        // Escludi se visible è false O se è nell'array hidden
+        return p.visible !== false && !hiddenIds.includes(p.id);
     });
+    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length} (nascosti: ${hiddenIds.length})`);
 
-    // Prendi 4-5 prodotti per ogni sottocategoria (max 100 totali)
-    const featuredProducts = [];
-    const maxPerSubcategory = 5;
-    const maxTotalProducts = 100;
+    // ✅ NUOVO: Usa prodotti selezionati dall'admin come featured
+    let productsToRender = [];
 
-    Object.keys(productsBySubcategory).forEach(subcat => {
-        const subcatProducts = productsBySubcategory[subcat];
-        const toTake = Math.min(maxPerSubcategory, subcatProducts.length);
-        featuredProducts.push(...subcatProducts.slice(0, toTake));
-    });
+    if (productLayout && productLayout.featured && productLayout.featured.length > 0) {
+        // Mostra prodotti marcati come featured dall'admin
+        productsToRender = visibleProducts.filter(p => productLayout.featured.includes(p.id));
+        console.log(`⭐ Prodotti featured dall'admin: ${productsToRender.length}`);
+    }
+
+    // Se non ci sono featured o sono meno di 20, completa con selezione automatica
+    if (productsToRender.length < 20) {
+        console.log(`📊 Featured insufficienti (${productsToRender.length}), completo con selezione automatica`);
+
+        // Raggruppa prodotti per sottocategoria (escludi già featured)
+        const featuredIds = productsToRender.map(p => p.id);
+        const remainingProducts = visibleProducts.filter(p => !featuredIds.includes(p.id));
+
+        const productsBySubcategory = {};
+        remainingProducts.forEach(p => {
+            const subcat = p.zenovaSubcategory || p.subcategory || 'altri';
+            if (!productsBySubcategory[subcat]) {
+                productsBySubcategory[subcat] = [];
+            }
+            productsBySubcategory[subcat].push(p);
+        });
+
+        // Prendi 4-5 prodotti per ogni sottocategoria
+        const autoFeatured = [];
+        const maxPerSubcategory = 5;
+        const maxTotalProducts = 100;
+
+        Object.keys(productsBySubcategory).forEach(subcat => {
+            const subcatProducts = productsBySubcategory[subcat];
+            const toTake = Math.min(maxPerSubcategory, subcatProducts.length);
+            autoFeatured.push(...subcatProducts.slice(0, toTake));
+        });
+
+        // Aggiungi prodotti automatici fino a 100
+        const needed = maxTotalProducts - productsToRender.length;
+        productsToRender.push(...autoFeatured.slice(0, needed));
+    }
 
     // Limita a max 100 prodotti totali
-    const productsToRender = featuredProducts.slice(0, maxTotalProducts);
+    productsToRender = productsToRender.slice(0, 100);
 
-    console.log(`✨ Featured products: ${productsToRender.length} prodotti da ${Object.keys(productsBySubcategory).length} sottocategorie`);
+    console.log(`✨ Rendering ${productsToRender.length} prodotti featured (${productLayout?.featured?.length || 0} dall'admin + ${productsToRender.length - (productLayout?.featured?.length || 0)} automatici)`);
 
     // Render featured products
     productsToRender.forEach(product => {
@@ -920,9 +945,13 @@ function renderProductsByCategory(searchTerm) {
 
     console.log(`🎯 Rendering products for: ${searchTerm}`);
 
-    // IMPORTANTE: Prima filtra prodotti nascosti (visible: false)
-    const visibleProducts = products.filter(p => p.visible !== false);
-    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length}`);
+    // IMPORTANTE: Prima filtra prodotti nascosti (visible: false) E prodotti nell'array hidden di productLayout
+    const hiddenIds = (productLayout && productLayout.hidden) ? productLayout.hidden : [];
+    const visibleProducts = products.filter(p => {
+        // Escludi se visible è false O se è nell'array hidden
+        return p.visible !== false && !hiddenIds.includes(p.id);
+    });
+    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length} (nascosti: ${hiddenIds.length})`);
 
     // Try filtering by zenovaSubcategory first (for anchor names like "profumi-donne")
     let filteredProducts = visibleProducts.filter(product => {
