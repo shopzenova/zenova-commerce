@@ -1922,16 +1922,38 @@ function closeProductDetailModal() {
             }
 
             // Trova e attiva il link della sottocategoria nella sidebar
-            const subcategoryLink = document.querySelector(`[href="#${currentProductSubcategory}"]`);
+            // Cerca sia href="#xxx" che data-subcategory (per compatibilità)
+            let subcategoryLink = document.querySelector(`[href="#${currentProductSubcategory}"]`);
+
+            // Se non trovato, cerca tra tutti i link della categoria
+            if (!subcategoryLink) {
+                const allLinks = document.querySelectorAll('.subcategory-link, .sub-subcategory-link');
+                for (const link of allLinks) {
+                    const href = link.getAttribute('href');
+                    if (href && href.includes(currentProductSubcategory)) {
+                        subcategoryLink = link;
+                        break;
+                    }
+                }
+            }
+
             if (subcategoryLink) {
                 subcategoryLink.classList.add('active');
+                console.log('✅ Attivato link sottocategoria:', currentProductSubcategory);
 
-                // Se è una sottocategoria nested (3° livello), apri anche il parent
+                // Se è una sottocategoria nested (3° livello), apri anche il parent (2° livello)
                 const nestedParent = subcategoryLink.closest('.subcategory-item-nested');
                 if (nestedParent) {
                     nestedParent.classList.add('active');
-                    console.log('📁 Aperta sottocategoria nested:', currentProductSubcategory);
+                    console.log('📁 Aperto parent nested (2° livello)');
                 }
+
+                // Scroll alla sottocategoria nella sidebar per evidenziarla
+                setTimeout(() => {
+                    subcategoryLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 150);
+            } else {
+                console.warn('⚠️ Link sottocategoria non trovato:', currentProductSubcategory);
             }
 
             // Mostra TUTTI i prodotti di quella sottocategoria
