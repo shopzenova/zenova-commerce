@@ -1695,6 +1695,7 @@ window.handleSearchResultClick = function(productId) {
 
 let currentProductId = null;
 let savedScrollPosition = 0;
+let savedSidebarState = []; // Salva stato sidebar
 
 // Gallery state
 let currentGalleryIndex = 0;
@@ -1709,6 +1710,13 @@ function openProductDetailModal(productId) {
 
     // Salva la posizione di scroll corrente
     savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    // ✅ Salva lo stato della sidebar (quali categorie sono aperte)
+    savedSidebarState = [];
+    document.querySelectorAll('.category-item.active, .subcategory-item-nested.active').forEach(item => {
+        savedSidebarState.push(item);
+    });
+    console.log('💾 Stato sidebar salvato:', savedSidebarState.length, 'elementi aperti');
 
     const modal = document.getElementById('productDetailModal');
 
@@ -1889,6 +1897,14 @@ function goToGalleryImage(index) {
 function closeProductDetailModal() {
     document.getElementById('productDetailModal').classList.remove('active');
     currentProductId = null;
+
+    // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
+    setTimeout(() => {
+        savedSidebarState.forEach(item => {
+            item.classList.add('active');
+        });
+        console.log('🔄 Stato sidebar ripristinato:', savedSidebarState.length, 'elementi riaperti');
+    }, 50);
 
     // Ripristina la posizione di scroll salvata
     setTimeout(() => {
