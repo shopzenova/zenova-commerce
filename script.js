@@ -1697,6 +1697,7 @@ let currentProductId = null;
 let savedScrollPosition = 0;
 let savedSidebarState = []; // Salva stato sidebar
 let currentProductCategory = null; // Categoria del prodotto corrente
+let currentProductSubcategory = null; // Sottocategoria del prodotto corrente
 
 // Gallery state
 let currentGalleryIndex = 0;
@@ -1709,6 +1710,7 @@ function openProductDetailModal(productId) {
 
     currentProductId = productId;
     currentProductCategory = product.zenovaCategory || null; // Salva categoria prodotto
+    currentProductSubcategory = product.zenovaSubcategory || null; // Salva sottocategoria
 
     // Salva la posizione di scroll corrente
     savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -1720,6 +1722,7 @@ function openProductDetailModal(productId) {
     });
     console.log('💾 Stato sidebar salvato:', savedSidebarState.length, 'elementi aperti');
     console.log('📂 Categoria prodotto:', currentProductCategory);
+    console.log('📁 Sottocategoria prodotto:', currentProductSubcategory);
 
     const modal = document.getElementById('productDetailModal');
 
@@ -1909,13 +1912,32 @@ function closeProductDetailModal() {
                 item.classList.add('active');
             });
             console.log('🔄 Stato sidebar ripristinato:', savedSidebarState.length, 'elementi riaperti');
-        } else if (currentProductCategory) {
-            // Se nessuna categoria era aperta, apri quella del prodotto visualizzato
+        } else if (currentProductCategory && currentProductSubcategory) {
+            // Se nessuna categoria era aperta, apri quella del prodotto e mostra la sottocategoria
             const categoryButton = document.querySelector(`[data-category="${currentProductCategory}"]`);
             if (categoryButton) {
                 const categoryItem = categoryButton.parentElement;
                 categoryItem.classList.add('active');
                 console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
+            }
+
+            // Trova e attiva il link della sottocategoria nella sidebar
+            const subcategoryLink = document.querySelector(`[href="#${currentProductSubcategory}"]`);
+            if (subcategoryLink) {
+                subcategoryLink.classList.add('active');
+
+                // Se è una sottocategoria nested (3° livello), apri anche il parent
+                const nestedParent = subcategoryLink.closest('.subcategory-item-nested');
+                if (nestedParent) {
+                    nestedParent.classList.add('active');
+                    console.log('📁 Aperta sottocategoria nested:', currentProductSubcategory);
+                }
+            }
+
+            // Mostra TUTTI i prodotti di quella sottocategoria
+            if (typeof window.renderProductsByCategory === 'function') {
+                window.renderProductsByCategory(currentProductSubcategory);
+                console.log('🎯 Visualizzati tutti i prodotti della sottocategoria:', currentProductSubcategory);
             }
         }
     }, 50);
@@ -1926,7 +1948,7 @@ function closeProductDetailModal() {
             top: savedScrollPosition,
             behavior: 'instant'
         });
-    }, 0);
+    }, 100);
 }
 
 // Get product features based on REAL product data from BigBuy
