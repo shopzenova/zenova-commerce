@@ -150,7 +150,10 @@ router.get('/', async (req, res) => {
         height: parseFloat(p.height) || 0,
         depth: parseFloat(p.depth) || 0
       },
-      // Non inviare zenovaSubcategory e zenovaCategories - usiamo solo categorie BigBuy
+      // IMPORTANTE: Includiamo zenovaSubcategory e zenovaCategory per filtrare nel frontend
+      zenovaSubcategory: p.zenovaSubcategory,
+      zenovaCategory: p.zenovaCategory,
+      subcategory: p.subcategory,  // Categorie BigBuy raw per backward compatibility
       active: true
     }));
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Prodotti Zenova</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .product { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+        .product img { max-width: 200px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Test Prodotti Zenova</h1>
+
+    <div>
+        <button onclick="testCategory('shampoo-capelli')">Test Shampoo</button>
+        <button onclick="testCategory('profumi-donne')">Test Profumi Donna</button>
+        <button onclick="testCategory('phon-asciugacapelli')">Test Phon</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        let allProducts = [];
+
+        // Carica prodotti
+        fetch('http://localhost:3000/api/products?pageSize=5000')
+            .then(res => res.json())
+            .then(data => {
+                allProducts = data.data;
+                document.getElementById('results').innerHTML = `
+                    <h2>✅ Backend connesso!</h2>
+                    <p>Totale prodotti caricati: ${allProducts.length}</p>
+                    <p>Clicca un pulsante sopra per testare una categoria</p>
+                `;
+            })
+            .catch(err => {
+                document.getElementById('results').innerHTML = `
+                    <h2>❌ Errore connessione backend</h2>
+                    <p>${err.message}</p>
+                `;
+            });
+
+        function testCategory(category) {
+            const filtered = allProducts.filter(p => p.zenovaSubcategory === category);
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h2>Categoria: ${category}</h2>
+                <p>Prodotti trovati: ${filtered.length}</p>
+                <hr>
+            `;
+
+            filtered.slice(0, 5).forEach(product => {
+                resultsDiv.innerHTML += `
+                    <div class="product">
+                        <h3>${product.name}</h3>
+                        <p><strong>ID:</strong> ${product.id}</p>
+                        <p><strong>Prezzo:</strong> €${product.retailPrice}</p>
+                        <p><strong>Stock:</strong> ${product.stock}</p>
+                        <p><strong>Categoria Zenova:</strong> ${product.zenovaCategory} / ${product.zenovaSubcategory}</p>
+                        ${product.image ? `<img src="${product.image}" alt="${product.name}">` : ''}
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

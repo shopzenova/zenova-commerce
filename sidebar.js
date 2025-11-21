@@ -7,86 +7,90 @@ const anchorToSubcategoryMap = {
     'domotica': '2399',
     'wireless': '2609',
 
-    // BEAUTY - 8 sottocategorie BigBuy
-    'bagno-igiene': '2507',
-    'accessori-bagno': '2507',
-    'additivi-bagno': '2507',
-    'deodoranti': '2507',
-    'esfolianti-corpo': '2507',
-    'pulizia-personale': '2507',
-    'set-bagno': '2507',
+    // BEAUTY - Mappato a categorie Zenova
+    'bagno-igiene': 'gel-doccia',
+    'accessori-bagno': 'gel-doccia',
+    'additivi-bagno': 'gel-doccia',
+    'deodoranti': 'deodoranti',
+    'esfolianti-corpo': 'lozione-corpo',
+    'pulizia-personale': 'gel-intimo',
+    'set-bagno': 'gel-doccia',
 
-    'cura-capelli': '2507',
-    'accessori-acconciature': '2507',
-    'apparecchi-parrucchieri': '2507',
-    'colorazione-capelli': '2507',
-    'extension-parrucche': '2507',
-    'prodotti-acconciature': '2507',
-    'prodotti-cura-capelli': '2507',
-    'utensili-taglio': '2507',
+    'cura-capelli': 'gel-viso',
+    'accessori-acconciature': 'set-regalo',
+    'apparecchi-parrucchieri': 'set-regalo',
+    'colorazione-capelli': 'creme-viso-notte',
+    'extension-parrucche': 'set-regalo',
+    'prodotti-acconciature': 'gel-viso',
+    'prodotti-cura-capelli': 'gel-viso',
+    'utensili-taglio': 'set-regalo',
 
-    'cura-pelle': '2507',
-    'collo-decollete': '2507',
-    'corpo-pelle': '2507',
-    'labbra-pelle': '2507',
-    'mani-piedi-pelle': '2507',
-    'occhi-pelle': '2507',
-    'protezione-solare': '2507',
-    'set-regalo-pelle': '2507',
-    'skincare-sole': '2507',
-    'viso-pelle': '2507',
+    'cura-pelle': 'creme-viso-notte',
+    'collo-decollete': 'creme-viso-notte',
+    'corpo-pelle': 'lozione-corpo',
+    'labbra-pelle': 'matita-labbra',
+    'mani-piedi-pelle': 'crema-mani',
+    'occhi-pelle': 'contorno-occhi',
+    'protezione-solare': 'protezione-solare',
+    'set-regalo-pelle': 'set-regalo',
+    'skincare-sole': 'protezione-solare',
+    'viso-pelle': 'creme-viso-notte',
 
-    'manicure-pedicure': '2507',
-    'cura-mani-piedi': '2507',
-    'fantasie-unghie': '2507',
-    'mani-piedi-manicure': '2507',
-    'trattamenti-unghie': '2507',
-    'utensili-manicure': '2507',
+    'manicure-pedicure': 'lozione-corpo',
+    'cura-mani-piedi': 'lozione-corpo',
+    'fantasie-unghie': 'set-regalo',
+    'mani-piedi-manicure': 'lozione-corpo',
+    'trattamenti-unghie': 'lozione-corpo',
+    'utensili-manicure': 'set-regalo',
 
-    'profumi-fragranze': '2507,2508',
-    'profumi-bambini': '2507,2508',
-    'candele-essenze': '2507,2508',
-    'profumi-donne': '2507,2510',
-    'eau-fraiche': '2507,2508',
-    'nebulizzatori': '2507,2508',
-    'oli-essenziali-profumi': '2507,2508',
-    'profumi-solidi': '2507,2508',
-    'set-profumi': '2507,2508',
-    'spray-corpo': '2507,2508',
-    'talco-profumato': '2507,2508',
-    'profumi-uomini': '2507,2509',
+    'profumi-fragranze': 'profumi-unisex',
+    'profumi-bambini': 'profumi-unisex',
+    'candele-essenze': 'profumi-unisex',
+    'profumi-donne': 'profumi-donne',
+    'eau-fraiche': 'profumi-unisex',
+    'nebulizzatori': 'profumi-unisex',
+    'oli-essenziali-profumi': 'profumi-unisex',
+    'profumi-solidi': 'profumi-unisex',
+    'set-profumi': 'set-regalo',
+    'spray-corpo': 'deodoranti',
+    'talco-profumato': 'deodoranti',
+    'profumi-uomini': 'profumi-uomini',
 
-    'rasatura-depilazione': '2507',
-    'cura-post-rasatura': '2507',
-    'cura-pre-rasatura': '2507',
-    'depilazione': '2507',
-    'forbici': '2507',
-    'rasatura-manuale': '2507',
-    'rasoi-elettrici': '2507',
-    'tagliacapelli': '2507',
+    'rasatura-depilazione': 'dopobarba',
+    'cura-post-rasatura': 'dopobarba',
+    'cura-pre-rasatura': 'schiuma-barba',
+    'depilazione': 'gel-viso',
+    'forbici': 'set-regalo',
+    'rasatura-manuale': 'dopobarba',
+    'rasoi-elettrici-beauty': 'dopobarba',
+    'tagliacapelli': 'dopobarba',
 
-    'trucco': '2507',
-    'trucco-corpo': '2507',
-    'trucco-labbra': '2507',
-    'trucco-occhi': '2507',
-    'set-trucchi': '2507',
-    'struccanti': '2507',
-    'trousse': '2507',
-    'trucco-viso': '2507',
+    'trucco': 'fondotinta',
+    'trucco-corpo': 'fondotinta',
+    'trucco-labbra': 'matita-labbra',
+    'trucco-occhi': 'mascara',
+    'set-trucchi': 'set-regalo',
+    'struccanti': 'struccanti',
+    'trousse': 'set-regalo',
+    'trucco-viso': 'fondotinta',
 
-    'utensili-accessori': '2507',
-    'borse-custodie': '2507',
-    'forniture-tatuaggi': '2507',
-    'dischetti-cotonati': '2507',
-    'pennelli-trucco': '2507',
-    'specchi-cosmetici': '2507',
-    'strumenti-trucco': '2507',
+    'utensili-accessori': 'set-regalo',
+    'borse-custodie': 'set-regalo',
+    'forniture-tatuaggi': 'set-regalo',
+    'dischetti-cotonati': 'igiene-orale',
+    'pennelli-trucco': 'fondotinta',
+    'specchi-cosmetici': 'fondotinta',
+    'strumenti-trucco': 'fondotinta',
 
-    // HEALTH & PERSONAL CARE
-    'benessere': '2501,2502',
-    'accessori-saune': '2501',
-    'lampade-abbronzanti': '2501',
-    'massaggio-rilassamento': '2501,2502,2504',
+    // HEALTH & PERSONAL CARE - Mappato a categorie Zenova
+    'phon-asciugacapelli': 'phon-asciugacapelli',
+    'rasoi-elettrici': 'rasoi-elettrici',
+    'shampoo': 'shampoo-capelli',
+    'balsamo': 'balsamo-capelli',
+    'tintura-capelli': 'tintura-capelli',
+    'set-massaggio': 'set-massaggio',
+    'cerotti': 'cerotti-medicazioni',
+    'protezione-solare': 'protezione-solare-viso',
 
     // NATURAL WELLNESS
     'oli-essenziali': 'wellness',
@@ -180,17 +184,27 @@ const subcategoryToCategoryMap = {
     'strumenti-trucco': 'beauty',
     '2507': 'beauty',
     '2507,2508': 'beauty',
-    '2507,2509': 'beauty',
-    '2507,2510': 'beauty',
+    '2507,2508,2509': 'beauty',
+    '2507,2508,2510': 'beauty',
+    '2507,2508,2511': 'beauty',
 
     // HEALTH & PERSONAL CARE
-    'benessere': 'health-personal-care',
-    'accessori-saune': 'health-personal-care',
-    'lampade-abbronzanti': 'health-personal-care',
-    'massaggio-rilassamento': 'health-personal-care',
-    '2501': 'health-personal-care',
-    '2501,2502': 'health-personal-care',
+    'phon-asciugacapelli': 'health-personal-care',
+    'rasoi-elettrici': 'health-personal-care',
+    'shampoo': 'health-personal-care',
+    'balsamo': 'health-personal-care',
+    'tintura-capelli': 'health-personal-care',
+    'set-massaggio': 'health-personal-care',
+    'cerotti': 'health-personal-care',
+    'protezione-solare': 'health-personal-care',
+    '2501,2520,2530': 'health-personal-care',
+    '2501,2520,2652': 'health-personal-care',
+    '2501,2520,2523': 'health-personal-care',
+    '2501,2520,2525': 'health-personal-care',
+    '2501,2520,3170': 'health-personal-care',
     '2501,2502,2504': 'health-personal-care',
+    '2501,2502,2896': 'health-personal-care',
+    '2501,2552,2554': 'health-personal-care',
 
     // NATURAL WELLNESS
     'oli-essenziali': 'natural-wellness',
@@ -247,8 +261,21 @@ document.addEventListener('DOMContentLoaded', function() {
     subcategoryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const subcategory = this.dataset.subcategory;
-            console.log('Subcategory clicked:', subcategory);
+
+            // Get hash from href (e.g., "#phon-asciugacapelli")
+            const hash = this.getAttribute('href');
+            const anchor = hash ? hash.replace('#', '') : '';
+
+            // Use mapping if available, otherwise use data-subcategory
+            const subcategory = anchorToSubcategoryMap[anchor] || this.dataset.subcategory;
+
+            console.log('Subcategory clicked:', anchor, '→', subcategory);
+
+            // Skip "all" category
+            if (subcategory === 'all') {
+                console.log('⚠️ "Tutti i Prodotti" is disabled');
+                return;
+            }
 
             // Remove active class from all subcategory links
             subcategoryLinks.forEach(l => l.classList.remove('active'));
@@ -258,8 +285,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add active class to clicked link
             this.classList.add('active');
 
-            // Filter products by subcategory
-            filterProductsBySubcategory(subcategory);
+            // Render products by category (from script.js)
+            if (typeof window.renderProductsByCategory === 'function') {
+                window.renderProductsByCategory(subcategory);
+            } else {
+                console.error('❌ renderProductsByCategory not found');
+            }
         });
     });
 
@@ -288,8 +319,15 @@ document.addEventListener('DOMContentLoaded', function() {
     subSubcategoryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const subcategory = this.dataset.subcategory;
-            console.log('✨ Sub-subcategory clicked:', subcategory);
+
+            // Get hash from href (e.g., "#profumi-donne")
+            const hash = this.getAttribute('href');
+            const anchor = hash ? hash.replace('#', '') : '';
+
+            // Use mapping if available, otherwise use data-subcategory
+            const subcategory = anchorToSubcategoryMap[anchor] || this.dataset.subcategory;
+
+            console.log('✨ Sub-subcategory clicked:', anchor, '→', subcategory);
 
             // Remove active class from all links
             subcategoryLinks.forEach(l => l.classList.remove('active'));
@@ -298,8 +336,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add active class to clicked link
             this.classList.add('active');
 
-            // Filter products by subcategory
-            filterProductsBySubcategory(subcategory);
+            // Render products by category (from script.js)
+            if (typeof window.renderProductsByCategory === 'function') {
+                window.renderProductsByCategory(subcategory);
+            } else {
+                console.error('❌ renderProductsByCategory not found');
+            }
         });
     });
 
@@ -390,21 +432,9 @@ function autoOpenCategoryFromHash() {
     const actualSubcategory = anchorToSubcategoryMap[hash] || hash;
     console.log('📦 Mapped to subcategory:', actualSubcategory);
 
-    // Handle 'all' category - show 4 products per subcategory
+    // Handle 'all' category - disabled
     if (actualSubcategory === 'all') {
-        console.log('ℹ️ Category link clicked - applying "4 products per category" filter');
-
-        // Open the parent category
-        const parentCategory = subcategoryToCategoryMap[hash];
-        if (parentCategory) {
-            const categoryBtn = document.querySelector(`[data-category="${parentCategory}"]`);
-            if (categoryBtn) {
-                categoryBtn.parentElement.classList.add('active');
-            }
-        }
-
-        // Apply the "4 products per category" filter
-        filterProductsBySubcategory('all');
+        console.log('⚠️ "Tutti i Prodotti" is disabled');
         return;
     }
 
@@ -446,9 +476,13 @@ function autoOpenCategoryFromHash() {
             console.log('✅ Nested category opened:', nestedParent.querySelector('.subcategory-name')?.textContent);
         }
 
-        // Filter products with the actual BigBuy value
-        console.log('🎯 Filtering products for:', actualSubcategory);
-        filterProductsBySubcategory(actualSubcategory);
+        // Render products with the actual BigBuy value
+        console.log('🎯 Rendering products for:', actualSubcategory);
+        if (typeof window.renderProductsByCategory === 'function') {
+            window.renderProductsByCategory(actualSubcategory);
+        } else {
+            console.error('❌ renderProductsByCategory not found');
+        }
     } else {
         console.log('❌ Subcategory link not found for hash:', hash);
     }

@@ -1,0 +1,203 @@
+{
+  "description": "Mapping definitivo Health & Personal Care BigBuy → Zenova",
+  "lastUpdated": "2025-11-20",
+  "totalProducts": 10055,
+  "totalBigBuyCategories": 38,
+  "mapping": {
+    "phon-asciugacapelli": {
+      "name": "Phon e Asciugacapelli",
+      "bigbuyIds": ["2501,2520,2530"],
+      "productsCount": 145,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "piastre-arricciacapelli": {
+      "name": "Piastre e Arricciacapelli",
+      "bigbuyIds": ["2501,2520,2532"],
+      "productsCount": 76,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "rasoi-elettrici": {
+      "name": "Rasoi Elettrici e Tagliacapelli",
+      "bigbuyIds": ["2501,2520,2652", "2501,2540,2544"],
+      "productsCount": 290,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "shampoo-capelli": {
+      "name": "Shampoo",
+      "bigbuyIds": ["2501,2520,2523"],
+      "productsCount": 220,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "balsamo-capelli": {
+      "name": "Balsamo e Maschera Capelli",
+      "bigbuyIds": ["2501,2520,2525", "2501,2520,2526"],
+      "productsCount": 332,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "tintura-capelli": {
+      "name": "Tintura e Colorazione Capelli",
+      "bigbuyIds": ["2501,2520,3170"],
+      "productsCount": 142,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "lacca-spray": {
+      "name": "Lacca e Spray Fissante",
+      "bigbuyIds": ["2501,2520,3195", "2501,2520,3193"],
+      "productsCount": 70,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "gel-cera-capelli": {
+      "name": "Gel e Cera per Capelli",
+      "bigbuyIds": ["2501,2520,3192"],
+      "productsCount": 15,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "shampoo-secco": {
+      "name": "Shampoo Secco",
+      "bigbuyIds": ["2501,2520,3197"],
+      "productsCount": 9,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "mousse-capelli": {
+      "name": "Mousse e Volumizzanti",
+      "bigbuyIds": ["2501,2520,2528", "2501,2520,3194"],
+      "productsCount": 15,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "pettini-spazzole": {
+      "name": "Pettini e Spazzole",
+      "bigbuyIds": ["2501,2520,2535"],
+      "productsCount": 77,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "siero-barba": {
+      "name": "Siero e Trattamenti Barba",
+      "bigbuyIds": ["2501,2540,2544"],
+      "productsCount": 158,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "crema-mani": {
+      "name": "Creme Mani e Piedi",
+      "bigbuyIds": ["2501,2540,2546"],
+      "productsCount": 85,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "crema-antimacchie": {
+      "name": "Creme Antimacchie",
+      "bigbuyIds": ["2501,2540,2548"],
+      "productsCount": 32,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "protezione-solare-viso": {
+      "name": "Protezione Solare Viso",
+      "bigbuyIds": ["2501,2552,2554"],
+      "productsCount": 28,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "protezione-solare-corpo": {
+      "name": "Protezione Solare Corpo",
+      "bigbuyIds": ["2501,2552,2556", "2501,2552,3408"],
+      "productsCount": 30,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "autoabbronzante": {
+      "name": "Autoabbronzante",
+      "bigbuyIds": ["2501,2552,2563", "2501,2552,2561"],
+      "productsCount": 7,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "after-sun": {
+      "name": "After Sun e Doposole",
+      "bigbuyIds": ["2501,2552,2568"],
+      "productsCount": 5,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "olio-solare": {
+      "name": "Olio Solare",
+      "bigbuyIds": ["2501,2552,2565"],
+      "productsCount": 4,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "cerotti-medicazioni": {
+      "name": "Cerotti e Medicazioni",
+      "bigbuyIds": ["2501,2502,2896", "2501,2502,2506"],
+      "productsCount": 194,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "misuratori-pressione": {
+      "name": "Misuratori di Pressione",
+      "bigbuyIds": ["2501,2502,2518"],
+      "productsCount": 39,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "cuscini-terapeutici": {
+      "name": "Cuscini Terapeutici",
+      "bigbuyIds": ["2501,2502,2503"],
+      "productsCount": 6,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "borse-acqua-calda": {
+      "name": "Borse Acqua Calda",
+      "bigbuyIds": ["2501,2502,2519"],
+      "productsCount": 12,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "separatore-dita": {
+      "name": "Separatori e Calzini Compressione",
+      "bigbuyIds": ["2501,2502,2505"],
+      "productsCount": 6,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "set-massaggio": {
+      "name": "Set Massaggio e Benessere",
+      "bigbuyIds": ["2501,2502,2504"],
+      "productsCount": 50,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "integratori": {
+      "name": "Integratori Alimentari",
+      "bigbuyIds": ["2501,3462"],
+      "productsCount": 28,
+      "zenovaCategory": "health-personal-care",
+      "priority": 1
+    },
+    "occhiali-da-vista": {
+      "name": "Montature Occhiali da Vista",
+      "bigbuyIds": ["2501,2502,2654"],
+      "productsCount": 8137,
+      "zenovaCategory": "health-personal-care",
+      "priority": 2
+    }
+  },
+  "notes": [
+    "Mapping basato su analisi di 10055 prodotti Health & Personal Care",
+    "Esclusi occhiali da vista (troppi prodotti, bassa priorità)",
+    "Focus su: cura capelli, benessere, protezione solare, salute",
+    "27 categorie Zenova mappate"
+  ]
+}

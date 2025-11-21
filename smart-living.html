@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Living - ZENOVA | Aura Experience</title>
+    <link rel="stylesheet" href="styles.css?v=20251108p">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        // Load saved theme immediately to prevent flash
+        (function() {
+            if (localStorage.getItem('zenova-theme') === 'dark') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('dark-mode');
+                });
+            }
+        })();
+    </script>
+    <style>
+        /* Category Navigation Styles */
+        .category-navigation {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(250,250,255,0.95));
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .dark-mode .category-navigation {
+            background: linear-gradient(135deg, rgba(30,30,40,0.95), rgba(40,40,55,0.98));
+        }
+
+        .category-nav-title {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .dark-mode .category-nav-title {
+            color: #999;
+        }
+
+        .category-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .category-nav-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .category-nav-card {
+            background: rgba(50,50,65,0.8);
+            color: #e0e0e0;
+        }
+
+        .category-nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-color, #8B7BB8);
+        }
+
+        .category-nav-card.active {
+            background: linear-gradient(135deg, #8B7BB8, #9B8BC8);
+            color: white;
+            border-color: #8B7BB8;
+        }
+
+        .dark-mode .category-nav-card.active {
+            background: linear-gradient(135deg, #7B6BA8, #8B7BB8);
+        }
+
+        .category-nav-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .category-nav-name {
+            font-weight: 600;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .category-nav-count {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="ZENOVA Aura Experience Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></a></h1>
+                        <p class="logo-experience">Experience</p>
+                        <p class="tagline">where technology meets calm and wellness</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+                <div class="nav-icons">
+                    <button class="theme-toggle-btn" id="themeToggle" title="Cambia tema">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="search-btn" id="searchBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="wishlist-btn" id="wishlistBtn" title="I miei preferiti">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="wishlist-count" id="wishlistCount">0</span>
+                    </button>
+                    <button class="cart-btn" id="cartBtn">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Category Navigation -->
+    <section class="category-navigation">
+        <div class="container">
+            <div class="category-nav-title">Esplora le nostre categorie</div>
+            <div class="category-nav-grid">
+                <a href="smart-living.html" class="category-nav-card active">
+                    <span class="category-nav-icon">🏠</span>
+                    <span class="category-nav-name">Smart Living</span>
+                    <span class="category-nav-count" id="smartLivingCount">Caricamento...</span>
+                </a>
+                <a href="cura-corpo-skin.html" class="category-nav-card">
+                    <span class="category-nav-icon">💆</span>
+                    <span class="category-nav-name">Cura Corpo & Skin</span>
+                    <span class="category-nav-count" id="curaCorpoCount">Caricamento...</span>
+                </a>
+                <a href="meditazione-zen.html" class="category-nav-card">
+                    <span class="category-nav-icon">🧘</span>
+                    <span class="category-nav-name">Meditazione & Zen</span>
+                    <span class="category-nav-count" id="meditazioneCount">Caricamento...</span>
+                </a>
+                <a href="design-atmosfera.html" class="category-nav-card">
+                    <span class="category-nav-icon">🎨</span>
+                    <span class="category-nav-name">Design & Atmosfera</span>
+                    <span class="category-nav-count" id="designCount">Caricamento...</span>
+                </a>
+                <a href="gourmet-tea.html" class="category-nav-card">
+                    <span class="category-nav-icon">☕</span>
+                    <span class="category-nav-name">Gourmet & Tea</span>
+                    <span class="category-nav-count" id="gourmetCount">Caricamento...</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header-simple">
+                <h1 class="page-title">🏠 Smart Living</h1>
+                <p class="page-subtitle">Casa intelligente, tech, LED, WiFi e gadget tecnologici</p>
+            </div>
+
+            <div class="products-main">
+                <div class="products-grid" id="productsGrid" data-category="smart-living">
+                    <!-- Products will be injected by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Il Tuo Carrello</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Il tuo carrello è vuoto</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totale:</span>
+                <span id="cartTotal">€0.00</span>
+            </div>
+            <button class="btn btn-primary btn-checkout">Procedi all'acquisto</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="wishlist-sidebar" id="wishlistSidebar">
+        <div class="wishlist-header">
+            <h3>I Miei Preferiti</h3>
+            <button class="close-btn" id="closeWishlist">&times;</button>
+        </div>
+        <div class="wishlist-items" id="wishlistItems">
+            <p class="empty-wishlist">Non hai ancora prodotti preferiti</p>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-detail-modal" id="productDetailModal">
+        <div class="product-detail-content">
+            <button class="product-detail-close" id="closeProductDetail">&times;</button>
+
+            <!-- Breadcrumb -->
+            <div class="product-breadcrumb" id="productBreadcrumb">
+                <span>Home</span> › <span>Smart Living</span> › <span id="breadcrumbProduct"></span>
+            </div>
+
+            <div class="product-detail-layout">
+                <div class="product-detail-image-section">
+                    <div class="product-gallery">
+                        <div class="gallery-counter" id="galleryCounter">1 / 3</div>
+                        <button class="gallery-nav gallery-prev" id="galleryPrev">‹</button>
+                        <div class="product-detail-image" id="productDetailImage"></div>
+                        <button class="gallery-nav gallery-next" id="galleryNext">›</button>
+                    </div>
+                    <div class="gallery-dots" id="galleryDots"></div>
+                </div>
+
+                <div class="product-detail-info-section">
+                    <!-- Brand Badge -->
+                    <div class="product-brand-badge" id="productBrand"></div>
+
+                    <!-- Product Title -->
+                    <h2 class="product-detail-name" id="productDetailName"></h2>
+
+                    <!-- Tags -->
+                    <div class="product-tags" id="productTags"></div>
+
+                    <!-- Price & Stock -->
+                    <div class="product-price-section">
+                        <div class="product-detail-price" id="productDetailPrice"></div>
+                        <div class="product-stock" id="productStock"></div>
+                    </div>
+
+                    <div class="product-detail-divider"></div>
+
+                    <!-- Description -->
+                    <div class="product-description-section">
+                        <h4>Descrizione</h4>
+                        <p class="product-detail-description" id="productDetailDescription"></p>
+                    </div>
+
+                    <!-- Technical Info -->
+                    <div class="product-technical-info" id="productTechnicalInfo">
+                        <h4>Informazioni Tecniche</h4>
+                        <div class="tech-info-grid" id="techInfoGrid"></div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="product-detail-features">
+                        <h4>Caratteristiche</h4>
+                        <ul id="productDetailFeatures"></ul>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="product-detail-actions">
+                        <button class="product-detail-add-btn" id="productDetailAddBtn">
+                            Aggiungi al Carrello
+                        </button>
+                        <button class="product-detail-wishlist-btn" title="Aggiungi ai preferiti">
+                            ♡
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <div class="search-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Cerca prodotti Smart Living..." autofocus>
+                    <button class="search-close" id="closeSearch">&times;</button>
+                </div>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Results will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-text">
+                        <strong>Pagamenti Sicuri</strong>
+                        <span>Protetti SSL</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">📦</div>
+                    <div class="trust-text">
+                        <strong>Spedizione Tracciata</strong>
+                        <span>Consegna garantita</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">✓</div>
+                    <div class="trust-text">
+                        <strong>Garanzia 2 Anni</strong>
+                        <span>Su tutti i prodotti</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">↩</div>
+                    <div class="trust-text">
+                        <strong>Resi Facili</strong>
+                        <span>Entro 30 giorni</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Widget -->
+    <a href="https://wa.me/393201234567" class="whatsapp-widget" target="_blank" title="Chatta con noi su WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.488 2.045 7.793L0 32l8.36-2.025A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.512 0-4.942-.708-7.053-2.042l-.507-.32-5.262 1.273 1.291-5.13-.336-.528A13.277 13.277 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
+            <path d="M23.547 19.427c-.36-.18-2.133-1.053-2.463-1.173-.33-.12-.57-.18-.81.18-.24.36-.93 1.173-1.14 1.413-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.895-1.787-1.07-.954-1.792-2.133-2.002-2.493-.21-.36-.022-.554.158-.733.162-.162.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.953-1.11-2.673-.293-.7-.59-.605-.81-.617-.21-.011-.45-.013-.69-.013-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3.003s1.29 3.483 1.47 3.723c.18.24 2.535 3.87 6.142 5.426.857.37 1.527.591 2.048.757.86.273 1.643.235 2.262.142.69-.103 2.133-.872 2.433-1.713.3-.842.3-1.563.21-1.713-.09-.15-.33-.24-.69-.42z" fill="currentColor"/>
+        </svg>
+    </a>
+
+    <script src="api-client.js?v=20251109H"></script>
+    <script src="script.js?v=20251113C"></script>
+    <script src="category-products.js?v=20251119"></script>
+</body>
+</html>

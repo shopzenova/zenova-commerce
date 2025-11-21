@@ -1,0 +1,116 @@
+{
+  "timestamp": "2025-11-21T07:37:04.321Z",
+  "stats": {
+    "total": 9966,
+    "matched": 1285,
+    "unmatched": 1,
+    "added": 1285,
+    "skippedGlasses": 8084,
+    "byCategory": {
+      "phon-asciugacapelli": 100,
+      "piastre-arricciacapelli": 78,
+      "rasoi-elettrici": 100,
+      "shampoo-capelli": 100,
+      "balsamo-capelli": 100,
+      "tintura-capelli": 100,
+      "lacca-spray": 61,
+      "gel-cera-capelli": 14,
+      "shampoo-secco": 11,
+      "mousse-capelli": 15,
+      "pettini-spazzole": 75,
+      "siero-barba": 100,
+      "crema-mani": 84,
+      "crema-antimacchie": 27,
+      "protezione-solare-viso": 33,
+      "protezione-solare-corpo": 31,
+      "autoabbronzante": 7,
+      "after-sun": 5,
+      "olio-solare": 4,
+      "cerotti-medicazioni": 100,
+      "misuratori-pressione": 41,
+      "cuscini-terapeutici": 6,
+      "borse-acqua-calda": 12,
+      "separatore-dita": 6,
+      "set-massaggio": 53,
+      "integratori": 22,
+      "occhiali-da-vista": 0
+    }
+  },
+  "topCategories": [
+    {
+      "key": "phon-asciugacapelli",
+      "name": "Phon e Asciugacapelli",
+      "count": 100
+    },
+    {
+      "key": "rasoi-elettrici",
+      "name": "Rasoi Elettrici e Tagliacapelli",
+      "count": 100
+    },
+    {
+      "key": "shampoo-capelli",
+      "name": "Shampoo",
+      "count": 100
+    },
+    {
+      "key": "balsamo-capelli",
+      "name": "Balsamo e Maschera Capelli",
+      "count": 100
+    },
+    {
+      "key": "tintura-capelli",
+      "name": "Tintura e Colorazione Capelli",
+      "count": 100
+    },
+    {
+      "key": "siero-barba",
+      "name": "Siero e Trattamenti Barba",
+      "count": 100
+    },
+    {
+      "key": "cerotti-medicazioni",
+      "name": "Cerotti e Medicazioni",
+      "count": 100
+    },
+    {
+      "key": "crema-mani",
+      "name": "Creme Mani e Piedi",
+      "count": 84
+    },
+    {
+      "key": "piastre-arricciacapelli",
+      "name": "Piastre e Arricciacapelli",
+      "count": 78
+    },
+    {
+      "key": "pettini-spazzole",
+      "name": "Pettini e Spazzole",
+      "count": 75
+    },
+    {
+      "key": "lacca-spray",
+      "name": "Lacca e Spray Fissante",
+      "count": 61
+    },
+    {
+      "key": "set-massaggio",
+      "name": "Set Massaggio e Benessere",
+      "count": 53
+    },
+    {
+      "key": "misuratori-pressione",
+      "name": "Misuratori di Pressione",
+      "count": 41
+    },
+    {
+      "key": "protezione-solare-viso",
+      "name": "Protezione Solare Viso",
+      "count": 33
+    },
+    {
+      "key": "protezione-solare-corpo",
+      "name": "Protezione Solare Corpo",
+      "count": 31
+    }
+  ]
+}

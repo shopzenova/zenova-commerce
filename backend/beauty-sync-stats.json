@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-11-21T07:36:49.527Z",
+  "stats": {
+    "total": 2524,
+    "matched": 2523,
+    "unmatched": 1,
+    "added": 2523,
+    "byCategory": {
+      "profumi-donne": 707,
+      "profumi-uomini": 290,
+      "profumi-unisex": 26,
+      "profumi-animali": 4,
+      "profumi-erotici": 3,
+      "deodoranti": 57,
+      "gel-doccia": 128,
+      "gel-intimo": 50,
+      "igiene-orale": 160,
+      "gel-viso": 74,
+      "creme-viso-notte": 198,
+      "contorno-occhi": 39,
+      "siero-viso": 71,
+      "maschere-viso": 37,
+      "struccanti": 36,
+      "trattamenti-viso": 19,
+      "lozione-corpo": 160,
+      "protezione-solare": 13,
+      "dopobarba": 25,
+      "schiuma-barba": 7,
+      "matita-occhi": 19,
+      "mascara": 24,
+      "ombretto": 9,
+      "matita-labbra": 75,
+      "fondotinta": 60,
+      "cipria": 11,
+      "correttore": 91,
+      "set-regalo": 130
+    }
+  },
+  "topCategories": [
+    {
+      "key": "profumi-donne",
+      "name": "Profumi Donna",
+      "count": 707
+    },
+    {
+      "key": "profumi-uomini",
+      "name": "Profumi Uomo",
+      "count": 290
+    },
+    {
+      "key": "creme-viso-notte",
+      "name": "Creme Viso Notte",
+      "count": 198
+    },
+    {
+      "key": "igiene-orale",
+      "name": "Spazzolini e Igiene Orale",
+      "count": 160
+    },
+    {
+      "key": "lozione-corpo",
+      "name": "Lozioni e Oli Corpo",
+      "count": 160
+    },
+    {
+      "key": "set-regalo",
+      "name": "Set Regalo e Cofanetti",
+      "count": 130
+    },
+    {
+      "key": "gel-doccia",
+      "name": "Gel Doccia e Bagnoschiuma",
+      "count": 128
+    },
+    {
+      "key": "correttore",
+      "name": "Correttore",
+      "count": 91
+    },
+    {
+      "key": "matita-labbra",
+      "name": "Matita Contorno Labbra",
+      "count": 75
+    },
+    {
+      "key": "gel-viso",
+      "name": "Gel e Detergenti Viso",
+      "count": 74
+    }
+  ]
+}

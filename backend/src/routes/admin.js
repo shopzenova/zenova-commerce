@@ -75,7 +75,9 @@ router.get('/products', (req, res) => {
       stock: p.stock,
       available: p.stock > 0,
       image: p.images && p.images[0] ? p.images[0] : null,
+      images: p.images || [],
       category: p.zenovaCategories ? p.zenovaCategories[0] : 'Generale',
+      zenovaCategories: p.zenovaCategories || [], // IMPORTANTE: Campo per filtro categoria frontend
       visible: p.visible !== undefined ? p.visible : true, // Default true per retro-compatibilità
       // Determina la zona del prodotto
       zone: getProductZone(p.id)

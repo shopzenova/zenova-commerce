@@ -1,0 +1,182 @@
+{
+  "description": "Mapping definitivo tra categorie BigBuy e sotto-sottocategorie Zenova Beauty",
+  "lastUpdated": "2025-11-20",
+  "totalProducts": 2537,
+  "totalBigBuyCategories": 40,
+  "mapping": {
+    "profumi-donne": {
+      "name": "Profumi Donna",
+      "bigbuyIds": ["2507,2508,2510"],
+      "productsCount": 720,
+      "priority": 1
+    },
+    "profumi-uomini": {
+      "name": "Profumi Uomo",
+      "bigbuyIds": ["2507,2508,2509"],
+      "productsCount": 286,
+      "priority": 1
+    },
+    "profumi-unisex": {
+      "name": "Profumi Unisex/Bambini",
+      "bigbuyIds": ["2507,2508,2511", "2507,2508,3009"],
+      "productsCount": 39,
+      "priority": 1
+    },
+    "profumi-animali": {
+      "name": "Profumi per Animali",
+      "bigbuyIds": ["2507,2508,3010"],
+      "productsCount": 5,
+      "priority": 1
+    },
+    "profumi-erotici": {
+      "name": "Profumi Erotici",
+      "bigbuyIds": ["2507,2508,3011"],
+      "productsCount": 3,
+      "priority": 1
+    },
+    "deodoranti": {
+      "name": "Deodoranti",
+      "bigbuyIds": ["2507,2547", "2507,2547,3168", "2507,2547,3169", "2507,2547,3167", "2507,2547,2550"],
+      "productsCount": 576,
+      "priority": 1
+    },
+    "gel-doccia": {
+      "name": "Gel Doccia e Bagnoschiuma",
+      "bigbuyIds": ["2507,2547,2549"],
+      "productsCount": 124,
+      "priority": 1
+    },
+    "gel-intimo": {
+      "name": "Gel Intimo",
+      "bigbuyIds": ["2507,2547,2891"],
+      "productsCount": 50,
+      "priority": 1
+    },
+    "igiene-orale": {
+      "name": "Spazzolini e Igiene Orale",
+      "bigbuyIds": ["2507,2547,2892"],
+      "productsCount": 158,
+      "priority": 1
+    },
+    "gel-viso": {
+      "name": "Gel e Detergenti Viso",
+      "bigbuyIds": ["2507,2527,2536"],
+      "productsCount": 77,
+      "priority": 1
+    },
+    "creme-viso-notte": {
+      "name": "Creme Viso Notte",
+      "bigbuyIds": ["2507,2527,2531"],
+      "productsCount": 196,
+      "priority": 1
+    },
+    "contorno-occhi": {
+      "name": "Contorno Occhi",
+      "bigbuyIds": ["2507,2527,2533"],
+      "productsCount": 38,
+      "priority": 1
+    },
+    "siero-viso": {
+      "name": "Siero Viso",
+      "bigbuyIds": ["2507,2527,2534"],
+      "productsCount": 80,
+      "priority": 1
+    },
+    "maschere-viso": {
+      "name": "Maschere Viso",
+      "bigbuyIds": ["2507,2527,2537"],
+      "productsCount": 36,
+      "priority": 1
+    },
+    "struccanti": {
+      "name": "Struccanti e Tonici",
+      "bigbuyIds": ["2507,2527,2538"],
+      "productsCount": 39,
+      "priority": 1
+    },
+    "trattamenti-viso": {
+      "name": "Trattamenti Viso Speciali",
+      "bigbuyIds": ["2507,2527,2539"],
+      "productsCount": 20,
+      "priority": 1
+    },
+    "lozione-corpo": {
+      "name": "Lozioni e Oli Corpo",
+      "bigbuyIds": ["2507,2547,2551"],
+      "productsCount": 167,
+      "priority": 1
+    },
+    "protezione-solare": {
+      "name": "Protezione Solare e Anticellulite",
+      "bigbuyIds": ["2507,2547,2553"],
+      "productsCount": 14,
+      "priority": 1
+    },
+    "dopobarba": {
+      "name": "Dopobarba",
+      "bigbuyIds": ["2507,2527,2514", "2507,2514,2527"],
+      "productsCount": 56,
+      "priority": 1
+    },
+    "schiuma-barba": {
+      "name": "Schiuma e Gel da Barba",
+      "bigbuyIds": ["2507,2527,3189", "2507,2527,3190", "2507,2527,3191"],
+      "productsCount": 8,
+      "priority": 1
+    },
+    "matita-occhi": {
+      "name": "Matite Occhi",
+      "bigbuyIds": ["2507,2555,2566"],
+      "productsCount": 18,
+      "priority": 1
+    },
+    "mascara": {
+      "name": "Mascara",
+      "bigbuyIds": ["2507,2555,2564", "2507,2555,2560"],
+      "productsCount": 23,
+      "priority": 1
+    },
+    "ombretto": {
+      "name": "Ombretti",
+      "bigbuyIds": ["2507,2555,2562"],
+      "productsCount": 8,
+      "priority": 1
+    },
+    "matita-labbra": {
+      "name": "Matita Contorno Labbra",
+      "bigbuyIds": ["2507,2555,2569"],
+      "productsCount": 64,
+      "priority": 1
+    },
+    "fondotinta": {
+      "name": "Base Trucco e Fondotinta",
+      "bigbuyIds": ["2507,2555,2557"],
+      "productsCount": 48,
+      "priority": 1
+    },
+    "cipria": {
+      "name": "Cipria e Polveri",
+      "bigbuyIds": ["2507,2555,2558"],
+      "productsCount": 11,
+      "priority": 1
+    },
+    "correttore": {
+      "name": "Correttore",
+      "bigbuyIds": ["2507,2555,2900"],
+      "productsCount": 85,
+      "priority": 1
+    },
+    "set-regalo": {
+      "name": "Set Regalo e Cofanetti",
+      "bigbuyIds": ["2507,2659"],
+      "productsCount": 137,
+      "priority": 1
+    }
+  },
+  "notes": [
+    "Mapping basato su analisi reale di 2537 prodotti Beauty con stock",
+    "Ogni bigbuyId è una combinazione esatta di categorie BigBuy",
+    "I prodotti vengono matchati con EXACT match delle categorie",
+    "Totale: 28 sotto-sottocategorie mappate su 40 categorie BigBuy"
+  ]
+}

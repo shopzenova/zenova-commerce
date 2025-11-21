@@ -1,0 +1,5802 @@
+[
+  {
+    "id": 2290,
+    "name": "Ventilazione",
+    "url": "ventilazione",
+    "parentCategory": 2239,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1755907545
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2290_header.jpg",
+      "https://cdnbigbuy.com/images/category/2290_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2290_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2290_small.jpg",
+      "https://cdnbigbuy.com/images/category/2290_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2291,
+    "name": "Caffettiere",
+    "url": "caffettiere",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1752297011
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2291_header.jpg",
+      "https://cdnbigbuy.com/images/category/2291_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2291_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2291_small.jpg",
+      "https://cdnbigbuy.com/images/category/2291_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2292,
+    "name": "Bibite",
+    "url": "bibite",
+    "parentCategory": 2209,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1687508589
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2292_header.jpg",
+      "https://cdnbigbuy.com/images/category/2292_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2292_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2292_small.jpg",
+      "https://cdnbigbuy.com/images/category/2292_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2293,
+    "name": "Sigarette Elettroniche",
+    "url": "sigarette-elettroniche",
+    "parentCategory": 2251,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2293_header.jpg",
+      "https://cdnbigbuy.com/images/category/2293_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2293_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2293_small.jpg",
+      "https://cdnbigbuy.com/images/category/2293_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2294,
+    "name": "Attrezzi",
+    "url": "attrezzi",
+    "parentCategory": 2230,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1731669849
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2294_header.jpg",
+      "https://cdnbigbuy.com/images/category/2294_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2294_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2294_small.jpg",
+      "https://cdnbigbuy.com/images/category/2294_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2295,
+    "name": "Organizer",
+    "url": "organizer",
+    "parentCategory": 2262,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235729
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235729
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2295_header.jpg",
+      "https://cdnbigbuy.com/images/category/2295_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2295_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2295_small.jpg",
+      "https://cdnbigbuy.com/images/category/2295_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2296,
+    "name": "Abbronzanti",
+    "url": "abbronzanti",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2296_header.jpg",
+      "https://cdnbigbuy.com/images/category/2296_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2296_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2296_small.jpg",
+      "https://cdnbigbuy.com/images/category/2296_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2297,
+    "name": "Caffettiera",
+    "url": "caffettiera",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1752297011
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2297_header.jpg",
+      "https://cdnbigbuy.com/images/category/2297_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2297_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2297_small.jpg",
+      "https://cdnbigbuy.com/images/category/2297_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2298,
+    "name": "Bilancia e Bascula",
+    "url": "bilancia-e-bascula",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1725445034
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2298_header.jpg",
+      "https://cdnbigbuy.com/images/category/2298_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2298_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2298_small.jpg",
+      "https://cdnbigbuy.com/images/category/2298_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2299,
+    "name": "Altri Prodotti Outdoor",
+    "url": "altri-prodotti-outdoor",
+    "parentCategory": 2246,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235729
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1739287266
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2299_header.jpg",
+      "https://cdnbigbuy.com/images/category/2299_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2299_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2299_small.jpg",
+      "https://cdnbigbuy.com/images/category/2299_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2300,
+    "name": "Fasce e Coulotte",
+    "url": "fasce-e-coulotte",
+    "parentCategory": 2227,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1706256187
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2300_header.jpg",
+      "https://cdnbigbuy.com/images/category/2300_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2300_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2300_small.jpg",
+      "https://cdnbigbuy.com/images/category/2300_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2301,
+    "name": "Radio",
+    "url": "radio",
+    "parentCategory": 2255,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072950
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072950
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2301_header.jpg",
+      "https://cdnbigbuy.com/images/category/2301_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2301_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2301_small.jpg",
+      "https://cdnbigbuy.com/images/category/2301_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2302,
+    "name": "Cellulari",
+    "url": "cellulari",
+    "parentCategory": 2261,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072997
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072997
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2302_header.jpg",
+      "https://cdnbigbuy.com/images/category/2302_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2302_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2302_small.jpg",
+      "https://cdnbigbuy.com/images/category/2302_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2303,
+    "name": "Spillatori Birra",
+    "url": "spillatori-birra",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2303_header.jpg",
+      "https://cdnbigbuy.com/images/category/2303_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2303_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2303_small.jpg",
+      "https://cdnbigbuy.com/images/category/2303_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2304,
+    "name": "Moci",
+    "url": "moci",
+    "parentCategory": 2253,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2304_header.jpg",
+      "https://cdnbigbuy.com/images/category/2304_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2304_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2304_small.jpg",
+      "https://cdnbigbuy.com/images/category/2304_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2305,
+    "name": "Cura dei Capelli",
+    "url": "cura-dei-capelli",
+    "parentCategory": 2218,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1761898186
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2305_header.jpg",
+      "https://cdnbigbuy.com/images/category/2305_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2305_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2305_small.jpg",
+      "https://cdnbigbuy.com/images/category/2305_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2306,
+    "name": "Riproduttori Multimediali",
+    "url": "riproduttori-multimediali",
+    "parentCategory": 2255,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072955
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072955
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2306_header.jpg",
+      "https://cdnbigbuy.com/images/category/2306_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2306_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2306_small.jpg",
+      "https://cdnbigbuy.com/images/category/2306_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2307,
+    "name": "Cibi per Bambini",
+    "url": "cibi-per-bambini",
+    "parentCategory": 2209,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2307_header.jpg",
+      "https://cdnbigbuy.com/images/category/2307_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2307_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2307_small.jpg",
+      "https://cdnbigbuy.com/images/category/2307_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2308,
+    "name": "Accendini",
+    "url": "accendini",
+    "parentCategory": 2251,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2308_header.jpg",
+      "https://cdnbigbuy.com/images/category/2308_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2308_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2308_small.jpg",
+      "https://cdnbigbuy.com/images/category/2308_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2309,
+    "name": "Pittura",
+    "url": "pittura",
+    "parentCategory": 2230,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2309_header.jpg",
+      "https://cdnbigbuy.com/images/category/2309_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2309_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2309_small.jpg",
+      "https://cdnbigbuy.com/images/category/2309_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2310,
+    "name": "Coperte Batamanta",
+    "url": "coperte-batamanta",
+    "parentCategory": 2234,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1636627889
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2310_header.jpg",
+      "https://cdnbigbuy.com/images/category/2310_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2310_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2310_small.jpg",
+      "https://cdnbigbuy.com/images/category/2310_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2311,
+    "name": "Giochi Musicali",
+    "url": "giochi-musicali",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2311_header.jpg",
+      "https://cdnbigbuy.com/images/category/2311_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2311_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2311_small.jpg",
+      "https://cdnbigbuy.com/images/category/2311_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2312,
+    "name": "Padelle",
+    "url": "padelle",
+    "parentCategory": 2217,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2312_header.jpg",
+      "https://cdnbigbuy.com/images/category/2312_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2312_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2312_small.jpg",
+      "https://cdnbigbuy.com/images/category/2312_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2313,
+    "name": "Epilatori",
+    "url": "epilatori",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1750776548
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2313_header.jpg",
+      "https://cdnbigbuy.com/images/category/2313_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2313_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2313_small.jpg",
+      "https://cdnbigbuy.com/images/category/2313_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2314,
+    "name": "Spillatore Birra",
+    "url": "spillatore-birra",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2314_header.jpg",
+      "https://cdnbigbuy.com/images/category/2314_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2314_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2314_small.jpg",
+      "https://cdnbigbuy.com/images/category/2314_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2315,
+    "name": "Stufe",
+    "url": "stufe",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1759873246
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2315_header.jpg",
+      "https://cdnbigbuy.com/images/category/2315_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2315_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2315_small.jpg",
+      "https://cdnbigbuy.com/images/category/2315_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2316,
+    "name": "Reggiseni",
+    "url": "reggiseni",
+    "parentCategory": 2227,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1706256187
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2316_header.jpg",
+      "https://cdnbigbuy.com/images/category/2316_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2316_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2316_small.jpg",
+      "https://cdnbigbuy.com/images/category/2316_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2317,
+    "name": "Sveglie Radio",
+    "url": "sveglie-radio",
+    "parentCategory": 2254,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1763583554
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2317_header.jpg",
+      "https://cdnbigbuy.com/images/category/2317_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2317_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2317_small.jpg",
+      "https://cdnbigbuy.com/images/category/2317_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2318,
+    "name": "Custodie Cellulari",
+    "url": "custodie-cellulari",
+    "parentCategory": 2261,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1480072981
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1743724207
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2318_header.jpg",
+      "https://cdnbigbuy.com/images/category/2318_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2318_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2318_small.jpg",
+      "https://cdnbigbuy.com/images/category/2318_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2319,
+    "name": "Altri Prodotti per la Casa",
+    "url": "altri-prodotti-per-la-casa",
+    "parentCategory": 2217,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1752043670
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2319_header.jpg",
+      "https://cdnbigbuy.com/images/category/2319_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2319_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2319_small.jpg",
+      "https://cdnbigbuy.com/images/category/2319_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2320,
+    "name": "Moci e Scope",
+    "url": "moci-e-scope",
+    "parentCategory": 2253,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2320_header.jpg",
+      "https://cdnbigbuy.com/images/category/2320_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2320_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2320_small.jpg",
+      "https://cdnbigbuy.com/images/category/2320_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2321,
+    "name": "Accessori",
+    "url": "accessori",
+    "parentCategory": 2209,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1732901360
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2321_header.jpg",
+      "https://cdnbigbuy.com/images/category/2321_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2321_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2321_small.jpg",
+      "https://cdnbigbuy.com/images/category/2321_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2322,
+    "name": "Ricambi Filtri",
+    "url": "ricambi-filtri",
+    "parentCategory": 2251,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2322_header.jpg",
+      "https://cdnbigbuy.com/images/category/2322_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2322_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2322_small.jpg",
+      "https://cdnbigbuy.com/images/category/2322_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2323,
+    "name": "Cura del Viso",
+    "url": "cura-del-viso",
+    "parentCategory": 2218,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1750917132
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2323_header.jpg",
+      "https://cdnbigbuy.com/images/category/2323_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2323_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2323_small.jpg",
+      "https://cdnbigbuy.com/images/category/2323_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2324,
+    "name": "Igiene Dentale",
+    "url": "igiene-dentale-",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2324_header.jpg",
+      "https://cdnbigbuy.com/images/category/2324_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2324_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2324_small.jpg",
+      "https://cdnbigbuy.com/images/category/2324_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2325,
+    "name": "Spremiagrumi",
+    "url": "spremiagrumi",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1676675246
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2325_header.jpg",
+      "https://cdnbigbuy.com/images/category/2325_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2325_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2325_small.jpg",
+      "https://cdnbigbuy.com/images/category/2325_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2326,
+    "name": "Scope Elettriche",
+    "url": "scope-elettriche",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2326_header.jpg",
+      "https://cdnbigbuy.com/images/category/2326_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2326_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2326_small.jpg",
+      "https://cdnbigbuy.com/images/category/2326_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2327,
+    "name": "Orologi",
+    "url": "orologi",
+    "parentCategory": 2254,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2327_header.jpg",
+      "https://cdnbigbuy.com/images/category/2327_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2327_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2327_small.jpg",
+      "https://cdnbigbuy.com/images/category/2327_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2328,
+    "name": "Licenze",
+    "url": "licenze",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2328_header.jpg",
+      "https://cdnbigbuy.com/images/category/2328_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2328_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2328_small.jpg",
+      "https://cdnbigbuy.com/images/category/2328_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2329,
+    "name": "Spremiagrumi",
+    "url": "spremiagrumi",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1676675246
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2329_header.jpg",
+      "https://cdnbigbuy.com/images/category/2329_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2329_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2329_small.jpg",
+      "https://cdnbigbuy.com/images/category/2329_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2330,
+    "name": "Vaporelle",
+    "url": "vaporelle",
+    "parentCategory": 2253,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2330_header.jpg",
+      "https://cdnbigbuy.com/images/category/2330_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2330_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2330_small.jpg",
+      "https://cdnbigbuy.com/images/category/2330_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2331,
+    "name": "Massaggiatori",
+    "url": "massaggiatori",
+    "parentCategory": 2234,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2331_header.jpg",
+      "https://cdnbigbuy.com/images/category/2331_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2331_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2331_small.jpg",
+      "https://cdnbigbuy.com/images/category/2331_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2332,
+    "name": "Altri Prodotti Indoor",
+    "url": "altri-prodotti-indoor",
+    "parentCategory": 2262,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235729
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1743168190
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2332_header.jpg",
+      "https://cdnbigbuy.com/images/category/2332_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2332_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2332_small.jpg",
+      "https://cdnbigbuy.com/images/category/2332_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2333,
+    "name": "Manicure e Pedicure",
+    "url": "manicure-e-pedicure",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2333_header.jpg",
+      "https://cdnbigbuy.com/images/category/2333_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2333_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2333_small.jpg",
+      "https://cdnbigbuy.com/images/category/2333_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2334,
+    "name": "Friggitrice",
+    "url": "friggitrice",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1725030786
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2334_header.jpg",
+      "https://cdnbigbuy.com/images/category/2334_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2334_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2334_small.jpg",
+      "https://cdnbigbuy.com/images/category/2334_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2335,
+    "name": "Pulizia col Vapore",
+    "url": "pulizia-col-vapore",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2335_header.jpg",
+      "https://cdnbigbuy.com/images/category/2335_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2335_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2335_small.jpg",
+      "https://cdnbigbuy.com/images/category/2335_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2336,
+    "name": "Altri Prodotti Fumatori",
+    "url": "altri-prodotti-fumatori",
+    "parentCategory": 2251,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2336_header.jpg",
+      "https://cdnbigbuy.com/images/category/2336_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2336_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2336_small.jpg",
+      "https://cdnbigbuy.com/images/category/2336_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2337,
+    "name": "Altri Gadget",
+    "url": "altri-gadget",
+    "parentCategory": 2254,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1743724207
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2337_header.jpg",
+      "https://cdnbigbuy.com/images/category/2337_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2337_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2337_small.jpg",
+      "https://cdnbigbuy.com/images/category/2337_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2338,
+    "name": "Modellismo | Radio Controllo ",
+    "url": "modellismo-radio-controllo",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2338_header.jpg",
+      "https://cdnbigbuy.com/images/category/2338_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2338_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2338_small.jpg",
+      "https://cdnbigbuy.com/images/category/2338_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2339,
+    "name": "Arance e Mandarini",
+    "url": "arance-e-mandarini",
+    "parentCategory": 2209,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1676675246
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2339_header.jpg",
+      "https://cdnbigbuy.com/images/category/2339_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2339_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2339_small.jpg",
+      "https://cdnbigbuy.com/images/category/2339_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2340,
+    "name": "Monopattini",
+    "url": "monopattini",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2340_header.jpg",
+      "https://cdnbigbuy.com/images/category/2340_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2340_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2340_small.jpg",
+      "https://cdnbigbuy.com/images/category/2340_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2341,
+    "name": "Cura Piedi e Mani",
+    "url": "cura-piedi-e-mani",
+    "parentCategory": 2218,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2341_header.jpg",
+      "https://cdnbigbuy.com/images/category/2341_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2341_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2341_small.jpg",
+      "https://cdnbigbuy.com/images/category/2341_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2342,
+    "name": "Friggitrici",
+    "url": "friggitrici",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1725030786
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2342_header.jpg",
+      "https://cdnbigbuy.com/images/category/2342_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2342_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2342_small.jpg",
+      "https://cdnbigbuy.com/images/category/2342_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2343,
+    "name": "Piastre per Capelli",
+    "url": "piastre-per-capelli",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1637931377
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2343_header.jpg",
+      "https://cdnbigbuy.com/images/category/2343_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2343_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2343_small.jpg",
+      "https://cdnbigbuy.com/images/category/2343_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2344,
+    "name": "Grill e Barbecue",
+    "url": "grill-e-barbecue",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1758230234
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2344_header.jpg",
+      "https://cdnbigbuy.com/images/category/2344_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2344_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2344_small.jpg",
+      "https://cdnbigbuy.com/images/category/2344_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2345,
+    "name": "Coperte Elettriche",
+    "url": "coperte-elettriche",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2345_header.jpg",
+      "https://cdnbigbuy.com/images/category/2345_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2345_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2345_small.jpg",
+      "https://cdnbigbuy.com/images/category/2345_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2346,
+    "name": "Ferri da Stiro",
+    "url": "ferri-da-stiro",
+    "parentCategory": 2253,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2346_header.jpg",
+      "https://cdnbigbuy.com/images/category/2346_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2346_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2346_small.jpg",
+      "https://cdnbigbuy.com/images/category/2346_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2347,
+    "name": "Altri Prodotti Relax",
+    "url": "altri-prodotti-relax",
+    "parentCategory": 2234,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1743168289
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2347_header.jpg",
+      "https://cdnbigbuy.com/images/category/2347_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2347_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2347_small.jpg",
+      "https://cdnbigbuy.com/images/category/2347_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2348,
+    "name": "Altri Prodotti Pulizia",
+    "url": "altri-prodotti-pulizia",
+    "parentCategory": 2253,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2348_header.jpg",
+      "https://cdnbigbuy.com/images/category/2348_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2348_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2348_small.jpg",
+      "https://cdnbigbuy.com/images/category/2348_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2349,
+    "name": "Poker",
+    "url": "poker",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2349_header.jpg",
+      "https://cdnbigbuy.com/images/category/2349_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2349_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2349_small.jpg",
+      "https://cdnbigbuy.com/images/category/2349_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2350,
+    "name": "Grill e Barbecue",
+    "url": "grill-e-barbecue",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1758230234
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2350_header.jpg",
+      "https://cdnbigbuy.com/images/category/2350_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2350_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2350_small.jpg",
+      "https://cdnbigbuy.com/images/category/2350_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2351,
+    "name": "Asciugacapelli",
+    "url": "asciugacapelli",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1704744906
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2351_header.jpg",
+      "https://cdnbigbuy.com/images/category/2351_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2351_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2351_small.jpg",
+      "https://cdnbigbuy.com/images/category/2351_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2352,
+    "name": "Bollitori",
+    "url": "bollitori",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2352_header.jpg",
+      "https://cdnbigbuy.com/images/category/2352_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2352_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2352_small.jpg",
+      "https://cdnbigbuy.com/images/category/2352_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2353,
+    "name": "Ferri da Stiro",
+    "url": "ferri-da-stiro",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2353_header.jpg",
+      "https://cdnbigbuy.com/images/category/2353_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2353_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2353_small.jpg",
+      "https://cdnbigbuy.com/images/category/2353_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2354,
+    "name": "Altri Giocattoli",
+    "url": "altri-giocattoli",
+    "parentCategory": 2256,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1684408407
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2354_header.jpg",
+      "https://cdnbigbuy.com/images/category/2354_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2354_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2354_small.jpg",
+      "https://cdnbigbuy.com/images/category/2354_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2355,
+    "name": "Bollitori Acqua",
+    "url": "bollitori-acqua",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235157
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2355_header.jpg",
+      "https://cdnbigbuy.com/images/category/2355_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2355_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2355_small.jpg",
+      "https://cdnbigbuy.com/images/category/2355_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2356,
+    "name": "Altri Prodotti Pulizia",
+    "url": "altri-prodotti-pulizia",
+    "parentCategory": 2210,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2356_header.jpg",
+      "https://cdnbigbuy.com/images/category/2356_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2356_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2356_small.jpg",
+      "https://cdnbigbuy.com/images/category/2356_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2357,
+    "name": "Forno",
+    "url": "forno",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1630654393
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2357_header.jpg",
+      "https://cdnbigbuy.com/images/category/2357_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2357_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2357_small.jpg",
+      "https://cdnbigbuy.com/images/category/2357_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2358,
+    "name": "Ventilatori",
+    "url": "ventilatori",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1755907545
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2358_header.jpg",
+      "https://cdnbigbuy.com/images/category/2358_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2358_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2358_small.jpg",
+      "https://cdnbigbuy.com/images/category/2358_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2359,
+    "name": "Forni",
+    "url": "forni",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1630654393
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2359_header.jpg",
+      "https://cdnbigbuy.com/images/category/2359_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2359_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2359_small.jpg",
+      "https://cdnbigbuy.com/images/category/2359_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2360,
+    "name": "Trituatutto e Pelatori",
+    "url": "trituatutto-e-pelatori",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1713260050
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2360_header.jpg",
+      "https://cdnbigbuy.com/images/category/2360_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2360_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2360_small.jpg",
+      "https://cdnbigbuy.com/images/category/2360_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2361,
+    "name": "Altri Prodotti Casa",
+    "url": "altri-prodotti-casa",
+    "parentCategory": 2226,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2361_header.jpg",
+      "https://cdnbigbuy.com/images/category/2361_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2361_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2361_small.jpg",
+      "https://cdnbigbuy.com/images/category/2361_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2362,
+    "name": "Robot da Cucina",
+    "url": "robot-da-cucina",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2362_header.jpg",
+      "https://cdnbigbuy.com/images/category/2362_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2362_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2362_small.jpg",
+      "https://cdnbigbuy.com/images/category/2362_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2363,
+    "name": "Toaster",
+    "url": "toaster",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1758230234
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2363_header.jpg",
+      "https://cdnbigbuy.com/images/category/2363_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2363_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2363_small.jpg",
+      "https://cdnbigbuy.com/images/category/2363_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2364,
+    "name": "Tritatutto e Pelatori",
+    "url": "tritatutto-e-pelatori",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2364_header.jpg",
+      "https://cdnbigbuy.com/images/category/2364_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2364_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2364_small.jpg",
+      "https://cdnbigbuy.com/images/category/2364_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2365,
+    "name": "Tostapane",
+    "url": "tostapane",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235316
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1757587737
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2365_header.jpg",
+      "https://cdnbigbuy.com/images/category/2365_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2365_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2365_small.jpg",
+      "https://cdnbigbuy.com/images/category/2365_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2366,
+    "name": "Altri Prodotti Cucina",
+    "url": "altri-prodotti-cucina",
+    "parentCategory": 2219,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1759873221
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2366_header.jpg",
+      "https://cdnbigbuy.com/images/category/2366_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2366_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2366_small.jpg",
+      "https://cdnbigbuy.com/images/category/2366_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2367,
+    "name": "Robot da Cucina",
+    "url": "robot-da-cucina",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2367_header.jpg",
+      "https://cdnbigbuy.com/images/category/2367_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2367_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2367_small.jpg",
+      "https://cdnbigbuy.com/images/category/2367_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2368,
+    "name": "Toaster",
+    "url": "toaster",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1758230234
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2368_header.jpg",
+      "https://cdnbigbuy.com/images/category/2368_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2368_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2368_small.jpg",
+      "https://cdnbigbuy.com/images/category/2368_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2369,
+    "name": "Tostapane",
+    "url": "tostapane",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1757587737
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2369_header.jpg",
+      "https://cdnbigbuy.com/images/category/2369_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2369_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2369_small.jpg",
+      "https://cdnbigbuy.com/images/category/2369_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2370,
+    "name": "Altri Accessori Cucina",
+    "url": "altri-accessori-cucina",
+    "parentCategory": 2225,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1759873221
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2370_header.jpg",
+      "https://cdnbigbuy.com/images/category/2370_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2370_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2370_small.jpg",
+      "https://cdnbigbuy.com/images/category/2370_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2372,
+    "name": "Piu Venduti",
+    "url": "piu-venduti",
+    "parentCategory": 2202,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1401374605
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1401374605
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2372_header.jpg",
+      "https://cdnbigbuy.com/images/category/2372_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2372_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2372_small.jpg",
+      "https://cdnbigbuy.com/images/category/2372_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2374,
+    "name": "Catálogo | completo Outlet",
+    "url": "catalogo-completo-outlet",
+    "parentCategory": 2202,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235797
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2374_header.jpg",
+      "https://cdnbigbuy.com/images/category/2374_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2374_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2374_small.jpg",
+      "https://cdnbigbuy.com/images/category/2374_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2375,
+    "name": "Servizi",
+    "url": "servizi",
+    "parentCategory": 2202,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1507100229
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1644505415
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2375_header.jpg",
+      "https://cdnbigbuy.com/images/category/2375_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2375_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2375_small.jpg",
+      "https://cdnbigbuy.com/images/category/2375_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2378,
+    "name": "Aromaterapia",
+    "url": "aromaterapia",
+    "parentCategory": 2196,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416494250
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235729
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2378_header.jpg",
+      "https://cdnbigbuy.com/images/category/2378_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2378_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2378_small.jpg",
+      "https://cdnbigbuy.com/images/category/2378_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2379,
+    "name": "Altri Articoli per l'Igiene Personale",
+    "url": "altri-articoli-per-l-igiene-personale",
+    "parentCategory": 2196,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416555786
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2379_header.jpg",
+      "https://cdnbigbuy.com/images/category/2379_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2379_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2379_small.jpg",
+      "https://cdnbigbuy.com/images/category/2379_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2380,
+    "name": "Parrucchieria",
+    "url": "parrucchieria",
+    "parentCategory": 2197,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416555833
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2380_header.jpg",
+      "https://cdnbigbuy.com/images/category/2380_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2380_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2380_small.jpg",
+      "https://cdnbigbuy.com/images/category/2380_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2381,
+    "name": "Creme Solari",
+    "url": "creme-solari",
+    "parentCategory": 2197,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416556479
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1713284243
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2381_header.jpg",
+      "https://cdnbigbuy.com/images/category/2381_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2381_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2381_small.jpg",
+      "https://cdnbigbuy.com/images/category/2381_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2382,
+    "name": "Occhiali da Sole",
+    "url": "occhiali-da-sole",
+    "parentCategory": 2227,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416556595
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2382_header.jpg",
+      "https://cdnbigbuy.com/images/category/2382_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2382_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2382_small.jpg",
+      "https://cdnbigbuy.com/images/category/2382_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2383,
+    "name": "Profumi per Uomini",
+    "url": "profumi-per-uomini",
+    "parentCategory": 2211,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416557879
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2383_header.jpg",
+      "https://cdnbigbuy.com/images/category/2383_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2383_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2383_small.jpg",
+      "https://cdnbigbuy.com/images/category/2383_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2384,
+    "name": "Profumi per Donne",
+    "url": "profumi-per-donne",
+    "parentCategory": 2221,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416557933
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2384_header.jpg",
+      "https://cdnbigbuy.com/images/category/2384_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2384_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2384_small.jpg",
+      "https://cdnbigbuy.com/images/category/2384_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2385,
+    "name": "Profumi Unisex",
+    "url": "profumi-unisex",
+    "parentCategory": 2228,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558068
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2385_header.jpg",
+      "https://cdnbigbuy.com/images/category/2385_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2385_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2385_small.jpg",
+      "https://cdnbigbuy.com/images/category/2385_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2386,
+    "name": "Depilazione",
+    "url": "depilazione",
+    "parentCategory": 2211,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558184
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1748446300
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2386_header.jpg",
+      "https://cdnbigbuy.com/images/category/2386_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2386_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2386_small.jpg",
+      "https://cdnbigbuy.com/images/category/2386_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2387,
+    "name": "Cosmetici per Uomini",
+    "url": "cosmetici-per-uomini",
+    "parentCategory": 2211,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558235
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2387_header.jpg",
+      "https://cdnbigbuy.com/images/category/2387_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2387_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2387_small.jpg",
+      "https://cdnbigbuy.com/images/category/2387_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2388,
+    "name": "Cura del Corpo per Uomini",
+    "url": "cura-del-corpo-per-uomini",
+    "parentCategory": 2211,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558350
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2388_header.jpg",
+      "https://cdnbigbuy.com/images/category/2388_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2388_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2388_small.jpg",
+      "https://cdnbigbuy.com/images/category/2388_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2389,
+    "name": "Cosmetici per Donne",
+    "url": "cosmetici-per-donne",
+    "parentCategory": 2221,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558446
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2389_header.jpg",
+      "https://cdnbigbuy.com/images/category/2389_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2389_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2389_small.jpg",
+      "https://cdnbigbuy.com/images/category/2389_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2390,
+    "name": "Cosmetici Unisex",
+    "url": "cosmetici-unisex",
+    "parentCategory": 2228,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558496
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2390_header.jpg",
+      "https://cdnbigbuy.com/images/category/2390_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2390_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2390_small.jpg",
+      "https://cdnbigbuy.com/images/category/2390_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2391,
+    "name": "Cura del Corpo ",
+    "url": "cura-del-corpo",
+    "parentCategory": 2228,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558572
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2391_header.jpg",
+      "https://cdnbigbuy.com/images/category/2391_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2391_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2391_small.jpg",
+      "https://cdnbigbuy.com/images/category/2391_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2392,
+    "name": "Make-Up",
+    "url": "make-up",
+    "parentCategory": 2221,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558607
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2392_header.jpg",
+      "https://cdnbigbuy.com/images/category/2392_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2392_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2392_small.jpg",
+      "https://cdnbigbuy.com/images/category/2392_big.jpg"
+    ],
+    "isoCode": "it"
+  },
+  {
+    "id": 2393,
+    "name": "Cura del Corpo per Donne",
+    "url": "cura-del-corpo-per-donne",
+    "parentCategory": 2221,
+    "dateAdd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1416558656
+    },
+    "dateUpd": {
+      "timezone": {
+        "name": "UTC",
+        "transitions": [
+          {
+            "ts": -9223372036854776000,
+            "time": "-292277022657-01-27T08:29:52+0000",
+            "offset": 0,
+            "isdst": false,
+            "abbr": "UTC"
+          }
+        ],
+        "location": {
+          "country_code": "??",
+          "latitude": -90,
+          "longitude": -180,
+          "comments": ""
+        }
+      },
+      "offset": 0,
+      "timestamp": 1475235624
+    },
+    "urlImages": [
+      "https://cdnbigbuy.com/images/category/2393_header.jpg",
+      "https://cdnbigbuy.com/images/category/2393_menu.jpg",
+      "https://cdnbigbuy.com/images/category/2393_mini.jpg",
+      "https://cdnbigbuy.com/images/category/2393_small.jpg",
+      "https://cdnbigbuy.com/images/category/2393_big.jpg"
+    ],
+    "isoCode": "it"
+  }
+]

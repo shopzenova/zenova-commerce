@@ -1,0 +1,678 @@
+{
+  "totalProducts": 10055,
+  "totalCategories": 38,
+  "categories": [
+    {
+      "id": "2501",
+      "count": 10055,
+      "examples": [
+        {
+          "name": "Lacca Fissante EXTRA BODY Paul Mitchell (300 ml)...",
+          "categories": "2501,2520,2526"
+        },
+        {
+          "name": "Spray Fissante EXPRESS STYLE hold me tight 300 ml Paul Mitch...",
+          "categories": "2501,2520,3195"
+        },
+        {
+          "name": "Balsamo Nutriente Blonde Forever Paul Mitchell 132880 200 ml...",
+          "categories": "2501,2520,2525"
+        }
+      ]
+    },
+    {
+      "id": "2502",
+      "count": 8444,
+      "examples": [
+        {
+          "name": "Toppe termoadesive Thermacare...",
+          "categories": "2501,2502,2506"
+        },
+        {
+          "name": "Cerotti Riscaldanti Adesivi per il Corpo Thermacare (3 Unità...",
+          "categories": "2501,2502,2506"
+        },
+        {
+          "name": "Toppe termoadesive Thermacare (1 Unità)...",
+          "categories": "2501,2502,2506"
+        }
+      ]
+    },
+    {
+      "id": "2654",
+      "count": 8137,
+      "examples": [
+        {
+          "name": "Montatura per Occhiali Donna Loewe VLW444M510A57 Marrone (ø ...",
+          "categories": "2501,2502,2654"
+        },
+        {
+          "name": "Montatura per Occhiali Donna Loewe VLW444M510I62 Bronce (ø 5...",
+          "categories": "2501,2502,2654"
+        },
+        {
+          "name": "Montatura per Occhiali Donna Loewe VLW445M5108GF Nero (ø 51 ...",
+          "categories": "2501,2502,2654"
+        }
+      ]
+    },
+    {
+      "id": "2520",
+      "count": 1233,
+      "examples": [
+        {
+          "name": "Lacca Fissante EXTRA BODY Paul Mitchell (300 ml)...",
+          "categories": "2501,2520,2526"
+        },
+        {
+          "name": "Spray Fissante EXPRESS STYLE hold me tight 300 ml Paul Mitch...",
+          "categories": "2501,2520,3195"
+        },
+        {
+          "name": "Balsamo Nutriente Blonde Forever Paul Mitchell 132880 200 ml...",
+          "categories": "2501,2520,2525"
+        }
+      ]
+    },
+    {
+      "id": "2540",
+      "count": 276,
+      "examples": [
+        {
+          "name": "Crema Anti rossori Martiderm Calamina Plus 75 ml (1 Unità)...",
+          "categories": "2501,2540,2548"
+        },
+        {
+          "name": "Lozione per le mani La Chinata Refill Hand 500 ml...",
+          "categories": "2501,2540,2546"
+        },
+        {
+          "name": "Crema Mani La Chinata Sensitive 50 ml...",
+          "categories": "2501,2540,2546"
+        }
+      ]
+    },
+    {
+      "id": "2523",
+      "count": 220,
+      "examples": [
+        {
+          "name": "Shampoo Strength Paul Mitchell 9531112930 300 ml...",
+          "categories": "2501,2520,2523"
+        },
+        {
+          "name": "Set per Capelli La Chinata Hair Care 3 Pezzi...",
+          "categories": "2501,2520,2523"
+        },
+        {
+          "name": "Shampoo per Bambini L'Oreal Professionnel Paris Soft 250 ml ...",
+          "categories": "2501,2520,2523"
+        }
+      ]
+    },
+    {
+      "id": "2526",
+      "count": 183,
+      "examples": [
+        {
+          "name": "Lacca Fissante EXTRA BODY Paul Mitchell (300 ml)...",
+          "categories": "2501,2520,2526"
+        },
+        {
+          "name": "Maschera per Capelli Resistance Architecte Kerastase 34553 5...",
+          "categories": "2501,2520,2526"
+        },
+        {
+          "name": "Trattamento Intensivo Riparatore Kerastase AD696 30 ml...",
+          "categories": "2501,2520,2526"
+        }
+      ]
+    },
+    {
+      "id": "2506",
+      "count": 164,
+      "examples": [
+        {
+          "name": "Toppe termoadesive Thermacare...",
+          "categories": "2501,2502,2506"
+        },
+        {
+          "name": "Cerotti Riscaldanti Adesivi per il Corpo Thermacare (3 Unità...",
+          "categories": "2501,2502,2506"
+        },
+        {
+          "name": "Toppe termoadesive Thermacare (1 Unità)...",
+          "categories": "2501,2502,2506"
+        }
+      ]
+    },
+    {
+      "id": "2544",
+      "count": 158,
+      "examples": [
+        {
+          "name": "Rasoio Elettrico Ricaricabile Postquam ER-5600 Nero...",
+          "categories": "2501,2540,2544"
+        },
+        {
+          "name": "Siero per Barba American Crew 10007821 50 ml...",
+          "categories": "2501,2540,2544"
+        },
+        {
+          "name": "Strisce Depilatorie Corpo Klorane...",
+          "categories": "2501,2540,2544"
+        }
+      ]
+    },
+    {
+      "id": "2525",
+      "count": 149,
+      "examples": [
+        {
+          "name": "Balsamo Nutriente Blonde Forever Paul Mitchell 132880 200 ml...",
+          "categories": "2501,2520,2525"
+        },
+        {
+          "name": "Balsamo Aveda Damage Remedy 40 ml...",
+          "categories": "2501,2520,2525"
+        },
+        {
+          "name": "Balsamo da Barba Dear Barber 250 ml...",
+          "categories": "2501,2520,2525"
+        }
+      ]
+    },
+    {
+      "id": "2530",
+      "count": 145,
+      "examples": [
+        {
+          "name": "Phon Taurus Alize Evolution Nero 2200 W...",
+          "categories": "2501,2520,2530"
+        },
+        {
+          "name": "Phon Rowenta CV7810F0 Nero 2200 W...",
+          "categories": "2501,2520,2530"
+        },
+        {
+          "name": "Phon Solac SP7170EXPERT 2600W IONIC 2600 W Nero...",
+          "categories": "2501,2520,2530"
+        }
+      ]
+    },
+    {
+      "id": "3170",
+      "count": 142,
+      "examples": [
+        {
+          "name": "Tintura Permanente Cromatone Montibello Nº 6,61 (60 ml)...",
+          "categories": "2501,2520,3170"
+        },
+        {
+          "name": "Tintura Permanente Montibello N616 Nero...",
+          "categories": "2501,2520,3170"
+        },
+        {
+          "name": "Trattamento per Capelli Post-permanente Montibello ISP0...",
+          "categories": "2501,2520,3170"
+        }
+      ]
+    },
+    {
+      "id": "2652",
+      "count": 132,
+      "examples": [
+        {
+          "name": "Rasoio per capelli Braun Braun Exact Series Ear & Nose 1 AA...",
+          "categories": "2501,2520,2652"
+        },
+        {
+          "name": "Rasoio da Barba Panasonic ER-GB43-K503 0.5-10mm...",
+          "categories": "2501,2520,2652"
+        },
+        {
+          "name": "Rasoio per depilazione e per Capelli Rowenta TN6000F4 Acciai...",
+          "categories": "2501,2520,2652"
+        }
+      ]
+    },
+    {
+      "id": "2546",
+      "count": 85,
+      "examples": [
+        {
+          "name": "Lozione per le mani La Chinata Refill Hand 500 ml...",
+          "categories": "2501,2540,2546"
+        },
+        {
+          "name": "Crema Mani La Chinata Sensitive 50 ml...",
+          "categories": "2501,2540,2546"
+        },
+        {
+          "name": "Crema Mani Molton Brown 7NYD21029...",
+          "categories": "2501,2540,2546"
+        }
+      ]
+    },
+    {
+      "id": "2535",
+      "count": 77,
+      "examples": [
+        {
+          "name": "Pettine Afro Label.M Original...",
+          "categories": "2501,2520,2535"
+        },
+        {
+          "name": "Spazzola Districante The Wet Brush Rosa Rettangolare...",
+          "categories": "2501,2520,2535"
+        },
+        {
+          "name": "Spazzola The Wet Brush Pro Paddle Detangler Viola Caucciù (1...",
+          "categories": "2501,2520,2535"
+        }
+      ]
+    },
+    {
+      "id": "2532",
+      "count": 76,
+      "examples": [
+        {
+          "name": "Piastra di Ceramica per Capelli Postquam Pro Styler...",
+          "categories": "2501,2520,2532"
+        },
+        {
+          "name": "Piastra per Capelli Revlon RVST2175E Nero...",
+          "categories": "2501,2520,2532"
+        },
+        {
+          "name": "Spazzola Termica Revlon RVDR5212 Nero Rosa 800W...",
+          "categories": "2501,2520,2532"
+        }
+      ]
+    },
+    {
+      "id": "2552",
+      "count": 74,
+      "examples": [
+        {
+          "name": "Protezione Solare Sisley Porcelaine Spf 30 40 ml...",
+          "categories": "2501,2552,2554"
+        },
+        {
+          "name": "Protezione Solare Gel La Roche Posay S0551312 SPF 50+ 50 ml...",
+          "categories": "2501,2552,2556"
+        },
+        {
+          "name": "Spray Protezione Solare Vichy MB001900 Spf 50 200 ml...",
+          "categories": "2501,2552,2556"
+        }
+      ]
+    },
+    {
+      "id": "3195",
+      "count": 51,
+      "examples": [
+        {
+          "name": "Spray Fissante EXPRESS STYLE hold me tight 300 ml Paul Mitch...",
+          "categories": "2501,2520,3195"
+        },
+        {
+          "name": "Lacca Fissante K Kerastase (300 ml) 300 ml 75 ml...",
+          "categories": "2501,2520,3195"
+        },
+        {
+          "name": "Lacca Fissante Kerastase 6439 300 ml...",
+          "categories": "2501,2520,3195"
+        }
+      ]
+    },
+    {
+      "id": "2504",
+      "count": 50,
+      "examples": [
+        {
+          "name": "Set Regalo Therabody TF02271-01 Bianco (2 Unità)...",
+          "categories": "2501,2502,2504"
+        },
+        {
+          "name": "Set Regalo Therabody TF02226-01 Nero (1 Unità)...",
+          "categories": "2501,2502,2504"
+        },
+        {
+          "name": "Set Regalo Therabody RA02101-01...",
+          "categories": "2501,2502,2504"
+        }
+      ]
+    },
+    {
+      "id": "2518",
+      "count": 39,
+      "examples": [
+        {
+          "name": "Sfigmomanometro da Braccio Beurer BM 35...",
+          "categories": "2501,2502,2518"
+        },
+        {
+          "name": "Sfigmomanometro da polso Beurer BC-28 Bianco...",
+          "categories": "2501,2502,2518"
+        },
+        {
+          "name": "Sfigmomanometro da Braccio Beurer BC27 Grigio...",
+          "categories": "2501,2502,2518"
+        }
+      ]
+    },
+    {
+      "id": "2548",
+      "count": 32,
+      "examples": [
+        {
+          "name": "Crema Anti rossori Martiderm Calamina Plus 75 ml (1 Unità)...",
+          "categories": "2501,2540,2548"
+        },
+        {
+          "name": "Concentrato Intenso Antimacchie Shiseido 729238169562 Antiet...",
+          "categories": "2501,2540,2548"
+        },
+        {
+          "name": "Trattamento Pelli con Acne Isdin 690014020 Gel...",
+          "categories": "2501,2540,2548"
+        }
+      ]
+    },
+    {
+      "id": "2896",
+      "count": 30,
+      "examples": [
+        {
+          "name": "Cerotti Hansaplast Universal Marrone...",
+          "categories": "2501,2502,2896"
+        },
+        {
+          "name": "Cerotti Hansaplast Universal Beige 40 Unità...",
+          "categories": "2501,2502,2896"
+        },
+        {
+          "name": "Gel Mani Igienizzante Body Ars 1330009...",
+          "categories": "2501,2502,2896"
+        }
+      ]
+    },
+    {
+      "id": "2554",
+      "count": 28,
+      "examples": [
+        {
+          "name": "Protezione Solare Sisley Porcelaine Spf 30 40 ml...",
+          "categories": "2501,2552,2554"
+        },
+        {
+          "name": "Protezione Solare Viso Vichy VCH00115 Spf 50 50 ml 3 in 1 An...",
+          "categories": "2501,2552,2554"
+        },
+        {
+          "name": "Protettore Labbra A-Derma X-Trem Stick...",
+          "categories": "2501,2552,2554"
+        }
+      ]
+    },
+    {
+      "id": "2556",
+      "count": 28,
+      "examples": [
+        {
+          "name": "Protezione Solare Gel La Roche Posay S0551312 SPF 50+ 50 ml...",
+          "categories": "2501,2552,2556"
+        },
+        {
+          "name": "Spray Protezione Solare Vichy MB001900 Spf 50 200 ml...",
+          "categories": "2501,2552,2556"
+        },
+        {
+          "name": "Latte Solare Fluido Isdin Spf 50 Crema 200 ml Bifasico...",
+          "categories": "2501,2552,2556"
+        }
+      ]
+    },
+    {
+      "id": "3462",
+      "count": 28,
+      "examples": [
+        {
+          "name": "Integratore Alimentare Leotron Vitamina C 108 Unità...",
+          "categories": "2501,3462"
+        },
+        {
+          "name": "Integratore per Insonnia Natura Essenziale Valeriana Leo Val...",
+          "categories": "2501,3462"
+        },
+        {
+          "name": "Multivitamine Leotron Sport 20 Buste...",
+          "categories": "2501,3462"
+        }
+      ]
+    },
+    {
+      "id": "3193",
+      "count": 19,
+      "examples": [
+        {
+          "name": "Gel Fissante Extraforte KMS 150 ml...",
+          "categories": "2501,2520,3193"
+        },
+        {
+          "name": "Lacca Fissaggio Extraforte Montibello...",
+          "categories": "2501,2520,3193"
+        },
+        {
+          "name": "Gel Fissante Extraforte Lola Cosmetics My Curl, My Life 500 ...",
+          "categories": "2501,2520,3193"
+        }
+      ]
+    },
+    {
+      "id": "3192",
+      "count": 15,
+      "examples": [
+        {
+          "name": "Argilla per Capelli D:FI 150 g Mat...",
+          "categories": "2501,2520,3192"
+        },
+        {
+          "name": "Cera Montibello DTFF Adatta a capelli sottili, medi o spessi...",
+          "categories": "2501,2520,3192"
+        },
+        {
+          "name": "Spuma Fissante Extraforte Montibello...",
+          "categories": "2501,2520,3192"
+        }
+      ]
+    },
+    {
+      "id": "3194",
+      "count": 13,
+      "examples": [
+        {
+          "name": "Schiuma Colorante Montibello Finalstyle Colour Mogano...",
+          "categories": "2501,2520,3194"
+        },
+        {
+          "name": "Schiuma Colorante Montibello Finalstyle Colour...",
+          "categories": "2501,2520,3194"
+        },
+        {
+          "name": "Spuma Modellante Silhouette Schwarzkopf 609457 (500 ml) 500 ...",
+          "categories": "2501,2520,3194"
+        }
+      ]
+    },
+    {
+      "id": "2519",
+      "count": 12,
+      "examples": [
+        {
+          "name": "Borsa Acqua Calda Gift Decor Azzurro Plastica 1,8 L (12 Unit...",
+          "categories": "2501,2502,2519"
+        },
+        {
+          "name": "Borsa Acqua Calda Gift Decor Beige Plastica 1,8 L (12 Unità)...",
+          "categories": "2501,2502,2519"
+        },
+        {
+          "name": "Borsa Acqua Calda Gift Decor Verde Plastica 1,8 L (12 Unità)...",
+          "categories": "2501,2502,2519"
+        }
+      ]
+    },
+    {
+      "id": "3197",
+      "count": 9,
+      "examples": [
+        {
+          "name": "Shampoo Secco Batiste BAT09 200 ml...",
+          "categories": "2501,2520,3197"
+        },
+        {
+          "name": "Shampoo Secco Moroccanoil MO-DSD205...",
+          "categories": "2501,2520,3197"
+        },
+        {
+          "name": "Shampoo Secco Batiste Cherry 200 ml 3 Pezzi...",
+          "categories": "2501,2520,3197"
+        }
+      ]
+    },
+    {
+      "id": "2503",
+      "count": 6,
+      "examples": [
+        {
+          "name": "Cuscino Rinfrescante Riempibile Refrish InnovaGoods...",
+          "categories": "2501,2502,2503"
+        },
+        {
+          "name": "Cuscino in Gel a Nido d'Ape Hexafresh InnovaGoods...",
+          "categories": "2501,2502,2503"
+        },
+        {
+          "name": "Cuscino Modulare Multifunzione Rollow InnovaGoods...",
+          "categories": "2501,2502,2503"
+        }
+      ]
+    },
+    {
+      "id": "2505",
+      "count": 6,
+      "examples": [
+        {
+          "name": "Separatore dita Filomatic 2 Unità...",
+          "categories": "2501,2502,2505"
+        },
+        {
+          "name": "Calzini a Compressione Relax InnovaGoods...",
+          "categories": "2501,2502,2505"
+        },
+        {
+          "name": "Cuscinetti Metatarsali in Gel di Silicone SilStep InnovaGood...",
+          "categories": "2501,2502,2505"
+        }
+      ]
+    },
+    {
+      "id": "2563",
+      "count": 5,
+      "examples": [
+        {
+          "name": "Autoabbronzante per il Corpo Topicrem...",
+          "categories": "2501,2552,2563"
+        },
+        {
+          "name": "Autoabbronzante per il Corpo Topicrem...",
+          "categories": "2501,2552,2563"
+        },
+        {
+          "name": "Autoabbronzante per il Corpo Martiderm SUN CARE 50 ml...",
+          "categories": "2501,2552,2563"
+        }
+      ]
+    },
+    {
+      "id": "2568",
+      "count": 5,
+      "examples": [
+        {
+          "name": "After Sun Instituto Español 10874 300 ml...",
+          "categories": "2501,2552,2568"
+        },
+        {
+          "name": "Spray Doposole Uriage Bariesun 150 ml...",
+          "categories": "2501,2552,2568"
+        },
+        {
+          "name": "Doposole Prolungatore Abbronzatura Bioderma Photoderm 60 ml ...",
+          "categories": "2501,2552,2568"
+        }
+      ]
+    },
+    {
+      "id": "2565",
+      "count": 4,
+      "examples": [
+        {
+          "name": "Accappatoio Martiderm SUN CARE...",
+          "categories": "2501,2552,2565"
+        },
+        {
+          "name": "Olio Solare Ziaja Sun Gel Spf 20 90 ml...",
+          "categories": "2501,2552,2565"
+        },
+        {
+          "name": "Potenziatore Abbronzatura Babaria SOLAR Spf 50+ 75 ml...",
+          "categories": "2501,2552,2565"
+        }
+      ]
+    },
+    {
+      "id": "2528",
+      "count": 2,
+      "examples": [
+        {
+          "name": "Spray Volumizzante Paul Mitchell...",
+          "categories": "2501,2520,2528"
+        },
+        {
+          "name": "Schiuma Volumizzante Moroccanoil Volumizing...",
+          "categories": "2501,2520,2528"
+        }
+      ]
+    },
+    {
+      "id": "2561",
+      "count": 2,
+      "examples": [
+        {
+          "name": "Terre Orlane Nº 23 Soleil Bronze 31 g...",
+          "categories": "2501,2552,2561"
+        },
+        {
+          "name": "Terre Guerlain Marrone...",
+          "categories": "2501,2552,2561"
+        }
+      ]
+    },
+    {
+      "id": "3408",
+      "count": 2,
+      "examples": [
+        {
+          "name": "Spray Protezione Solare ANTHELIOS XL La Roche Posay Spf 50+ ...",
+          "categories": "2501,2552,3408"
+        },
+        {
+          "name": "Spray Protezione Solare Ecran Bianco Spf 30 15 ml 250 ml...",
+          "categories": "2501,2552,3408"
+        }
+      ]
+    }
+  ]
+}

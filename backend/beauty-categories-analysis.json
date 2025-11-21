@@ -1,0 +1,706 @@
+{
+  "totalProducts": 2537,
+  "totalCategories": 40,
+  "categories": [
+    {
+      "id": "2507",
+      "count": 2537,
+      "examples": [
+        {
+          "name": "Gel Purificante Viso Bioderma Sebium Gommant...",
+          "categories": "2507,2527,2536"
+        },
+        {
+          "name": "Maschera Purificante Sisley Masque Purifiant Profond Aux Rés...",
+          "categories": "2507,2527,2537"
+        },
+        {
+          "name": "Deodorante Roll-on Biotherm 100104 75 ml...",
+          "categories": "2507,2547,3168"
+        }
+      ]
+    },
+    {
+      "id": "2508",
+      "count": 1045,
+      "examples": [
+        {
+          "name": "Profumo Uomo Pino Silvestre 122869 EDT 125 ml...",
+          "categories": "2507,2508,2509"
+        },
+        {
+          "name": "Profumo Donna Guerlain La Petite Robe Noir EDP 100 ml...",
+          "categories": "2507,2508,2510"
+        },
+        {
+          "name": "Profumo Uomo Rochas Eau De Rochas Homme EDT 200 ml...",
+          "categories": "2507,2508,2509"
+        }
+      ]
+    },
+    {
+      "id": "2510",
+      "count": 720,
+      "examples": [
+        {
+          "name": "Profumo Donna Guerlain La Petite Robe Noir EDP 100 ml...",
+          "categories": "2507,2508,2510"
+        },
+        {
+          "name": "Profumo Unisex Attar Collection The Persian Gold EDP 100 ml...",
+          "categories": "2507,2508,2510"
+        },
+        {
+          "name": "Profumo Donna Moschino Gold Fresh Couture EDP EDT...",
+          "categories": "2507,2508,2510"
+        }
+      ]
+    },
+    {
+      "id": "2547",
+      "count": 576,
+      "examples": [
+        {
+          "name": "Deodorante Roll-on Biotherm 100104 75 ml...",
+          "categories": "2507,2547,3168"
+        },
+        {
+          "name": "Deodorante Roll-on Lancôme 50 ml...",
+          "categories": "2507,2547,3169"
+        },
+        {
+          "name": "Gel e Shampoo Calvin Klein 121273 150 ml 200 ml...",
+          "categories": "2507,2547,2549"
+        }
+      ]
+    },
+    {
+      "id": "2527",
+      "count": 522,
+      "examples": [
+        {
+          "name": "Gel Purificante Viso Bioderma Sebium Gommant...",
+          "categories": "2507,2527,2536"
+        },
+        {
+          "name": "Maschera Purificante Sisley Masque Purifiant Profond Aux Rés...",
+          "categories": "2507,2527,2537"
+        },
+        {
+          "name": "Crema Notte Dermalogica...",
+          "categories": "2507,2527,2531"
+        }
+      ]
+    },
+    {
+      "id": "2509",
+      "count": 286,
+      "examples": [
+        {
+          "name": "Profumo Uomo Pino Silvestre 122869 EDT 125 ml...",
+          "categories": "2507,2508,2509"
+        },
+        {
+          "name": "Profumo Uomo Rochas Eau De Rochas Homme EDT 200 ml...",
+          "categories": "2507,2508,2509"
+        },
+        {
+          "name": "Profumo Uomo Roja Parfums EDP EDC...",
+          "categories": "2507,2508,2509"
+        }
+      ]
+    },
+    {
+      "id": "2555",
+      "count": 257,
+      "examples": [
+        {
+          "name": "Matita Occhi Sisley 187019...",
+          "categories": "2507,2555,2566"
+        },
+        {
+          "name": "Eyeliner Wonder Swipe Rimmel London 34222503006 30 ml...",
+          "categories": "2507,2555,2566"
+        },
+        {
+          "name": "Base per Trucco Fluida Teint Miracle Lancôme Rosa...",
+          "categories": "2507,2555,2557"
+        }
+      ]
+    },
+    {
+      "id": "2531",
+      "count": 196,
+      "examples": [
+        {
+          "name": "Crema Notte Dermalogica...",
+          "categories": "2507,2527,2531"
+        },
+        {
+          "name": "Crema Viso La Chinata 75 ml...",
+          "categories": "2507,2527,2531"
+        },
+        {
+          "name": "Crema Viso La Chinata 50 ml Pelle sensibile...",
+          "categories": "2507,2527,2531"
+        }
+      ]
+    },
+    {
+      "id": "2551",
+      "count": 167,
+      "examples": [
+        {
+          "name": "Lozione Corpo Aveda...",
+          "categories": "2507,2547,2551"
+        },
+        {
+          "name": "Olio Corpo Yonka Delicieuse 100 ml...",
+          "categories": "2507,2547,2551"
+        },
+        {
+          "name": "Lozione Corpo Calvin Klein Eternity...",
+          "categories": "2507,2547,2551"
+        }
+      ]
+    },
+    {
+      "id": "2892",
+      "count": 158,
+      "examples": [
+        {
+          "name": "Spazzolini interdentali Tepe Extra Soft Rosso 0,5 mm 25 Unit...",
+          "categories": "2507,2547,2892"
+        },
+        {
+          "name": "Spazzolini interdentali Tepe Angle Rosso 0,5 mm 25 Unità...",
+          "categories": "2507,2547,2892"
+        },
+        {
+          "name": "Spazzolini interdentali Tepe Angle Verde 0,8 mm 25 Unità...",
+          "categories": "2507,2547,2892"
+        }
+      ]
+    },
+    {
+      "id": "2659",
+      "count": 137,
+      "examples": [
+        {
+          "name": "Set Cosmetica La Chinata Box Nº3 7 Pezzi...",
+          "categories": "2507,2659"
+        },
+        {
+          "name": "Set Cosmetica La Chinata Box Nº2 7 Pezzi...",
+          "categories": "2507,2659"
+        },
+        {
+          "name": "Cofanetto Cosmetica Uomo La Chinata Small Gift 4 Pezzi...",
+          "categories": "2507,2659"
+        }
+      ]
+    },
+    {
+      "id": "2549",
+      "count": 124,
+      "examples": [
+        {
+          "name": "Gel e Shampoo Calvin Klein 121273 150 ml 200 ml...",
+          "categories": "2507,2547,2549"
+        },
+        {
+          "name": "Olio Doccia Aromatherapy Support Breathe 55 ml...",
+          "categories": "2507,2547,2549"
+        },
+        {
+          "name": "Gel Doccia Dermoprotettivo Instituto Español...",
+          "categories": "2507,2547,2549"
+        }
+      ]
+    },
+    {
+      "id": "2900",
+      "count": 85,
+      "examples": [
+        {
+          "name": "Correttore Viso Sisley 180009...",
+          "categories": "2507,2555,2900"
+        },
+        {
+          "name": "Set La Chinata...",
+          "categories": "2507,2555,2900"
+        },
+        {
+          "name": "Spugnetta per il Trucco Postquam...",
+          "categories": "2507,2555,2900"
+        }
+      ]
+    },
+    {
+      "id": "2534",
+      "count": 80,
+      "examples": [
+        {
+          "name": "Siero Perfezionante Sisley Global Perfect Pore Minimizer 30 ...",
+          "categories": "2507,2527,2534"
+        },
+        {
+          "name": "Siero Viso Aromatherapy...",
+          "categories": "2507,2527,2534"
+        },
+        {
+          "name": "Siero Viso Aromatherapy Hydrating Revitalising 15 ml...",
+          "categories": "2507,2527,2534"
+        }
+      ]
+    },
+    {
+      "id": "2536",
+      "count": 77,
+      "examples": [
+        {
+          "name": "Gel Purificante Viso Bioderma Sebium Gommant...",
+          "categories": "2507,2527,2536"
+        },
+        {
+          "name": "Strisce Detergenti per i Pori It's Skin...",
+          "categories": "2507,2527,2536"
+        },
+        {
+          "name": "Gel Detergente Purificante La Roche Posay Effaclar Gel 200 m...",
+          "categories": "2507,2527,2536"
+        }
+      ]
+    },
+    {
+      "id": "2569",
+      "count": 64,
+      "examples": [
+        {
+          "name": "Matita Contorno Labbra Shiseido Smu Lipliner Inkduo 05 Geran...",
+          "categories": "2507,2555,2569"
+        },
+        {
+          "name": "Matita Contorno Labbra Shiseido Inkduo 07 Poppy 0,9 g Rosso ...",
+          "categories": "2507,2555,2569"
+        },
+        {
+          "name": "Matita Contorno Labbra Shiseido 729238164246 Rosa Violetta 1...",
+          "categories": "2507,2555,2569"
+        }
+      ]
+    },
+    {
+      "id": "2891",
+      "count": 50,
+      "examples": [
+        {
+          "name": "Gel Intimo Instituto Español 300 ml...",
+          "categories": "2507,2547,2891"
+        },
+        {
+          "name": "Gel Intimo Pelle Atopica Instituto Español 100306 300 ml...",
+          "categories": "2507,2547,2891"
+        },
+        {
+          "name": "Attivatore del colore Dénuée Montibello DC22 22 vol (6.6%) (...",
+          "categories": "2507,2547,2891"
+        }
+      ]
+    },
+    {
+      "id": "2557",
+      "count": 48,
+      "examples": [
+        {
+          "name": "Base per Trucco Fluida Teint Miracle Lancôme Rosa...",
+          "categories": "2507,2555,2557"
+        },
+        {
+          "name": "Base per il Trucco in Polvere Shiseido Smu Synchro Skin Self...",
+          "categories": "2507,2555,2557"
+        },
+        {
+          "name": "Base per il Trucco in Polvere Shiseido Smu Synchro Skin Self...",
+          "categories": "2507,2555,2557"
+        }
+      ]
+    },
+    {
+      "id": "3168",
+      "count": 44,
+      "examples": [
+        {
+          "name": "Deodorante Roll-on Biotherm 100104 75 ml...",
+          "categories": "2507,2547,3168"
+        },
+        {
+          "name": "Deodorante Tabac...",
+          "categories": "2507,2547,3168"
+        },
+        {
+          "name": "Deodorante Spray Paco Rabanne 1 Million 150 ml...",
+          "categories": "2507,2547,3168"
+        }
+      ]
+    },
+    {
+      "id": "2538",
+      "count": 39,
+      "examples": [
+        {
+          "name": "Dischetti Struccanti M2 Beauté Oilfree...",
+          "categories": "2507,2527,2538"
+        },
+        {
+          "name": "Crema Viso Guerlain Crème De Beauté 200 ml...",
+          "categories": "2507,2527,2538"
+        },
+        {
+          "name": "Acqua Struccante Sisley 108200 300 ml...",
+          "categories": "2507,2527,2538"
+        }
+      ]
+    },
+    {
+      "id": "2533",
+      "count": 38,
+      "examples": [
+        {
+          "name": "Contorno Occhi Rexaline Hydra Shock 15 ml...",
+          "categories": "2507,2527,2533"
+        },
+        {
+          "name": "Crema Notte Declaré 16032800 50 ml...",
+          "categories": "2507,2527,2533"
+        },
+        {
+          "name": "Siero Contorno Occhi Shiseido 729238191129 15 ml...",
+          "categories": "2507,2527,2533"
+        }
+      ]
+    },
+    {
+      "id": "2537",
+      "count": 36,
+      "examples": [
+        {
+          "name": "Maschera Purificante Sisley Masque Purifiant Profond Aux Rés...",
+          "categories": "2507,2527,2537"
+        },
+        {
+          "name": "Siero Viso Darphin STIMULSKIN PLUS 50 ml 500 ml...",
+          "categories": "2507,2527,2537"
+        },
+        {
+          "name": "Maschera Idratante Notte Natura Bissé DIAMOND EXTREME MASK...",
+          "categories": "2507,2527,2537"
+        }
+      ]
+    },
+    {
+      "id": "2514",
+      "count": 28,
+      "examples": [
+        {
+          "name": "Lozione Dopobarba Hugo Boss Bottled No 6 50 ml...",
+          "categories": "2507,2527,2514"
+        },
+        {
+          "name": "Lozione Dopobarba Proraso 400572 Alcool...",
+          "categories": "2507,2527,2514"
+        },
+        {
+          "name": "Lozione Dopobarba Acqua Di Giò Armani Rasage...",
+          "categories": "2507,2527,2514"
+        }
+      ]
+    },
+    {
+      "id": "2511",
+      "count": 20,
+      "examples": [
+        {
+          "name": "Profumo Unisex La Religieuse Serge Lutens (100 ml) 96 g...",
+          "categories": "2507,2508,2511"
+        },
+        {
+          "name": "Profumo Unisex Salvatore Ferragamo COL27402 EDT 100 ml 75 ml...",
+          "categories": "2507,2508,2511"
+        },
+        {
+          "name": "Body Mist Instituto Español Agua de rosas EDC 750 ml...",
+          "categories": "2507,2508,2511"
+        }
+      ]
+    },
+    {
+      "id": "2539",
+      "count": 20,
+      "examples": [
+        {
+          "name": "Crema Viso Guerlain G061544 50 ml...",
+          "categories": "2507,2527,2539"
+        },
+        {
+          "name": "Massaggiatore Payot Roselift Roll-On...",
+          "categories": "2507,2527,2539"
+        },
+        {
+          "name": "Acqua Micellare Bioderma Sensibio H2O AR 250 ml...",
+          "categories": "2507,2527,2539"
+        }
+      ]
+    },
+    {
+      "id": "2564",
+      "count": 19,
+      "examples": [
+        {
+          "name": "Mascara per Ciglia Kanebo Sensai-4973167977293 Nero...",
+          "categories": "2507,2555,2564"
+        },
+        {
+          "name": "Tinta per ciglia RefectoCil 9003877057406 Nº 2.1 15 ml (1 Un...",
+          "categories": "2507,2555,2564"
+        },
+        {
+          "name": "Mascara Effetto Volume Clinique 020714192334 Bianco Nero...",
+          "categories": "2507,2555,2564"
+        }
+      ]
+    },
+    {
+      "id": "2566",
+      "count": 18,
+      "examples": [
+        {
+          "name": "Matita Occhi Sisley 187019...",
+          "categories": "2507,2555,2566"
+        },
+        {
+          "name": "Eyeliner Wonder Swipe Rimmel London 34222503006 30 ml...",
+          "categories": "2507,2555,2566"
+        },
+        {
+          "name": "Matita Occhi Lancôme 24908 Grigio...",
+          "categories": "2507,2555,2566"
+        }
+      ]
+    },
+    {
+      "id": "2553",
+      "count": 14,
+      "examples": [
+        {
+          "name": "Protezione Solare Viso La Roche Posay 50 ml...",
+          "categories": "2507,2547,2553"
+        },
+        {
+          "name": "Anticellulite Shiseido 2523202 200 ml...",
+          "categories": "2507,2547,2553"
+        },
+        {
+          "name": "Crema Corpo Anti-smagliature Lierac PHYTOLASTIL Gel...",
+          "categories": "2507,2547,2553"
+        }
+      ]
+    },
+    {
+      "id": "3169",
+      "count": 13,
+      "examples": [
+        {
+          "name": "Deodorante Roll-on Lancôme 50 ml...",
+          "categories": "2507,2547,3169"
+        },
+        {
+          "name": "Deodorante Roll-on Vichy Sensitive 50 ml...",
+          "categories": "2507,2547,3169"
+        },
+        {
+          "name": "Deodorante Roll-on Vichy Sensitive Skin48H 50 ml...",
+          "categories": "2507,2547,3169"
+        }
+      ]
+    },
+    {
+      "id": "2558",
+      "count": 11,
+      "examples": [
+        {
+          "name": "Polveri Compatte Shiseido Smu Synchro Skin Self Refreshing C...",
+          "categories": "2507,2555,2558"
+        },
+        {
+          "name": "Polveri Compatte Guerlain Nº 04...",
+          "categories": "2507,2555,2558"
+        },
+        {
+          "name": "Polveri Compatte Guerlain Nº 05...",
+          "categories": "2507,2555,2558"
+        }
+      ]
+    },
+    {
+      "id": "3009",
+      "count": 11,
+      "examples": [
+        {
+          "name": "Profumo Unisex Instituto Español Gotas Frescas EDC...",
+          "categories": "2507,2508,3009"
+        },
+        {
+          "name": "Profumo per Bambini Instituto Español Gotas Frescas Baby EDC...",
+          "categories": "2507,2508,3009"
+        },
+        {
+          "name": "Profumo Unisex Gotas Frescas Instituto Español 62810 EDC 250...",
+          "categories": "2507,2508,3009"
+        }
+      ]
+    },
+    {
+      "id": "2562",
+      "count": 8,
+      "examples": [
+        {
+          "name": "Ombretto Postquam Color Trend Kiwi 3 g...",
+          "categories": "2507,2555,2562"
+        },
+        {
+          "name": "Ombretto Postquam Color Trend Rose 3 g...",
+          "categories": "2507,2555,2562"
+        },
+        {
+          "name": "Palette di Ombretti Postquam Party...",
+          "categories": "2507,2555,2562"
+        }
+      ]
+    },
+    {
+      "id": "3010",
+      "count": 5,
+      "examples": [
+        {
+          "name": "Profumo per Animali Chien Chic Floreale 100 ml Cane...",
+          "categories": "2507,2508,3010"
+        },
+        {
+          "name": "Profumo per Animali Menforsan Vaniglia 125 ml...",
+          "categories": "2507,2508,3010"
+        },
+        {
+          "name": "Acqua di Colonia Menforsan Arancio Vanigliato 125 ml Cane...",
+          "categories": "2507,2508,3010"
+        }
+      ]
+    },
+    {
+      "id": "3167",
+      "count": 5,
+      "examples": [
+        {
+          "name": "Deodorante Stick Chanel 154065 60 L 75 ml...",
+          "categories": "2507,2547,3167"
+        },
+        {
+          "name": "Deodorante Cremoso Lancaster 41724...",
+          "categories": "2507,2547,3167"
+        },
+        {
+          "name": "Deodorante Stick Armani 141152 75 ml...",
+          "categories": "2507,2547,3167"
+        }
+      ]
+    },
+    {
+      "id": "3189",
+      "count": 5,
+      "examples": [
+        {
+          "name": "Schiuma da Barba Proraso Refresh Eucalyptus...",
+          "categories": "2507,2527,3189"
+        },
+        {
+          "name": "Talco Profumato Proraso Rosmarino Menta...",
+          "categories": "2507,2527,3189"
+        },
+        {
+          "name": "Schiuma da Barba Williams Protect...",
+          "categories": "2507,2527,3189"
+        }
+      ]
+    },
+    {
+      "id": "2560",
+      "count": 4,
+      "examples": [
+        {
+          "name": "Mascara per Ciglia Lancôme...",
+          "categories": "2507,2555,2560"
+        },
+        {
+          "name": "Fard Sisley 181505 Arancio...",
+          "categories": "2507,2555,2560"
+        },
+        {
+          "name": "Fard in Stick Essence Baby Got Nº 10-tickle me pink 5,5 g...",
+          "categories": "2507,2555,2560"
+        }
+      ]
+    },
+    {
+      "id": "3011",
+      "count": 3,
+      "examples": [
+        {
+          "name": "Profumo Erotico Obsessive 30 ml Con feromoni Fun...",
+          "categories": "2507,2508,3011"
+        },
+        {
+          "name": "Eau de Parfum Pherofem Cobeco Pherofem 15 ml EDP...",
+          "categories": "2507,2508,3011"
+        },
+        {
+          "name": "Eau de Toilette Pherofem Cobeco Pheromen 15 ml EDT...",
+          "categories": "2507,2508,3011"
+        }
+      ]
+    },
+    {
+      "id": "3190",
+      "count": 2,
+      "examples": [
+        {
+          "name": "Gel da Barba American Crew 7240465000...",
+          "categories": "2507,2527,3190"
+        },
+        {
+          "name": "Gel da Barba Williams Ice Blue...",
+          "categories": "2507,2527,3190"
+        }
+      ]
+    },
+    {
+      "id": "2550",
+      "count": 1,
+      "examples": [
+        {
+          "name": "Deodorante Spray For Men Byly (2 uds)...",
+          "categories": "2507,2547,2550"
+        }
+      ]
+    },
+    {
+      "id": "3191",
+      "count": 1,
+      "examples": [
+        {
+          "name": "Crema da Barba Dear Barber 100 ml...",
+          "categories": "2507,2527,3191"
+        }
+      ]
+    }
+  ]
+}

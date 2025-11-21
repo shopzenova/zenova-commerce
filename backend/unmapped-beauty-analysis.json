@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-11-20T13:44:18.496Z",
+  "totalUnmapped": 1,
+  "totalProductsUnmapped": 28,
+  "categories": [
+    {
+      "bigbuyId": "2507,2514,2527",
+      "count": 28,
+      "samples": [
+        {
+          "name": "Lozione Dopobarba Hugo Boss Bottled No 6 50 ml",
+          "brand": "1820"
+        },
+        {
+          "name": "Lozione Dopobarba Proraso 400572 Alcool",
+          "brand": "13527"
+        },
+        {
+          "name": "Lozione Dopobarba Acqua Di Giò Armani Rasage",
+          "brand": "1293"
+        },
+        {
+          "name": "Balsamo Dopobarba Proraso Yellow",
+          "brand": "13527"
+        },
+        {
+          "name": "Lozione Dopobarba Reuzel",
+          "brand": "17165"
+        }
+      ]
+    }
+  ]
+}

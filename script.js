@@ -366,7 +366,9 @@ function mapBackendProductToFrontend(backendProduct) {
         }
     }
 
-    // NON usare zenovaSubcategory - usa SEMPRE la categoria BigBuy originale
+    // Keep Zenova categories from backend for filtering
+    const zenovaSubcategory = backendProduct.zenovaSubcategory || null;
+    const zenovaCategory = backendProduct.zenovaCategory || null;
 
     return {
         id: backendProduct.id,
@@ -386,7 +388,10 @@ function mapBackendProductToFrontend(backendProduct) {
         ean: backendProduct.ean,
         dimensions: backendProduct.dimensions,
         weight: backendProduct.weight,
-        zenovaCategories: backendProduct.zenovaCategories || []
+        // Zenova categories for filtering
+        zenovaSubcategory: zenovaSubcategory,
+        zenovaCategory: zenovaCategory,
+        zenovaCategories: zenovaSubcategory ? [zenovaSubcategory] : []
     };
 }
 
@@ -431,8 +436,8 @@ async function loadProductsFromBackend() {
             nascosti: productLayout.hidden.length
         });
 
-        // Call backend API
-        const backendProducts = await ZenovaAPI.getProducts(1, 400);
+        // Call backend API (load all products including Health)
+        const backendProducts = await ZenovaAPI.getProducts(1, 10000);
 
         if (backendProducts && backendProducts.length > 0) {
             console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
@@ -513,8 +518,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadProductsFromBackend();
 
     // Then render and setup everything
-    renderProducts(); // For prodotti.html
-    renderFeaturedProducts(); // For index.html (homepage)
+    // Check if we're on prodotti.html or index.html
+    const productsGrid = document.getElementById('productsGrid');
+    if (productsGrid) {
+        // We're on prodotti.html - render all products
+        console.log('📄 Detected prodotti.html - rendering all products');
+        renderProducts();
+    } else {
+        // We're on index.html - render only featured
+        renderFeaturedProducts();
+    }
     loadCart();
     loadWishlist();
     setupEventListeners();
@@ -857,6 +870,68 @@ function renderProducts() {
     // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
     console.log('✅ Prodotti renderizzati, cards ora cliccabili');
 }
+
+// NEW: Render products filtered by specific category/subcategory
+function renderProductsByCategory(searchTerm) {
+    const productsGrid = document.getElementById('productsGrid');
+    if (!productsGrid) {
+        console.warn('⚠️ productsGrid not found');
+        return;
+    }
+
+    console.log(`🎯 Rendering products for: ${searchTerm}`);
+
+    // Try filtering by zenovaSubcategory first (for anchor names like "profumi-donne")
+    let filteredProducts = products.filter(product => {
+        return product.zenovaSubcategory === searchTerm;
+    });
+
+    // If no results, try exact match on subcategory (for BigBuy IDs like "2507,2508,2510")
+    if (filteredProducts.length === 0) {
+        const normalizeCategories = (catString) => {
+            return catString.split(',').map(c => c.trim()).sort().join(',');
+        };
+
+        const searchNormalized = normalizeCategories(searchTerm);
+
+        filteredProducts = products.filter(product => {
+            if (!product.subcategory) return false;
+            const productNormalized = normalizeCategories(product.subcategory);
+            return productNormalized === searchNormalized;
+        });
+    }
+
+    console.log(`📦 Found ${filteredProducts.length} products for "${searchTerm}"`);
+
+    // Clear grid
+    productsGrid.innerHTML = '';
+
+    if (filteredProducts.length === 0) {
+        productsGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;">📦</div>
+                <h3 style="color: #666; margin-bottom: 1rem;">Nessun Prodotto</h3>
+                <p style="color: #999;">Nessun prodotto disponibile in questa categoria al momento.</p>
+                <p style="color: #999; margin-top: 1rem;">Stiamo lavorando per aggiungere nuovi prodotti!</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Render filtered products
+    filteredProducts.forEach(product => {
+        const productCard = createProductCard(product);
+        productsGrid.appendChild(productCard);
+    });
+
+    // Make cards clickable
+    makeProductCardsClickable();
+
+    console.log('✅ Prodotti renderizzati per categoria');
+}
+
+// Make function globally accessible
+window.renderProductsByCategory = renderProductsByCategory;
 
 // Add to Cart
 function addToCart(productId) {

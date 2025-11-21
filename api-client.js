@@ -10,7 +10,7 @@ class ZenovaAPI {
   /**
    * GET - Lista prodotti
    */
-  static async getProducts(page = 1, pageSize = 200) {
+  static async getProducts(page = 1, pageSize = 5000) {
     try {
       const response = await fetch(`${API_BASE_URL}/products?page=${page}&pageSize=${pageSize}`);
       const data = await response.json();

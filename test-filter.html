@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Filtro Prodotti</title>
+</head>
+<body>
+    <h1>Test Filtro Prodotti</h1>
+    <button onclick="testFilter('set-massaggio')">Test set-massaggio</button>
+    <button onclick="testFilter('profumi-donne')">Test profumi-donne</button>
+    <button onclick="testFilter('2501,2502,2504')">Test 2501,2502,2504 (ID BigBuy)</button>
+    <div id="result"></div>
+
+    <script>
+        let products = [];
+
+        // Carica prodotti
+        fetch('http://localhost:3000/api/products')
+            .then(r => r.json())
+            .then(data => {
+                products = data;
+                console.log('Caricati', products.length, 'prodotti');
+            });
+
+        function testFilter(searchTerm) {
+            console.log('\n=== TEST:', searchTerm, '===');
+
+            // Try filtering by zenovaSubcategory first
+            let filtered = products.filter(product => {
+                return product.zenovaSubcategory === searchTerm;
+            });
+
+            console.log('Filtro 1 (zenovaSubcategory):', filtered.length, 'prodotti');
+
+            // If no results, try exact match on subcategory
+            if (filtered.length === 0) {
+                const normalizeCategories = (catString) => {
+                    return catString.split(',').map(c => c.trim()).sort().join(',');
+                };
+
+                const searchNormalized = normalizeCategories(searchTerm);
+
+                filtered = products.filter(product => {
+                    if (!product.subcategory) return false;
+                    const productNormalized = normalizeCategories(product.subcategory);
+                    return productNormalized === searchNormalized;
+                });
+
+                console.log('Filtro 2 (subcategory):', filtered.length, 'prodotti');
+            }
+
+            document.getElementById('result').innerHTML = `
+                <h2>Risultato per "${searchTerm}":</h2>
+                <p><strong>${filtered.length} prodotti trovati</strong></p>
+                <ul>
+                    ${filtered.slice(0, 5).map(p => `<li>${p.name} (${p.zenovaSubcategory})</li>`).join('')}
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
