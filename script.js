@@ -687,6 +687,15 @@ function createProductCard(product) {
 
     const productPrice = (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
 
+    // Get category name (support both zenovaCategory and category)
+    const categoryName = product.zenovaCategory || product.category || 'Prodotti';
+    const displayCategory = categoryName
+        .replace('beauty', 'Beauty')
+        .replace('health-personal-care', 'Health & Personal Care')
+        .replace('smart-living', 'Smart Living')
+        .replace('natural-wellness', 'Natural Wellness')
+        .replace('tech', 'Tech Innovation');
+
     productCard.innerHTML = `
         ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
         <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}">
@@ -696,7 +705,7 @@ function createProductCard(product) {
             ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.icon}
         </div>
         <div class="product-info">
-            <div class="product-category">${product.category}</div>
+            <div class="product-category">${displayCategory}</div>
             <h3 class="product-name">${product.name}</h3>
             <div class="product-footer">
                 <span class="product-price">€${productPrice}</span>
@@ -890,6 +899,9 @@ function renderProducts() {
 
     // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
     console.log('✅ Prodotti featured renderizzati, cards ora cliccabili');
+
+    // Re-initialize click handlers for product cards
+    makeProductCardsClickable();
 }
 
 // Function to reset to featured products (called when closing sidebar)
