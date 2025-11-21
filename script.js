@@ -1696,6 +1696,7 @@ window.handleSearchResultClick = function(productId) {
 let currentProductId = null;
 let savedScrollPosition = 0;
 let savedSidebarState = []; // Salva stato sidebar
+let currentProductCategory = null; // Categoria del prodotto corrente
 
 // Gallery state
 let currentGalleryIndex = 0;
@@ -1707,6 +1708,7 @@ function openProductDetailModal(productId) {
     if (!product) return;
 
     currentProductId = productId;
+    currentProductCategory = product.zenovaCategory || null; // Salva categoria prodotto
 
     // Salva la posizione di scroll corrente
     savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -1717,6 +1719,7 @@ function openProductDetailModal(productId) {
         savedSidebarState.push(item);
     });
     console.log('💾 Stato sidebar salvato:', savedSidebarState.length, 'elementi aperti');
+    console.log('📂 Categoria prodotto:', currentProductCategory);
 
     const modal = document.getElementById('productDetailModal');
 
@@ -1900,10 +1903,21 @@ function closeProductDetailModal() {
 
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {
-        savedSidebarState.forEach(item => {
-            item.classList.add('active');
-        });
-        console.log('🔄 Stato sidebar ripristinato:', savedSidebarState.length, 'elementi riaperti');
+        if (savedSidebarState.length > 0) {
+            // Ripristina categorie che erano già aperte
+            savedSidebarState.forEach(item => {
+                item.classList.add('active');
+            });
+            console.log('🔄 Stato sidebar ripristinato:', savedSidebarState.length, 'elementi riaperti');
+        } else if (currentProductCategory) {
+            // Se nessuna categoria era aperta, apri quella del prodotto visualizzato
+            const categoryButton = document.querySelector(`[data-category="${currentProductCategory}"]`);
+            if (categoryButton) {
+                const categoryItem = categoryButton.parentElement;
+                categoryItem.classList.add('active');
+                console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
+            }
+        }
     }, 50);
 
     // Ripristina la posizione di scroll salvata
