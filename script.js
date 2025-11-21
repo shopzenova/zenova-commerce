@@ -850,30 +850,53 @@ function renderProducts() {
 
     productsGrid.innerHTML = '';
 
-    console.log(`🎨 Rendering ${products.length} products`);
+    console.log(`🎨 Rendering featured products (4-5 per subcategory)`);
 
     // IMPORTANTE: Filtra prodotti nascosti (visible: false)
     const visibleProducts = products.filter(p => p.visible !== false);
-    console.log(`👁️  Prodotti visibili: ${visibleProducts.length} su ${products.length} totali`);
+    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length}`);
 
-    // Count subcategories
-    const subcategoryCounts = {};
+    // Raggruppa prodotti per sottocategoria
+    const productsBySubcategory = {};
     visibleProducts.forEach(p => {
-        subcategoryCounts[p.subcategory] = (subcategoryCounts[p.subcategory] || 0) + 1;
-    });
-    console.log('📊 Subcategories being rendered:');
-    Object.keys(subcategoryCounts).sort((a, b) => subcategoryCounts[b] - subcategoryCounts[a]).forEach(sub => {
-        console.log(`  "${sub}": ${subcategoryCounts[sub]} prodotti`);
+        const subcat = p.zenovaSubcategory || p.subcategory || 'altri';
+        if (!productsBySubcategory[subcat]) {
+            productsBySubcategory[subcat] = [];
+        }
+        productsBySubcategory[subcat].push(p);
     });
 
-    visibleProducts.forEach(product => {
+    // Prendi 4-5 prodotti per ogni sottocategoria (max 100 totali)
+    const featuredProducts = [];
+    const maxPerSubcategory = 5;
+    const maxTotalProducts = 100;
+
+    Object.keys(productsBySubcategory).forEach(subcat => {
+        const subcatProducts = productsBySubcategory[subcat];
+        const toTake = Math.min(maxPerSubcategory, subcatProducts.length);
+        featuredProducts.push(...subcatProducts.slice(0, toTake));
+    });
+
+    // Limita a max 100 prodotti totali
+    const productsToRender = featuredProducts.slice(0, maxTotalProducts);
+
+    console.log(`✨ Featured products: ${productsToRender.length} prodotti da ${Object.keys(productsBySubcategory).length} sottocategorie`);
+
+    // Render featured products
+    productsToRender.forEach(product => {
         const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
 
     // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
-    console.log('✅ Prodotti renderizzati, cards ora cliccabili');
+    console.log('✅ Prodotti featured renderizzati, cards ora cliccabili');
 }
+
+// Function to reset to featured products (called when closing sidebar)
+window.resetToFeaturedProducts = function() {
+    console.log('🔄 Reset a prodotti featured');
+    renderProducts();
+};
 
 // NEW: Render products filtered by specific category/subcategory
 function renderProductsByCategory(searchTerm) {
