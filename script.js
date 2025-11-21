@@ -945,13 +945,10 @@ function renderProductsByCategory(searchTerm) {
 
     console.log(`🎯 Rendering products for: ${searchTerm}`);
 
-    // IMPORTANTE: Prima filtra prodotti nascosti (visible: false) E prodotti nell'array hidden di productLayout
-    const hiddenIds = (productLayout && productLayout.hidden) ? productLayout.hidden : [];
-    const visibleProducts = products.filter(p => {
-        // Escludi se visible è false O se è nell'array hidden
-        return p.visible !== false && !hiddenIds.includes(p.id);
-    });
-    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length} (nascosti: ${hiddenIds.length})`);
+    // IMPORTANTE: Per le categorie sidebar, mostra tutti i prodotti (anche quelli in 'hidden')
+    // 'hidden' serve solo per escluderli dai 100 in evidenza, NON dalle categorie
+    const visibleProducts = products.filter(p => p.visible !== false);
+    console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length}`);
 
     // Try filtering by zenovaSubcategory first (for anchor names like "profumi-donne")
     let filteredProducts = visibleProducts.filter(product => {
