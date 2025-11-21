@@ -509,6 +509,23 @@ router.patch('/products/:id/visibility', (req, res) => {
     const productName = PRODUCTS[productIndex].name;
     const newVisibility = PRODUCTS[productIndex].visible;
 
+    // ✅ NUOVO: Gestisci array hidden in productLayout
+    if (!newVisibility) {
+      // Se nascondi (visible = false), aggiungi a hidden
+      if (!productLayout.hidden.includes(productId)) {
+        productLayout.hidden.push(productId);
+      }
+    } else {
+      // Se mostri (visible = true), rimuovi da hidden
+      const hiddenIndex = productLayout.hidden.indexOf(productId);
+      if (hiddenIndex > -1) {
+        productLayout.hidden.splice(hiddenIndex, 1);
+      }
+    }
+
+    // Salva productLayout aggiornato
+    fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
+
     // Salva nel file JSON
     const jsonPath = path.join(__dirname, '../../top-100-products.json');
     fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
