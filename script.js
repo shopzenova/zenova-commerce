@@ -1625,14 +1625,29 @@ function setupSearch() {
         searchInput.value = '';
     }
 
-    // Real-time search
+    // Real-time search with debouncing (300ms delay)
+    let searchTimeout;
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim().toLowerCase();
+
+        // Clear previous timeout
+        clearTimeout(searchTimeout);
 
         if (query.length === 0) {
             displayInitialResults();
         } else {
-            performSearch(query);
+            // Show loading state
+            searchResults.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #999;">
+                    <div style="font-size: 32px; margin-bottom: 10px;">🔄</div>
+                    <div>Ricerca in corso...</div>
+                </div>
+            `;
+
+            // Wait 300ms before searching (debouncing)
+            searchTimeout = setTimeout(() => {
+                performSearch(query);
+            }, 300);
         }
     });
 
@@ -1651,51 +1666,80 @@ function setupSearch() {
         displayResults(recentProducts, '');
     }
 
-    // Perform search
+    // Perform search (OPTIMIZED)
     function performSearch(query) {
-        const results = products.filter(product => {
-            const nameMatch = product.name.toLowerCase().includes(query);
-            const categoryMatch = product.category.toLowerCase().includes(query);
-            const descMatch = product.description.toLowerCase().includes(query);
+        const startTime = performance.now();
 
-            return nameMatch || categoryMatch || descMatch;
-        });
+        // Filter only visible products and limit results
+        const results = products
+            .filter(product => {
+                // Skip hidden products
+                if (product.visible === false) return false;
+
+                // Search only in name and category (NOT description for performance)
+                const nameMatch = product.name.toLowerCase().includes(query);
+                const categoryMatch = (product.category || '').toLowerCase().includes(query);
+                const subcategoryMatch = (product.zenovaSubcategory || '').toLowerCase().includes(query);
+
+                return nameMatch || categoryMatch || subcategoryMatch;
+            })
+            .slice(0, 20); // Limit to first 20 results for performance
+
+        const endTime = performance.now();
+        console.log(`🔍 Search completed in ${(endTime - startTime).toFixed(2)}ms - Found ${results.length} results`);
 
         displayResults(results, query);
     }
 
-    // Display search results
+    // Display search results (OPTIMIZED)
     function displayResults(results, query) {
         if (results.length === 0) {
             searchResults.innerHTML = `
                 <div class="search-empty">
                     <div class="search-empty-icon">🔍</div>
                     <div class="search-empty-text">Nessun risultato trovato</div>
-                    <div class="search-empty-hint">Prova con parole chiave diverse come "lavanda", "diffusore" o "yoga"</div>
+                    <div class="search-empty-hint">Prova con parole chiave diverse</div>
                 </div>
             `;
             return;
         }
 
-        searchResults.innerHTML = results.map(product => {
-            // Highlight matching text
+        let html = '';
+
+        // Show info if there are more results
+        if (results.length === 20) {
+            html += `
+                <div style="background: #f0f7ff; border: 1px solid #b3d9ff; border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center; color: #0066cc; font-size: 14px;">
+                    ℹ️ Mostrando i primi 20 risultati. Affina la ricerca per risultati più precisi.
+                </div>
+            `;
+        }
+
+        html += results.map(product => {
+            // Highlight matching text ONLY in name (skip description for performance)
             const highlightedName = highlightText(product.name, query);
-            const highlightedDesc = highlightText(product.description, query);
+
+            // Extract short description (first 100 chars, no HTML)
+            const shortDesc = product.description
+                ? product.description.replace(/<[^>]*>/g, '').substring(0, 100) + '...'
+                : product.category || '';
 
             return `
                 <div class="search-result-item" onclick="handleSearchResultClick('${product.id}')">
                     <div class="search-result-icon">
-                        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : product.icon}
+                        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : '📦'}
                     </div>
                     <div class="search-result-info">
-                        <div class="search-result-category">${product.category}</div>
+                        <div class="search-result-category">${product.zenovaSubcategory || product.category || 'Prodotto'}</div>
                         <div class="search-result-name">${highlightedName}</div>
-                        <div class="search-result-description">${highlightedDesc}</div>
+                        <div class="search-result-description">${shortDesc}</div>
                     </div>
                     <div class="search-result-price">€${(product.price || 0).toFixed(2)}</div>
                 </div>
             `;
         }).join('');
+
+        searchResults.innerHTML = html;
     }
 
     // Highlight matching text
@@ -1713,8 +1757,27 @@ window.handleSearchResultClick = function(productId) {
     document.getElementById('searchModal').classList.remove('active');
     document.getElementById('searchInput').value = '';
 
-    // Open product detail modal
-    openProductDetailModal(productId);
+    // Get product info
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        console.error('Prodotto non trovato:', productId);
+        return;
+    }
+
+    // Check if we're already on prodotti.html
+    const currentPage = window.location.pathname.split('/').pop();
+
+    if (currentPage === 'prodotti.html') {
+        // Already on shop page - just open modal
+        openProductDetailModal(productId);
+    } else {
+        // Navigate to shop page with product and category info
+        const subcategory = product.zenovaSubcategory || '';
+        const category = product.zenovaCategory || '';
+
+        // Navigate to prodotti.html with hash for category and product
+        window.location.href = `prodotti.html#${subcategory}&product=${productId}`;
+    }
 };
 
 // ============ PRODUCT DETAIL MODAL ============
@@ -1859,14 +1922,27 @@ function openProductDetailModal(productId) {
     // Update wishlist button state
     updateWishlistButtonInModal();
 
-    // Show modal
-    modal.classList.add('active');
+    // Prevent scrollbar shift when modal opens
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-    // Scrolla sempre in alto all'apertura del modal
+    // Apply padding BEFORE showing modal to prevent layout shift
+    if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.style.overflow = 'hidden';
+
+    // Reset modal scroll position BEFORE showing
     const modalContent = document.querySelector('.product-detail-content');
     if (modalContent) {
         modalContent.scrollTop = 0;
     }
+
+    // Show modal with double requestAnimationFrame for smoother rendering
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+        });
+    });
 }
 
 // Update gallery display
@@ -1929,6 +2005,10 @@ function goToGalleryImage(index) {
 function closeProductDetailModal() {
     document.getElementById('productDetailModal').classList.remove('active');
     currentProductId = null;
+
+    // Restore body scroll and padding (prevent page shift)
+    document.body.style.paddingRight = '';
+    document.body.style.overflow = '';
 
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {

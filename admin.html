@@ -281,8 +281,11 @@
                 <!-- All Products List with Zone Selection -->
                 <div class="all-products-section">
                     <div class="section-header">
-                        <h2>Tutti i Prodotti (325)</h2>
+                        <h2>Tutti i Prodotti (<span id="totalProductsCount">0</span>)</h2>
                         <input type="text" id="productSearch" class="search-input" placeholder="🔍 Cerca prodotto per nome...">
+                    </div>
+                    <div id="productSearchInfo" style="padding: 10px 20px; background: #f0f7ff; border-radius: 8px; margin-bottom: 15px; display: none;">
+                        <span id="visibleProductsCount">0</span> prodotti visibili
                     </div>
                     <div id="allProductsList" class="all-products-list">
                         <!-- Products will be loaded here by JavaScript -->
@@ -368,7 +371,7 @@
                         <select id="mainCategoryFilter" onchange="loadProductsByCategory()" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
                             <option value="all">📦 Tutte le Categorie</option>
                             <option value="beauty">💄 Beauty</option>
-                            <option value="health">🏥 Health & Personal Care</option>
+                            <option value="health-personal-care">🏥 Health & Personal Care</option>
                             <option value="smart-living">🏠 Smart Living</option>
                             <option value="natural-wellness">🌿 Natural Wellness</option>
                             <option value="tech">💻 Tech Innovation</option>

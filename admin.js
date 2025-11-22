@@ -108,6 +108,25 @@ dropZones.forEach(zone => {
         this.classList.remove('drag-over');
 
         if (draggedElement) {
+            const productId = draggedElement.dataset.id;
+            const targetZoneId = this.id; // 'homeProducts', 'sidebarProducts', 'hiddenProducts'
+
+            // Map zone ID to zone name
+            const zoneMap = {
+                'homeProducts': 'home',
+                'sidebarProducts': 'sidebar',
+                'hiddenProducts': 'hidden'
+            };
+            const newZone = zoneMap[targetZoneId];
+
+            // Update product zone in allProducts array
+            const product = allProducts.find(p => p.id === productId);
+            if (product && newZone) {
+                product.zone = newZone;
+                console.log(`✅ Prodotto "${product.name}" spostato in zona: ${newZone}`);
+            }
+
+            // Move element in DOM
             this.appendChild(draggedElement);
             updateZoneCounts();
             saveProductLayout();
@@ -131,7 +150,8 @@ async function saveProductLayout() {
     const layout = {
         home: [],
         sidebar: [],
-        hidden: []
+        hidden: [],
+        featured: [] // IMPORTANTE: deve essere incluso!
     };
 
     // Leggi il layout dall'array di prodotti invece che dal DOM
@@ -448,7 +468,24 @@ function populateAllProductsList(products) {
     const listContainer = document.getElementById('allProductsList');
     if (!listContainer) return;
 
+    // Update total count
+    const totalCountElement = document.getElementById('totalProductsCount');
+    if (totalCountElement) {
+        totalCountElement.textContent = products.length.toLocaleString();
+    }
+
     listContainer.innerHTML = '';
+
+    // Show warning if too many products
+    if (products.length > 1000) {
+        const warning = document.createElement('div');
+        warning.style.cssText = 'padding: 15px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin-bottom: 15px; text-align: center;';
+        warning.innerHTML = `
+            ⚠️ <strong>${products.length.toLocaleString()} prodotti</strong> caricati.
+            Usa la ricerca per filtrare i risultati e migliorare le performance.
+        `;
+        listContainer.appendChild(warning);
+    }
 
     products.forEach(product => {
         const productItem = document.createElement('div');
@@ -572,7 +609,18 @@ function setupProductSearch(products) {
             }
         });
 
-        console.log(`🔍 Ricerca "${searchTerm}": ${visibleCount} prodotti trovati`);
+        // Update visible count UI
+        const searchInfo = document.getElementById('productSearchInfo');
+        const visibleCountElement = document.getElementById('visibleProductsCount');
+
+        if (searchTerm === '') {
+            if (searchInfo) searchInfo.style.display = 'none';
+        } else {
+            if (searchInfo) searchInfo.style.display = 'block';
+            if (visibleCountElement) visibleCountElement.textContent = visibleCount.toLocaleString();
+        }
+
+        console.log(`🔍 Ricerca "${searchTerm}": ${visibleCount} prodotti trovati su ${productItems.length}`);
     });
 }
 
@@ -1117,7 +1165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Mappa nomi categorie user-friendly
 const categoryNames = {
     'beauty': 'Beauty',
-    'health': 'Health & Personal Care',
+    'health-personal-care': 'Health & Personal Care',
     'smart-living': 'Smart Living',
     'natural-wellness': 'Natural Wellness',
     'tech': 'Tech Innovation'

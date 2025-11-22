@@ -129,7 +129,7 @@ function getProductZone(productId) {
 
 // Helper: verifica se un prodotto è featured
 function isFeatured(productId) {
-  return productLayout.featured.includes(productId);
+  return productLayout.featured && productLayout.featured.includes(productId);
 }
 
 // PUT /api/admin/products/layout - Salva layout prodotti

@@ -2566,7 +2566,7 @@ body {
     font-weight: 600;
 }
 
-/* Product Detail Modal */
+/* Product Detail Modal - OPTIMIZED (no shake) */
 .product-detail-modal {
     position: fixed;
     top: 0;
@@ -2577,13 +2577,14 @@ body {
     z-index: 2500;
     display: none;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    overflow-y: auto;
+    transform: translateZ(0); /* Hardware acceleration */
+    will-change: opacity; /* Optimize transitions */
 }
 
 .product-detail-modal.active {
-    display: block;
+    display: flex;
     opacity: 1;
+    animation: modalFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .product-detail-content {
@@ -2591,13 +2592,13 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
-    animation: productDetailFadeIn 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transform: translateZ(0); /* Hardware acceleration */
 }
 
-@keyframes productDetailFadeIn {
+@keyframes modalFadeIn {
     from {
         opacity: 0;
     }

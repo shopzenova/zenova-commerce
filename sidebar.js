@@ -428,8 +428,20 @@ function autoOpenCategoryFromHash() {
 
     console.log('🔗 Hash detected:', hash);
 
+    // Parse hash to extract category and product ID
+    // Format: "category&product=ID" or just "category"
+    let categoryPart = hash;
+    let productId = null;
+
+    if (hash.includes('&product=')) {
+        const parts = hash.split('&product=');
+        categoryPart = parts[0];
+        productId = parts[1];
+        console.log('📦 Extracted category:', categoryPart, '| Product ID:', productId);
+    }
+
     // Convert anchor to actual BigBuy subcategory value
-    const actualSubcategory = anchorToSubcategoryMap[hash] || hash;
+    const actualSubcategory = anchorToSubcategoryMap[categoryPart] || categoryPart;
     console.log('📦 Mapped to subcategory:', actualSubcategory);
 
     // Handle 'all' category - disabled
@@ -438,8 +450,8 @@ function autoOpenCategoryFromHash() {
         return;
     }
 
-    // Find the parent category
-    const parentCategory = subcategoryToCategoryMap[hash] || subcategoryToCategoryMap[actualSubcategory];
+    // Find the parent category (use categoryPart, not hash)
+    const parentCategory = subcategoryToCategoryMap[categoryPart] || subcategoryToCategoryMap[actualSubcategory];
 
     if (!parentCategory) {
         console.log('❌ No parent category found for:', hash);
@@ -458,10 +470,10 @@ function autoOpenCategoryFromHash() {
         console.log('❌ Category button not found for:', parentCategory);
     }
 
-    // Find and activate the subcategory link using the HASH (unique identifier)
-    const subcategoryLink = document.querySelector(`a[href="#${hash}"].sub-subcategory-link, a[href="#${hash}"].subcategory-link`);
+    // Find and activate the subcategory link using categoryPart (not full hash)
+    const subcategoryLink = document.querySelector(`a[href="#${categoryPart}"].sub-subcategory-link, a[href="#${categoryPart}"].subcategory-link`);
     if (subcategoryLink) {
-        console.log('✅ Subcategory link found by hash:', hash);
+        console.log('✅ Subcategory link found by hash:', categoryPart);
 
         // Remove active from all
         document.querySelectorAll('.subcategory-link, .sub-subcategory-link').forEach(l => l.classList.remove('active'));
@@ -483,8 +495,16 @@ function autoOpenCategoryFromHash() {
         } else {
             console.error('❌ renderProductsByCategory not found');
         }
+
+        // If there's a product ID, open the product detail modal after a short delay
+        if (productId && typeof window.openProductDetailModal === 'function') {
+            console.log('🎯 Opening product detail for:', productId);
+            setTimeout(() => {
+                window.openProductDetailModal(productId);
+            }, 300); // Wait 300ms for products to load (reduced from 500ms)
+        }
     } else {
-        console.log('❌ Subcategory link not found for hash:', hash);
+        console.log('❌ Subcategory link not found for hash:', categoryPart);
     }
 }
 

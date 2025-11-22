@@ -106,17 +106,53 @@ function getSubcategoryDisplayName(subcat) {
   return names[subcat] || subcat;
 }
 
+// Carica layout prodotti
+let productLayout = { home: [], sidebar: [], hidden: [], featured: [] };
+try {
+  const layoutPath = path.join(__dirname, '../../config/product-layout.json');
+  if (fs.existsSync(layoutPath)) {
+    const layoutData = fs.readFileSync(layoutPath, 'utf-8');
+    productLayout = JSON.parse(layoutData);
+    logger.info(`✅ Layout caricato: ${productLayout.home.length} home, ${productLayout.sidebar.length} sidebar, ${productLayout.hidden.length} hidden`);
+  }
+} catch (error) {
+  logger.error('❌ Errore caricamento layout:', error);
+}
+
+// GET /api/products/layout - Restituisce il layout salvato
+router.get('/layout', (req, res) => {
+  res.json({
+    success: true,
+    data: productLayout
+  });
+});
+
 // GET /api/products - Lista tutti i prodotti (da JSON locale)
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 50;
     const category = req.query.category; // Filtro per categoria Zenova
+    const zone = req.query.zone; // Filtro per zona (home, sidebar, hidden)
 
     let products = [...TOP_PRODUCTS];
 
     // Filtra solo prodotti visibili (nasconde quelli con visible: false)
     products = products.filter(p => p.visible !== false);
+
+    // Filtra per ZONA se richiesto (IMPORTANTE!)
+    if (zone && zone !== 'all') {
+      if (zone === 'home') {
+        products = products.filter(p => productLayout.home.includes(p.id));
+        logger.info(`Filtrati per zona 'home': ${products.length} prodotti`);
+      } else if (zone === 'sidebar') {
+        products = products.filter(p => productLayout.sidebar.includes(p.id));
+        logger.info(`Filtrati per zona 'sidebar': ${products.length} prodotti`);
+      } else if (zone === 'hidden') {
+        products = products.filter(p => productLayout.hidden.includes(p.id));
+        logger.info(`Filtrati per zona 'hidden': ${products.length} prodotti`);
+      }
+    }
 
     // Filtra per categoria Zenova se richiesto
     if (category) {
