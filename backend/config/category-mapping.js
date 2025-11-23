@@ -1,8 +1,13 @@
 /**
- * Sistema di Categorizzazione Zenova - KEYWORD MATCHING SELETTIVO
+ * Sistema di Categorizzazione Zenova - NUOVA STRUTTURA 2.0
+ * "Where Technology Meets Calm"
  *
- * ESCLUDE automaticamente prodotti non Zenova (pentole, alcolici, cucina generica)
- * INCLUDE solo prodotti delle 5 categorie Zenova
+ * 5 CATEGORIE PRINCIPALI:
+ * 1. Beauty (BigBuy auto-sync)
+ * 2. Health & Personal Care (BigBuy auto-sync)
+ * 3. Smart Living (BigBuy SKU import)
+ * 4. Tech Innovation (Mix SKU import)
+ * 5. Natural Wellness (AW Dropship)
  */
 
 // ============================================================================
@@ -24,7 +29,7 @@ const BLACKLIST_KEYWORDS = [
 
   // Elettrodomestici da cucina generici
   'mixer', 'frullatore', 'robot da cucina', 'impastatrice', 'tritacarne',
-  'affettatrice', 'tostapane', 'bollitore elettrico',
+  'tostapane', 'bollitore elettrico',
 
   // Pulizia
   'scopa', 'aspirapolvere', 'mocio', 'spugna', 'detergente', 'sapone per piatti',
@@ -44,127 +49,129 @@ const BLACKLIST_KEYWORDS = [
 // ============================================================================
 
 const ZENOVA_CATEGORIES = {
-  // 1. 🏠 SMART LIVING
+  // 1. 💄 BEAUTY (BigBuy auto-sync)
+  'beauty': {
+    keywords: [
+      // Profumi
+      'profumo', 'eau de toilette', 'eau de parfum', 'fragranza', 'cologne',
+
+      // Makeup
+      'cosmetico', 'makeup', 'trucco', 'rossetto', 'mascara', 'fondotinta',
+      'ombretto', 'matita', 'cipria', 'blush', 'correttore',
+
+      // Skincare
+      'crema viso', 'siero viso', 'maschera viso', 'gel viso', 'lozione',
+      'anti-age', 'anti-rughe', 'contorno occhi', 'struccante',
+
+      // Corpo
+      'gel doccia', 'bagnoschiuma', 'crema corpo', 'lozione corpo',
+      'scrub corpo', 'olio corpo', 'deodorante',
+
+      // Igiene
+      'igiene orale', 'dentifricio', 'collutorio', 'gel intimo',
+      'sapone', 'detergente viso'
+    ],
+    priority: 1
+  },
+
+  // 2. 🏥 HEALTH & PERSONAL CARE (BigBuy auto-sync)
+  'health-personal-care': {
+    keywords: [
+      // Cura capelli
+      'shampoo', 'balsamo', 'maschera capelli', 'tintura capelli',
+      'lacca', 'gel capelli', 'mousse capelli', 'siero capelli',
+      'piastra', 'arricciacapelli', 'phon', 'asciugacapelli',
+
+      // Barba
+      'barba', 'dopobarba', 'schiuma barba', 'rasoio', 'trimmer barba',
+
+      // Massaggio e benessere
+      'massaggiatore', 'massaggio', 'shiatsu', 'pistola massaggiante',
+
+      // Medicale
+      'cerotto', 'medicazione', 'misuratore pressione', 'termometro',
+
+      // Protezione solare
+      'protezione solare', 'crema solare', 'after sun', 'autoabbronzante',
+
+      // Mani e piedi
+      'crema mani', 'crema piedi', 'pedicure', 'manicure'
+    ],
+    priority: 2
+  },
+
+  // 3. 🏠 SMART LIVING (BigBuy SKU import)
   'smart-living': {
     keywords: [
       // Illuminazione smart
       'smart led', 'lampadina smart', 'striscia led', 'led wifi', 'alexa', 'google home',
       'led rgb', 'illuminazione smart', 'smart light', 'led controllato',
+      'wake-up light', 'wake up light', 'sveglia luce', 'simulazione alba',
 
-      // Tech casa
+      // Domotica
       'smart home', 'domotica', 'sensore', 'telecamera wifi', 'campanello smart',
-      'termostato smart', 'presa smart', 'interruttore smart',
+      'termostato smart', 'presa smart', 'interruttore smart', 'hub smart',
 
-      // Gadget tech
-      'wireless', 'bluetooth speaker', 'caricatore wireless', 'powerbank',
-      'auricolari wireless', 'smart watch', 'fitness tracker'
-    ],
-    priority: 1
-  },
+      // Dispositivi wireless
+      'bluetooth speaker', 'casse bluetooth', 'altoparlante wireless',
+      'caricatore wireless', 'powerbank wireless',
 
-  // 2. 💆 CURA CORPO & SKIN
-  'cura-corpo-skin': {
-    keywords: [
-      // Massaggio
-      'massaggiatore', 'massaggio', 'massaggia', 'shiatsu', 'percussion massager',
-      'pistola massaggiante', 'roller massaggio', 'foam roller',
-
-      // Cura pelle
-      'crema viso', 'crema corpo', 'siero', 'maschera viso', 'peeling',
-      'scrub corpo', 'olio corpo', 'lozione corpo', 'balsamo labbra',
-      'crema mani', 'crema piedi', 'anti-age', 'anti-rughe',
-
-      // Beauty tools
-      'spazzola pulizia viso', 'dermaroller', 'jade roller', 'gua sha',
-      'epilatore', 'rasoio elettrico', 'trimmer', 'asciugacapelli',
-
-      // Cosmesi
-      'profumo', 'eau de toilette', 'eau de parfum', 'fragranza',
-      'cosmetico', 'makeup', 'trucco', 'rossetto', 'mascara',
-
-      // Bagno & relax
-      'sali da bagno', 'bomba da bagno', 'sapone naturale', 'spugna konjac'
-    ],
-    priority: 2
-  },
-
-  // 3. 🧘 MEDITAZIONE & ZEN
-  'meditazione-zen': {
-    keywords: [
-      // Yoga & meditazione
-      'tappetino yoga', 'yoga mat', 'cuscino meditazione', 'zafu', 'bolster yoga',
-      'blocco yoga', 'cinghia yoga', 'ruota yoga',
-
-      // Aromaterapia
-      'diffusore oli essenziali', 'diffusore aroma', 'oli essenziali', 'olio essenziale',
-      'aromaterapia', 'umidificatore aromi', 'bruciatore essenze',
-
-      // Incensi & candele zen
-      'incenso', 'bastoncini incenso', 'portaincenso', 'candela aromatica',
-      'candela meditazione', 'candela naturale', 'cera soia',
-
-      // Zen decor
-      'fontana zen', 'giardino zen', 'buddha', 'statua zen', 'campana tibetana',
-      'singing bowl', 'gong', 'carillon',
-
-      // Relax & wellness
-      'maschera occhi', 'eye mask', 'cuscino rilassante', 'termoforo',
-      'lampada sale', 'himalayan salt lamp'
+      // Smart home accessories
+      'robot aspirapolvere', 'purificatore aria smart', 'umidificatore smart',
+      'smart plug', 'smart socket', 'timer smart'
     ],
     priority: 3
   },
 
-  // 4. 🎨 DESIGN & ATMOSFERA
-  'design-atmosfera': {
+  // 4. ⚡ TECH INNOVATION (Mix SKU import)
+  'tech-innovation': {
     keywords: [
-      // Illuminazione design
-      'lampada design', 'lampada decorativa', 'luce notturna', 'nightlight',
-      'lampada luna', 'moon lamp', 'lampada led decorativa', 'light box',
-      'neon sign', 'insegna luminosa', 'lampada proiettore',
+      // Smart devices
+      'smart watch', 'smartwatch', 'fitness tracker', 'activity tracker',
+      'smart band', 'fitness band', 'smart ring',
 
-      // Profumatori ambiente
-      'diffusore ambiente', 'profumatore ambiente', 'bastoncini profumati',
-      'reed diffuser', 'spray ambiente', 'fragranza casa', 'pot pourri',
+      // Wearable tech
+      'auricolari wireless', 'auricolari', 'earbuds', 'tws', 'cuffie bluetooth',
+      'cuffie wireless', 'wireless earbuds', 'bluetooth earbuds',
+      'smart glasses', 'vr headset', 'ar glasses',
 
-      // Candele design
-      'candelabro', 'portacandele design', 'candela design', 'candeliere',
+      // Tech wellness
+      'fitness tech', 'health tracker', 'sleep tracker', 'postura smart',
+      'massaggiatore elettrico', 'tens machine', 'ems trainer',
 
-      // Decor atmosfera
-      'vaso design', 'scultura decorativa', 'oggetto design', 'decorazione parete',
-      'specchio design', 'orologio design', 'cornice foto design',
+      // Gadget tech innovativi
+      'gadget tech', 'tech gadget', 'innovazione', 'smart gadget',
+      'portable tech', 'mini projector', 'pocket printer',
 
-      // Tessili premium
-      'cuscino design', 'plaid design', 'coperta design'
+      // Innovazioni
+      'drone', 'robot', 'ai device', 'smart pen', 'digital notepad',
+      'e-reader', 'tablet', 'portable scanner'
     ],
     priority: 4
   },
 
-  // 5. ☕ GOURMET & TEA
-  'gourmet-tea-coffee': {
+  // 5. 🧘 NATURAL WELLNESS (AW Dropship)
+  'natural-wellness': {
     keywords: [
-      // Tè pregiato
-      'tè verde', 'tè nero', 'tè bianco', 'tè oolong', 'tè pu-erh',
-      'tè matcha', 'matcha', 'tè giapponese', 'tè cinese', 'tè pregiato',
-      'infuso', 'tisana premium', 'tisana bio', 'tisana detox',
+      // Oli essenziali
+      'oli essenziali', 'olio essenziale', 'essential oil', 'olio aromaterapia',
 
-      // Accessori tè
-      'teiera', 'teapot', 'kyusu', 'gaiwan', 'tazza tè', 'tea cup',
-      'infusore tè', 'tea infuser', 'filtro tè', 'tea strainer',
-      'bollitore tè', 'tea kettle', 'chasen', 'frusta matcha',
-      'set tè', 'tea set', 'cerimonia tè',
+      // Aromaterapia
+      'diffusore oli essenziali', 'diffusore aroma', 'aromaterapia',
+      'umidificatore aromi', 'bruciatore essenze', 'nebulizzatore',
 
-      // Caffè gourmet
-      'caffè specialty', 'caffè pregiato', 'caffè monorigine', 'caffè arabica',
-      'caffè biologico', 'caffè artigianale',
+      // Yoga e meditazione
+      'tappetino yoga', 'yoga mat', 'cuscino meditazione', 'zafu', 'bolster yoga',
+      'blocco yoga', 'cinghia yoga', 'ruota yoga', 'yoga wheel',
 
-      // Accessori caffè di qualità
-      'macchina caffè espresso', 'espresso machine', 'moka design',
-      'french press', 'chemex', 'v60', 'aeropress', 'cold brew',
-      'macinacaffè', 'coffee grinder', 'tamper', 'milk frother',
+      // Incensi e candele naturali
+      'incenso', 'bastoncini incenso', 'portaincenso', 'candela aromatica',
+      'candela meditazione', 'candela naturale', 'cera soia', 'candela biologica',
 
-      // Chocolateria
-      'cioccolato artigianale', 'cioccolato pregiato', 'cioccolato monorigine',
-      'praline', 'tartufo cioccolato', 'cacao premium'
+      // Prodotti zen
+      'fontana zen', 'giardino zen', 'buddha', 'statua zen', 'campana tibetana',
+      'singing bowl', 'gong', 'carillon zen', 'sale himalayano',
+      'lampada sale', 'himalayan salt lamp', 'cristalli', 'pietre chakra'
     ],
     priority: 5
   }
@@ -184,8 +191,10 @@ function categorizeProduct(product) {
   const text = `${name} ${description}`;
 
   // STEP 1: Controlla BLACKLIST - se matcha, ESCLUDI il prodotto
+  // Usa word boundary per evitare false positive (es. "rum" in "rumore")
   for (const blacklistWord of BLACKLIST_KEYWORDS) {
-    if (text.includes(blacklistWord.toLowerCase())) {
+    const regex = new RegExp(`\\b${blacklistWord.toLowerCase()}\\b`, 'i');
+    if (regex.test(text)) {
       return ['exclude']; // Prodotto da escludere
     }
   }
