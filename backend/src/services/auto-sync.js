@@ -124,6 +124,10 @@ async function syncCategory(categoryKey, existingProducts, existingIds) {
         const validation = isValidProduct(product);
         if (!validation.valid) {
           stats.skipped++;
+          // Log del motivo dello skip (solo i primi 5 per non spammare)
+          if (stats.skipped <= 5) {
+            logger.info(`  ⚠️ Prodotto ${product.id || product.sku} saltato: ${validation.reason}`);
+          }
           continue;
         }
 
@@ -164,23 +168,26 @@ async function syncCategory(categoryKey, existingProducts, existingIds) {
 // ============================================================================
 
 /**
- * Scarica prodotti da una categoria BigBuy
- * NOTA: Implementazione semplificata per demo
+ * Scarica prodotti da una categoria BigBuy usando API reale
  */
 async function fetchProductsFromBigBuyCategory(categoryId) {
-  // TODO: Implementare chiamata API BigBuy reale
-  // Per ora usiamo i prodotti esistenti come esempio
-
   try {
-    // Usa API BigBuy per scaricare prodotti dalla categoria
-    // const products = await bigbuyClient.getProductsByCategory(categoryId);
+    logger.info(`  🔽 Scarico prodotti BigBuy categoria ${categoryId}...`);
 
-    // Per ora restituiamo array vuoto (sarà implementato con API reale)
-    logger.warn(`⚠️ fetchProductsFromBigBuyCategory non ancora implementato con API BigBuy reale`);
-    return [];
+    // Usa API BigBuy reale per scaricare prodotti dalla categoria
+    const products = await bigbuyClient.getProductsByCategory(categoryId);
+
+    if (!products || !Array.isArray(products)) {
+      logger.warn(`  ⚠️ Nessun prodotto trovato per categoria ${categoryId}`);
+      return [];
+    }
+
+    logger.info(`  ✅ Scaricati ${products.length} prodotti dalla categoria ${categoryId}`);
+    return products;
 
   } catch (error) {
-    logger.error(`❌ Errore scaricamento prodotti categoria ${categoryId}:`, error);
+    logger.error(`  ❌ Errore scaricamento prodotti categoria ${categoryId}:`, error.message);
+    // Non lanciare l'errore, continua con la prossima categoria
     return [];
   }
 }

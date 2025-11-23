@@ -214,7 +214,12 @@ class BigBuyClient {
       });
       return response.data;
     } catch (error) {
-      logger.error('Errore BigBuy getProductsByCategory:', error.message);
+      logger.error(`Errore BigBuy getProductsByCategory (cat ${categoryId}):`, {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data
+      });
       throw error;
     }
   }
