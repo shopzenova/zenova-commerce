@@ -1937,11 +1937,9 @@ function openProductDetailModal(productId) {
         modalContent.scrollTop = 0;
     }
 
-    // Show modal with double requestAnimationFrame for smoother rendering
+    // Show modal (single RAF to avoid shake)
     requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            modal.classList.add('active');
-        });
+        modal.classList.add('active');
     });
 }
 

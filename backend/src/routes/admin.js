@@ -815,4 +815,81 @@ router.post('/products/:id/featured', (req, res) => {
   }
 });
 
+// ===== SINCRONIZZAZIONE AUTOMATICA BEAUTY + HEALTH =====
+
+// POST /api/admin/auto-sync - Avvia sincronizzazione automatica Beauty + Health
+router.post('/auto-sync', async (req, res) => {
+  try {
+    logger.info('🔄 Richiesta sincronizzazione automatica Beauty + Health');
+
+    // Importa servizio auto-sync
+    const { autoSync } = require('../services/auto-sync');
+
+    // Avvia sincronizzazione
+    const result = await autoSync();
+
+    if (result.success) {
+      logger.info(`✅ Sincronizzazione completata: Beauty +${result.stats.beauty.added}, Health +${result.stats.health.added}`);
+
+      res.json({
+        success: true,
+        message: 'Sincronizzazione automatica completata',
+        data: result
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        error: 'Sincronizzazione fallita',
+        data: result
+      });
+    }
+
+  } catch (error) {
+    logger.error('❌ Errore POST /api/admin/auto-sync:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Errore sincronizzazione automatica'
+    });
+  }
+});
+
+// GET /api/admin/auto-sync/status - Ottieni stato sincronizzazione
+router.get('/auto-sync/status', (req, res) => {
+  try {
+    // Per ora restituiamo info di configurazione
+    const { BIGBUY_CATEGORIES, SYNC_LIMITS, QUALITY_FILTERS } = require('../../config/auto-sync-config');
+
+    res.json({
+      success: true,
+      data: {
+        enabled: true,
+        categories: {
+          beauty: {
+            enabled: BIGBUY_CATEGORIES.beauty.enabled,
+            categoryCount: BIGBUY_CATEGORIES.beauty.categoryIds.length
+          },
+          health: {
+            enabled: BIGBUY_CATEGORIES.health.enabled,
+            categoryCount: BIGBUY_CATEGORIES.health.categoryIds.length
+          }
+        },
+        limits: SYNC_LIMITS,
+        filters: {
+          minStock: QUALITY_FILTERS.minStock,
+          minPrice: QUALITY_FILTERS.minPrice,
+          maxPrice: QUALITY_FILTERS.maxPrice,
+          requireImages: QUALITY_FILTERS.requireImages
+        }
+      }
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore GET /api/admin/auto-sync/status:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore recupero stato sincronizzazione'
+    });
+  }
+});
+
 module.exports = router;

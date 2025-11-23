@@ -2584,7 +2584,7 @@ body {
 .product-detail-modal.active {
     display: flex;
     opacity: 1;
-    animation: modalFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: modalFadeIn 0.65s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .product-detail-content {
@@ -2599,11 +2599,13 @@ body {
 }
 
 @keyframes modalFadeIn {
-    from {
+    0% {
         opacity: 0;
+        transform: scale(0.995) translateZ(0);
     }
-    to {
+    100% {
         opacity: 1;
+        transform: scale(1) translateZ(0);
     }
 }
 

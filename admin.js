@@ -1448,4 +1448,76 @@ function showProductsModal(subcategory, products) {
     });
 }
 
+// ===== SINCRONIZZAZIONE AUTOMATICA BEAUTY + HEALTH =====
+
+async function runAutoSync() {
+    const statusEl = document.getElementById('autoSyncStatus');
+    const detailsEl = document.getElementById('autoSyncDetails');
+    const button = event.target;
+
+    try {
+        // Avvia animazione
+        button.disabled = true;
+        button.textContent = '⏳ Sincronizzazione...';
+        statusEl.textContent = '🔄 Sincronizzazione in corso...';
+        statusEl.style.color = 'rgba(255,255,255,0.9)';
+        detailsEl.textContent = 'Scaricamento prodotti da BigBuy...';
+
+        console.log('🔄 Avvio sincronizzazione automatica Beauty + Health...');
+
+        // Chiamata API
+        const response = await fetch(`${API_BASE}/admin/auto-sync`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            const stats = result.data.stats;
+            const beautyAdded = stats.beauty.added;
+            const healthAdded = stats.health.added;
+            const totalAdded = beautyAdded + healthAdded;
+
+            console.log('✅ Sincronizzazione completata:', result.data);
+
+            // Aggiorna UI
+            statusEl.textContent = `✅ Sincronizzazione completata!`;
+            detailsEl.innerHTML = `
+                💄 Beauty: <strong>+${beautyAdded}</strong> nuovi prodotti<br>
+                🏥 Health: <strong>+${healthAdded}</strong> nuovi prodotti<br>
+                ⏱️ Durata: ${result.data.duration}s
+            `;
+
+            button.disabled = false;
+            button.textContent = 'Avvia Auto-Sync';
+
+            // Mostra notifica
+            showNotification(`✅ Sincronizzazione completata! +${totalAdded} nuovi prodotti`, 'success');
+
+            // Ricarica statistiche e prodotti
+            setTimeout(() => {
+                loadDashboardStats();
+                loadProducts();
+            }, 1000);
+
+        } else {
+            throw new Error(result.error || 'Sincronizzazione fallita');
+        }
+
+    } catch (error) {
+        console.error('❌ Errore sincronizzazione automatica:', error);
+
+        statusEl.textContent = '❌ Errore sincronizzazione';
+        detailsEl.textContent = error.message || 'Si è verificato un errore';
+
+        button.disabled = false;
+        button.textContent = 'Riprova Auto-Sync';
+
+        showNotification('❌ Errore durante la sincronizzazione', 'error');
+    }
+}
+
 console.log('Pannello Admin Zenova caricato ✅');

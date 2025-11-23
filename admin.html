@@ -537,6 +537,35 @@
                     <button class="btn-sync" onclick="syncNow()">Sincronizza Ora</button>
                 </div>
 
+                <!-- Auto-Sync Beauty + Health -->
+                <div class="sync-status-card" style="margin-top: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="sync-icon">
+                        <div style="font-size: 3rem;">🤖</div>
+                    </div>
+                    <div class="sync-info">
+                        <h3 style="color: white;">Sincronizzazione Automatica Beauty + Health</h3>
+                        <p id="autoSyncStatus" style="color: rgba(255,255,255,0.9);">⏳ In attesa...</p>
+                        <small id="autoSyncDetails" style="color: rgba(255,255,255,0.8);">Scarica automaticamente nuovi prodotti da categorie Beauty e Health</small>
+                    </div>
+                    <button class="btn-sync" style="background: white; color: #667eea;" onclick="runAutoSync()">Avvia Auto-Sync</button>
+                </div>
+
+                <!-- Auto-Sync Info -->
+                <div style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-top: 0; color: #667eea;">ℹ️ Filtri di Qualità Attivi</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0.5rem 0;">
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #dee2e6;">✅ Solo prodotti con stock disponibile</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #dee2e6;">✅ Prezzo minimo: €2.00</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #dee2e6;">✅ Richieste immagini di qualità</li>
+                        <li style="padding: 0.5rem 0; border-bottom: 1px solid #dee2e6;">✅ Descrizione prodotto obbligatoria</li>
+                        <li style="padding: 0.5rem 0;">✅ Max 50 nuovi prodotti per categoria</li>
+                    </ul>
+                    <p style="margin: 1rem 0 0; font-size: 0.9rem; color: #6c757d;">
+                        <strong>Categorie BigBuy sincronizzate:</strong><br>
+                        💄 Beauty (7 categorie) | 🏥 Health & Personal Care (4 categorie)
+                    </p>
+                </div>
+
                 <!-- Sync Schedule -->
                 <div class="sync-schedule">
                     <h3>Pianificazione Aggiornamenti</h3>
