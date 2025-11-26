@@ -181,11 +181,20 @@
       "stock": 8,
       "images": 1,
       "category": "smart-living"
+    },
+    {
+      "sku": "V0103345",
+      "name": "Lampada Equilibrio con Interruttore Magnetico Magilum InnovaGoods",
+      "brand": "2317",
+      "price": 22.23,
+      "stock": 616,
+      "images": 1,
+      "category": "smart-living"
     }
   ],
   "summary": {
     "techCount": 10,
-    "smartCount": 10,
-    "totalSelected": 20
+    "smartCount": 11,
+    "totalSelected": 21
   }
 }

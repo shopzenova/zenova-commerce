@@ -183,14 +183,44 @@
                 <!-- Import Product from BigBuy -->
                 <div class="import-product-section" style="margin-bottom: 30px;">
                     <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; color: white;">
-                        <h3 style="margin: 0 0 15px 0;">📦 Importa Prodotto da BigBuy</h3>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="text" id="importSKU" placeholder="Inserisci SKU BigBuy (es. M0110060)" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px;">
-                            <button onclick="importProductFromBigBuy()" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;">
-                                Importa Prodotto
+                        <h3 style="margin: 0 0 15px 0;">📦 Importa Prodotto da BigBuy (CSV Locali)</h3>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                            <input type="text" id="importSKU" placeholder="Inserisci SKU BigBuy (es. V0103345)" style="flex: 2; padding: 12px; border: none; border-radius: 8px; font-size: 14px;">
+                            <select id="importCategory" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
+                                <option value="">Scegli Categoria...</option>
+                                <option value="smart-living">🏠 Smart Living</option>
+                                <option value="tech-innovation">⚡ Tech Innovation</option>
+                            </select>
+                            <button onclick="searchProductPreview()" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+                                🔍 Cerca Prodotto
                             </button>
                         </div>
-                        <small style="opacity: 0.9; margin-top: 10px; display: block;">Il prodotto verrà automaticamente aggiunto al tuo catalogo</small>
+                        <small style="opacity: 0.9; display: block;">Cerca il prodotto nei CSV locali per vedere un'anteprima prima di importarlo</small>
+
+                        <!-- Product Preview Area -->
+                        <div id="productPreview" style="display: none; margin-top: 20px; padding: 20px; background: white; border-radius: 8px; color: #333;">
+                            <h4 style="margin: 0 0 15px 0; color: #667eea;">Anteprima Prodotto</h4>
+                            <div style="display: flex; gap: 20px; align-items: start;">
+                                <img id="previewImage" src="" alt="Prodotto" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #e0e0e0;">
+                                <div style="flex: 1;">
+                                    <h3 id="previewName" style="margin: 0 0 10px 0; font-size: 18px;">Nome Prodotto</h3>
+                                    <p id="previewBrand" style="margin: 0 0 5px 0; color: #666; font-size: 14px;"><strong>Brand:</strong> </p>
+                                    <p id="previewPrice" style="margin: 0 0 5px 0; color: #666; font-size: 14px;"><strong>Prezzo vendita:</strong> </p>
+                                    <p id="previewCost" style="margin: 0 0 5px 0; color: #666; font-size: 14px;"><strong>Tuo costo:</strong> </p>
+                                    <p id="previewMargin" style="margin: 0 0 5px 0; color: #43e97b; font-size: 14px;"><strong>Margine:</strong> </p>
+                                    <p id="previewStock" style="margin: 0 0 5px 0; color: #666; font-size: 14px;"><strong>Stock:</strong> </p>
+                                    <p id="previewImages" style="margin: 0; color: #666; font-size: 14px;"><strong>Immagini:</strong> </p>
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+                                <button onclick="cancelImport()" style="padding: 10px 25px; background: #e0e0e0; color: #666; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                    Annulla
+                                </button>
+                                <button onclick="confirmImport()" style="padding: 10px 25px; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                    ✅ Conferma Importazione
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -355,10 +355,10 @@ function reloadProducts() {
   }
 }
 
-// POST /api/admin/products/import - Importa prodotto da BigBuy per SKU
+// POST /api/admin/products/import - Importa prodotto da BigBuy per SKU (cerca nei CSV locali)
 router.post('/products/import', async (req, res) => {
   try {
-    const { sku } = req.body;
+    const { sku, category } = req.body;
 
     if (!sku) {
       return res.status(400).json({
@@ -367,18 +367,66 @@ router.post('/products/import', async (req, res) => {
       });
     }
 
-    logger.info(`🔍 Ricerca prodotto BigBuy con SKU: ${sku}`);
+    if (!category) {
+      return res.status(400).json({
+        success: false,
+        error: 'Categoria richiesta'
+      });
+    }
 
-    // Importa BigBuyClient (è già un'istanza)
-    const bigbuy = require('../integrations/BigBuyClient');
+    logger.info(`🔍 Ricerca prodotto nei CSV BigBuy con SKU: ${sku}`);
 
-    // Cerca il prodotto su BigBuy
-    const product = await bigbuy.getProduct(sku);
+    // Cerca il prodotto nei CSV locali
+    const csv = require('csv-parser');
+    const CSV_DIR = path.join(__dirname, '../../bigbuy-data/bigbuy-complete');
 
-    if (!product) {
+    if (!fs.existsSync(CSV_DIR)) {
+      return res.status(500).json({
+        success: false,
+        error: 'Cartella CSV non trovata. Scarica i CSV BigBuy prima.'
+      });
+    }
+
+    const csvFiles = fs.readdirSync(CSV_DIR)
+      .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
+
+    let foundProduct = null;
+
+    // Parsing CSV con gestione BOM
+    async function parseCSV(filePath) {
+      return new Promise((resolve, reject) => {
+        const products = [];
+        fs.createReadStream(filePath)
+          .pipe(csv({ separator: ';' }))
+          .on('data', (row) => {
+            const cleanedRow = {};
+            for (const [key, value] of Object.entries(row)) {
+              const cleanKey = key.replace(/^\uFEFF/, '');
+              cleanedRow[cleanKey] = value;
+            }
+            products.push(cleanedRow);
+          })
+          .on('end', () => resolve(products))
+          .on('error', reject);
+      });
+    }
+
+    // Cerca in tutti i CSV
+    for (const file of csvFiles) {
+      const filePath = path.join(CSV_DIR, file);
+      const products = await parseCSV(filePath);
+      const product = products.find(p => p.ID === sku);
+
+      if (product) {
+        foundProduct = product;
+        break;
+      }
+    }
+
+    if (!foundProduct) {
       return res.status(404).json({
         success: false,
-        error: 'Prodotto non trovato su BigBuy'
+        error: 'Prodotto non trovato nei CSV BigBuy'
       });
     }
 
@@ -391,28 +439,34 @@ router.post('/products/import', async (req, res) => {
       });
     }
 
+    // Raccogli immagini
+    const images = [];
+    for (let i = 1; i <= 8; i++) {
+      const imgField = `IMAGE${i}`;
+      if (foundProduct[imgField]) images.push({ url: foundProduct[imgField] });
+    }
+
     // Formatta il prodotto nel formato del catalogo
     const newProduct = {
-      id: sku,
-      name: product.name || `Prodotto ${sku}`,
-      description: product.description || '',
-      brand: product.brand || 'BigBuy',
-      category: product.category || 'Generale',
-      zenovaCategories: ['benessere'],
-      price: parseFloat(product.retailPrice || product.price || 0),
-      pvd: parseFloat(product.wholesalePrice || product.price || 0),
-      margin: product.margin || '0',
-      stock: product.quantity || 0,
-      imageCount: product.images ? product.images.length : 0,
-      images: product.images ? product.images.map(img => img.url || img) : [],
-      video: '0',
-      ean: product.ean || '',
-      width: product.width || '0',
-      height: product.height || '0',
-      depth: product.depth || '0',
-      weight: product.weight || '0',
-      score: 100,
-      raw: product
+      id: foundProduct.ID,
+      sku: foundProduct.ID,
+      name: foundProduct.NAME || foundProduct.ID,
+      description: foundProduct.DESCRIPTION || '',
+      brand: foundProduct.BRAND || '',
+      category: category,
+      zenovaCategory: category,
+      zenovaCategories: [category],
+      price: parseFloat(foundProduct.PVP_BIGBUY || 0),
+      pvd: parseFloat(foundProduct.PVD || 0),
+      stock: parseInt(foundProduct.STOCK || 0),
+      images: images,
+      imageCount: images.length,
+      video: foundProduct.VIDEO || '0',
+      ean: foundProduct.EAN13 || '',
+      width: foundProduct.WIDTH || '',
+      height: foundProduct.HEIGHT || '',
+      depth: foundProduct.DEPTH || '',
+      weight: foundProduct.WEIGHT || ''
     };
 
     // Aggiungi al file JSON
@@ -435,6 +489,117 @@ router.post('/products/import', async (req, res) => {
     res.status(500).json({
       success: false,
       error: error.message || 'Errore importazione prodotto'
+    });
+  }
+});
+
+// GET /api/admin/products/preview/:sku - Ottieni anteprima prodotto da CSV senza importare
+router.get('/products/preview/:sku', async (req, res) => {
+  try {
+    const sku = req.params.sku;
+
+    if (!sku) {
+      return res.status(400).json({
+        success: false,
+        error: 'SKU richiesto'
+      });
+    }
+
+    logger.info(`🔍 Anteprima prodotto CSV BigBuy con SKU: ${sku}`);
+
+    // Cerca il prodotto nei CSV locali
+    const csv = require('csv-parser');
+    const CSV_DIR = path.join(__dirname, '../../bigbuy-data/bigbuy-complete');
+
+    if (!fs.existsSync(CSV_DIR)) {
+      return res.status(500).json({
+        success: false,
+        error: 'Cartella CSV non trovata. Scarica i CSV BigBuy prima.'
+      });
+    }
+
+    const csvFiles = fs.readdirSync(CSV_DIR)
+      .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
+
+    let foundProduct = null;
+
+    // Parsing CSV con gestione BOM
+    async function parseCSV(filePath) {
+      return new Promise((resolve, reject) => {
+        const products = [];
+        fs.createReadStream(filePath)
+          .pipe(csv({ separator: ';' }))
+          .on('data', (row) => {
+            const cleanedRow = {};
+            for (const [key, value] of Object.entries(row)) {
+              const cleanKey = key.replace(/^\uFEFF/, '');
+              cleanedRow[cleanKey] = value;
+            }
+            products.push(cleanedRow);
+          })
+          .on('end', () => resolve(products))
+          .on('error', reject);
+      });
+    }
+
+    // Cerca in tutti i CSV
+    for (const file of csvFiles) {
+      const filePath = path.join(CSV_DIR, file);
+      const products = await parseCSV(filePath);
+      const product = products.find(p => p.ID === sku);
+
+      if (product) {
+        foundProduct = product;
+        break;
+      }
+    }
+
+    if (!foundProduct) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato nei CSV BigBuy'
+      });
+    }
+
+    // Verifica se già presente nel catalogo
+    const existingProduct = PRODUCTS.find(p => p.id === sku);
+    const alreadyImported = !!existingProduct;
+
+    // Raccogli immagini
+    const images = [];
+    for (let i = 1; i <= 8; i++) {
+      const imgField = `IMAGE${i}`;
+      if (foundProduct[imgField]) images.push(foundProduct[imgField]);
+    }
+
+    // Calcola margine
+    const price = parseFloat(foundProduct.PVP_BIGBUY || 0);
+    const cost = parseFloat(foundProduct.PVD || 0);
+    const margin = (price - cost).toFixed(2);
+
+    // Restituisci anteprima
+    res.json({
+      success: true,
+      data: {
+        sku: foundProduct.ID,
+        name: foundProduct.NAME || foundProduct.ID,
+        description: foundProduct.DESCRIPTION || '',
+        brand: foundProduct.BRAND || '',
+        price: price,
+        cost: cost,
+        margin: margin,
+        stock: parseInt(foundProduct.STOCK || 0),
+        images: images,
+        imageCount: images.length,
+        ean: foundProduct.EAN13 || '',
+        alreadyImported: alreadyImported
+      }
+    });
+  } catch (error) {
+    logger.error('❌ Errore anteprima prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message || 'Errore anteprima prodotto'
     });
   }
 });

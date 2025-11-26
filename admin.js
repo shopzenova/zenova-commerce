@@ -766,19 +766,86 @@ function importData(file) {
 // ===== NUOVE FUNZIONALITÀ: IMPORTAZIONE ED ELIMINAZIONE PRODOTTI =====
 
 // Importa prodotto da BigBuy
-async function importProductFromBigBuy() {
+// Variabile globale per salvare i dati del prodotto in anteprima
+let previewProductData = null;
+
+// Cerca prodotto e mostra anteprima
+async function searchProductPreview() {
     const skuInput = document.getElementById('importSKU');
+    const categorySelect = document.getElementById('importCategory');
     const sku = skuInput.value.trim();
+    const category = categorySelect.value;
 
     if (!sku) {
         alert('⚠️ Inserisci un SKU BigBuy valido');
         return;
     }
 
+    if (!category) {
+        alert('⚠️ Seleziona una categoria');
+        return;
+    }
+
     // Mostra loading
     const button = event.target;
     const originalText = button.textContent;
-    button.textContent = 'Importazione...';
+    button.textContent = '🔍 Ricerca...';
+    button.disabled = true;
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/preview/${sku}`);
+        const result = await response.json();
+
+        if (result.success) {
+            // Salva i dati per l'importazione successiva
+            previewProductData = {
+                sku: sku,
+                category: category,
+                productData: result.data
+            };
+
+            // Verifica se già importato
+            if (result.data.alreadyImported) {
+                alert('⚠️ Questo prodotto è già stato importato nel catalogo!');
+                button.textContent = originalText;
+                button.disabled = false;
+                return;
+            }
+
+            // Mostra l'anteprima
+            document.getElementById('previewImage').src = result.data.images[0] || 'https://via.placeholder.com/120';
+            document.getElementById('previewName').textContent = result.data.name;
+            document.getElementById('previewBrand').innerHTML = `<strong>Brand:</strong> ${result.data.brand}`;
+            document.getElementById('previewPrice').innerHTML = `<strong>Prezzo vendita:</strong> €${result.data.price.toFixed(2)}`;
+            document.getElementById('previewCost').innerHTML = `<strong>Tuo costo:</strong> €${result.data.cost.toFixed(2)}`;
+            document.getElementById('previewMargin').innerHTML = `<strong>Margine:</strong> €${result.data.margin}`;
+            document.getElementById('previewStock').innerHTML = `<strong>Stock:</strong> ${result.data.stock}`;
+            document.getElementById('previewImages').innerHTML = `<strong>Immagini:</strong> ${result.data.imageCount}`;
+
+            // Mostra il box anteprima
+            document.getElementById('productPreview').style.display = 'block';
+        } else {
+            alert(`❌ ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore ricerca prodotto:', error);
+        alert(`❌ Errore durante la ricerca: ${error.message}`);
+    } finally {
+        button.textContent = originalText;
+        button.disabled = false;
+    }
+}
+
+// Conferma importazione prodotto
+async function confirmImport() {
+    if (!previewProductData) {
+        alert('⚠️ Nessun prodotto da importare');
+        return;
+    }
+
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = '⏳ Importazione...';
     button.disabled = true;
 
     try {
@@ -787,14 +854,22 @@ async function importProductFromBigBuy() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ sku })
+            body: JSON.stringify({
+                sku: previewProductData.sku,
+                category: previewProductData.category
+            })
         });
 
         const result = await response.json();
 
         if (result.success) {
-            alert(`✅ Prodotto importato con successo!\n\n${result.data.name}\nPrezzo: €${result.data.price}`);
-            skuInput.value = '';
+            alert(`✅ Prodotto importato con successo!\n\n${result.data.name}\nPrezzo: €${result.data.price}\nCategoria: ${result.data.category}`);
+
+            // Reset form
+            document.getElementById('importSKU').value = '';
+            document.getElementById('importCategory').value = '';
+            document.getElementById('productPreview').style.display = 'none';
+            previewProductData = null;
 
             // Ricarica i prodotti
             await loadProducts();
@@ -808,6 +883,12 @@ async function importProductFromBigBuy() {
         button.textContent = originalText;
         button.disabled = false;
     }
+}
+
+// Annulla importazione
+function cancelImport() {
+    document.getElementById('productPreview').style.display = 'none';
+    previewProductData = null;
 }
 
 // Toggle visibilità prodotto
