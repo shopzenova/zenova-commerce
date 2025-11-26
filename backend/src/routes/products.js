@@ -178,7 +178,7 @@ router.get('/', async (req, res) => {
       retailPrice: parseFloat(p.price),   // Prezzo di vendita consigliato
       stock: p.stock,
       images: p.images,
-      image: p.images && p.images[0] ? p.images[0] : null,
+      image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : null),
       ean: p.ean,
       weight: parseFloat(p.weight) || 0,
       dimensions: {

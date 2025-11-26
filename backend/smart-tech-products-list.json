@@ -1,38 +1,11 @@
 {
   "tech-innovation": [
     {
-      "sku": "M0311542",
-      "name": "Auricolari con Microfono Gaming Corsair HS80 MAX",
-      "brand": "3938",
-      "price": 297.66,
-      "stock": 2,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
       "sku": "M0311543",
       "name": "Auricolari con Microfono Gaming Corsair HS80 MAX",
       "brand": "3938",
       "price": 297.66,
       "stock": 125,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9916669",
-      "name": "Monitor Gaming Samsung LS32D800UAUXEN 4K Ultra HD 32\"\"",
-      "brand": "1556",
-      "price": 296.72,
-      "stock": 13,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9901237",
-      "name": "Monitor AOC CU34P3CV Wide Quad HD 34\"\"",
-      "brand": "14288",
-      "price": 296.65,
-      "stock": 1,
       "images": 2,
       "category": "tech-innovation"
     },
@@ -46,83 +19,11 @@
       "category": "tech-innovation"
     },
     {
-      "sku": "M0324813",
-      "name": "Monitor Iiyama XUB2797UHSNP-B1 27\"\" 4K Ultra HD",
-      "brand": "15817",
-      "price": 294.83,
-      "stock": 9,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "M0805429",
-      "name": "Smartwatch Huawei Luca-B19 Bianco",
-      "brand": "1636",
-      "price": 293.89,
-      "stock": 2,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "M0805428",
-      "name": "Smartwatch Huawei Luca-B19 Nero",
-      "brand": "1636",
-      "price": 293.46,
-      "stock": 17,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "M0806687",
-      "name": "Smartwatch Google GA05785-DE Nero 1,4\"\" 45 mm",
-      "brand": "3672",
-      "price": 293.46,
-      "stock": 6,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S55301214",
-      "name": "Monitor Gaming BenQ EW2790U 27\"\" 4K Ultra HD",
-      "brand": "1517",
-      "price": 292.35,
-      "stock": 2,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S5627520",
-      "name": "Monitor ViewSonic VP2768a Quad HD 27\"\"",
-      "brand": "14287",
-      "price": 292.18,
-      "stock": 9,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9920064",
-      "name": "Smartwatch Apple MEPF4QL/A Bianco Ø 44 mm",
-      "brand": "1513",
-      "price": 290.1,
-      "stock": 2,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9919795",
-      "name": "Smartwatch Apple MEPJ4QL/A Nero Ø 44 mm",
-      "brand": "1513",
-      "price": 289.59,
-      "stock": 1,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "M0805909",
-      "name": "Smartwatch Huawei Soc-L29L Bianco",
-      "brand": "1636",
-      "price": 288.8,
-      "stock": 47,
+      "sku": "S55283889",
+      "name": "Monitor Gaming AOC Q27U3CV 4K Ultra HD 27\"\"",
+      "brand": "14288",
+      "price": 286.22,
+      "stock": 70,
       "images": 2,
       "category": "tech-innovation"
     },
@@ -136,83 +37,20 @@
       "category": "tech-innovation"
     },
     {
-      "sku": "S55128323",
-      "name": "Monitor Philips 345B1C/00 34\"\" LED VA LCD Flicker free 50-60  Hz",
-      "brand": "1551",
-      "price": 287.97,
-      "stock": 8,
+      "sku": "M0805909",
+      "name": "Smartwatch Huawei Soc-L29L Bianco",
+      "brand": "1636",
+      "price": 288.8,
+      "stock": 47,
       "images": 2,
       "category": "tech-innovation"
     },
     {
-      "sku": "M0323594",
-      "name": "Monitor Iiyama G-Master GCB3481WQSU-B1 34\"\"",
-      "brand": "15817",
-      "price": 286.71,
-      "stock": 6,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9920306",
-      "name": "Monitor Gaming LG 27U730A-B 4K Ultra HD 27\"\"",
-      "brand": "1539",
-      "price": 286.38,
-      "stock": 16,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S55283889",
-      "name": "Monitor Gaming AOC Q27U3CV 4K Ultra HD 27\"\"",
-      "brand": "14288",
-      "price": 286.22,
-      "stock": 70,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S0466007",
-      "name": "Smartwatch Samsung GALAXY WATCH 8 Grigio 1,5''",
-      "brand": "1556",
-      "price": 285.94,
-      "stock": 1,
-      "images": 1,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S55303053",
-      "name": "Toner Philips 222B9TA/00 21,5\"\" (21,5\"\") Full HD (Full HD)",
-      "brand": "1551",
-      "price": 284.66,
-      "stock": 1,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S0452447",
-      "name": "Smartwatch Samsung GALAXY WATCH 6",
-      "brand": "1556",
-      "price": 284.25,
-      "stock": 2,
-      "images": 1,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S9901814",
-      "name": "Monitor Asus MB249C 23,8\"\" Full HD 75 Hz",
-      "brand": "1516",
-      "price": 282.5,
-      "stock": 2,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S55166966",
-      "name": "Monitor Lenovo 63A3GAT1EU 27\"\" IPS",
-      "brand": "1538",
-      "price": 281.1,
-      "stock": 2,
+      "sku": "S0245660",
+      "name": "Monitor Gaming MSI MD272UPHG 27\"\" 4K Ultra HD",
+      "brand": "1545",
+      "price": 273.26,
+      "stock": 25,
       "images": 2,
       "category": "tech-innovation"
     },
@@ -226,52 +64,79 @@
       "category": "tech-innovation"
     },
     {
-      "sku": "S55301212",
-      "name": "Monitor Gaming BenQ EX271Q Quad HD 27\"\"",
-      "brand": "1517",
-      "price": 275.66,
-      "stock": 5,
+      "sku": "M0805428",
+      "name": "Smartwatch Huawei Luca-B19 Nero",
+      "brand": "1636",
+      "price": 293.46,
+      "stock": 17,
       "images": 2,
       "category": "tech-innovation"
     },
     {
-      "sku": "S0241548",
-      "name": "Monitor KEEP OUT XGM34UW 34\"\"",
-      "brand": "1599",
-      "price": 275.55,
-      "stock": 2,
+      "sku": "S9920306",
+      "name": "Monitor Gaming LG 27U730A-B 4K Ultra HD 27\"\"",
+      "brand": "1539",
+      "price": 286.38,
+      "stock": 16,
       "images": 2,
       "category": "tech-innovation"
     },
     {
-      "sku": "S9903706",
-      "name": "Stampante Multifunzione HP 28C02A",
-      "brand": "1892",
-      "price": 273.5,
-      "stock": 5,
-      "images": 1,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "S0245660",
-      "name": "Monitor Gaming MSI MD272UPHG 27\"\" 4K Ultra HD",
-      "brand": "1545",
-      "price": 273.26,
-      "stock": 25,
-      "images": 2,
-      "category": "tech-innovation"
-    },
-    {
-      "sku": "M0806686",
-      "name": "Smartwatch Apple MEHG4ZR/A Bianco 1,78\"\" Ø 44 mm",
-      "brand": "1513",
-      "price": 270.11,
-      "stock": 1,
+      "sku": "S9916669",
+      "name": "Monitor Gaming Samsung LS32D800UAUXEN 4K Ultra HD 32\"\"",
+      "brand": "1556",
+      "price": 296.72,
+      "stock": 13,
       "images": 2,
       "category": "tech-innovation"
     }
   ],
   "smart-living": [
+    {
+      "sku": "S0464375",
+      "name": "Smart TV TCL 50P7K 50\"\" 4K Ultra HD HDR QLED",
+      "brand": "3877",
+      "price": 268.8,
+      "stock": 222,
+      "images": 2,
+      "category": "smart-living"
+    },
+    {
+      "sku": "M0805910",
+      "name": "Smartwatch Huawei Rates-L19F Nero 1,5\"\" 46 mm",
+      "brand": "1636",
+      "price": 295.03,
+      "stock": 86,
+      "images": 2,
+      "category": "smart-living"
+    },
+    {
+      "sku": "M0806783",
+      "name": "Smartwatch Google Pixel Watch 3 45mm LTE Nero 1,4\"\" 45 mm",
+      "brand": "3672",
+      "price": 288.8,
+      "stock": 48,
+      "images": 2,
+      "category": "smart-living"
+    },
+    {
+      "sku": "M0805909",
+      "name": "Smartwatch Huawei Soc-L29L Bianco",
+      "brand": "1636",
+      "price": 288.8,
+      "stock": 47,
+      "images": 2,
+      "category": "smart-living"
+    },
+    {
+      "sku": "S7607673",
+      "name": "Smart TV Sony KD32W800P1AEP 32\"\" HD DLED WiFi HD 32\"\" LED",
+      "brand": "1206",
+      "price": 267.29,
+      "stock": 30,
+      "images": 2,
+      "category": "smart-living"
+    },
     {
       "sku": "M0900001",
       "name": "Distruggi Documenti Rexel Optimum AutoFeed 130X",
@@ -291,48 +156,12 @@
       "category": "smart-living"
     },
     {
-      "sku": "M0805910",
-      "name": "Smartwatch Huawei Rates-L19F Nero 1,5\"\" 46 mm",
-      "brand": "1636",
-      "price": 295.03,
-      "stock": 86,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S5613242",
-      "name": "Accessorio Mobotix Mx-O-M7SA-8DN050",
-      "brand": "14316",
-      "price": 294.84,
-      "stock": 1,
+      "sku": "S55145067",
+      "name": "Scanner HP 20G06A#B19 30 ppm",
+      "brand": "1892",
+      "price": 285.27,
+      "stock": 13,
       "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S5628760",
-      "name": "Videocamera di Sorveglianza Mobotix MX-O-M7SA-8DN040",
-      "brand": "14316",
-      "price": 294.84,
-      "stock": 2,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S0451689",
-      "name": "PDA con Lettore 1D + 2D Mustek NOMU T20 5\"\" Quad Core 2 GB RAM 16 GB",
-      "brand": "1578",
-      "price": 294.05,
-      "stock": 3,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0806687",
-      "name": "Smartwatch Google GA05785-DE Nero 1,4\"\" 45 mm",
-      "brand": "3672",
-      "price": 293.46,
-      "stock": 6,
-      "images": 2,
       "category": "smart-living"
     },
     {
@@ -345,105 +174,6 @@
       "category": "smart-living"
     },
     {
-      "sku": "S9920064",
-      "name": "Smartwatch Apple MEPF4QL/A Bianco Ø 44 mm",
-      "brand": "1513",
-      "price": 290.1,
-      "stock": 2,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S9919795",
-      "name": "Smartwatch Apple MEPJ4QL/A Nero Ø 44 mm",
-      "brand": "1513",
-      "price": 289.59,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0805909",
-      "name": "Smartwatch Huawei Soc-L29L Bianco",
-      "brand": "1636",
-      "price": 288.8,
-      "stock": 47,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0806783",
-      "name": "Smartwatch Google Pixel Watch 3 45mm LTE Nero 1,4\"\" 45 mm",
-      "brand": "3672",
-      "price": 288.8,
-      "stock": 48,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S55145067",
-      "name": "Scanner HP 20G06A#B19 30 ppm",
-      "brand": "1892",
-      "price": 285.27,
-      "stock": 13,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S0452447",
-      "name": "Smartwatch Samsung GALAXY WATCH 6",
-      "brand": "1556",
-      "price": 284.25,
-      "stock": 2,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S55151069",
-      "name": "Scanner Brother ADS4300NRE1 40 ppm",
-      "brand": "1518",
-      "price": 280.51,
-      "stock": 3,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S55081334",
-      "name": "Scanner Wi-Fi Fronte Retro Epson B11B244401 1200 dpi LAN 25 ppm",
-      "brand": "1527",
-      "price": 278.37,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S55082641",
-      "name": "Scanner Canon 2646C003 30 ppm",
-      "brand": "1519",
-      "price": 277.49,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S55081498",
-      "name": "Scanner Fronte Retro Epson B11B249401 600 dpi USB 2.0 26 ppm",
-      "brand": "1527",
-      "price": 275.4,
-      "stock": 2,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0317686",
-      "name": "Webcam Laia BH4KAI 4K Ultra HD",
-      "brand": "19722",
-      "price": 275,
-      "stock": 4,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
       "sku": "S0442654",
       "name": "Nintendo Switch Nintendo 32G 2022",
       "brand": "2191",
@@ -451,101 +181,11 @@
       "stock": 8,
       "images": 1,
       "category": "smart-living"
-    },
-    {
-      "sku": "S0450530",
-      "name": "Fotocamera Digitale Insta360 Insta360 X3",
-      "brand": "3360",
-      "price": 274.36,
-      "stock": 8,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0900045",
-      "name": "Distruggi Documenti Leitz IQ 100 Autofeed P4",
-      "brand": "14444",
-      "price": 273.92,
-      "stock": 2,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S5610438",
-      "name": "Videocamera di Sorveglianza Mobotix MX-VD1A-5-IR-VA",
-      "brand": "14316",
-      "price": 272.44,
-      "stock": 4,
-      "images": 1,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0806686",
-      "name": "Smartwatch Apple MEHG4ZR/A Bianco 1,78\"\" Ø 44 mm",
-      "brand": "1513",
-      "price": 270.11,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S0246167",
-      "name": "Smart TV Samsung TU43U7005FKX 43 43\"\" 4K Ultra HD LED HDR",
-      "brand": "1556",
-      "price": 269.5,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0806685",
-      "name": "Smartwatch Apple MEHQ4ZR/A Nero 1,78\"\" Ø 44 mm",
-      "brand": "1513",
-      "price": 268.94,
-      "stock": 1,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0806790",
-      "name": "Smartwatch Apple Apple Watch SE 3 GPS 44mm Bianco 1,78\"\" Ø 44 mm",
-      "brand": "1513",
-      "price": 268.94,
-      "stock": 4,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S0464375",
-      "name": "Smart TV TCL 50P7K 50\"\" 4K Ultra HD HDR QLED",
-      "brand": "3877",
-      "price": 268.8,
-      "stock": 222,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "S7607673",
-      "name": "Smart TV Sony KD32W800P1AEP 32\"\" HD DLED WiFi HD 32\"\" LED",
-      "brand": "1206",
-      "price": 267.29,
-      "stock": 30,
-      "images": 2,
-      "category": "smart-living"
-    },
-    {
-      "sku": "M0801282",
-      "name": "Smartwatch Google Pixel Watch GA04120 Oro 1,2\"\"",
-      "brand": "3672",
-      "price": 266.11,
-      "stock": 2,
-      "images": 2,
-      "category": "smart-living"
     }
   ],
   "summary": {
-    "techCount": 30,
-    "smartCount": 30,
-    "totalSelected": 60
+    "techCount": 10,
+    "smartCount": 10,
+    "totalSelected": 20
   }
 }

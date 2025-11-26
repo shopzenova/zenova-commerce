@@ -68,6 +68,7 @@ router.get('/stats', (req, res) => {
 router.get('/products', (req, res) => {
   try {
     const zone = req.query.zone; // home, sidebar, hidden, all
+    const category = req.query.category; // smart-living, tech-innovation, etc.
 
     // Formatta prodotti per l'admin panel
     const formattedProducts = PRODUCTS.map(p => {
@@ -83,7 +84,7 @@ router.get('/products', (req, res) => {
         retailPrice: parseFloat(p.price),
         stock: p.stock,
         available: p.stock > 0,
-        image: p.images && p.images[0] ? p.images[0] : (p.image || null),
+        image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : (p.image || null)),
         images: p.images || [],
         category: zenovaCategory || 'Generale',
         zenovaCategory: zenovaCategory,  // Stringa singola per compatibility
@@ -100,13 +101,21 @@ router.get('/products', (req, res) => {
     // Filtra per zona se richiesto
     let filteredProducts = formattedProducts;
     if (zone && zone !== 'all') {
-      filteredProducts = formattedProducts.filter(p => p.zone === zone);
+      filteredProducts = filteredProducts.filter(p => p.zone === zone);
+    }
+
+    // Filtra per categoria se richiesto
+    if (category) {
+      filteredProducts = filteredProducts.filter(p =>
+        p.zenovaCategories && p.zenovaCategories.includes(category)
+      );
     }
 
     res.json({
       success: true,
       data: filteredProducts,
       count: filteredProducts.length,
+      total: filteredProducts.length,
       layout: productLayout
     });
   } catch (error) {
