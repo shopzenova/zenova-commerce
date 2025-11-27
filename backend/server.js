@@ -29,14 +29,20 @@ app.use(helmet({
 // CORS - permetti richieste dal frontend Zenova
 app.use(cors({
   origin: function(origin, callback) {
-    // Permetti TUTTE le origini in development (incluso file:// che ha origin = null)
-    if (!origin || process.env.NODE_ENV === 'development') {
+    // Permetti sempre origin = null (file:// locale) o development
+    if (!origin) {
       callback(null, true);
+      return;
     }
-    // In development, permetti tutte le porte localhost
-    else if (origin.match(/^http:\/\/(localhost|127\.0\.0\.1):\d+$/)) {
+
+    // Permetti tutte le porte localhost in development
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       callback(null, true);
-    } else if (process.env.NODE_ENV === 'production' && origin === process.env.FRONTEND_URL) {
+      return;
+    }
+
+    // Production: solo FRONTEND_URL specificato
+    if (process.env.NODE_ENV === 'production' && origin === process.env.FRONTEND_URL) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
