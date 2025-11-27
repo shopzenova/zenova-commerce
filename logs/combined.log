@@ -1,0 +1,898 @@
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T07:55:18.426Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T07:55:18.505Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T07:55:18.509Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T07:55:18.615Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T07:55:18.674Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T07:55:18.703Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T07:55:18.703Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T07:55:18.703Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T07:55:43.124Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T07:55:43.196Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T07:55:43.200Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T07:55:43.201Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T07:55:43.275Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T07:55:43.281Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T07:55:43.284Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T07:55:52.591Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T07:55:56.261Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T07:55:56.291Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T07:56:05.352Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T07:56:35.722Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T07:56:35.864Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T07:56:35.865Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T07:56:35.872Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T07:56:35.886Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T07:56:35.887Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T07:56:35.887Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T07:56:35.892Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T07:56:35.892Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T07:56:35.893Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T07:56:36.090Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T07:56:36.110Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T07:56:36.321Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T07:56:53.920Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T07:56:53.953Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T07:56:53.956Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T07:56:53.957Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T07:56:53.964Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T07:56:53.965Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T07:56:53.968Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T07:56:53.969Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T07:56:53.969Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T07:56:53.970Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T07:56:53.979Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T07:56:54.014Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T07:56:54.122Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T07:56:54.154Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T07:56:59.310Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T07:56:59.388Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T07:56:59.389Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T07:56:59.389Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T07:56:59.410Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T07:56:59.411Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T07:56:59.412Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T07:56:59.973Z"}
+{"level":"info","message":"GET /api/admin/catalog/ftp","timestamp":"2025-11-27T07:57:15.340Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T08:00:09.870Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:00:10.041Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T08:00:10.042Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T08:00:10.044Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:00:10.174Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:00:10.175Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T08:00:10.176Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:00:10.871Z"}
+{"level":"info","message":"GET /api/admin/catalog/ftp","timestamp":"2025-11-27T08:00:12.528Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T08:01:11.044Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:01:11.139Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T08:01:11.140Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T08:01:11.143Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:01:11.150Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:01:11.151Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T08:01:11.152Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:01:11.680Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:01:15.713Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:01:15.743Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:01:15.744Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:01:15.744Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:01:15.747Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:01:15.748Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:01:15.755Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:01:15.756Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:01:15.758Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:01:15.759Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:01:15.760Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:01:15.808Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:01:15.917Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:15.952Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:01:20.398Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:01:20.494Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:01:20.495Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:01:20.495Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:01:20.501Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:01:20.502Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:01:20.509Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:20.509Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:20.647Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:01:22.577Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:01:22.604Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:01:22.605Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:01:22.605Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:01:22.612Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:01:22.613Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:01:22.639Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:22.640Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:22.765Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:01:25.411Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:01:25.452Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:01:25.454Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:01:25.455Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:01:25.461Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:01:25.462Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:01:25.462Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:01:25.464Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:01:25.468Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:01:25.469Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:01:25.470Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:01:25.501Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:01:25.650Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T08:05:26.293Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T08:05:26.403Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T08:05:26.408Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T08:05:26.564Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T08:05:26.657Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T08:05:26.694Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T08:05:26.694Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T08:05:26.695Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:06:01.391Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:01.674Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:01.675Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:06:01.677Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:06:01.716Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:06:01.717Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:06:01.727Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:01.730Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:01.731Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:06:01.733Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:06:01.779Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:01.832Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:01.987Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:06:02.808Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:06:07.492Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:07.547Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:07.548Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:07.549Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:07.554Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:06:07.557Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:07.614Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:07.617Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:07.764Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:06:10.009Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:10.052Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:10.053Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:10.054Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:10.058Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:06:10.060Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:10.067Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:10.210Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:06:11.911Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:06:20.762Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:20.800Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:20.804Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:06:20.805Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:06:20.812Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:06:20.813Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:06:20.814Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:20.819Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:20.820Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:06:20.821Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:06:20.821Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:20.867Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:21.046Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:06:28.711Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:28.742Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:28.743Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:28.745Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:28.746Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:06:28.758Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:28.776Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:28.917Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:06:39.354Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:39.413Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:39.414Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:06:39.417Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:06:39.421Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:06:39.424Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:06:39.425Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:39.427Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:39.428Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:06:39.429Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:06:39.430Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:39.467Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:39.612Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:06:41.083Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:06:41.135Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:06:41.136Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:06:41.137Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:06:41.235Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:06:41.236Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:06:41.292Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:41.294Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:06:41.432Z"}
+{"level":"info","message":"GET /api/admin/catalog/ftp","timestamp":"2025-11-27T08:06:49.415Z"}
+{"level":"info","message":"PUT /api/admin/products/layout","timestamp":"2025-11-27T08:07:16.971Z"}
+{"level":"info","message":"✅ Layout prodotti salvato","timestamp":"2025-11-27T08:07:16.975Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T08:07:19.620Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:19.714Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T08:07:19.715Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T08:07:19.718Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:07:19.730Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:19.731Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T08:07:19.732Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:07:20.309Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:07:23.410Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:23.453Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:23.455Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:07:23.456Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:07:23.461Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:07:23.462Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:07:23.463Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:23.469Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:23.470Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:07:23.470Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:07:23.471Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:23.503Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:23.648Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:07:27.206Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:27.347Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:27.348Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:07:27.348Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:07:27.360Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:07:27.361Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:07:27.363Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:27.364Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:27.365Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:07:27.365Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:07:27.368Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:27.395Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:27.551Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:07:31.550Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:31.607Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:31.608Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:31.609Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:31.622Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:07:31.623Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:31.678Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:31.679Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:31.813Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:07:33.789Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:33.824Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:33.825Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:33.825Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:33.829Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:07:33.838Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:33.877Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:33.878Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:34.016Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:07:35.831Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:35.879Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:35.884Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:35.885Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:35.911Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:07:35.911Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:36.034Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:36.173Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:07:54.806Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:54.847Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:54.849Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:07:54.854Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:07:54.858Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:07:54.859Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:07:54.859Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:54.862Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:54.863Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:07:54.863Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:07:54.864Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:54.900Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:55.039Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:07:58.067Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:07:58.197Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:07:58.197Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:07:58.198Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:07:58.206Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:07:58.207Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:07:58.209Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:07:58.210Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:07:58.210Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:07:58.211Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:07:58.212Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:07:58.234Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:07:58.372Z"}
+{"level":"info","message":"GET /api/products/S3057894","timestamp":"2025-11-27T08:09:39.301Z"}
+{"level":"info","message":"GET /api/products/S3057894","timestamp":"2025-11-27T08:09:47.568Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:10:12.274Z"}
+{"level":"info","message":"GET /admin.html","timestamp":"2025-11-27T08:12:09.063Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:12:09.150Z"}
+{"level":"info","message":"GET /admin.css","timestamp":"2025-11-27T08:12:09.150Z"}
+{"level":"info","message":"GET /admin.js","timestamp":"2025-11-27T08:12:09.153Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:12:09.162Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:12:09.164Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T08:12:09.165Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:12:09.713Z"}
+{"level":"info","message":"PUT /api/admin/products/layout","timestamp":"2025-11-27T08:12:24.652Z"}
+{"level":"info","message":"✅ Layout prodotti salvato","timestamp":"2025-11-27T08:12:24.654Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:12:29.548Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:12:29.612Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:12:29.613Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:12:29.615Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:12:29.620Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:12:29.621Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:12:29.622Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:12:29.626Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:12:29.627Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:12:29.627Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:12:29.628Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:12:29.652Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:12:29.817Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:12:38.172Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:12:38.212Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:12:38.220Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:12:38.222Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:12:38.226Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:12:38.227Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:12:38.249Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:12:38.251Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:12:38.525Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:12:40.215Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:12:40.271Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:12:40.272Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:12:40.276Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:12:40.280Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:12:40.286Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:12:40.313Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:12:40.459Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:12:48.806Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:12:48.841Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:12:48.843Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:12:48.845Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:12:48.848Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:12:48.849Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:12:48.879Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:12:49.012Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:14:07.934Z"}
+{"level":"info","message":"GET /api/products/S3057894","timestamp":"2025-11-27T08:14:33.620Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:15:13.169Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:15:13.197Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:15:13.200Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:15:13.201Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:15:13.211Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:15:13.212Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:15:13.355Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:15:13.512Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:15:13.513Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:15:22.659Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:15:22.692Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:15:22.695Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:15:22.696Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:15:22.702Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:15:22.703Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:15:22.709Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:15:22.710Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:15:22.711Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:15:22.712Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:15:22.774Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:15:22.775Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:15:22.941Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:15:32.629Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:15:32.676Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:15:32.678Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:15:32.678Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:15:32.683Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:15:32.683Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:15:32.692Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:15:32.814Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T08:16:36.498Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T08:16:36.591Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T08:16:36.593Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T08:16:36.695Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T08:16:36.757Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T08:16:36.790Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T08:16:36.790Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T08:16:36.790Z"}
+{"level":"info","message":"GET /api/products/S3057894","timestamp":"2025-11-27T08:16:50.829Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:17:09.911Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:17:10.531Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:10.569Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:10.570Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:10.574Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:10.582Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:17:10.593Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:10.707Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:17:10.839Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:10.874Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:17:19.834Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:19.869Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:17:19.873Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:19.873Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:17:19.876Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:17:19.877Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:17:19.879Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:19.882Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:19.883Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:17:19.885Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:17:19.886Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:19.935Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:20.076Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:17:25.708Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:25.748Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:25.749Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:25.750Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:25.754Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:17:25.755Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:25.763Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:25.763Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:25.983Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:17:26.115Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:17:26.912Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:26.936Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:26.938Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:26.939Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:26.942Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:17:26.943Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:26.951Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:26.953Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:27.175Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:17:27.302Z"}
+{"level":"info","message":"GET /cura-corpo-skin.html","timestamp":"2025-11-27T08:17:32.800Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:32.835Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:32.839Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:32.840Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:32.845Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:17:32.845Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:32.864Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:32.865Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:33.098Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:17:36.136Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:17:36.174Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:17:36.177Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:17:36.177Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:17:36.180Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:17:36.181Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:17:36.240Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:36.242Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:17:36.475Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:17:36.597Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:18:06.681Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:18:06.726Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:18:06.728Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:18:06.729Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:18:06.739Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:18:06.740Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:18:06.740Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:18:06.744Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:18:06.744Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:18:06.745Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:18:06.745Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:18:06.776Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:18:06.917Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:18:08.996Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:18:09.047Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:18:09.048Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:18:09.048Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:18:09.164Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:18:09.165Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:18:09.201Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:18:09.338Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:18:14.656Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:18:14.705Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:18:14.706Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:18:14.706Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:18:14.712Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:18:14.712Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:18:14.713Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:18:14.717Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:18:14.718Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:18:14.718Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:18:14.726Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:18:14.757Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:18:14.897Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:18:16.402Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:18:16.446Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:18:16.447Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:18:16.448Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:18:16.557Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:18:16.559Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:18:16.601Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:18:16.604Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:18:16.813Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:18:16.940Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:20:21.134Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:21.174Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:21.175Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:21.177Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:21.181Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:20:21.182Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:21.207Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:21.208Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:21.414Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:20:21.526Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:20:25.465Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:25.497Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:20:25.498Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:25.499Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:20:25.506Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:20:25.507Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:20:25.507Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:25.511Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:25.512Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:20:25.512Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:20:25.512Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:25.540Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:25.710Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:20:31.625Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:31.662Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:31.663Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:31.665Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:31.672Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:20:31.673Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:31.680Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:31.680Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:31.889Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:20:32.023Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:20:33.370Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:33.401Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:20:33.403Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:33.406Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:20:33.415Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:20:33.415Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:20:33.416Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:33.420Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:33.420Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:20:33.421Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:20:33.422Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:33.509Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:33.632Z"}
+{"level":"info","message":"GET /beauty.html","timestamp":"2025-11-27T08:20:34.540Z"}
+{"level":"info","message":"GET /health-personal-care.html","timestamp":"2025-11-27T08:20:42.059Z"}
+{"level":"info","message":"GET /natural-wellness.html","timestamp":"2025-11-27T08:20:45.042Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:20:51.504Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:51.548Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:51.550Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:51.553Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:51.560Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:20:51.560Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:51.566Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:51.694Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:20:53.624Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:20:53.691Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:20:53.692Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:20:53.693Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:20:53.697Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:20:53.698Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:20:53.699Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:20:53.703Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:20:53.703Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:20:53.704Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:20:53.713Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:20:53.736Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:20:53.880Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:22:09.908Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:27:06.840Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:27:06.877Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:27:06.878Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:27:06.881Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:27:06.886Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:27:06.888Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:27:06.892Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:27:06.894Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:27:06.894Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:27:06.894Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:27:06.908Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:27:06.934Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:27:07.075Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:27:09.893Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:27:20.545Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:27:20.584Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:27:20.586Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:27:20.588Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:27:20.592Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:27:20.592Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:27:20.602Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:27:20.726Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:27:40.212Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:27:40.258Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:27:40.258Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:27:40.260Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:27:40.264Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:27:40.265Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:27:40.266Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:27:40.272Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:27:40.273Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:27:40.273Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:27:40.290Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:27:40.309Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:27:40.468Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:29:34.185Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:29:34.239Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:29:34.240Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:29:34.243Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:29:34.247Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:29:34.248Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:29:34.253Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:29:34.385Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:29:40.923Z"}
+{"level":"info","message":"GET /.well-known/appspecific/com.chrome.devtools.json","timestamp":"2025-11-27T08:29:40.933Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:30:45.879Z"}
+{"level":"info","message":"GET /.well-known/appspecific/com.chrome.devtools.json","timestamp":"2025-11-27T08:30:45.928Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:30:45.936Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:30:45.939Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:30:45.941Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:30:45.959Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:30:45.960Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:30:46.031Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:30:46.247Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:30:46.355Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:32:09.904Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:33:00.477Z"}
+{"level":"info","message":"GET /.well-known/appspecific/com.chrome.devtools.json","timestamp":"2025-11-27T08:33:00.533Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:33:00.539Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:33:00.541Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:33:00.542Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:33:00.568Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:33:00.569Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:33:00.623Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:33:00.836Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:33:00.841Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:33:59.606Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:33:59.675Z"}
+{"level":"info","message":"GET /.well-known/appspecific/com.chrome.devtools.json","timestamp":"2025-11-27T08:33:59.677Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:33:59.678Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:33:59.679Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:33:59.696Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:33:59.713Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:33:59.781Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:34:00.022Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:34:00.023Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:08.246Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:08.285Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:12.465Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:12.492Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:18.381Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:18.415Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:24.092Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T08:35:24.100Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:35:58.548Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:35:58.666Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:35:58.671Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:35:58.674Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:35:58.688Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:35:58.777Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:35:58.872Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:35:58.968Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:36:14.611Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:36:14.657Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:36:14.659Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:36:14.662Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:36:14.665Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:36:14.674Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:36:14.675Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:36:14.679Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:36:14.680Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:36:14.683Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:36:14.687Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:36:14.759Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:36:14.918Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:36:32.339Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:36:32.390Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:36:32.391Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:36:32.392Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:36:32.397Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:36:32.401Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:36:32.416Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:36:32.545Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:37:09.897Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:42:09.904Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:42:14.424Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:42:14.459Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:42:14.465Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:42:14.473Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:42:14.492Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:42:14.657Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:42:14.958Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:42:25.021Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:42:25.054Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:42:25.061Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:42:25.062Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:42:25.074Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:42:25.313Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:42:25.529Z"}
+{"level":"info","message":"GET /smart-living.html","timestamp":"2025-11-27T08:42:34.893Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:42:35.031Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:42:35.032Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:42:35.033Z"}
+{"level":"info","message":"GET /category-products.js","timestamp":"2025-11-27T08:42:35.045Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:42:35.125Z"}
+{"level":"info","message":"GET /[object%20Object]","timestamp":"2025-11-27T08:42:35.321Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2025-11-27T08:42:37.056Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:43:49.180Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:43:49.232Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:43:49.236Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:43:49.237Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:43:49.244Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:43:49.244Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:43:49.249Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:43:49.249Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:43:49.250Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:43:49.251Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:43:49.261Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:43:49.348Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:43:49.519Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:43:52.383Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:43:52.437Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:43:52.439Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:43:52.441Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:43:52.448Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:43:52.449Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:43:52.463Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:43:52.593Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:44:52.619Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:44:52.659Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:44:52.662Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:44:52.665Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:44:52.667Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:44:52.670Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:44:52.674Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:44:52.676Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:44:52.684Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:44:52.685Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:44:52.689Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:44:52.722Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:44:52.870Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T08:45:00.725Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:45:00.767Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:45:00.770Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:45:00.772Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:45:00.783Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T08:45:00.784Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:45:00.799Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:45:00.927Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T08:45:15.026Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T08:45:15.060Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T08:45:15.062Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T08:45:15.064Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T08:45:15.068Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T08:45:15.070Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T08:45:15.073Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T08:45:15.075Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T08:45:15.076Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T08:45:15.077Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T08:45:15.088Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T08:45:15.115Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:45:15.262Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:47:09.892Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:52:09.899Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T08:54:24.469Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T08:57:09.907Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:02:09.908Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:05:58.868Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:06:16.461Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:06:16.522Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T09:06:24.188Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:06:24.221Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:06:24.238Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T09:06:24.240Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T09:06:24.242Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T09:06:24.243Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T09:06:24.243Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:06:24.244Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:06:24.248Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T09:06:24.249Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T09:06:24.251Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:06:24.295Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:06:24.464Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T09:06:32.773Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:06:32.820Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:06:32.822Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:06:32.823Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:06:32.829Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T09:06:32.830Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:06:32.836Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:06:33.005Z"}
+{"level":"info","message":"GET /prodotto.html","timestamp":"2025-11-27T09:06:56.089Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:07:09.893Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:11:18.363Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:11:18.484Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:11:18.490Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:11:18.617Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T09:11:18.697Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:11:18.745Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:11:18.746Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:11:18.746Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:12:09.912Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:17:09.896Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:19:18.476Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:19:18.562Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:19:18.568Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:19:18.623Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T09:19:18.689Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:19:18.711Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:19:18.711Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:19:18.712Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:19:43.502Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:19:43.536Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:19:58.009Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:19:58.026Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:01.029Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:01.083Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:14.458Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:14.462Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:20.673Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:20:20.729Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:21:36.791Z"}
+{"level":"info","message":"✅ Caricati 6331 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:21:36.860Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:21:36.862Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:21:36.910Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6331 prodotti","timestamp":"2025-11-27T09:21:36.973Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:21:36.994Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:21:36.994Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:21:36.995Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:21:57.912Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:21:57.954Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:22:00.096Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:22:00.103Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:22:06.380Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:22:06.406Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:22:09.909Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:23:11.016Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:23:11.051Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:24:17.752Z"}
+{"level":"info","message":"✅ Caricati 6331 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:24:17.846Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:24:17.849Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:24:17.966Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6331 prodotti","timestamp":"2025-11-27T09:24:18.037Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:24:18.079Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:24:18.079Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:24:18.079Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:24:35.958Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:24:35.981Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:24:38.327Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:24:38.330Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:25:13.368Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:25:13.414Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:26:17.799Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:26:17.883Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:26:17.886Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:26:17.938Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T09:26:18.011Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:26:18.035Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:26:18.035Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:26:18.035Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:35.521Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:35.573Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:37.341Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:37.357Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:42.763Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:26:42.768Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T09:26:55.248Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:26:55.286Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:26:55.291Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T09:26:55.295Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T09:26:55.303Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T09:26:55.309Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T09:26:55.316Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:26:55.319Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:26:55.323Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T09:26:55.324Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T09:26:55.388Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:26:55.405Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:26:55.578Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T09:27:05.139Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:27:05.154Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:27:05.159Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T09:27:05.162Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T09:27:05.168Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T09:27:05.170Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T09:27:05.171Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:27:05.176Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:27:05.187Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T09:27:05.188Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:27:05.224Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:27:05.370Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:27:09.911Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T09:27:10.285Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:27:10.307Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:27:10.312Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:27:10.316Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:27:10.320Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T09:27:10.321Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:27:10.333Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:27:10.474Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:06.658Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:06.670Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:09.752Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:09.759Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:14.091Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:28:14.105Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:01.559Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:01.587Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:17.078Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:17.090Z"}

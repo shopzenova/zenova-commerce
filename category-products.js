@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', async function() {
  */
 async function loadCategoryProducts() {
     try {
-        const response = await fetch(`${API_BASE}/products`);
+        // Carica TUTTI i prodotti visibili (senza filtro zona) per mostrare prodotti da home + sidebar
+        const response = await fetch(`${API_BASE}/products?pageSize=10000`);
 
         if (!response.ok) {
             throw new Error('Errore nel caricamento dei prodotti');

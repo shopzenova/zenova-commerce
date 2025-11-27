@@ -186,9 +186,10 @@ router.get('/', async (req, res) => {
         height: parseFloat(p.height) || 0,
         depth: parseFloat(p.depth) || 0
       },
-      // IMPORTANTE: Includiamo zenovaSubcategory e zenovaCategory per filtrare nel frontend
+      // IMPORTANTE: Includiamo zenovaSubcategory e zenovaCategories per filtrare nel frontend
       zenovaSubcategory: p.zenovaSubcategory,
       zenovaCategory: p.zenovaCategory,
+      zenovaCategories: p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []),
       subcategory: p.subcategory,  // Categorie BigBuy raw per backward compatibility
       active: true
     }));

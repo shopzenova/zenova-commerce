@@ -188,8 +188,11 @@
                             <input type="text" id="importSKU" placeholder="Inserisci SKU BigBuy (es. V0103345)" style="flex: 2; padding: 12px; border: none; border-radius: 8px; font-size: 14px;">
                             <select id="importCategory" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
                                 <option value="">Scegli Categoria...</option>
-                                <option value="smart-living">🏠 Smart Living</option>
-                                <option value="tech-innovation">⚡ Tech Innovation</option>
+                                <option value="beauty">Beauty</option>
+                                <option value="health-personal-care">Health & Personal Care</option>
+                                <option value="smart-living">Smart Living</option>
+                                <option value="natural-wellness">Natural Wellness</option>
+                                <option value="tech">Tech Innovation</option>
                             </select>
                             <button onclick="searchProductPreview()" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;">
                                 🔍 Cerca Prodotto
@@ -343,12 +346,12 @@
                         <div>
                             <select id="catalogCategory"
                                     style="padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; cursor: pointer;">
-                                <option value="all">📂 Tutte le Categorie</option>
-                                <option value="smart-living">🏠 Smart Living</option>
-                                <option value="cura-corpo-skin">💆 Cura Corpo & Skin</option>
-                                <option value="meditazione-zen">🧘 Meditazione & Zen</option>
-                                <option value="design-atmosfera">🎨 Design & Atmosfera</option>
-                                <option value="gourmet-tea-coffee">☕ Gourmet & Tea</option>
+                                <option value="all">Tutte le Categorie</option>
+                                <option value="beauty">Beauty</option>
+                                <option value="health-personal-care">Health & Personal Care</option>
+                                <option value="smart-living">Smart Living</option>
+                                <option value="natural-wellness">Natural Wellness</option>
+                                <option value="tech">Tech Innovation</option>
                             </select>
                         </div>
                         <button onclick="loadCatalogProducts()"
@@ -399,12 +402,12 @@
                     <div style="display: flex; gap: 15px; align-items: center; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px;">
                         <label style="color: white; font-weight: 600; min-width: 150px;">Categoria Principale:</label>
                         <select id="mainCategoryFilter" onchange="loadProductsByCategory()" style="flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">
-                            <option value="all">📦 Tutte le Categorie</option>
-                            <option value="beauty">💄 Beauty</option>
-                            <option value="health-personal-care">🏥 Health & Personal Care</option>
-                            <option value="smart-living">🏠 Smart Living</option>
-                            <option value="natural-wellness">🌿 Natural Wellness</option>
-                            <option value="tech-innovation">💻 Tech Innovation</option>
+                            <option value="all">Tutte le Categorie</option>
+                            <option value="beauty">Beauty</option>
+                            <option value="health-personal-care">Health & Personal Care</option>
+                            <option value="smart-living">Smart Living</option>
+                            <option value="natural-wellness">Natural Wellness</option>
+                            <option value="tech">Tech Innovation</option>
                         </select>
                         <button onclick="loadProductsByCategory()" style="padding: 12px 30px; background: white; color: #667eea; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
                             🔄 Aggiorna

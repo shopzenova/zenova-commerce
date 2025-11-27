@@ -222,18 +222,119 @@ function categorizeProduct(product) {
   return ['exclude'];
 }
 
+// ============================================================================
+// SOTTOCATEGORIE ZENOVA
+// ============================================================================
+
+const SUBCATEGORIES = {
+  'smart-living': {
+    'smart-led-illuminazione': [
+      'smart led', 'lampadina smart', 'striscia led', 'led wifi', 'led rgb',
+      'illuminazione smart', 'smart light', 'led controllato', 'lampada smart',
+      'wake-up light', 'wake up light', 'sveglia luce', 'simulazione alba',
+      'plafoniera led', 'lampada led', 'luce smart', 'faretto led'
+    ],
+    'domotica-smart-home': [
+      'smart home', 'domotica', 'sensore', 'telecamera wifi', 'campanello smart',
+      'termostato smart', 'presa smart', 'interruttore smart', 'hub smart',
+      'smart plug', 'smart socket', 'timer smart', 'alexa', 'google home',
+      'robot aspirapolvere', 'purificatore aria smart', 'umidificatore smart'
+    ]
+  },
+  'beauty': {
+    'makeup': [
+      'makeup', 'trucco', 'rossetto', 'mascara', 'fondotinta', 'ombretto',
+      'matita', 'cipria', 'blush', 'correttore', 'cosmetico'
+    ],
+    'skincare': [
+      'crema viso', 'siero viso', 'maschera viso', 'gel viso', 'lozione',
+      'anti-age', 'anti-rughe', 'contorno occhi', 'struccante', 'detergente viso'
+    ],
+    'profumi': [
+      'profumo', 'eau de toilette', 'eau de parfum', 'fragranza', 'cologne'
+    ],
+    'corpo': [
+      'gel doccia', 'bagnoschiuma', 'crema corpo', 'lozione corpo',
+      'scrub corpo', 'olio corpo', 'deodorante', 'sapone'
+    ]
+  },
+  'health-personal-care': {
+    'hair-care': [
+      'shampoo', 'balsamo', 'maschera capelli', 'tintura capelli',
+      'lacca', 'gel capelli', 'mousse capelli', 'siero capelli',
+      'piastra', 'arricciacapelli', 'phon', 'asciugacapelli'
+    ],
+    'barba': [
+      'barba', 'dopobarba', 'schiuma barba', 'rasoio', 'trimmer barba'
+    ],
+    'massaggio-benessere': [
+      'massaggiatore', 'massaggio', 'shiatsu', 'pistola massaggiante'
+    ],
+    'protezione-solare': [
+      'protezione solare', 'crema solare', 'after sun', 'autoabbronzante'
+    ]
+  },
+  'tech-innovation': {
+    'wearable': [
+      'smart watch', 'smartwatch', 'fitness tracker', 'activity tracker',
+      'smart band', 'fitness band', 'smart ring'
+    ],
+    'audio': [
+      'auricolari wireless', 'auricolari', 'earbuds', 'tws', 'cuffie bluetooth',
+      'cuffie wireless', 'wireless earbuds', 'bluetooth earbuds'
+    ],
+    'gadget': [
+      'gadget tech', 'tech gadget', 'innovazione', 'smart gadget',
+      'portable tech', 'mini projector', 'pocket printer', 'drone', 'robot'
+    ]
+  },
+  'natural-wellness': {
+    'aromaterapia': [
+      'oli essenziali', 'olio essenziale', 'essential oil', 'olio aromaterapia',
+      'diffusore oli essenziali', 'diffusore aroma', 'aromaterapia'
+    ],
+    'yoga-meditazione': [
+      'tappetino yoga', 'yoga mat', 'cuscino meditazione', 'zafu', 'bolster yoga',
+      'blocco yoga', 'cinghia yoga', 'ruota yoga', 'yoga wheel'
+    ],
+    'decorazione-zen': [
+      'incenso', 'bastoncini incenso', 'portaincenso', 'candela aromatica',
+      'fontana zen', 'giardino zen', 'buddha', 'statua zen', 'campana tibetana',
+      'lampada sale', 'himalayan salt lamp', 'cristalli', 'pietre chakra'
+    ]
+  }
+};
+
 /**
- * Determina la sottocategoria per filtri frontend (opzionale)
+ * Determina la sottocategoria per filtri frontend
  */
 function getProductSubcategory(product) {
   const categories = categorizeProduct(product);
 
-  if (categories.includes('exclude')) {
+  if (categories.includes('exclude') || categories.length === 0) {
     return null;
   }
 
-  // Restituisci la prima categoria come subcategory
-  return categories[0] || null;
+  const name = (product.name || '').toLowerCase();
+  const description = (product.description || '').toLowerCase();
+  const text = `${name} ${description}`;
+
+  // Per ogni categoria principale del prodotto
+  for (const mainCategory of categories) {
+    if (!SUBCATEGORIES[mainCategory]) continue;
+
+    // Cerca la sottocategoria più appropriata
+    for (const [subcategoryKey, keywords] of Object.entries(SUBCATEGORIES[mainCategory])) {
+      for (const keyword of keywords) {
+        if (text.includes(keyword.toLowerCase())) {
+          return subcategoryKey; // Restituisci la prima sottocategoria che matcha
+        }
+      }
+    }
+  }
+
+  // Se non trova una sottocategoria specifica, restituisce null
+  return null;
 }
 
 /**
