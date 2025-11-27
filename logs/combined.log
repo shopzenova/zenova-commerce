@@ -896,3 +896,203 @@
 {"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:01.587Z"}
 {"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:17.078Z"}
 {"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:30:17.090Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:32:14.915Z"}
+{"level":"info","message":"✅ Caricati 6346 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:32:15.005Z"}
+{"level":"info","message":"✅ Layout caricato: 11 home, 6333 sidebar, 2 hidden","timestamp":"2025-11-27T09:32:15.007Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:32:15.063Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6346 prodotti","timestamp":"2025-11-27T09:32:15.129Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:32:15.157Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:32:15.157Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:32:15.157Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:32:55.030Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:32:55.090Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:34:15.142Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:34:15.207Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:34:20.883Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:34:20.887Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:35:49.772Z"}
+{"level":"info","message":"✅ Caricati 6344 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:35:49.870Z"}
+{"level":"info","message":"✅ Layout caricato: 10 home, 6317 sidebar, 2 hidden","timestamp":"2025-11-27T09:35:49.872Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:35:49.938Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6344 prodotti","timestamp":"2025-11-27T09:35:50.023Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:35:50.052Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:35:50.052Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:35:50.052Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:04.412Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:04.432Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:27.021Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:27.074Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:32.261Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:32.288Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:36.253Z"}
+{"level":"error","message":"Error: Not allowed by CORS\n    at origin (C:\\Users\\giorg\\zenova-ecommerce\\backend\\server.js:42:16)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:219:13\n    at optionsCallback (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:199:9)\n    at corsMiddleware (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\cors\\lib\\index.js:204:7)\n    at Layer.handle [as handle_request] (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at trim_prefix (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:328:13)\n    at C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:286:9\n    at Function.process_params (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:346:12)\n    at next (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\express\\lib\\router\\index.js:280:10)\n    at internalNext (C:\\Users\\giorg\\zenova-ecommerce\\backend\\node_modules\\helmet\\index.cjs:537:6)","timestamp":"2025-11-27T09:36:36.261Z"}
+{"level":"warn","message":"⚠️  BigBuy in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:37:45.529Z"}
+{"level":"info","message":"✅ Caricati 6344 prodotti TOP dal file JSON","timestamp":"2025-11-27T09:37:45.639Z"}
+{"level":"info","message":"✅ Layout caricato: 10 home, 6317 sidebar, 2 hidden","timestamp":"2025-11-27T09:37:45.641Z"}
+{"level":"warn","message":"⚠️  Stripe in MOCK MODE - usando dati finti","timestamp":"2025-11-27T09:37:45.713Z"}
+{"level":"info","message":"✅ Admin API: Caricati 6344 prodotti","timestamp":"2025-11-27T09:37:45.795Z"}
+{"level":"info","message":"🚀 Server Zenova avviato su porta 3000","timestamp":"2025-11-27T09:37:45.823Z"}
+{"level":"info","message":"📝 Ambiente: undefined","timestamp":"2025-11-27T09:37:45.823Z"}
+{"level":"info","message":"🌐 Frontend URL: undefined","timestamp":"2025-11-27T09:37:45.823Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:10.487Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:38:10.665Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:18.706Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:38:18.838Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:27.000Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:38:27.126Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:39.659Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:38:39.809Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T09:38:42.328Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:38:42.333Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:42.335Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:38:45.501Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T09:38:45.502Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:38:45.503Z"}
+{"level":"info","message":"PUT /api/admin/products/layout","timestamp":"2025-11-27T09:39:39.843Z"}
+{"level":"info","message":"✅ Layout prodotti salvato","timestamp":"2025-11-27T09:39:39.846Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:39:45.279Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:39:45.451Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T09:40:03.052Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:40:03.091Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:40:03.098Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T09:40:03.100Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T09:40:03.107Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:40:03.109Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T09:40:03.113Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T09:40:03.115Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:40:03.126Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T09:40:03.149Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T09:40:03.151Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:40:03.199Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:40:03.359Z"}
+{"level":"info","message":"GET /prodotti.html","timestamp":"2025-11-27T09:40:09.540Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:40:09.560Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:40:09.565Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:40:09.569Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:40:09.576Z"}
+{"level":"info","message":"GET /sidebar.js","timestamp":"2025-11-27T09:40:09.580Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:40:09.590Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:40:09.726Z"}
+{"level":"info","message":"GET /index.html","timestamp":"2025-11-27T09:40:25.253Z"}
+{"level":"info","message":"GET /styles.css","timestamp":"2025-11-27T09:40:25.270Z"}
+{"level":"info","message":"GET /logo-aura.png","timestamp":"2025-11-27T09:40:25.274Z"}
+{"level":"info","message":"GET /unsplash-3.avif","timestamp":"2025-11-27T09:40:25.276Z"}
+{"level":"info","message":"GET /tech-2.jpg","timestamp":"2025-11-27T09:40:25.281Z"}
+{"level":"info","message":"GET /tech-1.jpg","timestamp":"2025-11-27T09:40:25.283Z"}
+{"level":"info","message":"GET /relax-3.jpg","timestamp":"2025-11-27T09:40:25.284Z"}
+{"level":"info","message":"GET /api-client.js","timestamp":"2025-11-27T09:40:25.285Z"}
+{"level":"info","message":"GET /script.js","timestamp":"2025-11-27T09:40:25.288Z"}
+{"level":"info","message":"GET /esperienza-1.png","timestamp":"2025-11-27T09:40:25.290Z"}
+{"level":"info","message":"GET /video-zenova.mp4","timestamp":"2025-11-27T09:40:25.291Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T09:40:25.338Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T09:40:25.492Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:43:45.923Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:48:45.918Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:53:45.903Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T09:58:45.906Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:03:45.902Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:08:45.889Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:13:45.969Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:18:45.905Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:23:45.937Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:28:45.921Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:33:45.889Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:38:45.911Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:43:45.914Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:48:45.905Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:53:45.908Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T10:58:45.926Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:03:45.896Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:08:45.906Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:13:45.901Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:18:45.899Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:23:45.903Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:28:45.900Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:33:45.912Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:38:45.928Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:43:45.894Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:48:45.915Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:53:45.901Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T11:58:45.901Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:01:35.217Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:01:35.576Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:01:47.475Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:01:47.612Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:01:53.925Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:01:54.068Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:03:45.900Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:05:05.838Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:05:06.001Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:06:49.308Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:06:49.473Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:06:53.541Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:06:53.687Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:07:13.653Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:07:13.827Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:07:36.195Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:07:36.349Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:08:45.902Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:13:45.900Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:17:41.308Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:17:41.490Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:18:11.261Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:18:11.428Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:18:14.961Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:18:15.096Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:18:37.838Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:18:37.986Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:18:45.905Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:20:21.432Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:20:21.573Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:20:48.972Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:20:49.109Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:23:12.694Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:23:12.856Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:23:40.643Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:23:40.792Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:23:45.928Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:23:55.043Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:23:55.173Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:23:57.339Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:23:57.481Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:24:00.281Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:24:00.444Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:24:02.393Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:24:02.514Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:24:04.711Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:24:04.855Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:24:26.621Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:24:26.782Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:24:33.976Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:24:33.979Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T12:24:33.980Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:25:40.114Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:25:40.247Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:25:47.437Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:25:47.567Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:25:57.179Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:25:57.317Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:27:15.390Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:27:15.605Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:27:47.825Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:27:48.002Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:28:16.576Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:28:16.725Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:28:45.926Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:31:31.397Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:31:31.725Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:31:58.415Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:31:58.548Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:32:07.960Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:32:08.095Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:32:16.375Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:32:16.514Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:32:23.553Z"}
+{"level":"info","message":"GET /api/products","timestamp":"2025-11-27T12:32:23.716Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T12:32:26.343Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:32:26.344Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:32:26.345Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:32:29.588Z"}
+{"level":"info","message":"GET /api/admin/products","timestamp":"2025-11-27T12:32:29.589Z"}
+{"level":"info","message":"GET /api/admin/activity","timestamp":"2025-11-27T12:32:29.591Z"}
+{"level":"info","message":"GET /api/admin/stats","timestamp":"2025-11-27T12:33:45.934Z"}

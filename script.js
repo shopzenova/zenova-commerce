@@ -678,7 +678,7 @@ window.filterProductsBySubcategory = function(subcategory) {
 function createProductCard(product) {
     const productCard = document.createElement('div');
     productCard.className = 'product-card';
-    productCard.setAttribute('data-subcategory', product.subcategory);
+    productCard.setAttribute('data-subcategory', product.zenovaSubcategory || product.subcategory);
     productCard.setAttribute('data-product-id', product.id);
 
     const isInWishlist = wishlist.some(item => item.id === product.id);
@@ -859,7 +859,7 @@ function renderProducts() {
 
     productsGrid.innerHTML = '';
 
-    console.log(`🎨 Rendering featured products from admin selection`);
+    console.log(`🎨 Rendering products for shop page`);
 
     // IMPORTANTE: Filtra prodotti nascosti (visible: false) E prodotti nell'array hidden di productLayout
     const hiddenIds = (productLayout && productLayout.hidden) ? productLayout.hidden : [];
@@ -869,7 +869,7 @@ function renderProducts() {
     });
     console.log(`👁️  Prodotti visibili totali: ${visibleProducts.length} su ${products.length} (nascosti: ${hiddenIds.length})`);
 
-    // ✅ NUOVO: Usa prodotti selezionati dall'admin come featured
+    // ✅ SHOP PAGE: Mostra 100 prodotti in evidenza scelti dall'admin
     let productsToRender = [];
 
     if (productLayout && productLayout.featured && productLayout.featured.length > 0) {
@@ -914,7 +914,7 @@ function renderProducts() {
     // Limita a max 100 prodotti totali
     productsToRender = productsToRender.slice(0, 100);
 
-    console.log(`✨ Rendering ${productsToRender.length} prodotti featured (${productLayout?.featured?.length || 0} dall'admin + ${productsToRender.length - (productLayout?.featured?.length || 0)} automatici)`);
+    console.log(`✨ Rendering ${productsToRender.length} prodotti in evidenza`);
 
     // Render featured products
     productsToRender.forEach(product => {

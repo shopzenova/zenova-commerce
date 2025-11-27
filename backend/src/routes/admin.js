@@ -759,10 +759,11 @@ router.get('/catalog/ftp', (req, res) => {
     // Filtra SOLO prodotti Zenova validi (escludi quelli con categoria "exclude")
     const validZenovaCategories = [
       'smart-living',
-      'cura-corpo-skin',
-      'meditazione-zen',
-      'design-atmosfera',
-      'gourmet-tea-coffee'
+      'beauty',
+      'health-personal-care',
+      'natural-wellness',
+      'tech-innovation',
+      'tech'
     ];
 
     let filtered = ftpProducts.filter(p => {

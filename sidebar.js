@@ -3,8 +3,8 @@ const anchorToSubcategoryMap = {
     // ======== NUOVE 5 CATEGORIE ZENOVA ========
 
     // SMART LIVING
-    'smart-led': '2399,2400,2421',
-    'domotica': '2399',
+    'smart-led': 'smart-led-illuminazione',
+    'domotica': 'domotica-smart-home',
     'wireless': '2609',
 
     // BEAUTY - Mappato a categorie Zenova
@@ -111,6 +111,8 @@ const subcategoryToCategoryMap = {
     'smart-led': 'smart-living',
     'domotica': 'smart-living',
     'wireless': 'smart-living',
+    'smart-led-illuminazione': 'smart-living',
+    'domotica-smart-home': 'smart-living',
     '2399': 'smart-living',
     '2399,2400,2421': 'smart-living',
     '2609': 'smart-living',
