@@ -452,7 +452,7 @@ router.post('/products/import', async (req, res) => {
       'beauty': 'profumi-fragranze',
       'health-personal-care': 'set-massaggio',
       'natural-wellness': 'oli-essenziali',
-      'tech': 'gadget-tech'
+      'tech-innovation': 'gadget-tech'
     };
 
     // Formatta il prodotto nel formato del catalogo
