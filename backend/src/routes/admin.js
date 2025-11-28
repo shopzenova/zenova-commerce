@@ -446,6 +446,15 @@ router.post('/products/import', async (req, res) => {
       if (foundProduct[imgField]) images.push({ url: foundProduct[imgField] });
     }
 
+    // Mappa sottocategorie di default per ogni categoria principale
+    const defaultSubcategories = {
+      'smart-living': 'smart-led-illuminazione',
+      'beauty': 'profumi-fragranze',
+      'health-personal-care': 'set-massaggio',
+      'natural-wellness': 'oli-essenziali',
+      'tech': 'gadget-tech'
+    };
+
     // Formatta il prodotto nel formato del catalogo
     const newProduct = {
       id: foundProduct.ID,
@@ -456,6 +465,7 @@ router.post('/products/import', async (req, res) => {
       category: category,
       zenovaCategory: category,
       zenovaCategories: [category],
+      zenovaSubcategory: defaultSubcategories[category] || 'altri',
       price: parseFloat(foundProduct.PVP_BIGBUY || 0),
       pvd: parseFloat(foundProduct.PVD || 0),
       stock: parseInt(foundProduct.STOCK || 0),
