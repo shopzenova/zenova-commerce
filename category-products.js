@@ -54,6 +54,14 @@ async function loadCategoryProducts() {
             allProducts = result.data;
             console.log('📦 Prodotti totali caricati:', allProducts.length);
 
+            // Sincronizza con script.js: se products esiste, popolalo
+            // Altrimenti crea window.products per il modal
+            if (typeof products !== 'undefined') {
+                products = allProducts;
+            } else {
+                window.products = allProducts;
+            }
+
             // Filtra prodotti per categoria corrente
             const filteredProducts = filterProductsByCategory(currentCategory);
             console.log(`🎯 Prodotti in "${currentCategory}":`, filteredProducts.length);
@@ -282,7 +290,7 @@ function showProductDetail(productId) {
 
     // Usa la funzione globale se esiste (da script.js)
     if (typeof window.openProductDetailModal === 'function') {
-        window.openProductDetailModal(product);
+        window.openProductDetailModal(productId);
     } else {
         console.log('📄 Apertura dettagli prodotto:', product.name);
         // Fallback: redirect a pagina prodotto

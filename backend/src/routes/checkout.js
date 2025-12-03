@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('../integrations/StripeClient');
 const bigbuy = require('../integrations/BigBuyClient');
+const shippingService = require('../services/ShippingService');
 const logger = require('../utils/logger');
 
 // POST /api/checkout - Crea sessione checkout Stripe
@@ -199,6 +200,72 @@ router.get('/mock/:sessionId', (req, res) => {
     </body>
     </html>
   `);
+});
+
+// POST /api/checkout/calculate-shipping - Calcola costi spedizione (usando CSV BigBuy)
+router.post('/calculate-shipping', async (req, res) => {
+  try {
+    const { items, destination } = req.body;
+
+    // Validazione input
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Carrello vuoto'
+      });
+    }
+
+    if (!destination || !destination.country) {
+      return res.status(400).json({
+        success: false,
+        error: 'Destinazione richiesta (country)'
+      });
+    }
+
+    logger.info(`🚚 Calcolo spedizione per ${items.length} prodotti verso ${destination.country}`);
+
+    // Prepara dati prodotti
+    const products = items.map(item => ({
+      reference: item.id, // ID prodotto BigBuy
+      quantity: item.quantity || 1
+    }));
+
+    // Usa ShippingService per calcolare costi REALI da CSV
+    const result = await shippingService.calculateShippingCost(products, {
+      country: destination.country,
+      postcode: destination.postcode || ''
+    });
+
+    if (!result.success) {
+      return res.status(400).json({
+        success: false,
+        error: result.error,
+        supportedCountries: result.supportedCountries
+      });
+    }
+
+    logger.info(`✅ Costo spedizione calcolato: €${result.cost} (${result.carrier})`);
+
+    res.json({
+      success: true,
+      shipping: {
+        cost: result.cost,
+        carrier: result.carrier,
+        country: result.country,
+        breakdown: result.breakdown,
+        productsCount: result.productsCount,
+        notFoundCount: result.notFoundCount
+      }
+    });
+
+  } catch (error) {
+    logger.error('Errore calcolo spedizione:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Errore calcolo costi spedizione',
+      message: error.message
+    });
+  }
 });
 
 module.exports = router;

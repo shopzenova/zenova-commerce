@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
     let shippingData = {};
     let currentStep = 1;
+    let calculatedShippingCost = 0; // Will be calculated dynamically
 
     // Check if user is logged in
     const currentUser = getCurrentUser();
@@ -73,6 +74,84 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('lastName').value = currentUser.lastName;
             document.getElementById('email').value = currentUser.email;
         }
+    }
+
+    // Function to calculate shipping costs dynamically
+    async function calculateShipping() {
+        const countrySelect = document.getElementById('country');
+        if (!countrySelect || !countrySelect.value) {
+            console.log('⚠️ Paese non selezionato, uso costo spedizione predefinito');
+            calculatedShippingCost = 0;
+            loadOrderSummary();
+            return;
+        }
+
+        const country = countrySelect.value;
+        const postalCode = document.getElementById('postalCode')?.value || '';
+
+        // Show loading indicator
+        const shippingElement = document.getElementById('summaryShipping');
+        if (shippingElement) {
+            shippingElement.innerHTML = '<span style="color: #888;">Calcolo...</span>';
+        }
+
+        try {
+            console.log('📦 Calcolo costi spedizione per:', { country, postalCode, cartItems: cart.length });
+
+            // Prepare cart items for shipping calculation
+            const items = cart.map(item => ({
+                id: item.bigbuyId || item.id,
+                quantity: item.quantity
+            }));
+
+            const response = await fetch('http://localhost:3000/api/checkout/calculate-shipping', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items,
+                    destination: {
+                        country,
+                        postcode: postalCode
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Errore HTTP: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('✅ Costi spedizione calcolati:', data);
+
+            if (data.success && data.shipping && data.shipping.cost !== undefined) {
+                calculatedShippingCost = data.shipping.cost;
+                console.log(`💰 Costo spedizione: €${calculatedShippingCost.toFixed(2)} (${data.shipping.carrier})`);
+            } else {
+                console.warn('⚠️ Risposta API non valida, uso costo predefinito');
+                calculatedShippingCost = 0;
+            }
+
+        } catch (error) {
+            console.error('❌ Errore calcolo spedizione:', error);
+            calculatedShippingCost = 0; // Fallback to free shipping
+        }
+
+        // Update summary with calculated cost
+        loadOrderSummary();
+    }
+
+    // Add listener to country select for dynamic shipping calculation
+    const countrySelect = document.getElementById('country');
+    if (countrySelect) {
+        countrySelect.addEventListener('change', calculateShipping);
+        console.log('✅ Listener aggiunto a campo paese per calcolo spedizione');
+    }
+
+    // Calculate shipping on page load (if country already selected)
+    if (countrySelect && countrySelect.value) {
+        calculateShipping();
     }
 
     // Load order summary
@@ -138,6 +217,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (selectedMethod === 'cash') {
                 document.getElementById('cashOnDeliveryInfo').classList.remove('hidden');
             }
+
+            // Recalculate order summary (to update cash on delivery fee)
+            loadOrderSummary();
         });
     });
 
@@ -331,14 +413,29 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('summaryDiscount').textContent = `-€${discount.toFixed(2)}`;
         }
 
-        // Check for cash on delivery fee
+        // Calculate shipping cost (from BigBuy API + cash on delivery fee if applicable)
         const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
-        let shippingCost = 0;
+        let shippingCost = calculatedShippingCost; // Base shipping cost from BigBuy
+
+        // Add cash on delivery fee if applicable
+        const cashOnDeliveryFee = 5.00;
         if (selectedMethod && selectedMethod.value === 'cash') {
-            shippingCost = 5.00;
-            document.getElementById('summaryShipping').textContent = '€5.00';
+            shippingCost += cashOnDeliveryFee;
+        }
+
+        // Display shipping cost
+        const shippingElement = document.getElementById('summaryShipping');
+        if (shippingCost === 0) {
+            shippingElement.textContent = 'Gratis';
         } else {
-            document.getElementById('summaryShipping').textContent = 'Gratis';
+            const breakdown = [];
+            if (calculatedShippingCost > 0) {
+                breakdown.push(`Spedizione: €${calculatedShippingCost.toFixed(2)}`);
+            }
+            if (selectedMethod && selectedMethod.value === 'cash') {
+                breakdown.push(`Contrassegno: €${cashOnDeliveryFee.toFixed(2)}`);
+            }
+            shippingElement.innerHTML = `€${shippingCost.toFixed(2)}${breakdown.length > 0 ? '<br><small style="color: #666;">(' + breakdown.join(' + ') + ')</small>' : ''}`;
         }
 
         const total = subtotal - discount + shippingCost;
@@ -357,12 +454,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtotal -= subtotal * promo.discount;
         }
 
+        // Add calculated shipping cost
+        let shippingCost = calculatedShippingCost;
+
+        // Add cash on delivery fee if applicable
         const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
         if (selectedMethod && selectedMethod.value === 'cash') {
-            subtotal += 5.00;
+            shippingCost += 5.00; // Cash on delivery fee
         }
 
-        return subtotal;
+        return subtotal + shippingCost;
     }
 
     function goToStep(step) {

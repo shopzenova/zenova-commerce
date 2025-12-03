@@ -1004,7 +1004,8 @@ window.renderProductsByCategory = renderProductsByCategory;
 
 // Add to Cart
 function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
+    const productsArray = products.length > 0 ? products : (window.products || []);
+    const product = productsArray.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {
@@ -1166,7 +1167,8 @@ async function validateCartWithBackend() {
 
 // Add to Wishlist
 function addToWishlist(productId) {
-    const product = products.find(p => p.id === productId);
+    const productsArray = products.length > 0 ? products : (window.products || []);
+    const product = productsArray.find(p => p.id === productId);
     const existingItem = wishlist.find(item => item.id === productId);
 
     if (!existingItem) {
@@ -1758,7 +1760,8 @@ window.handleSearchResultClick = function(productId) {
     document.getElementById('searchInput').value = '';
 
     // Get product info
-    const product = products.find(p => p.id === productId);
+    const productsArray = products.length > 0 ? products : (window.products || []);
+    const product = productsArray.find(p => p.id === productId);
     if (!product) {
         console.error('Prodotto non trovato:', productId);
         return;
@@ -1794,8 +1797,13 @@ let currentGalleryImages = [];
 
 // Open product detail modal
 function openProductDetailModal(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
+    // Cerca in products (script.js) o window.products (category-products.js)
+    const productsArray = products.length > 0 ? products : (window.products || []);
+    const product = productsArray.find(p => p.id === productId);
+    if (!product) {
+        console.error('❌ Prodotto non trovato:', productId, 'in array di', productsArray.length, 'prodotti');
+        return;
+    }
 
     currentProductId = productId;
     currentProductCategory = product.zenovaCategory || null; // Salva categoria prodotto
@@ -1942,6 +1950,9 @@ function openProductDetailModal(productId) {
         modal.classList.add('active');
     });
 }
+
+// Make function globally accessible for category pages
+window.openProductDetailModal = openProductDetailModal;
 
 // Update gallery display
 function updateGallery() {

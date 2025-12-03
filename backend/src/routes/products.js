@@ -8,8 +8,23 @@ const productFilters = require('../../config/product-filters');
 
 // Carica i TOP 100 prodotti dal file JSON
 let TOP_PRODUCTS = [];
+const jsonPath = path.join(__dirname, '../../top-100-products.json');
+
+// Funzione per ricaricare i prodotti dal file JSON
+function reloadProducts() {
+  try {
+    const rawData = fs.readFileSync(jsonPath, 'utf-8');
+    TOP_PRODUCTS = JSON.parse(rawData);
+    logger.info(`🔄 Ricaricati ${TOP_PRODUCTS.length} prodotti TOP dal file JSON`);
+    return true;
+  } catch (error) {
+    logger.error('❌ Errore ricaricamento top-100-products.json:', error);
+    return false;
+  }
+}
+
+// Caricamento iniziale
 try {
-  const jsonPath = path.join(__dirname, '../../top-100-products.json');
   const rawData = fs.readFileSync(jsonPath, 'utf-8');
   TOP_PRODUCTS = JSON.parse(rawData);
   logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti TOP dal file JSON`);
@@ -194,6 +209,13 @@ router.get('/', async (req, res) => {
       active: true
     }));
 
+    // Disabilita cache per forzare ricaricamento dopo modifiche
+    res.set({
+      'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+
     res.json({
       success: true,
       data: formattedProducts,
@@ -356,3 +378,4 @@ router.post('/stock', async (req, res) => {
 });
 
 module.exports = router;
+module.exports.reloadProducts = reloadProducts;

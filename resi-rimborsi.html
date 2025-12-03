@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resi e Rimborsi | ZENOVA - Where Technology Meets Calm Wellness</title>
+    <link rel="stylesheet" href="styles.css?v=20251127ALL">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .legal-page {
+            padding: 6rem 0 4rem;
+            min-height: 100vh;
+        }
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--color-border, #e0e0e0);
+        }
+        .legal-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-heading, #1a1a1a);
+            margin-bottom: 0.5rem;
+        }
+        .legal-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-light, #666);
+            font-weight: 300;
+        }
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+        .legal-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-heading, #1a1a1a);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .legal-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-heading, #333);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .legal-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text, #444);
+            margin-bottom: 1rem;
+        }
+        .legal-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .legal-section li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text, #444);
+            margin-bottom: 0.5rem;
+        }
+        .info-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .info-box.warning {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0b2 100%);
+            border-left-color: #ff9800;
+        }
+        .info-box.success {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left-color: #4caf50;
+        }
+        .info-box.error {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left-color: #f44336;
+        }
+        .info-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+        .icon-text {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            gap: 0.75rem;
+            color: #5568d3;
+        }
+        .steps-box {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .steps-box ol {
+            margin: 1rem 0 0 1.5rem;
+        }
+        .steps-box li {
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1>ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></h1>
+                        <p class="logo-experience">Experience</p>
+                        <p class="tagline">where technology meets calm and wellness</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Legal Content -->
+    <main class="legal-page">
+        <div class="legal-container">
+            <div class="legal-header">
+                <h1 class="legal-title">↩️ Resi e Rimborsi</h1>
+                <p class="legal-subtitle">La tua soddisfazione è la nostra priorità</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">✓</span> Garanzia Legale di Conformità</h2>
+                <p>Tutti i prodotti venduti su Zenova sono coperti dalla <strong>Garanzia Legale di Conformità di 2 anni</strong> come previsto dal Codice del Consumo (D.Lgs. 206/2005).</p>
+
+                <div class="info-box success">
+                    <p>✓ Garanzia di <strong>24 mesi</strong> per prodotti nuovi</p>
+                    <p>✓ Garanzia di <strong>12 mesi</strong> per prodotti ricondizionati</p>
+                </div>
+
+                <p>La garanzia copre:</p>
+                <ul>
+                    <li>Difetti di conformità presenti al momento della consegna</li>
+                    <li>Difetti di fabbricazione</li>
+                    <li>Malfunzionamenti non dovuti a uso improprio</li>
+                </ul>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">⚠️</span> Cosa Copre e Cosa NON Copre la Garanzia</h2>
+
+                <h3>✓ La garanzia COPRE:</h3>
+                <ul>
+                    <li>Difetti di fabbricazione o materiali</li>
+                    <li>Prodotti che non funzionano correttamente senza intervento da parte dell'utente</li>
+                    <li>Prodotti danneggiati durante il trasporto (con segnalazione entro 48 ore)</li>
+                    <li>Prodotti che non corrispondono alla descrizione dell'ordine</li>
+                </ul>
+
+                <h3>✗ La garanzia NON COPRE:</h3>
+                <ul>
+                    <li><strong>Danni causati da uso improprio, cadute o manomissioni</strong></li>
+                    <li><strong>Normale usura del prodotto</strong></li>
+                    <li><strong>Danni causati da liquidi o umidità (se non previsto nelle specifiche)</strong></li>
+                    <li><strong>Prodotti con sigilli di garanzia rimossi o danneggiati</strong></li>
+                    <li><strong>Danni causati da modifiche non autorizzate</strong></li>
+                </ul>
+
+                <div class="info-box error">
+                    <p>❌ <strong>IMPORTANTE:</strong> NON accettiamo resi per cambio d'idea, ripensamento o "non mi piace più". Assicurati di essere sicuro del tuo acquisto prima di ordinare!</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">⏱️</span> Tempistiche per Segnalare Problemi</h2>
+                <p>È fondamentale rispettare queste tempistiche per poter esercitare il diritto di garanzia:</p>
+
+                <div class="info-box warning">
+                    <p>⏰ <strong>48 ore dalla consegna</strong> per segnalare:</p>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Prodotto danneggiato durante il trasporto</li>
+                        <li>Prodotto non conforme all'ordine</li>
+                        <li>Confezione danneggiata o aperta</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <p>📅 <strong>Entro 2 mesi dalla scoperta del difetto</strong> per segnalare:</p>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Difetti di funzionamento</li>
+                        <li>Problemi di conformità</li>
+                        <li>Malfunzionamenti vari</li>
+                    </ul>
+                </div>
+
+                <p><strong>Attenzione:</strong> Segnalazioni ricevute oltre questi termini potrebbero non essere accettate.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📋</span> Come Richiedere un Reso</h2>
+
+                <div class="steps-box">
+                    <h3>Segui questi passaggi:</h3>
+                    <ol>
+                        <li><strong>Contattaci immediatamente</strong> via email a <strong>info@zenova.it</strong> o WhatsApp al <strong>+39 320 123 4567</strong></li>
+                        <li><strong>Fornisci queste informazioni:</strong>
+                            <ul>
+                                <li>Numero d'ordine</li>
+                                <li>Descrizione dettagliata del problema</li>
+                                <li>Foto/video del difetto (se possibile)</li>
+                                <li>Data di ricezione del prodotto</li>
+                            </ul>
+                        </li>
+                        <li><strong>Attendi la nostra risposta</strong> - Ti invieremo le istruzioni per il reso entro 48 ore lavorative</li>
+                        <li><strong>Prepara il pacco:</strong>
+                            <ul>
+                                <li>Imballa il prodotto nella confezione originale (se possibile)</li>
+                                <li>Includi tutti gli accessori e manuali</li>
+                                <li>Inserisci la copia della fattura o la ricevuta d'ordine</li>
+                            </ul>
+                        </li>
+                        <li><strong>Spedisci il pacco</strong> utilizzando il corriere e l'etichetta che ti forniremo</li>
+                    </ol>
+                </div>
+
+                <div class="info-box warning">
+                    <p>⚠️ <strong>NON spedire prodotti senza aver prima ottenuto la nostra autorizzazione!</strong> Resi non autorizzati non verranno accettati e saranno rispediti al mittente a sue spese.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">💰</span> Rimborsi e Sostituzioni</h2>
+
+                <h3>In caso di prodotto difettoso, puoi scegliere tra:</h3>
+                <ul>
+                    <li><strong>Sostituzione gratuita</strong> con un prodotto identico nuovo (opzione consigliata)</li>
+                    <li><strong>Riparazione</strong> del prodotto difettoso (se possibile)</li>
+                    <li><strong>Rimborso completo</strong> del prezzo pagato (solo se sostituzione/riparazione non sono possibili)</li>
+                </ul>
+
+                <h3>Tempi di Rimborso</h3>
+                <p>Una volta ricevuto e verificato il prodotto difettoso:</p>
+                <ul>
+                    <li><strong>Sostituzione:</strong> il nuovo prodotto verrà spedito entro 3-5 giorni lavorativi</li>
+                    <li><strong>Rimborso:</strong> verrà elaborato entro 7-14 giorni lavorativi con lo stesso metodo di pagamento utilizzato per l'acquisto</li>
+                </ul>
+
+                <div class="info-box success">
+                    <p>✓ Le spese di spedizione per il reso di prodotti difettosi sono <strong>GRATUITE</strong> - ti forniremo un'etichetta di reso prepagata!</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📦</span> Condizioni per il Reso</h2>
+                <p>Per poter accettare il reso, il prodotto deve soddisfare queste condizioni:</p>
+                <ul>
+                    <li>Essere nella <strong>confezione originale</strong> (o imballaggio equivalente)</li>
+                    <li>Includere <strong>tutti gli accessori, cavi, manuali</strong> forniti</li>
+                    <li>Avere <strong>sigilli e etichette intatti</strong> (a meno che il difetto non sia visibile solo dopo l'apertura)</li>
+                    <li>NON presentare <strong>danni causati dall'utente</strong></li>
+                </ul>
+
+                <div class="info-box warning">
+                    <p>⚠️ Prodotti restituiti in condizioni non idonee potrebbero essere rifiutati o soggetti a penali per deprezzamento.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">❌</span> Resi NON Accettati</h2>
+                <p>NON possiamo accettare resi nei seguenti casi:</p>
+                <ul>
+                    <li><strong>Cambio d'idea</strong> - "Non mi piace", "Ho trovato di meglio", "Non lo voglio più"</li>
+                    <li><strong>Prodotti personalizzati</strong> o fatti su misura (se presenti)</li>
+                    <li><strong>Prodotti igienici aperti</strong> (diffusori d'aroma, skincare, etc.)</li>
+                    <li><strong>Resi non autorizzati</strong> inviati senza previa comunicazione</li>
+                    <li><strong>Prodotti danneggiati dall'uso improprio</strong></li>
+                </ul>
+
+                <div class="info-box error">
+                    <p>❌ <strong>Attenzione:</strong> Zenova si riserva il diritto di rifiutare resi che non rispettano le condizioni sopra elencate. In tal caso, il prodotto verrà rispedito al cliente a sue spese.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">💬</span> Hai Bisogno di Aiuto?</h2>
+                <p>Il nostro servizio clienti è a tua disposizione per qualsiasi domanda o problema:</p>
+
+                <div class="info-box">
+                    <p><strong>📧 Email:</strong> info@zenova.it</p>
+                    <p><strong>📞 Telefono:</strong> +39 123 456 7890</p>
+                    <p><strong>💬 WhatsApp:</strong> +39 320 123 4567</p>
+                    <p><strong>⏰ Orari:</strong> Lun-Ven 9:00-18:00 | Sab 9:00-13:00</p>
+                </div>
+
+                <p>Risponderemo a tutte le richieste entro <strong>48 ore lavorative</strong>.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">⚖️</span> Diritti del Consumatore</h2>
+                <p>Questa politica di resi è conforme alla normativa italiana ed europea in materia di tutela del consumatore (D.Lgs. 206/2005 - Codice del Consumo).</p>
+                <p>Per ulteriori informazioni sui tuoi diritti, visita il sito del <a href="https://www.mise.gov.it" target="_blank" rel="noopener noreferrer" style="color: #667eea;">Ministero dello Sviluppo Economico</a>.</p>
+            </div>
+
+            <a href="index.html" class="back-link">← Torna alla Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-text">
+                        <strong>Pagamenti Sicuri</strong>
+                        <span>Protetti SSL</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">📦</div>
+                    <div class="trust-text">
+                        <strong>Spedizione Tracciata</strong>
+                        <span>Consegna garantita</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">✓</div>
+                    <div class="trust-text">
+                        <strong>Garanzia 2 Anni</strong>
+                        <span>Su tutti i prodotti</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">↩</div>
+                    <div class="trust-text">
+                        <strong>Resi Facili</strong>
+                        <span>Entro 30 giorni</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Informazioni</h4>
+                    <p><a href="spedizioni-consegne.html" style="color: inherit;">Spedizioni e Consegne</a></p>
+                    <p><a href="resi-rimborsi.html" style="color: inherit;">Resi e Rimborsi</a></p>
+                    <p><a href="termini-condizioni.html" style="color: inherit;">Termini e Condizioni</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Assistenza</h4>
+                    <p>
+                        <a href="https://wa.me/393201234567" target="_blank" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            📞 WhatsApp
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Widget -->
+    <a href="https://wa.me/393201234567" class="whatsapp-widget" target="_blank" title="Chatta con noi su WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.488 2.045 7.793L0 32l8.36-2.025A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.512 0-4.942-.708-7.053-2.042l-.507-.32-5.262 1.273 1.291-5.13-.336-.528A13.277 13.277 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
+            <path d="M23.547 19.427c-.36-.18-2.133-1.053-2.463-1.173-.33-.12-.57-.18-.81.18-.24.36-.93 1.173-1.14 1.413-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.895-1.787-1.07-.954-1.792-2.133-2.002-2.493-.21-.36-.022-.554.158-.733.162-.162.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.953-1.11-2.673-.293-.7-.59-.605-.81-.617-.21-.011-.45-.013-.69-.013-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3.003s1.29 3.483 1.47 3.723c.18.24 2.535 3.87 6.142 5.426.857.37 1.527.591 2.048.757.86.273 1.643.235 2.262.142.69-.103 2.133-.872 2.433-1.713.3-.842.3-1.563.21-1.713-.09-.15-.33-.24-.69-.42z" fill="currentColor"/>
+        </svg>
+    </a>
+</body>
+</html>

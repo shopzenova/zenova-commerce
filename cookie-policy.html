@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | ZENOVA Aura Experience</title>
+    <link rel="stylesheet" href="styles.css?v=20251203">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .policy-container {
+            max-width: 900px;
+            margin: 120px auto 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .policy-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #8B6F47;
+        }
+        .policy-header h1 {
+            font-size: 2.5em;
+            color: #8B6F47;
+            margin-bottom: 10px;
+        }
+        .policy-updated {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .policy-section {
+            margin-bottom: 30px;
+        }
+        .policy-section h2 {
+            color: #8B6F47;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+        .policy-section h3 {
+            color: #6F5735;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .policy-section p, .policy-section li {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .policy-section ul {
+            margin-left: 20px;
+        }
+        .highlight-box {
+            background: #F5F1E8;
+            padding: 20px;
+            border-left: 4px solid #8B6F47;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .cookie-table th, .cookie-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .cookie-table th {
+            background: #8B6F47;
+            color: white;
+            font-weight: 600;
+        }
+        .cookie-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .placeholder {
+            background: #FFE5B4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #8B6F47;
+        }
+        .cookie-consent-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #8B6F47;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 10px 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+        }
+        .cookie-consent-btn:hover {
+            background: #6F5735;
+        }
+        @media (max-width: 768px) {
+            .policy-container {
+                margin: 100px 20px 40px;
+                padding: 20px;
+            }
+            .policy-header h1 {
+                font-size: 1.8em;
+            }
+            .cookie-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1>ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></h1>
+                        <p class="logo-experience">Experience</p>
+                        <p class="tagline">where technology meets calm and wellness</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+                <div class="nav-icons">
+                    <button class="icon-btn" id="cartBtn">
+                        <span class="cart-icon">🛒</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Policy Content -->
+    <div class="policy-container">
+        <div class="policy-header">
+            <h1>🍪 Cookie Policy</h1>
+            <p class="policy-updated">Ultimo aggiornamento: <span class="placeholder">[DATA]</span></p>
+        </div>
+
+        <div class="highlight-box">
+            <strong>⚠️ NOTA:</strong> Questa Cookie Policy è un template. I cookie effettivamente utilizzati possono variare. Aggiorna questa pagina quando implementi nuovi servizi (es: Google Analytics, Meta Pixel, ecc.).
+        </div>
+
+        <div class="policy-section">
+            <h2>1. Cosa Sono i Cookie</h2>
+            <p>I cookie sono piccoli file di testo che vengono memorizzati sul tuo dispositivo (computer, smartphone, tablet) quando visiti un sito web.</p>
+            <p>I cookie permettono al sito di:</p>
+            <ul>
+                <li>Ricordare le tue preferenze e impostazioni</li>
+                <li>Mantenere attiva la sessione di navigazione</li>
+                <li>Analizzare il traffico e il comportamento degli utenti</li>
+                <li>Personalizzare contenuti e pubblicità</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>2. Tipologie di Cookie Utilizzati</h2>
+
+            <h3>2.1 Cookie Tecnici (Necessari)</h3>
+            <p>Questi cookie sono <strong>essenziali</strong> per il funzionamento del sito e non richiedono consenso.</p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Scopo</th>
+                        <th>Durata</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>zenova-cart</code></td>
+                        <td>Memorizza prodotti nel carrello</td>
+                        <td>7 giorni</td>
+                        <td>Tecnico</td>
+                    </tr>
+                    <tr>
+                        <td><code>zenova-wishlist</code></td>
+                        <td>Memorizza lista preferiti</td>
+                        <td>30 giorni</td>
+                        <td>Tecnico</td>
+                    </tr>
+                    <tr>
+                        <td><code>zenova-theme</code></td>
+                        <td>Salva preferenza tema (chiaro/scuro)</td>
+                        <td>1 anno</td>
+                        <td>Tecnico</td>
+                    </tr>
+                    <tr>
+                        <td><code>stripe_*</code></td>
+                        <td>Gestione pagamenti sicuri</td>
+                        <td>Sessione</td>
+                        <td>Tecnico</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.2 Cookie Analitici</h3>
+            <p>Questi cookie ci aiutano a capire come gli utenti navigano sul sito. <strong>Richiedono consenso.</strong></p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Servizio</th>
+                        <th>Provider</th>
+                        <th>Scopo</th>
+                        <th>Durata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Google Analytics 4</td>
+                        <td>Google LLC</td>
+                        <td>Analisi traffico, pagine visitate, provenienza utenti</td>
+                        <td>2 anni</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="font-size: 0.85em; color: #666;">
+                            <strong>Cookie:</strong> _ga, _ga_*, _gid<br>
+                            <strong>Privacy Policy:</strong> <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2.3 Cookie di Profilazione e Marketing</h3>
+            <p>Questi cookie tracciano il comportamento per mostrare pubblicità personalizzata. <strong>Richiedono consenso esplicito.</strong></p>
+
+            <div class="highlight-box">
+                <p><strong>⚠️ ZENOVA attualmente NON utilizza cookie di profilazione o marketing.</strong></p>
+                <p>Se in futuro implementeremo Facebook Pixel, Google Ads o simili, questa sezione sarà aggiornata.</p>
+            </div>
+
+            <h3>2.4 Cookie di Terze Parti</h3>
+            <p>Alcuni servizi esterni integrati nel sito installano i propri cookie:</p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Servizio</th>
+                        <th>Provider</th>
+                        <th>Scopo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Stripe</td>
+                        <td>Stripe, Inc.</td>
+                        <td>Pagamenti online sicuri</td>
+                    </tr>
+                    <tr>
+                        <td>Google Fonts</td>
+                        <td>Google LLC</td>
+                        <td>Caricamento font tipografici</td>
+                    </tr>
+                    <tr>
+                        <td>Unsplash</td>
+                        <td>Unsplash Inc.</td>
+                        <td>Caricamento immagini prodotti</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="policy-section">
+            <h2>3. Base Giuridica</h2>
+            <p>Il trattamento tramite cookie si basa su:</p>
+            <ul>
+                <li><strong>Cookie tecnici:</strong> interesse legittimo (Art. 6.1.f GDPR) - necessari per il funzionamento del sito</li>
+                <li><strong>Cookie analitici:</strong> consenso (Art. 6.1.a GDPR) - puoi negare o revocare in qualsiasi momento</li>
+                <li><strong>Cookie marketing:</strong> consenso esplicito (attualmente non utilizzati)</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>4. Come Gestire i Cookie</h2>
+
+            <h3>4.1 Banner Cookie</h3>
+            <p>Al primo accesso al sito, visualizzi un banner che ti permette di:</p>
+            <ul>
+                <li>✅ Accettare tutti i cookie</li>
+                <li>⚙️ Personalizzare le preferenze</li>
+                <li>❌ Rifiutare cookie non necessari</li>
+            </ul>
+
+            <h3>4.2 Modifica Preferenze</h3>
+            <p>Puoi modificare le tue preferenze in qualsiasi momento:</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="cookie-consent-btn" onclick="alert('Funzionalità da implementare: aprire pannello gestione cookie')">
+                    ⚙️ Gestisci Preferenze Cookie
+                </button>
+            </div>
+
+            <h3>4.3 Impostazioni Browser</h3>
+            <p>Puoi gestire i cookie anche direttamente dal tuo browser:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Impostazioni → Privacy e sicurezza → Cookie</li>
+                <li><strong>Firefox:</strong> Opzioni → Privacy e sicurezza → Cookie</li>
+                <li><strong>Safari:</strong> Preferenze → Privacy → Cookie</li>
+                <li><strong>Edge:</strong> Impostazioni → Cookie e autorizzazioni sito</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>⚠️ Attenzione:</strong> Disabilitare tutti i cookie potrebbe impedire il corretto funzionamento del sito (es: carrello, login, checkout).
+            </div>
+        </div>
+
+        <div class="policy-section">
+            <h2>5. Cookie di Sessione vs Persistenti</h2>
+
+            <h3>Cookie di Sessione</h3>
+            <p>Vengono cancellati automaticamente quando chiudi il browser. Utilizzati per:</p>
+            <ul>
+                <li>Mantenere la sessione di navigazione attiva</li>
+                <li>Gestire processo di checkout</li>
+            </ul>
+
+            <h3>Cookie Persistenti</h3>
+            <p>Rimangono sul dispositivo per un periodo definito. Utilizzati per:</p>
+            <ul>
+                <li>Ricordare preferenze utente (tema, lingua)</li>
+                <li>Mantenere carrello tra sessioni diverse</li>
+                <li>Analisi statistiche a lungo termine</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>6. Cookie di Prima Parte vs Terze Parti</h2>
+
+            <h3>Cookie di Prima Parte</h3>
+            <p>Installati direttamente da ZENOVA (dominio zenova.it). Abbiamo pieno controllo su questi cookie.</p>
+
+            <h3>Cookie di Terze Parti</h3>
+            <p>Installati da servizi esterni (Google Analytics, Stripe, ecc.). Sono regolati dalle rispettive privacy policy dei provider.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>7. Trasferimento Dati Extra-UE</h2>
+            <p>Alcuni servizi che utilizzano cookie potrebbero trasferire dati fuori dall'Unione Europea:</p>
+            <ul>
+                <li><strong>Google Analytics:</strong> USA (con garanzie adeguate - Google Analytics Data Processing Terms)</li>
+                <li><strong>Stripe:</strong> USA (certificato Privacy Shield e Standard Contractual Clauses)</li>
+            </ul>
+            <p>Tutti i trasferimenti extra-UE avvengono con garanzie adeguate previste dal GDPR (Art. 46).</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>8. I Tuoi Diritti</h2>
+            <p>Hai diritto a:</p>
+            <ul>
+                <li>Revocare il consenso ai cookie in qualsiasi momento</li>
+                <li>Richiedere quali cookie sono stati installati</li>
+                <li>Cancellare i cookie dal tuo browser</li>
+                <li>Richiedere la cancellazione dei dati raccolti tramite cookie</li>
+            </ul>
+            <p>Per esercitare i tuoi diritti: <span class="placeholder">[EMAIL PRIVACY]</span></p>
+        </div>
+
+        <div class="policy-section">
+            <h2>9. Aggiornamenti alla Cookie Policy</h2>
+            <p>Questa Cookie Policy può essere aggiornata per riflettere:</p>
+            <ul>
+                <li>Modifiche normative (GDPR, ePrivacy Regulation)</li>
+                <li>Nuovi servizi implementati sul sito</li>
+                <li>Feedback del Garante Privacy</li>
+            </ul>
+            <p>La data di ultimo aggiornamento è sempre indicata in cima alla pagina.</p>
+        </div>
+
+        <div class="policy-section">
+            <h2>10. Link Utili</h2>
+            <ul>
+                <li><a href="privacy-policy.html" style="color: #8B6F47;">Privacy Policy ZENOVA</a></li>
+                <li><a href="https://www.garanteprivacy.it/cookie" target="_blank" style="color: #8B6F47;">Garante Privacy - Guida Cookie</a></li>
+                <li><a href="https://www.youronlinechoices.eu/" target="_blank" style="color: #8B6F47;">Your Online Choices - Opt-out pubblicità</a></li>
+                <li><a href="https://policies.google.com/technologies/cookies" target="_blank" style="color: #8B6F47;">Google - Come usano i cookie</a></li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>11. Contatti</h2>
+            <p>Per domande sulla Cookie Policy:</p>
+            <ul>
+                <li><strong>Email Privacy:</strong> <span class="placeholder">[EMAIL PRIVACY]</span></li>
+                <li><strong>Titolare:</strong> <span class="placeholder">[RAGIONE SOCIALE]</span></li>
+                <li><strong>Sede:</strong> <span class="placeholder">[INDIRIZZO COMPLETO]</span></li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #ddd;">
+            <a href="index.html" class="btn btn-primary">Torna alla Home</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Informazioni Legali</h4>
+                    <p><a href="spedizioni-consegne.html" style="color: inherit; text-decoration: none;">📦 Spedizioni e Consegne</a></p>
+                    <p><a href="resi-rimborsi.html" style="color: inherit; text-decoration: none;">↩️ Resi e Rimborsi</a></p>
+                    <p><a href="privacy-policy.html" style="color: inherit; text-decoration: none;">🔒 Privacy Policy</a></p>
+                    <p><a href="termini-condizioni.html" style="color: inherit; text-decoration: none;">📄 Termini e Condizioni</a></p>
+                    <p><a href="cookie-policy.html" style="color: inherit; text-decoration: none;">🍪 Cookie Policy</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: <span class="placeholder">[TELEFONO]</span></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
