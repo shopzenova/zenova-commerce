@@ -503,6 +503,13 @@ function populateAllProductsList(products) {
                 <option value="home" ${product.zone === 'home' ? 'selected' : ''}>Home (Vetrina)</option>
                 <option value="hidden" ${product.zone === 'hidden' ? 'selected' : ''}>Nascosto</option>
             </select>
+            <button class="btn-icon btn-move-category"
+                    data-product-id="${product.id}"
+                    data-product-name="${product.name}"
+                    data-product-image="${product.images && product.images[0] ? product.images[0] : ''}"
+                    data-current-category="${product.zenovaCategory || ''}"
+                    data-current-subcategory="${product.zenovaSubcategory || ''}"
+                    title="Sposta in altra categoria">📂</button>
             <button class="btn-icon" title="${product.visible ? 'Nascondi prodotto dal sito' : 'Rendi visibile sul sito'}" onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible})">
                 ${product.visible ? '👁️' : '👁️‍🗨️'}
             </button>
@@ -519,6 +526,9 @@ function populateAllProductsList(products) {
 
         listContainer.appendChild(productItem);
     });
+
+    // Attacca event listener ai pulsanti "Sposta Categoria"
+    attachMoveCategoryListeners();
 
     // Setup ricerca prodotti
     setupProductSearch(products);
@@ -1254,6 +1264,9 @@ const categoryNames = {
 
 // Carica e visualizza prodotti raggruppati per categoria
 async function loadProductsByCategory() {
+    console.log('🔄 loadProductsByCategory chiamata!');
+    console.trace();
+
     const mainCategory = document.getElementById('mainCategoryFilter').value;
     const gridContainer = document.getElementById('categoriesGrid');
 
@@ -1313,6 +1326,9 @@ async function loadProductsByCategory() {
             const subcategoryCard = createSubcategoryCard(subcategory, products, mainCategory);
             gridContainer.appendChild(subcategoryCard);
         });
+
+        // Attacca event listener ai pulsanti "Sposta Categoria"
+        attachMoveCategoryListeners();
 
     } catch (error) {
         console.error('❌ Errore caricamento prodotti per categoria:', error);
@@ -1431,26 +1447,81 @@ function createCategoryProductCard(product) {
                 '<p style="margin: 5px 0 0 0; font-size: 11px; color: #43e97b; font-weight: bold;">✅ VISIBILE</p>'
             }
         </div>
-        <div style="display: flex; gap: 5px; justify-content: space-between;">
+        <div style="display: flex; gap: 5px; justify-content: space-between; flex-wrap: wrap;">
+            <button type="button" class="btn-move-category"
+                    data-product-id="${product.id}"
+                    data-product-name="${product.name}"
+                    data-product-image="${product.image || ''}"
+                    data-current-category="${product.zenovaCategory || ''}"
+                    data-current-subcategory="${product.zenovaSubcategory || ''}"
+                    title="Sposta in altra categoria"
+                    style="flex: 1; min-width: 100%; padding: 8px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">
+                📂 Sposta Categoria
+            </button>
             <button onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible !== false})"
                     title="${product.visible !== false ? 'Nascondi prodotto' : 'Mostra prodotto'}"
-                    style="flex: 1; padding: 8px; background: ${product.visible !== false ? '#f39c12' : '#43e97b'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">
-                ${product.visible !== false ? '🙈 Nascondi' : '👁️ Mostra'}
+                    style="flex: 1; padding: 8px; background: ${product.visible !== false ? '#f39c12' : '#43e97b'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600;">
+                ${product.visible !== false ? '🙈' : '👁️'}
             </button>
             <button onclick="toggleFeatured('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.isFeatured || false})"
                     title="${product.isFeatured ? 'Rimuovi da evidenza' : 'Metti in evidenza'}"
-                    style="padding: 8px 12px; background: ${product.isFeatured ? '#FFD700' : '#95a5a6'}; color: ${product.isFeatured ? '#000' : '#fff'}; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">
+                    style="padding: 8px 12px; background: ${product.isFeatured ? '#FFD700' : '#95a5a6'}; color: ${product.isFeatured ? '#000' : '#fff'}; border: none; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold;">
                 ⭐
             </button>
             <button onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}'); loadProductsByCategory();"
                     title="Elimina prodotto"
-                    style="padding: 8px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">
+                    style="padding: 8px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">
                 🗑️
             </button>
         </div>
     `;
 
     return card;
+}
+
+// Event delegation - UN SOLO listener per tutti i pulsanti
+let delegationListenerAttached = false;
+
+function attachMoveCategoryListeners() {
+    if (delegationListenerAttached) {
+        console.log('✅ Event delegation già attivo');
+        return;
+    }
+
+    console.log('🔗 Attacco event delegation per pulsanti Sposta Categoria');
+
+    // Event delegation sul main content
+    const mainContent = document.querySelector('.admin-content');
+    if (!mainContent) return;
+
+    mainContent.addEventListener('click', function(e) {
+        // Ignora se il click viene dal modal
+        if (e.target.closest('#editCategoryModal')) {
+            return;
+        }
+
+        const btn = e.target.closest('.btn-move-category');
+        if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation(); // Blocca anche altri listener
+
+            const productId = btn.dataset.productId;
+            const productName = btn.dataset.productName;
+            const productImage = btn.dataset.productImage;
+            const currentCategory = btn.dataset.currentCategory;
+            const currentSubcategory = btn.dataset.currentSubcategory;
+
+            console.log('📂 Click:', productName);
+
+            // Apri il modal in modo asincrono per evitare conflitti
+            setTimeout(() => {
+                openEditModal(productId, productName, productImage, currentCategory, currentSubcategory);
+            }, 10);
+        }
+    });
+
+    delegationListenerAttached = true;
 }
 
 // Espandi sottocategoria per mostrare tutti i prodotti
@@ -1520,6 +1591,9 @@ function showProductsModal(subcategory, products) {
 
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
+
+    // Attacca event listener ai pulsanti "Sposta Categoria"
+    setTimeout(() => attachMoveCategoryListeners(), 100);
 
     // Chiudi cliccando fuori
     modal.addEventListener('click', function(e) {
@@ -1602,3 +1676,235 @@ async function runAutoSync() {
 }
 
 console.log('Pannello Admin Zenova caricato ✅');
+
+// ============================================================================
+// MODAL MODIFICA CATEGORIA
+// ============================================================================
+
+// Mapping delle sottocategorie per ogni categoria principale
+const SUBCATEGORIES_MAP = {
+    'smart-living': [
+        { value: 'smart-led-illuminazione', label: 'Smart LED Illuminazione' },
+        { value: 'domotica-smart-home', label: 'Domotica & Smart Home' }
+    ],
+    'beauty': [
+        { value: 'makeup', label: 'Makeup' },
+        { value: 'skincare', label: 'Skincare' },
+        { value: 'profumi', label: 'Profumi' },
+        { value: 'corpo', label: 'Corpo' }
+    ],
+    'health-personal-care': [
+        { value: 'hair-care', label: 'Hair Care' },
+        { value: 'barba', label: 'Barba' },
+        { value: 'massaggio-benessere', label: 'Massaggio & Benessere' },
+        { value: 'protezione-solare', label: 'Protezione Solare' }
+    ],
+    'tech-innovation': [
+        { value: 'gadget-tech', label: 'Gadget Tech' },
+        { value: 'smart-devices', label: 'Smart Devices' },
+        { value: 'wearable-tech', label: 'Wearable Tech' },
+        { value: 'tech-wellness', label: 'Tech Wellness' }
+    ],
+    'natural-wellness': [
+        { value: 'aromaterapia', label: 'Aromaterapia' },
+        { value: 'yoga-meditazione', label: 'Yoga & Meditazione' },
+        { value: 'decorazione-zen', label: 'Decorazione Zen' }
+    ]
+};
+
+// Funzione per aprire il modal
+function openEditModal(productId, productName, productImage, currentCategory, currentSubcategory) {
+    console.log('📂 Apertura modal per prodotto:', productId, productName);
+
+    const modal = document.getElementById('editCategoryModal');
+    const categorySelect = document.getElementById('editCategory');
+
+    if (!modal) {
+        console.error('❌ Modal non trovato!');
+        return;
+    }
+
+    // Popola i dati del prodotto nel modal
+    document.getElementById('editProductId').value = productId;
+    document.getElementById('modalProductName').textContent = productName;
+    document.getElementById('modalProductId').textContent = `ID: ${productId}`;
+    document.getElementById('modalProductImage').src = productImage || 'https://via.placeholder.com/80';
+
+    // Imposta la categoria corrente
+    categorySelect.value = currentCategory || '';
+
+    // Aggiorna le sottocategorie
+    updateSubcategories(currentCategory, currentSubcategory);
+
+    // Mostra il modal con debug migliorato
+    modal.classList.add('show');
+    modal.style.display = 'flex';
+    modal.style.zIndex = '99999'; // Force high z-index
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'; // More visible background
+    modal.style.opacity = '1'; // FORCE opacity to 1 - FIX per animazione che non parte
+    modal.style.animation = 'none'; // Disabilita animazione che causa problemi
+
+    console.log('✅ Modal aperto con:', {
+        classList: modal.classList.toString(),
+        display: modal.style.display,
+        zIndex: modal.style.zIndex,
+        opacity: modal.style.opacity,
+        visibility: window.getComputedStyle(modal).visibility
+    });
+}
+
+// Funzione per aggiornare il dropdown delle sottocategorie
+function updateSubcategories(category, selectedSubcategory = '') {
+    const subcategorySelect = document.getElementById('editSubcategory');
+
+    if (!subcategorySelect) {
+        console.error('❌ Dropdown sottocategorie non trovato');
+        return;
+    }
+
+    // Pulisci il dropdown
+    subcategorySelect.innerHTML = '<option value="">Seleziona sottocategoria...</option>';
+
+    if (category && SUBCATEGORIES_MAP[category]) {
+        // Abilita il dropdown
+        subcategorySelect.disabled = false;
+
+        // Aggiungi le opzioni
+        SUBCATEGORIES_MAP[category].forEach(sub => {
+            const option = document.createElement('option');
+            option.value = sub.value;
+            option.textContent = sub.label;
+            if (sub.value === selectedSubcategory) {
+                option.selected = true;
+            }
+            subcategorySelect.appendChild(option);
+        });
+    } else {
+        subcategorySelect.disabled = true;
+    }
+}
+
+// Event listener per il cambio categoria - inizializzato dopo DOMContentLoaded
+
+// Funzione per chiudere il modal
+function closeEditModal() {
+    console.log('🔴 closeEditModal chiamato!');
+    console.trace(); // Mostra chi ha chiamato questa funzione
+
+    const modal = document.getElementById('editCategoryModal');
+    const editForm = document.getElementById('editCategoryForm');
+
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        console.log('⚠️ Modal chiuso da:', new Error().stack);
+    }
+    if (editForm) {
+        editForm.reset();
+    }
+
+    console.log('✅ Modal chiuso');
+}
+
+// Inizializza event listeners per il modal quando il DOM è pronto
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('editCategoryModal');
+    const modalContent = document.querySelector('#editCategoryModal .modal-content');
+    const modalClose = document.querySelector('.modal-close');
+    const cancelBtn = document.getElementById('cancelEdit');
+    const categorySelect = document.getElementById('editCategory');
+    const editForm = document.getElementById('editCategoryForm');
+
+    console.log('🔧 Inizializzazione event listeners modal...');
+
+    // Previeni propagazione click dal modal-content
+    if (modalContent) {
+        modalContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
+    if (modalClose) {
+        modalClose.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeEditModal();
+        });
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeEditModal();
+        });
+    }
+
+    // NON CHIUDERE MAI sul background - solo con X o Annulla
+    console.log('✅ Event listeners modal registrati (background click DISABILITATO)');
+
+    // Event listener per cambio categoria
+    if (categorySelect) {
+        categorySelect.addEventListener('change', (e) => {
+            updateSubcategories(e.target.value);
+        });
+    }
+
+    // Gestione submit form
+    if (editForm) {
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const productId = document.getElementById('editProductId').value;
+            const newCategory = categorySelect.value;
+            const subcategorySelect = document.getElementById('editSubcategory');
+            const newSubcategory = subcategorySelect.value;
+
+            if (!newCategory || !newSubcategory) {
+                showNotification('⚠️ Seleziona categoria e sottocategoria', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/admin/products/${productId}/category`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        category: newCategory,
+                        subcategory: newSubcategory
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showNotification('✅ Categoria aggiornata con successo!', 'success');
+                    closeEditModal();
+
+                    // Ricarica i prodotti per mostrare le modifiche
+                    await loadProducts();
+
+                    // Ricarica solo se siamo nella sezione categorie
+                    const categoriesSection = document.getElementById('categories');
+                    if (categoriesSection && categoriesSection.classList.contains('active')) {
+                        setTimeout(() => {
+                            if (typeof loadProductsByCategory === 'function') {
+                                loadProductsByCategory();
+                            }
+                        }, 300);
+                    }
+                } else {
+                    throw new Error(result.error || 'Aggiornamento fallito');
+                }
+            } catch (error) {
+                console.error('Errore aggiornamento categoria:', error);
+                showNotification('❌ Errore durante l\'aggiornamento', 'error');
+            }
+        });
+    }
+});
+
+
+console.log('Modal modifica categoria inizializzato ✅');

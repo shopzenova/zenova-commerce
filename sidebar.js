@@ -99,10 +99,10 @@ const anchorToSubcategoryMap = {
     'incensi-candele': 'wellness',
 
     // TECH INNOVATION
-    'gadget-tech': 'tech',
-    'smart-devices': 'tech',
-    'wearable-tech': 'tech',
-    'tech-wellness': 'tech'
+    'gadget-tech': 'gadget-tech',
+    'smart-devices': 'smart-devices',
+    'wearable-tech': 'wearable-tech',
+    'tech-wellness': 'tech-wellness'
 };
 
 // Mapping subcategories to parent categories

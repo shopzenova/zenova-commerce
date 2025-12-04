@@ -3,11 +3,37 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
+const productsRouter = require('./products');
 
 // Carica i prodotti dal file JSON (include prodotti FTP)
 let PRODUCTS = [];
+const jsonPath = path.join(__dirname, '../../top-100-products.json');
+
+// Funzione per ricaricare i prodotti dal file JSON
+function reloadProducts() {
+  try {
+    const rawData = fs.readFileSync(jsonPath, 'utf-8');
+    PRODUCTS = JSON.parse(rawData);
+    logger.info(`🔄 Admin API: Ricaricati ${PRODUCTS.length} prodotti`);
+
+    // Ricarica anche i prodotti in products.js
+    logger.info(`🔍 productsRouter.reloadProducts esiste? ${typeof productsRouter.reloadProducts}`);
+    if (typeof productsRouter.reloadProducts === 'function') {
+      logger.info(`📞 Chiamo productsRouter.reloadProducts()`);
+      productsRouter.reloadProducts();
+    } else {
+      logger.warn(`⚠️  productsRouter.reloadProducts NON è una funzione!`);
+    }
+
+    return true;
+  } catch (error) {
+    logger.error('❌ Errore ricaricamento prodotti per admin:', error);
+    return false;
+  }
+}
+
+// Caricamento iniziale
 try {
-  const jsonPath = path.join(__dirname, '../../top-100-products.json');
   const rawData = fs.readFileSync(jsonPath, 'utf-8');
   PRODUCTS = JSON.parse(rawData);
   logger.info(`✅ Admin API: Caricati ${PRODUCTS.length} prodotti`);
@@ -341,19 +367,7 @@ router.get('/activity', (req, res) => {
 
 // ===== NUOVE FUNZIONALITÀ: IMPORTAZIONE ED ELIMINAZIONE =====
 
-// Helper: Ricarica prodotti dal file JSON
-function reloadProducts() {
-  try {
-    const jsonPath = path.join(__dirname, '../../top-100-products.json');
-    const rawData = fs.readFileSync(jsonPath, 'utf-8');
-    PRODUCTS = JSON.parse(rawData);
-    logger.info(`✅ Prodotti ricaricati: ${PRODUCTS.length} prodotti`);
-    return true;
-  } catch (error) {
-    logger.error('❌ Errore ricaricamento prodotti:', error);
-    return false;
-  }
-}
+// Helper: Ricarica prodotti rimosso - ora usa la funzione all'inizio del file
 
 // POST /api/admin/products/import - Importa prodotto da BigBuy per SKU (cerca nei CSV locali)
 router.post('/products/import', async (req, res) => {
@@ -476,7 +490,9 @@ router.post('/products/import', async (req, res) => {
       width: foundProduct.WIDTH || '',
       height: foundProduct.HEIGHT || '',
       depth: foundProduct.DEPTH || '',
-      weight: foundProduct.WEIGHT || ''
+      weight: foundProduct.WEIGHT || '',
+      visible: true,
+      zone: 'sidebar'
     };
 
     // Aggiungi al file JSON
@@ -733,6 +749,68 @@ router.patch('/products/:id/visibility', (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Errore aggiornamento visibilità prodotto'
+    });
+  }
+});
+
+// PATCH /api/admin/products/:id/category - Aggiorna categoria e sottocategoria prodotto
+router.patch('/products/:id/category', (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { category, subcategory } = req.body;
+
+    logger.info(`📂 Richiesta aggiornamento categoria prodotto: ${productId} -> ${category}/${subcategory}`);
+
+    // Trova il prodotto
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    const product = PRODUCTS[productIndex];
+    const oldCategory = product.zenovaCategory;
+    const oldSubcategory = product.zenovaSubcategory;
+
+    // Aggiorna categoria e sottocategoria
+    product.zenovaCategory = category;
+    product.category = category;
+    product.zenovaCategories = [category];
+    product.zenovaSubcategory = subcategory;
+
+    // Salva nel file JSON
+    const jsonPath = path.join(__dirname, '../../top-100-products.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+
+    logger.info(`💾 File JSON salvato, ricarico prodotti in memoria...`);
+
+    // Ricarica prodotti
+    const reloadResult = reloadProducts();
+    logger.info(`🔄 Risultato reload: ${reloadResult ? 'SUCCESS' : 'FAILED'}`);
+
+    logger.info(`✅ Categoria prodotto aggiornata: ${product.name}`);
+    logger.info(`   ${oldCategory}/${oldSubcategory} → ${category}/${subcategory}`);
+
+    res.json({
+      success: true,
+      message: `Categoria aggiornata con successo`,
+      data: {
+        id: productId,
+        name: product.name,
+        category: category,
+        subcategory: subcategory,
+        oldCategory: oldCategory,
+        oldSubcategory: oldSubcategory
+      }
+    });
+  } catch (error) {
+    logger.error('❌ Errore aggiornamento categoria prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore aggiornamento categoria prodotto'
     });
   }
 });

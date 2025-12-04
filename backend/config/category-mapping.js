@@ -138,6 +138,8 @@ const ZENOVA_CATEGORIES = {
       // Tech wellness
       'fitness tech', 'health tracker', 'sleep tracker', 'postura smart',
       'massaggiatore elettrico', 'tens machine', 'ems trainer',
+      'macchina del rumore', 'white noise', 'rumore bianco', 'sleep machine',
+      'macchina rilassante', 'slewel', 'sound machine', 'macchina per dormire',
 
       // Gadget tech innovativi
       'gadget tech', 'tech gadget', 'innovazione', 'smart gadget',

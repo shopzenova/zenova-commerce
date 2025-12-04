@@ -360,6 +360,46 @@ class BigBuyClient {
     }
   }
 
+  // ===== SHIPPING =====
+
+  async calculateShippingCost(products, destination) {
+    if (this.isMockMode) {
+      // Mock: calcolo semplice basato sul paese
+      const baseCost = destination.country === 'IT' ? 4.90 : 9.90;
+      return {
+        shippingCosts: [
+          { carrierId: 11, carrierName: 'GLS', cost: baseCost },
+          { carrierId: 12, carrierName: 'DHL Express', cost: baseCost * 2 }
+        ]
+      };
+    }
+
+    try {
+      logger.info(`🚚 Calcolo costo spedizione per ${products.length} prodotti verso ${destination.country}`);
+
+      const response = await this._makeRequest('post', '/rest/shipping/costs.json', {
+        products: products.map(p => ({
+          reference: p.reference || p.sku,
+          quantity: p.quantity
+        })),
+        destination: {
+          country: destination.country,
+          postcode: destination.postcode
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      logger.error('Errore BigBuy calculateShippingCost:', error.message);
+      // Fallback a costi fissi in caso di errore
+      return {
+        shippingCosts: [
+          { carrierId: 0, carrierName: 'Standard', cost: destination.country === 'IT' ? 4.90 : 9.90 }
+        ]
+      };
+    }
+  }
+
   // ===== MOCK DATA (per sviluppo) =====
 
   _getMockProducts(page = 1, pageSize = 100) {
