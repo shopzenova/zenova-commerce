@@ -4,6 +4,31 @@ let products = [];
 // Product Layout - Controls visibility (home/sidebar/hidden)
 let productLayout = { home: [], sidebar: [], hidden: [] };
 
+// =======================
+// IMAGE URL HELPER
+// =======================
+
+/**
+ * Converte percorsi relativi di immagini in URL assoluti
+ * @param {string} path - Percorso dell'immagine (relativo o assoluto)
+ * @returns {string} URL assoluto dell'immagine
+ */
+function getAbsoluteImageUrl(path) {
+    if (!path) return path;
+
+    // Se è già un URL assoluto o data URI, restituiscilo così com'è
+    if (path.startsWith('http') || path.startsWith('data:')) {
+        return path;
+    }
+
+    // Se è un percorso relativo che inizia con /, aggiungi il prefisso del backend
+    if (path.startsWith('/')) {
+        return 'http://localhost:3000' + path;
+    }
+
+    return path;
+}
+
 // Static products as fallback (kept for offline mode)
 const staticProducts = [
     {
@@ -696,13 +721,31 @@ function createProductCard(product) {
         .replace('natural-wellness', 'Natural Wellness')
         .replace('tech', 'Tech Innovation');
 
+    // Get thumbnail for grid (small, fast loading) and full image for modal
+    let thumbnailUrl, fullImageUrl;
+    if (product.images && product.images.length > 0) {
+        const img = product.images[0];
+        if (typeof img === 'object') {
+            thumbnailUrl = img.thumbnail || img.url; // Use thumbnail if available
+            fullImageUrl = img.url; // Full HD for modal
+        } else {
+            thumbnailUrl = fullImageUrl = img; // Old format: string URL
+        }
+    } else if (product.image) {
+        thumbnailUrl = fullImageUrl = product.image; // Fallback to old format
+    }
+
+    // Converti percorsi relativi in URL assoluti
+    thumbnailUrl = getAbsoluteImageUrl(thumbnailUrl);
+    fullImageUrl = getAbsoluteImageUrl(fullImageUrl);
+
     productCard.innerHTML = `
         ${product.badge ? `<div class="product-badge product-badge-${product.badge.toLowerCase().replace(' ', '-')}">${product.badge}</div>` : ''}
         <button class="product-card-wishlist-btn ${wishlistClass}" data-product-id="${product.id}">
             ${wishlistIcon}
         </button>
         <div class="product-image">
-            ${product.image ? `<img src="${product.image}" alt="${product.name}">` : product.icon}
+            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}">` : (product.icon || '📦')}
         </div>
         <div class="product-info">
             <div class="product-category">${displayCategory}</div>
@@ -729,6 +772,11 @@ function createProductCard(product) {
     cartBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         addToCart(product.id);
+    });
+
+    // Open product detail modal when clicking on card
+    productCard.addEventListener('click', () => {
+        openProductDetailModal(product.id);
     });
 
     return productCard;
@@ -1060,8 +1108,9 @@ function updateCart() {
         cartItems.innerHTML = cart.map(item => {
             // Get image URL or fallback
             let imageHtml = '';
-            if (item.image && item.image.startsWith('http')) {
-                imageHtml = `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            const imageUrl = getAbsoluteImageUrl(item.image);
+            if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
             } else {
@@ -1225,11 +1274,13 @@ function updateWishlist() {
     if (wishlist.length === 0) {
         wishlistItems.innerHTML = '<p class="empty-wishlist">Non hai ancora prodotti preferiti</p>';
     } else {
-        wishlistItems.innerHTML = wishlist.map(item => `
+        wishlistItems.innerHTML = wishlist.map(item => {
+            const imageUrl = getAbsoluteImageUrl(item.image);
+            return `
             <div class="wishlist-item">
                 <button class="wishlist-remove-btn" onclick="removeFromWishlist(${item.id})">&times;</button>
                 <div class="wishlist-item-image">
-                    ${item.image ? `<img src="${item.image}" alt="${item.name}">` : item.icon}
+                    ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}">` : item.icon}
                 </div>
                 <div class="wishlist-item-info">
                     <div class="wishlist-item-category">${item.category}</div>
@@ -1242,7 +1293,8 @@ function updateWishlist() {
                     </div>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     // Update wishlist button in product detail modal
@@ -1726,10 +1778,18 @@ function setupSearch() {
                 ? product.description.replace(/<[^>]*>/g, '').substring(0, 100) + '...'
                 : product.category || '';
 
+            // Get image URL (handle both formats)
+            let searchImage = product.image;
+            if (!searchImage && product.images && product.images.length > 0) {
+                const img = product.images[0];
+                searchImage = typeof img === 'object' ? (img.url || img.thumbnail) : img;
+            }
+            const searchImageUrl = getAbsoluteImageUrl(searchImage);
+
             return `
                 <div class="search-result-item" onclick="handleSearchResultClick('${product.id}')">
                     <div class="search-result-icon">
-                        ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : '📦'}
+                        ${searchImageUrl ? `<img src="${searchImageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : '📦'}
                     </div>
                     <div class="search-result-info">
                         <div class="search-result-category">${product.zenovaSubcategory || product.category || 'Prodotto'}</div>
@@ -1826,100 +1886,121 @@ function openProductDetailModal(productId) {
     // Use ALL product images from BigBuy (not just 1 repeated)
     if (product.images && product.images.length > 0) {
         currentGalleryImages = product.images; // Tutte le immagini reali!
+        console.log('🖼️ Immagini caricate:', currentGalleryImages);
     } else if (product.image) {
         currentGalleryImages = [product.image];
+        console.log('🖼️ Usando product.image:', product.image);
     } else {
         currentGalleryImages = [product.icon];
+        console.log('🖼️ Usando product.icon:', product.icon);
     }
     currentGalleryIndex = 0;
 
     // Update gallery
     updateGallery();
 
-    // Breadcrumb
+    // Breadcrumb (only exists in prodotti.html)
     const breadcrumbCategory = document.getElementById('breadcrumbCategory');
-    breadcrumbCategory.textContent = product.category || 'Prodotti';
+    if (breadcrumbCategory) {
+        breadcrumbCategory.textContent = product.category || 'Prodotti';
+    }
 
-    // Brand Badge
+    // Brand Badge (only exists in prodotti.html)
     const brandBadge = document.getElementById('productBrand');
-    if (product.brand) {
-        brandBadge.textContent = `Brand: ${product.brand}`;
-        brandBadge.style.display = 'inline-block';
-    } else {
-        brandBadge.style.display = 'none';
+    if (brandBadge) {
+        if (product.brand) {
+            brandBadge.textContent = `Brand: ${product.brand}`;
+            brandBadge.style.display = 'inline-block';
+        } else {
+            brandBadge.style.display = 'none';
+        }
     }
 
     // Product Name
     document.getElementById('productDetailName').textContent = product.name;
 
-    // Tags (from zenovaCategories)
+    // Tags (from zenovaCategories) - only exists in prodotti.html
     const tagsContainer = document.getElementById('productTags');
-    if (product.zenovaCategories && product.zenovaCategories.length > 0) {
-        tagsContainer.innerHTML = product.zenovaCategories
-            .map(tag => `<span class="product-tag">${tag}</span>`)
-            .join('');
-        tagsContainer.style.display = 'flex';
-    } else if (product.category) {
-        const categories = product.category.split(',').map(c => c.trim());
-        tagsContainer.innerHTML = categories
-            .map(tag => `<span class="product-tag">${tag}</span>`)
-            .join('');
-        tagsContainer.style.display = 'flex';
-    } else {
-        tagsContainer.style.display = 'none';
+    if (tagsContainer) {
+        if (product.zenovaCategories && product.zenovaCategories.length > 0) {
+            tagsContainer.innerHTML = product.zenovaCategories
+                .map(tag => `<span class="product-tag">${tag}</span>`)
+                .join('');
+            tagsContainer.style.display = 'flex';
+        } else if (product.category) {
+            const categories = product.category.split(',').map(c => c.trim());
+            tagsContainer.innerHTML = categories
+                .map(tag => `<span class="product-tag">${tag}</span>`)
+                .join('');
+            tagsContainer.style.display = 'flex';
+        } else {
+            tagsContainer.style.display = 'none';
+        }
     }
 
     // Price
     document.getElementById('productDetailPrice').textContent = `€${(product.price || 0).toFixed(2)}`;
 
-    // Stock
+    // Stock - only exists in prodotti.html
     const stockElement = document.getElementById('productStock');
-    if (product.stock !== undefined) {
-        if (product.stock > 50) {
-            stockElement.textContent = `✓ Disponibile (${product.stock} unità)`;
-            stockElement.className = 'product-stock';
-        } else if (product.stock > 0) {
-            stockElement.textContent = `⚠ Poche disponibilità (${product.stock} unità)`;
-            stockElement.className = 'product-stock low-stock';
+    if (stockElement) {
+        if (product.stock !== undefined) {
+            if (product.stock > 50) {
+                stockElement.textContent = `✓ Disponibile (${product.stock} unità)`;
+                stockElement.className = 'product-stock';
+            } else if (product.stock > 0) {
+                stockElement.textContent = `⚠ Poche disponibilità (${product.stock} unità)`;
+                stockElement.className = 'product-stock low-stock';
+            } else {
+                stockElement.textContent = '✗ Non disponibile';
+                stockElement.className = 'product-stock out-of-stock';
+            }
         } else {
-            stockElement.textContent = '✗ Non disponibile';
-            stockElement.className = 'product-stock out-of-stock';
+            stockElement.textContent = '✓ Disponibile';
+            stockElement.className = 'product-stock';
         }
-    } else {
-        stockElement.textContent = '✓ Disponibile';
-        stockElement.className = 'product-stock';
     }
 
     // Description
     document.getElementById('productDetailDescription').innerHTML = product.description || 'Descrizione non disponibile';
 
-    // Technical Info
+    // Technical Info - only exists in prodotti.html
     const techInfoGrid = document.getElementById('techInfoGrid');
-    const techInfo = [];
+    if (techInfoGrid) {
+        const techInfo = [];
 
-    if (product.ean) techInfo.push({ label: 'EAN', value: product.ean });
-    if (product.dimensions) {
-        const dims = product.dimensions;
-        techInfo.push({
-            label: 'Dimensioni',
-            value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
-        });
-    }
-    if (product.weight) techInfo.push({ label: 'Peso', value: `${product.weight} kg` });
-    if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
+        if (product.ean) techInfo.push({ label: 'EAN', value: product.ean });
+        if (product.dimensions) {
+            const dims = product.dimensions;
+            techInfo.push({
+                label: 'Dimensioni',
+                value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
+            });
+        }
+        if (product.weight) {
+            // Converti grammi in kg se >= 1000g, altrimenti mostra in grammi
+            const weightDisplay = product.weight >= 1000
+                ? `${(product.weight / 1000).toFixed(2)} kg`
+                : `${product.weight} g`;
+            techInfo.push({ label: 'Peso', value: weightDisplay });
+        }
+        if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
 
-    if (techInfo.length > 0) {
-        techInfoGrid.innerHTML = techInfo
-            .map(item => `
-                <div class="tech-info-item">
-                    <div class="tech-info-label">${item.label}</div>
-                    <div class="tech-info-value">${item.value}</div>
-                </div>
-            `)
-            .join('');
-        document.getElementById('productTechnicalInfo').style.display = 'block';
-    } else {
-        document.getElementById('productTechnicalInfo').style.display = 'none';
+        if (techInfo.length > 0) {
+            techInfoGrid.innerHTML = techInfo
+                .map(item => `
+                    <div class="tech-info-item">
+                        <div class="tech-info-label">${item.label}</div>
+                        <div class="tech-info-value">${item.value}</div>
+                    </div>
+                `)
+                .join('');
+            const productTechnicalInfo = document.getElementById('productTechnicalInfo');
+            if (productTechnicalInfo) productTechnicalInfo.style.display = 'block';
+        } else {
+            const productTechnicalInfo = document.getElementById('productTechnicalInfo');
+            if (productTechnicalInfo) productTechnicalInfo.style.display = 'none';
+        }
     }
 
     // Generate features with REAL product data
@@ -1964,10 +2045,26 @@ function updateGallery() {
 
     // Update image
     const currentImage = currentGalleryImages[currentGalleryIndex];
-    if (currentImage.startsWith('http')) {
-        imageContainer.innerHTML = `<img src="${currentImage}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
-    } else {
+    console.log('🔧 updateGallery - currentImage:', currentImage);
+
+    // Handle both string URLs and image objects {url: "..."}
+    let imageUrl = typeof currentImage === 'string' ? currentImage : (currentImage?.url || currentImage?.thumbnail);
+    console.log('🔧 updateGallery - imageUrl estratto:', imageUrl);
+
+    // Converti percorsi relativi in URL assoluti
+    imageUrl = getAbsoluteImageUrl(imageUrl);
+    console.log('🔧 updateGallery - imageUrl finale:', imageUrl);
+
+    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+        console.log('✅ Impostando immagine:', imageUrl);
+        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
+    } else if (typeof currentImage === 'string' && currentImage.includes('<svg')) {
+        console.log('✅ Impostando SVG');
         imageContainer.innerHTML = currentImage;
+    } else {
+        console.log('❌ Nessuna immagine valida, mostro placeholder');
+        // Fallback: mostra placeholder se nessuna immagine valida
+        imageContainer.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #999;">Immagine non disponibile</div>`;
     }
 
     // Le frecce sono sempre visibili
@@ -2136,7 +2233,10 @@ function getProductFeatures(product) {
             features.push(`Disponibilità: ${product.stock} unità`);
         }
         if (product.weight) {
-            features.push(`Peso: ${product.weight} kg`);
+            const weightDisplay = product.weight >= 1000
+                ? `${(product.weight / 1000).toFixed(2)} kg`
+                : `${product.weight} g`;
+            features.push(`Peso: ${weightDisplay}`);
         }
         if (product.dimensions) {
             const dims = product.dimensions;
