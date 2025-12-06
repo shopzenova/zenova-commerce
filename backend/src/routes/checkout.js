@@ -3,6 +3,7 @@ const router = express.Router();
 const stripe = require('../integrations/StripeClient');
 const bigbuy = require('../integrations/BigBuyClient');
 const shippingService = require('../services/ShippingService');
+const orderService = require('../services/OrderService');
 const logger = require('../utils/logger');
 
 // POST /api/checkout - Crea sessione checkout Stripe
@@ -64,13 +65,41 @@ router.post('/', async (req, res) => {
     // 3. Crea sessione Stripe
     const session = await stripe.createCheckoutSession(checkoutData);
 
-    logger.info(`Checkout creato per ${customer.email}, session: ${session.sessionId}`);
+    // 4. Salva ordine nel database
+    const order = orderService.createOrder({
+      customer: {
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        address: customer.address || {}
+      },
+      items: items,
+      totals: {
+        subtotal: items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        shipping: customer.shippingCost || 0,
+        total: items.reduce((sum, item) => sum + (item.price * item.quantity), 0) + (customer.shippingCost || 0)
+      },
+      payment: {
+        method: 'stripe',
+        sessionId: session.sessionId,
+        status: 'pending'
+      },
+      shipping: {
+        carrier: customer.shippingCarrier || '',
+        trackingNumber: '',
+        estimatedDelivery: ''
+      },
+      notes: customer.notes || ''
+    });
+
+    logger.info(`Checkout creato per ${customer.email}, session: ${session.sessionId}, ordine: ${order.id}`);
 
     res.json({
       success: true,
       data: {
         sessionId: session.sessionId,
-        url: session.url
+        url: session.url,
+        orderId: order.id
       }
     });
 
@@ -95,10 +124,21 @@ router.get('/success', async (req, res) => {
     // Recupera sessione Stripe
     const session = await stripe.getSession(session_id);
 
+    // Trova e aggiorna l'ordine corrispondente
+    const orders = orderService.getAllOrders();
+    const order = orders.find(o => o.payment.sessionId === session_id);
+
+    if (order) {
+      // Aggiorna stato ordine a "processing" (pagamento confermato)
+      orderService.updateOrderStatus(order.id, 'processing');
+      logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
+    }
+
     res.json({
       success: true,
       message: 'Pagamento completato con successo!',
-      orderEmail: session.customer_email
+      orderEmail: session.customer_email,
+      orderId: order ? order.id : null
     });
 
   } catch (error) {

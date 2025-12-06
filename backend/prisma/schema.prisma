@@ -5,7 +5,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -16,15 +16,15 @@ model Product {
   bigbuyId     Int      @unique @map("bigbuy_id")
   sku          String   @unique
   name         String
-  description  String?  @db.Text
+  description  String?
   category     String?
-  price        Decimal  @db.Decimal(10, 2)
-  retailPrice  Decimal  @db.Decimal(10, 2) @map("retail_price")
+  price        Decimal
+  retailPrice  Decimal  @map("retail_price")
   stock        Int      @default(0)
-  images       Json?
-  features     Json?
-  weight       Decimal? @db.Decimal(8, 2)
-  dimensions   Json?
+  images       String?
+  features     String?
+  weight       Decimal?
+  dimensions   String?
   active       Boolean  @default(true)
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
@@ -72,10 +72,10 @@ model Order {
   customerEmail     String    @map("customer_email")
   customerName      String    @map("customer_name")
   customerPhone     String?   @map("customer_phone")
-  shippingAddress   Json      @map("shipping_address")
-  subtotal          Decimal   @db.Decimal(10, 2)
-  shippingCost      Decimal   @default(0) @db.Decimal(10, 2) @map("shipping_cost")
-  total             Decimal   @db.Decimal(10, 2)
+  shippingAddress   String    @map("shipping_address")
+  subtotal          Decimal
+  shippingCost      Decimal   @default(0) @map("shipping_cost")
+  total             Decimal
   paymentMethod     String    @default("stripe") @map("payment_method")
   paymentStatus     String    @default("pending") @map("payment_status")
   stripeSessionId   String?   @map("stripe_session_id")
@@ -85,8 +85,8 @@ model Order {
   bigbuyStatus      String?   @map("bigbuy_status")
   bigbuySentAt      DateTime? @map("bigbuy_sent_at")
   status            String    @default("pending")
-  customerNotes     String?   @db.Text @map("customer_notes")
-  internalNotes     String?   @db.Text @map("internal_notes")
+  customerNotes     String?   @map("customer_notes")
+  internalNotes     String?   @map("internal_notes")
   createdAt         DateTime  @default(now()) @map("created_at")
   updatedAt         DateTime  @updatedAt @map("updated_at")
 
@@ -112,10 +112,10 @@ model OrderItem {
   sku          String
   productName  String   @map("product_name")
   productImage String?  @map("product_image")
-  unitPrice    Decimal  @db.Decimal(10, 2) @map("unit_price")
+  unitPrice    Decimal  @map("unit_price")
   quantity     Int      @default(1)
-  totalPrice   Decimal  @db.Decimal(10, 2) @map("total_price")
-  costPrice    Decimal? @db.Decimal(10, 2) @map("cost_price")
+  totalPrice   Decimal  @map("total_price")
+  costPrice    Decimal? @map("cost_price")
   createdAt    DateTime @default(now()) @map("created_at")
 
   order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -140,7 +140,7 @@ model Shipment {
   status              String    @default("pending")
   trackingEmailSent   Boolean   @default(false) @map("tracking_email_sent")
   deliveryEmailSent   Boolean   @default(false) @map("delivery_email_sent")
-  trackingEvents      Json?     @map("tracking_events")
+  trackingEvents      String?   @map("tracking_events")
   createdAt           DateTime  @default(now()) @map("created_at")
   updatedAt           DateTime  @updatedAt @map("updated_at")
 
@@ -158,8 +158,8 @@ model SyncLog {
   syncType        String   @map("sync_type")
   status          String
   itemsProcessed  Int      @default(0) @map("items_processed")
-  errorMessage    String?  @db.Text @map("error_message")
-  syncData        Json?    @map("sync_data")
+  errorMessage    String?  @map("error_message")
+  syncData        String?  @map("sync_data")
   durationMs      Int?     @map("duration_ms")
   createdAt       DateTime @default(now()) @map("created_at")
 

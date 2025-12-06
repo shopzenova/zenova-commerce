@@ -92,11 +92,11 @@ const anchorToSubcategoryMap = {
     'cerotti': 'cerotti-medicazioni',
     'protezione-solare': 'protezione-solare-viso',
 
-    // NATURAL WELLNESS
-    'oli-essenziali': 'wellness',
-    'aromaterapia': 'wellness',
-    'yoga-meditazione': 'wellness',
-    'incensi-candele': 'wellness',
+    // NATURAL WELLNESS - AW Dropship
+    'oli-essenziali': 'oli-essenziali',
+    'oli-fragranza': 'oli-fragranza',
+    'relax-benessere': 'relax-benessere',
+    'vestiario-wellness': 'vestiario-wellness',
 
     // TECH INNOVATION
     'gadget-tech': 'gadget-tech',
@@ -208,11 +208,11 @@ const subcategoryToCategoryMap = {
     '2501,2502,2896': 'health-personal-care',
     '2501,2552,2554': 'health-personal-care',
 
-    // NATURAL WELLNESS
+    // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'natural-wellness',
-    'aromaterapia': 'natural-wellness',
-    'yoga-meditazione': 'natural-wellness',
-    'incensi-candele': 'natural-wellness',
+    'oli-fragranza': 'natural-wellness',
+    'relax-benessere': 'natural-wellness',
+    'vestiario-wellness': 'natural-wellness',
     'wellness': 'natural-wellness',
 
     // TECH INNOVATION

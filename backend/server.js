@@ -70,7 +70,14 @@ app.use((req, res, next) => {
 });
 
 // Serve file statici del frontend (dalla directory parent)
-app.use(express.static(path.join(__dirname, '..')));
+// Aggiungi header CORS per tutti i file statici
+app.use(express.static(path.join(__dirname, '..'), {
+  setHeaders: (res, filePath) => {
+    // Permetti CORS per immagini
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  }
+}));
 
 // ===== ROUTES =====
 
@@ -81,6 +88,65 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV
   });
+});
+
+// Image proxy endpoint for AW images (to bypass 403 Forbidden)
+app.get('/api/proxy-image', async (req, res) => {
+  const imageUrl = req.query.url;
+  if (!imageUrl) {
+    return res.status(400).send('Missing URL parameter');
+  }
+
+  try {
+    const https = require('https');
+    const http = require('http');
+    const url = require('url');
+
+    const parsedUrl = url.parse(imageUrl);
+    const client = parsedUrl.protocol === 'https:' ? https : http;
+
+    const options = {
+      hostname: parsedUrl.hostname,
+      path: parsedUrl.path,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://www.aroma-zone.com/',
+        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'Sec-Fetch-Dest': 'image',
+        'Sec-Fetch-Mode': 'no-cors',
+        'Sec-Fetch-Site': 'cross-site'
+      }
+    };
+
+    const proxyReq = client.get(options, (proxyRes) => {
+      // Forward status code
+      res.status(proxyRes.statusCode);
+
+      // Forward content type
+      if (proxyRes.headers['content-type']) {
+        res.set('Content-Type', proxyRes.headers['content-type']);
+      }
+
+      // Set CORS headers
+      res.set('Access-Control-Allow-Origin', '*');
+
+      // Stream image to client
+      proxyRes.pipe(res);
+    });
+
+    proxyReq.on('error', (error) => {
+      logger.error('Image proxy error:', error);
+      res.status(500).send('Failed to fetch image');
+    });
+  } catch (error) {
+    logger.error('Image proxy error:', error);
+    res.status(500).send('Failed to fetch image');
+  }
 });
 
 // API routes

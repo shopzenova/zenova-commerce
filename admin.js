@@ -1906,5 +1906,264 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ===== GESTIONE ORDINI =====
+
+/**
+ * Carica e visualizza ordini
+ */
+async function loadOrders(statusFilter = '') {
+    const container = document.getElementById('ordersContainer');
+    if (!container) return;
+
+    try {
+        container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
+
+        const url = statusFilter
+            ? `http://localhost:3000/api/orders?status=${statusFilter}`
+            : 'http://localhost:3000/api/orders';
+
+        const response = await fetch(url);
+        const result = await response.json();
+
+        if (!result.success || !result.data) {
+            throw new Error(result.error || 'Errore caricamento ordini');
+        }
+
+        const orders = result.data;
+
+        if (orders.length === 0) {
+            container.innerHTML = `
+                <p style="text-align: center; padding: 40px; color: #666;">
+                    Nessun ordine trovato${statusFilter ? ' per questo stato' : ''}.
+                </p>
+            `;
+            return;
+        }
+
+        // Renderizza ordini
+        container.innerHTML = orders.map(order => renderOrderCard(order)).join('');
+
+        // Aggiungi event listeners
+        orders.forEach(order => {
+            addOrderEventListeners(order.id);
+        });
+
+    } catch (error) {
+        console.error('Errore caricamento ordini:', error);
+        container.innerHTML = `
+            <p style="text-align: center; padding: 40px; color: #e74c3c;">
+                ❌ Errore caricamento ordini: ${error.message}
+            </p>
+        `;
+    }
+}
+
+/**
+ * Renderizza card ordine
+ */
+function renderOrderCard(order) {
+    const statusLabels = {
+        pending: 'In attesa',
+        processing: 'In elaborazione',
+        shipped: 'Spedito',
+        delivered: 'Consegnato',
+        cancelled: 'Annullato'
+    };
+
+    const statusClasses = {
+        pending: 'pending',
+        processing: 'processing',
+        shipped: 'shipped',
+        delivered: 'delivered',
+        cancelled: 'cancelled'
+    };
+
+    const date = new Date(order.createdAt);
+    const dateStr = date.toLocaleDateString('it-IT') + ' - ' + date.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'});
+
+    const productsText = order.items.length === 1
+        ? order.items[0].name
+        : `${order.items.length} prodotti`;
+
+    return `
+        <div class="order-card" data-order-id="${order.id}">
+            <div class="order-header">
+                <span class="order-id">${order.id}</span>
+                <span class="order-status ${statusClasses[order.status]}">${statusLabels[order.status]}</span>
+            </div>
+            <div class="order-details">
+                <p><strong>Cliente:</strong> ${order.customer.name || order.customer.email}</p>
+                <p><strong>Email:</strong> ${order.customer.email}</p>
+                <p><strong>Prodotti:</strong> ${productsText}</p>
+                <p><strong>Totale:</strong> €${order.totals.total.toFixed(2)}</p>
+                <p><strong>Data:</strong> ${dateStr}</p>
+            </div>
+            <div class="order-actions">
+                <select class="order-status-select" data-order-id="${order.id}">
+                    <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>In attesa</option>
+                    <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>In elaborazione</option>
+                    <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>Spedito</option>
+                    <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Consegnato</option>
+                    <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Annullato</option>
+                </select>
+                <button class="btn-small order-details-btn" data-order-id="${order.id}">Dettagli</button>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Aggiungi event listeners per ordine
+ */
+function addOrderEventListeners(orderId) {
+    // Cambio stato
+    const statusSelect = document.querySelector(`.order-status-select[data-order-id="${orderId}"]`);
+    if (statusSelect) {
+        statusSelect.addEventListener('change', async (e) => {
+            const newStatus = e.target.value;
+            await updateOrderStatus(orderId, newStatus);
+        });
+    }
+
+    // Dettagli ordine
+    const detailsBtn = document.querySelector(`.order-details-btn[data-order-id="${orderId}"]`);
+    if (detailsBtn) {
+        detailsBtn.addEventListener('click', () => {
+            showOrderDetails(orderId);
+        });
+    }
+}
+
+/**
+ * Aggiorna stato ordine
+ */
+async function updateOrderStatus(orderId, newStatus) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            showNotification(`✅ Ordine aggiornato: ${newStatus}`, 'success');
+            // Ricarica ordini per aggiornare la visualizzazione
+            const currentFilter = document.getElementById('orderStatusFilter').value;
+            await loadOrders(currentFilter);
+        } else {
+            throw new Error(result.error || 'Errore aggiornamento');
+        }
+    } catch (error) {
+        console.error('Errore aggiornamento stato:', error);
+        showNotification(`❌ Errore: ${error.message}`, 'error');
+    }
+}
+
+/**
+ * Mostra dettagli ordine
+ */
+async function showOrderDetails(orderId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`);
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.error || 'Ordine non trovato');
+        }
+
+        const order = result.data;
+
+        // Crea HTML dettagli
+        const itemsHtml = order.items.map(item => `
+            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                <strong>${item.name}</strong><br>
+                Quantità: ${item.quantity} x €${item.price.toFixed(2)} = €${(item.quantity * item.price).toFixed(2)}
+            </div>
+        `).join('');
+
+        const detailsHtml = `
+            <div style="max-width: 600px;">
+                <h3>Ordine ${order.id}</h3>
+                <hr>
+                <h4>Cliente</h4>
+                <p><strong>Nome:</strong> ${order.customer.name || '-'}</p>
+                <p><strong>Email:</strong> ${order.customer.email}</p>
+                <p><strong>Telefono:</strong> ${order.customer.phone || '-'}</p>
+                <hr>
+                <h4>Prodotti</h4>
+                ${itemsHtml}
+                <hr>
+                <h4>Totali</h4>
+                <p><strong>Subtotale:</strong> €${order.totals.subtotal.toFixed(2)}</p>
+                <p><strong>Spedizione:</strong> €${order.totals.shipping.toFixed(2)}</p>
+                <p><strong>Totale:</strong> €${order.totals.total.toFixed(2)}</p>
+                <hr>
+                <h4>Spedizione</h4>
+                <p><strong>Corriere:</strong> ${order.shipping.carrier || '-'}</p>
+                <p><strong>Tracking:</strong> ${order.shipping.trackingNumber || '-'}</p>
+                <hr>
+                <p><strong>Data ordine:</strong> ${new Date(order.createdAt).toLocaleString('it-IT')}</p>
+            </div>
+        `;
+
+        // Mostra in un alert o modal (per semplicità uso alert, puoi creare un modal dedicato)
+        const modalContainer = document.createElement('div');
+        modalContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 10000;';
+        modalContainer.innerHTML = `
+            <div style="background: white; padding: 30px; border-radius: 8px; max-height: 80vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                ${detailsHtml}
+                <button onclick="this.closest('div[style*=fixed]').remove()" style="margin-top: 20px; padding: 10px 20px; background: #8B6F47; color: white; border: none; border-radius: 4px; cursor: pointer;">Chiudi</button>
+            </div>
+        `;
+        document.body.appendChild(modalContainer);
+
+        // Chiudi cliccando fuori
+        modalContainer.addEventListener('click', (e) => {
+            if (e.target === modalContainer) {
+                modalContainer.remove();
+            }
+        });
+
+    } catch (error) {
+        console.error('Errore caricamento dettagli:', error);
+        showNotification(`❌ Errore: ${error.message}`, 'error');
+    }
+}
+
+// Inizializzazione gestione ordini
+document.addEventListener('DOMContentLoaded', function() {
+    const ordersSection = document.getElementById('orders');
+    const orderStatusFilter = document.getElementById('orderStatusFilter');
+
+    if (ordersSection) {
+        // Carica ordini quando si apre la sezione ordini
+        const ordersNavBtn = document.querySelector('[data-section="orders"]');
+        if (ordersNavBtn) {
+            ordersNavBtn.addEventListener('click', () => {
+                setTimeout(() => {
+                    loadOrders();
+                }, 100);
+            });
+        }
+
+        // Filtro per stato
+        if (orderStatusFilter) {
+            orderStatusFilter.addEventListener('change', (e) => {
+                loadOrders(e.target.value);
+            });
+        }
+
+        // Se la sezione ordini è già visibile, carica subito
+        if (ordersSection.classList.contains('active')) {
+            loadOrders();
+        }
+    }
+});
+
 
 console.log('Modal modifica categoria inizializzato ✅');
+console.log('Gestione ordini inizializzata ✅');

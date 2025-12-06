@@ -554,9 +554,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Order placed:', order);
 
-        /* REAL IMPLEMENTATION:
-
-        fetch('/api/orders', {
+        // Send order to backend
+        fetch('http://localhost:3000/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)
@@ -571,7 +570,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error sending order:', error);
         });
-        */
     }
 
     function renderPayPalButton() {

@@ -1,0 +1,50 @@
+{
+  "EO-73": {
+    "name": "Olio Essenziale di Alloro 10 ml",
+    "description": "Nome latino: Pimenta Racemosa. Parte della pianta utilizzata: Foglie. Origine: Caraibi. Metodo di estrazione: Distillazione a vapore.\n\nL'alloro delle Indie Occidentali è un'altra pianta apprezzata per i suoi usi in medicina e in cucina. Le foglie di alloro sono state utilizzate in vari tipi di cucina e condimento e il frutto è uno degli ingredienti del \"Piccantino\".\n\nL'alloro è da tempo utilizzato nei tonici per capelli, poiché si dice che faccia bene al cuoio capelluto, oltre a curare i capelli stessi e favorirne la crescita. Si dice anche che l'olio essenziale di alloro sia utile per dolori, fastidi, problemi di circolazione e reumatismi, oltre a essere un valido aiuto per il sistema immunitario nella lotta contro le malattie."
+  },
+  "EO-60": {
+    "name": "Olio Essenziale di Anice Stellato 10 ml",
+    "description": "Olio essenziale puro di Anice Stellato cinese (Illicium verum). Parte della pianta utilizzata: Frutti. Origine: Cina. Metodo di estrazione: Distillazione a vapore. L'anice stellato ha un aroma dolce e speziato, utilizzato tradizionalmente per favorire il benessere digestivo e creare un'atmosfera accogliente."
+  },
+  "EO-13": {
+    "name": "Olio Essenziale di Basilico 10 ml",
+    "description": "Olio essenziale puro di Basilico (Ocimum basilicum). Parte della pianta utilizzata: Foglie e sommità fiorite. Origine: India. Metodo di estrazione: Distillazione a vapore. Il basilico è noto per le sue proprietà rinvigorenti e chiarificanti, ideale per diffusione ambientale e per stimolare la concentrazione."
+  },
+  "ULFO-11": {
+    "name": "Olio per Fragranza Cedro 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Cedro. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza legnosa e calda che dona un senso di comfort e serenità. Prodotto concentrato, utilizzare con parsimonia."
+  },
+  "ULFO-12": {
+    "name": "Olio per Fragranza Camomilla 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Camomilla. Perfetto per candele, saponi e prodotti rilassanti. Fragranza delicata e calmante che evoca tranquillità e benessere. Prodotto concentrato, adatto per uso professionale."
+  },
+  "ULFO-84": {
+    "name": "Olio per Fragranza Cocco 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Cocco. Ideale per creare prodotti estivi e tropicali. Fragranza dolce e cremosa che ricorda le spiagge esotiche. Perfetto per candele, saponi e cosmetici fai-da-te."
+  },
+  "AWChill-10": {
+    "name": "Chill Pills Bergamotto & Lavanda - Box 1.3 Kg",
+    "description": "Box da 1.3 kg di Chill Pills profumate al Bergamotto e Lavanda. Perfette per creare un'atmosfera rilassante e accogliente. Le Chill Pills sono piccole compresse profumate ideali per diffondere fragranze naturali negli ambienti. Combinazione calmante di agrumi freschi e lavanda rilassante."
+  },
+  "AWChill-12": {
+    "name": "Chill Pills Passion Fruit - Box 1.3 Kg",
+    "description": "Box da 1.3 kg di Chill Pills profumate al Passion Fruit (Frutto della Passione). Fragranza tropicale ed energizzante che porta freschezza e vitalità negli ambienti. Ideali per uso professionale o domestico."
+  },
+  "AWChill-11": {
+    "name": "Chill Pills Summer of Love - Box 1.3 Kg",
+    "description": "Box da 1.3 kg di Chill Pills fragranza Summer of Love. Una miscela floreale e fruttata che evoca ricordi estivi e momenti felici. Perfette per creare un'atmosfera gioiosa e positiva."
+  },
+  "NSMed-24": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Bianco, Blu & Oro con Simbolo Occhio Greco",
+    "description": "Elegante vestito della collezione Nomad Sari ispirata al Mediterraneo. Design unico con simbolo dell'occhio greco protettivo in blu e oro su base bianca. Realizzato con tessuti naturali e confortevoli. Taglia LXL. Perfetto per l'estate e per creare un look bohémien e rilassato. Vestiario wellness che unisce stile e comfort."
+  },
+  "NSMed-22": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Blu Mare & Bianco",
+    "description": "Splendido vestito della collezione Nomad Sari ispirata alle tonalità del Mediterraneo. Colori blu mare e bianco che evocano le onde e la brezza marina. Tessuti naturali e morbidi. Taglia LXL. Vestiario wellness ideale per momenti di relax e vacanze."
+  },
+  "NSMed-20": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Turchese & Bianco",
+    "description": "Bellissimo vestito della collezione Nomad Sari con colori turchese e bianco. Design ispirato al mare Mediterraneo e alla sua bellezza naturale. Tessuti confortevoli e traspiranti. Taglia LXL. Perfetto per chi cerca stile, comfort e benessere."
+  }
+}

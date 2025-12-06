@@ -1,0 +1,32 @@
+{
+  "totalProducts": 100,
+  "departments": [
+    {
+      "slug": "no-department",
+      "count": 100,
+      "products": [
+        {
+          "id": 390273,
+          "code": "NSMed-24",
+          "slug": "nsmed-24-dssk"
+        },
+        {
+          "id": 390268,
+          "code": "NSMed-22",
+          "slug": "nsmed-22-dssk"
+        },
+        {
+          "id": 390265,
+          "code": "NSMed-20",
+          "slug": "nsmed-20-dssk"
+        }
+      ]
+    }
+  ],
+  "families": [
+    {
+      "slug": "no-family",
+      "count": 100
+    }
+  ]
+}

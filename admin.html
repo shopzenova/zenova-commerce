@@ -702,40 +702,23 @@
                     <p>Visualizza e gestisci gli ordini ricevuti</p>
                 </div>
 
-                <div class="orders-list">
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#1234</span>
-                            <span class="order-status pending">In elaborazione</span>
-                        </div>
-                        <div class="order-details">
-                            <p><strong>Cliente:</strong> Mario Rossi</p>
-                            <p><strong>Prodotto:</strong> Set Oli Essenziali Premium</p>
-                            <p><strong>Totale:</strong> € 45.90</p>
-                            <p><strong>Data:</strong> 15/11/2025 - 11:30</p>
-                        </div>
-                        <div class="order-actions">
-                            <button class="btn-small">Invia a BigBuy</button>
-                            <button class="btn-small">Dettagli</button>
-                        </div>
-                    </div>
+                <!-- Filtri Ordini -->
+                <div class="orders-filters" style="margin-bottom: 20px;">
+                    <select id="orderStatusFilter" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
+                        <option value="">Tutti gli stati</option>
+                        <option value="pending">In attesa</option>
+                        <option value="processing">In elaborazione</option>
+                        <option value="shipped">Spedito</option>
+                        <option value="delivered">Consegnato</option>
+                        <option value="cancelled">Annullato</option>
+                    </select>
+                </div>
 
-                    <div class="order-card">
-                        <div class="order-header">
-                            <span class="order-id">#1233</span>
-                            <span class="order-status shipped">Spedito</span>
-                        </div>
-                        <div class="order-details">
-                            <p><strong>Cliente:</strong> Laura Bianchi</p>
-                            <p><strong>Prodotto:</strong> Diffusore Aromi Premium</p>
-                            <p><strong>Totale:</strong> € 29.90</p>
-                            <p><strong>Data:</strong> 14/11/2025 - 16:20</p>
-                        </div>
-                        <div class="order-actions">
-                            <button class="btn-small">Tracking</button>
-                            <button class="btn-small">Dettagli</button>
-                        </div>
-                    </div>
+                <!-- Container Ordini (popolato dinamicamente) -->
+                <div class="orders-list" id="ordersContainer">
+                    <p style="text-align: center; padding: 40px; color: #666;">
+                        Caricamento ordini...
+                    </p>
                 </div>
             </section>
         </main>
