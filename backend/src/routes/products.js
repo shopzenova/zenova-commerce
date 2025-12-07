@@ -171,8 +171,9 @@ router.get('/', async (req, res) => {
 
     // Filtra per categoria Zenova se richiesto
     if (category) {
+      const categoryLower = category.toLowerCase();
       products = products.filter(p =>
-        p.zenovaCategories && p.zenovaCategories.includes(category)
+        p.zenovaCategories && p.zenovaCategories.some(cat => cat.toLowerCase() === categoryLower)
       );
       logger.info(`Filtrati per categoria '${category}': ${products.length} prodotti`);
     }
