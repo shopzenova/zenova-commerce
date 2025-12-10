@@ -11,8 +11,8 @@ if %errorlevel% equ 0 (
     exit /b
 )
 
-REM Avvia il server in modalità minimizzata
-start /min "" cmd /c "node server.js"
+REM Avvia il server in modalità minimizzata (mantiene la finestra aperta)
+start /min "Zenova Backend" cmd /k "node server.js"
 
 REM Aspetta 3 secondi per dare tempo al server di avviarsi
 timeout /t 3 /nobreak > nul

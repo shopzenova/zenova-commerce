@@ -1,33 +1,27 @@
 @echo off
-title Zenova - Avvio Automatico
-color 0A
-
 echo ========================================
-echo    ZENOVA - E-commerce Zen & Naturale
-echo    Avvio automatico progetto...
+echo    ZENOVA E-COMMERCE
+echo    Avvio in corso...
 echo ========================================
 echo.
 
-echo [1/3] Avvio Backend Server...
-start "Zenova Backend" cmd /k "cd /d C:\Users\giorg\zenova-ecommerce\backend && npm start"
+cd /d "%~dp0backend"
 
-echo [2/3] Attendo avvio server (8 secondi)...
-timeout /t 8 /nobreak >nul
+echo [1/2] Avvio backend su porta 3000...
+start "Zenova Backend" cmd /k "node server.js"
 
-echo [3/3] Apro Zenova nel browser...
-start "" "C:\Users\giorg\zenova-ecommerce\index.html"
+echo [2/2] Attendo 3 secondi...
+timeout /t 3 /nobreak >nul
+
+echo [3/3] Apertura browser...
+start http://localhost:3000
 
 echo.
 echo ========================================
-echo    ZENOVA AVVIATO CON SUCCESSO!
+echo    ZENOVA E-COMMERCE ATTIVO!
 echo ========================================
 echo.
-echo Backend: http://localhost:3000
-echo Frontend: Aperto nel browser
+echo Il sito si aprira automaticamente nel browser.
+echo Per fermare il backend, chiudi la finestra "Zenova Backend".
 echo.
-echo Per chiudere il backend, vai nella finestra
-echo "Zenova Backend" e premi CTRL+C
-echo.
-echo Questa finestra si chiudera' tra 5 secondi...
-timeout /t 5 /nobreak >nul
-exit
+pause

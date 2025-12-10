@@ -277,8 +277,8 @@ router.get('/:id', async (req, res) => {
   try {
     const productId = req.params.id;
 
-    // Cerca prima nel JSON locale
-    const product = TOP_PRODUCTS.find(p => p.id === productId);
+    // Cerca prima nel JSON locale (cerca sia per ID che per SKU)
+    const product = TOP_PRODUCTS.find(p => p.id === productId || p.sku === productId);
 
     if (!product) {
       return res.status(404).json({
@@ -305,6 +305,7 @@ router.get('/:id', async (req, res) => {
       price: parseFloat(product.pvd),           // Prezzo di acquisto da BigBuy
       retailPrice: parseFloat(product.price),   // Prezzo di vendita consigliato
       stock: product.stock,
+      available: product.available !== false,   // Disponibilità per acquisto (default true se non specificato)
       images: product.images,
       video: product.video,
       ean: product.ean,

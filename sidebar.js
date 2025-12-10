@@ -97,6 +97,8 @@ const anchorToSubcategoryMap = {
     'oli-fragranza': 'oli-fragranza',
     'relax-benessere': 'relax-benessere',
     'vestiario-wellness': 'vestiario-wellness',
+    'pietre-preziose': 'pietre-preziose',
+    'incenso': 'incenso',
 
     // TECH INNOVATION
     'gadget-tech': 'gadget-tech',
@@ -213,6 +215,8 @@ const subcategoryToCategoryMap = {
     'oli-fragranza': 'natural-wellness',
     'relax-benessere': 'natural-wellness',
     'vestiario-wellness': 'natural-wellness',
+    'pietre-preziose': 'natural-wellness',
+    'incenso': 'natural-wellness',
     'wellness': 'natural-wellness',
 
     // TECH INNOVATION
