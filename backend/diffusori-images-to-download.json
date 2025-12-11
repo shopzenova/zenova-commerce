@@ -1,0 +1,177 @@
+[
+  {
+    "sku": "AATOM-11",
+    "urls": [
+      "https://media.aiku.io/VmzoZEa1IDsd5jrDCREe3z2Z4Hz5tz1r1bpfSW_WYbY/bG9jYWw6Ly9tZWRpYS9IRy9DQy82MFIzMEMxRzZNVktDQ0hHLzI4Y2FhNGFmLmpwZWc",
+      "https://media.aiku.io/v3IR8RRXsVuHoqfWnY9KrOwaSfxhyX5fSmKXQqZrquc/bG9jYWw6Ly9tZWRpYS9ISC9DQy82MFIzMEMxRzZNVktDQ0hILzMzNDVkNmI3LmpwZWc",
+      "https://media.aiku.io/lkFWvEPxYTshn0BcfSxoxNaqMX_oQOJbl73p0uNX7FM/bG9jYWw6Ly9tZWRpYS85Uy9DQy82MFIzMEMxRzZNVktDQzlTL2RlY2Y2MTBlLmpwZWc",
+      "https://media.aiku.io/x2-QSjp8eZSj7qAclAW1qY7mn5G_hZEFndRa5INZQeY/bG9jYWw6Ly9tZWRpYS9ISi9DQy82MFIzMEMxRzZNVktDQ0hKLzg0M2UzNWYxLmpwZWc",
+      "https://media.aiku.io/__qWPP5slGPjXE5rkat4Cat9Tu2Lo6GAQQXB01cTT3k/bG9jYWw6Ly9tZWRpYS9ISy9DQy82MFIzMEMxRzZNVktDQ0hLLzVlZWNkM2I4LmpwZWc",
+      "https://media.aiku.io/DJcf1QqzxuQpqeCREQt-gVNJ0guj7e3V-j3i4cTlDCw/bG9jYWw6Ly9tZWRpYS9ITS9DQy82MFIzMEMxRzZNVktDQ0hNL2ZhMDkxODZlLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-12",
+    "urls": [
+      "https://media.aiku.io/1DRbJxQRlimWNQ_SSw1svq8TD7krc1UqaP4rdFu4mNs/bG9jYWw6Ly9tZWRpYS9IUC9DQy82MFIzMEMxRzZNVktDQ0hQL2YzMTAxYzM5LmpwZWc",
+      "https://media.aiku.io/3Lu8RScGRCDB_trF168rc_V9xW_kezNvED2pghhTcL4/bG9jYWw6Ly9tZWRpYS9IUS9DQy82MFIzMEMxRzZNVktDQ0hRL2FmNTE5YjNkLmpwZWc",
+      "https://media.aiku.io/WHd_M4uTrdKWm4GZvKRYcB9MCtwRDX6WxoghToO6aHY/bG9jYWw6Ly9tZWRpYS9ITi9DQy82MFIzMEMxRzZNVktDQ0hOLzVmYzUwNGM5LmpwZWc",
+      "https://media.aiku.io/95KWFY1Fr3Xe5cLy-4hsV0ZHH5XZwEBVjhIpOyI1iYo/bG9jYWw6Ly9tZWRpYS9IUi9DQy82MFIzMEMxRzZNVktDQ0hSL2Y1Yjc2MTMzLmpwZWc",
+      "https://media.aiku.io/FJGjwxNTRu-iytRKERYylmAWvdfZGzv9FWpWyOc_3Q8/bG9jYWw6Ly9tZWRpYS9IUy9DQy82MFIzMEMxRzZNVktDQ0hTLzZkYzNlNjcwLmpwZWc",
+      "https://media.aiku.io/IN6BljbCyvxFZySNepgLfe9IoxMtOxmX4pklvFX2bdc/bG9jYWw6Ly9tZWRpYS9TRy9DQy82MFIzMEMxRzZNVktDQ1NHLzNmNDM5YmE0LmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-16",
+    "urls": [
+      "https://media.aiku.io/Vb-5rbmL-TpUft6Bb_6cCbJExp6_m1zwvwUHZnQ-PTM/bG9jYWw6Ly9tZWRpYS8xUi9DRC82MFIzMEMxRzZNVktDRDFSL2Y5NGJhNDQ1LmpwZWc",
+      "https://media.aiku.io/zI9aLuWHFuVkDEEAYDuzHVRvsN4ieKjFwJfxEhr9HFk/bG9jYWw6Ly9tZWRpYS8xUy9DRC82MFIzMEMxRzZNVktDRDFTLzEzNjAyMDI0LmpwZWc",
+      "https://media.aiku.io/VwsfxSj3_jMIe3_NnzdWX_rcq1s1wp40FESiNiyYhSQ/bG9jYWw6Ly9tZWRpYS8xUS9DRC82MFIzMEMxRzZNVktDRDFRLzdlYmY3ODA4LmpwZWc",
+      "https://media.aiku.io/2T94-Wg-4TTzYeQ4QIlvQSRPM6YcV0fx25Ud_EeZLy0/bG9jYWw6Ly9tZWRpYS85Ry9DRC82MFIzMEMxRzZNVktDRDlHLzZlOTkwYzE4LmpwZWc",
+      "https://media.aiku.io/9HyOrh0h7uytm6rwqYAuwhDRYOnyzQ2_ICz09Zb3ABs/bG9jYWw6Ly9tZWRpYS85SC9DRC82MFIzMEMxRzZNVktDRDlILzA3ZTQyZDg1LmpwZWc",
+      "https://media.aiku.io/e1xFIBStAh57Zxk6-dy2Y1eQqXNczY3JTCInAZxOlCs/bG9jYWw6Ly9tZWRpYS85Si9DRC82MFIzMEMxRzZNVktDRDlKLzc4YmM5YzVjLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-14",
+    "urls": [
+      "https://media.aiku.io/YDTQpQDcsvcNpifKMDLKX_Z_wGis8RQDb1bJaBdI_8M/bG9jYWw6Ly9tZWRpYS9TUy9DQy82MFIzMEMxRzZNVktDQ1NTL2Y0M2IxNTk5LmpwZWc",
+      "https://media.aiku.io/jijzsUOIsAZC4sFCFhz_9GPD-u8wkaNCZX6e4pRPrA4/bG9jYWw6Ly9tZWRpYS8xRy9DRC82MFIzMEMxRzZNVktDRDFHL2Y0Zjk4N2M5LmpwZWc",
+      "https://media.aiku.io/OLn6ug_IewV5ksnZFIqssqCV3wv3ItoDTjucTuiQXUE/bG9jYWw6Ly9tZWRpYS9TUi9DQy82MFIzMEMxRzZNVktDQ1NSLzI0MGI1YWQzLmpwZWc",
+      "https://media.aiku.io/LLhLRKrNVMbIRCBDczy2UoGoh4p0V19x4xUXZvQNZBU/bG9jYWw6Ly9tZWRpYS8xSC9DRC82MFIzMEMxRzZNVktDRDFILzRkMzdhY2VkLmpwZWc",
+      "https://media.aiku.io/vZc-ckQkbg8vXgivCQgMLJwTotl2Ib9cue32Fw1CGP4/bG9jYWw6Ly9tZWRpYS8xSi9DRC82MFIzMEMxRzZNVktDRDFKLzhmZjQ1NDJjLmpwZWc",
+      "https://media.aiku.io/IN6BljbCyvxFZySNepgLfe9IoxMtOxmX4pklvFX2bdc/bG9jYWw6Ly9tZWRpYS9TRy9DQy82MFIzMEMxRzZNVktDQ1NHLzNmNDM5YmE0LmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-18",
+    "urls": [
+      "https://media.aiku.io/5UNY4lCG4cjizXk0cmay9eWaqA8Rvqx3bCunI617twM/bG9jYWw6Ly9tZWRpYS85UC8yRS82MFIzMEMxRzZSUksyRTlQLzhhZDZiYjJiLmpwZWc",
+      "https://media.aiku.io/90jFQjeaW0QaGjyXlOO11VDc-7PN_fzD6L_gUj3212k/bG9jYWw6Ly9tZWRpYS85US8yRS82MFIzMEMxRzZSUksyRTlRL2JlZTM2ZTMxLmpwZWc",
+      "https://media.aiku.io/y35YlQdMXL_XDor-_1-cBeZizCPUD4aHfdRKY9dW9Qw/bG9jYWw6Ly9tZWRpYS85Ui8yRS82MFIzMEMxRzZSUksyRTlSLzVhYzkzMWU2LmpwZWc",
+      "https://media.aiku.io/LzIHAq4AHkwsjRxYNztJHTj7MjnYjDMQvXhCBQ4ho7w/bG9jYWw6Ly9tZWRpYS85Uy8yRS82MFIzMEMxRzZSUksyRTlTL2RiNDU2ZGI4LmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-25",
+    "urls": [
+      "https://media.aiku.io/EKTXLxUg5_C1HnVSmgypD9pCemdfk1OMk9lK_5uFDDA/bG9jYWw6Ly9tZWRpYS85SC9BQy82MFIzMEMxRzZSVktBQzlIL2NkNjRmNWVhLmpwZWc",
+      "https://media.aiku.io/iql7KZy3jWj38el-wHCgzB2b-Z5DmKFxo-JPm3jcYKM/bG9jYWw6Ly9tZWRpYS8xUi9BQy82MFIzMEMxRzZSVktBQzFSLzU0ODQxYzRhLnBuZw",
+      "https://media.aiku.io/_NxW5HqWNbwXuYhcWXS7c1CPG0VSDYW_JvFJvFzyNqc/bG9jYWw6Ly9tZWRpYS85Ry9BQy82MFIzMEMxRzZSVktBQzlHL2E0MmY4Y2IyLmpwZWc",
+      "https://media.aiku.io/_6VdFf2CLRaQvfnMi9x_GpPfy_4-Y4W9STJm-7SbwBE/bG9jYWw6Ly9tZWRpYS8xUy9BQy82MFIzMEMxRzZSVktBQzFTLzFjMTdiOGY1LmpwZWc",
+      "https://media.aiku.io/iEeY-poS7T3f_CSobFdTHAaJRMI4Xl4Xv-v-Ez2mseM/bG9jYWw6Ly9tZWRpYS85Si9BQy82MFIzMEMxRzZSVktBQzlKLzU2ZDIyMzgyLmpwZWc",
+      "https://media.aiku.io/SiwS6tbdmvHD_oqdz3vq55kVHrNKicngxfxNVtBM3Bw/bG9jYWw6Ly9tZWRpYS85Sy9BQy82MFIzMEMxRzZSVktBQzlLL2E4ZmYzNWZhLmpwZWc",
+      "https://media.aiku.io/oieGzxzP6ytDOO4oi4KX7QHHWKW53qmQT7j6CKukjTQ/bG9jYWw6Ly9tZWRpYS85TS9BQy82MFIzMEMxRzZSVktBQzlNLzQ0OTEyYmE2LmdpZg",
+      "https://media.aiku.io/ML4qTv7TpC8pBjvbxZ3O7D2J3eoRObiCG3bkqpgPqj4/bG9jYWw6Ly9tZWRpYS85Ti9BQy82MFIzMEMxRzZSVktBQzlOLzViN2Y3N2ExLmdpZg"
+    ]
+  },
+  {
+    "sku": "AATOM-26",
+    "urls": [
+      "https://media.aiku.io/zTdbgS2tmht9GtEn5Kw4-pd14N2ej690Y0AFrqvKWY4/bG9jYWw6Ly9tZWRpYS85UC9BQy82MFIzMEMxRzZSVktBQzlQLzE0NWRlOGVlLmpwZWc",
+      "https://media.aiku.io/KhPGm7mMNMrQvdwxjOTzOqRm0-3TWxlV5TR-kaIKKDY/bG9jYWw6Ly9tZWRpYS85US9BQy82MFIzMEMxRzZSVktBQzlRLzI0ZTEzYzY4LnBuZw",
+      "https://media.aiku.io/wnopSZqZ8Lm5ULha1kKr0A5IptJscKQCjsxwqyC1a10/bG9jYWw6Ly9tZWRpYS85Ui9BQy82MFIzMEMxRzZSVktBQzlSL2Y4YmY2Y2RkLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-27",
+    "urls": [
+      "https://media.aiku.io/nTozizHaXJdOl2aKqlXvL9la47Yr1qgd-1NfxN2F4ek/bG9jYWw6Ly9tZWRpYS85Uy9BQy82MFIzMEMxRzZSVktBQzlTLzA3ZTFjMGIxLmpwZWc",
+      "https://media.aiku.io/p4rVqxOR664fap_iRxe7Oeswxl_6W7KhhbJj7aevJMY/bG9jYWw6Ly9tZWRpYS9IRy9BQy82MFIzMEMxRzZSVktBQ0hHLzk4ZTFkNzA1LmpwZWc",
+      "https://media.aiku.io/RLMxoc8JJkNgi1u5DBq4O-_XwBTmLT-p5Jz4zX8AbDI/bG9jYWw6Ly9tZWRpYS9ISC9BQy82MFIzMEMxRzZSVktBQ0hILzVmZDU2ODQ1LmpwZWc",
+      "https://media.aiku.io/ur1TWY0QJWCA6j8wY5f1TaykNFa275P1U2nyHxV_900/bG9jYWw6Ly9tZWRpYS9ISi9BQy82MFIzMEMxRzZSVktBQ0hKL2ZhYmZlNzZmLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-28",
+    "urls": [
+      "https://media.aiku.io/QhThbxN4Ow063QsMwfVgPzHBUXArQkuqzxAmikBrWLA/bG9jYWw6Ly9tZWRpYS9ISy9BQy82MFIzMEMxRzZSVktBQ0hLLzUxZmYxYmNmLmpwZWc",
+      "https://media.aiku.io/dBIAyfs0ATLXx2Lq2S0pbG0kQPaVTH3bqJ2iTHSs7z4/bG9jYWw6Ly9tZWRpYS9ITS9BQy82MFIzMEMxRzZSVktBQ0hNL2UxNTJlZjUyLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-29",
+    "urls": [
+      "https://media.aiku.io/FBNzHgzQVF9rBRkw-BmIOmvO8p0tip5rb0bF_75raUE/bG9jYWw6Ly9tZWRpYS9TUy9FRC82MFIzMEMxRzZSVzNFRFNTL2EzY2U3OWU4LmpwZWc",
+      "https://media.aiku.io/U9xCItA61WT9LYp-7wLu5A8BZ3JsLmBd909lMY_H6J8/bG9jYWw6Ly9tZWRpYS9TUS9FRC82MFIzMEMxRzZSVzNFRFNRLzliNjMwNmQxLmpwZWc",
+      "https://media.aiku.io/-eWPLFE3Doqcb_Dox1C0I5h9YjQpN8no_ZB5PeYwuGE/bG9jYWw6Ly9tZWRpYS9TUC9FRC82MFIzMEMxRzZSVzNFRFNQLzZjZDU1MGJmLmpwZWc",
+      "https://media.aiku.io/V5f-o0i9u36zwlkxwlXSEWof_4rSSYYUqPp_E0u6s0o/bG9jYWw6Ly9tZWRpYS9TUi9FRC82MFIzMEMxRzZSVzNFRFNSL2FhZDI4ZDhiLmpwZWc",
+      "https://media.aiku.io/mC7nVZ8tg7y6lsUMxl1iApTcZSfTq_QWTBPE_yKUwV4/bG9jYWw6Ly9tZWRpYS8xRy9FRS82MFIzMEMxRzZSVzNFRTFHLzYyNDZjMTY2LmpwZWc",
+      "https://media.aiku.io/glHjHdMRd0deI_TYD4DXcY5HnoIWmPI2GuYR4BARWnI/bG9jYWw6Ly9tZWRpYS8xSC9FRS82MFIzMEMxRzZSVzNFRTFIL2UwMDFlYjRlLmpwZWc",
+      "https://media.aiku.io/s1sAKYvyuYoHm4dsn-z1FH4jYmD55b-Re1Xyq-PYJ4c/bG9jYWw6Ly9tZWRpYS8xSi9FRS82MFIzMEMxRzZSVzNFRTFKLzIxYTAzYzQxLmpwZWc",
+      "https://media.aiku.io/TMfOJryT4sZQCRCcyEa8t1EH4LIYkrkszvpRT09ijy4/bG9jYWw6Ly9tZWRpYS8xSy9FRS82MFIzMEMxRzZSVzNFRTFLLzY4ODkzMDFjLmpwZWc",
+      "https://media.aiku.io/miVsqQgxENYB7WS-Fa68oG_dDkW-wuBR3TD8bxfQtrE/bG9jYWw6Ly9tZWRpYS8xTS9FRS82MFIzMEMxRzZSVzNFRTFNLzE0N2I0YzA3LmpwZWc",
+      "https://media.aiku.io/A37VIuHUlrR3finbeUDh2H8vwEJ11lfJ93L0fPtOhkc/bG9jYWw6Ly9tZWRpYS8xTi9FRS82MFIzMEMxRzZSVzNFRTFOL2Q5NmIxMWIyLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-30",
+    "urls": [
+      "https://media.aiku.io/p4Ys9q135iMK3eJa1GFx-tgvpM_4Hf_v-yXUTcdER0Y/bG9jYWw6Ly9tZWRpYS85Sy9FRS82MFIzMEMxRzZSVzNFRTlLLzNlY2U1Y2M1LmpwZWc",
+      "https://media.aiku.io/an9UgBFdrmk0AVql0j2JmdO74a4fik-RyLS0BVzxJHU/bG9jYWw6Ly9tZWRpYS85SC9FRS82MFIzMEMxRzZSVzNFRTlIL2U5YmVjOGU1LmpwZWc",
+      "https://media.aiku.io/7vyRny-5SHuRf-qt8G19BvDtmDy7noWWyE_IT4wa4SA/bG9jYWw6Ly9tZWRpYS85Si9FRS82MFIzMEMxRzZSVzNFRTlKL2E4ZmY4MDM5LmpwZWc",
+      "https://media.aiku.io/6V5l5_qtNFyihlP4mfpgCu2iXCXp8LhkHraGA-75J8s/bG9jYWw6Ly9tZWRpYS8xUy9FRS82MFIzMEMxRzZSVzNFRTFTLzZlY2JhNmI1LmpwZWc",
+      "https://media.aiku.io/jyEfmDYr0JI8xPhWWvBe9ixkPt7AIH50wiSO1sKGM5k/bG9jYWw6Ly9tZWRpYS8xUS9FRS82MFIzMEMxRzZSVzNFRTFRLzc0MmE3NzJiLmpwZWc",
+      "https://media.aiku.io/nzfP7VkUxqivnw1SARseW4bPoSBwRLrEq6B5hdUvPR0/bG9jYWw6Ly9tZWRpYS8xUC9FRS82MFIzMEMxRzZSVzNFRTFQLzE2NzdiNzIwLmpwZWc",
+      "https://media.aiku.io/YBcIObd8XHITeJ31OPWahzft6UR1c6I_UShrugnQb7k/bG9jYWw6Ly9tZWRpYS8xUi9FRS82MFIzMEMxRzZSVzNFRTFSLzg2Y2QyMzEwLmpwZWc",
+      "https://media.aiku.io/vHfpKXEdIWGQWUNjM550Ju-vT8omDYp58_d988hQJWE/bG9jYWw6Ly9tZWRpYS85Ry9FRS82MFIzMEMxRzZSVzNFRTlHL2M1ZDQ3NjVjLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-39",
+    "urls": [
+      "https://media.aiku.io/oFkvscp9wVW87n3JhUT_Y-HJojNl2bV1H_zcEBskGR0/bG9jYWw6Ly9tZWRpYS85UC8yQy82MFIzMEMxRzZXU0syQzlQLzY3MjNjYTNmLmpwZWc",
+      "https://media.aiku.io/b0YkL3U7iJ6SNMQniluJPgn9mrv-rtpL42m8xEJEnhQ/bG9jYWw6Ly9tZWRpYS85US8yQy82MFIzMEMxRzZXU0syQzlRL2VkYzMzOTU0LmpwZWc",
+      "https://media.aiku.io/1t4YTxllg-iP85afT39DjvAk1DeiD0KQHG6SkH6dPbY/bG9jYWw6Ly9tZWRpYS85Ui8yQy82MFIzMEMxRzZXU0syQzlSLzRlOTg5N2M2LmpwZWc",
+      "https://media.aiku.io/uxn3lfu6VdKDU5XWyKolAKD96-4FRjuL82A3vlFKkPs/bG9jYWw6Ly9tZWRpYS85Uy8yQy82MFIzMEMxRzZXU0syQzlTLzYxZDgwODNlLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-31",
+    "urls": [
+      "https://media.aiku.io/J3uQaxMkmxYtlWbpi5AB0hWWidKO_NLllc2jl-VIwh4/bG9jYWw6Ly9tZWRpYS85US84RS82MFIzMEMxRzZXU0s4RTlRL2YxZGQxODdlLmpwZWc",
+      "https://media.aiku.io/8isG4PoGEcMZOX1c0s9FUzCgZS6gKr2zqBIk90eMVXQ/bG9jYWw6Ly9tZWRpYS85Ui84RS82MFIzMEMxRzZXU0s4RTlSLzg4ZTg1MGJmLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-32",
+    "urls": [
+      "https://media.aiku.io/K6DPlTP2vxKHBlaaVd3AE44wOSWDYF73Te5ZieW9ctY/bG9jYWw6Ly9tZWRpYS85Uy84RS82MFIzMEMxRzZXU0s4RTlTLzgwZTE0NmUxLmpwZWc",
+      "https://media.aiku.io/Vu9AbSmbtqwZfWaxV8tVh-PlErHD4OqjW-M_dFWpMtg/bG9jYWw6Ly9tZWRpYS8xRy9BQy82MFIzMEMxRzZXU0tBQzFHLzM5NGY2NmFmLmpwZWc",
+      "https://media.aiku.io/Cw0MxXHCoazk6FzJJta2nfSU_G4yU-mm8CriGtr-LbM/bG9jYWw6Ly9tZWRpYS8xSC9BQy82MFIzMEMxRzZXU0tBQzFILzJmMjlmYTgxLmpwZWc",
+      "https://media.aiku.io/4ejMcFVaZqm-sKfLt5AzBM3DCp4f8X2zYzklF0xxAZE/bG9jYWw6Ly9tZWRpYS8xSi9BQy82MFIzMEMxRzZXU0tBQzFKL2ViYjczZmFkLmpwZWc"
+    ]
+  },
+  {
+    "sku": "AATOM-40",
+    "urls": [
+      "https://media.aiku.io/2oI_yEHZncDsxtE5IaH_E8jP9rlzyMPAk9BAvMpgYHc/bG9jYWw6Ly9tZWRpYS85TS9KRC82MFIzMEMxSjY0UjNKRDlNLzRiNjYwN2I2LmpwZw",
+      "https://media.aiku.io/M1U-MSo0q6q3u30hPuc9fN6fvL7GFsX2Y9c3viBhOwY/bG9jYWw6Ly9tZWRpYS85UC9KRC82MFIzMEMxSjY0UjNKRDlQL2Y5ZjEyMTFjLmpwZw",
+      "https://media.aiku.io/eRr7A3mIZqhBGcvNf0gtw-rwMCmkmmkBSomZ61WUrYw/bG9jYWw6Ly9tZWRpYS85US9KRC82MFIzMEMxSjY0UjNKRDlRL2RhNzg5Mjg2LmpwZw",
+      "https://media.aiku.io/oaRw7_SAI9eq35HPaVmfncLTbCz957et9H-_O-a3wtw/bG9jYWw6Ly9tZWRpYS85Ui9KRC82MFIzMEMxSjY0UjNKRDlSLzE5NjRjNGM1LmpwZw",
+      "https://media.aiku.io/jTH7d38ges6qyhGTl3CO4ZjzMPox_QxNNw8F6UXwSmE/bG9jYWw6Ly9tZWRpYS85Uy9KRC82MFIzMEMxSjY0UjNKRDlTL2Q0ZjQ5Yjk0LmpwZw",
+      "https://media.aiku.io/HoOqdAZdb-W-UgGRclXxEP6pY1eVqpYmhY5OxsKC-44/bG9jYWw6Ly9tZWRpYS9IRy9KRC82MFIzMEMxSjY0UjNKREhHL2ZhZjc4OWY0LmpwZw",
+      "https://media.aiku.io/DXpkVenBqtuR0gN_iIz-iuiLsbqX4peGBwcDXwvWITE/bG9jYWw6Ly9tZWRpYS9ISC9KRC82MFIzMEMxSjY0UjNKREhILzI5ZmQyMmFmLmpwZw",
+      "https://media.aiku.io/j6gNqGCxu6MGccPXTdsFpeEDGQrTE0-ZWilH8uEbvMA/bG9jYWw6Ly9tZWRpYS9ISi9KRC82MFIzMEMxSjY0UjNKREhKLzEzY2Y0M2I5LmpwZw",
+      "https://media.aiku.io/4d2wXUPoU8vmzfAa-gTSYp9LUcsWK_tO63eTniAc8Eo/bG9jYWw6Ly9tZWRpYS9ISy9KRC82MFIzMEMxSjY0UjNKREhLL2FmNDJlYjQxLmpwZw",
+      "https://media.aiku.io/kPscAotm7KvbWW6XdlItG7j4H3K1C-w1-7C0gSfPBM0/bG9jYWw6Ly9tZWRpYS85Ti9KRC82MFIzMEMxSjY0UjNKRDlOLzhjNjFmZjFhLmpwZw",
+      "https://media.aiku.io/AdUZMTzW_lC5e1VP3hXhjuLqz4nKK6zEknekTgAbuHs/bG9jYWw6Ly9tZWRpYS9ITS9KRC82MFIzMEMxSjY0UjNKREhNLzJkMGVmNGVjLmpwZw"
+    ]
+  },
+  {
+    "sku": "AATOM-41",
+    "urls": [
+      "https://media.aiku.io/SEzzPHTWRWO2du8lY3HNcCt4My0_QMRnneklpzw8eQA/bG9jYWw6Ly9tZWRpYS9ITi9KRC82MFIzMEMxSjY0UjNKREhOLzc5YWM1Nzg4LmpwZw",
+      "https://media.aiku.io/8TmmtHVo_Axj4dnS-L-cisObuq25n5SyZFgq585WW-g/bG9jYWw6Ly9tZWRpYS9IUC9KRC82MFIzMEMxSjY0UjNKREhQLzE0YzI1MTdkLmpwZw",
+      "https://media.aiku.io/10YUOJRCiXJREualAF8z6qU27y8sgiMQxvDc81nwLNQ/bG9jYWw6Ly9tZWRpYS9IUS9KRC82MFIzMEMxSjY0UjNKREhRL2ZlMzE4MTQ1LmpwZw",
+      "https://media.aiku.io/7cRnrOHz3bPvn2f8_EPiVVd8e7cgs8xT7ku9ZMw8YKs/bG9jYWw6Ly9tZWRpYS9IUi9KRC82MFIzMEMxSjY0UjNKREhSL2IzNjg0YWY1LmpwZw",
+      "https://media.aiku.io/Qt7xOslvZWggv7B_ioUH2u_Jl6gcRd_FLlcbHiR0LZY/bG9jYWw6Ly9tZWRpYS9TRy9KRC82MFIzMEMxSjY0UjNKRFNHL2E2MDJhMjBhLmpwZw",
+      "https://media.aiku.io/t69K1aNmHlHUEInwVVH6Hi54y8UM0F3l6jO4PuUplU4/bG9jYWw6Ly9tZWRpYS9IUy9KRC82MFIzMEMxSjY0UjNKREhTL2Y2ZjY5OWFkLmpwZw",
+      "https://media.aiku.io/4czCwQZx9Rr8in5j21D3MpgHPwboxyGg_aJC-P7C34I/bG9jYWw6Ly9tZWRpYS9TSC9KRC82MFIzMEMxSjY0UjNKRFNIL2JjOTAyMzEzLmpwZw",
+      "https://media.aiku.io/fczfFyVCCqJh2v1UL8bqjaSbrItKz1kGeDUIpx-vX4o/bG9jYWw6Ly9tZWRpYS9TSi9KRC82MFIzMEMxSjY0UjNKRFNKLzUwYjFmNDZmLmpwZw",
+      "https://media.aiku.io/2z727UYUJvyjkpnDOZUG05Z83gEk-eF7GR3mN_1liuE/bG9jYWw6Ly9tZWRpYS9TTS9KRC82MFIzMEMxSjY0UjNKRFNNL2FkMDYyYmUzLmpwZw",
+      "https://media.aiku.io/PPn_BWu7-8pm6Xy4GsaXmUoaEr8CFqv-6Z5GI7Aaupg/bG9jYWw6Ly9tZWRpYS9TTi9KRC82MFIzMEMxSjY0UjNKRFNOL2M0Y2YyZjc0LmpwZw",
+      "https://media.aiku.io/RrGgGQeKemm_fDbKsymPRUBbp637q2KuxdkBGhtWSCQ/bG9jYWw6Ly9tZWRpYS9TSy9KRC82MFIzMEMxSjY0UjNKRFNLL2IxZTQ4OGZiLmpwZw"
+    ]
+  }
+]
