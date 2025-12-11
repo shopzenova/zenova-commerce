@@ -116,7 +116,9 @@ function getSubcategoryDisplayName(subcat) {
     'cura-pelle-solare': 'Protezione Solare',
     'cura-pelle-corpo': 'Cura Corpo',
     'cura-pelle-viso': 'Cura Viso',
-    'cura-pelle-labbra': 'Labbra'
+    'cura-pelle-labbra': 'Labbra',
+    'diffusori-elettronici': 'Diffusori Elettronici',
+    'diffusori-bastoncini': 'Diffusori a Bastoncini'
   };
   return names[subcat] || subcat;
 }
