@@ -587,6 +587,55 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, 500);
 });
 
+// Auto-open category and product from hash
+window.autoOpenCategoryFromHash = function() {
+    const hash = window.location.hash.substring(1); // Remove #
+    if (!hash) return;
+
+    console.log('🎯 Processing hash:', hash);
+
+    // Check if hash contains &product=
+    const parts = hash.split('&');
+    const subcategory = parts[0];
+    let productId = null;
+
+    // Look for product= parameter
+    for (let part of parts) {
+        if (part.startsWith('product=')) {
+            productId = part.split('=')[1];
+            break;
+        }
+    }
+
+    // Filter by subcategory if present
+    if (subcategory) {
+        console.log('📂 Opening subcategory:', subcategory);
+        filterProductsBySubcategory(subcategory);
+    }
+
+    // Open product modal if productId present
+    if (productId) {
+        console.log('🛍️ Opening product:', productId);
+        // Wait for products to be filtered and modal function to be ready
+        const tryOpenModal = (attempts = 0) => {
+            if (attempts > 10) {
+                console.error('❌ Failed to open product modal after 10 attempts');
+                return;
+            }
+
+            if (typeof openProductDetailModal === 'function') {
+                console.log('✅ Opening product modal, attempt:', attempts + 1);
+                openProductDetailModal(productId);
+            } else {
+                console.log('⏳ Waiting for modal function... attempt:', attempts + 1);
+                setTimeout(() => tryOpenModal(attempts + 1), 300);
+            }
+        };
+
+        setTimeout(() => tryOpenModal(), 800);
+    }
+};
+
 // Filter Products By Subcategory
 window.filterProductsBySubcategory = function(subcategory) {
     console.log('🔍 Filtraggio prodotti per subcategory:', subcategory);
@@ -1730,14 +1779,22 @@ function setupSearch() {
                 // Skip hidden products
                 if (product.visible === false) return false;
 
-                // Search only in name and category (NOT description for performance)
+                // Search in multiple fields
                 const nameMatch = product.name.toLowerCase().includes(query);
                 const categoryMatch = (product.category || '').toLowerCase().includes(query);
                 const subcategoryMatch = (product.zenovaSubcategory || '').toLowerCase().includes(query);
+                const brandMatch = (product.brand || '').toLowerCase().includes(query);
+                const skuMatch = (product.sku || '').toLowerCase().includes(query);
+                const idMatch = (product.id || '').toLowerCase().includes(query);
 
-                return nameMatch || categoryMatch || subcategoryMatch;
+                // Search in description (cleaned from HTML)
+                const descMatch = product.description
+                    ? product.description.replace(/<[^>]*>/g, '').toLowerCase().includes(query)
+                    : false;
+
+                return nameMatch || categoryMatch || subcategoryMatch || brandMatch || skuMatch || idMatch || descMatch;
             })
-            .slice(0, 20); // Limit to first 20 results for performance
+            .slice(0, 30); // Limit to first 30 results for performance
 
         const endTime = performance.now();
         console.log(`🔍 Search completed in ${(endTime - startTime).toFixed(2)}ms - Found ${results.length} results`);
@@ -1761,10 +1818,10 @@ function setupSearch() {
         let html = '';
 
         // Show info if there are more results
-        if (results.length === 20) {
+        if (results.length === 30) {
             html += `
                 <div style="background: #f0f7ff; border: 1px solid #b3d9ff; border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center; color: #0066cc; font-size: 14px;">
-                    ℹ️ Mostrando i primi 20 risultati. Affina la ricerca per risultati più precisi.
+                    ℹ️ Mostrando i primi 30 risultati. Affina la ricerca per risultati più precisi.
                 </div>
             `;
         }
