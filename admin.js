@@ -1433,9 +1433,12 @@ function createCategoryProductCard(product) {
         border: 2px solid ${product.visible === false ? '#e74c3c' : 'transparent'};
     `;
 
+    // Escape del nome per attributi HTML
+    const safeName = product.name.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
     card.innerHTML = `
         <img src="${product.image || 'https://via.placeholder.com/150'}"
-             alt="${product.name}"
+             alt="${safeName}"
              style="width: 100%; height: 150px; object-fit: cover; border-radius: 6px;">
         <div style="flex: 1;">
             <h5 style="margin: 0 0 5px 0; font-size: 13px; line-height: 1.3; height: 40px; overflow: hidden;">
@@ -1450,7 +1453,7 @@ function createCategoryProductCard(product) {
         <div style="display: flex; gap: 5px; justify-content: space-between; flex-wrap: wrap;">
             <button type="button" class="btn-move-category"
                     data-product-id="${product.id}"
-                    data-product-name="${product.name}"
+                    data-product-name="${safeName}"
                     data-product-image="${product.image || ''}"
                     data-current-category="${product.zenovaCategory || ''}"
                     data-current-subcategory="${product.zenovaSubcategory || ''}"
@@ -1458,23 +1461,55 @@ function createCategoryProductCard(product) {
                     style="flex: 1; min-width: 100%; padding: 8px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">
                 📂 Sposta Categoria
             </button>
-            <button onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible !== false})"
+            <button class="btn-toggle-visibility"
+                    data-product-id="${product.id}"
+                    data-product-name="${safeName}"
+                    data-visible="${product.visible !== false}"
                     title="${product.visible !== false ? 'Nascondi prodotto' : 'Mostra prodotto'}"
                     style="flex: 1; padding: 8px; background: ${product.visible !== false ? '#f39c12' : '#43e97b'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600;">
                 ${product.visible !== false ? '🙈' : '👁️'}
             </button>
-            <button onclick="toggleFeatured('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.isFeatured || false})"
+            <button class="btn-toggle-featured"
+                    data-product-id="${product.id}"
+                    data-product-name="${safeName}"
+                    data-featured="${product.isFeatured || false}"
                     title="${product.isFeatured ? 'Rimuovi da evidenza' : 'Metti in evidenza'}"
                     style="padding: 8px 12px; background: ${product.isFeatured ? '#FFD700' : '#95a5a6'}; color: ${product.isFeatured ? '#000' : '#fff'}; border: none; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold;">
                 ⭐
             </button>
-            <button onclick="deleteProduct('${product.id}', '${product.name.replace(/'/g, "\\'")}'); loadProductsByCategory();"
+            <button class="btn-delete-product"
+                    data-product-id="${product.id}"
+                    data-product-name="${safeName}"
                     title="Elimina prodotto"
                     style="padding: 8px 12px; background: #e74c3c; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px;">
                 🗑️
             </button>
         </div>
     `;
+
+    // Aggiungi event listeners
+    const deleteBtn = card.querySelector('.btn-delete-product');
+    const visibilityBtn = card.querySelector('.btn-toggle-visibility');
+    const featuredBtn = card.querySelector('.btn-toggle-featured');
+
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', async () => {
+            await deleteProduct(product.id, product.name);
+            await loadProductsByCategory();
+        });
+    }
+
+    if (visibilityBtn) {
+        visibilityBtn.addEventListener('click', () => {
+            toggleProductVisibility(product.id, product.name, product.visible !== false);
+        });
+    }
+
+    if (featuredBtn) {
+        featuredBtn.addEventListener('click', () => {
+            toggleFeatured(product.id, product.name, product.isFeatured || false);
+        });
+    }
 
     return card;
 }
