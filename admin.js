@@ -1608,27 +1608,37 @@ function showProductsModal(subcategory, products) {
         position: relative;
     `;
 
-    modalContent.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #f0f0f0;">
-            <div>
-                <h2 style="margin: 0; color: #667eea;">📁 ${subcategoryName}</h2>
-                <p style="margin: 5px 0 0 0; color: #999;">${products.length} prodott${products.length === 1 ? 'o' : 'i'} totali</p>
-            </div>
-            <button onclick="this.closest('[style*=fixed]').remove()"
-                    style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">
-                ✕ Chiudi
-            </button>
+    // Header della modale
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #f0f0f0;';
+    header.innerHTML = `
+        <div>
+            <h2 style="margin: 0; color: #667eea;">📁 ${subcategoryName}</h2>
+            <p style="margin: 5px 0 0 0; color: #999;">${products.length} prodott${products.length === 1 ? 'o' : 'i'} totali</p>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
-            ${products.map(p => createCategoryProductCard(p).outerHTML).join('')}
-        </div>
+        <button class="close-modal-btn" style="padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">
+            ✕ Chiudi
+        </button>
     `;
 
+    // Grid per i prodotti
+    const productsGrid = document.createElement('div');
+    productsGrid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;';
+
+    // Aggiungi ogni prodotto come elemento DOM (NON come stringa!)
+    products.forEach(product => {
+        const card = createCategoryProductCard(product);
+        productsGrid.appendChild(card);
+    });
+
+    modalContent.appendChild(header);
+    modalContent.appendChild(productsGrid);
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
 
-    // Attacca event listener ai pulsanti "Sposta Categoria"
-    setTimeout(() => attachMoveCategoryListeners(), 100);
+    // Event listener per il pulsante chiudi
+    const closeBtn = header.querySelector('.close-modal-btn');
+    closeBtn.addEventListener('click', () => modal.remove());
 
     // Chiudi cliccando fuori
     modal.addEventListener('click', function(e) {
