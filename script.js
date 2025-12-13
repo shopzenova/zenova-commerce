@@ -2189,13 +2189,14 @@ function closeProductDetailModal() {
                 categoryItem.classList.add('active');
                 console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
             } else if (currentProductCategory === 'natural-wellness') {
-                // Fix specifico per Natural Wellness: cerca e apri forzatamente
+                // Fix specifico per Natural Wellness: simula click sul bottone per aprire la tendina
                 const naturalWellnessButton = document.querySelector('[data-category="natural-wellness"]');
                 if (naturalWellnessButton) {
                     const categoryItem = naturalWellnessButton.closest('.category-item');
-                    if (categoryItem) {
-                        categoryItem.classList.add('active');
-                        console.log('📂 Aperta categoria Natural Wellness (fix specifico)');
+                    // Solo se la categoria NON è già aperta, simula il click
+                    if (categoryItem && !categoryItem.classList.contains('active')) {
+                        naturalWellnessButton.click();
+                        console.log('📂 Aperta categoria Natural Wellness (simulato click)');
                     }
                 }
             }
