@@ -2173,6 +2173,18 @@ function closeProductDetailModal() {
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
 
+    // ✅ Fix Natural Wellness: apri SUBITO prima del setTimeout
+    if (savedSidebarState.length === 0 && currentProductCategory === 'natural-wellness') {
+        const naturalWellnessButton = document.querySelector('[data-category="natural-wellness"]');
+        if (naturalWellnessButton) {
+            const categoryItem = naturalWellnessButton.closest('.category-item');
+            if (categoryItem && !categoryItem.classList.contains('active')) {
+                naturalWellnessButton.click();
+                console.log('📂 [IMMEDIATO] Aperta Natural Wellness prima del setTimeout');
+            }
+        }
+    }
+
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {
         if (savedSidebarState.length > 0) {
@@ -2185,19 +2197,11 @@ function closeProductDetailModal() {
             // Se nessuna categoria era aperta, apri quella del prodotto e mostra la sottocategoria
             const categoryButton = document.querySelector(`[data-category="${currentProductCategory}"]`);
 
-            if (categoryButton) {
-                // Fix specifico per Natural Wellness: usa click invece di classList per aprire la tendina
-                if (currentProductCategory === 'natural-wellness') {
-                    const categoryItem = categoryButton.closest('.category-item');
-                    if (categoryItem && !categoryItem.classList.contains('active')) {
-                        categoryButton.click();
-                        console.log('📂 Aperta categoria Natural Wellness (simulato click)');
-                    }
-                } else {
-                    const categoryItem = categoryButton.parentElement;
-                    categoryItem.classList.add('active');
-                    console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
-                }
+            if (categoryButton && currentProductCategory !== 'natural-wellness') {
+                // Per tutte le categorie tranne Natural Wellness (che viene gestito sopra)
+                const categoryItem = categoryButton.parentElement;
+                categoryItem.classList.add('active');
+                console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
             }
 
             // Trova e attiva il link della sottocategoria nella sidebar
