@@ -2173,14 +2173,23 @@ function closeProductDetailModal() {
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
 
-    // ✅ Fix Natural Wellness: apri SUBITO prima del setTimeout
+    // ✅ Fix Natural Wellness: forza apertura SENZA click (per evitare interferenze)
     if (savedSidebarState.length === 0 && currentProductCategory === 'natural-wellness') {
         const naturalWellnessButton = document.querySelector('[data-category="natural-wellness"]');
         if (naturalWellnessButton) {
             const categoryItem = naturalWellnessButton.closest('.category-item');
-            if (categoryItem && !categoryItem.classList.contains('active')) {
-                naturalWellnessButton.click();
-                console.log('📂 [IMMEDIATO] Aperta Natural Wellness prima del setTimeout');
+            if (categoryItem) {
+                // Forza apertura immediata con classe active
+                categoryItem.classList.add('active');
+                console.log('📂 [IMMEDIATO] Forzata apertura Natural Wellness con classList');
+
+                // Usa un timeout più lungo per assicurarsi che resti aperta
+                setTimeout(() => {
+                    if (!categoryItem.classList.contains('active')) {
+                        categoryItem.classList.add('active');
+                        console.log('📂 [TIMEOUT 500ms] Riaperta Natural Wellness');
+                    }
+                }, 500);
             }
         }
     }
