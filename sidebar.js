@@ -246,11 +246,17 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Button clicked:', index);
 
             const categoryItem = this.parentElement;
+            const categoryName = this.dataset.category;
 
-            // Close all other categories
+            // Close all other categories (tranne Natural Wellness se già aperta)
             document.querySelectorAll('.category-item').forEach(item => {
                 if (item !== categoryItem) {
-                    item.classList.remove('active');
+                    // Non chiudere Natural Wellness se sta venendo riaperta da script.js
+                    const itemButton = item.querySelector('.category-btn');
+                    const itemCategory = itemButton ? itemButton.dataset.category : null;
+                    if (itemCategory !== 'natural-wellness' || !item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
                 }
             });
 
