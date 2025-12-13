@@ -2188,6 +2188,16 @@ function closeProductDetailModal() {
                 const categoryItem = categoryButton.parentElement;
                 categoryItem.classList.add('active');
                 console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
+            } else if (currentProductCategory === 'natural-wellness') {
+                // Fix specifico per Natural Wellness: cerca e apri forzatamente
+                const naturalWellnessButton = document.querySelector('[data-category="natural-wellness"]');
+                if (naturalWellnessButton) {
+                    const categoryItem = naturalWellnessButton.closest('.category-item');
+                    if (categoryItem) {
+                        categoryItem.classList.add('active');
+                        console.log('📂 Aperta categoria Natural Wellness (fix specifico)');
+                    }
+                }
             }
 
             // Trova e attiva il link della sottocategoria nella sidebar
