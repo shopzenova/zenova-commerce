@@ -440,58 +440,89 @@ function getIconForCategory(category) {
 }
 
 /**
- * Load products from backend
+ * Load products from backend OR static JSON
  */
 async function loadProductsFromBackend() {
-    console.log('🔄 Caricamento prodotti dal backend...');
+    console.log('🔄 Caricamento prodotti...');
 
     try {
-        // Check if ZenovaAPI is available
-        if (typeof ZenovaAPI === 'undefined') {
-            console.warn('⚠️ ZenovaAPI non disponibile, uso prodotti statici');
-            products = staticProducts;
-            return false;
-        }
+        // Check if ZenovaAPI is available (backend mode)
+        if (typeof ZenovaAPI !== 'undefined') {
+            // BACKEND MODE - Use API
+            console.log('📡 Modalità backend - carico da API');
 
-        // Load layout first (to know which products to hide)
-        console.log('📂 Caricamento layout prodotti...');
-        productLayout = await ZenovaAPI.getLayout();
-        console.log('✅ Layout caricato:', {
-            inVetrina: productLayout.home.length,
-            nascosti: productLayout.hidden.length
-        });
-
-        // Call backend API (load all products including Health)
-        const backendProducts = await ZenovaAPI.getProducts(1, 10000);
-
-        if (backendProducts && backendProducts.length > 0) {
-            console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
-
-            // Map backend products to frontend format
-            const mappedProducts = backendProducts
-                .map(mapBackendProductToFrontend)
-                .filter(p => p !== null);
-
-            // Filter out HIDDEN products (not visible anywhere)
-            products = mappedProducts.filter(p => {
-                const isHidden = productLayout.hidden.includes(p.id);
-                if (isHidden) {
-                    console.log(`🚫 Prodotto nascosto: ${p.name}`);
-                }
-                return !isHidden;
+            // Load layout first (to know which products to hide)
+            console.log('📂 Caricamento layout prodotti...');
+            productLayout = await ZenovaAPI.getLayout();
+            console.log('✅ Layout caricato:', {
+                inVetrina: productLayout.home.length,
+                nascosti: productLayout.hidden.length
             });
 
-            console.log('✅ Prodotti convertiti e pronti:', products.length);
-            console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
-            console.log('📦 Tutte le categorie BigBuy caricate correttamente');
-            return true;
-        } else {
-            console.warn('⚠️ Nessun prodotto ricevuto dal backend, uso prodotti statici');
-            products = staticProducts;
-            return false;
+            // Call backend API (load all products including Health)
+            const backendProducts = await ZenovaAPI.getProducts(1, 10000);
+
+            if (backendProducts && backendProducts.length > 0) {
+                console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
+
+                // Map backend products to frontend format
+                const mappedProducts = backendProducts
+                    .map(mapBackendProductToFrontend)
+                    .filter(p => p !== null);
+
+                // Filter out HIDDEN products (not visible anywhere)
+                products = mappedProducts.filter(p => {
+                    const isHidden = productLayout.hidden.includes(p.id);
+                    if (isHidden) {
+                        console.log(`🚫 Prodotto nascosto: ${p.name}`);
+                    }
+                    return !isHidden;
+                });
+
+                console.log('✅ Prodotti convertiti e pronti:', products.length);
+                console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
+                console.log('📦 Tutte le categorie BigBuy caricate correttamente');
+                return true;
+            }
         }
+
+        // STATIC MODE - Load from JSON file (for Vercel deployment)
+        console.log('📦 Modalità statica - carico da products.json');
+        const response = await fetch('./products.json');
+        const jsonProducts = await response.json();
+
+        if (jsonProducts && jsonProducts.length > 0) {
+            console.log(`✅ Caricati ${jsonProducts.length} prodotti dal file JSON`);
+
+            // Filter only visible products
+            products = jsonProducts
+                .filter(p => p.visible !== false && p.zone !== 'hidden')
+                .map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    description: p.description || '',
+                    category: p.zenovaCategory || p.category,
+                    subcategory: p.zenovaSubcategory || p.subcategory,
+                    price: parseFloat(p.price) || 0,
+                    retailPrice: parseFloat(p.retailPrice) || parseFloat(p.price) || 0,
+                    stock: p.stock || 0,
+                    image: p.image || (p.images && p.images[0]) || '',
+                    images: p.images || [p.image],
+                    active: p.active !== false,
+                    zone: p.zone || 'home'
+                }));
+
+            console.log('✅ Prodotti pronti:', products.length);
+            return true;
+        }
+
+        // Fallback to static products
+        console.warn('⚠️ Nessun prodotto caricato, uso prodotti statici di esempio');
+        products = staticProducts;
+        return false;
+
     } catch (error) {
-        console.error('❌ Errore caricamento prodotti dal backend:', error);
+        console.error('❌ Errore caricamento prodotti:', error);
         console.log('📦 Fallback: uso prodotti statici');
         products = staticProducts;
         return false;

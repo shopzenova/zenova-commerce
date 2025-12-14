@@ -1,0 +1,17 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code
+*.js text
+*.json text
+*.md text
+*.css text
+*.html text
+
+# Binary files
+*.jpg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.avif binary
+*.mp4 binary
