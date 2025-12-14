@@ -1765,6 +1765,17 @@ function setupSearch() {
 
     // Display initial results (all products or popular ones)
     function displayInitialResults() {
+        // Check if products are loaded
+        if (!products || products.length === 0) {
+            searchResults.innerHTML = `
+                <div class="search-empty">
+                    <div class="search-empty-icon">⏳</div>
+                    <div class="search-empty-text">Caricamento prodotti...</div>
+                    <div class="search-empty-hint">Attendi un momento</div>
+                </div>
+            `;
+            return;
+        }
         const recentProducts = products.slice(0, 5);
         displayResults(recentProducts, '');
     }
@@ -1772,6 +1783,18 @@ function setupSearch() {
     // Perform search (OPTIMIZED)
     function performSearch(query) {
         const startTime = performance.now();
+
+        // Check if products are loaded
+        if (!products || products.length === 0) {
+            searchResults.innerHTML = `
+                <div class="search-empty">
+                    <div class="search-empty-icon">⏳</div>
+                    <div class="search-empty-text">Caricamento prodotti...</div>
+                    <div class="search-empty-hint">Attendi un momento e riprova</div>
+                </div>
+            `;
+            return;
+        }
 
         // Filter only visible products and limit results
         const results = products

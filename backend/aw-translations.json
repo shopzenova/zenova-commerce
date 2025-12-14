@@ -1,27 +1,67 @@
 {
-  "EO-73": {
-    "name": "Olio Essenziale di Alloro 10 ml",
-    "description": "Nome latino: Pimenta Racemosa. Parte della pianta utilizzata: Foglie. Origine: Caraibi. Metodo di estrazione: Distillazione a vapore.\n\nL'alloro delle Indie Occidentali è un'altra pianta apprezzata per i suoi usi in medicina e in cucina. Le foglie di alloro sono state utilizzate in vari tipi di cucina e condimento e il frutto è uno degli ingredienti del \"Piccantino\".\n\nL'alloro è da tempo utilizzato nei tonici per capelli, poiché si dice che faccia bene al cuoio capelluto, oltre a curare i capelli stessi e favorirne la crescita. Si dice anche che l'olio essenziale di alloro sia utile per dolori, fastidi, problemi di circolazione e reumatismi, oltre a essere un valido aiuto per il sistema immunitario nella lotta contro le malattie."
+  "NSMed-24": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Bianco, Blu & Oro con Simbolo Occhio Greco",
+    "description": "Elegante vestito della collezione Nomad Sari ispirata al Mediterraneo. Design unico con simbolo dell'occhio greco protettivo in blu e oro su base bianca. Realizzato con tessuti naturali e confortevoli. Taglia LXL. Perfetto per l'estate e per creare un look bohémien e rilassato. Vestiario wellness che unisce stile e comfort."
   },
-  "EO-60": {
-    "name": "Olio Essenziale di Anice Stellato 10 ml",
-    "description": "Olio essenziale puro di Anice Stellato cinese (Illicium verum). Parte della pianta utilizzata: Frutti. Origine: Cina. Metodo di estrazione: Distillazione a vapore. L'anice stellato ha un aroma dolce e speziato, utilizzato tradizionalmente per favorire il benessere digestivo e creare un'atmosfera accogliente."
+  "NSMed-22": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Blu Mare & Bianco",
+    "description": "Splendido vestito della collezione Nomad Sari ispirata alle tonalità del Mediterraneo. Colori blu mare e bianco che evocano le onde e la brezza marina. Tessuti naturali e morbidi. Taglia LXL. Vestiario wellness ideale per momenti di relax e vacanze."
   },
-  "EO-13": {
-    "name": "Olio Essenziale di Basilico 10 ml",
-    "description": "Olio essenziale puro di Basilico (Ocimum basilicum). Parte della pianta utilizzata: Foglie e sommità fiorite. Origine: India. Metodo di estrazione: Distillazione a vapore. Il basilico è noto per le sue proprietà rinvigorenti e chiarificanti, ideale per diffusione ambientale e per stimolare la concentrazione."
+  "NSMed-20": {
+    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Turchese & Bianco",
+    "description": "Bellissimo vestito della collezione Nomad Sari con colori turchese e bianco. Design ispirato al mare Mediterraneo e alla sua bellezza naturale. Tessuti confortevoli e traspiranti. Taglia LXL. Perfetto per chi cerca stile, comfort e benessere."
   },
-  "ULFO-11": {
-    "name": "Olio per Fragranza Cedro 10 ml - SENZA ETICHETTA",
-    "description": "Olio per fragranza al profumo di Cedro. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza legnosa e calda che dona un senso di comfort e serenità. Prodotto concentrato, utilizzare con parsimonia."
+  "NSMed-14": {
+    "name": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Oro & Blu Motivo Greco - Dipinto a Mano",
+    "description": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Oro & Blu Motivo Greco - Dipinto a Mano. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
   },
-  "ULFO-12": {
-    "name": "Olio per Fragranza Camomilla 10 ml - SENZA ETICHETTA",
-    "description": "Olio per fragranza al profumo di Camomilla. Perfetto per candele, saponi e prodotti rilassanti. Fragranza delicata e calmante che evoca tranquillità e benessere. Prodotto concentrato, adatto per uso professionale."
+  "NSMed-16": {
+    "name": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Rich Blu & Oro Dipinto a Mano Occhio Greco Protettivo Design",
+    "description": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Rich Blu & Oro Dipinto a Mano Occhio Greco Protettivo Design. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
   },
-  "ULFO-84": {
-    "name": "Olio per Fragranza Cocco 10 ml - SENZA ETICHETTA",
-    "description": "Olio per fragranza al profumo di Cocco. Ideale per creare prodotti estivi e tropicali. Fragranza dolce e cremosa che ricorda le spiagge esotiche. Perfetto per candele, saponi e cosmetici fai-da-te."
+  "NSMed-18": {
+    "name": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Turchese & Oro Design con Pesci",
+    "description": "(LXL) Nomad Sari On the Med Collezione - Pantaloni Lounge - Turchese & Oro Design con Pesci. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-23": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Vestito -  Bianco , Blu & Oro Occhio Greco Protettivo Design",
+    "description": "(ML) Nomad Sari On the Med Collezione - Vestito -  Bianco , Blu & Oro Occhio Greco Protettivo Design. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-21": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Vestito - Blu Mare & Oro Design con Pesci",
+    "description": "(ML) Nomad Sari On the Med Collezione - Vestito - Blu Mare & Oro Design con Pesci. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-19": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Vestito - Turchese & Oro Design Corallo",
+    "description": "(ML) Nomad Sari On the Med Collezione - Vestito - Turchese & Oro Design Corallo. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-13": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Oro & Blu Motivo Greco - Dipinto a Mano",
+    "description": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Oro & Blu Motivo Greco - Dipinto a Mano. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-15": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Rich Blu & Oro Dipinto a Mano Occhio Greco Protettivo Design",
+    "description": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Rich Blu & Oro Dipinto a Mano Occhio Greco Protettivo Design. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "NSMed-17": {
+    "name": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Turchese & Oro Design con Pesci",
+    "description": "(ML) Nomad Sari On the Med Collezione - Pantaloni Lounge - Turchese & Oro Design con Pesci. Capo d'abbigliamento della collezione Nomad Sari ispirata al Mediterraneo. Realizzato con tessuti naturali, morbidi e traspiranti. Design unico che unisce stile bohémien e comfort. Taglia LXL. Vestiario wellness perfetto per momenti di relax, yoga, meditazione o vacanze."
+  },
+  "BeardoB-02": {
+    "name": "1 Litre Beard Oil - Nordic Abete Rosso - Regenerate!",
+    "description": "1 Litre Beard Oil - Nordic Abete Rosso - Regenerate!. Prodotto di qualità per il benessere e il relax."
+  },
+  "BeardoB-04": {
+    "name": "1 Litre Beard Oil - Roman Gladiator - Enhance!",
+    "description": "1 Litre Beard Oil - Roman Gladiator - Enhance!. Prodotto di qualità per il benessere e il relax."
+  },
+  "BeardoB-03": {
+    "name": "1 Litre Beard Oil - Spartan Hero - Condition!",
+    "description": "1 Litre Beard Oil - Spartan Hero - Condition!. Prodotto di qualità per il benessere e il relax."
+  },
+  "BeardoB-01": {
+    "name": "1 Litre Beard Oil - Viking Musk - Cleanse!",
+    "description": "1 Litre Beard Oil - Viking Musk - Cleanse!. Prodotto di qualità per il benessere e il relax."
   },
   "AWChill-10": {
     "name": "Chill Pills Bergamotto & Lavanda - Box 1.3 Kg",
@@ -35,16 +75,328 @@
     "name": "Chill Pills Summer of Love - Box 1.3 Kg",
     "description": "Box da 1.3 kg di Chill Pills fragranza Summer of Love. Una miscela floreale e fruttata che evoca ricordi estivi e momenti felici. Perfette per creare un'atmosfera gioiosa e positiva."
   },
-  "NSMed-24": {
-    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Bianco, Blu & Oro con Simbolo Occhio Greco",
-    "description": "Elegante vestito della collezione Nomad Sari ispirata al Mediterraneo. Design unico con simbolo dell'occhio greco protettivo in blu e oro su base bianca. Realizzato con tessuti naturali e confortevoli. Taglia LXL. Perfetto per l'estate e per creare un look bohémien e rilassato. Vestiario wellness che unisce stile e comfort."
+  "AWChill-09": {
+    "name": "1.3 Kg Box of Chill Pills - Ylang & Patchouli",
+    "description": "1.3 Kg Box of Chill Pills - Ylang & Patchouli. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
   },
-  "NSMed-22": {
-    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Blu Mare & Bianco",
-    "description": "Splendido vestito della collezione Nomad Sari ispirata alle tonalità del Mediterraneo. Colori blu mare e bianco che evocano le onde e la brezza marina. Tessuti naturali e morbidi. Taglia LXL. Vestiario wellness ideale per momenti di relax e vacanze."
+  "AWChill-05": {
+    "name": "1.3Kg Box of Chill Pills - Black Ciliegia",
+    "description": "1.3Kg Box of Chill Pills - Black Ciliegia. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
   },
-  "NSMed-20": {
-    "name": "Collezione Nomad Sari On the Med - Vestito (LXL) - Turchese & Bianco",
-    "description": "Bellissimo vestito della collezione Nomad Sari con colori turchese e bianco. Design ispirato al mare Mediterraneo e alla sua bellezza naturale. Tessuti confortevoli e traspiranti. Taglia LXL. Perfetto per chi cerca stile, comfort e benessere."
+  "AWChill-02": {
+    "name": "1.3Kg Box of Chill Pills - Lavanda",
+    "description": "1.3Kg Box of Chill Pills - Lavanda. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-01": {
+    "name": "1.3Kg Box of Chill Pills - Mango",
+    "description": "1.3Kg Box of Chill Pills - Mango. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-04": {
+    "name": "1.3Kg Box of Chill Pills - Pinacolada",
+    "description": "1.3Kg Box of Chill Pills - Pinacolada. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-03": {
+    "name": "1.3Kg Box of Chill Pills - Rosa",
+    "description": "1.3Kg Box of Chill Pills - Rosa. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-06": {
+    "name": "1.3Kg Box of Chill Pills - Vaniglia Cup Cake",
+    "description": "1.3Kg Box of Chill Pills - Vaniglia Cup Cake. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-07": {
+    "name": "1.3Kg Box of Chill Pills Baby Powder",
+    "description": "1.3Kg Box of Chill Pills Baby Powder. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "AWChill-08": {
+    "name": "1.3kg Box of Chill Pills - Fresh Oranges",
+    "description": "1.3kg Box of Chill Pills - Fresh Oranges. Compresse profumate ideali per diffondere fragranze naturali negli ambienti. Perfette per creare un'atmosfera rilassante e accogliente. Formato professionale da 1.3 kg, ideale sia per uso domestico che commerciale."
+  },
+  "EO-60": {
+    "name": "Olio Essenziale di Anice Stellato 10 ml",
+    "description": "Olio essenziale puro di Anice Stellato cinese (Illicium verum). Parte della pianta utilizzata: Frutti. Origine: Cina. Metodo di estrazione: Distillazione a vapore. L'anice stellato ha un aroma dolce e speziato, utilizzato tradizionalmente per favorire il benessere digestivo e creare un'atmosfera accogliente."
+  },
+  "EO-13": {
+    "name": "Olio Essenziale di Basilico 10 ml",
+    "description": "Olio essenziale puro di Basilico (Ocimum basilicum). Parte della pianta utilizzata: Foglie e sommità fiorite. Origine: India. Metodo di estrazione: Distillazione a vapore. Il basilico è noto per le sue proprietà rinvigorenti e chiarificanti, ideale per diffusione ambientale e per stimolare la concentrazione."
+  },
+  "EO-73": {
+    "name": "Olio Essenziale di Alloro 10 ml",
+    "description": "Nome latino: Pimenta Racemosa. Parte della pianta utilizzata: Foglie. Origine: Caraibi. Metodo di estrazione: Distillazione a vapore.\n\nL'alloro delle Indie Occidentali è un'altra pianta apprezzata per i suoi usi in medicina e in cucina. Le foglie di alloro sono state utilizzate in vari tipi di cucina e condimento e il frutto è uno degli ingredienti del \"Piccantino\".\n\nL'alloro è da tempo utilizzato nei tonici per capelli, poiché si dice che faccia bene al cuoio capelluto, oltre a curare i capelli stessi e favorirne la crescita. Si dice anche che l'olio essenziale di alloro sia utile per dolori, fastidi, problemi di circolazione e reumatismi, oltre a essere un valido aiuto per il sistema immunitario nella lotta contro le malattie."
+  },
+  "EO-59": {
+    "name": "10 ml Benzoin Olio Essenziale (Dilute/Dpg)",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Benzoin Olio Essenziale (Dilute/Dpg). Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-15": {
+    "name": "10 ml Blackpepper Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Blackpepper Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-56": {
+    "name": "10 ml Cajeput Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cajeput Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-55": {
+    "name": "10 ml Carrot Seed Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Carrot Seed Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-11": {
+    "name": "Olio per Fragranza Cedro 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Cedro. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza legnosa e calda che dona un senso di comfort e serenità. Prodotto concentrato, utilizzare con parsimonia."
+  },
+  "EO-50": {
+    "name": "10 ml Cedro Virginian Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cedro Virginian Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-12": {
+    "name": "Olio per Fragranza Camomilla 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Camomilla. Perfetto per candele, saponi e prodotti rilassanti. Fragranza delicata e calmante che evoca tranquillità e benessere. Prodotto concentrato, adatto per uso professionale."
+  },
+  "EO-18": {
+    "name": "10 ml Camomilla Roman (Dilute) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Camomilla Roman (Dilute) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-19": {
+    "name": "10 ml Camomilla Roman (Puro) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Camomilla Roman (Puro) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-21": {
+    "name": "10 ml Cannella Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cannella Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-20": {
+    "name": "10 ml Citronella Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Citronella Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-07": {
+    "name": "10 ml Salvia Sclarea Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Salvia Sclarea Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-22": {
+    "name": "10 ml Chiodi di Garofano Leaf Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Chiodi di Garofano Leaf Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-84": {
+    "name": "Olio per Fragranza Cocco 10 ml - SENZA ETICHETTA",
+    "description": "Olio per fragranza al profumo di Cocco. Ideale per creare prodotti estivi e tropicali. Fragranza dolce e cremosa che ricorda le spiagge esotiche. Perfetto per candele, saponi e cosmetici fai-da-te."
+  },
+  "EO-42": {
+    "name": "10 ml Coriander Seed Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Coriander Seed Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-83": {
+    "name": "10 ml Cornmint Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cornmint Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-66": {
+    "name": "10 ml Cumin Seed Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cumin Seed Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-17": {
+    "name": "10 ml Cut Grass Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Cut Grass Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-23": {
+    "name": "10 ml Cipresso Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Cipresso Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-20": {
+    "name": "10 ml Dewberry Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Dewberry Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-58": {
+    "name": "10 ml Dill Seed Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Dill Seed Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-85": {
+    "name": "10 ml Dragon's Blood Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Dragon's Blood Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "ULFO-21": {
+    "name": "10 ml Dream Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Dream Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-03": {
+    "name": "10 ml Eucalipto Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Eucalipto Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-22": {
+    "name": "10 ml Eucalipto Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Eucalipto Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-16": {
+    "name": "10 ml Finocchio Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Finocchio Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-17": {
+    "name": "10 ml Incenso (Dilute) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Incenso (Dilute) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-65": {
+    "name": "10 ml Frankinsence (Puro) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Frankinsence (Puro) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-24": {
+    "name": "10 ml Fresia Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Fresia Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-08": {
+    "name": "10 ml Geranio (Egypt) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Geranio (Egypt) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-25": {
+    "name": "10 ml Geranio Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Geranio Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-24": {
+    "name": "10 ml Zenzero Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Zenzero Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-26": {
+    "name": "10 ml Oro Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Oro Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "ULFO-27": {
+    "name": "10 ml Gothic Dream Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Gothic Dream Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-25": {
+    "name": "10 ml Pompelmo Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Pompelmo Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-28": {
+    "name": "10 ml Hidden Giardino Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Hidden Giardino Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-71": {
+    "name": "10 ml Legno di Ho Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Legno di Ho Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-51": {
+    "name": "10 ml Hyssop Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Hyssop Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-26": {
+    "name": "10 ml Gelsomino Absolute Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Gelsomino Absolute Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-11": {
+    "name": "10 ml Gelsomino Dilute Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Gelsomino Dilute Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-27": {
+    "name": "10 ml Juniperberry Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Juniperberry Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-01": {
+    "name": "10 ml Lavanda Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Lavanda Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-12": {
+    "name": "10 ml Limone Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Limone Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-72": {
+    "name": "10 ml Limone Tea Tree Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Limone Tea Tree Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-64": {
+    "name": "10 ml Limone Verbena Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Limone Verbena Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-28": {
+    "name": "10 ml Citronella Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Citronella Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-36": {
+    "name": "10 ml Lillà Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Lillà Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "ULFO-37": {
+    "name": "10 ml Giglio Of The Valley Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Giglio Of The Valley Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-29": {
+    "name": "10 ml Lime Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Lime Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-30": {
+    "name": "10 ml Mandarin Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Mandarin Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-38": {
+    "name": "10 ml Mandarin Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Mandarin Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-31": {
+    "name": "10 ml Maggiorana Spanish Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Maggiorana Spanish Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-52": {
+    "name": "10 ml May Chang Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml May Chang Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-61": {
+    "name": "10 ml Melissa (Blend) Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Melissa (Blend) Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-40": {
+    "name": "10 ml Midnight Rosa Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Midnight Rosa Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-40": {
+    "name": "10 ml Mirra Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Mirra Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-41": {
+    "name": "10 ml Mirra Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Mirra Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-32": {
+    "name": "10 ml Neroli Dilute Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Neroli Dilute Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-44": {
+    "name": "10 ml Niaouli Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Niaouli Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-43": {
+    "name": "10 ml Notte Magic Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Notte Magic Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-34": {
+    "name": "10 ml Noce Moscata Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Noce Moscata Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "EO-35": {
+    "name": "10 ml Arancia Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Arancia Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-45": {
+    "name": "10 ml Arancia Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Arancia Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-36": {
+    "name": "10 ml Palmarosa Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Palmarosa Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-86": {
+    "name": "10 ml Parma Violetta Fragrance Oil10 ml Fresh Cotton Oil - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Parma Violetta Fragrance Oil10 ml Fresh Cotton Oil - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-69": {
+    "name": "10 ml Parsley Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Parsley Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-46": {
+    "name": "10 ml Frutto della Passione Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Frutto della Passione Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
+  },
+  "EO-10": {
+    "name": "10 ml Patchouli Olio Essenziale",
+    "description": "Olio essenziale puro 100% naturale. 10 ml Patchouli Olio Essenziale. Ideale per aromaterapia, diffusione ambientale e benessere quotidiano. Estratto con metodi naturali per preservare tutte le proprietà benefiche della pianta. Perfetto per creare un'atmosfera rilassante e armoniosa."
+  },
+  "ULFO-48": {
+    "name": "10 ml Pesca Olio per Fragranza - SENZA ETICHETTA",
+    "description": "Olio per fragranza di alta qualità. 10 ml Pesca Olio per Fragranza - SENZA ETICHETTA. Ideale per creare candele, saponi, diffusori e prodotti per la cura personale. Fragranza concentrata e duratura. Perfetto per uso professionale e hobbistico."
   }
 }

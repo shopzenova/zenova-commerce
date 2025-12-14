@@ -95,7 +95,6 @@ const anchorToSubcategoryMap = {
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'oli-essenziali',
     'oli-fragranza': 'oli-fragranza',
-    'relax-benessere': 'relax-benessere',
     'vestiario-wellness': 'vestiario-wellness',
     'pietre-preziose': 'pietre-preziose',
     'incenso': 'incenso',
@@ -213,7 +212,6 @@ const subcategoryToCategoryMap = {
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'natural-wellness',
     'oli-fragranza': 'natural-wellness',
-    'relax-benessere': 'natural-wellness',
     'vestiario-wellness': 'natural-wellness',
     'pietre-preziose': 'natural-wellness',
     'incenso': 'natural-wellness',

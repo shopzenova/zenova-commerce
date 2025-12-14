@@ -33,6 +33,9 @@ router.post('/create-order', async (req, res) => {
 
     logger.info(`📦 Creazione ordine PayPal per ${customer.email}, ${items.length} prodotti`);
 
+    // TODO: Riabilitare verifica stock quando BigBuy API funzionerà correttamente
+    // TEMPORANEAMENTE DISABILITATO PER TEST PAYPAL
+    /*
     // 1. Verifica stock BigBuy
     const bigbuyItems = items.filter(item => item.source === 'bigbuy');
     if (bigbuyItems.length > 0) {
@@ -77,6 +80,8 @@ router.post('/create-order', async (req, res) => {
       }
       logger.info(`✅ Stock AW Dropship verificato con successo`);
     }
+    */
+    logger.warn('⚠️  Verifica stock DISABILITATA temporaneamente per test PayPal');
 
     // 3. Crea ordine PayPal
     const result = await paypalService.createOrder(items, customer);
