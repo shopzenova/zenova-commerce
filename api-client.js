@@ -12,7 +12,9 @@ class ZenovaAPI {
    */
   static async getProducts(page = 1, pageSize = 5000) {
     try {
-      const response = await fetch(`${API_BASE_URL}/products?page=${page}&pageSize=${pageSize}`);
+      // Cache-buster per forzare reload dopo fix wellness category
+      const cacheBuster = Date.now();
+      const response = await fetch(`${API_BASE_URL}/products?page=${page}&pageSize=${pageSize}&_=${cacheBuster}`);
       const data = await response.json();
 
       if (data.success) {

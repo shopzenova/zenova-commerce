@@ -1933,6 +1933,9 @@ function openProductDetailModal(productId) {
     savedSidebarState = [];
     document.querySelectorAll('.category-item.active, .subcategory-item-nested.active').forEach(item => {
         savedSidebarState.push(item);
+        const categoryBtn = item.querySelector('.category-btn');
+        const categoryName = categoryBtn ? categoryBtn.dataset.category : 'unknown';
+        console.log('   💾 Salvato elemento:', categoryName);
     });
     console.log('💾 Stato sidebar salvato:', savedSidebarState.length, 'elementi aperti');
     console.log('📂 Categoria prodotto:', currentProductCategory);
@@ -2173,44 +2176,34 @@ function closeProductDetailModal() {
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
 
-    // ✅ Fix Natural Wellness: forza apertura SENZA click (per evitare interferenze)
-    if (savedSidebarState.length === 0 && currentProductCategory === 'natural-wellness') {
-        const naturalWellnessButton = document.querySelector('[data-category="natural-wellness"]');
-        if (naturalWellnessButton) {
-            const categoryItem = naturalWellnessButton.closest('.category-item');
-            if (categoryItem) {
-                // Forza apertura immediata con classe active
-                categoryItem.classList.add('active');
-                console.log('📂 [IMMEDIATO] Forzata apertura Natural Wellness con classList');
-
-                // Usa un timeout più lungo per assicurarsi che resti aperta
-                setTimeout(() => {
-                    if (!categoryItem.classList.contains('active')) {
-                        categoryItem.classList.add('active');
-                        console.log('📂 [TIMEOUT 500ms] Riaperta Natural Wellness');
-                    }
-                }, 500);
-            }
-        }
-    }
-
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {
         if (savedSidebarState.length > 0) {
             // Ripristina categorie che erano già aperte
             savedSidebarState.forEach(item => {
                 item.classList.add('active');
+                const categoryBtn = item.querySelector('.category-btn');
+                const categoryName = categoryBtn ? categoryBtn.dataset.category : 'unknown';
+                console.log('   🔄 Ripristinato elemento:', categoryName);
             });
             console.log('🔄 Stato sidebar ripristinato:', savedSidebarState.length, 'elementi riaperti');
         } else if (currentProductCategory && currentProductSubcategory) {
             // Se nessuna categoria era aperta, apri quella del prodotto e mostra la sottocategoria
-            const categoryButton = document.querySelector(`[data-category="${currentProductCategory}"]`);
+            // FIX: Mappa "wellness" -> "natural-wellness" per compatibilità
+            const mappedCategory = currentProductCategory === 'wellness' ? 'natural-wellness' : currentProductCategory;
+            console.log('🔍 Cerco categoria:', currentProductCategory, '→', mappedCategory);
+            const categoryButton = document.querySelector(`[data-category="${mappedCategory}"]`);
 
-            if (categoryButton && currentProductCategory !== 'natural-wellness') {
-                // Per tutte le categorie tranne Natural Wellness (che viene gestito sopra)
+            if (categoryButton) {
+                // Per tutte le categorie
                 const categoryItem = categoryButton.parentElement;
+                console.log('🔍 categoryItem trovato:', categoryItem);
                 categoryItem.classList.add('active');
                 console.log('📂 Aperta categoria del prodotto:', currentProductCategory);
+                // Verifica se ha la classe active
+                console.log('✅ Classe active presente?', categoryItem.classList.contains('active'));
+            } else {
+                console.error('❌ categoryButton NON TROVATO per:', currentProductCategory);
             }
 
             // Trova e attiva il link della sottocategoria nella sidebar
