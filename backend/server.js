@@ -153,6 +153,7 @@ app.get('/api/proxy-image', async (req, res) => {
 app.use('/api/products', require('./src/routes/products'));
 app.use('/api/cart', require('./src/routes/cart'));
 app.use('/api/checkout', require('./src/routes/checkout'));
+app.use('/api/paypal', require('./src/routes/paypal'));  // PayPal Advanced Checkout
 app.use('/api/orders', require('./src/routes/orders'));
 app.use('/api/admin', require('./src/routes/admin'));  // Admin panel API
 app.use('/api/admin/sync', require('./src/routes/admin-sync'));  // BigBuy FTP Sync

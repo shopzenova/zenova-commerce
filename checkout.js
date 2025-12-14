@@ -576,47 +576,116 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear existing button
         document.getElementById('paypal-button-container').innerHTML = '';
 
-        // Render PayPal button
-        /* UNCOMMENT WHEN PAYPAL IS CONFIGURED:
-
+        // Render PayPal button (SANDBOX mode)
         paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: calculateTotal().toFixed(2)
-                        }
-                    }]
-                });
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
             },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    const orderId = generateOrderId();
-                    saveOrder(orderId, shippingData, 'paypal', details.id);
-                    goToStep(3);
-                });
+            createOrder: async function(data, actions) {
+                console.log('🔄 Creazione ordine PayPal via backend...');
+
+                try {
+                    // Verify shipping data is complete
+                    if (!shippingData.email || !shippingData.firstName) {
+                        throw new Error('Dati di spedizione mancanti. Compila il form di spedizione prima di procedere.');
+                    }
+
+                    // Prepare cart items
+                    const cartItems = cart.map(item => ({
+                        productId: item.id,
+                        source: item.source || 'bigbuy',
+                        bigbuyId: item.bigbuyId || (item.source === 'bigbuy' ? item.id : null),
+                        awId: item.awId || (item.source === 'aw' ? item.id : null),
+                        name: item.name,
+                        description: item.description || '',
+                        price: item.price,
+                        quantity: item.quantity,
+                        images: item.images || []
+                    }));
+
+                    // Create order via backend API
+                    const response = await fetch('http://localhost:3000/api/paypal/create-order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            items: cartItems,
+                            customer: {
+                                email: shippingData.email,
+                                name: `${shippingData.firstName} ${shippingData.lastName}`,
+                                phone: shippingData.phone,
+                                address: shippingData.address,
+                                city: shippingData.city,
+                                postalCode: shippingData.postalCode,
+                                shippingCost: calculatedShippingCost
+                            }
+                        })
+                    });
+
+                    const result = await response.json();
+                    console.log('✅ Ordine PayPal creato:', result);
+
+                    if (!result.success) {
+                        throw new Error(result.error || 'Errore creazione ordine');
+                    }
+
+                    return result.data.orderId;
+
+                } catch (error) {
+                    console.error('❌ Errore creazione ordine PayPal:', error);
+                    alert('Errore durante la creazione dell\'ordine. Riprova.');
+                    throw error;
+                }
+            },
+            onApprove: async function(data, actions) {
+                console.log('💳 Cattura pagamento PayPal...');
+
+                try {
+                    // Capture payment via backend
+                    const response = await fetch('http://localhost:3000/api/paypal/capture-order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderId: data.orderID
+                        })
+                    });
+
+                    const result = await response.json();
+                    console.log('✅ Pagamento catturato:', result);
+
+                    if (result.success) {
+                        // Clear cart
+                        localStorage.removeItem('zenova-cart');
+
+                        // Redirect to success page
+                        window.location.href = `checkout-success.html?paypal_order=${data.orderID}&db_order=${result.data.dbOrderId}`;
+                    } else {
+                        throw new Error(result.error || 'Errore cattura pagamento');
+                    }
+
+                } catch (error) {
+                    console.error('❌ Errore cattura pagamento:', error);
+                    alert('Errore durante la finalizzazione del pagamento. Contattaci per assistenza.');
+                }
+            },
+            onCancel: function(data) {
+                console.log('❌ Pagamento PayPal annullato');
+                alert('Hai annullato il pagamento. Puoi riprovare quando vuoi.');
             },
             onError: function(err) {
-                console.error('PayPal error:', err);
-                alert('Si è verificato un errore con PayPal. Riprova.');
+                console.error('❌ Errore PayPal:', err);
+                alert('Si è verificato un errore con PayPal. Riprova o scegli un altro metodo di pagamento.');
             }
         }).render('#paypal-button-container');
-        */
-
-        // Demo button (remove when PayPal is configured)
-        document.getElementById('paypal-button-container').innerHTML = `
-            <button class="btn btn-primary" onclick="handleDemoPayPal()">
-                Paga con PayPal (Demo)
-            </button>
-        `;
     }
 
-    // Make demo PayPal function available globally
-    window.handleDemoPayPal = function() {
-        const orderId = generateOrderId();
-        saveOrder(orderId, shippingData, 'paypal');
-        goToStep(3);
-    };
+    // PayPal is now fully integrated with backend API
 
     // Redirect if cart is empty
     if (cart.length === 0) {

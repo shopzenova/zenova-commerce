@@ -209,6 +209,10 @@ router.get('/', async (req, res) => {
       zenovaCategory: p.zenovaCategory,
       zenovaCategories: p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []),
       subcategory: p.subcategory,  // Categorie BigBuy raw per backward compatibility
+      // Fornitori - IMPORTANTE per PayPal stock verification
+      source: p.source || 'bigbuy',
+      bigbuyId: p.bigbuyId || (p.source === 'bigbuy' ? p.id : null),
+      awId: p.awId || (p.source === 'aw' ? p.id : null),
       active: true
     }));
 
