@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ZENOVA | Aura Experience</title>
+    <link rel="stylesheet" href="styles.css?v=20251108f">
+    <link rel="stylesheet" href="checkout.css?v=20251108">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AaUVAYba3rAHoZowsnhPirSm-vnNNnGL_bSZn7iGiLrtZwkyqRAAfFlwMZLIieRGksTz1TLVo83tNejt&currency=EUR"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></a></h1>
+                        <p class="tagline">Where Technology Meets Calm Wellness</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-header">
+                <h1>Checkout</h1>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Spedizione</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Pagamento</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Conferma</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-grid">
+                <!-- Left Column - Forms -->
+                <div class="checkout-main">
+                    <!-- User Info Alert -->
+                    <div class="user-info-alert" id="userInfoAlert">
+                        <p>Non hai effettuato l'accesso. <a href="auth.html">Accedi</a> o continua come ospite.</p>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="checkout-card" id="shippingCard">
+                        <div class="card-header">
+                            <h2>Informazioni di Spedizione</h2>
+                        </div>
+                        <form class="checkout-form" id="shippingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">Nome *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Cognome *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Telefono *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+39">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Indirizzo *</label>
+                                <input type="text" id="address" name="address" required placeholder="Via, Numero civico">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Città *</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode">CAP *</label>
+                                    <input type="text" id="postalCode" name="postalCode" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="country">Paese *</label>
+                                <select id="country" name="country" required>
+                                    <option value="">Seleziona paese...</option>
+                                    <option value="IT" selected>🇮🇹 Italia</option>
+                                    <option disabled>──────────</option>
+                                    <option value="AT">🇦🇹 Austria</option>
+                                    <option value="BE">🇧🇪 Belgio</option>
+                                    <option value="BG">🇧🇬 Bulgaria</option>
+                                    <option value="HR">🇭🇷 Croazia</option>
+                                    <option value="CY">🇨🇾 Cipro</option>
+                                    <option value="CZ">🇨🇿 Repubblica Ceca</option>
+                                    <option value="DK">🇩🇰 Danimarca</option>
+                                    <option value="EE">🇪🇪 Estonia</option>
+                                    <option value="FI">🇫🇮 Finlandia</option>
+                                    <option value="FR">🇫🇷 Francia</option>
+                                    <option value="DE">🇩🇪 Germania</option>
+                                    <option value="GR">🇬🇷 Grecia</option>
+                                    <option value="HU">🇭🇺 Ungheria</option>
+                                    <option value="IE">🇮🇪 Irlanda</option>
+                                    <option value="LV">🇱🇻 Lettonia</option>
+                                    <option value="LT">🇱🇹 Lituania</option>
+                                    <option value="LU">🇱🇺 Lussemburgo</option>
+                                    <option value="MT">🇲🇹 Malta</option>
+                                    <option value="NL">🇳🇱 Paesi Bassi</option>
+                                    <option value="PL">🇵🇱 Polonia</option>
+                                    <option value="PT">🇵🇹 Portogallo</option>
+                                    <option value="RO">🇷🇴 Romania</option>
+                                    <option value="SK">🇸🇰 Slovacchia</option>
+                                    <option value="SI">🇸🇮 Slovenia</option>
+                                    <option value="ES">🇪🇸 Spagna</option>
+                                    <option value="SE">🇸🇪 Svezia</option>
+                                    <option disabled>──────────</option>
+                                    <option value="CH">🇨🇭 Svizzera</option>
+                                    <option value="NO">🇳🇴 Norvegia</option>
+                                    <option value="GB">🇬🇧 Regno Unito</option>
+                                    <option disabled>──────────</option>
+                                    <option value="AU">🇦🇺 Australia</option>
+                                    <option value="US">🇺🇸 Stati Uniti</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes">Note per la consegna (opzionale)</label>
+                                <textarea id="notes" name="notes" rows="3" placeholder="Es: Citofono rotto, chiamare al telefono"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Continua al Pagamento</button>
+                        </form>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="checkout-card hidden" id="paymentCard">
+                        <div class="card-header">
+                            <h2>Metodo di Pagamento</h2>
+                        </div>
+
+                        <div class="payment-methods">
+                            <div class="payment-method" data-method="card">
+                                <input type="radio" id="paymentMethodCard" name="paymentMethod" value="card" checked>
+                                <label for="paymentMethodCard">
+                                    <div class="method-icon">💳</div>
+                                    <div class="method-details">
+                                        <span class="method-name">Carta di Credito/Debito</span>
+                                        <span class="method-desc">Visa, Mastercard, Amex</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="payment-method" data-method="paypal">
+                                <input type="radio" id="paymentMethodPaypal" name="paymentMethod" value="paypal">
+                                <label for="paymentMethodPaypal">
+                                    <div class="method-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24">
+                                            <path fill="#003087" d="M8.32 21.97a.546.546 0 0 1-.54-.46L6.47 15.3a.815.815 0 0 1 .81-.95h2.43c4.46 0 6.49-2.16 6.93-5.42.04-.31.07-.6.09-.87.34 1.75.02 3.44-.94 4.94-1.15 1.77-3.16 2.69-5.98 2.69H7.58c-.44 0-.83.32-.9.76l-.97 5.08a.546.546 0 0 1-.54.46h-2.85z"/>
+                                            <path fill="#0070E0" d="M9.05 5.82c.21-.1.44-.15.67-.15h5.48c.65 0 1.26.03 1.81.09 1.81.21 3.09.87 3.71 2.45.34 1.03.34 2.27 0 3.69v.11c-.56 3.63-3.17 5.49-7.76 5.49H10.8c-.46 0-.85.33-.92.78l-1.19 6.21-.34 1.77a.465.465 0 0 1-.46.39h-3.3c-.34 0-.62-.29-.57-.64l2.54-13.29c.08-.44.47-.76.92-.76h2.43c.46 0 .85-.33.92-.78l.22-1.16z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="method-details">
+                                        <span class="method-name">PayPal</span>
+                                        <span class="method-desc">Pagamento sicuro con PayPal</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="payment-method" data-method="bank">
+                                <input type="radio" id="paymentMethodBank" name="paymentMethod" value="bank">
+                                <label for="paymentMethodBank">
+                                    <div class="method-icon">🏦</div>
+                                    <div class="method-details">
+                                        <span class="method-name">Bonifico Bancario</span>
+                                        <span class="method-desc">Riceverai le istruzioni via email</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="payment-method" data-method="cash">
+                                <input type="radio" id="paymentCash" name="paymentMethod" value="cash">
+                                <label for="paymentCash">
+                                    <div class="method-icon">💶</div>
+                                    <div class="method-details">
+                                        <span class="method-name">Contrassegno</span>
+                                        <span class="method-desc">Paga alla consegna (+€5.00)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Stripe Card Form -->
+                        <div class="payment-form-container" id="stripeCardForm">
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label>Dettagli Carta</label>
+                                    <div id="card-element" class="stripe-element"></div>
+                                    <div id="card-errors" class="form-error"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full" id="submitPayment">
+                                    <span id="button-text">Paga €<span id="payment-amount">0.00</span></span>
+                                    <span id="spinner" class="hidden">Elaborazione...</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- PayPal Container -->
+                        <div class="payment-form-container hidden" id="paypalContainer">
+                            <div id="paypal-button-container"></div>
+                        </div>
+
+                        <!-- Bank Transfer Info -->
+                        <div class="payment-form-container hidden" id="bankTransferInfo">
+                            <div class="info-box">
+                                <h4>Istruzioni per il bonifico</h4>
+                                <p>Completa l'ordine e riceverai le coordinate bancarie via email. L'ordine verrà processato dopo la ricezione del pagamento.</p>
+                                <button class="btn btn-primary" id="confirmBankTransfer">Conferma Ordine</button>
+                            </div>
+                        </div>
+
+                        <!-- Cash on Delivery -->
+                        <div class="payment-form-container hidden" id="cashOnDeliveryInfo">
+                            <div class="info-box">
+                                <h4>Pagamento alla consegna</h4>
+                                <p>Pagherai in contanti al corriere alla consegna. Costo aggiuntivo: €5.00</p>
+                                <button class="btn btn-primary" id="confirmCashPayment">Conferma Ordine</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Confirmation -->
+                    <div class="checkout-card hidden" id="confirmationCard">
+                        <div class="confirmation-success">
+                            <div class="success-icon">✓</div>
+                            <h2>Ordine Confermato!</h2>
+                            <p class="order-number">Numero ordine: <strong id="orderNumber">#ZN-000000</strong></p>
+                            <p>Grazie per il tuo acquisto. Riceverai una email di conferma a breve.</p>
+                            <div class="confirmation-actions">
+                                <a href="index.html" class="btn btn-primary">Torna alla Home</a>
+                                <a href="prodotti.html" class="btn btn-secondary">Continua lo Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="checkout-sidebar">
+                    <div class="order-summary">
+                        <h3>Riepilogo Ordine</h3>
+                        <div class="summary-items" id="summaryItems">
+                            <!-- Items will be loaded by JavaScript -->
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Subtotale</span>
+                            <span id="summarySubtotal">€0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Spedizione</span>
+                            <span id="summaryShipping">Gratis</span>
+                        </div>
+                        <div class="summary-row discount hidden" id="discountRow">
+                            <span>Sconto</span>
+                            <span id="summaryDiscount">-€0.00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Totale</span>
+                            <span id="summaryTotal">€0.00</span>
+                        </div>
+                        <div class="promo-code">
+                            <input type="text" id="promoCode" placeholder="Codice promozionale">
+                            <button class="btn-apply" id="applyPromo">Applica</button>
+                        </div>
+                    </div>
+
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <span class="badge-icon">🔒</span>
+                            <span class="badge-text">Pagamento Sicuro SSL</span>
+                        </div>
+                        <div class="badge">
+                            <span class="badge-icon">📦</span>
+                            <span class="badge-text">Spedizione Tracciata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ZENOVA | Aura Experience</h4>
+                    <p>Where Technology Meets Calm Wellness</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ZENOVA | Aura Experience. Tutti i diritti riservati.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em; opacity: 0.8;">Foto fornite da <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Unsplash</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="api-client.js?v=20251105e"></script>
+    <script src="auth.js?v=20251105e"></script>
+    <script src="checkout.js?v=20251108b"></script>
+</body>
+</html>

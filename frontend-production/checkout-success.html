@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordine Confermato - ZENOVA | Aura Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .success-container {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .success-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            text-align: center;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+        }
+        .success-title {
+            font-size: 2rem;
+            color: var(--soft-brown);
+            margin-bottom: 1rem;
+        }
+        .success-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .order-info {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .order-number {
+            font-size: 1.2rem;
+            color: var(--soft-brown);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: var(--soft-brown);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #6F5735;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--soft-brown);
+            border: 2px solid var(--soft-brown);
+        }
+        .btn-secondary:hover {
+            background: var(--cream);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></a></h1>
+                        <p class="tagline">Where Technology Meets Calm Wellness</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Success Content -->
+    <section class="success-container">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Ordine Confermato!</h1>
+            <p class="success-message">
+                Grazie per il tuo acquisto! Abbiamo ricevuto il tuo ordine e ti invieremo una conferma via email a breve.
+            </p>
+            <div class="order-info">
+                <div class="order-number" id="orderNumber">Numero ordine: #ZN-000000</div>
+                <p style="color: #666; font-size: 0.95rem;">Riceverai aggiornamenti sullo stato dell'ordine via email</p>
+            </div>
+            <div class="actions">
+                <a href="index.html" class="btn btn-primary">Torna alla Home</a>
+                <a href="prodotti.html" class="btn btn-secondary">Continua lo Shopping</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ZENOVA | Aura Experience</h4>
+                    <p>Where Technology Meets Calm Wellness</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ZENOVA | Aura Experience. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Extract order number from URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            if (sessionId) {
+                // Generate a readable order number from session ID
+                const orderNumber = `ZN-${sessionId.substring(sessionId.length - 8).toUpperCase()}`;
+                document.getElementById('orderNumber').textContent = `Numero ordine: #${orderNumber}`;
+            }
+
+            // Clear cart
+            localStorage.removeItem('zenova-cart');
+            localStorage.removeItem('zenova_promo');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spedizioni e Consegne | ZENOVA - Where Technology Meets Calm Wellness</title>
+    <link rel="stylesheet" href="styles.css?v=20251127ALL">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .legal-page {
+            padding: 6rem 0 4rem;
+            min-height: 100vh;
+        }
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--color-border, #e0e0e0);
+        }
+        .legal-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-heading, #1a1a1a);
+            margin-bottom: 0.5rem;
+        }
+        .legal-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-light, #666);
+            font-weight: 300;
+        }
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+        .legal-section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-heading, #1a1a1a);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .legal-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-heading, #333);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .legal-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text, #444);
+            margin-bottom: 1rem;
+        }
+        .legal-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .legal-section li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text, #444);
+            margin-bottom: 0.5rem;
+        }
+        .info-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .info-box.warning {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0b2 100%);
+            border-left-color: #ff9800;
+        }
+        .info-box.success {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left-color: #4caf50;
+        }
+        .info-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+        .icon-text {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            gap: 0.75rem;
+            color: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1>ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></h1>
+                        <p class="logo-experience">Experience</p>
+                        <p class="tagline">where technology meets calm and wellness</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">
+                        <span class="link-text">Home</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="prodotti.html" class="nav-link">
+                        <span class="link-text">Shop</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="chi-siamo.html" class="nav-link">
+                        <span class="link-text">Chi Siamo</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                    <li><a href="contatti.html" class="nav-link">
+                        <span class="link-text">Contatti</span>
+                        <span class="link-underline"></span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Legal Content -->
+    <main class="legal-page">
+        <div class="legal-container">
+            <div class="legal-header">
+                <h1 class="legal-title">📦 Spedizioni e Consegne</h1>
+                <p class="legal-subtitle">Informazioni complete sui tempi e modalità di spedizione</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">🚚</span> Tempi di Elaborazione Ordini</h2>
+                <p>Una volta ricevuto l'ordine e confermato il pagamento, il tuo pacco verrà elaborato e spedito entro <strong>24-48 ore lavorative</strong>.</p>
+
+                <div class="info-box success">
+                    <p>✓ Ordini confermati entro le ore 14:00 nei giorni lavorativi vengono generalmente spediti il giorno stesso.</p>
+                </div>
+
+                <p>I tempi di elaborazione possono variare leggermente durante periodi di alta stagione (Black Friday, Natale, etc.).</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📍</span> Tempi di Consegna</h2>
+
+                <h3>Italia</h3>
+                <ul>
+                    <li><strong>Spedizione Standard:</strong> 3-5 giorni lavorativi dalla data di spedizione</li>
+                    <li><strong>Spedizione Express:</strong> 1-2 giorni lavorativi dalla data di spedizione (disponibile al checkout)</li>
+                </ul>
+
+                <h3>Europa (UE)</h3>
+                <ul>
+                    <li><strong>Spedizione Standard:</strong> 5-7 giorni lavorativi dalla data di spedizione</li>
+                    <li><strong>Spedizione Express:</strong> 2-4 giorni lavorativi dalla data di spedizione</li>
+                </ul>
+
+                <h3>Resto del Mondo</h3>
+                <ul>
+                    <li><strong>Spedizione Internazionale:</strong> 7-15 giorni lavorativi dalla data di spedizione</li>
+                    <li>I tempi possono variare in base alle procedure doganali del paese di destinazione</li>
+                </ul>
+
+                <div class="info-box warning">
+                    <p>⚠️ I tempi di consegna sono indicativi e potrebbero subire variazioni dovute a cause di forza maggiore, condizioni meteorologiche avverse, o ritardi del corriere.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📦</span> Corrieri e Tracciabilità</h2>
+                <p>Collaboriamo con i principali corrieri espressi nazionali e internazionali per garantire consegne rapide e sicure:</p>
+                <ul>
+                    <li>SDA Express Courier</li>
+                    <li>BRT Bartolini</li>
+                    <li>GLS</li>
+                    <li>DHL Express (per spedizioni internazionali)</li>
+                    <li>UPS (per spedizioni internazionali)</li>
+                </ul>
+
+                <div class="info-box">
+                    <p>📧 Riceverai un'email con il numero di tracking non appena il tuo ordine verrà spedito. Potrai tracciare il pacco in tempo reale sul sito del corriere.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">💰</span> Costi di Spedizione</h2>
+
+                <div class="info-box">
+                    <p>💡 <strong>Calcolo in Tempo Reale:</strong> I costi di spedizione vengono calcolati automaticamente al checkout in base al paese di destinazione e ai prodotti nel carrello, utilizzando le tariffe reali del nostro partner logistico BigBuy.</p>
+                </div>
+
+                <h3>Tariffe Indicative per Paese</h3>
+                <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.95em;">I costi indicati sono medi e possono variare leggermente in base al prodotto specifico.</p>
+
+                <style>
+                    .shipping-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 1.5rem 0;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        border-radius: 8px;
+                        overflow: hidden;
+                    }
+                    .shipping-table th {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        padding: 15px;
+                        text-align: left;
+                        font-weight: 600;
+                    }
+                    .shipping-table td {
+                        padding: 12px 15px;
+                        border-bottom: 1px solid #e0e0e0;
+                    }
+                    .shipping-table tr:hover {
+                        background: #f5f7fa;
+                    }
+                    .shipping-table tr:last-child td {
+                        border-bottom: none;
+                    }
+                    .country-flag {
+                        font-size: 1.3em;
+                        margin-right: 8px;
+                    }
+                    .price-col {
+                        font-weight: 600;
+                        color: #667eea;
+                        font-size: 1.1em;
+                    }
+                    .carrier-col {
+                        color: #666;
+                        font-size: 0.9em;
+                    }
+                    .time-col {
+                        color: #888;
+                        font-size: 0.9em;
+                    }
+                </style>
+
+                <table class="shipping-table">
+                    <thead>
+                        <tr>
+                            <th>Paese</th>
+                            <th>Costo Medio</th>
+                            <th>Corriere</th>
+                            <th>Tempi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="country-flag">🇮🇹</span> Italia</td>
+                            <td class="price-col">€7.60</td>
+                            <td class="carrier-col">Standard / UPS</td>
+                            <td class="time-col">2-3 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇳🇱</span> Paesi Bassi</td>
+                            <td class="price-col">€4.40</td>
+                            <td class="carrier-col">Standard Shipment</td>
+                            <td class="time-col">1-2 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇪🇸</span> Spagna</td>
+                            <td class="price-col">€5.10</td>
+                            <td class="carrier-col">Chrono</td>
+                            <td class="time-col">1-2 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇩🇪</span> Germania</td>
+                            <td class="price-col">€5.70</td>
+                            <td class="carrier-col">Standard Shipment</td>
+                            <td class="time-col">2-3 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇧🇪</span> Belgio</td>
+                            <td class="price-col">€6.50</td>
+                            <td class="carrier-col">Standard / UPS</td>
+                            <td class="time-col">1-2 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇦🇹</span> Austria</td>
+                            <td class="price-col">€6.55</td>
+                            <td class="carrier-col">Standard / GLS</td>
+                            <td class="time-col">3-4 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇫🇷</span> Francia</td>
+                            <td class="price-col">€6.70</td>
+                            <td class="carrier-col">Standard / UPS</td>
+                            <td class="time-col">1-2 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇬🇷</span> Grecia</td>
+                            <td class="price-col">€8.00</td>
+                            <td class="carrier-col">Standard Shipment</td>
+                            <td class="time-col">3-4 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇩🇰</span> Danimarca</td>
+                            <td class="price-col">€8.00</td>
+                            <td class="carrier-col">Standard Shipment</td>
+                            <td class="time-col">2-3 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇬🇧</span> Regno Unito</td>
+                            <td class="price-col">€8.50</td>
+                            <td class="carrier-col">UPS</td>
+                            <td class="time-col">2-3 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇨🇭</span> Svizzera</td>
+                            <td class="price-col">€12.90</td>
+                            <td class="carrier-col">GLS</td>
+                            <td class="time-col">4-5 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇳🇴</span> Norvegia</td>
+                            <td class="price-col">€23.30</td>
+                            <td class="carrier-col">Standard</td>
+                            <td class="time-col">5-7 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇺🇸</span> Stati Uniti</td>
+                            <td class="price-col">€15-25</td>
+                            <td class="carrier-col">Vari corrieri</td>
+                            <td class="time-col">7-10 giorni</td>
+                        </tr>
+                        <tr>
+                            <td><span class="country-flag">🇦🇺</span> Australia</td>
+                            <td class="price-col">€20-30</td>
+                            <td class="carrier-col">Vari corrieri</td>
+                            <td class="time-col">10-14 giorni</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem;">Altri Paesi UE</h3>
+                <p>Spediamo anche in tutti gli altri paesi dell'Unione Europea: Portogallo, Polonia, Irlanda, Croazia, Repubblica Ceca, Slovacchia, Slovenia, Romania, Bulgaria, Ungheria, Lettonia, Lituania, Estonia, Finlandia, Svezia, Cipro e Malta.</p>
+                <p><strong>Costi medi:</strong> €6-15 con tempi di consegna tra 2-7 giorni lavorativi.</p>
+
+                <div class="info-box warning">
+                    <p>📌 <strong>Nota importante:</strong> I costi esatti vengono calcolati al checkout in base ai prodotti nel carrello. Le tariffe sopra indicate sono medie orientative basate sui dati del nostro partner logistico BigBuy.</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">🌍</span> Dogana e Dazi (Extra UE)</h2>
+                <p>Per ordini spediti al di fuori dell'Unione Europea, potrebbero essere applicati <strong>dazi doganali, tasse di importazione e/o IVA</strong> da parte del paese di destinazione.</p>
+
+                <div class="info-box warning">
+                    <p>⚠️ <strong>Importante:</strong> Questi costi sono a carico del destinatario e non sono inclusi nel prezzo del prodotto o nelle spese di spedizione. Ti consigliamo di verificare le normative del tuo paese prima di effettuare l'ordine.</p>
+                </div>
+
+                <p>Zenova non è responsabile per eventuali ritardi causati dalle procedure doganali.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📦</span> Imballaggio</h2>
+                <p>I tuoi prodotti verranno imballati con cura utilizzando materiali protettivi di alta qualità per garantire che arrivino in perfette condizioni.</p>
+                <p>Utilizziamo, dove possibile, <strong>materiali eco-friendly e riciclabili</strong> in linea con la nostra filosofia di sostenibilità.</p>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">❓</span> Problemi con la Consegna?</h2>
+                <p>Se il tuo ordine non arriva entro i tempi previsti o riscontri problemi con la consegna:</p>
+                <ul>
+                    <li>Verifica lo stato di tracking con il numero fornito via email</li>
+                    <li>Contatta il nostro servizio clienti a <strong>info@zenova.it</strong></li>
+                    <li>Chiamaci o scrivici su WhatsApp al <strong>+39 320 123 4567</strong></li>
+                </ul>
+
+                <div class="info-box success">
+                    <p>💬 Il nostro team è a tua disposizione per risolvere qualsiasi problema e garantirti la migliore esperienza d'acquisto!</p>
+                </div>
+            </div>
+
+            <div class="legal-section">
+                <h2><span class="icon-text">📄</span> Informazioni Legali</h2>
+                <p>Zenova è un marchio di e-commerce dropshipping che collabora con fornitori certificati e affidabili per garantire prodotti di qualità e spedizioni rapide.</p>
+                <p>Tutti i prodotti vengono spediti direttamente dai nostri magazzini partner in Europa.</p>
+            </div>
+
+            <a href="index.html" class="back-link">← Torna alla Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-icon">🔒</div>
+                    <div class="trust-text">
+                        <strong>Pagamenti Sicuri</strong>
+                        <span>Protetti SSL</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">📦</div>
+                    <div class="trust-text">
+                        <strong>Spedizione Tracciata</strong>
+                        <span>Consegna garantita</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">✓</div>
+                    <div class="trust-text">
+                        <strong>Garanzia 2 Anni</strong>
+                        <span>Su tutti i prodotti</span>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-icon">↩</div>
+                    <div class="trust-text">
+                        <strong>Resi Facili</strong>
+                        <span>Entro 30 giorni</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Zenova</h4>
+                    <p>La tua oasi di tranquillità</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Informazioni</h4>
+                    <p><a href="spedizioni-consegne.html" style="color: inherit;">Spedizioni e Consegne</a></p>
+                    <p><a href="resi-rimborsi.html" style="color: inherit;">Resi e Rimborsi</a></p>
+                    <p><a href="termini-condizioni.html" style="color: inherit;">Termini e Condizioni</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Assistenza</h4>
+                    <p>
+                        <a href="https://wa.me/393201234567" target="_blank" style="color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            📞 WhatsApp
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zenova. Tutti i diritti riservati.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Widget -->
+    <a href="https://wa.me/393201234567" class="whatsapp-widget" target="_blank" title="Chatta con noi su WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.488 2.045 7.793L0 32l8.36-2.025A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.512 0-4.942-.708-7.053-2.042l-.507-.32-5.262 1.273 1.291-5.13-.336-.528A13.277 13.277 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
+            <path d="M23.547 19.427c-.36-.18-2.133-1.053-2.463-1.173-.33-.12-.57-.18-.81.18-.24.36-.93 1.173-1.14 1.413-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.895-1.787-1.07-.954-1.792-2.133-2.002-2.493-.21-.36-.022-.554.158-.733.162-.162.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.953-1.11-2.673-.293-.7-.59-.605-.81-.617-.21-.011-.45-.013-.69-.013-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3.003s1.29 3.483 1.47 3.723c.18.24 2.535 3.87 6.142 5.426.857.37 1.527.591 2.048.757.86.273 1.643.235 2.262.142.69-.103 2.133-.872 2.433-1.713.3-.842.3-1.563.21-1.713-.09-.15-.33-.24-.69-.42z" fill="currentColor"/>
+        </svg>
+    </a>
+</body>
+</html>

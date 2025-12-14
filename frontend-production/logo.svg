@@ -1,0 +1,48 @@
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lotusGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8B875;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4A373;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C89968;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFECD2;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#D4A373;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Glow effect -->
+  <circle cx="30" cy="30" r="28" fill="url(#glowGradient)" opacity="0.3"/>
+
+  <!-- Outer petals -->
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(-30 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(0 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(30 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(60 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(90 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(120 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(150 30 30)"/>
+  <ellipse cx="30" cy="18" rx="5" ry="14" fill="url(#lotusGradient)" opacity="0.7" transform="rotate(180 30 30)"/>
+
+  <!-- Middle petals -->
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(-22.5 30 30)"/>
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(22.5 30 30)"/>
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(67.5 30 30)"/>
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(112.5 30 30)"/>
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(157.5 30 30)"/>
+  <ellipse cx="30" cy="22" rx="4.5" ry="11" fill="url(#lotusGradient)" opacity="0.85" transform="rotate(202.5 30 30)"/>
+
+  <!-- Inner petals -->
+  <ellipse cx="30" cy="24" rx="4" ry="9" fill="url(#lotusGradient)" transform="rotate(0 30 30)"/>
+  <ellipse cx="30" cy="24" rx="4" ry="9" fill="url(#lotusGradient)" transform="rotate(45 30 30)"/>
+  <ellipse cx="30" cy="24" rx="4" ry="9" fill="url(#lotusGradient)" transform="rotate(90 30 30)"/>
+  <ellipse cx="30" cy="24" rx="4" ry="9" fill="url(#lotusGradient)" transform="rotate(135 30 30)"/>
+
+  <!-- Center -->
+  <circle cx="30" cy="30" r="6" fill="#E8B875" opacity="0.9"/>
+  <circle cx="30" cy="30" r="4" fill="#FFECD2" opacity="0.6"/>
+
+  <!-- Water ripples -->
+  <ellipse cx="30" cy="50" rx="18" ry="2" fill="none" stroke="#D4A373" stroke-width="0.5" opacity="0.3"/>
+  <ellipse cx="30" cy="50" rx="24" ry="3" fill="none" stroke="#D4A373" stroke-width="0.3" opacity="0.2"/>
+</svg>
