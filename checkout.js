@@ -2,11 +2,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Checkout system loaded');
 
-    // Initialize Stripe (MOCK for development - replace with real key in production)
+    // Initialize Stripe with real key
     let stripe, elements, cardElement;
     try {
-        // Try to initialize Stripe, but don't block if key is invalid
-        stripe = Stripe('pk_test_51234567890abcdefghijklmnopqrstuvwxyz123456');
+        // Initialize Stripe with test key
+        stripe = Stripe('pk_test_51SfJ1xFfFbDwiUWSTV0kv3h36Jeg9lBjIwPVRrrOQh43MRyj3ewtWP4UJGDPg2PUHUIj9DE4eTaUy29QCU95qhRf00kQYhOy5G');
         elements = stripe.elements();
 
         // Create card element
@@ -202,8 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Hide all payment forms
             document.getElementById('stripeCardForm').classList.add('hidden');
             document.getElementById('paypalContainer').classList.add('hidden');
-            document.getElementById('bankTransferInfo').classList.add('hidden');
-            document.getElementById('cashOnDeliveryInfo').classList.add('hidden');
 
             // Show selected payment form
             const selectedMethod = this.value;
@@ -212,13 +210,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (selectedMethod === 'paypal') {
                 document.getElementById('paypalContainer').classList.remove('hidden');
                 renderPayPalButton();
-            } else if (selectedMethod === 'bank') {
-                document.getElementById('bankTransferInfo').classList.remove('hidden');
-            } else if (selectedMethod === 'cash') {
-                document.getElementById('cashOnDeliveryInfo').classList.remove('hidden');
             }
 
-            // Recalculate order summary (to update cash on delivery fee)
+            // Recalculate order summary
             loadOrderSummary();
         });
     });
@@ -344,19 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
         */
     });
 
-    // Bank transfer confirmation
-    document.getElementById('confirmBankTransfer').addEventListener('click', function() {
-        const orderId = generateOrderId();
-        saveOrder(orderId, shippingData, 'bank');
-        goToStep(3);
-    });
-
-    // Cash on delivery confirmation
-    document.getElementById('confirmCashPayment').addEventListener('click', function() {
-        const orderId = generateOrderId();
-        saveOrder(orderId, shippingData, 'cash');
-        goToStep(3);
-    });
 
     // Promo code
     document.getElementById('applyPromo').addEventListener('click', function() {
@@ -413,29 +394,15 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('summaryDiscount').textContent = `-€${discount.toFixed(2)}`;
         }
 
-        // Calculate shipping cost (from BigBuy API + cash on delivery fee if applicable)
-        const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        // Calculate shipping cost (from BigBuy API)
         let shippingCost = calculatedShippingCost; // Base shipping cost from BigBuy
-
-        // Add cash on delivery fee if applicable
-        const cashOnDeliveryFee = 5.00;
-        if (selectedMethod && selectedMethod.value === 'cash') {
-            shippingCost += cashOnDeliveryFee;
-        }
 
         // Display shipping cost
         const shippingElement = document.getElementById('summaryShipping');
         if (shippingCost === 0) {
             shippingElement.textContent = 'Gratis';
         } else {
-            const breakdown = [];
-            if (calculatedShippingCost > 0) {
-                breakdown.push(`Spedizione: €${calculatedShippingCost.toFixed(2)}`);
-            }
-            if (selectedMethod && selectedMethod.value === 'cash') {
-                breakdown.push(`Contrassegno: €${cashOnDeliveryFee.toFixed(2)}`);
-            }
-            shippingElement.innerHTML = `€${shippingCost.toFixed(2)}${breakdown.length > 0 ? '<br><small style="color: #666;">(' + breakdown.join(' + ') + ')</small>' : ''}`;
+            shippingElement.textContent = `€${shippingCost.toFixed(2)}`;
         }
 
         const total = subtotal - discount + shippingCost;
@@ -456,12 +423,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add calculated shipping cost
         let shippingCost = calculatedShippingCost;
-
-        // Add cash on delivery fee if applicable
-        const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
-        if (selectedMethod && selectedMethod.value === 'cash') {
-            shippingCost += 5.00; // Cash on delivery fee
-        }
 
         return subtotal + shippingCost;
     }

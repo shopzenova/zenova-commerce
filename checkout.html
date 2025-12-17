@@ -193,28 +193,6 @@
                                     </div>
                                 </label>
                             </div>
-
-                            <div class="payment-method" data-method="bank">
-                                <input type="radio" id="paymentMethodBank" name="paymentMethod" value="bank">
-                                <label for="paymentMethodBank">
-                                    <div class="method-icon">🏦</div>
-                                    <div class="method-details">
-                                        <span class="method-name">Bonifico Bancario</span>
-                                        <span class="method-desc">Riceverai le istruzioni via email</span>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="payment-method" data-method="cash">
-                                <input type="radio" id="paymentCash" name="paymentMethod" value="cash">
-                                <label for="paymentCash">
-                                    <div class="method-icon">💶</div>
-                                    <div class="method-details">
-                                        <span class="method-name">Contrassegno</span>
-                                        <span class="method-desc">Paga alla consegna (+€5.00)</span>
-                                    </div>
-                                </label>
-                            </div>
                         </div>
 
                         <!-- Stripe Card Form -->
@@ -235,24 +213,6 @@
                         <!-- PayPal Container -->
                         <div class="payment-form-container hidden" id="paypalContainer">
                             <div id="paypal-button-container"></div>
-                        </div>
-
-                        <!-- Bank Transfer Info -->
-                        <div class="payment-form-container hidden" id="bankTransferInfo">
-                            <div class="info-box">
-                                <h4>Istruzioni per il bonifico</h4>
-                                <p>Completa l'ordine e riceverai le coordinate bancarie via email. L'ordine verrà processato dopo la ricezione del pagamento.</p>
-                                <button class="btn btn-primary" id="confirmBankTransfer">Conferma Ordine</button>
-                            </div>
-                        </div>
-
-                        <!-- Cash on Delivery -->
-                        <div class="payment-form-container hidden" id="cashOnDeliveryInfo">
-                            <div class="info-box">
-                                <h4>Pagamento alla consegna</h4>
-                                <p>Pagherai in contanti al corriere alla consegna. Costo aggiuntivo: €5.00</p>
-                                <button class="btn btn-primary" id="confirmCashPayment">Conferma Ordine</button>
-                            </div>
                         </div>
                     </div>
 
