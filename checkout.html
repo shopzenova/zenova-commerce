@@ -9,10 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Stripe.js -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <!-- PayPal SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AaUVAYba3rAHoZowsnhPirSm-vnNNnGL_bSZn7iGiLrtZwkyqRAAfFlwMZLIieRGksTz1TLVo83tNejt&currency=EUR"></script>
+    <!-- PayPal SDK - LIVE MODE -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQFp3HVb7joYeJnIZIBPehGoQtJGaOAM5gALJmIpz5AYwvSbOrPLLZF3tlyEOgsnoq5LYjLR2jnjVGSv&currency=EUR"></script>
 </head>
 <body>
     <!-- Header -->
@@ -166,52 +164,12 @@
                             <h2>Metodo di Pagamento</h2>
                         </div>
 
-                        <div class="payment-methods">
-                            <div class="payment-method" data-method="card">
-                                <input type="radio" id="paymentMethodCard" name="paymentMethod" value="card" checked>
-                                <label for="paymentMethodCard">
-                                    <div class="method-icon">💳</div>
-                                    <div class="method-details">
-                                        <span class="method-name">Carta di Credito/Debito</span>
-                                        <span class="method-desc">Visa, Mastercard, Amex</span>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <div class="payment-method" data-method="paypal">
-                                <input type="radio" id="paymentMethodPaypal" name="paymentMethod" value="paypal">
-                                <label for="paymentMethodPaypal">
-                                    <div class="method-icon">
-                                        <svg width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="#003087" d="M8.32 21.97a.546.546 0 0 1-.54-.46L6.47 15.3a.815.815 0 0 1 .81-.95h2.43c4.46 0 6.49-2.16 6.93-5.42.04-.31.07-.6.09-.87.34 1.75.02 3.44-.94 4.94-1.15 1.77-3.16 2.69-5.98 2.69H7.58c-.44 0-.83.32-.9.76l-.97 5.08a.546.546 0 0 1-.54.46h-2.85z"/>
-                                            <path fill="#0070E0" d="M9.05 5.82c.21-.1.44-.15.67-.15h5.48c.65 0 1.26.03 1.81.09 1.81.21 3.09.87 3.71 2.45.34 1.03.34 2.27 0 3.69v.11c-.56 3.63-3.17 5.49-7.76 5.49H10.8c-.46 0-.85.33-.92.78l-1.19 6.21-.34 1.77a.465.465 0 0 1-.46.39h-3.3c-.34 0-.62-.29-.57-.64l2.54-13.29c.08-.44.47-.76.92-.76h2.43c.46 0 .85-.33.92-.78l.22-1.16z"/>
-                                        </svg>
-                                    </div>
-                                    <div class="method-details">
-                                        <span class="method-name">PayPal</span>
-                                        <span class="method-desc">Pagamento sicuro con PayPal</span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Stripe Card Form -->
-                        <div class="payment-form-container" id="stripeCardForm">
-                            <form id="paymentForm">
-                                <div class="form-group">
-                                    <label>Dettagli Carta</label>
-                                    <div id="card-element" class="stripe-element"></div>
-                                    <div id="card-errors" class="form-error"></div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-full" id="submitPayment">
-                                    <span id="button-text">Paga €<span id="payment-amount">0.00</span></span>
-                                    <span id="spinner" class="hidden">Elaborazione...</span>
-                                </button>
-                            </form>
+                        <div class="payment-info">
+                            <p style="margin-bottom: 1.5rem; color: #666;">Paga in modo sicuro con PayPal. Puoi usare il tuo account PayPal o pagare con carta di credito/debito senza account.</p>
                         </div>
 
                         <!-- PayPal Container -->
-                        <div class="payment-form-container hidden" id="paypalContainer">
+                        <div class="payment-form-container" id="paypalContainer">
                             <div id="paypal-button-container"></div>
                         </div>
                     </div>
