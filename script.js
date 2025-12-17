@@ -875,7 +875,15 @@ function renderFeaturedProducts() {
     featuredGrid.innerHTML = '';
 
     // Filter products that are in the "home" layout
-    const featuredProducts = products.filter(p => productLayout.home.includes(p.id));
+    // Support both backend mode (productLayout.home) and static mode (product.zone)
+    const featuredProducts = products.filter(p => {
+        // Backend mode: use productLayout
+        if (productLayout.home.length > 0) {
+            return productLayout.home.includes(p.id);
+        }
+        // Static mode: use zone field
+        return p.zone === 'home';
+    });
 
     console.log(`✨ Featured products: ${featuredProducts.length} out of ${products.length} total`);
 
