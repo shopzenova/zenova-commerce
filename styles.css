@@ -354,6 +354,7 @@ body {
     align-items: center;
 }
 
+.whatsapp-header-btn,
 .search-btn,
 .wishlist-btn,
 .admin-btn,
@@ -373,6 +374,18 @@ body {
     color: var(--warm-brown);
 }
 
+.whatsapp-header-btn {
+    color: #25D366;
+    border-color: #25D366;
+}
+
+.whatsapp-header-btn:hover {
+    background: rgba(37, 211, 102, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-header-btn svg,
 .search-btn svg,
 .wishlist-btn svg,
 .user-btn svg,
