@@ -16,6 +16,16 @@ let productLayout = { home: [], sidebar: [], hidden: [] };
 function getAbsoluteImageUrl(path) {
     if (!path) return path;
 
+    // Se path è un array, prendi il primo elemento
+    if (Array.isArray(path)) {
+        path = path[0];
+    }
+
+    // Se non è una stringa, restituisci path così com'è
+    if (typeof path !== 'string') {
+        return path;
+    }
+
     // Se è già un URL assoluto o data URI, restituiscilo così com'è
     if (path.startsWith('http') || path.startsWith('data:')) {
         return path;
