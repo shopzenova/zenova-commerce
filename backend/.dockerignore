@@ -1,0 +1,91 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Development files
+.env.example
+*.md
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Logs
+logs
+*.log
+server.log
+backend.log
+server-output.log
+
+# Test files
+test
+*.test.js
+jest.config.js
+
+# Build artifacts
+dist
+build
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup*
+*-backup-*
+*.BACKUP*
+
+# CSV and JSON data files (keep only necessary ones)
+bigbuy-data
+*.csv
+bigbuy-*.json
+aw-*.json
+aw-*.csv
+top-100-products-backup*.json
+top-100-products.backup*.json
+top-100-products.json.backup*
+
+# Scripts not needed in production
+add-*.js
+analyze-*.js
+check-*.js
+clean-*.js
+compare-*.js
+debug-*.js
+delete-*.js
+download-*.js
+explore-*.js
+extract-*.js
+fetch-*.js
+filter-*.js
+find-*.js
+fix-*.js
+generate-*.js
+import-*.js
+integrate-*.js
+keep-*.js
+link-*.js
+list-*.js
+move-*.js
+recategorize-*.js
+reimport-*.js
+remove-*.js
+reorganize-*.js
+replace-*.js
+run-*.js
+search-*.js
+select-*.js
+show-*.js
+sync-*.js
+tag-*.js
+test-*.js
+translate-*.js
+update-*.js
+verify-*.js
+
+# Keep only essential files
+!prisma/
+!src/
+!server.js
+!package*.json

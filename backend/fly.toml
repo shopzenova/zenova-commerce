@@ -1,0 +1,36 @@
+# fly.toml - Configurazione Fly.io per Zenova Backend
+
+app = "zenova-backend"
+primary_region = "ams" # Amsterdam - più vicino all'Italia
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/health"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 512
+
+# Volume per persistere il database SQLite
+[[mounts]]
+  source = "zenova_data"
+  destination = "/app/prisma"
