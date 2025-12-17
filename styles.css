@@ -2228,11 +2228,80 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Header mobile compatto stile Amazon */
+    .header {
+        box-shadow: 0 2px 8px rgba(139, 111, 71, 0.1);
+    }
+
+    .nav {
+        padding: 0.6rem 0;
+    }
+
+    /* Nascondi testo logo e motto su mobile */
+    .logo-text {
+        display: none;
+    }
+
+    /* Logo icon piccolo su mobile */
+    .logo-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-icon img {
+        filter: drop-shadow(0 2px 6px rgba(212, 163, 115, 0.4));
+    }
+
+    /* Nascondi menu desktop e WhatsApp */
     .nav-menu {
         display: none;
     }
 
     .whatsapp-contact {
+        display: none;
+    }
+
+    /* Nav icons più grandi e visibili su mobile */
+    .nav-icons {
+        gap: 0.5rem;
+    }
+
+    .search-btn,
+    .cart-btn {
+        width: 48px;
+        height: 48px;
+        padding: 0.7rem;
+        border-width: 2px;
+    }
+
+    .search-btn svg,
+    .cart-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Carrello ancora più visibile */
+    .cart-btn {
+        background: rgba(212, 163, 115, 0.1);
+        border-color: var(--soft-terracotta);
+    }
+
+    .cart-btn:hover {
+        background: rgba(212, 163, 115, 0.2);
+    }
+
+    /* Badge carrello più grande */
+    .cart-count {
+        font-size: 0.75rem;
+        min-width: 22px;
+        height: 22px;
+        top: -6px;
+        right: -6px;
+    }
+
+    /* Nascondi wishlist e admin su mobile per dare più spazio */
+    .wishlist-btn,
+    .admin-btn {
         display: none;
     }
 
