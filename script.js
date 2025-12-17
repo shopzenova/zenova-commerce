@@ -1211,7 +1211,7 @@ function updateCart() {
             // Get image URL or fallback
             let imageHtml = '';
             const imageUrl = getAbsoluteImageUrl(item.image);
-            if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
                 imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
