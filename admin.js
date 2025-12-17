@@ -1525,12 +1525,9 @@ function attachMoveCategoryListeners() {
 
     console.log('🔗 Attacco event delegation per pulsanti Sposta Categoria');
 
-    // Event delegation sul main content
-    const mainContent = document.querySelector('.admin-content');
-    if (!mainContent) return;
-
-    mainContent.addEventListener('click', function(e) {
-        // Ignora se il click viene dal modal
+    // Event delegation sul document body per catturare anche i modali
+    document.body.addEventListener('click', function(e) {
+        // Ignora se il click viene dal modal di modifica categoria
         if (e.target.closest('#editCategoryModal')) {
             return;
         }
