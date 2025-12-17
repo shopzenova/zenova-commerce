@@ -1009,9 +1009,13 @@ function renderProducts() {
     let productsToRender = [];
 
     if (productLayout && productLayout.featured && productLayout.featured.length > 0) {
-        // Mostra prodotti marcati come featured dall'admin
+        // Backend mode: Mostra prodotti marcati come featured dall'admin
         productsToRender = visibleProducts.filter(p => productLayout.featured.includes(p.id));
-        console.log(`⭐ Prodotti featured dall'admin: ${productsToRender.length}`);
+        console.log(`⭐ Prodotti featured dall'admin (backend): ${productsToRender.length}`);
+    } else {
+        // Static mode: usa campo 'featured' da products.json
+        productsToRender = visibleProducts.filter(p => p.featured === true);
+        console.log(`⭐ Prodotti featured (statico): ${productsToRender.length}`);
     }
 
     // Se non ci sono featured o sono meno di 20, completa con selezione automatica
