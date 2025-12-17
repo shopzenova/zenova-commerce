@@ -498,6 +498,20 @@ async function loadProductsFromBackend() {
 
         // STATIC MODE - Load from JSON file (for Vercel deployment)
         console.log('📦 Modalità statica - carico da products.json');
+
+        // Load product layout for featured/home/hidden
+        try {
+            const layoutResponse = await fetch('./product-layout.json');
+            productLayout = await layoutResponse.json();
+            console.log('✅ Layout caricato:', {
+                home: productLayout.home?.length || 0,
+                featured: productLayout.featured?.length || 0,
+                hidden: productLayout.hidden?.length || 0
+            });
+        } catch (e) {
+            console.warn('⚠️  product-layout.json non trovato, uso valori di default');
+        }
+
         const response = await fetch('./products.json');
         const jsonProducts = await response.json();
 
