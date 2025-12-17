@@ -56,3 +56,4 @@ zenova-ecommerce/
 ---
 
 **Zenova** - La tua oasi di tranquillità
+# Vercel rebuild trigger
