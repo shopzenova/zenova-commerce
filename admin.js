@@ -1,7 +1,27 @@
 // Admin Panel JavaScript
 
-// API Configuration
-const API_BASE = 'http://localhost:3000/api';
+// API Configuration - Auto-detect environment
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : null;
+
+// Products cache (used when online without backend)
+let PRODUCTS_CACHE = null;
+
+// Load products from JSON (fallback for online mode)
+async function loadProductsFromJSON() {
+    if (PRODUCTS_CACHE) return PRODUCTS_CACHE;
+
+    try {
+        const response = await fetch('/products.json');
+        const products = await response.json();
+        PRODUCTS_CACHE = products;
+        console.log(`📦 Loaded ${products.length} products from products.json (online mode)`);
+        return products;
+    } catch (error) {
+        console.error('❌ Error loading products.json:', error);
+        return [];
+    }
+}
 
 // Authentication
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -372,11 +392,29 @@ document.head.appendChild(style);
 // Load dashboard statistics from API
 async function loadDashboardStats() {
     try {
-        const response = await fetch(`${API_BASE}/admin/stats`);
-        const result = await response.json();
+        let stats;
 
-        if (result.success) {
-            const stats = result.data;
+        if (IS_LOCAL) {
+            // Local mode: use backend API
+            const response = await fetch(`${API_BASE}/admin/stats`);
+            const result = await response.json();
+            if (result.success) {
+                stats = result.data;
+            }
+        } else {
+            // Online mode: calculate from products.json
+            const products = await loadProductsFromJSON();
+            stats = {
+                totalProducts: products.length,
+                availableProducts: products.filter(p => p.stock > 0).length,
+                outOfStock: products.filter(p => p.stock === 0).length,
+                todayOrders: 0,
+                todaySales: 0,
+                lastSync: new Date().toISOString()
+            };
+        }
+
+        if (stats) {
 
             // Update stat cards
             document.querySelector('.stat-card:nth-child(1) h3').textContent = stats.totalProducts;
@@ -398,20 +436,44 @@ let allProducts = [];
 // Load products from API
 async function loadProducts() {
     try {
-        const response = await fetch(`${API_BASE}/admin/products?zone=all`);
-        const result = await response.json();
+        if (IS_LOCAL) {
+            // Local mode: use backend API
+            const response = await fetch(`${API_BASE}/admin/products?zone=all`);
+            const result = await response.json();
 
-        if (result.success) {
-            allProducts = result.data;
-            console.log(`✅ Caricati ${allProducts.length} prodotti`);
+            if (result.success) {
+                allProducts = result.data;
+                console.log(`✅ Caricati ${allProducts.length} prodotti (local mode)`);
 
-            // Popola le zone con i prodotti reali
-            populateProductZones(allProducts);
+                // Popola le zone con i prodotti reali
+                populateProductZones(allProducts);
 
-            // Salva il layout dal server
-            if (result.layout) {
-                localStorage.setItem('zenova_product_layout', JSON.stringify(result.layout));
+                // Salva il layout dal server
+                if (result.layout) {
+                    localStorage.setItem('zenova_product_layout', JSON.stringify(result.layout));
+                }
             }
+        } else {
+            // Online mode: load from products.json
+            const products = await loadProductsFromJSON();
+
+            // Convert to admin format (add zone and other metadata)
+            allProducts = products.map(p => ({
+                id: p.sku || p.id,
+                name: p.name,
+                price: p.price,
+                stock: p.stock || 0,
+                available: p.stock > 0,
+                image: p.image,
+                images: p.images || [p.image],
+                category: p.category,
+                subcategory: p.subcategory,
+                zone: p.zone || 'hidden', // Default to hidden if no zone
+                featured: p.featured || false
+            }));
+
+            console.log(`✅ Caricati ${allProducts.length} prodotti (online mode)`);
+            populateProductZones(allProducts);
         }
     } catch (error) {
         console.error('❌ Errore caricamento prodotti:', error);
@@ -685,6 +747,16 @@ function setupDragAndDrop(card) {
 // Load activity log
 async function loadActivity() {
     try {
+        if (!IS_LOCAL) {
+            // Online mode: no activity data available
+            const activityList = document.querySelector('.activity-list');
+            if (activityList) {
+                activityList.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Attività disponibili solo in modalità locale</p>';
+            }
+            return;
+        }
+
+        // Local mode: fetch from API
         const response = await fetch(`${API_BASE}/admin/activity`);
         const result = await response.json();
 
