@@ -1844,7 +1844,7 @@ console.log('Pannello Admin Zenova caricato ✅');
 const SUBCATEGORIES_MAP = {
     'smart-living': [
         { value: 'smart-led-illuminazione', label: 'Smart LED Illuminazione' },
-        { value: 'domotica-smart-home', label: 'Domotica & Smart Home' }
+        { value: 'domotica-smart-home', label: 'Home & Decor' }
     ],
     'beauty': [
         { value: 'makeup', label: 'Makeup' },
