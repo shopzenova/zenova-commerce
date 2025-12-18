@@ -89,7 +89,9 @@ async function importDiffusers() {
         const dimensions = product['Unit dimensions'] || '';
         const materials = product['Materials/Ingredients'] || '';
         const barcode = product['Barcode'] || '';
-        const stock = product['Stock'] === 'Discontinued' ? 0 : 100; // Stock di default
+        // Usa quantità reale dal CSV
+        const availableQty = parseInt(product['Available Quantity'] || 0);
+        const stock = product['Stock'] === 'Discontinued' ? 0 : availableQty;
 
         // Ottieni immagini
         const images = getProductImages(productCode, imagesDir);
