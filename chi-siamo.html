@@ -27,7 +27,44 @@
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
             }, 'google_translate_element');
+
+            // Restore saved language preference
+            restoreSavedLanguage();
         }
+
+        // Restore the previously selected language
+        function restoreSavedLanguage() {
+            const savedLang = localStorage.getItem('zenova-translate-lang');
+            if (savedLang && savedLang !== 'it') {
+                // Wait for Google Translate to fully load
+                setTimeout(() => {
+                    const selectElement = document.querySelector('.goog-te-combo');
+                    if (selectElement) {
+                        selectElement.value = savedLang;
+                        selectElement.dispatchEvent(new Event('change'));
+                    }
+                }, 1000);
+            }
+        }
+
+        // Monitor language changes and save preference
+        document.addEventListener('DOMContentLoaded', function() {
+            // Monitor for language selector changes
+            const observer = new MutationObserver(function() {
+                const selectElement = document.querySelector('.goog-te-combo');
+                if (selectElement && !selectElement.hasAttribute('data-listener')) {
+                    selectElement.setAttribute('data-listener', 'true');
+                    selectElement.addEventListener('change', function() {
+                        localStorage.setItem('zenova-translate-lang', this.value);
+                    });
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
