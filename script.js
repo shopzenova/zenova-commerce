@@ -31,6 +31,12 @@ function getAbsoluteImageUrl(path) {
         return path;
     }
 
+    // Se è un percorso relativo che inizia con /uploads/, è un file statico locale
+    // Restituiscilo così com'è (Vercel servirà questi file statici)
+    if (path.startsWith('/uploads/')) {
+        return path;
+    }
+
     // Se è un percorso relativo che inizia con /, aggiungi il prefisso del backend
     if (path.startsWith('/')) {
         return 'http://localhost:3000' + path;
