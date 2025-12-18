@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadCart();
     loadWishlist();
     setupEventListeners();
-    setupCategorySidebar(); // Re-enabled to handle category navigation from hash
+    // setupCategorySidebar(); // REMOVED - sidebar.js handles category accordion
     initDarkMode();
 
     // ✅ FIX: Inizializza click sulle card SUBITO dopo il rendering
