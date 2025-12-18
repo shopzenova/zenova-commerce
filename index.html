@@ -79,6 +79,13 @@
         </div>
         <div class="container">
             <nav class="nav">
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
                 <div class="logo">
                     <div class="logo-icon">
                         <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
@@ -107,6 +114,23 @@
                         <span class="link-underline"></span>
                     </a></li>
                 </ul>
+                <!-- Mobile Icons (only search + cart) -->
+                <div class="nav-icons-mobile">
+                    <button class="search-btn" id="searchBtnMobile">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="cart-btn" id="cartBtnMobile">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="cart-count-mobile">0</span>
+                    </button>
+                </div>
+
+                <!-- Desktop Icons (all icons) -->
                 <div class="nav-icons">
                     <div id="google_translate_element" style="display: inline-block;"></div>
                     <button class="theme-toggle-btn" id="themeToggle" title="Cambia tema">

@@ -2,6 +2,137 @@
    ZENOVA MOBILE OPTIMIZATIONS
    ======================================== */
 
+/* Mobile Header - Always visible */
+
+/* Hide desktop elements on mobile */
+@media (max-width: 968px) {
+
+    /* Hide desktop nav menu and icons */
+    .nav-menu {
+        display: none !important;
+    }
+
+    .nav-icons {
+        display: none !important;
+    }
+
+    /* Show mobile icons */
+    .nav-icons-mobile {
+        display: flex !important;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Mobile menu toggle button (hamburger) */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        position: relative;
+        z-index: 1001;
+    }
+
+    .mobile-menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-color, #333);
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Compact logo for mobile */
+    .logo {
+        flex: 1;
+    }
+
+    .logo-text h1 {
+        font-size: 1.2rem !important;
+    }
+
+    .logo-experience {
+        font-size: 0.7rem !important;
+    }
+
+    .tagline {
+        display: none !important;
+    }
+
+    /* Mobile nav layout */
+    .nav {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 0.5rem;
+        padding: 0.5rem 0 !important;
+    }
+
+    /* Mobile icons styling */
+    .nav-icons-mobile button,
+    .nav-icons-mobile a {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .nav-icons-mobile svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--text-color, #333);
+    }
+
+    .cart-count-mobile {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: var(--primary-color, #ff6b6b);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 10px;
+        min-width: 18px;
+        text-align: center;
+    }
+}
+
+/* Hide mobile elements on desktop */
+@media (min-width: 969px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    .nav-icons-mobile {
+        display: none !important;
+    }
+}
+
 /* Migliori font size per mobile */
 @media (max-width: 768px) {
 

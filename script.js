@@ -1217,11 +1217,13 @@ function updateQuantity(productId, change) {
 function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
+    const cartCountMobile = document.querySelector('.cart-count-mobile');
     const cartTotal = document.getElementById('cartTotal');
 
-    // Update cart count
+    // Update cart count (both desktop and mobile)
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
+    if (cartCount) cartCount.textContent = totalItems;
+    if (cartCountMobile) cartCountMobile.textContent = totalItems;
 
     // Update cart items
     if (cart.length === 0) {
@@ -1480,19 +1482,49 @@ function loadWishlist() {
 // Setup Event Listeners
 function setupEventListeners() {
     const cartBtn = document.getElementById('cartBtn');
+    const cartBtnMobile = document.getElementById('cartBtnMobile');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchBtnMobile = document.getElementById('searchBtnMobile');
     const closeCart = document.getElementById('closeCart');
     const wishlistBtn = document.getElementById('wishlistBtn');
     const closeWishlist = document.getElementById('closeWishlist');
     const overlay = document.getElementById('overlay');
     const cartSidebar = document.getElementById('cartSidebar');
     const wishlistSidebar = document.getElementById('wishlistSidebar');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-    // Cart listeners
-    cartBtn.addEventListener('click', () => {
-        cartSidebar.classList.add('active');
-        wishlistSidebar.classList.remove('active');
-        overlay.classList.add('active');
-    });
+    // Mobile menu toggle
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            // TODO: Open mobile menu sidebar when implemented
+        });
+    }
+
+    // Cart listeners (desktop)
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            wishlistSidebar.classList.remove('active');
+            overlay.classList.add('active');
+        });
+    }
+
+    // Cart listeners (mobile)
+    if (cartBtnMobile) {
+        cartBtnMobile.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            wishlistSidebar.classList.remove('active');
+            overlay.classList.add('active');
+        });
+    }
+
+    // Search listeners (mobile)
+    if (searchBtnMobile && searchBtn) {
+        searchBtnMobile.addEventListener('click', () => {
+            searchBtn.click(); // Trigger desktop search
+        });
+    }
 
     closeCart.addEventListener('click', () => {
         cartSidebar.classList.remove('active');
