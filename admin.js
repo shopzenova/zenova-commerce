@@ -167,6 +167,11 @@ function updateZoneCounts() {
 
 // Save product layout to server and localStorage
 async function saveProductLayout() {
+    if (!IS_LOCAL) {
+        alert('⚠️ Salvataggio layout disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare il layout.');
+        return;
+    }
+
     const layout = {
         home: [],
         sidebar: [],
@@ -261,6 +266,11 @@ priceInputs.forEach(inputId => {
 
 // Sync Now Function
 async function syncNow() {
+    if (!IS_LOCAL) {
+        alert('⚠️ Sincronizzazione BigBuy disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per sincronizzare il catalogo.');
+        return;
+    }
+
     const syncBtn = document.querySelector('.btn-sync');
     const syncSpinner = document.querySelector('.sync-spinner');
     const syncStatusText = document.querySelector('.sync-status-text');
@@ -981,6 +991,11 @@ function cancelImport() {
 
 // Toggle visibilità prodotto
 async function toggleProductVisibility(productId, productName, currentVisibility) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Modifica visibilità prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare i prodotti.');
+        return;
+    }
+
     const newVisibility = !currentVisibility;
     const action = newVisibility ? 'visibile' : 'nascosto';
 
@@ -1017,6 +1032,11 @@ async function toggleProductVisibility(productId, productName, currentVisibility
 
 // Elimina prodotto
 async function deleteProduct(productId, productName) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Eliminazione prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire i prodotti.');
+        return;
+    }
+
     const confirmed = confirm(`🗑️ Sei sicuro di voler eliminare questo prodotto?\n\n"${productName}"\n\nQuesta azione è irreversibile!`);
 
     if (!confirmed) return;
@@ -1044,6 +1064,11 @@ async function deleteProduct(productId, productName) {
 
 // Toggle featured product
 async function toggleFeatured(productId, productName, currentlyFeatured) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Gestione prodotti in evidenza disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire i prodotti in evidenza.');
+        return;
+    }
+
     try {
         const action = currentlyFeatured ? 'rimuovere da' : 'mettere in';
         const confirmed = confirm(`⭐ ${action.toUpperCase()} evidenza?\n\n"${productName}"\n\n${currentlyFeatured ? 'Non verrà più mostrato tra i prodotti in evidenza.' : 'Verrà mostrato tra i 100 prodotti in evidenza nello shop.'}`);
@@ -1086,6 +1111,15 @@ let catalogState = {
 // Carica prodotti dal catalogo FTP
 async function loadCatalogProducts(page = 1) {
     try {
+        if (!IS_LOCAL) {
+            // Online mode: catalog not available
+            const catalogGrid = document.getElementById('catalogProductsGrid');
+            if (catalogGrid) {
+                catalogGrid.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Catalogo BigBuy</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>http://localhost:3000/admin.html</code> per accedere al catalogo completo</p></div>';
+            }
+            return;
+        }
+
         const category = document.getElementById('catalogCategory').value;
         const search = document.getElementById('catalogSearch').value;
 
@@ -1266,6 +1300,11 @@ function renderCatalogPagination(currentPage, totalPages) {
 
 // Import product from catalog to curated catalog
 async function importCatalogProduct(productId) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Importazione prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per importare prodotti dal catalogo BigBuy.');
+        return;
+    }
+
     try {
         const confirmed = confirm(`📦 Importare questo prodotto nel catalogo curato Zenova?\n\nSKU: ${productId}\n\nIl prodotto sarà subito disponibile sul sito.`);
 
@@ -1985,6 +2024,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            if (!IS_LOCAL) {
+                alert('⚠️ Modifica categoria disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare le categorie.');
+                return;
+            }
+
             try {
                 const response = await fetch(`http://localhost:3000/api/admin/products/${productId}/category`, {
                     method: 'PATCH',
@@ -2034,6 +2078,11 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadOrders(statusFilter = '') {
     const container = document.getElementById('ordersContainer');
     if (!container) return;
+
+    if (!IS_LOCAL) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Gestione Ordini</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>http://localhost:3000/admin.html</code> per gestire gli ordini</p></div>';
+        return;
+    }
 
     try {
         container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
@@ -2158,6 +2207,11 @@ function addOrderEventListeners(orderId) {
  * Aggiorna stato ordine
  */
 async function updateOrderStatus(orderId, newStatus) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Gestione ordini disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire gli ordini.');
+        return;
+    }
+
     try {
         const response = await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
             method: 'PATCH',
