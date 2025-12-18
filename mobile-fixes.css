@@ -262,6 +262,28 @@
         gap: 1.5rem !important;
     }
 
+    /* Tech features grid - 2 colonne su mobile */
+    .tech-features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+
+    .tech-feature-card {
+        padding: 1rem !important;
+    }
+
+    .tech-feature-icon {
+        font-size: 2rem !important;
+    }
+
+    .tech-feature-title {
+        font-size: 0.9rem !important;
+    }
+
+    .tech-feature-description {
+        font-size: 0.85rem !important;
+    }
+
     /* Logo più piccolo su mobile */
     .logo h1 {
         font-size: 1.3rem !important;
