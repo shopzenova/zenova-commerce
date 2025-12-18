@@ -2125,22 +2125,51 @@ function openProductDetailModal(productId) {
     if (techInfoGrid) {
         const techInfo = [];
 
+        // Standard product fields
         if (product.ean) techInfo.push({ label: 'EAN', value: product.ean });
+
+        // Handle dimensions - can be object or string
         if (product.dimensions) {
-            const dims = product.dimensions;
-            techInfo.push({
-                label: 'Dimensioni',
-                value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
-            });
+            if (typeof product.dimensions === 'object') {
+                const dims = product.dimensions;
+                techInfo.push({
+                    label: 'Dimensioni',
+                    value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
+                });
+            } else if (typeof product.dimensions === 'string') {
+                techInfo.push({ label: 'Dimensioni', value: product.dimensions });
+            }
         }
+
         if (product.weight) {
-            // Converti grammi in kg se >= 1000g, altrimenti mostra in grammi
-            const weightDisplay = product.weight >= 1000
-                ? `${(product.weight / 1000).toFixed(2)} kg`
-                : `${product.weight} g`;
+            // Converti grammi in kg se >= 1, altrimenti mostra in kg con 3 decimali
+            const weightDisplay = product.weight >= 1
+                ? `${product.weight.toFixed(2)} kg`
+                : `${(product.weight * 1000).toFixed(0)} g`;
             techInfo.push({ label: 'Peso', value: weightDisplay });
         }
+
         if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
+
+        // Extended features from AW products
+        if (product.features && typeof product.features === 'object') {
+            const features = product.features;
+
+            if (features.barcode) techInfo.push({ label: 'Barcode', value: features.barcode });
+            if (features.family) techInfo.push({ label: 'Famiglia', value: features.family });
+            if (features.materials) techInfo.push({ label: 'Materiali', value: features.materials });
+
+            if (features.packageWeight) {
+                const pkgWeightDisplay = features.packageWeight >= 1
+                    ? `${features.packageWeight.toFixed(2)} kg`
+                    : `${(features.packageWeight * 1000).toFixed(0)} g`;
+                techInfo.push({ label: 'Peso Imballaggio', value: pkgWeightDisplay });
+            }
+
+            if (features.countryOfOrigin) techInfo.push({ label: 'Paese di Origine', value: features.countryOfOrigin });
+            if (features.unitsPerOuter) techInfo.push({ label: 'Unità per Scatola', value: features.unitsPerOuter.toString() });
+            if (features.cpnpNumber) techInfo.push({ label: 'CPNP', value: features.cpnpNumber });
+        }
 
         if (techInfo.length > 0) {
             techInfoGrid.innerHTML = techInfo
@@ -2211,7 +2240,8 @@ function updateGallery() {
     imageUrl = getAbsoluteImageUrl(imageUrl);
     console.log('🔧 updateGallery - imageUrl finale:', imageUrl);
 
-    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+    // Accept both absolute URLs (http/data) and relative paths (starting with /)
+    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
         console.log('✅ Impostando immagine:', imageUrl);
         imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
     } else if (typeof currentImage === 'string' && currentImage.includes('<svg')) {
