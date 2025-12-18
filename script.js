@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadCart();
     loadWishlist();
     setupEventListeners();
-    // setupCategorySidebar(); // REMOVED - sidebar.js handles category accordion
+    setupCategorySidebar(); // Re-enabled to handle category navigation from hash
     initDarkMode();
 
     // ✅ FIX: Inizializza click sulle card SUBITO dopo il rendering
@@ -668,9 +668,84 @@ window.autoOpenCategoryFromHash = function() {
         }
     }
 
+    // Map subcategories to main categories
+    const subcategoryToCategory = {
+        // Smart Living
+        'smart-led': 'smart-living',
+        'smart-led-illuminazione': 'smart-living',
+        'domotica': 'smart-living',
+        'domotica-smart-home': 'smart-living',
+        // Beauty
+        'makeup': 'beauty',
+        'skincare': 'beauty',
+        'profumi': 'beauty',
+        'corpo': 'beauty',
+        // Health & Personal Care
+        'hair-care': 'health-personal-care',
+        'barba': 'health-personal-care',
+        'massaggio-benessere': 'health-personal-care',
+        'protezione-solare': 'health-personal-care',
+        // Tech Innovation
+        'gadget-tech': 'tech-innovation',
+        // Natural Wellness
+        'oli-essenziali': 'natural-wellness',
+        'oli-per-fragranza': 'natural-wellness',
+        'candele-gel-profumati-sali-bagno': 'natural-wellness',
+        'diffusori-elettronici': 'natural-wellness',
+        'diffusori-bastoncini': 'natural-wellness',
+        'pietre-preziose': 'natural-wellness',
+        'incenso': 'natural-wellness',
+        'vestiario-wellness': 'natural-wellness'
+    };
+
+    // Open the parent category in sidebar if subcategory is present
+    if (subcategory && subcategoryToCategory[subcategory]) {
+        const mainCategory = subcategoryToCategory[subcategory];
+        console.log(`📂 Opening parent category "${mainCategory}" for subcategory "${subcategory}"`);
+
+        // Find the category button and open it manually
+        const categoryBtn = document.querySelector(`.category-btn[data-category="${mainCategory}"]`);
+        if (categoryBtn) {
+            const categoryItem = categoryBtn.parentElement;
+            const subcategoryList = categoryItem.querySelector('.subcategory-list');
+
+            // Close all other categories first
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item !== categoryItem) {
+                    item.classList.remove('active');
+                    const sublist = item.querySelector('.subcategory-list');
+                    if (sublist) sublist.style.maxHeight = '0px';
+                }
+            });
+
+            // Open this category
+            categoryItem.classList.add('active');
+            if (subcategoryList) {
+                subcategoryList.style.maxHeight = '500px';
+            }
+            console.log('🔓 Category opened in sidebar');
+        } else {
+            console.log('⚠️ Category button not found for:', mainCategory);
+        }
+
+        // Highlight the subcategory link
+        setTimeout(() => {
+            const subcategoryLink = document.querySelector(`.subcategory-link[data-subcategory="${subcategory}"]`);
+            if (subcategoryLink) {
+                // Remove active from all subcategory links
+                document.querySelectorAll('.subcategory-link').forEach(link => link.classList.remove('active'));
+                // Add active to current
+                subcategoryLink.classList.add('active');
+                console.log('✅ Subcategory link highlighted');
+            } else {
+                console.log('⚠️ Subcategory link not found for:', subcategory);
+            }
+        }, 300);
+    }
+
     // Filter by subcategory if present
     if (subcategory) {
-        console.log('📂 Opening subcategory:', subcategory);
+        console.log('📂 Filtering products for subcategory:', subcategory);
         filterProductsBySubcategory(subcategory);
     }
 
@@ -1687,110 +1762,78 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Setup Category Sidebar - DISABLED: sidebar.js handles this
-// function setupCategorySidebar() {
-//     const categoryBtns = document.querySelectorAll('.category-btn');
-//
-//     console.log('Setting up sidebar, found buttons:', categoryBtns.length);
-//
-//     if (categoryBtns.length === 0) {
-//         console.log('No category buttons found, exiting');
-//         // Show message on page if buttons not found
-//         const sidebar = document.querySelector('.categories-sidebar');
-//         if (sidebar) {
-//             const msg = document.createElement('div');
-//             msg.style.cssText = 'color: red; padding: 10px; background: #fff;';
-//             msg.textContent = 'ERRORE: Pulsanti non trovati!';
-//             sidebar.prepend(msg);
-//         }
-//         return; // Exit if no sidebar exists
-//     }
-//
-//     // Show success message
-//     const sidebar = document.querySelector('.categories-sidebar');
-//     if (sidebar) {
-//         const msg = document.createElement('div');
-//         msg.style.cssText = 'color: green; padding: 10px; background: #e8f5e9; margin-bottom: 10px; border-radius: 5px; font-size: 12px;';
-//         msg.textContent = `✓ Sidebar attiva! Trovati ${categoryBtns.length} pulsanti`;
-//         sidebar.querySelector('.sidebar-header').after(msg);
-//
-//         // Remove message after 3 seconds
-//         setTimeout(() => msg.remove(), 3000);
-//     }
-//
-//     categoryBtns.forEach((btn, index) => {
-//         console.log('Adding listener to button', index);
-//         btn.addEventListener('click', function(e) {
-//             e.preventDefault();
-//             e.stopPropagation();
-//
-//             alert('Click rilevato su categoria ' + index);
-//             console.log('Button clicked!', index);
-//
-//             const categoryItem = this.parentElement;
-//             console.log('Category item:', categoryItem);
-//
-//             // Close all other categories
-//             document.querySelectorAll('.category-item').forEach(item => {
-//                 if (item !== categoryItem) {
-//                     item.classList.remove('active');
-//                     const sublist = item.querySelector('.subcategory-list');
-//                     if (sublist) sublist.style.maxHeight = '0px';
-//                 }
-//             });
-//
-//             // Toggle current category
-//             const wasActive = categoryItem.classList.contains('active');
-//             const subcategoryList = categoryItem.querySelector('.subcategory-list');
-//
-//             if (wasActive) {
-//                 categoryItem.classList.remove('active');
-//                 if (subcategoryList) subcategoryList.style.maxHeight = '0px';
-//                 console.log('Closed category');
-//             } else {
-//                 categoryItem.classList.add('active');
-//                 if (subcategoryList) subcategoryList.style.maxHeight = '500px';
-//                 console.log('Opened category');
-//             }
-//
-//             // Visual debug - change button color
-//             this.style.background = wasActive ? '' : 'rgba(212, 163, 115, 0.3)';
-//         });
-//     });
-//
-//     // Handle subcategory clicks - filter products on page
-//     const subcategoryLinks = document.querySelectorAll('.subcategory-link');
-//
-//     subcategoryLinks.forEach(link => {
-//         link.addEventListener('click', (e) => {
-//             e.preventDefault();
-//             const subcategory = link.dataset.subcategory;
-//             console.log('Filtering by subcategory:', subcategory);
-//
-//             // Remove active class from all links
-//             subcategoryLinks.forEach(l => l.classList.remove('active'));
-//             // Add active class to clicked link
-//             link.classList.add('active');
-//
-//             // Filter products
-//             const productCards = document.querySelectorAll('.product-card');
-//             productCards.forEach(card => {
-//                 if (subcategory === 'all') {
-//                     card.style.display = 'block';
-//                 } else {
-//                     const cardSubcategory = card.getAttribute('data-subcategory');
-//                     if (cardSubcategory === subcategory) {
-//                         card.style.display = 'block';
-//                     } else {
-//                         card.style.display = 'none';
-//                     }
-//                 }
-//             });
-//
-//             // Scroll to products section
-//             document.querySelector('.products-grid').scrollIntoView({ behavior: 'smooth' });
-//         });
-//     });
-// }
+function setupCategorySidebar() {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+
+    console.log('📂 Setting up sidebar, found buttons:', categoryBtns.length);
+
+    if (categoryBtns.length === 0) {
+        console.log('⚠️ No category buttons found in sidebar');
+        return;
+    }
+
+    categoryBtns.forEach((btn, index) => {
+        console.log('➕ Adding listener to button', index);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log('🔘 Category button clicked:', index);
+
+            const categoryItem = this.parentElement;
+
+            // Close all other categories
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item !== categoryItem) {
+                    item.classList.remove('active');
+                    const sublist = item.querySelector('.subcategory-list');
+                    if (sublist) sublist.style.maxHeight = '0px';
+                }
+            });
+
+            // Toggle current category
+            const wasActive = categoryItem.classList.contains('active');
+            const subcategoryList = categoryItem.querySelector('.subcategory-list');
+
+            if (wasActive) {
+                categoryItem.classList.remove('active');
+                if (subcategoryList) subcategoryList.style.maxHeight = '0px';
+                console.log('🔽 Closed category');
+            } else {
+                categoryItem.classList.add('active');
+                if (subcategoryList) subcategoryList.style.maxHeight = '500px';
+                console.log('🔼 Opened category');
+            }
+        });
+    });
+
+    // Handle subcategory clicks - filter products on page
+    const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const subcategory = link.dataset.subcategory;
+            console.log('📂 Filtering by subcategory:', subcategory);
+
+            // Remove active class from all links
+            subcategoryLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            link.classList.add('active');
+
+            // Use the global filter function
+            if (typeof filterProductsBySubcategory === 'function') {
+                filterProductsBySubcategory(subcategory);
+            }
+
+            // Scroll to products section
+            const productsGrid = document.querySelector('.products-grid');
+            if (productsGrid) {
+                productsGrid.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
 
 // ============ SEARCH FUNCTIONALITY ============
 
