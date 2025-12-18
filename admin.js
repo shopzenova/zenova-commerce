@@ -458,19 +458,25 @@ async function loadProducts() {
             const products = await loadProductsFromJSON();
 
             // Convert to admin format (add zone and other metadata)
-            allProducts = products.map(p => ({
-                id: p.sku || p.id,
-                name: p.name,
-                price: p.price,
-                stock: p.stock || 0,
-                available: p.stock > 0,
-                image: p.image,
-                images: p.images || [p.image],
-                category: p.category,
-                subcategory: p.subcategory,
-                zone: p.zone || 'hidden', // Default to hidden if no zone
-                featured: p.featured || false
-            }));
+            allProducts = products.map(p => {
+                // Handle image: if it's an array, take first element, otherwise use as is
+                const imageUrl = Array.isArray(p.image) ? p.image[0] : p.image;
+                const imagesArray = p.images || (imageUrl ? [imageUrl] : []);
+
+                return {
+                    id: p.sku || p.id,
+                    name: p.name,
+                    price: p.price,
+                    stock: p.stock || 0,
+                    available: p.stock > 0,
+                    image: imageUrl || '',
+                    images: imagesArray,
+                    category: p.category,
+                    subcategory: p.subcategory,
+                    zone: p.zone || 'hidden', // Default to hidden if no zone
+                    featured: p.featured || false
+                };
+            });
 
             console.log(`✅ Caricati ${allProducts.length} prodotti (online mode)`);
             populateProductZones(allProducts);
