@@ -1191,7 +1191,7 @@ body {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-medium);
-    transition: all 0.4s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     border: 2px solid transparent;
     position: relative;
