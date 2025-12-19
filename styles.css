@@ -2398,7 +2398,7 @@ body {
 }
 
 .product-card {
-    animation: fadeIn 0.5s ease forwards;
+    animation: fadeIn 0.2s ease forwards;
 }
 
 /* Search Modal */
