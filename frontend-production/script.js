@@ -16,8 +16,24 @@ let productLayout = { home: [], sidebar: [], hidden: [] };
 function getAbsoluteImageUrl(path) {
     if (!path) return path;
 
+    // Se path è un array, prendi il primo elemento
+    if (Array.isArray(path)) {
+        path = path[0];
+    }
+
+    // Se non è una stringa, restituisci path così com'è
+    if (typeof path !== 'string') {
+        return path;
+    }
+
     // Se è già un URL assoluto o data URI, restituiscilo così com'è
     if (path.startsWith('http') || path.startsWith('data:')) {
+        return path;
+    }
+
+    // Se è un percorso relativo che inizia con /uploads/, è un file statico locale
+    // Restituiscilo così com'è (Vercel servirà questi file statici)
+    if (path.startsWith('/uploads/')) {
         return path;
     }
 
@@ -440,58 +456,103 @@ function getIconForCategory(category) {
 }
 
 /**
- * Load products from backend
+ * Load products from backend OR static JSON
  */
 async function loadProductsFromBackend() {
-    console.log('🔄 Caricamento prodotti dal backend...');
+    console.log('🔄 Caricamento prodotti...');
 
     try {
-        // Check if ZenovaAPI is available
-        if (typeof ZenovaAPI === 'undefined') {
-            console.warn('⚠️ ZenovaAPI non disponibile, uso prodotti statici');
-            products = staticProducts;
-            return false;
-        }
+        // Check if ZenovaAPI is available (backend mode)
+        if (typeof ZenovaAPI !== 'undefined') {
+            // BACKEND MODE - Use API
+            console.log('📡 Modalità backend - carico da API');
 
-        // Load layout first (to know which products to hide)
-        console.log('📂 Caricamento layout prodotti...');
-        productLayout = await ZenovaAPI.getLayout();
-        console.log('✅ Layout caricato:', {
-            inVetrina: productLayout.home.length,
-            nascosti: productLayout.hidden.length
-        });
-
-        // Call backend API (load all products including Health)
-        const backendProducts = await ZenovaAPI.getProducts(1, 10000);
-
-        if (backendProducts && backendProducts.length > 0) {
-            console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
-
-            // Map backend products to frontend format
-            const mappedProducts = backendProducts
-                .map(mapBackendProductToFrontend)
-                .filter(p => p !== null);
-
-            // Filter out HIDDEN products (not visible anywhere)
-            products = mappedProducts.filter(p => {
-                const isHidden = productLayout.hidden.includes(p.id);
-                if (isHidden) {
-                    console.log(`🚫 Prodotto nascosto: ${p.name}`);
-                }
-                return !isHidden;
+            // Load layout first (to know which products to hide)
+            console.log('📂 Caricamento layout prodotti...');
+            productLayout = await ZenovaAPI.getLayout();
+            console.log('✅ Layout caricato:', {
+                inVetrina: productLayout.home.length,
+                nascosti: productLayout.hidden.length
             });
 
-            console.log('✅ Prodotti convertiti e pronti:', products.length);
-            console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
-            console.log('📦 Tutte le categorie BigBuy caricate correttamente');
-            return true;
-        } else {
-            console.warn('⚠️ Nessun prodotto ricevuto dal backend, uso prodotti statici');
-            products = staticProducts;
-            return false;
+            // Call backend API (load all products including Health)
+            const backendProducts = await ZenovaAPI.getProducts(1, 10000);
+
+            if (backendProducts && backendProducts.length > 0) {
+                console.log(`✅ Ricevuti ${backendProducts.length} prodotti dal backend`);
+
+                // Map backend products to frontend format
+                const mappedProducts = backendProducts
+                    .map(mapBackendProductToFrontend)
+                    .filter(p => p !== null);
+
+                // Filter out HIDDEN products (not visible anywhere)
+                products = mappedProducts.filter(p => {
+                    const isHidden = productLayout.hidden.includes(p.id);
+                    if (isHidden) {
+                        console.log(`🚫 Prodotto nascosto: ${p.name}`);
+                    }
+                    return !isHidden;
+                });
+
+                console.log('✅ Prodotti convertiti e pronti:', products.length);
+                console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
+                console.log('📦 Tutte le categorie BigBuy caricate correttamente');
+                return true;
+            }
         }
+
+        // STATIC MODE - Load from JSON file (for Vercel deployment)
+        console.log('📦 Modalità statica - carico da products.json');
+
+        // Load product layout for featured/home/hidden
+        try {
+            const layoutResponse = await fetch('./product-layout.json');
+            productLayout = await layoutResponse.json();
+            console.log('✅ Layout caricato:', {
+                home: productLayout.home?.length || 0,
+                featured: productLayout.featured?.length || 0,
+                hidden: productLayout.hidden?.length || 0
+            });
+        } catch (e) {
+            console.warn('⚠️  product-layout.json non trovato, uso valori di default');
+        }
+
+        const response = await fetch('./products.json');
+        const jsonProducts = await response.json();
+
+        if (jsonProducts && jsonProducts.length > 0) {
+            console.log(`✅ Caricati ${jsonProducts.length} prodotti dal file JSON`);
+
+            // Filter only visible products
+            products = jsonProducts
+                .filter(p => p.visible !== false && p.zone !== 'hidden')
+                .map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    description: p.description || '',
+                    category: p.zenovaCategory || p.category,
+                    subcategory: p.zenovaSubcategory || p.subcategory,
+                    price: parseFloat(p.price) || 0,
+                    retailPrice: parseFloat(p.retailPrice) || parseFloat(p.price) || 0,
+                    stock: p.stock || 0,
+                    image: p.image || (p.images && p.images[0]) || '',
+                    images: p.images || [p.image],
+                    active: p.active !== false,
+                    zone: p.zone || 'home'
+                }));
+
+            console.log('✅ Prodotti pronti:', products.length);
+            return true;
+        }
+
+        // Fallback to static products
+        console.warn('⚠️ Nessun prodotto caricato, uso prodotti statici di esempio');
+        products = staticProducts;
+        return false;
+
     } catch (error) {
-        console.error('❌ Errore caricamento prodotti dal backend:', error);
+        console.error('❌ Errore caricamento prodotti:', error);
         console.log('📦 Fallback: uso prodotti statici');
         products = staticProducts;
         return false;
@@ -607,9 +668,84 @@ window.autoOpenCategoryFromHash = function() {
         }
     }
 
+    // Map subcategories to main categories
+    const subcategoryToCategory = {
+        // Smart Living
+        'smart-led': 'smart-living',
+        'smart-led-illuminazione': 'smart-living',
+        'domotica': 'smart-living',
+        'domotica-smart-home': 'smart-living',
+        // Beauty
+        'makeup': 'beauty',
+        'skincare': 'beauty',
+        'profumi': 'beauty',
+        'corpo': 'beauty',
+        // Health & Personal Care
+        'hair-care': 'health-personal-care',
+        'barba': 'health-personal-care',
+        'massaggio-benessere': 'health-personal-care',
+        'protezione-solare': 'health-personal-care',
+        // Tech Innovation
+        'gadget-tech': 'tech-innovation',
+        // Natural Wellness
+        'oli-essenziali': 'natural-wellness',
+        'oli-per-fragranza': 'natural-wellness',
+        'candele-gel-profumati-sali-bagno': 'natural-wellness',
+        'diffusori-aromatici': 'natural-wellness',
+        'diffusori-oli': 'natural-wellness',
+        'pietre-preziose': 'natural-wellness',
+        'incenso': 'natural-wellness',
+        'vestiario-wellness': 'natural-wellness'
+    };
+
+    // Open the parent category in sidebar if subcategory is present
+    if (subcategory && subcategoryToCategory[subcategory]) {
+        const mainCategory = subcategoryToCategory[subcategory];
+        console.log(`📂 Opening parent category "${mainCategory}" for subcategory "${subcategory}"`);
+
+        // Find the category button and open it manually
+        const categoryBtn = document.querySelector(`.category-btn[data-category="${mainCategory}"]`);
+        if (categoryBtn) {
+            const categoryItem = categoryBtn.parentElement;
+            const subcategoryList = categoryItem.querySelector('.subcategory-list');
+
+            // Close all other categories first
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item !== categoryItem) {
+                    item.classList.remove('active');
+                    const sublist = item.querySelector('.subcategory-list');
+                    if (sublist) sublist.style.maxHeight = '0px';
+                }
+            });
+
+            // Open this category
+            categoryItem.classList.add('active');
+            if (subcategoryList) {
+                subcategoryList.style.maxHeight = '500px';
+            }
+            console.log('🔓 Category opened in sidebar');
+        } else {
+            console.log('⚠️ Category button not found for:', mainCategory);
+        }
+
+        // Highlight the subcategory link
+        setTimeout(() => {
+            const subcategoryLink = document.querySelector(`.subcategory-link[data-subcategory="${subcategory}"]`);
+            if (subcategoryLink) {
+                // Remove active from all subcategory links
+                document.querySelectorAll('.subcategory-link').forEach(link => link.classList.remove('active'));
+                // Add active to current
+                subcategoryLink.classList.add('active');
+                console.log('✅ Subcategory link highlighted');
+            } else {
+                console.log('⚠️ Subcategory link not found for:', subcategory);
+            }
+        }, 300);
+    }
+
     // Filter by subcategory if present
     if (subcategory) {
-        console.log('📂 Opening subcategory:', subcategory);
+        console.log('📂 Filtering products for subcategory:', subcategory);
         filterProductsBySubcategory(subcategory);
     }
 
@@ -844,7 +980,15 @@ function renderFeaturedProducts() {
     featuredGrid.innerHTML = '';
 
     // Filter products that are in the "home" layout
-    const featuredProducts = products.filter(p => productLayout.home.includes(p.id));
+    // Support both backend mode (productLayout.home) and static mode (product.zone)
+    const featuredProducts = products.filter(p => {
+        // Backend mode: use productLayout
+        if (productLayout.home.length > 0) {
+            return productLayout.home.includes(p.id);
+        }
+        // Static mode: use zone field
+        return p.zone === 'home';
+    });
 
     console.log(`✨ Featured products: ${featuredProducts.length} out of ${products.length} total`);
 
@@ -970,9 +1114,13 @@ function renderProducts() {
     let productsToRender = [];
 
     if (productLayout && productLayout.featured && productLayout.featured.length > 0) {
-        // Mostra prodotti marcati come featured dall'admin
+        // Backend mode: Mostra prodotti marcati come featured dall'admin
         productsToRender = visibleProducts.filter(p => productLayout.featured.includes(p.id));
-        console.log(`⭐ Prodotti featured dall'admin: ${productsToRender.length}`);
+        console.log(`⭐ Prodotti featured dall'admin (backend): ${productsToRender.length}`);
+    } else {
+        // Static mode: usa campo 'featured' da products.json
+        productsToRender = visibleProducts.filter(p => p.featured === true);
+        console.log(`⭐ Prodotti featured (statico): ${productsToRender.length}`);
     }
 
     // Se non ci sono featured o sono meno di 20, completa con selezione automatica
@@ -1144,11 +1292,13 @@ function updateQuantity(productId, change) {
 function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
+    const cartCountMobile = document.querySelector('.cart-count-mobile');
     const cartTotal = document.getElementById('cartTotal');
 
-    // Update cart count
+    // Update cart count (both desktop and mobile)
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
+    if (cartCount) cartCount.textContent = totalItems;
+    if (cartCountMobile) cartCountMobile.textContent = totalItems;
 
     // Update cart items
     if (cart.length === 0) {
@@ -1158,7 +1308,7 @@ function updateCart() {
             // Get image URL or fallback
             let imageHtml = '';
             const imageUrl = getAbsoluteImageUrl(item.image);
-            if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
                 imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
@@ -1407,19 +1557,49 @@ function loadWishlist() {
 // Setup Event Listeners
 function setupEventListeners() {
     const cartBtn = document.getElementById('cartBtn');
+    const cartBtnMobile = document.getElementById('cartBtnMobile');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchBtnMobile = document.getElementById('searchBtnMobile');
     const closeCart = document.getElementById('closeCart');
     const wishlistBtn = document.getElementById('wishlistBtn');
     const closeWishlist = document.getElementById('closeWishlist');
     const overlay = document.getElementById('overlay');
     const cartSidebar = document.getElementById('cartSidebar');
     const wishlistSidebar = document.getElementById('wishlistSidebar');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-    // Cart listeners
-    cartBtn.addEventListener('click', () => {
-        cartSidebar.classList.add('active');
-        wishlistSidebar.classList.remove('active');
-        overlay.classList.add('active');
-    });
+    // Mobile menu toggle
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            // TODO: Open mobile menu sidebar when implemented
+        });
+    }
+
+    // Cart listeners (desktop)
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            wishlistSidebar.classList.remove('active');
+            overlay.classList.add('active');
+        });
+    }
+
+    // Cart listeners (mobile)
+    if (cartBtnMobile) {
+        cartBtnMobile.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            wishlistSidebar.classList.remove('active');
+            overlay.classList.add('active');
+        });
+    }
+
+    // Search listeners (mobile)
+    if (searchBtnMobile && searchBtn) {
+        searchBtnMobile.addEventListener('click', () => {
+            searchBtn.click(); // Trigger desktop search
+        });
+    }
 
     closeCart.addEventListener('click', () => {
         cartSidebar.classList.remove('active');
@@ -1582,110 +1762,78 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Setup Category Sidebar - DISABLED: sidebar.js handles this
-// function setupCategorySidebar() {
-//     const categoryBtns = document.querySelectorAll('.category-btn');
-//
-//     console.log('Setting up sidebar, found buttons:', categoryBtns.length);
-//
-//     if (categoryBtns.length === 0) {
-//         console.log('No category buttons found, exiting');
-//         // Show message on page if buttons not found
-//         const sidebar = document.querySelector('.categories-sidebar');
-//         if (sidebar) {
-//             const msg = document.createElement('div');
-//             msg.style.cssText = 'color: red; padding: 10px; background: #fff;';
-//             msg.textContent = 'ERRORE: Pulsanti non trovati!';
-//             sidebar.prepend(msg);
-//         }
-//         return; // Exit if no sidebar exists
-//     }
-//
-//     // Show success message
-//     const sidebar = document.querySelector('.categories-sidebar');
-//     if (sidebar) {
-//         const msg = document.createElement('div');
-//         msg.style.cssText = 'color: green; padding: 10px; background: #e8f5e9; margin-bottom: 10px; border-radius: 5px; font-size: 12px;';
-//         msg.textContent = `✓ Sidebar attiva! Trovati ${categoryBtns.length} pulsanti`;
-//         sidebar.querySelector('.sidebar-header').after(msg);
-//
-//         // Remove message after 3 seconds
-//         setTimeout(() => msg.remove(), 3000);
-//     }
-//
-//     categoryBtns.forEach((btn, index) => {
-//         console.log('Adding listener to button', index);
-//         btn.addEventListener('click', function(e) {
-//             e.preventDefault();
-//             e.stopPropagation();
-//
-//             alert('Click rilevato su categoria ' + index);
-//             console.log('Button clicked!', index);
-//
-//             const categoryItem = this.parentElement;
-//             console.log('Category item:', categoryItem);
-//
-//             // Close all other categories
-//             document.querySelectorAll('.category-item').forEach(item => {
-//                 if (item !== categoryItem) {
-//                     item.classList.remove('active');
-//                     const sublist = item.querySelector('.subcategory-list');
-//                     if (sublist) sublist.style.maxHeight = '0px';
-//                 }
-//             });
-//
-//             // Toggle current category
-//             const wasActive = categoryItem.classList.contains('active');
-//             const subcategoryList = categoryItem.querySelector('.subcategory-list');
-//
-//             if (wasActive) {
-//                 categoryItem.classList.remove('active');
-//                 if (subcategoryList) subcategoryList.style.maxHeight = '0px';
-//                 console.log('Closed category');
-//             } else {
-//                 categoryItem.classList.add('active');
-//                 if (subcategoryList) subcategoryList.style.maxHeight = '500px';
-//                 console.log('Opened category');
-//             }
-//
-//             // Visual debug - change button color
-//             this.style.background = wasActive ? '' : 'rgba(212, 163, 115, 0.3)';
-//         });
-//     });
-//
-//     // Handle subcategory clicks - filter products on page
-//     const subcategoryLinks = document.querySelectorAll('.subcategory-link');
-//
-//     subcategoryLinks.forEach(link => {
-//         link.addEventListener('click', (e) => {
-//             e.preventDefault();
-//             const subcategory = link.dataset.subcategory;
-//             console.log('Filtering by subcategory:', subcategory);
-//
-//             // Remove active class from all links
-//             subcategoryLinks.forEach(l => l.classList.remove('active'));
-//             // Add active class to clicked link
-//             link.classList.add('active');
-//
-//             // Filter products
-//             const productCards = document.querySelectorAll('.product-card');
-//             productCards.forEach(card => {
-//                 if (subcategory === 'all') {
-//                     card.style.display = 'block';
-//                 } else {
-//                     const cardSubcategory = card.getAttribute('data-subcategory');
-//                     if (cardSubcategory === subcategory) {
-//                         card.style.display = 'block';
-//                     } else {
-//                         card.style.display = 'none';
-//                     }
-//                 }
-//             });
-//
-//             // Scroll to products section
-//             document.querySelector('.products-grid').scrollIntoView({ behavior: 'smooth' });
-//         });
-//     });
-// }
+function setupCategorySidebar() {
+    const categoryBtns = document.querySelectorAll('.category-btn');
+
+    console.log('📂 Setting up sidebar, found buttons:', categoryBtns.length);
+
+    if (categoryBtns.length === 0) {
+        console.log('⚠️ No category buttons found in sidebar');
+        return;
+    }
+
+    categoryBtns.forEach((btn, index) => {
+        console.log('➕ Adding listener to button', index);
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log('🔘 Category button clicked:', index);
+
+            const categoryItem = this.parentElement;
+
+            // Close all other categories
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item !== categoryItem) {
+                    item.classList.remove('active');
+                    const sublist = item.querySelector('.subcategory-list');
+                    if (sublist) sublist.style.maxHeight = '0px';
+                }
+            });
+
+            // Toggle current category
+            const wasActive = categoryItem.classList.contains('active');
+            const subcategoryList = categoryItem.querySelector('.subcategory-list');
+
+            if (wasActive) {
+                categoryItem.classList.remove('active');
+                if (subcategoryList) subcategoryList.style.maxHeight = '0px';
+                console.log('🔽 Closed category');
+            } else {
+                categoryItem.classList.add('active');
+                if (subcategoryList) subcategoryList.style.maxHeight = '500px';
+                console.log('🔼 Opened category');
+            }
+        });
+    });
+
+    // Handle subcategory clicks - filter products on page
+    const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const subcategory = link.dataset.subcategory;
+            console.log('📂 Filtering by subcategory:', subcategory);
+
+            // Remove active class from all links
+            subcategoryLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            link.classList.add('active');
+
+            // Use the global filter function
+            if (typeof filterProductsBySubcategory === 'function') {
+                filterProductsBySubcategory(subcategory);
+            }
+
+            // Scroll to products section
+            const productsGrid = document.querySelector('.products-grid');
+            if (productsGrid) {
+                productsGrid.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
 
 // ============ SEARCH FUNCTIONALITY ============
 
@@ -2052,22 +2200,51 @@ function openProductDetailModal(productId) {
     if (techInfoGrid) {
         const techInfo = [];
 
+        // Standard product fields
         if (product.ean) techInfo.push({ label: 'EAN', value: product.ean });
+
+        // Handle dimensions - can be object or string
         if (product.dimensions) {
-            const dims = product.dimensions;
-            techInfo.push({
-                label: 'Dimensioni',
-                value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
-            });
+            if (typeof product.dimensions === 'object') {
+                const dims = product.dimensions;
+                techInfo.push({
+                    label: 'Dimensioni',
+                    value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
+                });
+            } else if (typeof product.dimensions === 'string') {
+                techInfo.push({ label: 'Dimensioni', value: product.dimensions });
+            }
         }
+
         if (product.weight) {
-            // Converti grammi in kg se >= 1000g, altrimenti mostra in grammi
-            const weightDisplay = product.weight >= 1000
-                ? `${(product.weight / 1000).toFixed(2)} kg`
-                : `${product.weight} g`;
+            // Converti grammi in kg se >= 1, altrimenti mostra in kg con 3 decimali
+            const weightDisplay = product.weight >= 1
+                ? `${product.weight.toFixed(2)} kg`
+                : `${(product.weight * 1000).toFixed(0)} g`;
             techInfo.push({ label: 'Peso', value: weightDisplay });
         }
+
         if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
+
+        // Extended features from AW products
+        if (product.features && typeof product.features === 'object') {
+            const features = product.features;
+
+            if (features.barcode) techInfo.push({ label: 'Barcode', value: features.barcode });
+            if (features.family) techInfo.push({ label: 'Famiglia', value: features.family });
+            if (features.materials) techInfo.push({ label: 'Materiali', value: features.materials });
+
+            if (features.packageWeight) {
+                const pkgWeightDisplay = features.packageWeight >= 1
+                    ? `${features.packageWeight.toFixed(2)} kg`
+                    : `${(features.packageWeight * 1000).toFixed(0)} g`;
+                techInfo.push({ label: 'Peso Imballaggio', value: pkgWeightDisplay });
+            }
+
+            if (features.countryOfOrigin) techInfo.push({ label: 'Paese di Origine', value: features.countryOfOrigin });
+            if (features.unitsPerOuter) techInfo.push({ label: 'Unità per Scatola', value: features.unitsPerOuter.toString() });
+            if (features.cpnpNumber) techInfo.push({ label: 'CPNP', value: features.cpnpNumber });
+        }
 
         if (techInfo.length > 0) {
             techInfoGrid.innerHTML = techInfo
@@ -2138,7 +2315,8 @@ function updateGallery() {
     imageUrl = getAbsoluteImageUrl(imageUrl);
     console.log('🔧 updateGallery - imageUrl finale:', imageUrl);
 
-    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+    // Accept both absolute URLs (http/data) and relative paths (starting with /)
+    if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
         console.log('✅ Impostando immagine:', imageUrl);
         imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
     } else if (typeof currentImage === 'string' && currentImage.includes('<svg')) {
