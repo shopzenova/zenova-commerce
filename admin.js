@@ -1868,8 +1868,8 @@ const SUBCATEGORIES_MAP = {
         { value: 'oli-essenziali', label: 'Oli Essenziali' },
         { value: 'oli-per-fragranza', label: 'Oli per Fragranza' },
         { value: 'candele-gel-profumati-sali-bagno', label: 'Candele Gel Profumati e Sali da Bagno' },
-        { value: 'diffusori-elettronici', label: 'Diffusori Elettronici' },
-        { value: 'diffusori-bastoncini', label: 'Diffusori a Bastoncini' },
+        { value: 'diffusori-aromatici', label: 'Diffusori Aromatici' },
+        { value: 'diffusori-oli', label: 'Diffusori Oli' },
         { value: 'pietre-preziose', label: 'Pietre Preziose' },
         { value: 'incenso', label: 'Incenso' },
         { value: 'vestiario-wellness', label: 'Vestiario Wellness' }

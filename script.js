@@ -691,8 +691,8 @@ window.autoOpenCategoryFromHash = function() {
         'oli-essenziali': 'natural-wellness',
         'oli-per-fragranza': 'natural-wellness',
         'candele-gel-profumati-sali-bagno': 'natural-wellness',
-        'diffusori-elettronici': 'natural-wellness',
-        'diffusori-bastoncini': 'natural-wellness',
+        'diffusori-aromatici': 'natural-wellness',
+        'diffusori-oli': 'natural-wellness',
         'pietre-preziose': 'natural-wellness',
         'incenso': 'natural-wellness',
         'vestiario-wellness': 'natural-wellness'
