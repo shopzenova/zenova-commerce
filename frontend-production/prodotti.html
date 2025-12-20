@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop - ZENOVA | Aura Experience</title>
     <link rel="stylesheet" href="styles.css?v=20251108p">
+    <link rel="stylesheet" href="mobile-fixes.css?v=20251217">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -18,6 +19,55 @@
             }
         })();
     </script>
+    <!-- Google Translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'it',
+                includedLanguages: 'it,en,es,fr,de,pt,nl,pl,ro,el,cs,sv,da,fi,no,hu,bg,hr,sk,sl',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+
+            // Restore saved language preference
+            restoreSavedLanguage();
+        }
+
+        // Restore the previously selected language
+        function restoreSavedLanguage() {
+            const savedLang = localStorage.getItem('zenova-translate-lang');
+            if (savedLang && savedLang !== 'it') {
+                // Wait for Google Translate to fully load
+                setTimeout(() => {
+                    const selectElement = document.querySelector('.goog-te-combo');
+                    if (selectElement) {
+                        selectElement.value = savedLang;
+                        selectElement.dispatchEvent(new Event('change'));
+                    }
+                }, 1000);
+            }
+        }
+
+        // Monitor language changes and save preference
+        document.addEventListener('DOMContentLoaded', function() {
+            // Monitor for language selector changes
+            const observer = new MutationObserver(function() {
+                const selectElement = document.querySelector('.goog-te-combo');
+                if (selectElement && !selectElement.hasAttribute('data-listener')) {
+                    selectElement.setAttribute('data-listener', 'true');
+                    selectElement.addEventListener('change', function() {
+                        localStorage.setItem('zenova-translate-lang', this.value);
+                    });
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
     <!-- Header -->
@@ -58,6 +108,7 @@
                     </a></li>
                 </ul>
                 <div class="nav-icons">
+                    <div id="google_translate_element" style="display: inline-block;"></div>
                     <button class="theme-toggle-btn" id="themeToggle" title="Cambia tema">
                         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
@@ -121,10 +172,7 @@
                                     Smart LED & Illuminazione
                                 </a>
                                 <a href="#domotica" class="subcategory-link" data-subcategory="2399">
-                                    Domotica & Smart Home
-                                </a>
-                                <a href="#wireless" class="subcategory-link" data-subcategory="2609">
-                                    Dispositivi Wireless
+                                    Home & Decor
                                 </a>
                             </div>
                         </div>
@@ -194,10 +242,10 @@
                                 <a href="#oli-essenziali" class="subcategory-link" data-subcategory="oli-essenziali">
                                     Oli Essenziali
                                 </a>
-                                <a href="#oli-fragranza" class="subcategory-link" data-subcategory="oli-fragranza">
+                                <a href="#oli-per-fragranza" class="subcategory-link" data-subcategory="oli-per-fragranza">
                                     Oli per Fragranza
                                 </a>
-                                <a href="#diffusori" class="subcategory-link" data-subcategory="diffusori">
+                                <a href="#candele-gel-profumati-sali-bagno" class="subcategory-link" data-subcategory="candele-gel-profumati-sali-bagno">
                                     Candele Gel Profumati e Sali da Bagno
                                 </a>
                                 <a href="#diffusori-aromatici" class="subcategory-link" data-subcategory="diffusori-aromatici">
@@ -227,15 +275,6 @@
                             <div class="subcategory-list">
                                 <a href="#gadget-tech" class="subcategory-link" data-subcategory="gadget-tech">
                                     Gadget tech
-                                </a>
-                                <a href="#smart-devices" class="subcategory-link" data-subcategory="smart-devices">
-                                    Smart devices
-                                </a>
-                                <a href="#wearable-tech" class="subcategory-link" data-subcategory="wearable-tech">
-                                    Wearable tech
-                                </a>
-                                <a href="#tech-wellness" class="subcategory-link" data-subcategory="tech-wellness">
-                                    Tech wellness
                                 </a>
                             </div>
                         </div>
@@ -412,20 +451,6 @@
                         <span>Consegna garantita</span>
                     </div>
                 </div>
-                <div class="trust-badge">
-                    <div class="trust-icon">✓</div>
-                    <div class="trust-text">
-                        <strong>Garanzia 2 Anni</strong>
-                        <span>Su tutti i prodotti</span>
-                    </div>
-                </div>
-                <div class="trust-badge">
-                    <div class="trust-icon">↩</div>
-                    <div class="trust-text">
-                        <strong>Resi Facili</strong>
-                        <span>Entro 30 giorni</span>
-                    </div>
-                </div>
             </div>
 
             <div class="footer-content">
@@ -441,9 +466,19 @@
                     <p><a href="termini-condizioni.html" style="color: inherit; text-decoration: none;">📄 Termini e Condizioni</a></p>
                 </div>
                 <div class="footer-section">
+                    <h4>Zenova Aura</h4>
+                    <p style="font-size: 0.9rem; line-height: 1.6;">
+                        <strong>ZENOVA AURA</strong><br>
+                        Via Francesco Domenico Guerrazzi 149<br>
+                        50019 Sesto Fiorentino (FI)<br>
+                        P.IVA: 07501250489<br>
+                        REA: FI-707797
+                    </p>
+                </div>
+                <div class="footer-section">
                     <h4>Contatti</h4>
-                    <p>Email: info@zenova.it</p>
-                    <p>Tel: +39 123 456 7890</p>
+                    <p>Email: info@zenova.ovh</p>
+                    <p>PEC: zenova.aura@pec.it</p>
                 </div>
                 <div class="footer-section">
                     <h4>Seguici</h4>
@@ -458,17 +493,8 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Widget -->
-    <a href="https://wa.me/393201234567" class="whatsapp-widget" target="_blank" title="Chatta con noi su WhatsApp">
-        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.834.745 5.488 2.045 7.793L0 32l8.36-2.025A15.93 15.93 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.333c-2.512 0-4.942-.708-7.053-2.042l-.507-.32-5.262 1.273 1.291-5.13-.336-.528A13.277 13.277 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333z" fill="currentColor"/>
-            <path d="M23.547 19.427c-.36-.18-2.133-1.053-2.463-1.173-.33-.12-.57-.18-.81.18-.24.36-.93 1.173-1.14 1.413-.21.24-.42.27-.78.09-.36-.18-1.52-.56-2.895-1.787-1.07-.954-1.792-2.133-2.002-2.493-.21-.36-.022-.554.158-.733.162-.162.36-.42.54-.63.18-.21.24-.36.36-.6.12-.24.06-.45-.03-.63-.09-.18-.81-1.953-1.11-2.673-.293-.7-.59-.605-.81-.617-.21-.011-.45-.013-.69-.013-.24 0-.63.09-.96.45-.33.36-1.26 1.23-1.26 3.003s1.29 3.483 1.47 3.723c.18.24 2.535 3.87 6.142 5.426.857.37 1.527.591 2.048.757.86.273 1.643.235 2.262.142.69-.103 2.133-.872 2.433-1.713.3-.842.3-1.563.21-1.713-.09-.15-.33-.24-.69-.42z" fill="currentColor"/>
-        </svg>
-    </a>
-
-    <script src="config.js"></script>
     <script src="api-client.js?v=20251214FIX2"></script>
     <script src="script.js?v=20251214FIX2"></script>
-    <script src="sidebar.js?v=20251214FIX2"></script>
+    <script src="sidebar.js?v=20251218-1845"></script>
 </body>
 </html>
