@@ -42,6 +42,11 @@ function getAbsoluteImageUrl(path) {
         return 'http://localhost:3000' + path;
     }
 
+    // Se è un percorso relativo (images/...), aggiungi / davanti
+    if (path.startsWith('images/')) {
+        return '/' + path;
+    }
+
     return path;
 }
 
@@ -518,7 +523,9 @@ async function loadProductsFromBackend() {
             console.warn('⚠️  product-layout.json non trovato, uso valori di default');
         }
 
-        const response = await fetch('./products.json');
+        // Cache buster to force reload of fresh data
+        const cacheBuster = Date.now();
+        const response = await fetch(`./products.json?v=${cacheBuster}`);
         const jsonProducts = await response.json();
 
         if (jsonProducts && jsonProducts.length > 0) {
