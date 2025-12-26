@@ -2908,8 +2908,9 @@ function initMobileCategoryDropdowns() {
 
     dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.category-nav-item');
+        const menu = dropdown.querySelector('.category-dropdown-menu');
 
-        if (!trigger) return;
+        if (!trigger || !menu) return;
 
         // Previeni il comportamento di default del link
         trigger.addEventListener('click', (e) => {
@@ -2924,7 +2925,15 @@ function initMobileCategoryDropdowns() {
             });
 
             // Toggle questo dropdown
+            const isOpening = !dropdown.classList.contains('open');
             dropdown.classList.toggle('open');
+
+            // Se sto aprendo, posiziona il menu correttamente (position: fixed)
+            if (isOpening) {
+                const rect = trigger.getBoundingClientRect();
+                menu.style.top = `${rect.bottom + 5}px`;
+                menu.style.left = `${rect.left}px`;
+            }
         });
     });
 
