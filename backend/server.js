@@ -16,12 +16,13 @@ app.use(helmet({
   contentSecurityPolicy: process.env.NODE_ENV === 'production' ? undefined : {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.paypal.com", "https://js.stripe.com"],
       scriptSrcAttr: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:", "https://cdnbigbuy.com"],
-      connectSrc: ["'self'", "http://localhost:3000"],
+      imgSrc: ["'self'", "data:", "https:", "https://cdnbigbuy.com", "https://img.icons8.com"],
+      connectSrc: ["'self'", "http://localhost:3000", "https://www.paypal.com", "https://api.stripe.com"],
+      frameSrc: ["'self'", "https://www.paypal.com", "https://js.stripe.com"],
     },
   },
 }));
@@ -154,6 +155,7 @@ app.use('/api/products', require('./src/routes/products'));
 app.use('/api/cart', require('./src/routes/cart'));
 app.use('/api/checkout', require('./src/routes/checkout'));
 app.use('/api/paypal', require('./src/routes/paypal'));  // PayPal Advanced Checkout
+app.use('/api/stripe', require('./src/routes/stripe'));  // Stripe Card Payments
 app.use('/api/orders', require('./src/routes/orders'));
 app.use('/api/admin', require('./src/routes/admin'));  // Admin panel API
 app.use('/api/admin/sync', require('./src/routes/admin-sync'));  // BigBuy FTP Sync

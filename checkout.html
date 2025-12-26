@@ -9,8 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- PayPal SDK - LIVE MODE -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AQFp3HVb7joYeJnIZIBPehGoQtJGaOAM5gALJmIpz5AYwvSbOrPLLZF3tlyEOgsnoq5LYjLR2jnjVGSv&currency=EUR"></script>
+    <!-- PayPal SDK - LIVE MODE con Carta -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQFp3HVb7joYeJnIZIBPehGoQtJGaOAM5gALJmIpz5AYwvSbOrPLLZF3tlyEOgsnoq5LYjLR2jnjVGSv&currency=EUR&intent=capture&components=buttons,funding-eligibility"></script>
+    <!-- Stripe SDK -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <!-- Header -->
@@ -164,13 +166,53 @@
                             <h2>Metodo di Pagamento</h2>
                         </div>
 
-                        <div class="payment-info">
-                            <p style="margin-bottom: 1.5rem; color: #666;">Paga in modo sicuro con PayPal. Puoi usare il tuo account PayPal o pagare con carta di credito/debito senza account.</p>
+                        <!-- Payment Method Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                💳 Carta di Credito/Debito
+                            </button>
+                            <button class="payment-tab" data-method="paypal">
+                                <svg style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;" viewBox="0 0 24 24"><path fill="currentColor" d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg>
+                                PayPal
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Container -->
+                        <div class="payment-method-container" id="cardContainer">
+                            <div class="payment-info">
+                                <p style="margin-bottom: 1.5rem; color: #666;">
+                                    Paga in modo sicuro con carta di credito o debito. Accettiamo:
+                                </p>
+                                <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
+                                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" style="height: 30px;">
+                                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" style="height: 30px;">
+                                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex" style="height: 30px;">
+                                </div>
+                            </div>
+
+                            <div class="payment-form-container">
+                                <!-- Stripe Card Element -->
+                                <div id="card-element" style="padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; background: white;"></div>
+                                <div id="card-errors" role="alert" style="color: #e74c3c; margin-top: 10px; font-size: 14px;"></div>
+                                <button type="button" class="btn btn-primary" id="card-payment-button" style="margin-top: 20px; width: 100%;">
+                                    Paga €<span id="card-total">0.00</span>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- PayPal Container -->
-                        <div class="payment-form-container" id="paypalContainer">
-                            <div id="paypal-button-container"></div>
+                        <div class="payment-method-container hidden" id="paypalContainer">
+                            <div class="payment-info">
+                                <p style="margin-bottom: 1.5rem; color: #666;">
+                                    Paga in modo sicuro con PayPal. Puoi usare il tuo account PayPal o pagare con carta di credito/debito senza account.
+                                </p>
+                            </div>
+                            <div class="payment-form-container">
+                                <button type="button" class="btn btn-primary" id="paypal-redirect-button" style="width: 100%; background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                    <svg style="width: 24px; height: 24px; fill: white;" viewBox="0 0 24 24"><path d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg>
+                                    Paga con PayPal
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -262,6 +304,6 @@
 
     <script src="api-client.js?v=20251105e"></script>
     <script src="auth.js?v=20251105e"></script>
-    <script src="checkout.js?v=20251108b"></script>
+    <script src="checkout.js?v=20251225stripe"></script>
 </body>
 </html>

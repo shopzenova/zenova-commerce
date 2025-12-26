@@ -1,50 +1,6 @@
-// Checkout System
+// Checkout System - PayPal Only
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Checkout system loaded');
-
-    // Initialize Stripe (MOCK for development - replace with real key in production)
-    let stripe, elements, cardElement;
-    try {
-        // Try to initialize Stripe, but don't block if key is invalid
-        stripe = Stripe('pk_test_51234567890abcdefghijklmnopqrstuvwxyz123456');
-        elements = stripe.elements();
-
-        // Create card element
-        cardElement = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#32325d',
-                    fontFamily: 'Quicksand, sans-serif',
-                    '::placeholder': {
-                        color: '#aab7c4'
-                    }
-                }
-            }
-        });
-
-        // Try to mount card element
-        const cardElementContainer = document.getElementById('card-element');
-        if (cardElementContainer) {
-            cardElement.mount('#card-element');
-        }
-
-        // Handle card errors
-        if (cardElement) {
-            cardElement.on('change', function(event) {
-                const displayError = document.getElementById('card-errors');
-                if (displayError) {
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
-                }
-            });
-        }
-    } catch (error) {
-        console.warn('⚠️ Stripe non inizializzato (modalità sviluppo):', error.message);
-    }
+    console.log('Checkout system loaded - PayPal only mode');
 
     // Get cart data
     const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
@@ -193,170 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Move to payment step
         console.log('➡️ Passo allo step 2 (pagamento)...');
         goToStep(2);
+        // Render PayPal button automatically
+        renderPayPalButton();
     });
 
-    // Payment method selection
-    const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
-    paymentMethods.forEach(method => {
-        method.addEventListener('change', function() {
-            // Hide all payment forms
-            document.getElementById('stripeCardForm').classList.add('hidden');
-            document.getElementById('paypalContainer').classList.add('hidden');
-            document.getElementById('bankTransferInfo').classList.add('hidden');
-            document.getElementById('cashOnDeliveryInfo').classList.add('hidden');
-
-            // Show selected payment form
-            const selectedMethod = this.value;
-            if (selectedMethod === 'card') {
-                document.getElementById('stripeCardForm').classList.remove('hidden');
-            } else if (selectedMethod === 'paypal') {
-                document.getElementById('paypalContainer').classList.remove('hidden');
-                renderPayPalButton();
-            } else if (selectedMethod === 'bank') {
-                document.getElementById('bankTransferInfo').classList.remove('hidden');
-            } else if (selectedMethod === 'cash') {
-                document.getElementById('cashOnDeliveryInfo').classList.remove('hidden');
-            }
-
-            // Recalculate order summary (to update cash on delivery fee)
-            loadOrderSummary();
-        });
-    });
-
-    // Stripe payment form
-    const paymentForm = document.getElementById('paymentForm');
-    paymentForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const submitButton = document.getElementById('submitPayment');
-        const buttonText = document.getElementById('button-text');
-        const spinner = document.getElementById('spinner');
-
-        submitButton.disabled = true;
-        buttonText.classList.add('hidden');
-        spinner.classList.remove('hidden');
-
-        // TEMPORARY FIX: Bypass backend and simulate successful payment
-        console.log('⚠️ Modalità sviluppo - bypass backend Stripe');
-
-        // Simulate processing delay
-        setTimeout(() => {
-            const orderId = generateOrderId();
-            saveOrder(orderId, shippingData, 'card', 'demo_payment_' + Date.now());
-            goToStep(3);
-        }, 1500);
-
-        return; // Skip the backend call below
-
-        // Create Stripe Checkout session via backend
-        try {
-            console.log('🔄 Creazione sessione Stripe Checkout...');
-            console.log('📦 Dati spedizione:', shippingData);
-
-            // Check if ZenovaAPI is available
-            if (typeof ZenovaAPI === 'undefined') {
-                throw new Error('ZenovaAPI non disponibile');
-            }
-
-            // Verify shipping data is complete
-            if (!shippingData.email || !shippingData.firstName) {
-                throw new Error('Dati di spedizione mancanti. Compila il form di spedizione prima di procedere.');
-            }
-
-            // Prepare cart items with full data
-            const cartItems = cart.map(item => ({
-                productId: item.id,
-                bigbuyId: item.bigbuyId || item.id,
-                name: item.name,
-                description: item.description || '',
-                price: item.price,
-                quantity: item.quantity,
-                images: item.images || []
-            }));
-
-            console.log('🛒 Carrello da inviare:', cartItems);
-
-            // Create checkout session via backend
-            console.log('📡 Chiamata API createCheckout...');
-            const result = await ZenovaAPI.createCheckout(cartItems, {
-                email: shippingData.email,
-                name: `${shippingData.firstName} ${shippingData.lastName}`,
-                phone: shippingData.phone
-            });
-
-            console.log('📥 Risposta ricevuta:', result);
-
-            // If successful, user will be redirected to Stripe Checkout
-            // (the redirect happens inside ZenovaAPI.createCheckout)
-
-            console.log('✅ Checkout creato con successo');
-
-        } catch (error) {
-            console.error('❌ Errore checkout:', error);
-            document.getElementById('card-errors').textContent = 'Errore durante il checkout. Riprova.';
-            submitButton.disabled = false;
-            buttonText.classList.remove('hidden');
-            spinner.classList.add('hidden');
-        }
-
-        /* REAL IMPLEMENTATION (uncomment when ready):
-
-        try {
-            // Create payment intent on your server
-            const response = await fetch('/create-payment-intent', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    amount: calculateTotal() * 100, // in cents
-                    currency: 'eur'
-                })
-            });
-            const { clientSecret } = await response.json();
-
-            // Confirm payment
-            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name: shippingData.firstName + ' ' + shippingData.lastName,
-                        email: shippingData.email
-                    }
-                }
-            });
-
-            if (error) {
-                document.getElementById('card-errors').textContent = error.message;
-                submitButton.disabled = false;
-                buttonText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-            } else {
-                // Payment successful
-                const orderId = generateOrderId();
-                saveOrder(orderId, shippingData, 'card', paymentIntent.id);
-                goToStep(3);
-            }
-        } catch (err) {
-            console.error('Payment error:', err);
-            submitButton.disabled = false;
-            buttonText.classList.remove('hidden');
-            spinner.classList.add('hidden');
-        }
-        */
-    });
-
-    // Bank transfer confirmation
-    document.getElementById('confirmBankTransfer').addEventListener('click', function() {
-        const orderId = generateOrderId();
-        saveOrder(orderId, shippingData, 'bank');
-        goToStep(3);
-    });
-
-    // Cash on delivery confirmation
-    document.getElementById('confirmCashPayment').addEventListener('click', function() {
-        const orderId = generateOrderId();
-        saveOrder(orderId, shippingData, 'cash');
-        goToStep(3);
-    });
 
     // Promo code
     document.getElementById('applyPromo').addEventListener('click', function() {
@@ -413,36 +209,21 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('summaryDiscount').textContent = `-€${discount.toFixed(2)}`;
         }
 
-        // Calculate shipping cost (from BigBuy API + cash on delivery fee if applicable)
-        const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        // Calculate shipping cost (from BigBuy API)
         let shippingCost = calculatedShippingCost; // Base shipping cost from BigBuy
-
-        // Add cash on delivery fee if applicable
-        const cashOnDeliveryFee = 5.00;
-        if (selectedMethod && selectedMethod.value === 'cash') {
-            shippingCost += cashOnDeliveryFee;
-        }
 
         // Display shipping cost
         const shippingElement = document.getElementById('summaryShipping');
         if (shippingCost === 0) {
             shippingElement.textContent = 'Gratis';
         } else {
-            const breakdown = [];
-            if (calculatedShippingCost > 0) {
-                breakdown.push(`Spedizione: €${calculatedShippingCost.toFixed(2)}`);
-            }
-            if (selectedMethod && selectedMethod.value === 'cash') {
-                breakdown.push(`Contrassegno: €${cashOnDeliveryFee.toFixed(2)}`);
-            }
-            shippingElement.innerHTML = `€${shippingCost.toFixed(2)}${breakdown.length > 0 ? '<br><small style="color: #666;">(' + breakdown.join(' + ') + ')</small>' : ''}`;
+            shippingElement.textContent = `€${shippingCost.toFixed(2)}`;
         }
 
         const total = subtotal - discount + shippingCost;
 
         document.getElementById('summarySubtotal').textContent = `€${subtotal.toFixed(2)}`;
         document.getElementById('summaryTotal').textContent = `€${total.toFixed(2)}`;
-        document.getElementById('payment-amount').textContent = total.toFixed(2);
     }
 
     function calculateTotal() {
@@ -456,12 +237,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add calculated shipping cost
         let shippingCost = calculatedShippingCost;
-
-        // Add cash on delivery fee if applicable
-        const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
-        if (selectedMethod && selectedMethod.value === 'cash') {
-            shippingCost += 5.00; // Cash on delivery fee
-        }
 
         return subtotal + shippingCost;
     }
@@ -621,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 address: shippingData.address,
                                 city: shippingData.city,
                                 postalCode: shippingData.postalCode,
+                                country: shippingData.country,
                                 shippingCost: calculatedShippingCost
                             }
                         })
@@ -631,6 +407,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     if (!result.success) {
                         throw new Error(result.error || 'Errore creazione ordine');
+                    }
+
+                    // Redirect diretto invece di usare popup (risolve problema popup blocker)
+                    if (result.data.approvalUrl) {
+                        console.log('➡️ Redirect a PayPal:', result.data.approvalUrl);
+                        window.location.href = result.data.approvalUrl;
+                        return; // Non ritornare orderId per evitare popup
                     }
 
                     return result.data.orderId;

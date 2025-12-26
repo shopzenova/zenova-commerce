@@ -94,7 +94,7 @@ async function createOrder(items, customer) {
             address_line_1: customer.address || 'Via esempio 1',
             admin_area_2: customer.city || 'Roma',
             postal_code: customer.postalCode || '00100',
-            country_code: 'IT'
+            country_code: customer.country || 'IT'
           }
         }
       }]

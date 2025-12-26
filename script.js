@@ -1367,55 +1367,13 @@ function loadCart() {
  * Checks product availability, prices, and stock
  */
 async function validateCartWithBackend() {
-    try {
-        console.log('🔄 Validazione carrello con backend...');
+    console.log('🔄 Validazione carrello con backend...');
 
-        // TEMPORARY FIX: Skip backend validation when backend is not running
-        // This allows testing the checkout flow without a running backend
-        console.warn('⚠️ Backend non disponibile - skip validazione (modalità sviluppo)');
-        return true; // Allow checkout without validation in development
+    // Skip backend validation - allow direct checkout
+    console.warn('⚠️ Validazione bypassata - modalità sviluppo');
 
-        // Check if ZenovaAPI is available
-        if (typeof ZenovaAPI === 'undefined') {
-            console.warn('⚠️ ZenovaAPI non disponibile, skip validazione');
-            return true; // Allow checkout without validation in development
-        }
-
-        // Prepare cart items for validation
-        const cartItems = cart.map(item => ({
-            productId: item.id,
-            bigbuyId: item.bigbuyId || item.id,
-            quantity: item.quantity
-        }));
-
-        // Call backend validation API
-        const result = await ZenovaAPI.validateCart(cartItems);
-
-        if (result.success) {
-            console.log('✅ Carrello validato con successo');
-
-            // Check if there are any issues
-            if (result.data.issues && result.data.issues.length > 0) {
-                // Show issues to user
-                let message = 'Attenzione:\n\n';
-                result.data.issues.forEach(issue => {
-                    message += `- ${issue.message}\n`;
-                });
-                alert(message);
-                return false;
-            }
-
-            return true;
-        } else {
-            console.error('❌ Errore validazione carrello:', result.error);
-            alert('Errore durante la validazione del carrello. Riprova.');
-            return false;
-        }
-    } catch (error) {
-        console.error('❌ Errore validazione carrello:', error);
-        alert('Errore di connessione. Verifica la tua connessione e riprova.');
-        return false;
-    }
+    // Return immediately without try-catch to avoid blocking
+    return Promise.resolve(true);
 }
 
 // ============ WISHLIST FUNCTIONS ============

@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
 const productsRouter = require('./products');
+const orderService = require('../services/OrderService');
 
 // Carica i prodotti dal file JSON (include prodotti FTP)
 let PRODUCTS = [];
@@ -66,9 +67,21 @@ router.get('/stats', (req, res) => {
     const totalProducts = PRODUCTS.length;
     const availableProducts = PRODUCTS.filter(p => p.stock > 0).length;
 
-    // Per ora ordini e vendite sono mock (verranno dal database quando implementato)
-    const todayOrders = 0;  // TODO: da database ordini
-    const todaySales = 0;   // TODO: da database ordini
+    // Calcola ordini e vendite di oggi dal database
+    const allOrders = orderService.getAllOrders();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Inizio giornata
+
+    const todayOrdersFiltered = allOrders.filter(order => {
+      const orderDate = new Date(order.createdAt);
+      orderDate.setHours(0, 0, 0, 0);
+      return orderDate.getTime() === today.getTime();
+    });
+
+    const todayOrders = todayOrdersFiltered.length;
+    const todaySales = todayOrdersFiltered.reduce((sum, order) => {
+      return sum + (order.totals?.total || 0);
+    }, 0);
 
     res.json({
       success: true,
@@ -77,7 +90,7 @@ router.get('/stats', (req, res) => {
         availableProducts,
         outOfStock: totalProducts - availableProducts,
         todayOrders,
-        todaySales,
+        todaySales: Math.round(todaySales * 100) / 100, // Arrotonda a 2 decimali
         lastSync: new Date().toISOString()
       }
     });
