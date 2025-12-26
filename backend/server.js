@@ -42,9 +42,18 @@ app.use(cors({
       return;
     }
 
-    // Production: solo FRONTEND_URL specificato
-    if (process.env.NODE_ENV === 'production' && origin === process.env.FRONTEND_URL) {
-      callback(null, true);
+    // Production: permetti lista domini separati da virgola in FRONTEND_URL
+    if (process.env.NODE_ENV === 'production') {
+      const allowedOrigins = process.env.FRONTEND_URL
+        ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
+        : [];
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        logger.warn(`🚫 CORS blocked origin: ${origin}`);
+        callback(new Error('Not allowed by CORS'));
+      }
     } else {
       callback(new Error('Not allowed by CORS'));
     }
