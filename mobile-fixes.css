@@ -622,7 +622,23 @@
         width: 100% !important;
     }
 
-    /* === 5. NASCONDI ELEMENTI INUTILI SU MOBILE === */
+    /* === 5. FRECCE NAVIGAZIONE IMMAGINI PRODOTTO - Sotto immagine === */
+    .gallery-nav {
+        top: 250px !important; /* Alzate sotto all'immagine (non su descrizione) */
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.5rem !important;
+    }
+
+    .gallery-prev {
+        left: 10% !important;
+    }
+
+    .gallery-next {
+        right: 10% !important;
+    }
+
+    /* === 6. NASCONDI ELEMENTI INUTILI SU MOBILE === */
 
     /* Nascondi hero banner grande */
     .hero {
