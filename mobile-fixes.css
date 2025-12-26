@@ -546,6 +546,32 @@
         max-width: 100% !important;
     }
 
+    /* Bottone "Aggiungi al carrello" - solo icona su mobile */
+    .add-to-cart-btn {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 0 !important; /* Nasconde il testo */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        margin: 10px auto 0 auto !important;
+    }
+
+    .add-to-cart-btn::before {
+        content: "🛒" !important;
+        font-size: 1.5rem !important;
+        display: block !important;
+    }
+
+    .add-to-cart-btn:active {
+        transform: scale(0.95) !important;
+    }
+
     /* === 4. SIDEBAR CATEGORIE MOBILE (prodotti.html) - IN ALTO === */
     .categories-sidebar {
         width: 100% !important;
