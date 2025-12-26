@@ -546,40 +546,53 @@
         max-width: 100% !important;
     }
 
-    /* === 4. NASCONDI SIDEBAR SU MOBILE - Mostra solo "Scopri tutti i prodotti" === */
+    /* === 4. SIDEBAR CATEGORIE MOBILE (prodotti.html) - IN ALTO === */
     .categories-sidebar {
-        display: none !important; /* Nascosta su mobile */
-    }
-
-    /* Pulsante "Scopri tutti i prodotti" - visibile solo mobile */
-    .mobile-discover-all {
-        display: block !important;
         width: 100% !important;
-        padding: 18px 24px !important;
-        margin: 15px 0 20px 0 !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        color: white !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        border: none !important;
+        position: static !important;
+        margin-bottom: 20px !important;
+        background: white !important;
         border-radius: 12px !important;
-        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3) !important;
-        cursor: pointer !important;
-        text-align: center !important;
-        transition: transform 0.2s !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+        padding: 15px !important;
+        order: -1 !important; /* Forza sidebar in alto */
     }
 
-    .mobile-discover-all:active {
-        transform: scale(0.98) !important;
+    .sidebar-header h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 10px !important;
     }
 
-    /* Layout prodotti: tutto semplificato */
+    .category-btn {
+        font-size: 1rem !important;
+        padding: 12px 15px !important;
+        width: 100% !important;
+        min-height: 48px !important;
+    }
+
+    .subcategory-list {
+        padding-left: 10px !important;
+    }
+
+    .subcategory-link {
+        font-size: 0.95rem !important;
+        padding: 10px 12px !important;
+        min-height: 44px !important;
+    }
+
+    /* Nascondi pulsante "Scopri tutti" su mobile */
+    .mobile-discover-all {
+        display: none !important;
+    }
+
+    /* Layout prodotti: sidebar SOPRA, prodotti SOTTO */
     .products-layout {
         display: flex !important;
         flex-direction: column !important;
     }
 
     .products-container {
+        order: 1 !important; /* Prodotti sotto la sidebar */
         width: 100% !important;
     }
 
