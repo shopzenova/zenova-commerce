@@ -2891,3 +2891,53 @@ function resetAutoplay() {
 document.addEventListener('DOMContentLoaded', () => {
     initTestimonialsSlider();
 });
+
+// ========================================
+// MOBILE CATEGORY DROPDOWN TOGGLE
+// ========================================
+
+/**
+ * Gestisce l'apertura/chiusura dei dropdown categorie su mobile
+ * Su mobile, :hover non funziona, serve click
+ */
+function initMobileCategoryDropdowns() {
+    // Solo su mobile (max-width: 768px)
+    if (window.innerWidth > 768) return;
+
+    const dropdowns = document.querySelectorAll('.category-nav-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.category-nav-item');
+
+        if (!trigger) return;
+
+        // Previeni il comportamento di default del link
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Chiudi tutti gli altri dropdown
+            dropdowns.forEach(other => {
+                if (other !== dropdown) {
+                    other.classList.remove('open');
+                }
+            });
+
+            // Toggle questo dropdown
+            dropdown.classList.toggle('open');
+        });
+    });
+
+    // Chiudi dropdown quando si clicca fuori
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.category-nav-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('open');
+            });
+        }
+    });
+}
+
+// Inizializza al caricamento e al resize
+document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
+window.addEventListener('resize', initMobileCategoryDropdowns);
