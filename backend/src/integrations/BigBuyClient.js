@@ -390,11 +390,36 @@ class BigBuyClient {
 
       return response.data;
     } catch (error) {
-      logger.error('Errore BigBuy calculateShippingCost:', error.message);
-      // Fallback a costi fissi in caso di errore
+      logger.error('❌ Errore BigBuy calculateShippingCost:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data
+      });
+
+      // Fallback: usa costi REALI da CSV (€9.47/prodotto IT)
+      // Per non rimetterci soldi!
+      const costPerProduct = {
+        'IT': 9.47,  // Costo REALE da CSV BigBuy
+        'ES': 4.79,  // Costo REALE da CSV BigBuy
+        'FR': 8.50,
+        'DE': 8.50,
+        'default': 10.00
+      };
+
+      const unitCost = costPerProduct[destination.country] || costPerProduct['default'];
+      const totalProducts = products.reduce((sum, p) => sum + (p.quantity || 1), 0);
+      const totalCost = unitCost * totalProducts;
+
+      logger.warn(`⚠️ Fallback spedizione: ${totalProducts} prodotti × €${unitCost} = €${totalCost} (${destination.country})`);
+
       return {
         shippingCosts: [
-          { carrierId: 0, carrierName: 'Standard', cost: destination.country === 'IT' ? 4.90 : 9.90 }
+          {
+            carrierId: 0,
+            carrierName: 'Standard',
+            cost: totalCost
+          }
         ]
       };
     }
