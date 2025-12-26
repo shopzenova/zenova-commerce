@@ -61,20 +61,8 @@
         transform: rotate(-45deg) translate(7px, -7px);
     }
 
-    /* Compact logo for mobile */
+    /* Nascondi logo su mobile - semplifica navigazione */
     .logo {
-        flex: 1;
-    }
-
-    .logo-text h1 {
-        font-size: 1.2rem !important;
-    }
-
-    .logo-experience {
-        font-size: 0.7rem !important;
-    }
-
-    .tagline {
         display: none !important;
     }
 
@@ -223,7 +211,39 @@
         min-height: 44px;
     }
 
-    /* Carrello */
+    /* Carrello Mobile - Icona Visibile */
+    .cart-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        padding: 1.5rem !important;
+        border-bottom: none !important;
+    }
+
+    .cart-header h3 {
+        color: white !important;
+        font-size: 1.3rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+    }
+
+    .cart-header h3::before {
+        content: "🛒" !important;
+        font-size: 2rem !important;
+        display: inline-block !important;
+    }
+
+    .cart-header .close-btn {
+        color: white !important;
+        font-size: 2rem !important;
+        background: rgba(255,255,255,0.2) !important;
+        border-radius: 50% !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
     .cart-item-name {
         font-size: 1rem !important;
     }
@@ -435,13 +455,27 @@
         transform: scale(0.95) !important;
     }
 
-    .dropdown-arrow {
-        display: none !important; /* No dropdown su mobile */
-    }
-
-    .category-dropdown-menu,
+    /* Dropdown categorie navigazione - nascondi mega menu */
     .mega-menu {
         display: none !important; /* No mega menu su mobile */
+    }
+
+    /* Dropdown filtri e ordinamento - mantieni visibili con z-index alto */
+    .category-dropdown-menu {
+        z-index: 9999 !important;
+        position: fixed !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+    }
+
+    .category-dropdown {
+        z-index: 9999 !important;
+    }
+
+    /* Fix z-index per tutti i dropdown */
+    [class*="dropdown"],
+    [class*="menu"] {
+        z-index: 9999 !important;
     }
 
     /* === 3. PRODOTTI IN EVIDENZA CAROUSEL === */
