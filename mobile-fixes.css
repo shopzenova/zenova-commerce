@@ -355,6 +355,180 @@
     }
 }
 
+/* ========================================
+   MOBILE E-COMMERCE REDESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    /* === 1. BARRA CERCA GRANDE IN CIMA === */
+    .search-btn {
+        width: 100% !important;
+        height: 50px !important;
+        background: #f5f5f5 !important;
+        border: 2px solid #ddd !important;
+        border-radius: 25px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        font-size: 1.1rem !important;
+        color: #666 !important;
+        margin: 10px 0 !important;
+        padding: 0 20px !important;
+    }
+
+    .search-btn::before {
+        content: "🔍 Cerca prodotti..." !important;
+    }
+
+    .search-btn svg {
+        display: none !important;
+    }
+
+    /* === 2. CATEGORIE SCROLL ORIZZONTALE === */
+    .categories-nav {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important; /* Firefox */
+        -ms-overflow-style: none !important; /* IE/Edge */
+        background: white !important;
+        position: sticky !important;
+        top: 60px !important;
+        z-index: 100 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        padding: 10px 0 !important;
+    }
+
+    .categories-nav::-webkit-scrollbar {
+        display: none !important; /* Chrome/Safari */
+    }
+
+    .categories-nav-list {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 12px !important;
+        padding: 0 15px !important;
+        width: max-content !important;
+    }
+
+    .category-nav-item-wrapper {
+        flex-shrink: 0 !important;
+    }
+
+    .category-nav-item {
+        display: inline-flex !important;
+        align-items: center !important;
+        white-space: nowrap !important;
+        padding: 12px 20px !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        border-radius: 25px !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        transition: transform 0.2s !important;
+    }
+
+    .category-nav-item:active {
+        transform: scale(0.95) !important;
+    }
+
+    .dropdown-arrow {
+        display: none !important; /* No dropdown su mobile */
+    }
+
+    .category-dropdown-menu,
+    .mega-menu {
+        display: none !important; /* No mega menu su mobile */
+    }
+
+    /* === 3. PRODOTTI IN EVIDENZA CAROUSEL === */
+    .featured-products-grid,
+    .products-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        gap: 15px !important;
+        padding: 15px 0 !important;
+    }
+
+    .featured-products-grid::-webkit-scrollbar,
+    .products-grid::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .product-card {
+        flex-shrink: 0 !important;
+        width: 280px !important;
+        max-width: 85vw !important;
+    }
+
+    /* === 4. NASCONDI ELEMENTI INUTILI SU MOBILE === */
+
+    /* Nascondi hero banner grande */
+    .hero {
+        display: none !important;
+    }
+
+    /* Nascondi griglia categorie con immagini */
+    .categories-grid,
+    .category-grid,
+    .tech-features-grid {
+        display: none !important;
+    }
+
+    /* Nascondi immagini decorative */
+    .hero-image,
+    .category-image,
+    .banner-image {
+        display: none !important;
+    }
+
+    /* === 5. LAYOUT PULITO === */
+    body {
+        background: #f9f9f9 !important;
+    }
+
+    .container {
+        padding: 0 15px !important;
+    }
+
+    section {
+        padding: 15px 0 !important;
+    }
+
+    /* Titoli sezioni più compatti */
+    .section-title {
+        font-size: 1.3rem !important;
+        margin: 15px 0 !important;
+        padding-left: 15px !important;
+    }
+
+    /* === 6. PRODUCT MODAL FIX === */
+    .product-detail-modal {
+        padding: 20px 10px !important;
+    }
+
+    .product-detail-content {
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* === 7. CART FOOTER STICKY === */
+    .cart-footer {
+        position: sticky !important;
+        bottom: 0 !important;
+        background: white !important;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.1) !important;
+        z-index: 1000 !important;
+    }
+}
+
 /* Landscape mobile */
 @media (max-width: 896px) and (orientation: landscape) {
 
