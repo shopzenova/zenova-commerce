@@ -1,5 +1,628 @@
 [
   {
+    "id": "ZN-1766702524103-2198",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "BackF-12A",
+        "bigbuyId": "BackF-12A",
+        "name": "Bruciatore Incenso a Cascata - Grande Dragon Pool",
+        "price": 28.5,
+        "quantity": 1,
+        "image": "https://media.aiku.io/fLb7KUuIFpRErjy2YzMofJYS0K00nE0BW6X9DfahN4o/bG9jYWw6Ly9tZWRpYS8xTi8yRC82MFIzMEMxRzZNV0syRDFOL2JhZDU5ZWEwLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 28.5,
+      "shipping": 12.58,
+      "total": 41.08
+    },
+    "payment": {
+      "method": "stripe_card",
+      "sessionId": "pi_3SiNENFfFbDwiUWS0K2haelw",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:42:04.103Z",
+    "updatedAt": "2025-12-25T22:42:04.103Z"
+  },
+  {
+    "id": "ZN-1766702251351-4129",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "MANT-06",
+        "bigbuyId": "MANT-06",
+        "name": "Lime Arancione Pareo Mandala",
+        "price": 15.65,
+        "quantity": 1,
+        "image": {
+          "url": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc",
+          "thumbnail": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc"
+        }
+      }
+    ],
+    "totals": {
+      "subtotal": 0,
+      "shipping": 0,
+      "total": 0
+    },
+    "payment": {
+      "method": "stripe",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:37:31.351Z",
+    "updatedAt": "2025-12-25T22:37:31.351Z"
+  },
+  {
+    "id": "ZN-1766702133703-2261",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "MANT-06",
+        "bigbuyId": "MANT-06",
+        "name": "Lime Arancione Pareo Mandala",
+        "price": 15.65,
+        "quantity": 1,
+        "image": {
+          "url": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc",
+          "thumbnail": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc"
+        }
+      }
+    ],
+    "totals": {
+      "subtotal": 0,
+      "shipping": 0,
+      "total": 0
+    },
+    "payment": {
+      "method": "stripe",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:35:33.703Z",
+    "updatedAt": "2025-12-25T22:35:33.703Z"
+  },
+  {
+    "id": "ZN-1766701993507-2601",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "MANT-06",
+        "bigbuyId": "MANT-06",
+        "name": "Lime Arancione Pareo Mandala",
+        "price": 15.65,
+        "quantity": 1,
+        "image": {
+          "url": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc",
+          "thumbnail": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc"
+        }
+      }
+    ],
+    "totals": {
+      "subtotal": 0,
+      "shipping": 0,
+      "total": 0
+    },
+    "payment": {
+      "method": "stripe",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:33:13.507Z",
+    "updatedAt": "2025-12-25T22:33:13.507Z"
+  },
+  {
+    "id": "ZN-1766701873742-4315",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "MANT-06",
+        "bigbuyId": "MANT-06",
+        "name": "Lime Arancione Pareo Mandala",
+        "price": 15.65,
+        "quantity": 1,
+        "image": {
+          "url": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc",
+          "thumbnail": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc"
+        }
+      }
+    ],
+    "totals": {
+      "subtotal": 0,
+      "shipping": 0,
+      "total": 0
+    },
+    "payment": {
+      "method": "stripe",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:31:13.742Z",
+    "updatedAt": "2025-12-25T22:31:13.742Z"
+  },
+  {
+    "id": "ZN-1766701682448-3164",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "MANT-06",
+        "bigbuyId": "MANT-06",
+        "name": "Lime Arancione Pareo Mandala",
+        "price": 15.65,
+        "quantity": 1,
+        "image": {
+          "url": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc",
+          "thumbnail": "https://media.aiku.io/tgHPi1YRL980DYXBG-pnprzND-sj4VY_W3KImi9Czw0/bG9jYWw6Ly9tZWRpYS85Uy9HRS82MFIzMEMxRzZNUktHRTlTLzQxOGU0YTI5LmpwZWc"
+        }
+      }
+    ],
+    "totals": {
+      "subtotal": 15.65,
+      "shipping": 12.58,
+      "total": 28.23
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:28:02.448Z",
+    "updatedAt": "2025-12-25T22:28:02.448Z"
+  },
+  {
+    "id": "ZN-1766701532208-2248",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "S71009840",
+        "bigbuyId": "S71009840",
+        "name": "Candela LED Brilliant Grigio Metallo 3 Unità",
+        "price": 29.11,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/4004353428326_S71009840_P20.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 29.11,
+      "shipping": 0,
+      "total": 29.11
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:25:32.208Z",
+    "updatedAt": "2025-12-25T22:25:32.208Z"
+  },
+  {
+    "id": "ZN-1766701171095-7754",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "M0125751",
+        "bigbuyId": "M0125751",
+        "name": "Profumo Unisex Tom Ford Oud Minerale EDP 100 ml",
+        "price": 126.64,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/0888066144254_S8316956_P00.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 126.64,
+      "shipping": 8.92,
+      "total": 135.56
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:19:31.095Z",
+    "updatedAt": "2025-12-25T22:19:31.095Z"
+  },
+  {
+    "id": "ZN-1766701112780-6689",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "363733333333",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "M0125751",
+        "bigbuyId": "M0125751",
+        "name": "Profumo Unisex Tom Ford Oud Minerale EDP 100 ml",
+        "price": 126.64,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/0888066144254_S8316956_P00.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 126.64,
+      "shipping": 7.11,
+      "total": 133.75
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:18:32.780Z",
+    "updatedAt": "2025-12-25T22:18:32.780Z"
+  },
+  {
+    "id": "ZN-1766701087504-8213",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "M0125751",
+        "bigbuyId": "M0125751",
+        "name": "Profumo Unisex Tom Ford Oud Minerale EDP 100 ml",
+        "price": 126.64,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/0888066144254_S8316956_P00.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 126.64,
+      "shipping": 7.11,
+      "total": 133.75
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:18:07.505Z",
+    "updatedAt": "2025-12-25T22:18:07.505Z"
+  },
+  {
+    "id": "ZN-1766700165272-9937",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T22:02:45.272Z",
+    "updatedAt": "2025-12-25T22:02:45.272Z"
+  },
+  {
+    "id": "ZN-1766699864290-9197",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T21:57:44.290Z",
+    "updatedAt": "2025-12-25T21:57:44.290Z"
+  },
+  {
+    "id": "ZN-1766699719263-6478",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T21:55:19.263Z",
+    "updatedAt": "2025-12-25T21:55:19.263Z"
+  },
+  {
+    "id": "ZN-1766699574689-417",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T21:52:54.689Z",
+    "updatedAt": "2025-12-25T21:52:54.689Z"
+  },
+  {
+    "id": "ZN-1766699547414-8655",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T21:52:27.414Z",
+    "updatedAt": "2025-12-25T21:52:27.414Z"
+  },
+  {
+    "id": "ZN-1766699510717-1191",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "3312737533",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "AromaJ-07",
+        "bigbuyId": "AromaJ-07",
+        "name": "Gioiello per Aromaterapia Collana - Tartaruga 25mm",
+        "price": 13.95,
+        "quantity": 1,
+        "image": "https://media.aiku.io/ZdZEt_CWuoyDQTPywECeudmLiOvZnG89LOJrTaUf6ho/bG9jYWw6Ly9tZWRpYS9TSy84RC82MFIzMEMxRzZNVEs4RFNLL2I4MTNhZTliLmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 13.95,
+      "shipping": 12.58,
+      "total": 26.53
+    },
+    "payment": {
+      "method": "paypal",
+      "sessionId": "",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2025-12-25T21:51:50.717Z",
+    "updatedAt": "2025-12-25T21:51:50.717Z"
+  },
+  {
     "id": "ZN-1765976974216-7977",
     "status": "pending",
     "customer": {
