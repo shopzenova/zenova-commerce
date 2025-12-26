@@ -3,7 +3,7 @@
  * Helper per chiamare il backend da script.js
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://zenova-commerce-production.up.railway.app/api';
 
 class ZenovaAPI {
 

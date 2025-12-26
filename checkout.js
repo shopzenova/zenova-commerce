@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 quantity: item.quantity
             }));
 
-            const response = await fetch('http://localhost:3000/api/checkout/calculate-shipping', {
+            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/checkout/calculate-shipping', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }));
 
             // Create order via backend API
-            const response = await fetch('http://localhost:3000/api/paypal/create-order', {
+            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/paypal/create-order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }));
 
             // Create payment intent via backend
-            const response = await fetch('http://localhost:3000/api/stripe/create-payment-intent', {
+            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/stripe/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Order placed:', order);
 
         // Send order to backend
-        fetch('http://localhost:3000/api/orders', {
+        fetch('https://zenova-commerce-production.up.railway.app/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)

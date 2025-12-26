@@ -2,7 +2,7 @@
 
 // API Configuration - Auto-detect environment
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : null;
+const API_BASE = IS_LOCAL ? 'https://zenova-commerce-production.up.railway.app/api' : null;
 
 // Products cache (used when online without backend)
 let PRODUCTS_CACHE = null;
@@ -168,7 +168,7 @@ function updateZoneCounts() {
 // Save product layout to server and localStorage
 async function saveProductLayout() {
     if (!IS_LOCAL) {
-        alert('⚠️ Salvataggio layout disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare il layout.');
+        alert('⚠️ Salvataggio layout disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare il layout.');
         return;
     }
 
@@ -267,7 +267,7 @@ priceInputs.forEach(inputId => {
 // Sync Now Function
 async function syncNow() {
     if (!IS_LOCAL) {
-        alert('⚠️ Sincronizzazione BigBuy disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per sincronizzare il catalogo.');
+        alert('⚠️ Sincronizzazione BigBuy disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per sincronizzare il catalogo.');
         return;
     }
 
@@ -992,7 +992,7 @@ function cancelImport() {
 // Toggle visibilità prodotto
 async function toggleProductVisibility(productId, productName, currentVisibility) {
     if (!IS_LOCAL) {
-        alert('⚠️ Modifica visibilità prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare i prodotti.');
+        alert('⚠️ Modifica visibilità prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare i prodotti.');
         return;
     }
 
@@ -1033,7 +1033,7 @@ async function toggleProductVisibility(productId, productName, currentVisibility
 // Elimina prodotto
 async function deleteProduct(productId, productName) {
     if (!IS_LOCAL) {
-        alert('⚠️ Eliminazione prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire i prodotti.');
+        alert('⚠️ Eliminazione prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire i prodotti.');
         return;
     }
 
@@ -1065,7 +1065,7 @@ async function deleteProduct(productId, productName) {
 // Toggle featured product
 async function toggleFeatured(productId, productName, currentlyFeatured) {
     if (!IS_LOCAL) {
-        alert('⚠️ Gestione prodotti in evidenza disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire i prodotti in evidenza.');
+        alert('⚠️ Gestione prodotti in evidenza disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire i prodotti in evidenza.');
         return;
     }
 
@@ -1115,7 +1115,7 @@ async function loadCatalogProducts(page = 1) {
             // Online mode: catalog not available
             const catalogGrid = document.getElementById('catalogProductsGrid');
             if (catalogGrid) {
-                catalogGrid.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Catalogo BigBuy</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>http://localhost:3000/admin.html</code> per accedere al catalogo completo</p></div>';
+                catalogGrid.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Catalogo BigBuy</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>https://zenova-commerce-production.up.railway.app/admin.html</code> per accedere al catalogo completo</p></div>';
             }
             return;
         }
@@ -1301,7 +1301,7 @@ function renderCatalogPagination(currentPage, totalPages) {
 // Import product from catalog to curated catalog
 async function importCatalogProduct(productId) {
     if (!IS_LOCAL) {
-        alert('⚠️ Importazione prodotti disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per importare prodotti dal catalogo BigBuy.');
+        alert('⚠️ Importazione prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per importare prodotti dal catalogo BigBuy.');
         return;
     }
 
@@ -2030,12 +2030,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (!IS_LOCAL) {
-                alert('⚠️ Modifica categoria disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per modificare le categorie.');
+                alert('⚠️ Modifica categoria disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare le categorie.');
                 return;
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/api/admin/products/${productId}/category`, {
+                const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/admin/products/${productId}/category`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -2085,7 +2085,7 @@ async function loadOrders(statusFilter = '') {
     if (!container) return;
 
     if (!IS_LOCAL) {
-        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Gestione Ordini</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>http://localhost:3000/admin.html</code> per gestire gli ordini</p></div>';
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Gestione Ordini</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>https://zenova-commerce-production.up.railway.app/admin.html</code> per gestire gli ordini</p></div>';
         return;
     }
 
@@ -2093,8 +2093,8 @@ async function loadOrders(statusFilter = '') {
         container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
 
         const url = statusFilter
-            ? `http://localhost:3000/api/orders?status=${statusFilter}`
-            : 'http://localhost:3000/api/orders';
+            ? `https://zenova-commerce-production.up.railway.app/api/orders?status=${statusFilter}`
+            : 'https://zenova-commerce-production.up.railway.app/api/orders';
 
         const response = await fetch(url);
         const result = await response.json();
@@ -2213,12 +2213,12 @@ function addOrderEventListeners(orderId) {
  */
 async function updateOrderStatus(orderId, newStatus) {
     if (!IS_LOCAL) {
-        alert('⚠️ Gestione ordini disponibile solo in modalità locale.\n\nApri http://localhost:3000/admin.html per gestire gli ordini.');
+        alert('⚠️ Gestione ordini disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire gli ordini.');
         return;
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/orders/${orderId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -2247,7 +2247,7 @@ async function updateOrderStatus(orderId, newStatus) {
  */
 async function showOrderDetails(orderId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`);
+        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/orders/${orderId}`);
         const result = await response.json();
 
         if (!result.success) {

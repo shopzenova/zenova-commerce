@@ -3,7 +3,7 @@
  * Gestisce il caricamento e visualizzazione prodotti per categoria
  */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://zenova-commerce-production.up.railway.app/api';
 
 // Mapping categorie
 const CATEGORY_MAP = {

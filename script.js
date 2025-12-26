@@ -39,7 +39,7 @@ function getAbsoluteImageUrl(path) {
 
     // Se è un percorso relativo che inizia con /, aggiungi il prefisso del backend
     if (path.startsWith('/')) {
-        return 'http://localhost:3000' + path;
+        return 'https://zenova-commerce-production.up.railway.app' + path;
     }
 
     // Se è un percorso relativo (images/...), aggiungi / davanti
