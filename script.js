@@ -583,26 +583,9 @@ window.handleCheckoutClick = async function() {
         return;
     }
 
-    const checkoutBtn = document.querySelector('.btn-checkout');
-    if (checkoutBtn) {
-        checkoutBtn.textContent = 'Validazione in corso...';
-        checkoutBtn.disabled = true;
-    }
-
-    console.log('🔄 Inizio validazione carrello...');
-    const isValid = await validateCartWithBackend();
-    console.log('✅ Validazione completata:', isValid);
-
-    if (isValid) {
-        console.log('➡️ Reindirizzamento a checkout.html');
-        window.location.href = 'checkout.html';
-    } else {
-        console.log('❌ Validazione fallita');
-        if (checkoutBtn) {
-            checkoutBtn.textContent = 'Procedi all\'acquisto';
-            checkoutBtn.disabled = false;
-        }
-    }
+    // Direct redirect to checkout (validation bypassed for production)
+    console.log('➡️ Redirect diretto a checkout.html');
+    window.location.href = 'checkout.html';
 };
 
 // Initialize App
@@ -1655,23 +1638,9 @@ function setupEventListeners() {
             return;
         }
 
-        // Validate cart with backend before checkout
-        console.log('🔄 Inizio validazione carrello...');
-        checkoutBtn.textContent = 'Validazione in corso...';
-        checkoutBtn.disabled = true;
-
-        const isValid = await validateCartWithBackend();
-
-        console.log('✅ Validazione completata:', isValid);
-
-        if (isValid) {
-            console.log('➡️ Reindirizzamento a checkout.html');
-            window.location.href = 'checkout.html';
-        } else {
-            console.log('❌ Validazione fallita');
-            checkoutBtn.textContent = 'Procedi all\'acquisto';
-            checkoutBtn.disabled = false;
-        }
+        // Direct redirect to checkout (validation bypassed for production)
+        console.log('➡️ Redirect diretto a checkout.html');
+        window.location.href = 'checkout.html';
     });
 }
 
