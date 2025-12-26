@@ -76,8 +76,9 @@
     }
 
     /* Mobile icons styling - CARRELLO GRANDE E VISIBILE */
-    .nav-icons-mobile button,
-    .nav-icons-mobile a {
+    .nav-icons-mobile .cart-btn,
+    .nav-icons-mobile button:not(.search-btn),
+    .nav-icons-mobile a:not(.search-btn) {
         width: 70px !important;
         height: 70px !important;
         display: flex;
@@ -90,7 +91,8 @@
         position: relative;
     }
 
-    .nav-icons-mobile svg {
+    .nav-icons-mobile .cart-btn svg,
+    .nav-icons-mobile button:not(.search-btn) svg {
         width: 40px !important;
         height: 40px !important;
         stroke: #333 !important;
