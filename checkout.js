@@ -98,10 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             console.log('📦 Calcolo costi spedizione per:', { country, postalCode, cartItems: cart.length });
 
-            // Prepare cart items for shipping calculation
+            // Prepare cart items for shipping calculation (include price for free shipping logic)
             const items = cart.map(item => ({
                 id: item.bigbuyId || item.id,
-                quantity: item.quantity
+                quantity: item.quantity,
+                price: item.price
             }));
 
             const response = await fetch('https://zenova-commerce-production.up.railway.app/api/checkout/calculate-shipping', {

@@ -264,17 +264,27 @@ router.post('/calculate-shipping', async (req, res) => {
 
     logger.info(`🚚 Calcolo spedizione per ${items.length} prodotti verso ${destination.country}`);
 
+    // Calcola totale ordine per spedizione gratis
+    const orderTotal = items.reduce((sum, item) => {
+      const price = item.price || 0;
+      const quantity = item.quantity || 1;
+      return sum + (price * quantity);
+    }, 0);
+
+    logger.info(`💰 Totale ordine: €${orderTotal.toFixed(2)}`);
+
     // Prepara dati prodotti
     const products = items.map(item => ({
-      reference: item.id, // ID prodotto BigBuy
-      quantity: item.quantity || 1
+      reference: item.id,
+      quantity: item.quantity || 1,
+      price: item.price || 0
     }));
 
-    // Usa ShippingService per calcolare costi REALI da CSV
+    // Usa ShippingService con tariffe fisse intelligenti
     const result = await shippingService.calculateShippingCost(products, {
       country: destination.country,
       postcode: destination.postcode || ''
-    });
+    }, orderTotal);
 
     if (!result.success) {
       return res.status(400).json({
@@ -284,7 +294,7 @@ router.post('/calculate-shipping', async (req, res) => {
       });
     }
 
-    logger.info(`✅ Costo spedizione calcolato: €${result.cost} (${result.carrier})`);
+    logger.info(`✅ Costo spedizione: €${result.cost} ${result.isFree ? '(GRATIS!)' : ''}`);
 
     res.json({
       success: true,
@@ -292,9 +302,11 @@ router.post('/calculate-shipping', async (req, res) => {
         cost: result.cost,
         carrier: result.carrier,
         country: result.country,
-        breakdown: result.breakdown,
-        productsCount: result.productsCount,
-        notFoundCount: result.notFoundCount
+        zone: result.zone,
+        isFree: result.isFree,
+        freeAbove: result.freeAbove,
+        orderTotal: orderTotal,
+        productsCount: result.productsCount
       }
     });
 

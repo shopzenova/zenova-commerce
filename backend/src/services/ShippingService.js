@@ -1,13 +1,12 @@
-// Servizio per calcolo costi spedizione usando API BigBuy (no CSV!)
-const bigbuy = require('../integrations/BigBuyClient');
+// Servizio per calcolo costi spedizione con tariffe fisse intelligenti
 const logger = require('../utils/logger');
 
 class ShippingService {
   constructor() {
-    this.shippingCache = new Map(); // Cache in memoria per velocità
+    this.shippingCache = new Map();
     this.CACHE_TTL = 30 * 60 * 1000; // 30 minuti cache
 
-    // Paesi supportati da BigBuy
+    // Paesi supportati
     this.supportedCountries = [
       'AT', 'AU', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE',
       'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'LT',
@@ -15,21 +14,73 @@ class ShippingService {
       'SK', 'US'
     ];
 
-    logger.info('✅ ShippingService inizializzato (API BigBuy)');
+    // Tariffe per paese (costo fisso + soglia spedizione gratis)
+    this.shippingRates = {
+      // Zone 1: Italia (priorità)
+      'IT': { cost: 9.90, freeAbove: 50, zone: 'Italia' },
+
+      // Zone 2: Spagna + Paesi vicini EU
+      'ES': { cost: 12.90, freeAbove: 75, zone: 'EU Zone 1' },
+      'PT': { cost: 12.90, freeAbove: 75, zone: 'EU Zone 1' },
+      'FR': { cost: 12.90, freeAbove: 75, zone: 'EU Zone 1' },
+
+      // Zone 3: Europa Centrale
+      'DE': { cost: 14.90, freeAbove: 75, zone: 'EU Zone 2' },
+      'AT': { cost: 14.90, freeAbove: 75, zone: 'EU Zone 2' },
+      'BE': { cost: 14.90, freeAbove: 75, zone: 'EU Zone 2' },
+      'NL': { cost: 14.90, freeAbove: 75, zone: 'EU Zone 2' },
+      'LU': { cost: 14.90, freeAbove: 75, zone: 'EU Zone 2' },
+
+      // Zone 4: Europa Est
+      'PL': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'CZ': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'SK': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'HU': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'SI': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'HR': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'RO': { cost: 18.90, freeAbove: 100, zone: 'EU Zone 3' },
+      'BG': { cost: 18.90, freeAbove: 100, zone: 'EU Zone 3' },
+
+      // Zone 5: Europa Nord/Sud
+      'GR': { cost: 19.90, freeAbove: 100, zone: 'EU Zone 4' },
+      'CY': { cost: 22.90, freeAbove: 150, zone: 'EU Zone 4' },
+      'MT': { cost: 22.90, freeAbove: 150, zone: 'EU Zone 4' },
+      'DK': { cost: 16.90, freeAbove: 100, zone: 'EU Zone 4' },
+      'SE': { cost: 18.90, freeAbove: 100, zone: 'EU Zone 4' },
+      'FI': { cost: 19.90, freeAbove: 100, zone: 'EU Zone 4' },
+      'NO': { cost: 22.90, freeAbove: 150, zone: 'Extra EU' },
+      'CH': { cost: 22.90, freeAbove: 150, zone: 'Extra EU' },
+
+      // Zone 6: Baltico
+      'EE': { cost: 19.90, freeAbove: 100, zone: 'EU Baltic' },
+      'LV': { cost: 19.90, freeAbove: 100, zone: 'EU Baltic' },
+      'LT': { cost: 19.90, freeAbove: 100, zone: 'EU Baltic' },
+      'IE': { cost: 18.90, freeAbove: 100, zone: 'EU West' },
+
+      // Zone 7: UK
+      'GB': { cost: 19.90, freeAbove: 100, zone: 'UK' },
+
+      // Zone 8: Extra EU
+      'US': { cost: 29.90, freeAbove: 200, zone: 'USA' },
+      'AU': { cost: 34.90, freeAbove: 200, zone: 'Australia' }
+    };
+
+    logger.info('✅ ShippingService inizializzato (Tariffe fisse intelligenti)');
   }
 
   /**
-   * Calcola costo spedizione per un ordine usando API BigBuy
+   * Calcola costo spedizione per un ordine
    * @param {Array} products - Array di {reference, quantity}
    * @param {Object} destination - {country, postcode}
-   * @returns {Object} - {success, cost, carrier, breakdown}
+   * @param {Number} orderTotal - Totale ordine (opzionale, per spedizione gratis)
+   * @returns {Object} - {success, cost, carrier, isFree}
    */
-  async calculateShippingCost(products, destination) {
+  async calculateShippingCost(products, destination, orderTotal = 0) {
     const countryCode = destination.country.toUpperCase();
 
     // Verifica paese supportato
     if (!this.supportedCountries.includes(countryCode)) {
-      logger.warn(`⚠️  Paese ${countryCode} non supportato da BigBuy`);
+      logger.warn(`⚠️  Paese ${countryCode} non supportato`);
       return {
         success: false,
         error: `Spedizione non disponibile per ${countryCode}`,
@@ -37,114 +88,69 @@ class ShippingService {
       };
     }
 
-    // Controlla cache
-    const cacheKey = `shipping_${countryCode}_${JSON.stringify(products)}`;
-    const cached = this._getFromCache(cacheKey);
-    if (cached) {
-      logger.info(`📦 Cache HIT per spedizione ${countryCode}`);
-      return cached;
-    }
-
     try {
-      logger.info(`🚚 Calcolo spedizione per ${products.length} prodotti verso ${countryCode}`);
+      // Ottieni tariffa per il paese
+      const rate = this.shippingRates[countryCode];
 
-      // Prepara dati prodotti per API BigBuy
-      const bigbuyProducts = products.map(p => ({
-        reference: p.reference || p.id,
-        quantity: p.quantity || 1
-      }));
-
-      // Chiama API BigBuy per calcolo spedizione
-      const bigbuyResponse = await bigbuy.calculateShippingCost(bigbuyProducts, {
-        country: countryCode,
-        postcode: destination.postcode || ''
-      });
-
-      logger.info(`📦 Risposta BigBuy shipping:`, bigbuyResponse);
-
-      // Gestisci risposta BigBuy
-      if (!bigbuyResponse || !bigbuyResponse.shippingCosts || bigbuyResponse.shippingCosts.length === 0) {
-        throw new Error('Nessuna opzione di spedizione disponibile da BigBuy');
+      if (!rate) {
+        // Paese supportato ma senza tariffa specifica, usa default EU
+        logger.warn(`⚠️  Tariffa non trovata per ${countryCode}, uso default EU`);
+        return {
+          success: true,
+          cost: 14.90,
+          carrier: 'Standard',
+          country: countryCode,
+          isFree: false,
+          zone: 'EU Default'
+        };
       }
 
-      // Prendi l'opzione più economica
-      const cheapestOption = bigbuyResponse.shippingCosts.reduce((min, option) =>
-        option.cost < min.cost ? option : min
-      );
+      // Calcola totale carrello se non fornito
+      if (!orderTotal && products && products.length > 0) {
+        // Se products ha field price, calcolalo
+        orderTotal = products.reduce((sum, p) => {
+          const price = p.price || 0;
+          const qty = p.quantity || 1;
+          return sum + (price * qty);
+        }, 0);
+      }
+
+      // Spedizione gratis sopra soglia?
+      const isFree = orderTotal >= rate.freeAbove;
+      const shippingCost = isFree ? 0 : rate.cost;
+
+      logger.info(`🚚 Spedizione ${countryCode} (${rate.zone}): €${shippingCost} ${isFree ? '(GRATIS! Ordine > €' + rate.freeAbove + ')' : ''}`);
 
       const result = {
         success: true,
-        cost: parseFloat(cheapestOption.cost.toFixed(2)),
-        carrier: cheapestOption.carrierName || 'Standard',
-        carrierId: cheapestOption.carrierId,
+        cost: shippingCost,
+        carrier: 'Standard',
         country: countryCode,
-        breakdown: bigbuyResponse.shippingCosts.map(option => ({
-          carrier: option.carrierName,
-          cost: option.cost,
-          carrierId: option.carrierId
-        })),
-        productsCount: products.length
+        zone: rate.zone,
+        isFree: isFree,
+        freeAbove: rate.freeAbove,
+        orderTotal: orderTotal,
+        productsCount: products ? products.length : 0
       };
-
-      logger.info(`✅ Costo spedizione calcolato: €${result.cost} (${result.carrier})`);
-
-      // Salva in cache
-      this._setCache(cacheKey, result);
 
       return result;
 
     } catch (error) {
       logger.error(`❌ Errore calcolo spedizione per ${countryCode}:`, error.message);
 
-      // Fallback: costi fissi ragionevoli se API fallisce
-      const fallbackCosts = {
-        'IT': 9.90,
-        'ES': 9.90,
-        'FR': 12.90,
-        'DE': 12.90,
-        'AT': 14.90,
-        'BE': 14.90,
-        'NL': 14.90,
-        'PT': 14.90,
-        'GB': 16.90,
-        'US': 24.90,
-        'CH': 18.90
-      };
-
-      const fallbackCost = fallbackCosts[countryCode] || 14.90;
-
-      logger.warn(`⚠️  Uso costo fallback per ${countryCode}: €${fallbackCost}`);
-
       return {
-        success: true,
-        cost: fallbackCost,
-        carrier: 'Standard',
-        country: countryCode,
-        isFallback: true,
+        success: false,
         error: error.message,
-        productsCount: products.length
+        country: countryCode
       };
     }
   }
 
   /**
-   * Cache helpers
+   * Ottieni info tariffa per un paese
    */
-  _getCacheKey(key) {
-    return `cache_${key}`;
-  }
-
-  _getFromCache(key) {
-    const cached = this.shippingCache.get(key);
-    if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
-      return cached.data;
-    }
-    this.shippingCache.delete(key);
-    return null;
-  }
-
-  _setCache(key, data) {
-    this.shippingCache.set(key, { data, timestamp: Date.now() });
+  getShippingRate(countryCode) {
+    return this.shippingRates[countryCode.toUpperCase()] || null;
   }
 
   /**
@@ -155,7 +161,7 @@ class ShippingService {
   }
 
   /**
-   * Pulisci cache (utile per aggiornamenti)
+   * Pulisci cache
    */
   clearCache() {
     this.shippingCache.clear();
