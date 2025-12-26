@@ -417,7 +417,14 @@
         flex-shrink: 0 !important;
     }
 
-    /* === 2. CATEGORIE SCROLL ORIZZONTALE === */
+    /* === 2. CATEGORIE SCROLL ORIZZONTALE (solo HOME) === */
+    /* Su prodotti.html, nascondere categories-nav e usare solo sidebar */
+    body:not(.home-page) .categories-nav {
+        display: none !important; /* Nascondi su prodotti.html */
+    }
+
+    /* Su home page (index.html), mostrare categories-nav scorrevole */
+    .home-page .categories-nav,
     .categories-nav {
         overflow-x: auto !important;
         overflow-y: hidden !important;
@@ -525,31 +532,65 @@
         background: #f5f5f5 !important;
     }
 
-    /* === 3. PRODOTTI IN EVIDENZA CAROUSEL === */
+    /* === 3. PRODOTTI SCROLL VERTICALE (non carousel) === */
     .featured-products-grid,
     .products-grid {
-        display: flex !important;
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 15px !important;
         padding: 15px 0 !important;
     }
 
-    .featured-products-grid::-webkit-scrollbar,
-    .products-grid::-webkit-scrollbar {
-        display: none !important;
-    }
-
     .product-card {
-        flex-shrink: 0 !important;
-        width: 280px !important;
-        max-width: 85vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
-    /* === 4. NASCONDI ELEMENTI INUTILI SU MOBILE === */
+    /* === 4. SIDEBAR CATEGORIE MOBILE (prodotti.html) - IN ALTO === */
+    .categories-sidebar {
+        width: 100% !important;
+        position: static !important;
+        margin-bottom: 20px !important;
+        background: white !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+        padding: 15px !important;
+        order: -1 !important; /* Forza sidebar in alto */
+    }
+
+    .sidebar-header h3 {
+        font-size: 1.3rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .category-btn {
+        font-size: 1rem !important;
+        padding: 12px 15px !important;
+        width: 100% !important;
+        min-height: 48px !important;
+    }
+
+    .subcategory-list {
+        padding-left: 10px !important;
+    }
+
+    .subcategory-link {
+        font-size: 0.95rem !important;
+        padding: 10px 12px !important;
+        min-height: 44px !important;
+    }
+
+    /* Layout prodotti: sidebar SOPRA, prodotti SOTTO */
+    .products-layout {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .products-container {
+        order: 1 !important; /* Prodotti sotto la sidebar */
+    }
+
+    /* === 5. NASCONDI ELEMENTI INUTILI SU MOBILE === */
 
     /* Nascondi hero banner grande */
     .hero {
