@@ -75,42 +75,42 @@
         padding: 0.5rem 0 !important;
     }
 
-    /* Mobile icons styling - TRASPARENTE con icone ben visibili */
+    /* Mobile icons styling - CARRELLO GRANDE E VISIBILE */
     .nav-icons-mobile button,
     .nav-icons-mobile a {
-        width: 50px;
-        height: 50px;
+        width: 70px !important;
+        height: 70px !important;
         display: flex;
         align-items: center;
         justify-content: center;
         background: transparent !important;
-        border: 2px solid #333 !important;
-        border-radius: 10px;
+        border: 3px solid #333 !important;
+        border-radius: 12px;
         cursor: pointer;
         position: relative;
     }
 
     .nav-icons-mobile svg {
-        width: 28px !important;
-        height: 28px !important;
+        width: 40px !important;
+        height: 40px !important;
         stroke: #333 !important;
-        stroke-width: 2.5 !important;
+        stroke-width: 3 !important;
     }
 
     .cart-count-mobile {
         position: absolute;
-        top: -10px;
-        right: -10px;
+        top: -12px;
+        right: -12px;
         background: #ff4757;
         color: white;
-        font-size: 0.75rem;
+        font-size: 0.9rem;
         font-weight: bold;
-        padding: 4px 8px;
-        border-radius: 12px;
-        min-width: 22px;
+        padding: 5px 10px;
+        border-radius: 14px;
+        min-width: 26px;
         text-align: center;
-        border: 2px solid white;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border: 3px solid white;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
     }
 }
 
