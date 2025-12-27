@@ -219,7 +219,7 @@
 
     /* Carrello Mobile - Icona Visibile */
     .cart-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #D4A373 0%, #8B6F47 100%) !important;
         padding: 1.5rem !important;
         border-bottom: none !important;
     }
@@ -460,12 +460,12 @@
         align-items: center !important;
         white-space: nowrap !important;
         padding: 12px 20px !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #D4A373 0%, #8B6F47 100%) !important;
         color: white !important;
         border-radius: 25px !important;
         font-size: 0.95rem !important;
         font-weight: 600 !important;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3) !important;
         transition: transform 0.2s !important;
     }
 
@@ -556,9 +556,9 @@
         align-items: center !important;
         justify-content: center !important;
         font-size: 0 !important; /* Nasconde il testo */
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #D4A373 0%, #8B6F47 100%) !important;
         border: none !important;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        box-shadow: 0 4px 12px rgba(212, 163, 115, 0.3) !important;
         margin: 10px auto 0 auto !important;
     }
 
