@@ -2925,15 +2925,16 @@ function initMobileCategoryDropdowns() {
             });
 
             // Toggle questo dropdown
-            const isOpening = !dropdown.classList.contains('open');
             dropdown.classList.toggle('open');
+        });
 
-            // Se sto aprendo, posiziona il menu correttamente (position: fixed)
-            if (isOpening) {
-                const rect = trigger.getBoundingClientRect();
-                menu.style.top = `${rect.bottom + 5}px`;
-                menu.style.left = `${rect.left}px`;
-            }
+        // Chiudi dropdown quando si clicca su un link interno
+        const links = menu.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                // Chiudi il dropdown quando si clicca un link
+                dropdown.classList.remove('open');
+            });
         });
     });
 
