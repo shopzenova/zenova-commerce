@@ -2951,3 +2951,57 @@ function initMobileCategoryDropdowns() {
 // Inizializza al caricamento e al resize
 document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
 window.addEventListener('resize', initMobileCategoryDropdowns);
+
+// ========================================
+// MOBILE AUTO-SCROLL AI PRODOTTI
+// ========================================
+
+/**
+ * Su mobile, quando clicki una categoria sidebar, scrolla automaticamente ai prodotti
+ */
+function initMobileAutoScrollToProducts() {
+    // Solo su mobile (max-width: 768px)
+    if (window.innerWidth > 768) return;
+
+    // Trova tutti i link sottocategorie e il bottone "In evidenza"
+    const subcategoryLinks = document.querySelectorAll('.subcategory-link');
+    const featuredBtn = document.querySelector('button[onclick*="resetToFeaturedProducts"]');
+
+    // Auto-scroll ai prodotti quando clicki una sottocategoria
+    subcategoryLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(() => {
+                scrollToProducts();
+            }, 300); // Piccolo delay per dare tempo al filtro di applicarsi
+        });
+    });
+
+    // Auto-scroll anche per "In evidenza"
+    if (featuredBtn) {
+        featuredBtn.addEventListener('click', () => {
+            setTimeout(() => {
+                scrollToProducts();
+            }, 300);
+        });
+    }
+
+    function scrollToProducts() {
+        // Trova la griglia prodotti
+        const productsGrid = document.querySelector('.products-grid, .featured-products-grid');
+
+        if (productsGrid) {
+            // Scroll smooth alla griglia prodotti
+            const yOffset = -100; // Offset per non nascondere sotto header
+            const y = productsGrid.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+            window.scrollTo({
+                top: y,
+                behavior: 'smooth'
+            });
+        }
+    }
+}
+
+// Inizializza auto-scroll mobile
+document.addEventListener('DOMContentLoaded', initMobileAutoScrollToProducts);
+window.addEventListener('resize', initMobileAutoScrollToProducts);
