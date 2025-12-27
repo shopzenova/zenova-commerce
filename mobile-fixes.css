@@ -662,7 +662,17 @@
         right: 10% !important;
     }
 
-    /* === 6. NASCONDI ELEMENTI INUTILI SU MOBILE === */
+    /* === 6. MODAL PRODOTTO - X chiusura più alta === */
+    .product-detail-close {
+        top: 0.5rem !important; /* Alzata (prima: 2rem) */
+        right: 0.5rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.5rem !important;
+        z-index: 9999 !important; /* Sopra tutto */
+    }
+
+    /* === 7. NASCONDI ELEMENTI INUTILI SU MOBILE === */
 
     /* Nascondi hero banner grande */
     .hero {
