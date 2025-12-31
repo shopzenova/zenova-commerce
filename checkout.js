@@ -1,6 +1,13 @@
 // Checkout System - Card (Stripe) + PayPal
+
+// API Configuration - Auto-detect environment
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : 'https://zenova-commerce-production.up.railway.app/api';
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Checkout system loaded - Card + PayPal mode');
+    console.log('Environment:', IS_LOCAL ? 'LOCAL' : 'PRODUCTION');
+    console.log('API Base:', API_BASE);
 
     // Get cart data
     const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
@@ -105,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 price: item.price
             }));
 
-            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/checkout/calculate-shipping', {
+            const response = await fetch(`${API_BASE}/checkout/calculate-shipping`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -251,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }));
 
             // Create order via backend API
-            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/paypal/create-order', {
+            const response = await fetch(`${API_BASE}/paypal/create-order`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -372,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }));
 
             // Create payment intent via backend
-            const response = await fetch('https://zenova-commerce-production.up.railway.app/api/stripe/create-payment-intent', {
+            const response = await fetch(`${API_BASE}/stripe/create-payment-intent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -640,7 +647,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Order placed:', order);
 
         // Send order to backend
-        fetch('https://zenova-commerce-production.up.railway.app/api/orders', {
+        fetch(`${API_BASE}/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)
