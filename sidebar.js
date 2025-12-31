@@ -304,6 +304,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Render products by category (from script.js)
             if (typeof window.renderProductsByCategory === 'function') {
                 window.renderProductsByCategory(subcategory);
+
+                // Scroll to products on mobile (auto-scroll dopo click categoria)
+                const productsGrid = document.getElementById('productsGrid');
+                if (productsGrid && window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
             } else {
                 console.error('❌ renderProductsByCategory not found');
             }
@@ -355,6 +363,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Render products by category (from script.js)
             if (typeof window.renderProductsByCategory === 'function') {
                 window.renderProductsByCategory(subcategory);
+
+                // Scroll to products on mobile (auto-scroll dopo click categoria)
+                const productsGrid = document.getElementById('productsGrid');
+                if (productsGrid && window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
             } else {
                 console.error('❌ renderProductsByCategory not found');
             }
