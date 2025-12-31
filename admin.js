@@ -2,7 +2,7 @@
 
 // API Configuration - Auto-detect environment
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const API_BASE = IS_LOCAL ? 'https://zenova-commerce-production.up.railway.app/api' : null;
+const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : null;
 
 // Products cache (used when online without backend)
 let PRODUCTS_CACHE = null;
