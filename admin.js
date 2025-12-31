@@ -2035,7 +2035,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/admin/products/${productId}/category`, {
+                const response = await fetch(`${API_BASE}/admin/products/${productId}/category`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -2093,8 +2093,8 @@ async function loadOrders(statusFilter = '') {
         container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
 
         const url = statusFilter
-            ? `https://zenova-commerce-production.up.railway.app/api/orders?status=${statusFilter}`
-            : 'https://zenova-commerce-production.up.railway.app/api/orders';
+            ? `${API_BASE}/orders?status=${statusFilter}`
+            : `${API_BASE}/orders`;
 
         const response = await fetch(url);
         const result = await response.json();
@@ -2218,7 +2218,7 @@ async function updateOrderStatus(orderId, newStatus) {
     }
 
     try {
-        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/orders/${orderId}/status`, {
+        const response = await fetch(`${API_BASE}/orders/${orderId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -2247,7 +2247,7 @@ async function updateOrderStatus(orderId, newStatus) {
  */
 async function showOrderDetails(orderId) {
     try {
-        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/orders/${orderId}`);
+        const response = await fetch(`${API_BASE}/orders/${orderId}`);
         const result = await response.json();
 
         if (!result.success) {
