@@ -456,10 +456,31 @@ document.addEventListener('DOMContentLoaded', function() {
             const itemTotal = item.price * item.quantity;
             subtotal += itemTotal;
 
+            // Gestione immagine prodotto (come nel carrello)
+            let imageHtml = '';
+            let imageUrl = item.image;
+
+            // Convert relative URLs to absolute
+            if (imageUrl && typeof imageUrl === 'string') {
+                if (Array.isArray(imageUrl)) imageUrl = imageUrl[0];
+                if (!imageUrl.startsWith('http') && !imageUrl.startsWith('data:') && imageUrl.startsWith('/')) {
+                    imageUrl = 'https://zenova-commerce-production.up.railway.app' + imageUrl;
+                }
+            }
+
+            // Generate image HTML
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            } else if (item.icon) {
+                imageHtml = item.icon;
+            } else {
+                imageHtml = '📦';
+            }
+
             const itemEl = document.createElement('div');
             itemEl.className = 'summary-item';
             itemEl.innerHTML = `
-                <div class="item-image">${item.icon || '📦'}</div>
+                <div class="item-image">${imageHtml}</div>
                 <div class="item-details">
                     <div class="item-name">${item.name}</div>
                     <div class="item-quantity">Quantità: ${item.quantity}</div>
