@@ -244,6 +244,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('✅ Dati spedizione OK, preparo carrello...');
 
+            // *** CHECK STOCK AVAILABILITY ***
+            console.log('📦 Verifica disponibilità prodotti...');
+            const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
+
+            if (unavailableProducts.length > 0) {
+                const productNames = unavailableProducts.map(p => p.name).join(', ');
+                alert(`❌ Prodotti non disponibili o quantità insufficiente:\n\n${productNames}\n\nRimuovili dal carrello prima di procedere.`);
+                paypalRedirectButton.disabled = false;
+                paypalRedirectButton.textContent = 'Paga con PayPal';
+                return;
+            }
+
             // Prepare cart items
             const cartItems = cart.map(item => ({
                 productId: item.id,
@@ -363,6 +375,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Verify shipping data
             if (!shippingData.email || !shippingData.firstName) {
                 throw new Error('Compila prima i dati di spedizione');
+            }
+
+            // *** CHECK STOCK AVAILABILITY ***
+            console.log('📦 Verifica disponibilità prodotti...');
+            const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
+
+            if (unavailableProducts.length > 0) {
+                const productNames = unavailableProducts.map(p => p.name).join(', ');
+                alert(`❌ Prodotti non disponibili o quantità insufficiente:\n\n${productNames}\n\nRimuovili dal carrello prima di procedere.`);
+                cardPaymentButton.disabled = false;
+                cardPaymentButton.textContent = 'Paga con Carta';
+                return;
             }
 
             // Prepare cart items
@@ -644,24 +668,55 @@ document.addEventListener('DOMContentLoaded', function() {
         // This is where you would send the order to your backend
         // and integrate with dropshipping suppliers
 
-        console.log('Order placed:', order);
+        console.log('📤 Invio ordine al server:', order.orderId);
 
-        // Send order to backend
+        // Send order to backend with improved error handling
         fetch(`${API_BASE}/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('📡 Risposta server - Status:', response.status, 'OK:', response.ok);
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            console.log('Order sent to server:', data);
-
-            // If using dropshipping automation:
-            // Your server would then forward the order to the supplier's API
+            console.log('✅ Ordine salvato sul server:', data);
+            if (data.success) {
+                console.log('✅ Ordine confermato dal backend con ID:', data.orderId || data.data?.id);
+            } else {
+                console.warn('⚠️ Server ha risposto ma senza successo:', data);
+                showServerSyncWarning();
+            }
         })
         .catch(error => {
-            console.error('Error sending order:', error);
+            console.error('❌ ERRORE invio ordine al server:', error);
+            console.error('❌ Ordine ID:', order.orderId);
+            console.error('❌ API Base:', API_BASE);
+            showServerSyncWarning();
+
+            // Save failed order for retry
+            const failedOrders = JSON.parse(localStorage.getItem('zenova_failed_orders') || '[]');
+            failedOrders.push({ order, timestamp: Date.now(), error: error.message });
+            localStorage.setItem('zenova_failed_orders', JSON.stringify(failedOrders));
         });
+    }
+
+    function showServerSyncWarning() {
+        // Show visible warning that order may need manual verification
+        const warningDiv = document.createElement('div');
+        warningDiv.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #ff9800; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-width: 90%; text-align: center;';
+        warningDiv.innerHTML = '⚠️ Ordine ricevuto ma sincronizzazione server in corso.<br>Controlla la tua email per la conferma.';
+        document.body.appendChild(warningDiv);
+
+        setTimeout(() => {
+            warningDiv.style.transition = 'opacity 0.5s';
+            warningDiv.style.opacity = '0';
+            setTimeout(() => warningDiv.remove(), 500);
+        }, 8000);
     }
 
     // PayPal redirect is now handled by custom button (paypalRedirectButton)
