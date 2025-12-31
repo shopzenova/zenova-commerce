@@ -448,7 +448,7 @@ async function loadProducts() {
     try {
         if (IS_LOCAL) {
             // Local mode: use backend API
-            const response = await fetch(`${API_BASE}/admin/products?zone=all`);
+            const response = await fetch(`${API_BASE}/admin/products?zone=all&pageSize=10000`);
             const result = await response.json();
 
             if (result.success) {
