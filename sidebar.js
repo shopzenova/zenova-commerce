@@ -102,6 +102,7 @@ const anchorToSubcategoryMap = {
     'vestiario-wellness': 'vestiario-wellness',
     'pietre-preziose': 'pietre-preziose',
     'incenso': 'incenso',
+    'kit-benessere-cofanetti-regalo': 'kit-benessere-cofanetti-regalo',
 
     // TECH INNOVATION
     'gadget-tech': 'gadget-tech',
@@ -220,6 +221,7 @@ const subcategoryToCategoryMap = {
     'vestiario-wellness': 'natural-wellness',
     'pietre-preziose': 'natural-wellness',
     'incenso': 'natural-wellness',
+    'kit-benessere-cofanetti-regalo': 'natural-wellness',
     'wellness': 'natural-wellness',
 
     // TECH INNOVATION
