@@ -48,7 +48,10 @@ app.use(cors({
         ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
         : [];
 
-      if (allowedOrigins.includes(origin)) {
+      // Permetti tutti i domini Vercel (*.vercel.app) per preview deployments
+      const isVercelDomain = origin.includes('.vercel.app');
+
+      if (allowedOrigins.includes(origin) || isVercelDomain) {
         callback(null, true);
       } else {
         logger.warn(`🚫 CORS blocked origin: ${origin}`);
