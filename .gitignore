@@ -1,2 +1,19 @@
 backend/nul
 nul
+
+# Environment variables (contengono API keys e secrets)
+.env
+.env.*
+backend/.env
+backend/.env.*
+
+# Backup files
+*.backup*
+
+# CSV files (dati temporanei import)
+backend/*.csv
+backend/*-NEW.csv
+
+# Node modules
+node_modules/
+backend/node_modules/
