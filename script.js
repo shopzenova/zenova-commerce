@@ -507,8 +507,8 @@ async function loadProductsFromBackend() {
             }
         }
 
-        // STATIC MODE - Load from JSON file (for Vercel deployment)
-        console.log('📦 Modalità statica - carico da products.json');
+        // STATIC MODE - Load from Railway API (products.json troppo grande per Vercel)
+        console.log('📦 Modalità statica - carico da Railway API');
 
         // Load product layout for featured/home/hidden
         try {
@@ -523,9 +523,9 @@ async function loadProductsFromBackend() {
             console.warn('⚠️  product-layout.json non trovato, uso valori di default');
         }
 
-        // Cache buster to force reload of fresh data
+        // Carica da Railway API invece di file statico
         const cacheBuster = Date.now();
-        const response = await fetch(`./products.json?v=${cacheBuster}`);
+        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/products?v=${cacheBuster}`);
         const jsonProducts = await response.json();
 
         if (jsonProducts && jsonProducts.length > 0) {
