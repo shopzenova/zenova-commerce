@@ -6,19 +6,19 @@ const bigbuy = require('../integrations/BigBuyClient');
 const logger = require('../utils/logger');
 const productFilters = require('../../config/product-filters');
 
-// Carica i TOP 100 prodotti dal file JSON
+// Carica TUTTI i prodotti dal file JSON
 let TOP_PRODUCTS = [];
-const jsonPath = path.join(__dirname, '../../top-100-products.json');
+const jsonPath = path.join(__dirname, '../../data/products.json');
 
 // Funzione per ricaricare i prodotti dal file JSON
 function reloadProducts() {
   try {
     const rawData = fs.readFileSync(jsonPath, 'utf-8');
     TOP_PRODUCTS = JSON.parse(rawData);
-    logger.info(`🔄 Ricaricati ${TOP_PRODUCTS.length} prodotti TOP dal file JSON`);
+    logger.info(`🔄 Ricaricati ${TOP_PRODUCTS.length} prodotti dal file JSON`);
     return true;
   } catch (error) {
-    logger.error('❌ Errore ricaricamento top-100-products.json:', error);
+    logger.error('❌ Errore ricaricamento data/products.json:', error);
     return false;
   }
 }
@@ -27,9 +27,9 @@ function reloadProducts() {
 try {
   const rawData = fs.readFileSync(jsonPath, 'utf-8');
   TOP_PRODUCTS = JSON.parse(rawData);
-  logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti TOP dal file JSON`);
+  logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti dal file JSON`);
 } catch (error) {
-  logger.error('❌ Errore caricamento top-100-products.json:', error);
+  logger.error('❌ Errore caricamento data/products.json:', error);
 }
 
 // GET /api/products/categories - Ottieni categorie
