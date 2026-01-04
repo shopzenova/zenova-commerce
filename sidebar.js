@@ -94,8 +94,8 @@ const anchorToSubcategoryMap = {
 
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'oli-essenziali',
-    'oli-fragranza': 'oli-fragranza',
-    'oli-per-fragranza': 'oli-fragranza',
+    'oli-fragranza': 'oli-per-fragranza',
+    'oli-per-fragranza': 'oli-per-fragranza',
     'candele-gel-profumati-sali-bagno': 'diffusori',
     'diffusori-aromatici': 'diffusori-aromatici',
     'diffusori-oli': 'diffusori-oli',
@@ -217,6 +217,7 @@ const subcategoryToCategoryMap = {
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'natural-wellness',
     'oli-fragranza': 'natural-wellness',
+    'oli-per-fragranza': 'natural-wellness',
     'diffusori': 'natural-wellness',
     'vestiario-wellness': 'natural-wellness',
     'pietre-preziose': 'natural-wellness',
