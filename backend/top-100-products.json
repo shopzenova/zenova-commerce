@@ -142045,7 +142045,7 @@
     "zenovaCategories": [
       "smart-living"
     ],
-    "zenovaSubcategory": "smart-led-illuminazione",
+    "zenovaSubcategory": "domotica-smart-home",
     "price": 195.4,
     "pvd": 183.68,
     "stock": 0,
@@ -151936,5 +151936,1597 @@
     "rating": 4.5,
     "reviews": 0,
     "importedAt": "2026-01-03"
+  },
+  {
+    "id": "aw-asc-01",
+    "sku": "ASC-01",
+    "name": "Candela Aromaterapia Soia 200g - Vibrazioni Positive",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 0,
+    "images": [
+      "/uploads/asc-01-1.jpeg",
+      "/uploads/asc-01-2.jpeg"
+    ],
+    "description": "<p>Realizzato con<strong>&nbsp;100% pure Clary Sage and Peppermint essential oil</strong> / 200g Cera di soia / 40h burning time.</p><p>Our new <strong>Candela aromaterapica - Vibrazioni Positive</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)</p><p>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con&nbsp;100% pure Clary Sage and Peppermint essential oil / 200g Cera di soia / 40h burning time.Our new Candela aromaterapica - Vibrazioni Positive are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796520282",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-asc-02",
+    "sku": "ASC-02",
+    "name": "Candela Aromaterapia Soia 200g - Pensiero Chiaro",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 207,
+    "images": [
+      "/uploads/asc-02-1.jpeg",
+      "/uploads/asc-02-2.jpeg"
+    ],
+    "description": "<p>Realizzato con<strong>&nbsp;100% pure Rosemary essential oil&nbsp;</strong>/ 200g Cera di soia / 40h burning time.</p><p>Our new <strong>Candela aromaterapica - Pensiero Chiaro</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)<br><br>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con&nbsp;100% pure Rosemary essential oil&nbsp;/ 200g Cera di soia / 40h burning time.Our new Candela aromaterapica - Pensiero Chiaro are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796520299",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-asc-03",
+    "sku": "ASC-03",
+    "name": "Candela Aromaterapia Soia 200g - Creatività",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 286,
+    "images": [
+      "/uploads/asc-03-1.jpeg",
+      "/uploads/asc-03-2.jpeg"
+    ],
+    "description": "<p>Realizzato con 1<strong>00% pure Peppermint and Clove essential oil&nbsp;</strong>/ 200g Cera di soia / 40h burning time.&nbsp;</p><p>Our new <strong>Candela aromaterapica - Creatività</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)<br><br>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con 100% pure Peppermint and Clove essential oil&nbsp;/ 200g Cera di soia / 40h burning time.&nbsp;Our new Candela aromaterapica - Creatività are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796520305",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-asc-04",
+    "sku": "ASC-04",
+    "name": "Candela Aromaterapia Soia 200g - Pace",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 0,
+    "images": [
+      "/uploads/asc-04-1.jpeg",
+      "/uploads/asc-04-2.jpeg"
+    ],
+    "description": "<p>Realizzato con <strong>100% pure Lavender and Geranium essential oil</strong> / 200g Cera di soia / 40h burning time</p><p>Our new <strong>Candela aromaterapica - Pace</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)<br><br>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con 100% pure Lavender and Geranium essential oil / 200g Cera di soia / 40h burning timeOur new Candela aromaterapica - Pace are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796520312",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-asc-05",
+    "sku": "ASC-05",
+    "name": "Candela Aromaterapia Soia 200g - Afrodisiaco",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 0,
+    "images": [
+      "/uploads/asc-05-1.jpeg",
+      "/uploads/asc-05-2.jpeg"
+    ],
+    "description": "<p>Realizzato con <strong>100% pure Ylang Ylang and Patchouli essential oil&nbsp;</strong>/ 200g Cera di soia / 40h burning time.</p><p>Our new <strong>Candela aromaterapica - Afrodisiaco</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)<br><br>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con 100% pure Ylang Ylang and Patchouli essential oil&nbsp;/ 200g Cera di soia / 40h burning time.Our new Candela aromaterapica - Afrodisiaco are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796520329",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-asc-06",
+    "sku": "ASC-06",
+    "name": "Candela Aromaterapia Soia 200g - Relax",
+    "price": 5.95,
+    "originalPrice": 12,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 198,
+    "images": [
+      "/uploads/asc-06-1.jpeg",
+      "/uploads/asc-06-2.jpeg"
+    ],
+    "description": "<p>Realizzato con <strong>100% pure Lavender and Fennel essential oil&nbsp;</strong>/ 200g Cera di soia / 40h burning time.&nbsp;</p><p>Our new <strong>Candela aromaterapica - Relax</strong> are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)<br><br>Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;</p>",
+    "shortDescription": "Realizzato con 100% pure Lavender and Fennel essential oil&nbsp;/ 200g Cera di soia / 40h burning time.&nbsp;Our new Candela aromaterapica - Relax are Realizzato con Pure Oli essenziali and Natural Cera di soia to enchant and delight your customers. Nothing more nothing less... so Natural, so Pure, so Vegano :)Combinations of pure oils that all work well together to stimulate Pensiero Chiaro, relax, energy, happiness and much more. Slowly and delicately the aroma will rise while burning the candle and fill any room with a truly aromatherapeutic fragrance. &nbsp;",
+    "barcode": "5055796532407",
+    "weight": 0.2,
+    "materials": "Soy Wax, Glass, Essential Oils",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-04",
+    "sku": "ATC-04",
+    "name": "Candela Artisticain Latta - Matrioske Russe",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 1309,
+    "images": [
+      "/uploads/atc-04-1.jpeg",
+      "/uploads/atc-04-2.jpeg",
+      "/uploads/atc-04-3.jpeg",
+      "/uploads/atc-04-4.jpeg",
+      "/uploads/atc-04-5.jpeg",
+      "/uploads/atc-04-6.jpeg",
+      "/uploads/atc-04-7.jpeg",
+      "/uploads/atc-04-8.jpeg",
+      "/uploads/atc-04-9.jpeg",
+      "/uploads/atc-04-10.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Matrioske Russe</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Matrioske Russe è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza duratu...",
+    "barcode": "5055796532445",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-01",
+    "sku": "ATC-01",
+    "name": "Candela Artisticain Latta - Unicorni",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 1098,
+    "images": [
+      "/uploads/atc-01-1.jpeg",
+      "/uploads/atc-01-2.jpeg",
+      "/uploads/atc-01-3.jpeg",
+      "/uploads/atc-01-4.jpeg",
+      "/uploads/atc-01-5.jpeg",
+      "/uploads/atc-01-6.jpeg",
+      "/uploads/atc-01-7.jpeg",
+      "/uploads/atc-01-8.jpeg",
+      "/uploads/atc-01-9.jpeg",
+      "/uploads/atc-01-10.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Unicorni</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Unicorni è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza duratura e av...",
+    "barcode": "5055796532414",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-02",
+    "sku": "ATC-02",
+    "name": "Candela Artisticain Latta - Vita Marina",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 1333,
+    "images": [
+      "/uploads/atc-02-1.jpeg",
+      "/uploads/atc-02-2.jpeg",
+      "/uploads/atc-02-3.jpeg",
+      "/uploads/atc-02-4.jpeg",
+      "/uploads/atc-02-5.jpeg",
+      "/uploads/atc-02-6.jpeg",
+      "/uploads/atc-02-7.jpeg",
+      "/uploads/atc-02-8.jpeg",
+      "/uploads/atc-02-9.jpeg",
+      "/uploads/atc-02-10.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Vita Marina</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Vita Marina è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza duratura e...",
+    "barcode": "5055796532421",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-05",
+    "sku": "ATC-05",
+    "name": "Candela Artisticain Latta - Giardino Romantico",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 604,
+    "images": [
+      "/uploads/atc-05-1.jpeg",
+      "/uploads/atc-05-2.jpeg",
+      "/uploads/atc-05-3.jpeg",
+      "/uploads/atc-05-4.jpeg",
+      "/uploads/atc-05-5.jpeg",
+      "/uploads/atc-05-6.jpeg",
+      "/uploads/atc-05-7.jpeg",
+      "/uploads/atc-05-8.jpeg",
+      "/uploads/atc-05-9.jpeg",
+      "/uploads/atc-05-10.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Giardino Romantico</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Giardino Romantico è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza dur...",
+    "barcode": "5055796532452",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-06",
+    "sku": "ATC-06",
+    "name": "Candela Artisticain Latta - Weekend Parigino",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 4,
+    "images": [
+      "/uploads/atc-06-1.jpeg",
+      "/uploads/atc-06-2.jpeg",
+      "/uploads/atc-06-3.jpeg",
+      "/uploads/atc-06-4.jpeg",
+      "/uploads/atc-06-5.jpeg",
+      "/uploads/atc-06-6.jpeg",
+      "/uploads/atc-06-7.jpeg",
+      "/uploads/atc-06-8.jpeg",
+      "/uploads/atc-06-9.jpeg",
+      "/uploads/atc-06-10.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Weekend Parigino</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Weekend Parigino è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza durat...",
+    "barcode": "5055796532469",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-atc-03",
+    "sku": "ATC-03",
+    "name": "Candela Artisticain Latta - Messaggi Amichevoli",
+    "price": 3.95,
+    "originalPrice": 8.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 769,
+    "images": [
+      "/uploads/atc-03-1.jpeg",
+      "/uploads/atc-03-2.jpeg",
+      "/uploads/atc-03-3.jpeg",
+      "/uploads/atc-03-4.jpeg",
+      "/uploads/atc-03-5.jpeg",
+      "/uploads/atc-03-6.jpeg",
+      "/uploads/atc-03-7.jpeg",
+      "/uploads/atc-03-8.jpeg",
+      "/uploads/atc-03-9.jpeg",
+      "/uploads/atc-03-10.jpeg",
+      "/uploads/atc-03-11.jpeg",
+      "/uploads/atc-03-12.jpeg",
+      "/uploads/atc-03-13.jpeg",
+      "/uploads/atc-03-14.jpeg"
+    ],
+    "description": "<p><strong>Candela Artisticain Latta - Messaggi Amichevoli</strong> è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.</p>\n<p>Perfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.</p>\n<p><strong>Caratteristiche:</strong></p>\n<ul>\n<li>Ingredienti naturali di alta qualità</li>\n<li>Fragranza duratura e avvolgente</li>\n<li>Design elegante e raffinato</li>\n<li>Ideale per momenti di relax e meditazione</li>\n</ul>",
+    "shortDescription": "Candela Artisticain Latta - Messaggi Amichevoli è un prodotto di alta qualità realizzato con ingredienti naturali per offrire un'esperienza aromaterapica unica.\nPerfetto per creare un'atmosfera rilassante e armoniosa nella tua casa.\nCaratteristiche:\n\nIngredienti naturali di alta qualità\nFragranza du...",
+    "barcode": "5055796532438",
+    "weight": 0.12,
+    "materials": "Soy Wax, Tin, Fragrance",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-01",
+    "sku": "ChkCC-01",
+    "name": "Candela Cristallo Chakra - Chakra Radice",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 308,
+    "images": [
+      "/uploads/chkcc-01-1.jpeg",
+      "/uploads/chkcc-01-2.jpeg",
+      "/uploads/chkcc-01-3.jpeg",
+      "/uploads/chkcc-01-4.jpeg",
+      "/uploads/chkcc-01-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Crafted with the gRotondoing energy of Rosso Jasper and the protective power of Black Agate</strong>, this candle embodies the essence of the Chakra Radice.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The soothing fragrance of Black Oud adds an earthy dimension</strong> to your meditazione and healing practices.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">Encased in a box that bears the wisdom,<strong>&nbsp;&quot;In order to bloom, you must first grow strong roots,&quot;</strong> this candle is your anchor to stability and strength.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. </span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Crafted with the gRotondoing energy of Rosso Jasper and the protective power of Black Agate, this candle embodies the essence of the Chakra Radice.&nbsp;The soothing fragrance of Black Oud adds an earthy dimension to your meditazione and healing practices.&nbsp;Encased in a box that bears the wisdom,&nbsp;&quot;In order to bloom, you must first grow strong roots,&quot; this candle is your anchor to stability and strength.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333255",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-02",
+    "sku": "ChkCC-02",
+    "name": "Candela Cristallo Chakra - Chakra Sacro",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 283,
+    "images": [
+      "/uploads/chkcc-02-1.jpeg",
+      "/uploads/chkcc-02-2.jpeg",
+      "/uploads/chkcc-02-3.jpeg",
+      "/uploads/chkcc-02-4.jpeg",
+      "/uploads/chkcc-02-5.jpeg",
+      "/uploads/chkcc-02-6.png",
+      "/uploads/chkcc-02-7.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Ignite your creative and passionate energies with our Sacral Chakra Crystal Candle. Realizzato con the dynamic combination of <strong>Tiger Eye and Rose Quartz</strong>, it resonates with the essence of the Sacral Chakra.</span></p><p><span style=\"color: rgb(75, 80, 88);\">The fragrance of &quot;Invoking Dreams&quot; surRotondos you, <strong>inspiring your innermost desires. &nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Embrace the quote on the box that proclaims, <strong>&quot;The future belongs to those who dare to dream.&quot;</strong> Light this candle to unleash your Creatività, awaken your sensuality, and manifest your dreams.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Ignite your creative and passionate energies with our Sacral Chakra Crystal Candle. Realizzato con the dynamic combination of Tiger Eye and Rose Quartz, it resonates with the essence of the Sacral Chakra.The fragrance of &quot;Invoking Dreams&quot; surRotondos you, inspiring your innermost desires. &nbsp;Embrace the quote on the box that proclaims, &quot;The future belongs to those who dare to dream.&quot; Light this candle to unleash your Creatività, awaken your sensuality, and manifest your dreams.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333262",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-03",
+    "sku": "ChkCC-03",
+    "name": "Candela Cristallo Chakra - Chakra Plesso Solare",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 314,
+    "images": [
+      "/uploads/chkcc-03-1.jpeg",
+      "/uploads/chkcc-03-2.jpeg",
+      "/uploads/chkcc-03-3.jpeg",
+      "/uploads/chkcc-03-4.jpeg",
+      "/uploads/chkcc-03-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Elevate your personal power and self-confidence with our <strong>Solar Plexus</strong> <strong>Chakra Crystal Candle</strong>. Infused with<strong>&nbsp;Amethyst and Black Agate</strong>, this candle embodies the essence of the Chakra Plesso Solare.  <br></span></p><p><span style=\"color: rgb(75, 80, 88);\">The fragrance, &quot;Deep in the Forest,&quot; evokes courage and self-assuRossoness.</span></p><p><span style=\"color: rgb(75, 80, 88);\">The box bears the empowering message, <strong>&quot;Don&#39;t be controlled by fears in your mind, be led by the dreams in your Cuore.&quot; </strong>Light this candle to boost your self-esteem, harness your inner strength, and radiate confidence.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Elevate your personal power and self-confidence with our Chakra Plesso Solare Crystal Candle. Infused with&nbsp;Amethyst and Black Agate, this candle embodies the essence of the Chakra Plesso Solare.  The fragrance, &quot;Deep in the Forest,&quot; evokes courage and self-assuRossoness.The box bears the empowering message, &quot;Don&#39;t be controlled by fears in your mind, be led by the dreams in your Cuore.&quot; Light this candle to boost your self-esteem, harness your inner strength, and radiate confidence.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333347",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-04",
+    "sku": "ChkCC-04",
+    "name": "Candela Cristallo Chakra - Chakra del Cuore",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 403,
+    "images": [
+      "/uploads/chkcc-04-1.jpeg",
+      "/uploads/chkcc-04-2.jpeg",
+      "/uploads/chkcc-04-3.jpeg",
+      "/uploads/chkcc-04-4.jpeg",
+      "/uploads/chkcc-04-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Open your Cuore to love and compassion with our Chakra del Cuore Crystal Candle</strong>. Created with the nurturing energy of <strong>Rose Quartz and Crystal Jade</strong>, it aligns with the essence of the Chakra del Cuore.  <br></span></p><p><span style=\"color: rgb(75, 80, 88);\">T<strong>he soothing fragrance of Rose Musk</strong> envelops your space, promoting love and emotional healing.</span></p><p><span style=\"color: rgb(75, 80, 88);\">Embrace the profound quote on the box,<strong>&nbsp;&quot;The Cuore has its reasons which reason knows not.&quot;</strong> Light this candle to heal emotional wounds, foster loving relationships, and bring harmony to your Cuore.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. </span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Open your Cuore to love and compassion with our Chakra del Cuore Crystal Candle. Created with the nurturing energy of Rose Quartz and Crystal Jade, it aligns with the essence of the Chakra del Cuore.  The soothing fragrance of Rose Musk envelops your space, promoting love and emotional healing.Embrace the profound quote on the box,&nbsp;&quot;The Cuore has its reasons which reason knows not.&quot; Light this candle to heal emotional wounds, foster loving relationships, and bring harmony to your Cuore.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333354",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-05",
+    "sku": "ChkCC-05",
+    "name": "Candela Cristallo Chakra - Chakra della Gola",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 506,
+    "images": [
+      "/uploads/chkcc-05-1.jpeg",
+      "/uploads/chkcc-05-2.jpeg",
+      "/uploads/chkcc-05-3.jpeg",
+      "/uploads/chkcc-05-4.jpeg",
+      "/uploads/chkcc-05-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Find your voice and enhance communication with our Chakra della Gola Crystal Candle</strong>. Crafted with <strong>Sodalite and Jade chips</strong>, this candle resonates with the essence of the Chakra della Gola. <br></span></p><p><span style=\"color: rgb(75, 80, 88);\">The fragrance, &quot;Gentle Reasons,&quot; encourages mindful and clear expression.</span></p><p><span style=\"color: rgb(75, 80, 88);\">The box carries a reminder, <strong>&quot;Words are your most powerful tool, use with utmost care.&quot; </strong>Light this candle to empower your communication, express your truth, and strengthen your voice.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. </span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Find your voice and enhance communication with our Chakra della Gola Crystal Candle. Crafted with Sodalite and Jade chips, this candle resonates with the essence of the Chakra della Gola. The fragrance, &quot;Gentle Reasons,&quot; encourages mindful and clear expression.The box carries a reminder, &quot;Words are your most powerful tool, use with utmost care.&quot; Light this candle to empower your communication, express your truth, and strengthen your voice.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma. After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333361",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-06",
+    "sku": "ChkCC-06",
+    "name": "Candela Cristallo Chakra - Chakra del Terzo Occhio",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 170,
+    "images": [
+      "/uploads/chkcc-06-1.jpeg",
+      "/uploads/chkcc-06-2.jpeg",
+      "/uploads/chkcc-06-3.jpeg",
+      "/uploads/chkcc-06-4.jpeg",
+      "/uploads/chkcc-06-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Expand your intuition and inner wisdom with our Chakra del Terzo Occhio Crystal Candle.</strong> Enriched with<strong>&nbsp;Amethyst and Rose Quartz</strong>, it aligns with the essence of the Chakra del Terzo Occhio.</span></p><p><span style=\"color: rgb(75, 80, 88);\">The fragrance, &quot;Sweet Crystal Truth,&quot; invites insight and clarity.</span></p><p><span style=\"color: rgb(75, 80, 88);\">A thought-provoking quote on the box reads, <strong>&quot;The only true wisdom is in knowing that you know nothing.&quot;</strong> Light this candle to enhance your intuition, gain spiritual clarity, and deepen your inner awareness.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Expand your intuition and inner wisdom with our Chakra del Terzo Occhio Crystal Candle. Enriched with&nbsp;Amethyst and Rose Quartz, it aligns with the essence of the Chakra del Terzo Occhio.The fragrance, &quot;Sweet Crystal Truth,&quot; invites insight and clarity.A thought-provoking quote on the box reads, &quot;The only true wisdom is in knowing that you know nothing.&quot; Light this candle to enhance your intuition, gain spiritual clarity, and deepen your inner awareness.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333378",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-07",
+    "sku": "ChkCC-07",
+    "name": "Candela Cristallo Chakra - Chakra della Corona",
+    "price": 5.95,
+    "originalPrice": 12.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 372,
+    "images": [
+      "/uploads/chkcc-07-1.jpeg",
+      "/uploads/chkcc-07-2.jpeg",
+      "/uploads/chkcc-07-3.jpeg",
+      "/uploads/chkcc-07-4.jpeg",
+      "/uploads/chkcc-07-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\"><strong>Experience the power of healing with this Chakra Crystal Candle.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks. </strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Connect with higher consciousness and spiritual enlightenment through our Chakra della Corona Crystal Candle</strong>. Imbued with <strong>Celestite and Selenite</strong>, it resonates with the essence of the Chakra della Corona.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">The refreshing fragrance of Ocean Breeze uplifts your spirit.</span></p><p><span style=\"color: rgb(75, 80, 88);\">The box imparts the wisdom, <strong>&quot;In every moment, the universe is whispering to you.&quot;</strong> Light this candle to access divine wisdom, transcend earthly concerns, and experience spiritual transcendence.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 17 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks. Connect with higher consciousness and spiritual enlightenment through our Chakra della Corona Crystal Candle. Imbued with Celestite and Selenite, it resonates with the essence of the Chakra della Corona.&nbsp;The refreshing fragrance of Ocean Breeze uplifts your spirit.The box imparts the wisdom, &quot;In every moment, the universe is whispering to you.&quot; Light this candle to access divine wisdom, transcend earthly concerns, and experience spiritual transcendence.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 17 ore",
+    "barcode": "5056368333385",
+    "weight": 0.36,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-chkcc-08",
+    "sku": "ChkCC-08",
+    "name": "Large Candela Cristallo Chakra - Sette Chakra",
+    "price": 7.95,
+    "originalPrice": 17,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 185,
+    "images": [
+      "/uploads/chkcc-08-1.jpeg",
+      "/uploads/chkcc-08-2.jpeg",
+      "/uploads/chkcc-08-3.jpeg",
+      "/uploads/chkcc-08-4.jpeg",
+      "/uploads/chkcc-08-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Experience the power of healing with this <strong>Large Chakra Crystal Candle</strong>.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">Realizzato con real <strong>gemstone rocks, all natural Cera di soia, specially blended perfume</strong> and <strong>magical wood wicks</strong>.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Harmonize and balance all your chakras with our Seven Chakra Crystal Candle.</strong> Crafted with seven stones representing each chakra, this candle radiates the fragrance of &quot;Moon Beams.&quot;</span></p><p><span style=\"color: rgb(75, 80, 88);\">The box bears the profound message, <strong>&quot;The mind is everything, what you think you become.&quot;</strong> Light this candle to align and balance your entire energy system, promoting holistic well-being and inner harmony.</span></p><p><span style=\"color: rgb(75, 80, 88);\">As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em>Burning time: 23 ore</em></span></p>",
+    "shortDescription": "Experience the power of healing with this Large Chakra Crystal Candle.&nbsp;Realizzato con real gemstone rocks, all natural Cera di soia, specially blended perfume and magical wood wicks.&nbsp;Harmonize and balance all your chakras with our Seven Chakra Crystal Candle. Crafted with seven stones representing each chakra, this candle radiates the fragrance of &quot;Moon Beams.&quot;The box bears the profound message, &quot;The mind is everything, what you think you become.&quot; Light this candle to align and balance your entire energy system, promoting holistic well-being and inner harmony.As you light the candle, you&#39;ll feel the healing energy of the crystals and the soothing fragrance of the specially blended aroma.&nbsp;After burning this candle, the jar can be repurposed and you can clean and keep the rock crystals.Burning time: 23 ore",
+    "barcode": "5056368333392",
+    "weight": 0.64,
+    "materials": "Soy Wax, Fragrance, Glass",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-hhc-02",
+    "sku": "HHC-02",
+    "name": "Candela Magica Fiore Cristallo Hop Hare - Il Mago",
+    "price": 6.7,
+    "originalPrice": 14.95,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 377,
+    "images": [
+      "/uploads/hhc-02-1.jpeg",
+      "/uploads/hhc-02-2.jpeg",
+      "/uploads/hhc-02-3.jpeg",
+      "/uploads/hhc-02-4.jpeg",
+      "/uploads/hhc-02-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Step into a realm of tranquility with <strong>Il Mago Crystal Magic Candle</strong>.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">The refreshing<strong>&nbsp;fragrance of enchanted mint&nbsp;</strong>dances through the air, creating an oasis of calm and clarity.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">PaiRosso with the calming <strong>jade gemstone,</strong> this candle is a magician&#39;s touch for your senses, whispering ancient spells of serenity. Jade, known for its gRotondoing properties, fosters balance and emotional harmony. Illuminate your space with Il Mago, and let the minty mystique and jade&#39;s magic transport you to a serene sanctuary.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Enjoy a serene ambiance, promoting relax and mental clarity.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Burning time:&nbsp;</strong>22 ore</span></p>",
+    "shortDescription": "Step into a realm of tranquility with Il Mago Crystal Magic Candle.&nbsp;The refreshing&nbsp;fragrance of enchanted mint&nbsp;dances through the air, creating an oasis of calm and clarity.&nbsp;PaiRosso with the calming jade gemstone, this candle is a magician&#39;s touch for your senses, whispering ancient spells of serenity. Jade, known for its gRotondoing properties, fosters balance and emotional harmony. Illuminate your space with Il Mago, and let the minty mystique and jade&#39;s magic transport you to a serene sanctuary.Enjoy a serene ambiance, promoting relax and mental clarity.Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.Burning time:&nbsp;22 ore",
+    "barcode": "5056368334689",
+    "weight": 0.33,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-hhc-03",
+    "sku": "HHC-03",
+    "name": "Candela Magica Fiore Cristallo Hop Hare - La Luna",
+    "price": 6.7,
+    "originalPrice": 14.95,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 313,
+    "images": [
+      "/uploads/hhc-03-1.jpeg",
+      "/uploads/hhc-03-2.jpeg",
+      "/uploads/hhc-03-3.jpeg",
+      "/uploads/hhc-03-4.jpeg",
+      "/uploads/hhc-03-5.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Experience the serenity of moonlit <strong>Lavender Hills</strong> with <strong>La Luna Crystal</strong> <strong>Magic Candle</strong>. The calming lavender fragrance embraces your surRotondoings, creating a haven of Pace.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">Enhanced by the soothing <strong>amethyst gemstone,</strong> this candle invites balance and harmony into your space. Amethyst, reveRosso for its stress-relieving properties, promotes a tranquil atmosphere, making it the perfect companion for moments of relax.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Illuminate your space with La Luna, and let the calming aroma and amethyst energy guide you to a state of blissful harmony.&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Burning time:</strong> 22 ore</span></p>",
+    "shortDescription": "Experience the serenity of moonlit Lavender Hills with La Luna Crystal Magic Candle. The calming lavender fragrance embraces your surRotondoings, creating a haven of Pace.&nbsp;Enhanced by the soothing amethyst gemstone, this candle invites balance and harmony into your space. Amethyst, reveRosso for its stress-relieving properties, promotes a tranquil atmosphere, making it the perfect companion for moments of relax.&nbsp;Illuminate your space with La Luna, and let the calming aroma and amethyst energy guide you to a state of blissful harmony.&nbsp;Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.Burning time: 22 ore",
+    "barcode": "5056368334696",
+    "weight": 0.33,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-hhc-01",
+    "sku": "HHC-01",
+    "name": "Candela Magica Fiore Cristallo Hop Hare - Gli Amanti",
+    "price": 6.7,
+    "originalPrice": 14.95,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 0,
+    "images": [
+      "/uploads/hhc-01-1.jpeg",
+      "/uploads/hhc-01-2.jpeg",
+      "/uploads/hhc-01-3.jpeg",
+      "/uploads/hhc-01-4.jpeg",
+      "/uploads/hhc-01-5.jpeg",
+      "/uploads/hhc-01-6.jpeg",
+      "/uploads/hhc-01-7.jpeg"
+    ],
+    "description": "<p>Embark on a journey of love with <strong>Gli Amanti Crystal Magic Candle.&nbsp;</strong></p><p>Immerse your senses in the captivating fragrance of <strong>blooming rose</strong> <strong>meadows</strong>, creating an atmosphere of romance and tenderness.&nbsp;</p><p>The centerpiece of this enchanting candle is the love-attracting<strong>&nbsp;rose quartz</strong>, believed to open the Chakra del Cuore and invite love into your life. As the flame dances, let the soothing energy of the rose quartz infuse your space with warmth and affection. &nbsp;</p><p><strong>Create an atmosphere of love and warmth, Perfetto per romantic evenings.</strong></p><p>Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.</p><p><strong>Burning time:</strong> 22 ore</p>",
+    "shortDescription": "Embark on a journey of love with Gli Amanti Crystal Magic Candle.&nbsp;Immerse your senses in the captivating fragrance of blooming rose meadows, creating an atmosphere of romance and tenderness.&nbsp;The centerpiece of this enchanting candle is the love-attracting&nbsp;rose quartz, believed to open the Chakra del Cuore and invite love into your life. As the flame dances, let the soothing energy of the rose quartz infuse your space with warmth and affection. &nbsp;Create an atmosphere of love and warmth, Perfetto per romantic evenings.Encased in a deep green glass container with a rustic wooden wick, each Hop Hare Crystal Magic Candle is a unique masterpiece. Unveil the magic within as you discover a gemstone accompanied by a sprinkle of smaller gemstone chips, creating a dazzling display of natural wonders. The essence of these candles is further heightened by the delicate dry flowers.Burning time: 22 ore",
+    "barcode": "5056368334672",
+    "weight": 0.33,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-pc-06",
+    "sku": "PC-06",
+    "name": "Set Candele Pilastro  50mm (11/16/22/33H) (4 pezzi) - Rosso",
+    "price": 5.79,
+    "originalPrice": 9.95,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 0,
+    "images": [
+      "/uploads/pc-06-1.jpeg"
+    ],
+    "description": "<p>Burning time: ~11 h / 16 h / 22 h / 33 h&nbsp;</p><p>Weight: ~ 105g / 135g / 170g / 200g</p><p>Height: 7,0 cm / 9,0 cm / 11,0 cm / 13,0 cm</p><p>Diameter: &oslash;4,8 cm</p>",
+    "shortDescription": "Burning time: ~11 h / 16 h / 22 h / 33 h&nbsp;Weight: ~ 105g / 135g / 170g / 200gHeight: 7,0 cm / 9,0 cm / 11,0 cm / 13,0 cmDiameter: &oslash;4,8 cm",
+    "barcode": "",
+    "weight": 0.61,
+    "materials": "parafin wax",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-pc-05",
+    "sku": "PC-05",
+    "name": "Set Candele Pilastro  50mm (11/16/22/33H) (4 pezzi) - Avorio",
+    "price": 5.79,
+    "originalPrice": 9.95,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 48,
+    "images": [
+      "/uploads/pc-05-1.jpeg",
+      "/uploads/pc-05-2.jpeg",
+      "/uploads/pc-05-3.jpeg",
+      "/uploads/pc-05-4.jpeg"
+    ],
+    "description": "<p>Burning time: ~11 h / 16 h / 22 h / 33 h&nbsp;</p><p>Weight: ~ 105g / 135g / 170g / 200g</p><p>Height: 7,0 cm / 9,0 cm / 11,0 cm / 13,0 cm</p><p>Diameter: &oslash;4,8 cm</p>",
+    "shortDescription": "Burning time: ~11 h / 16 h / 22 h / 33 h&nbsp;Weight: ~ 105g / 135g / 170g / 200gHeight: 7,0 cm / 9,0 cm / 11,0 cm / 13,0 cmDiameter: &oslash;4,8 cm",
+    "barcode": "",
+    "weight": 0.61,
+    "materials": "parafin wax",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-qsalt-29",
+    "sku": "QSalt-29",
+    "name": "Portacandele Sale - Rotondo",
+    "price": 9.23,
+    "originalPrice": 11.52,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 32,
+    "images": [
+      "/uploads/qsalt-29-1.jpeg"
+    ],
+    "description": "<p>These&nbsp;<strong>AWGifts Dropship Europe&acute;s</strong>&nbsp; <strong>Rotondo Sale himalayano Candle Holders</strong> are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.</p><p>Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only,&nbsp;</p>",
+    "shortDescription": "These&nbsp;AWGifts Dropship Europe&acute;s&nbsp; Rotondo Sale himalayano Candle Holders are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only,&nbsp;",
+    "barcode": "5055796581641",
+    "weight": 1.1,
+    "materials": "Himalaya Salt",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-qsalt-31",
+    "sku": "QSalt-31",
+    "name": "Portacandele Sale - Media Cuore",
+    "price": 9.37,
+    "originalPrice": 13.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 80,
+    "images": [
+      "/uploads/qsalt-31-1.jpeg",
+      "/uploads/qsalt-31-2.jpeg",
+      "/uploads/qsalt-31-3.jpeg",
+      "/uploads/qsalt-31-4.jpeg"
+    ],
+    "description": "<p>These <strong>AWGifts Dropship Europe&acute;s</strong>&nbsp; <strong>Cuore Sale himalayano Candle Holders&nbsp;</strong></p><p><strong>- Med Cuore</strong> are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.</p><p>Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only,&nbsp;</p>",
+    "shortDescription": "These AWGifts Dropship Europe&acute;s&nbsp; Cuore Sale himalayano Candle Holders&nbsp;- Med Cuore are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only,&nbsp;",
+    "barcode": "5055796581665",
+    "weight": 0.6,
+    "materials": "Himalaya Salt",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-qsalt-44",
+    "sku": "QSalt-44",
+    "name": "Natural Portacandele Sale - 2 fori",
+    "price": 7.58,
+    "originalPrice": 10.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 43,
+    "images": [
+      "/uploads/qsalt-44-1.jpeg",
+      "/uploads/qsalt-44-2.jpeg",
+      "/uploads/qsalt-44-3.jpeg",
+      "/uploads/qsalt-44-4.jpeg"
+    ],
+    "description": "<p>These<strong>&nbsp; AWGifts Dropship Europe&acute;s &nbsp;Sale himalayano Candle Holders&nbsp;</strong><strong>- 2 holes</strong> are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.&nbsp;</p><p>Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only.&nbsp;</p>",
+    "shortDescription": "These&nbsp; AWGifts Dropship Europe&acute;s &nbsp;Sale himalayano Candle Holders&nbsp;- 2 holes are believed to create negatively charged ions in the air. This is a good thing because modern day pollution and electrical equipment create positive ions in the air which are potentially harmful to us and cause air quality in areas affected to deteriorate. By using a Himalayan Crystal Salt Lamp you replace the negatively charged ions in the air which help us to avoid the alleged physical and mental harm that the &lsquo;electric smog&rsquo; creates.&nbsp;Each Wholesale Salt candle holders are unique rather than sell them by size we sell them by circaimate weight. Items are marked with sizes to give a rough idea of size only.&nbsp;",
+    "barcode": "5055796581696",
+    "weight": 1.3,
+    "materials": "Himalaya Salt",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-selch-08",
+    "sku": "SelCH-08",
+    "name": "Portacandele Selenite Palla di Neve - 8 cm",
+    "price": 7.85,
+    "originalPrice": 15,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 244,
+    "images": [
+      "/uploads/selch-08-1.jpeg",
+      "/uploads/selch-08-2.jpeg",
+      "/uploads/selch-08-3.jpeg",
+      "/uploads/selch-08-4.jpeg",
+      "/uploads/selch-08-5.jpeg"
+    ],
+    "description": "<p>Selenite which is kind of &nbsp;translucent crystal allows the flame of the candle to flicker slightly through the walls of the candle holder. Edges of the candle holders are rough which is natural to selenite.</p><p><br></p><p>Selenite Candle Holders are shiny and sometimes with whiter areas. Top of each candle holder is polished and the underside is cut flat.</p><p><br></p><p>Sizes: Diameter &nbsp;9cm, Height 8cm</p>",
+    "shortDescription": "Selenite which is kind of &nbsp;translucent crystal allows the flame of the candle to flicker slightly through the walls of the candle holder. Edges of the candle holders are rough which is natural to selenite.Selenite Candle Holders are shiny and sometimes with whiter areas. Top of each candle holder is polished and the underside is cut flat.Sizes: Diameter &nbsp;9cm, Height 8cm",
+    "barcode": "5055796502585",
+    "weight": 0.8,
+    "materials": "selenite",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-selch-07",
+    "sku": "SelCH-07",
+    "name": "Portacandele Selenite Cuore",
+    "price": 7.85,
+    "originalPrice": 15,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 87,
+    "images": [
+      "/uploads/selch-07-1.jpeg",
+      "/uploads/selch-07-2.jpeg",
+      "/uploads/selch-07-3.jpeg",
+      "/uploads/selch-07-4.jpeg"
+    ],
+    "description": "<p>Selenite which is kind of &nbsp;translucent crystal allows the flame of the candle to flicker slightly through the walls of the candle holder. Edges of the candle holders are rough which is natural to selenite.</p><p><br></p><p>Selenite Candle Holders are shiny and sometimes with whiter areas. Top of each candle holder is polished and the underside is cut flat.</p><p><br></p><p>Sizes: width 9cm, Lenght &nbsp;8cm, Height 5cm</p>",
+    "shortDescription": "Selenite which is kind of &nbsp;translucent crystal allows the flame of the candle to flicker slightly through the walls of the candle holder. Edges of the candle holders are rough which is natural to selenite.Selenite Candle Holders are shiny and sometimes with whiter areas. Top of each candle holder is polished and the underside is cut flat.Sizes: width 9cm, Lenght &nbsp;8cm, Height 5cm",
+    "barcode": "5055796502561",
+    "weight": 0.5,
+    "materials": "selenite",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-01",
+    "sku": "ZCC-01",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Acquario",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 822,
+    "images": [
+      "/uploads/zcc-01-1.jpeg",
+      "/uploads/zcc-01-2.jpeg",
+      "/uploads/zcc-01-3.jpeg",
+      "/uploads/zcc-01-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Celebrate the visionary spirit of Aquarius with this Zodiac Crystal Candle. Infused with the calming scent of Amethyst Crystal and Amber, it creates a serene and inspiring atmosphere. As the candle burns, shimmering gemstones appear, enhancing the connection to Aquarius&#39; energy.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet made of amethyst, lapis lazuli, and hematite. Each stone is carefully selected to align with the strengths of Aquarius:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Amethyst enhances intuition and spiritual growthLapis lazuli encourages wisdom and self-expressionHematite provides gRotondoing and focus&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This unique combination of candle and bracelet is Perfetto per birthdays, cura di sé rituals, or as a thoughtful zodiac-inspiRosso gift.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Cassis, Mandarin</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Lavender, Rosso Berries, Rose</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Sandalwood, Amber</em></strong></span></p>",
+    "shortDescription": "Celebrate the visionary spirit of Aquarius with this Zodiac Crystal Candle. Infused with the calming scent of Amethyst Crystal and Amber, it creates a serene and inspiring atmosphere. As the candle burns, shimmering gemstones appear, enhancing the connection to Aquarius&#39; energy.The set includes a gemstone bracelet made of amethyst, lapis lazuli, and hematite. Each stone is carefully selected to align with the strengths of Aquarius:Amethyst enhances intuition and spiritual growthLapis lazuli encourages wisdom and self-expressionHematite provides gRotondoing and focus&nbsp;This unique combination of candle and bracelet is Perfetto per birthdays, cura di sé rituals, or as a thoughtful zodiac-inspiRosso gift.&nbsp;Top notes: Cassis, MandarinCuore notes: Lavender, Rosso Berries, RoseBase notes: Sandalwood, Amber",
+    "barcode": "5056368348013",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-02",
+    "sku": "ZCC-02",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Pesci",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 737,
+    "images": [
+      "/uploads/zcc-02-1.jpeg",
+      "/uploads/zcc-02-2.jpeg",
+      "/uploads/zcc-02-3.jpeg",
+      "/uploads/zcc-02-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Dive into the dreamy and intuitive world of Pesci with this Zodiac Crystal Candle. Its soothing fragrance of Aquamarine and Celestial Smoke creates a calming, otherworldly atmosphere, Perfetto per this compassionate and creative sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a delicate gemstone bracelet Realizzato con moonstone, turquoise, and aquamarine, chosen to resonate with Pesci&#39; gentle and spiritual nature:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Moonstone enhances intuition and emotional balanceTurquoise promotes healing and self-expressionAquamarine fosters calmness and clarity&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This magical pairing of candle and bracelet is ideal for cura di sé, meditazione, or as a meaningful gift for Pesci.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Lemon, Bergamot, Pink Pepper</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Violet, Jasmine, Patchouli</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Tonka, Suede, Amber, Musk, Vanilla</em></strong></span></p>",
+    "shortDescription": "Dive into the dreamy and intuitive world of Pesci with this Zodiac Crystal Candle. Its soothing fragrance of Aquamarine and Celestial Smoke creates a calming, otherworldly atmosphere, Perfetto per this compassionate and creative sign.&nbsp;The set includes a delicate gemstone bracelet Realizzato con moonstone, turquoise, and aquamarine, chosen to resonate with Pesci&#39; gentle and spiritual nature:Moonstone enhances intuition and emotional balanceTurquoise promotes healing and self-expressionAquamarine fosters calmness and clarity&nbsp;This magical pairing of candle and bracelet is ideal for cura di sé, meditazione, or as a meaningful gift for Pesci.Top notes: Lemon, Bergamot, Pink PepperCuore notes: Violet, Jasmine, PatchouliBase notes: Tonka, Suede, Amber, Musk, Vanilla",
+    "barcode": "5056368348020",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-03",
+    "sku": "ZCC-03",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Ariete",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 737,
+    "images": [
+      "/uploads/zcc-03-1.jpeg",
+      "/uploads/zcc-03-2.jpeg",
+      "/uploads/zcc-03-3.jpeg",
+      "/uploads/zcc-03-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Ignite the bold and fearless energy of Ariete with this Zodiac Crystal Candle. The invigorating scent of Clear Quartz Freshness mirrors the dynamic and confident spirit of this fiery sign, creating an uplifting atmosphere for new beginnings.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Included in the set is a powerful gemstone bracelet featuring Rosso jasper, bloodstone, and hematite, carefully chosen to support Ariete&#39; strength and determination:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Rosso jasper boosts courage and vitalityBloodstone enhances resilience and focusHematite gRotondos energy and promotes balancePerfetto per celebrating the unstoppable nature of Ariete, this candle and bracelet set makes a meaningful gift or a personal ritual for empowerment.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Pine, Eucalyptus, Sage, Thyme, Sea Salt, Ozone</strong></em></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Cuore notes: Rose, Lily, Jasmine, Lilac, Violet</strong></em></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Cedarwood, Ambe</em></strong>r</span></p>",
+    "shortDescription": "Ignite the bold and fearless energy of Ariete with this Zodiac Crystal Candle. The invigorating scent of Clear Quartz Freshness mirrors the dynamic and confident spirit of this fiery sign, creating an uplifting atmosphere for new beginnings.&nbsp;Included in the set is a powerful gemstone bracelet featuring Rosso jasper, bloodstone, and hematite, carefully chosen to support Ariete&#39; strength and determination:Rosso jasper boosts courage and vitalityBloodstone enhances resilience and focusHematite gRotondos energy and promotes balancePerfetto per celebrating the unstoppable nature of Ariete, this candle and bracelet set makes a meaningful gift or a personal ritual for empowerment.Top notes: Pine, Eucalyptus, Sage, Thyme, Sea Salt, OzoneCuore notes: Rose, Lily, Jasmine, Lilac, VioletBase notes: Cedarwood, Amber",
+    "barcode": "5056368348037",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-04",
+    "sku": "ZCC-04",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Toro",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 826,
+    "images": [
+      "/uploads/zcc-04-1.jpeg",
+      "/uploads/zcc-04-2.jpeg",
+      "/uploads/zcc-04-3.jpeg",
+      "/uploads/zcc-04-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Embrace the gRotondoed and nurturing energy of Toro with this Zodiac Crystal Candle. The rich, earthy fragrance of Forest Emerald and Patchouli brings a sense of tranquility and connection to nature, perfectly suited for this steadfast and harmonious sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a beautiful gemstone bracelet featuring lapis lazuli and moss agate, selected to enhance Toro&rsquo; strengths:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Lapis lazuli inspires wisdom and inner PaceMoss agate fosters growth and a deep connection to nature&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This calming combination of candle and bracelet is ideal for moments of cura di sé, meditazione, or as a thoughtful gift for the Toro in your life.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Bergamot, Olibanum, Cypress, Mint, Basil</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Clove, Verbena, Fern</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Patchouli, Velvet Woods, Tonka, Benzoin, Styrax, Amber, Leather, Moss, Musk, Animalic, Labdanum</em></strong></span></p>",
+    "shortDescription": "Embrace the gRotondoed and nurturing energy of Toro with this Zodiac Crystal Candle. The rich, earthy fragrance of Forest Emerald and Patchouli brings a sense of tranquility and connection to nature, perfectly suited for this steadfast and harmonious sign.&nbsp;The set includes a beautiful gemstone bracelet featuring lapis lazuli and moss agate, selected to enhance Toro&rsquo; strengths:Lapis lazuli inspires wisdom and inner PaceMoss agate fosters growth and a deep connection to nature&nbsp;This calming combination of candle and bracelet is ideal for moments of cura di sé, meditazione, or as a thoughtful gift for the Toro in your life.Top notes: Bergamot, Olibanum, Cypress, Mint, BasilCuore notes: Clove, Verbena, FernBase notes: Patchouli, Velvet Woods, Tonka, Benzoin, Styrax, Amber, Leather, Moss, Musk, Animalic, Labdanum",
+    "barcode": "5056368348044",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-05",
+    "sku": "ZCC-05",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Gemelli",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 730,
+    "images": [
+      "/uploads/zcc-05-1.jpeg",
+      "/uploads/zcc-05-2.jpeg",
+      "/uploads/zcc-05-3.jpeg",
+      "/uploads/zcc-05-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Embody the dynamic and adaptable energy of Gemelli with this Zodiac Crystal Candle. The unique fragrance of Oriental Tiger&#39;s Eye brings warmth and balance, perfectly complementing the curious and lively nature of this air sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a stunning gemstone bracelet Realizzato con citrine, rose quartz, and moonstone, chosen to align with Gemelli&rsquo;s versatile qualities:&nbsp;</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Citrine boosts Creatività and confidenceRose quartz promotes love, compassion, and harmonyMoonstone enhances intuition and emotional balance </strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">This vibrant combination of candle and bracelet makes a thoughtful gift or a perfect addition to the own cura di sé ritual, helping Gemelli embrace their dual nature.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Bergamot, Peach</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Orange Blossom, Rose, Heliotrope, Lily, Orchid, Orris, Gardenia</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Cedarwood, Amber, Musk, Vetiver, Moss, Benzoin</em></strong></span></p>",
+    "shortDescription": "Embody the dynamic and adaptable energy of Gemelli with this Zodiac Crystal Candle. The unique fragrance of Oriental Tiger&#39;s Eye brings warmth and balance, perfectly complementing the curious and lively nature of this air sign.&nbsp;The set includes a stunning gemstone bracelet Realizzato con citrine, rose quartz, and moonstone, chosen to align with Gemelli&rsquo;s versatile qualities:&nbsp;Citrine boosts Creatività and confidenceRose quartz promotes love, compassion, and harmonyMoonstone enhances intuition and emotional balance This vibrant combination of candle and bracelet makes a thoughtful gift or a perfect addition to the own cura di sé ritual, helping Gemelli embrace their dual nature.&nbsp;Top notes: Bergamot, PeachCuore notes: Orange Blossom, Rose, Heliotrope, Lily, Orchid, Orris, GardeniaBase notes: Cedarwood, Amber, Musk, Vetiver, Moss, Benzoin",
+    "barcode": "5056368348051",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-06",
+    "sku": "ZCC-06",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Cancro",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 683,
+    "images": [
+      "/uploads/zcc-06-1.jpeg",
+      "/uploads/zcc-06-2.jpeg",
+      "/uploads/zcc-06-3.jpeg",
+      "/uploads/zcc-06-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Tap into the intuitive and nurturing energy of Cancro with this Zodiac Crystal Candle. The soothing fragrance of Moonstone Eclipse creates a calming and protective atmosphere, reflecting the emotional depth and sensitivity of this water sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet Realizzato con aquamarine, smoky quartz, and moonstone, chosen to support Cancro&rsquo;s compassionate and empathetic nature: </strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Aquamarine promotes tranquillity and emotional healingSmoky quartz provides gRotondoing and protectionMoonstone enhances intuition and emotional balance&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This gentle and healing combination of candle and bracelet is Perfetto per cura di sé, meditazione, or as a thoughtful gift for a Cancro.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Cassis, Mandarin</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Lavender, Rosso Berries, Rose</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Sandalwood, Amber</em></strong></span></p>",
+    "shortDescription": "Tap into the intuitive and nurturing energy of Cancro with this Zodiac Crystal Candle. The soothing fragrance of Moonstone Eclipse creates a calming and protective atmosphere, reflecting the emotional depth and sensitivity of this water sign.&nbsp;The set includes a gemstone bracelet Realizzato con aquamarine, smoky quartz, and moonstone, chosen to support Cancro&rsquo;s compassionate and empathetic nature: Aquamarine promotes tranquillity and emotional healingSmoky quartz provides gRotondoing and protectionMoonstone enhances intuition and emotional balance&nbsp;This gentle and healing combination of candle and bracelet is Perfetto per cura di sé, meditazione, or as a thoughtful gift for a Cancro.Top notes: Cassis, MandarinCuore notes: Lavender, Rosso Berries, RoseBase notes: Sandalwood, Amber",
+    "barcode": "5056368348068",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-07",
+    "sku": "ZCC-07",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Leone",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 708,
+    "images": [
+      "/uploads/zcc-07-1.jpeg",
+      "/uploads/zcc-07-2.jpeg",
+      "/uploads/zcc-07-3.jpeg",
+      "/uploads/zcc-07-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Unleash the bold and radiant energy of Leone with this Zodiac Crystal Candle. The warm, invigorating fragrance of Frosted Citrine and Ginger fills the air, perfectly matching the vibrant and confident spirit of this fire sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a powerful gemstone bracelet Realizzato con tiger&#39;s eye and carnelian, carefully selected to amplify Leone&rsquo;s strengths:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Tiger&rsquo;s eye enhances courage and personal powerCarnelian boosts Creatività and motivation&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This bold pairing of candle and bracelet is Perfetto per empowering the Leone within, making it an ideal gift or a personal addition to the cura di sé ritual.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Nectarine, Citrus, Green Notes</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Rose Petals, Muguet, Ginger</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Musk, Woods</em></strong></span></p>",
+    "shortDescription": "Unleash the bold and radiant energy of Leone with this Zodiac Crystal Candle. The warm, invigorating fragrance of Frosted Citrine and Ginger fills the air, perfectly matching the vibrant and confident spirit of this fire sign.&nbsp;The set includes a powerful gemstone bracelet Realizzato con tiger&#39;s eye and carnelian, carefully selected to amplify Leone&rsquo;s strengths:Tiger&rsquo;s eye enhances courage and personal powerCarnelian boosts Creatività and motivation&nbsp;This bold pairing of candle and bracelet is Perfetto per empowering the Leone within, making it an ideal gift or a personal addition to the cura di sé ritual.&nbsp;Top notes: Nectarine, Citrus, Green NotesCuore notes: Rose Petals, Muguet, GingerBase notes: Musk, Woods",
+    "barcode": "5056368348075",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-08",
+    "sku": "ZCC-08",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Vergine",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 764,
+    "images": [
+      "/uploads/zcc-08-1.jpeg",
+      "/uploads/zcc-08-2.jpeg",
+      "/uploads/zcc-08-3.jpeg",
+      "/uploads/zcc-08-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Embrace the practical yet deeply intuitive energy of Vergine with this Zodiac Crystal Candle. The earthy fragrance of Tree Agate and Oud creates a gRotondoed, soothing atmosphere, reflecting Vergine&rsquo;s love for order, nature, and balance.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet Realizzato con amethyst, carnelian, and moss agate, selected to resonate with Vergine&rsquo;s nurturing and analytical qualities:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Amethyst enhances clarity and spiritual insightCarnelian boosts motivation and CreativitàMoss agate fosters growth and connection to nature&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This calming and empowering combination of candle and bracelet is Perfetto per mindfulness, cura di sé, or as a thoughtful gift for the Vergine..</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Raspberry, Clove</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore notes: Rose, Geranium, Jasmine, Praline</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Oudh, Amber, Musk, Vanilla</em></strong></span></p>",
+    "shortDescription": "Embrace the practical yet deeply intuitive energy of Vergine with this Zodiac Crystal Candle. The earthy fragrance of Tree Agate and Oud creates a gRotondoed, soothing atmosphere, reflecting Vergine&rsquo;s love for order, nature, and balance.&nbsp;The set includes a gemstone bracelet Realizzato con amethyst, carnelian, and moss agate, selected to resonate with Vergine&rsquo;s nurturing and analytical qualities:Amethyst enhances clarity and spiritual insightCarnelian boosts motivation and CreativitàMoss agate fosters growth and connection to nature&nbsp;This calming and empowering combination of candle and bracelet is Perfetto per mindfulness, cura di sé, or as a thoughtful gift for the Vergine..Top notes: Raspberry, CloveCuore notes: Rose, Geranium, Jasmine, PralineBase notes: Oudh, Amber, Musk, Vanilla",
+    "barcode": "5056368348082",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-09",
+    "sku": "ZCC-09",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Bilancia",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 859,
+    "images": [
+      "/uploads/zcc-09-1.jpeg",
+      "/uploads/zcc-09-2.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Bilancia, find your balance in the cosmic dance. Cool Jade &amp; Oakmoss Fragrance, a harmonious echo of Venus&#39; grace, will soothe your spirit. Titanium Stone, a perfectly balanced scale, embodies your pursuit of equilibrium. Dance, Bilancia, and let your dreams take flight on wings of perfect balance.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet Realizzato con Green Aventurine, Opal, and Rose quartz selected to resonate with the diplomatic spirit of Bilancia, amplifying their charm and fostering balance in their relationships.</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Green Aventurine helps find clarity and balance in their decision-makingOpal Opal enhances Bilancia&#39;s natural charm and CreativitàRose Quartz helping them maintain harmony in relationships</span></p><p><span style=\"color: rgb(75, 80, 88);\">Bilancias, the diplomatic charmers, seek harmony in all things, gracefully navigating situations with an even temper and a keen sense of fairness. Their love for beauty and balance makes them social butterflies.</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top Notes: Herbal, Spice, Citrus.</strong></em></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Cuore Notes: Rose, Geranium.</span></strong></em></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base Notes: Oakmoss, Vanilla, Musk.</em></strong></span></p>",
+    "shortDescription": "Bilancia, find your balance in the cosmic dance. Cool Jade &amp; Oakmoss Fragrance, a harmonious echo of Venus&#39; grace, will soothe your spirit. Titanium Stone, a perfectly balanced scale, embodies your pursuit of equilibrium. Dance, Bilancia, and let your dreams take flight on wings of perfect balance.The set includes a gemstone bracelet Realizzato con Green Aventurine, Opal, and Rose quartz selected to resonate with the diplomatic spirit of Bilancia, amplifying their charm and fostering balance in their relationships.Green Aventurine helps find clarity and balance in their decision-makingOpal Opal enhances Bilancia&#39;s natural charm and CreativitàRose Quartz helping them maintain harmony in relationshipsBilancias, the diplomatic charmers, seek harmony in all things, gracefully navigating situations with an even temper and a keen sense of fairness. Their love for beauty and balance makes them social butterflies.Top Notes: Herbal, Spice, Citrus.Cuore Notes: Rose, Geranium.Base Notes: Oakmoss, Vanilla, Musk.",
+    "barcode": "5056368348099",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-10",
+    "sku": "ZCC-10",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Scorpione",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 710,
+    "images": [
+      "/uploads/zcc-10-1.jpeg",
+      "/uploads/zcc-10-2.jpeg",
+      "/uploads/zcc-10-3.jpeg",
+      "/uploads/zcc-10-4.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Channel the intense and transformative energy of Scorpione with this Zodiac Crystal Candle. The deep, rich fragrance of Obsidian and Dark Coffee creates a mysterious and empowering atmosphere, Perfetto per this passionate and fearless sign.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet Realizzato con smoky quartz, lapis lazuli, and black obsidian, chosen to support Scorpione&rsquo;s powerful and magnetic nature:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">Smoky quartz offers protection and gRotondoingLapis lazuli enhances wisdom and self-expressionBlack obsidian provides deep healing and transformation&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\">This captivating combination of candle and bracelet is ideal for moments of introspection, empowerment, or as a meaningful gift for a Scorpione.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Top notes: Spicy, Black Pepper</strong></em></span></p><p><span style=\"color: rgb(75, 80, 88);\"><em><strong>Cuore notes: Orange Blossom, Tiramisu, Jasmine</strong></em></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Base notes: Woody, Vanilla, Tonka Bean</em></strong></span></p>",
+    "shortDescription": "Channel the intense and transformative energy of Scorpione with this Zodiac Crystal Candle. The deep, rich fragrance of Obsidian and Dark Coffee creates a mysterious and empowering atmosphere, Perfetto per this passionate and fearless sign.&nbsp;The set includes a gemstone bracelet Realizzato con smoky quartz, lapis lazuli, and black obsidian, chosen to support Scorpione&rsquo;s powerful and magnetic nature:Smoky quartz offers protection and gRotondoingLapis lazuli enhances wisdom and self-expressionBlack obsidian provides deep healing and transformation&nbsp;This captivating combination of candle and bracelet is ideal for moments of introspection, empowerment, or as a meaningful gift for a Scorpione.&nbsp;Top notes: Spicy, Black PepperCuore notes: Orange Blossom, Tiramisu, JasmineBase notes: Woody, Vanilla, Tonka Bean",
+    "barcode": "5056368348105",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-11",
+    "sku": "ZCC-11",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Sagittario",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 771,
+    "images": [
+      "/uploads/zcc-11-1.jpeg",
+      "/uploads/zcc-11-2.jpeg",
+      "/uploads/zcc-11-3.jpeg",
+      "/uploads/zcc-11-4.jpeg"
+    ],
+    "description": "<p>Embrace the adventurous and free-spirited energy of Sagittario with this Zodiac Crystal Candle. The fresh and invigorating fragrance of Turquoise Dewiness creates an uplifting atmosphere, reflecting the optimism and wanderlust of this fire sign.&nbsp;</p><p><strong>The set includes a gemstone bracelet Realizzato con amethyst, sodalite, and black obsidian, chosen to resonate with Sagittario&#39; curious and expansive nature:</strong></p><p>Amethyst enhances spiritual growth and claritySodalite fosters truth and communicationBlack obsidian offers protection and gRotondoing&nbsp;</p><p>This vibrant pairing of candle and bracelet is Perfetto per those seeking inspiration, adventure, or as a thoughtful gift for the Sagittario.&nbsp;</p><p><em><strong>Top notes: Lemon, Bergamot, Grapefruit, Orange</strong></em></p><p><em><strong>Cuore notes: Jasmine, Rose, Ozonic Notes</strong></em></p><p><strong><em>Base notes: Amber, Musk, Cedarwood, Sandalwood</em></strong></p>",
+    "shortDescription": "Embrace the adventurous and free-spirited energy of Sagittario with this Zodiac Crystal Candle. The fresh and invigorating fragrance of Turquoise Dewiness creates an uplifting atmosphere, reflecting the optimism and wanderlust of this fire sign.&nbsp;The set includes a gemstone bracelet Realizzato con amethyst, sodalite, and black obsidian, chosen to resonate with Sagittario&#39; curious and expansive nature:Amethyst enhances spiritual growth and claritySodalite fosters truth and communicationBlack obsidian offers protection and gRotondoing&nbsp;This vibrant pairing of candle and bracelet is Perfetto per those seeking inspiration, adventure, or as a thoughtful gift for the Sagittario.&nbsp;Top notes: Lemon, Bergamot, Grapefruit, OrangeCuore notes: Jasmine, Rose, Ozonic NotesBase notes: Amber, Musk, Cedarwood, Sandalwood",
+    "barcode": "5056368348112",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
+  },
+  {
+    "id": "aw-zcc-12",
+    "sku": "ZCC-12",
+    "name": "Candela Cristallo Zodiaco con Bracciale Pietre - Capricorno",
+    "price": 8.25,
+    "originalPrice": 17.5,
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "supplier": "aw-dropship",
+    "stock": 801,
+    "images": [
+      "/uploads/zcc-12-1.jpeg",
+      "/uploads/zcc-12-2.jpeg",
+      "/uploads/zcc-12-3.jpeg",
+      "/uploads/zcc-12-4.jpeg",
+      "/uploads/zcc-12-5.jpeg",
+      "/uploads/zcc-12-6.jpeg"
+    ],
+    "description": "<p><span style=\"color: rgb(75, 80, 88);\">Embody the disciplined and ambitious energy of Capricorno with this Zodiac Crystal Candle. The sophisticated fragrance of Glaze Lapis Lazuli creates a serene and gRotondoing atmosphere, perfectly reflecting Capricorno&rsquo;s practical and determined nature.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>The set includes a gemstone bracelet Realizzato con amethyst and smoky quartz, chosen to support Capricorno&rsquo;s strength and focus:</strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong>Amethyst promotes clarity and spiritual insightSmoky quartz offers gRotondoing and protection </strong></span></p><p><span style=\"color: rgb(75, 80, 88);\">This elegant pairing of candle and bracelet is ideal for self-reflection, focus, or as a meaningful gift for a Capricorno.&nbsp;</span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Top notes: Coconut, Raspberry, Pear</em></strong></span></p><p><span style=\"color: rgb(75, 80, 88);\"><strong><em>Cuore notes: Rose, Jasmine, Lily</em></strong></span></p><p><em><strong><span style=\"color: rgb(75, 80, 88);\">Base notes: Macaron, Sugar, Amber, Musk, Sandalwood</span></strong></em></p>",
+    "shortDescription": "Embody the disciplined and ambitious energy of Capricorno with this Zodiac Crystal Candle. The sophisticated fragrance of Glaze Lapis Lazuli creates a serene and gRotondoing atmosphere, perfectly reflecting Capricorno&rsquo;s practical and determined nature.&nbsp;The set includes a gemstone bracelet Realizzato con amethyst and smoky quartz, chosen to support Capricorno&rsquo;s strength and focus:Amethyst promotes clarity and spiritual insightSmoky quartz offers gRotondoing and protection This elegant pairing of candle and bracelet is ideal for self-reflection, focus, or as a meaningful gift for a Capricorno.&nbsp;Top notes: Coconut, Raspberry, PearCuore notes: Rose, Jasmine, LilyBase notes: Macaron, Sugar, Amber, Musk, Sandalwood",
+    "barcode": "5056368348129",
+    "weight": 0.32,
+    "materials": "Soy Wax, Fragrance, Glass, Gemstones",
+    "featured": false,
+    "visible": true,
+    "visibility": "visible",
+    "tags": [
+      "candele",
+      "aromaterapia",
+      "natural wellness",
+      "sali da bagno"
+    ],
+    "metadata": {
+      "type": "Candele e Portacandele",
+      "use": "Aromaterapia e decorazione"
+    }
   }
 ]
