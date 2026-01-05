@@ -87,5 +87,6 @@ verify-*.js
 # Keep only essential files
 !prisma/
 !src/
+!data/
 !server.js
 !package*.json
