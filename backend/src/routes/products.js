@@ -205,8 +205,9 @@ router.get('/', async (req, res) => {
         depth: parseFloat(p.depth) || 0
       },
       // IMPORTANTE: Includiamo zenovaSubcategory e zenovaCategories per filtrare nel frontend
-      zenovaSubcategory: p.zenovaSubcategory,
-      zenovaCategory: p.zenovaCategory,
+      // Fix: converte stringa "undefined" in undefined vero (bug import AW)
+      zenovaSubcategory: p.zenovaSubcategory === 'undefined' ? undefined : p.zenovaSubcategory,
+      zenovaCategory: p.zenovaCategory === 'undefined' ? undefined : p.zenovaCategory,
       zenovaCategories: p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []),
       subcategory: p.subcategory,  // Categorie BigBuy raw per backward compatibility
       // Fornitori - IMPORTANTE per PayPal stock verification
