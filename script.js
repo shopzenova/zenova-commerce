@@ -525,11 +525,14 @@ async function loadProductsFromBackend() {
 
         // Carica da Railway API invece di file statico
         const cacheBuster = Date.now();
-        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/products?v=${cacheBuster}`);
-        const jsonProducts = await response.json();
+        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/products?pageSize=5000&v=${cacheBuster}`);
+        const jsonResponse = await response.json();
+
+        // L'API restituisce {success: true, data: [...]} oppure array diretto
+        const jsonProducts = jsonResponse.data || jsonResponse;
 
         if (jsonProducts && jsonProducts.length > 0) {
-            console.log(`✅ Caricati ${jsonProducts.length} prodotti dal file JSON`);
+            console.log(`✅ Caricati ${jsonProducts.length} prodotti dall'API Railway`);
 
             // Filter only visible products
             products = jsonProducts
