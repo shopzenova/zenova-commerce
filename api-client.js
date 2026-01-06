@@ -3,7 +3,10 @@
  * Helper per chiamare il backend da script.js
  */
 
-const API_BASE_URL = 'https://zenova-commerce-production.up.railway.app/api';
+// Usa localhost se siamo in sviluppo locale, altrimenti Railway
+const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:3000/api'
+  : 'https://zenova-commerce-production.up.railway.app/api';
 
 class ZenovaAPI {
 

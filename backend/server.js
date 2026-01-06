@@ -23,7 +23,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       imgSrc: ["'self'", "data:", "https:", "https://cdnbigbuy.com", "https://img.icons8.com"],
-      connectSrc: ["'self'", "http://localhost:3000", "https://www.paypal.com", "https://api.stripe.com"],
+      connectSrc: ["'self'", "http://localhost:3000", "https://zenova-commerce-production.up.railway.app", "https://www.paypal.com", "https://api.stripe.com"],
       frameSrc: ["'self'", "https://www.paypal.com", "https://js.stripe.com"],
     },
   },

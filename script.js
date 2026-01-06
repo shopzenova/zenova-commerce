@@ -523,9 +523,12 @@ async function loadProductsFromBackend() {
             console.warn('⚠️  product-layout.json non trovato, uso valori di default');
         }
 
-        // Carica da Railway API invece di file statico
+        // Carica da Railway API invece di file statico (o localhost se locale)
         const cacheBuster = Date.now();
-        const response = await fetch(`https://zenova-commerce-production.up.railway.app/api/products?pageSize=5000&v=${cacheBuster}`);
+        const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:3000/api'
+          : 'https://zenova-commerce-production.up.railway.app/api';
+        const response = await fetch(`${apiUrl}/products?pageSize=5000&v=${cacheBuster}`);
         const jsonResponse = await response.json();
 
         // L'API restituisce {success: true, data: [...]} oppure array diretto
