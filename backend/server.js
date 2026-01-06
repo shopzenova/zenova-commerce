@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 const logger = require('./src/utils/logger');
 
-// Force rebuild - 2026-01-05 Fix incensi
+// Force rebuild - 2026-01-06 RIPRISTINO URGENTE prodotti
 
 const app = express();
 const PORT = process.env.PORT || 3000;
