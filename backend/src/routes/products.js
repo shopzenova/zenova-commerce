@@ -32,6 +32,46 @@ try {
   logger.error('❌ Errore caricamento data/products.json:', error);
 }
 
+// ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
+// Gestisce automaticamente formati diversi da BigBuy e AW Dropship
+
+function getWholesalePrice(product) {
+  // Riconosce automaticamente il formato in base al fornitore
+  const source = product.source || product.supplier;
+
+  if (source === 'bigbuy') {
+    // BigBuy: pvd = prezzo di acquisto/ingrosso
+    return parseFloat(product.pvd) || 0;
+  } else if (source === 'aw-dropship' || source === 'aw') {
+    // AW Dropship: price = prezzo di acquisto/ingrosso
+    return parseFloat(product.price) || 0;
+  }
+
+  // Fallback: prova pvd prima, poi price
+  return parseFloat(product.pvd || product.price) || 0;
+}
+
+function getRetailPrice(product) {
+  // Riconosce automaticamente il formato in base al fornitore
+  const source = product.source || product.supplier;
+
+  if (source === 'bigbuy') {
+    // BigBuy: price = prezzo di vendita consigliato
+    return parseFloat(product.price) || 0;
+  } else if (source === 'aw-dropship' || source === 'aw') {
+    // AW Dropship: originalPrice = prezzo di vendita
+    // Se non presente, calcola con margine 30% su wholesale
+    if (product.originalPrice) {
+      return parseFloat(product.originalPrice);
+    }
+    const wholesale = parseFloat(product.price) || 0;
+    return Math.round(wholesale * 1.3 * 100) / 100; // margine 30%, arrotondato
+  }
+
+  // Fallback
+  return parseFloat(product.price) || 0;
+}
+
 // GET /api/products/categories - Ottieni categorie
 router.get('/categories', async (req, res) => {
   try {
@@ -192,8 +232,8 @@ router.get('/', async (req, res) => {
       description: p.description,
       brand: p.brand || 'Zenova',
       category: p.raw && p.raw.CATEGORY ? p.raw.CATEGORY : p.category,  // USA categorie ID BigBuy raw
-      price: parseFloat(p.pvd),           // Prezzo di acquisto da BigBuy
-      retailPrice: parseFloat(p.price),   // Prezzo di vendita consigliato
+      price: getWholesalePrice(p),        // Prezzo di acquisto (BigBuy o AW)
+      retailPrice: getRetailPrice(p),     // Prezzo di vendita (BigBuy o AW)
       stock: p.stock,
       images: p.images,
       image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : null),
@@ -309,8 +349,8 @@ router.get('/:id', async (req, res) => {
       description: product.description,
       brand: product.brand || 'Zenova',
       category: product.zenovaCategories ? product.zenovaCategories.join(', ') : product.category,
-      price: parseFloat(product.pvd),           // Prezzo di acquisto da BigBuy
-      retailPrice: parseFloat(product.price),   // Prezzo di vendita consigliato
+      price: getWholesalePrice(product),        // Prezzo di acquisto (BigBuy o AW)
+      retailPrice: getRetailPrice(product),     // Prezzo di vendita (BigBuy o AW)
       stock: product.stock,
       available: product.available !== false,   // Disponibilità per acquisto (default true se non specificato)
       images: product.images,
