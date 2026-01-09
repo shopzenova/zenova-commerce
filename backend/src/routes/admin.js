@@ -457,8 +457,10 @@ router.post('/products/import', async (req, res) => {
       });
     }
 
-    // Verifica che non esista già
-    const existingProduct = PRODUCTS.find(p => p.id === sku);
+    // ✅ Verifica che non esista già su PostgreSQL
+    const existingProduct = await prisma.product.findUnique({
+      where: { id: sku }
+    });
     if (existingProduct) {
       return res.status(409).json({
         success: false,
@@ -482,46 +484,78 @@ router.post('/products/import', async (req, res) => {
       'tech-innovation': 'gadget-tech'
     };
 
-    // Formatta il prodotto nel formato del catalogo
-    const newProduct = {
-      id: foundProduct.ID,
-      sku: foundProduct.ID,
-      name: foundProduct.NAME || foundProduct.ID,
-      description: foundProduct.DESCRIPTION || '',
-      brand: foundProduct.BRAND || '',
-      category: category,
-      zenovaCategory: category,
-      zenovaCategories: [category],
-      zenovaSubcategory: defaultSubcategories[category] || 'altri',
-      price: parseFloat(foundProduct.PVP_BIGBUY || 0),
-      pvd: parseFloat(foundProduct.PVD || 0),
-      stock: parseInt(foundProduct.STOCK || 0),
-      images: images,
-      imageCount: images.length,
-      video: foundProduct.VIDEO || '0',
-      ean: foundProduct.EAN13 || '',
-      width: foundProduct.WIDTH || '',
-      height: foundProduct.HEIGHT || '',
-      depth: foundProduct.DEPTH || '',
-      weight: foundProduct.WEIGHT || '',
-      visible: true,
-      zone: 'sidebar'
+    // Raccogli URL immagini (array di stringhe per PostgreSQL)
+    const imageUrls = images.map(img => img.url || img);
+
+    // ✅ SALVA SU POSTGRESQL
+    const newProduct = await prisma.product.create({
+      data: {
+        id: foundProduct.ID,
+        name: foundProduct.NAME || foundProduct.ID,
+        description: foundProduct.DESCRIPTION || '',
+        brand: foundProduct.BRAND || '',
+        category: category,
+        zenovaCategory: category,
+        zenovaCategories: [category],
+        zenovaSubcategory: defaultSubcategories[category] || 'altri',
+        price: parseFloat(foundProduct.PVP_BIGBUY || 0),
+        retailPrice: parseFloat(foundProduct.PVP_BIGBUY || 0),
+        wholesalePrice: parseFloat(foundProduct.PVD || 0),
+        stock: parseInt(foundProduct.STOCK || 0),
+        images: imageUrls,
+        image: imageUrls[0] || null,
+        video: foundProduct.VIDEO || null,
+        ean: foundProduct.EAN13 || '',
+        width: parseFloat(foundProduct.WIDTH || 0),
+        height: parseFloat(foundProduct.HEIGHT || 0),
+        depth: parseFloat(foundProduct.DEPTH || 0),
+        weight: parseFloat(foundProduct.WEIGHT || 0),
+        visible: true,
+        zone: 'sidebar',
+        source: 'bigbuy',
+        bigbuyId: foundProduct.ID
+      }
+    });
+
+    // ✅ Aggiungi anche in memoria per compatibilità
+    const newProductFormatted = {
+      id: newProduct.id,
+      sku: newProduct.id,
+      name: newProduct.name,
+      description: newProduct.description,
+      brand: newProduct.brand,
+      category: newProduct.category,
+      zenovaCategory: newProduct.zenovaCategory,
+      zenovaCategories: newProduct.zenovaCategories,
+      zenovaSubcategory: newProduct.zenovaSubcategory,
+      price: parseFloat(newProduct.price),
+      pvd: parseFloat(newProduct.wholesalePrice),
+      stock: newProduct.stock,
+      images: newProduct.images.map(url => ({ url })),
+      imageCount: newProduct.images.length,
+      video: newProduct.video,
+      ean: newProduct.ean,
+      width: newProduct.width,
+      height: newProduct.height,
+      depth: newProduct.depth,
+      weight: newProduct.weight,
+      visible: newProduct.visible,
+      zone: newProduct.zone
     };
+    PRODUCTS.push(newProductFormatted);
 
-    // Aggiungi al file JSON
-    const jsonPath = path.join(__dirname, '../../top-100-products.json');
-    PRODUCTS.push(newProduct);
-    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+    // ✅ Aggiungi a productLayout sidebar
+    if (!productLayout.sidebar.includes(newProduct.id)) {
+      productLayout.sidebar.push(newProduct.id);
+      fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
+    }
 
-    // Ricarica prodotti
-    reloadProducts();
-
-    logger.info(`✅ Prodotto importato: ${newProduct.name}`);
+    logger.info(`✅ Prodotto importato su PostgreSQL: ${newProduct.name}`);
 
     res.json({
       success: true,
-      message: 'Prodotto importato con successo',
-      data: newProduct
+      message: 'Prodotto importato con successo e disponibile online',
+      data: newProductFormatted
     });
   } catch (error) {
     logger.error('❌ Errore importazione prodotto:', error);
