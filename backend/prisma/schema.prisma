@@ -1,40 +1,54 @@
-// Prisma Schema per Zenova E-commerce
+// Prisma Schema per Zenova E-commerce - PostgreSQL
+// Con TUTTI i campi da products.json
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// ===== PRODOTTI =====
+// ===== PRODOTTI (SCHEMA COMPLETO) =====
 
 model Product {
-  id           Int      @id @default(autoincrement())
-  bigbuyId     Int      @unique @map("bigbuy_id")
-  sku          String   @unique
-  name         String
-  description  String?
-  category     String?
-  price        Decimal
-  retailPrice  Decimal  @map("retail_price")
-  stock        Int      @default(0)
-  images       String?
-  features     String?
-  weight       Decimal?
-  dimensions   String?
-  active       Boolean  @default(true)
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id                 String    @id // ID prodotto (es: "M0100360", "aw-asc-01")
+  name               String
+  description        String?   @db.Text
+  brand              String?
+  category           String?   // Categoria fornitore (es: "2507,2527,2537")
+  subcategory        String?
+  zenovaCategory     String?   @map("zenova_category")
+  zenovaSubcategory  String?   @map("zenova_subcategory")
+  price              Decimal   @db.Decimal(10, 2)
+  retailPrice        Decimal   @map("retail_price") @db.Decimal(10, 2)
+  wholesalePrice     Decimal?  @map("wholesale_price") @db.Decimal(10, 2)
+  stock              Int       @default(0)
+  images             String[]  // Array di URL immagini
+  image              String?   // Immagine principale
+  ean                String?
+  weight             Decimal?  @db.Decimal(10, 3)
+  dimensions         Json?     // {width, height, depth}
+  active             Boolean   @default(true)
+  visible            Boolean   @default(true)
+  zone               String?   // "home", "sidebar", "hidden"
+  source             String?   // "bigbuy", "aw", etc.
+  bigbuyId           String?   @map("bigbuy_id")
+  lastSync           DateTime? @map("last_sync")
+  zenovaCategories   String[]  @map("zenova_categories") // Array categorie
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
 
-  orderItems   OrderItem[]
+  orderItems         OrderItem[]
 
-  @@index([bigbuyId])
-  @@index([sku])
-  @@index([category])
+  @@index([zenovaCategory])
+  @@index([zenovaSubcategory])
+  @@index([source])
+  @@index([visible])
+  @@index([zone])
   @@index([active])
+  @@index([bigbuyId])
   @@map("products")
 }
 
@@ -73,9 +87,9 @@ model Order {
   customerName      String    @map("customer_name")
   customerPhone     String?   @map("customer_phone")
   shippingAddress   String    @map("shipping_address")
-  subtotal          Decimal
-  shippingCost      Decimal   @default(0) @map("shipping_cost")
-  total             Decimal
+  subtotal          Decimal   @db.Decimal(10, 2)
+  shippingCost      Decimal   @default(0) @map("shipping_cost") @db.Decimal(10, 2)
+  total             Decimal   @db.Decimal(10, 2)
   paymentMethod     String    @default("stripe") @map("payment_method")
   paymentStatus     String    @default("pending") @map("payment_status")
   stripeSessionId   String?   @map("stripe_session_id")
@@ -107,15 +121,14 @@ model Order {
 model OrderItem {
   id           Int      @id @default(autoincrement())
   orderId      Int      @map("order_id")
-  productId    Int?     @map("product_id")
-  bigbuyId     Int      @map("bigbuy_id")
+  productId    String?  @map("product_id") // Cambiato a String per match con Product.id
   sku          String
   productName  String   @map("product_name")
   productImage String?  @map("product_image")
-  unitPrice    Decimal  @map("unit_price")
+  unitPrice    Decimal  @map("unit_price") @db.Decimal(10, 2)
   quantity     Int      @default(1)
-  totalPrice   Decimal  @map("total_price")
-  costPrice    Decimal? @map("cost_price")
+  totalPrice   Decimal  @map("total_price") @db.Decimal(10, 2)
+  costPrice    Decimal? @map("cost_price") @db.Decimal(10, 2)
   createdAt    DateTime @default(now()) @map("created_at")
 
   order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)

@@ -1,36 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs');
-const path = require('path');
+const { PrismaClient } = require('@prisma/client');
 const bigbuy = require('../integrations/BigBuyClient');
 const logger = require('../utils/logger');
 const productFilters = require('../../config/product-filters');
 
-// Carica TUTTI i prodotti dal file JSON
-let TOP_PRODUCTS = [];
-const jsonPath = path.join(__dirname, '../../data/products.json');
+// Prisma Client per PostgreSQL
+const prisma = new PrismaClient();
 
-// Funzione per ricaricare i prodotti dal file JSON
-function reloadProducts() {
-  try {
-    const rawData = fs.readFileSync(jsonPath, 'utf-8');
-    TOP_PRODUCTS = JSON.parse(rawData);
-    logger.info(`🔄 Ricaricati ${TOP_PRODUCTS.length} prodotti dal file JSON`);
-    return true;
-  } catch (error) {
-    logger.error('❌ Errore ricaricamento data/products.json:', error);
-    return false;
-  }
-}
-
-// Caricamento iniziale
-try {
-  const rawData = fs.readFileSync(jsonPath, 'utf-8');
-  TOP_PRODUCTS = JSON.parse(rawData);
-  logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti dal file JSON`);
-} catch (error) {
-  logger.error('❌ Errore caricamento data/products.json:', error);
-}
+logger.info(`✅ PostgreSQL Database connesso - products API ready`);
 
 // ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
 // Gestisce automaticamente formati diversi da BigBuy e AW Dropship
@@ -72,16 +50,23 @@ function getRetailPrice(product) {
   return parseFloat(product.price) || 0;
 }
 
-// GET /api/products/categories - Ottieni categorie
+// GET /api/products/categories - Ottieni categorie (da PostgreSQL)
 router.get('/categories', async (req, res) => {
   try {
+    // Query prodotti visibili da PostgreSQL
+    const visibleProducts = await prisma.product.findMany({
+      where: { visible: true },
+      select: {
+        zenovaCategory: true,
+        zenovaSubcategory: true,
+        zenovaCategories: true
+      }
+    });
+
     const categories = {};
 
-    // Filtra solo prodotti visibili
-    const visibleProducts = TOP_PRODUCTS.filter(p => p.visible !== false);
-
     visibleProducts.forEach(product => {
-      const cats = product.zenovaCategories || ['Generale'];
+      const cats = product.zenovaCategories || (product.zenovaCategory ? [product.zenovaCategory] : ['Generale']);
       const subcat = product.zenovaSubcategory || null;
 
       cats.forEach(cat => {
@@ -184,7 +169,7 @@ router.get('/layout', (req, res) => {
   });
 });
 
-// GET /api/products - Lista tutti i prodotti (da JSON locale)
+// GET /api/products - Lista tutti i prodotti (da PostgreSQL)
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -192,38 +177,38 @@ router.get('/', async (req, res) => {
     const category = req.query.category; // Filtro per categoria Zenova
     const zone = req.query.zone; // Filtro per zona (home, sidebar, hidden)
 
-    let products = [...TOP_PRODUCTS];
+    // Build Prisma where clause
+    const where = {
+      visible: true // Solo prodotti visibili
+    };
 
-    // Filtra solo prodotti visibili (nasconde quelli con visible: false)
-    products = products.filter(p => p.visible !== false);
-
-    // Filtra per ZONA se richiesto (IMPORTANTE!)
+    // Filtra per ZONA se richiesto
     if (zone && zone !== 'all') {
-      if (zone === 'home') {
-        products = products.filter(p => productLayout.home.includes(p.id));
-        logger.info(`Filtrati per zona 'home': ${products.length} prodotti`);
-      } else if (zone === 'sidebar') {
-        products = products.filter(p => productLayout.sidebar.includes(p.id));
-        logger.info(`Filtrati per zona 'sidebar': ${products.length} prodotti`);
-      } else if (zone === 'hidden') {
-        products = products.filter(p => productLayout.hidden.includes(p.id));
-        logger.info(`Filtrati per zona 'hidden': ${products.length} prodotti`);
-      }
+      where.zone = zone;
+      logger.info(`Filtro zona: ${zone}`);
     }
 
     // Filtra per categoria Zenova se richiesto
     if (category) {
-      const categoryLower = category.toLowerCase();
-      products = products.filter(p =>
-        p.zenovaCategories && p.zenovaCategories.some(cat => cat.toLowerCase() === categoryLower)
-      );
-      logger.info(`Filtrati per categoria '${category}': ${products.length} prodotti`);
+      where.zenovaCategory = category;
+      logger.info(`Filtro categoria: ${category}`);
     }
 
-    // Paginazione
-    const startIndex = (page - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedProducts = products.slice(startIndex, endIndex);
+    // Query PostgreSQL con paginazione
+    const skip = (page - 1) * pageSize;
+    const [products, totalCount] = await Promise.all([
+      prisma.product.findMany({
+        where,
+        skip,
+        take: pageSize,
+        orderBy: { createdAt: 'desc' }
+      }),
+      prisma.product.count({ where })
+    ]);
+
+    logger.info(`Query prodotti: ${products.length} risultati (totale: ${totalCount})`);
+
+    const paginatedProducts = products;
 
     // Trasforma nel formato che si aspetta il frontend
     const formattedProducts = paginatedProducts.map(p => ({
@@ -324,8 +309,10 @@ router.get('/:id', async (req, res) => {
   try {
     const productId = req.params.id;
 
-    // Cerca prima nel JSON locale (cerca sia per ID che per SKU)
-    const product = TOP_PRODUCTS.find(p => p.id === productId || p.sku === productId);
+    // Cerca nel database PostgreSQL (cerca per ID)
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
 
     if (!product) {
       return res.status(404).json({
