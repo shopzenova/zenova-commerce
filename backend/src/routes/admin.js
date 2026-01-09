@@ -505,10 +505,12 @@ router.post('/products/import', async (req, res) => {
         images: imageUrls,
         image: imageUrls[0] || null,
         ean: foundProduct.EAN13 || '',
-        width: parseFloat(foundProduct.WIDTH || 0),
-        height: parseFloat(foundProduct.HEIGHT || 0),
-        depth: parseFloat(foundProduct.DEPTH || 0),
         weight: parseFloat(foundProduct.WEIGHT || 0),
+        dimensions: {
+          width: parseFloat(foundProduct.WIDTH || 0),
+          height: parseFloat(foundProduct.HEIGHT || 0),
+          depth: parseFloat(foundProduct.DEPTH || 0)
+        },
         visible: true,
         zone: 'sidebar',
         source: 'bigbuy',
@@ -533,9 +535,9 @@ router.post('/products/import', async (req, res) => {
       images: newProduct.images.map(url => ({ url })),
       imageCount: newProduct.images.length,
       ean: newProduct.ean,
-      width: newProduct.width,
-      height: newProduct.height,
-      depth: newProduct.depth,
+      width: newProduct.dimensions?.width || 0,
+      height: newProduct.dimensions?.height || 0,
+      depth: newProduct.dimensions?.depth || 0,
       weight: newProduct.weight,
       visible: newProduct.visible,
       zone: newProduct.zone
