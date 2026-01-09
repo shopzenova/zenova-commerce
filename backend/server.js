@@ -85,12 +85,24 @@ app.use((req, res, next) => {
 });
 
 // Serve file statici del frontend (dalla directory parent)
-// Aggiungi header CORS per tutti i file statici
+// Aggiungi header CORS e CACHE per tutti i file statici
 app.use(express.static(path.join(__dirname, '..'), {
+  maxAge: '1y', // Cache 1 anno
+  immutable: true,
   setHeaders: (res, filePath) => {
     // Permetti CORS per immagini
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+
+    // Cache aggressivo per immagini
+    if (filePath.match(/\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+
+    // Cache medio per JS/CSS
+    if (filePath.match(/\.(js|css)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
   }
 }));
 
@@ -149,6 +161,15 @@ app.get('/api/proxy-image', async (req, res) => {
 
       // Set CORS headers
       res.set('Access-Control-Allow-Origin', '*');
+
+      // CACHE AGGRESSIVO - 1 anno
+      res.set('Cache-Control', 'public, max-age=31536000, immutable');
+      res.set('Expires', new Date(Date.now() + 31536000000).toUTCString());
+
+      // Compressione
+      if (proxyRes.headers['content-encoding']) {
+        res.set('Content-Encoding', proxyRes.headers['content-encoding']);
+      }
 
       // Stream image to client
       proxyRes.pipe(res);
