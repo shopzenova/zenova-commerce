@@ -2,45 +2,38 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const { PrismaClient } = require('@prisma/client');
 const logger = require('../utils/logger');
 const productsRouter = require('./products');
 const orderService = require('../services/OrderService');
 
-// Carica i prodotti dal file JSON (include prodotti FTP)
-let PRODUCTS = [];
-const jsonPath = path.join(__dirname, '../../top-100-products.json');
+// Prisma Client per PostgreSQL
+const prisma = new PrismaClient();
 
-// Funzione per ricaricare i prodotti dal file JSON
-function reloadProducts() {
+// Funzione per ricaricare i prodotti (ora da PostgreSQL)
+async function reloadProducts() {
   try {
-    const rawData = fs.readFileSync(jsonPath, 'utf-8');
-    PRODUCTS = JSON.parse(rawData);
-    logger.info(`🔄 Admin API: Ricaricati ${PRODUCTS.length} prodotti`);
-
-    // Ricarica anche i prodotti in products.js
-    logger.info(`🔍 productsRouter.reloadProducts esiste? ${typeof productsRouter.reloadProducts}`);
-    if (typeof productsRouter.reloadProducts === 'function') {
-      logger.info(`📞 Chiamo productsRouter.reloadProducts()`);
-      productsRouter.reloadProducts();
-    } else {
-      logger.warn(`⚠️  productsRouter.reloadProducts NON è una funzione!`);
-    }
-
-    return true;
+    const products = await prisma.product.findMany();
+    logger.info(`🔄 Admin API: Caricati ${products.length} prodotti da PostgreSQL`);
+    return products;
   } catch (error) {
     logger.error('❌ Errore ricaricamento prodotti per admin:', error);
     return false;
   }
 }
 
-// Caricamento iniziale
-try {
-  const rawData = fs.readFileSync(jsonPath, 'utf-8');
-  PRODUCTS = JSON.parse(rawData);
-  logger.info(`✅ Admin API: Caricati ${PRODUCTS.length} prodotti`);
-} catch (error) {
-  logger.error('❌ Errore caricamento prodotti per admin:', error);
-}
+// Array in memoria per velocità (caricato da PostgreSQL)
+let PRODUCTS = [];
+
+// Caricamento iniziale da PostgreSQL
+(async () => {
+  try {
+    PRODUCTS = await prisma.product.findMany();
+    logger.info(`✅ Admin API: Caricati ${PRODUCTS.length} prodotti da PostgreSQL`);
+  } catch (error) {
+    logger.error('❌ Errore caricamento prodotti da PostgreSQL per admin:', error);
+  }
+})();
 
 // File per salvare il layout dei prodotti
 const LAYOUT_FILE = path.join(__dirname, '../../config/product-layout.json');
@@ -103,14 +96,21 @@ router.get('/stats', (req, res) => {
   }
 });
 
-// GET /api/admin/products - Lista prodotti con info layout
-router.get('/products', (req, res) => {
+// GET /api/admin/products - Lista prodotti con info layout (da PostgreSQL)
+router.get('/products', async (req, res) => {
   try {
     const zone = req.query.zone; // home, sidebar, hidden, all
     const category = req.query.category; // smart-living, tech-innovation, etc.
 
+    // Carica TUTTI i prodotti da PostgreSQL
+    const products = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+
+    logger.info(`✅ Admin API: Caricati ${products.length} prodotti`);
+
     // Formatta prodotti per l'admin panel
-    const formattedProducts = PRODUCTS.map(p => {
+    const formattedProducts = products.map(p => {
       // Gestisci sia zenovaCategory (stringa) che zenovaCategories (array) per retro-compatibilità
       const zenovaCategory = p.zenovaCategory || (p.zenovaCategories && p.zenovaCategories[0]) || null;
       const zenovaCategories = p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []);
@@ -120,19 +120,19 @@ router.get('/products', (req, res) => {
         name: p.name,
         brand: p.brand || 'Zenova',
         price: parseFloat(p.price),
-        retailPrice: parseFloat(p.price),
+        retailPrice: parseFloat(p.retailPrice || p.price),
         stock: p.stock,
         available: p.stock > 0,
-        image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : (p.image || null)),
+        image: p.image || (p.images && p.images[0]) || null,
         images: p.images || [],
         category: zenovaCategory || 'Generale',
         zenovaCategory: zenovaCategory,  // Stringa singola per compatibility
         zenovaCategories: zenovaCategories,  // Array per compatibility
         zenovaSubcategory: p.zenovaSubcategory || null,  // IMPORTANTE per la vista categorie
-        // Se il prodotto è in hidden, visible deve essere false
-        visible: productLayout.hidden.includes(p.id) ? false : (p.visible !== undefined ? p.visible : true),
-        // Determina la zona del prodotto
-        zone: getProductZone(p.id),
+        // Usa direttamente il campo visible dal database
+        visible: p.visible !== undefined ? p.visible : true,
+        // Usa direttamente il campo zone dal database
+        zone: p.zone || getProductZone(p.id),
         isFeatured: isFeatured(p.id)  // Nuovo: indica se è in evidenza
       };
     });
