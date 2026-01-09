@@ -644,41 +644,47 @@ router.get('/products/preview/:sku', async (req, res) => {
 });
 
 // DELETE /api/admin/products/:id - Elimina prodotto dal catalogo
-router.delete('/products/:id', (req, res) => {
+router.delete('/products/:id', async (req, res) => {
   try {
     const productId = req.params.id;
 
     logger.info(`🗑️  Richiesta eliminazione prodotto: ${productId}`);
 
-    // Trova il prodotto
-    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    // Trova il prodotto da PostgreSQL
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
 
-    if (productIndex === -1) {
+    if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Prodotto non trovato'
       });
     }
 
-    const productName = PRODUCTS[productIndex].name;
+    const productName = product.name;
 
-    // Rimuovi dall'array
-    PRODUCTS.splice(productIndex, 1);
+    // ✅ ELIMINA DA POSTGRESQL
+    await prisma.product.delete({
+      where: { id: productId }
+    });
 
-    // Salva nel file JSON
-    const jsonPath = path.join(__dirname, '../../top-100-products.json');
-    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+    // ✅ Rimuovi anche dalla memoria per compatibilità
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    if (productIndex !== -1) {
+      PRODUCTS.splice(productIndex, 1);
+    }
 
     // Rimuovi anche dal layout se presente
     productLayout.home = productLayout.home.filter(id => id !== productId);
     productLayout.sidebar = productLayout.sidebar.filter(id => id !== productId);
     productLayout.hidden = productLayout.hidden.filter(id => id !== productId);
+    if (productLayout.featured) {
+      productLayout.featured = productLayout.featured.filter(id => id !== productId);
+    }
     fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
 
-    // Ricarica prodotti
-    reloadProducts();
-
-    logger.info(`✅ Prodotto eliminato: ${productName}`);
+    logger.info(`✅ Prodotto eliminato da PostgreSQL: ${productName}`);
 
     res.json({
       success: true,
@@ -699,30 +705,41 @@ router.delete('/products/:id', (req, res) => {
 });
 
 // PATCH /api/admin/products/:id/visibility - Toggle visibilità prodotto
-router.patch('/products/:id/visibility', (req, res) => {
+router.patch('/products/:id/visibility', async (req, res) => {
   try {
     const productId = req.params.id;
     const { visible } = req.body;
 
     logger.info(`👁️  Richiesta toggle visibilità prodotto: ${productId} -> ${visible}`);
 
-    // Trova il prodotto
-    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    // Trova il prodotto da PostgreSQL
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
 
-    if (productIndex === -1) {
+    if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Prodotto non trovato'
       });
     }
 
-    // Aggiorna campo visible
-    PRODUCTS[productIndex].visible = visible !== undefined ? visible : !PRODUCTS[productIndex].visible;
+    // Calcola nuova visibilità
+    const newVisibility = visible !== undefined ? visible : !product.visible;
 
-    const productName = PRODUCTS[productIndex].name;
-    const newVisibility = PRODUCTS[productIndex].visible;
+    // ✅ AGGIORNA SU POSTGRESQL
+    await prisma.product.update({
+      where: { id: productId },
+      data: { visible: newVisibility }
+    });
 
-    // ✅ NUOVO: Gestisci array hidden in productLayout
+    // ✅ Aggiorna anche in memoria per compatibilità
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    if (productIndex !== -1) {
+      PRODUCTS[productIndex].visible = newVisibility;
+    }
+
+    // ✅ Gestisci array hidden in productLayout
     if (!newVisibility) {
       // Se nascondi (visible = false), aggiungi a hidden
       if (!productLayout.hidden.includes(productId)) {
@@ -739,21 +756,14 @@ router.patch('/products/:id/visibility', (req, res) => {
     // Salva productLayout aggiornato
     fs.writeFileSync(LAYOUT_FILE, JSON.stringify(productLayout, null, 2));
 
-    // Salva nel file JSON
-    const jsonPath = path.join(__dirname, '../../top-100-products.json');
-    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
-
-    // Ricarica prodotti
-    reloadProducts();
-
-    logger.info(`✅ Visibilità prodotto aggiornata: ${productName} -> ${newVisibility ? 'visibile' : 'nascosto'}`);
+    logger.info(`✅ Visibilità prodotto aggiornata su PostgreSQL: ${product.name} -> ${newVisibility ? 'visibile' : 'nascosto'}`);
 
     res.json({
       success: true,
-      message: `Prodotto "${productName}" ora è ${newVisibility ? 'visibile' : 'nascosto'}`,
+      message: `Prodotto "${product.name}" ora è ${newVisibility ? 'visibile' : 'nascosto'}`,
       data: {
         id: productId,
-        name: productName,
+        name: product.name,
         visible: newVisibility
       }
     });
@@ -767,44 +777,49 @@ router.patch('/products/:id/visibility', (req, res) => {
 });
 
 // PATCH /api/admin/products/:id/category - Aggiorna categoria e sottocategoria prodotto
-router.patch('/products/:id/category', (req, res) => {
+router.patch('/products/:id/category', async (req, res) => {
   try {
     const productId = req.params.id;
     const { category, subcategory } = req.body;
 
     logger.info(`📂 Richiesta aggiornamento categoria prodotto: ${productId} -> ${category}/${subcategory}`);
 
-    // Trova il prodotto
-    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    // Trova il prodotto da PostgreSQL
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
 
-    if (productIndex === -1) {
+    if (!product) {
       return res.status(404).json({
         success: false,
         error: 'Prodotto non trovato'
       });
     }
 
-    const product = PRODUCTS[productIndex];
     const oldCategory = product.zenovaCategory;
     const oldSubcategory = product.zenovaSubcategory;
 
-    // Aggiorna categoria e sottocategoria
-    product.zenovaCategory = category;
-    product.category = category;
-    product.zenovaCategories = [category];
-    product.zenovaSubcategory = subcategory;
+    // ✅ AGGIORNA SU POSTGRESQL
+    await prisma.product.update({
+      where: { id: productId },
+      data: {
+        zenovaCategory: category,
+        category: category,
+        zenovaCategories: [category],
+        zenovaSubcategory: subcategory
+      }
+    });
 
-    // Salva nel file JSON
-    const jsonPath = path.join(__dirname, '../../top-100-products.json');
-    fs.writeFileSync(jsonPath, JSON.stringify(PRODUCTS, null, 2));
+    // ✅ Aggiorna anche in memoria per compatibilità
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    if (productIndex !== -1) {
+      PRODUCTS[productIndex].zenovaCategory = category;
+      PRODUCTS[productIndex].category = category;
+      PRODUCTS[productIndex].zenovaCategories = [category];
+      PRODUCTS[productIndex].zenovaSubcategory = subcategory;
+    }
 
-    logger.info(`💾 File JSON salvato, ricarico prodotti in memoria...`);
-
-    // Ricarica prodotti
-    const reloadResult = reloadProducts();
-    logger.info(`🔄 Risultato reload: ${reloadResult ? 'SUCCESS' : 'FAILED'}`);
-
-    logger.info(`✅ Categoria prodotto aggiornata: ${product.name}`);
+    logger.info(`✅ Categoria prodotto aggiornata su PostgreSQL: ${product.name}`);
     logger.info(`   ${oldCategory}/${oldSubcategory} → ${category}/${subcategory}`);
 
     res.json({
@@ -1040,12 +1055,15 @@ router.post('/catalog/import/:id', (req, res) => {
 });
 
 // POST /api/admin/products/:id/featured - Toggle prodotto featured
-router.post('/products/:id/featured', (req, res) => {
+router.post('/products/:id/featured', async (req, res) => {
   try {
     const productId = req.params.id;
 
-    // Verifica che il prodotto esista
-    const product = PRODUCTS.find(p => p.id === productId);
+    // ✅ Verifica che il prodotto esista su PostgreSQL
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
+
     if (!product) {
       return res.status(404).json({
         success: false,
@@ -1053,7 +1071,7 @@ router.post('/products/:id/featured', (req, res) => {
       });
     }
 
-    // Toggle featured
+    // Toggle featured nel layout
     const index = productLayout.featured.indexOf(productId);
     let action = '';
 
