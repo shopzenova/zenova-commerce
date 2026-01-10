@@ -39,11 +39,15 @@ function getRetailPrice(product) {
     // BigBuy: price = prezzo di vendita consigliato
     return parseFloat(product.price) || 0;
   } else if (source === 'aw-dropship' || source === 'aw') {
-    // AW Dropship: originalPrice = prezzo di vendita
-    // Se non presente, calcola con margine 30% su wholesale
+    // AW Dropship: usa retailPrice se presente (database PostgreSQL)
+    if (product.retailPrice) {
+      return parseFloat(product.retailPrice);
+    }
+    // Altrimenti usa originalPrice (da API AW)
     if (product.originalPrice) {
       return parseFloat(product.originalPrice);
     }
+    // Fallback: calcola con margine 30% su wholesale
     const wholesale = parseFloat(product.price) || 0;
     return Math.round(wholesale * 1.3 * 100) / 100; // margine 30%, arrotondato
   }
