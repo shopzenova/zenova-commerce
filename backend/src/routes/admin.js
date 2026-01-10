@@ -877,6 +877,86 @@ router.patch('/products/:id/category', async (req, res) => {
   }
 });
 
+// PATCH /api/admin/products/:id/price - Aggiorna prezzo vendita prodotto
+router.patch('/products/:id/price', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { retailPrice } = req.body;
+
+    logger.info(`💰 Richiesta aggiornamento prezzo prodotto: ${productId} -> €${retailPrice}`);
+
+    // Validazione prezzo
+    if (!retailPrice || isNaN(retailPrice) || parseFloat(retailPrice) <= 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'Prezzo non valido (deve essere maggiore di 0)'
+      });
+    }
+
+    // Trova il prodotto da PostgreSQL
+    const product = await prisma.product.findUnique({
+      where: { id: productId }
+    });
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato'
+      });
+    }
+
+    const oldRetailPrice = parseFloat(product.retailPrice);
+    const newRetailPrice = parseFloat(retailPrice);
+    const wholesalePrice = parseFloat(product.price);
+
+    // Validazione: prezzo vendita deve essere >= prezzo acquisto
+    if (newRetailPrice < wholesalePrice) {
+      return res.status(400).json({
+        success: false,
+        error: `Prezzo vendita (€${newRetailPrice}) non può essere inferiore al prezzo di acquisto (€${wholesalePrice})`
+      });
+    }
+
+    // ✅ AGGIORNA SU POSTGRESQL
+    await prisma.product.update({
+      where: { id: productId },
+      data: {
+        retailPrice: newRetailPrice
+      }
+    });
+
+    // ✅ Aggiorna anche in memoria per compatibilità
+    const productIndex = PRODUCTS.findIndex(p => p.id === productId);
+    if (productIndex !== -1) {
+      PRODUCTS[productIndex].retailPrice = newRetailPrice;
+    }
+
+    const margine = ((newRetailPrice - wholesalePrice) / newRetailPrice * 100).toFixed(1);
+
+    logger.info(`✅ Prezzo prodotto aggiornato su PostgreSQL: ${product.name}`);
+    logger.info(`   €${oldRetailPrice} → €${newRetailPrice} (margine: ${margine}%)`);
+
+    res.json({
+      success: true,
+      message: `Prezzo aggiornato con successo`,
+      data: {
+        id: productId,
+        name: product.name,
+        retailPrice: newRetailPrice,
+        wholesalePrice: wholesalePrice,
+        oldRetailPrice: oldRetailPrice,
+        margine: parseFloat(margine)
+      }
+    });
+  } catch (error) {
+    logger.error('❌ Errore aggiornamento prezzo prodotto:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Errore aggiornamento prezzo prodotto'
+    });
+  }
+});
+
 // ===== BROWSER CATALOGO BIGBUY FTP =====
 
 // GET /api/admin/catalog/ftp - Lista prodotti dal catalogo BigBuy FTP
