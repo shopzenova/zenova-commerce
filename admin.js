@@ -8,6 +8,9 @@ const API_BASE = IS_LOCAL
     ? 'http://localhost:3000/api'
     : (IS_RAILWAY ? '/api' : (IS_ZENOVA ? 'https://zenova-commerce-production.up.railway.app/api' : null));
 
+// Check if we have backend access (local, Railway, or Zenova)
+const HAS_BACKEND = API_BASE !== null;
+
 // Products cache (used when online without backend)
 let PRODUCTS_CACHE = null;
 
@@ -171,7 +174,7 @@ function updateZoneCounts() {
 
 // Save product layout to server and localStorage
 async function saveProductLayout() {
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         alert('⚠️ Salvataggio layout disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare il layout.');
         return;
     }
@@ -270,7 +273,7 @@ priceInputs.forEach(inputId => {
 
 // Sync Now Function
 async function syncNow() {
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         alert('⚠️ Sincronizzazione BigBuy disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per sincronizzare il catalogo.');
         return;
     }
@@ -408,15 +411,15 @@ async function loadDashboardStats() {
     try {
         let stats;
 
-        if (IS_LOCAL) {
-            // Local mode: use backend API
+        if (HAS_BACKEND) {
+            // Backend connected: use API
             const response = await fetch(`${API_BASE}/admin/stats`);
             const result = await response.json();
             if (result.success) {
                 stats = result.data;
             }
         } else {
-            // Online mode: calculate from products.json
+            // No backend: calculate from products.json
             const products = await loadProductsFromJSON();
             stats = {
                 totalProducts: products.length,
@@ -450,8 +453,8 @@ let allProducts = [];
 // Load products from API
 async function loadProducts() {
     try {
-        if (IS_LOCAL) {
-            // Local mode: use backend API
+        if (HAS_BACKEND) {
+            // Backend connected: use API
             const response = await fetch(`${API_BASE}/admin/products?zone=all&pageSize=10000`);
             const result = await response.json();
 
@@ -767,7 +770,7 @@ function setupDragAndDrop(card) {
 // Load activity log
 async function loadActivity() {
     try {
-        if (!IS_LOCAL) {
+        if (!HAS_BACKEND) {
             // Online mode: no activity data available
             const activityList = document.querySelector('.activity-list');
             if (activityList) {
@@ -995,8 +998,8 @@ function cancelImport() {
 
 // Toggle visibilità prodotto
 async function toggleProductVisibility(productId, productName, currentVisibility) {
-    if (!IS_LOCAL) {
-        alert('⚠️ Modifica visibilità prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare i prodotti.');
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
         return;
     }
 
@@ -1036,8 +1039,8 @@ async function toggleProductVisibility(productId, productName, currentVisibility
 
 // Elimina prodotto
 async function deleteProduct(productId, productName) {
-    if (!IS_LOCAL) {
-        alert('⚠️ Eliminazione prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire i prodotti.');
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
         return;
     }
 
@@ -1068,7 +1071,7 @@ async function deleteProduct(productId, productName) {
 
 // Modifica prezzo prodotto
 async function editProductPrice(productId, productName, currentPrice, wholesalePrice) {
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         alert('⚠️ Modifica prezzi disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare i prezzi.');
         return;
     }
@@ -1148,8 +1151,8 @@ async function editProductPrice(productId, productName, currentPrice, wholesaleP
 
 // Toggle featured product
 async function toggleFeatured(productId, productName, currentlyFeatured) {
-    if (!IS_LOCAL) {
-        alert('⚠️ Gestione prodotti in evidenza disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire i prodotti in evidenza.');
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
         return;
     }
 
@@ -1195,7 +1198,7 @@ let catalogState = {
 // Carica prodotti dal catalogo FTP
 async function loadCatalogProducts(page = 1) {
     try {
-        if (!IS_LOCAL) {
+        if (!HAS_BACKEND) {
             // Online mode: catalog not available
             const catalogGrid = document.getElementById('catalogProductsGrid');
             if (catalogGrid) {
@@ -1384,7 +1387,7 @@ function renderCatalogPagination(currentPage, totalPages) {
 
 // Import product from catalog to curated catalog
 async function importCatalogProduct(productId) {
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         alert('⚠️ Importazione prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per importare prodotti dal catalogo BigBuy.');
         return;
     }
@@ -2113,7 +2116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            if (!IS_LOCAL) {
+            if (!HAS_BACKEND) {
                 alert('⚠️ Modifica categoria disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare le categorie.');
                 return;
             }
@@ -2168,7 +2171,7 @@ async function loadOrders(statusFilter = '') {
     const container = document.getElementById('ordersContainer');
     if (!container) return;
 
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Gestione Ordini</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>https://zenova-commerce-production.up.railway.app/admin.html</code> per gestire gli ordini</p></div>';
         return;
     }
@@ -2296,7 +2299,7 @@ function addOrderEventListeners(orderId) {
  * Aggiorna stato ordine
  */
 async function updateOrderStatus(orderId, newStatus) {
-    if (!IS_LOCAL) {
+    if (!HAS_BACKEND) {
         alert('⚠️ Gestione ordini disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire gli ordini.');
         return;
     }
