@@ -921,7 +921,7 @@ async function searchProductPreview() {
             document.getElementById('previewImage').src = result.data.images[0] || 'https://via.placeholder.com/120';
             document.getElementById('previewName').textContent = result.data.name;
             document.getElementById('previewBrand').innerHTML = `<strong>Brand:</strong> ${result.data.brand}`;
-            document.getElementById('previewPrice').innerHTML = `<strong>Prezzo vendita:</strong> €${result.data.price.toFixed(2)}`;
+            document.getElementById('previewPrice').innerHTML = `<strong>Prezzo vendita:</strong> €${(result.data.retailPrice || result.data.price).toFixed(2)}`;
             document.getElementById('previewCost').innerHTML = `<strong>Tuo costo:</strong> €${result.data.cost.toFixed(2)}`;
             document.getElementById('previewMargin').innerHTML = `<strong>Margine:</strong> €${result.data.margin}`;
             document.getElementById('previewStock').innerHTML = `<strong>Stock:</strong> ${result.data.stock}`;
@@ -1648,7 +1648,7 @@ function createCategoryProductCard(product) {
             <h5 style="margin: 0 0 5px 0; font-size: 13px; line-height: 1.3; height: 40px; overflow: hidden;">
                 ${product.name.substring(0, 60)}${product.name.length > 60 ? '...' : ''}
             </h5>
-            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #667eea;">€ ${product.price.toFixed(2)}</p>
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #667eea;">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             ${product.visible === false ?
                 '<p style="margin: 5px 0 0 0; font-size: 11px; color: #e74c3c; font-weight: bold;">🚫 NASCOSTO</p>' :
                 '<p style="margin: 5px 0 0 0; font-size: 11px; color: #43e97b; font-weight: bold;">✅ VISIBILE</p>'
