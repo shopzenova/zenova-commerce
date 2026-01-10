@@ -23,6 +23,7 @@ model Product {
   zenovaSubcategory  String?   @map("zenova_subcategory")
   price              Decimal   @db.Decimal(10, 2)
   retailPrice        Decimal   @map("retail_price") @db.Decimal(10, 2)
+  originalPrice      Decimal?  @map("original_price") @db.Decimal(10, 2)
   wholesalePrice     Decimal?  @map("wholesale_price") @db.Decimal(10, 2)
   stock              Int       @default(0)
   images             String[]  // Array di URL immagini

@@ -163,6 +163,19 @@ try {
   logger.error('❌ Errore caricamento layout:', error);
 }
 
+// Carica top-100-products.json per avere originalPrice dei prodotti AW
+let TOP_PRODUCTS = [];
+try {
+  const productsPath = path.join(__dirname, '../../top-100-products.json');
+  if (fs.existsSync(productsPath)) {
+    const productsData = fs.readFileSync(productsPath, 'utf-8');
+    TOP_PRODUCTS = JSON.parse(productsData);
+    logger.info(`✅ Caricati ${TOP_PRODUCTS.length} prodotti da top-100-products.json`);
+  }
+} catch (error) {
+  logger.error('❌ Errore caricamento top-100-products.json:', error);
+}
+
 // GET /api/products/layout - Restituisce il layout salvato
 router.get('/layout', (req, res) => {
   res.json({
@@ -212,8 +225,19 @@ router.get('/', async (req, res) => {
 
     const paginatedProducts = products;
 
+    // Arricchisci prodotti AW con originalPrice da top-100-products.json
+    const enrichedProducts = paginatedProducts.map(dbProduct => {
+      if ((dbProduct.source === 'aw' || dbProduct.source === 'aw-dropship') && TOP_PRODUCTS.length > 0) {
+        const jsonProduct = TOP_PRODUCTS.find(jp => jp.id === dbProduct.id);
+        if (jsonProduct && jsonProduct.originalPrice) {
+          return { ...dbProduct, originalPrice: jsonProduct.originalPrice };
+        }
+      }
+      return dbProduct;
+    });
+
     // Trasforma nel formato che si aspetta il frontend
-    const formattedProducts = paginatedProducts.map(p => ({
+    const formattedProducts = enrichedProducts.map(p => ({
       id: p.id,
       name: p.name,
       description: p.description,
@@ -331,28 +355,37 @@ router.get('/:id', async (req, res) => {
       });
     }
 
+    // Arricchisci con originalPrice da JSON se è prodotto AW
+    let enrichedProduct = product;
+    if ((product.source === 'aw' || product.source === 'aw-dropship') && TOP_PRODUCTS.length > 0) {
+      const jsonProduct = TOP_PRODUCTS.find(jp => jp.id === product.id);
+      if (jsonProduct && jsonProduct.originalPrice) {
+        enrichedProduct = { ...product, originalPrice: jsonProduct.originalPrice };
+      }
+    }
+
     // Formatta nel formato atteso
     const formattedProduct = {
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      brand: product.brand || 'Zenova',
-      category: product.zenovaCategories ? product.zenovaCategories.join(', ') : product.category,
-      price: getWholesalePrice(product),        // Prezzo di acquisto (BigBuy o AW)
-      retailPrice: getRetailPrice(product),     // Prezzo di vendita (BigBuy o AW)
-      stock: product.stock,
-      available: product.available !== false,   // Disponibilità per acquisto (default true se non specificato)
-      images: product.images,
-      video: product.video,
-      ean: product.ean,
-      weight: parseFloat(product.weight) || 0,
+      id: enrichedProduct.id,
+      name: enrichedProduct.name,
+      description: enrichedProduct.description,
+      brand: enrichedProduct.brand || 'Zenova',
+      category: enrichedProduct.zenovaCategories ? enrichedProduct.zenovaCategories.join(', ') : enrichedProduct.category,
+      price: getWholesalePrice(enrichedProduct),        // Prezzo di acquisto (BigBuy o AW)
+      retailPrice: getRetailPrice(enrichedProduct),     // Prezzo di vendita (BigBuy o AW)
+      stock: enrichedProduct.stock,
+      available: enrichedProduct.available !== false,   // Disponibilità per acquisto (default true se non specificato)
+      images: enrichedProduct.images,
+      video: enrichedProduct.video,
+      ean: enrichedProduct.ean,
+      weight: parseFloat(enrichedProduct.weight) || 0,
       dimensions: {
-        width: parseFloat(product.width) || 0,
-        height: parseFloat(product.height) || 0,
-        depth: parseFloat(product.depth) || 0
+        width: parseFloat(enrichedProduct.width) || 0,
+        height: parseFloat(enrichedProduct.height) || 0,
+        depth: parseFloat(enrichedProduct.depth) || 0
       },
-      zenovaSubcategory: product.zenovaSubcategory,  // Sotto-categoria per filtri
-      zenovaCategories: product.zenovaCategories || [],
+      zenovaSubcategory: enrichedProduct.zenovaSubcategory,  // Sotto-categoria per filtri
+      zenovaCategories: enrichedProduct.zenovaCategories || [],
       active: true
     };
 
