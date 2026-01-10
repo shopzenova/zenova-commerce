@@ -581,7 +581,7 @@ function populateAllProductsList(products) {
                  class="product-list-img">
             <div class="product-list-info">
                 <h4>${product.name}</h4>
-                <p class="product-price">€ ${product.price.toFixed(2)}</p>
+                <p class="product-price">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             </div>
             <select class="product-zone-select" data-product-id="${product.id}">
                 <option value="sidebar" ${product.zone === 'sidebar' || !product.zone ? 'selected' : ''}>Sidebar (Shop)</option>
