@@ -10,6 +10,32 @@ const orderService = require('../services/OrderService');
 // Prisma Client per PostgreSQL
 const prisma = new PrismaClient();
 
+// ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
+function getWholesalePrice(product) {
+  const source = product.source || product.supplier;
+  if (source === 'bigbuy') {
+    return parseFloat(product.pvd) || 0;
+  } else if (source === 'aw-dropship' || source === 'aw') {
+    return parseFloat(product.price) || 0;
+  }
+  return parseFloat(product.pvd || product.price) || 0;
+}
+
+function getRetailPrice(product) {
+  const source = product.source || product.supplier;
+  if (source === 'bigbuy') {
+    return parseFloat(product.price) || 0;
+  } else if (source === 'aw-dropship' || source === 'aw') {
+    // AW: usa originalPrice se presente, altrimenti calcola 30%
+    if (product.originalPrice) {
+      return parseFloat(product.originalPrice);
+    }
+    const wholesale = parseFloat(product.price) || 0;
+    return Math.round(wholesale * 1.3 * 100) / 100;
+  }
+  return parseFloat(product.price) || 0;
+}
+
 // Funzione per ricaricare i prodotti (ora da PostgreSQL)
 async function reloadProducts() {
   try {
@@ -24,6 +50,19 @@ async function reloadProducts() {
 
 // Array in memoria per velocità (caricato da PostgreSQL)
 let PRODUCTS = [];
+
+// Carica top-100-products.json per avere originalPrice dei prodotti AW
+let TOP_PRODUCTS = [];
+try {
+  const productsPath = path.join(__dirname, '../../top-100-products.json');
+  if (fs.existsSync(productsPath)) {
+    const productsData = fs.readFileSync(productsPath, 'utf-8');
+    TOP_PRODUCTS = JSON.parse(productsData);
+    logger.info(`✅ Admin: Caricati ${TOP_PRODUCTS.length} prodotti da top-100-products.json`);
+  }
+} catch (error) {
+  logger.error('❌ Errore caricamento top-100-products.json per admin:', error);
+}
 
 // Caricamento iniziale da PostgreSQL
 (async () => {
@@ -109,8 +148,19 @@ router.get('/products', async (req, res) => {
 
     logger.info(`✅ Admin API: Caricati ${products.length} prodotti`);
 
+    // Arricchisci prodotti AW con originalPrice da top-100-products.json
+    const enrichedProducts = products.map(dbProduct => {
+      if ((dbProduct.source === 'aw' || dbProduct.source === 'aw-dropship') && TOP_PRODUCTS.length > 0) {
+        const jsonProduct = TOP_PRODUCTS.find(jp => jp.id === dbProduct.id);
+        if (jsonProduct && jsonProduct.originalPrice) {
+          return { ...dbProduct, originalPrice: jsonProduct.originalPrice };
+        }
+      }
+      return dbProduct;
+    });
+
     // Formatta prodotti per l'admin panel
-    const formattedProducts = products.map(p => {
+    const formattedProducts = enrichedProducts.map(p => {
       // Gestisci sia zenovaCategory (stringa) che zenovaCategories (array) per retro-compatibilità
       const zenovaCategory = p.zenovaCategory || (p.zenovaCategories && p.zenovaCategories[0]) || null;
       const zenovaCategories = p.zenovaCategories || (p.zenovaCategory ? [p.zenovaCategory] : []);
@@ -119,8 +169,8 @@ router.get('/products', async (req, res) => {
         id: p.id,
         name: p.name,
         brand: p.brand || 'Zenova',
-        price: parseFloat(p.price),
-        retailPrice: parseFloat(p.retailPrice || p.price),
+        price: getWholesalePrice(p),  // Prezzo acquisto
+        retailPrice: getRetailPrice(p),  // Prezzo vendita (usa originalPrice se presente)
         stock: p.stock,
         available: p.stock > 0,
         image: p.image || (p.images && p.images[0]) || null,

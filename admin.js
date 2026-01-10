@@ -734,7 +734,7 @@ function createProductCard(product) {
         <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
         <div class="product-admin-info">
             <h4>${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</h4>
-            <p class="product-price">€ ${product.price.toFixed(2)}</p>
+            <p class="product-price">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             <span class="product-status ${statusClass}">${statusText}</span>
         </div>
         <div class="product-actions">
