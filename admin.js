@@ -3,9 +3,10 @@
 // API Configuration - Auto-detect environment
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const IS_RAILWAY = window.location.hostname.includes('railway.app');
+const IS_ZENOVA = window.location.hostname.includes('zenova.ovh');
 const API_BASE = IS_LOCAL
     ? 'http://localhost:3000/api'
-    : (IS_RAILWAY ? '/api' : null);
+    : (IS_RAILWAY ? '/api' : (IS_ZENOVA ? 'https://zenova-commerce-production.up.railway.app/api' : null));
 
 // Products cache (used when online without backend)
 let PRODUCTS_CACHE = null;
