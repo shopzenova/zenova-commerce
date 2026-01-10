@@ -722,20 +722,15 @@ function createProductCard(product) {
     const statusClass = product.available ? 'available' : 'unavailable';
     const statusText = product.available ? '✅ Disponibile' : '❌ Esaurito';
 
-    const displayPrice = product.retailPrice || product.price;
-
     card.innerHTML = `
         <span class="drag-handle">⋮⋮</span>
         <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
         <div class="product-admin-info">
             <h4>${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</h4>
-            <p class="product-price" id="price-${product.id}">€ ${displayPrice.toFixed(2)}</p>
+            <p class="product-price">€ ${product.price.toFixed(2)}</p>
             <span class="product-status ${statusClass}">${statusText}</span>
         </div>
         <div class="product-actions">
-            <button class="btn-icon" title="Modifica prezzo" onclick="editProductPrice('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${displayPrice}, ${product.price || 0})">
-                💰
-            </button>
             <button class="btn-icon" title="${product.visible ? 'Nascondi' : 'Mostra'}" onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible})">
                 ${product.visible ? '👁️' : '👁️‍🗨️'}
             </button>

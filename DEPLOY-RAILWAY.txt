@@ -1,0 +1,51 @@
+╔══════════════════════════════════════════════════════════════╗
+║        GUIDA DEPLOY BACKEND SU RAILWAY - 3 PASSI            ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 COSA DEVI FARE TU (super facile):
+
+┌──────────────────────────────────────────────────────────────┐
+│ PASSO 1: Login Railway                                       │
+└──────────────────────────────────────────────────────────────┘
+1. Apri: https://railway.app
+2. Click "Login" → "Login with GitHub"
+3. Autorizza Railway
+
+
+┌──────────────────────────────────────────────────────────────┐
+│ PASSO 2: Crea Progetto dal Repository                        │
+└──────────────────────────────────────────────────────────────┘
+1. Click "New Project"
+2. Click "Deploy from GitHub repo"
+3. Seleziona: shopzenova/zenova-commerce
+4. Vai su "Settings" (icona ingranaggio ⚙️)
+5. Cerca "Root Directory"
+6. Scrivi: backend
+7. Salva
+
+
+┌──────────────────────────────────────────────────────────────┐
+│ PASSO 3: Incolla Variabili d'Ambiente                        │
+└──────────────────────────────────────────────────────────────┘
+1. Vai su "Variables" (icona chiave 🔑)
+2. Click "RAW Editor"
+3. Apri il file: backend/.env.railway
+4. Copia TUTTO il contenuto
+5. Incolla su Railway
+6. Click "Deploy"
+
+
+┌──────────────────────────────────────────────────────────────┐
+│ PASSO 4: Ottieni URL Backend                                 │
+└──────────────────────────────────────────────────────────────┘
+1. Aspetta 2-3 minuti (vedi logs deploy)
+2. Quando vedi "✅ Deploy successful"
+3. Vai su "Settings"
+4. Click "Generate Domain"
+5. Copia l'URL (es: zenova-backend-production.up.railway.app)
+6. MANDAMELO! (ti serve per aggiornare il frontend)
+
+
+╔══════════════════════════════════════════════════════════════╗
+║  FATTO! Poi io aggiorno il frontend per usare il backend    ║
+╚══════════════════════════════════════════════════════════════╝

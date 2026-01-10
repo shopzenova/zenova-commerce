@@ -131438,7 +131438,7 @@
     ],
     "ean": "5055796576272",
     "supplier": "AW Dropship",
-    "visible": true,
+    "visible": false,
     "featured": false,
     "source": "bigbuy",
     "bigbuyId": "RDHF-06"
@@ -137182,36 +137182,6 @@
     "zone": "sidebar"
   },
   {
-    "id": "S7122526",
-    "sku": "S7122526",
-    "name": "Riproduttore Lexibook Frozen Luce LED CD Per bambini Bluetooth Bluetooth 5.0",
-    "description": "Se sei un appassionato d'<b>informatica ed elettronica</b>, ti piace stare al passo con la più recente tecnologia senza lasciarti sfuggire nessun dettaglio, acquista <b>Riproduttore Lexibook Frozen Luce LED CD Per bambini Bluetooth Bluetooth 5.0</b> al miglior prezzo.<br><br><ul><li>Caratteristiche: <ul><li>Luce LED</li><li>Ingresso Aux</li><li>Funziona a batterie</li><li>Indicatore LED di funzionamento</li><li>Altoparlanti integrati</li></ul></li><li>Tipo: CD</li><li>Design: Per bambini</li><li>Connettività: <ul><li>Bluetooth 5.0</li><li>Bluetooth</li></ul></li><li>Colore: Multicolore</li><li>Materiale: Plastica</li><li>Età consigliata: + 3 anni</li><li>Funziona a batterie: Sì</li><li>Connessioni: Jack 3.5 mm</li><li>Non Include: Adattatore AC</li></ul>",
-    "brand": "2615",
-    "category": "smart-living",
-    "zenovaCategory": "smart-living",
-    "zenovaCategories": [
-      "smart-living"
-    ],
-    "zenovaSubcategory": "smart-led-illuminazione",
-    "price": 66.56,
-    "pvd": 58.57,
-    "stock": 23,
-    "images": [
-      {
-        "url": "https://cdnbigbuy.com/images/3380743090252_S7122526_P02.jpg"
-      }
-    ],
-    "imageCount": 1,
-    "video": "0",
-    "ean": "3380743090252",
-    "width": "23",
-    "height": "13.6",
-    "depth": "25.6",
-    "weight": "1.288",
-    "visible": true,
-    "zone": "sidebar"
-  },
-  {
     "id": "S7172270",
     "sku": "S7172270",
     "name": "Altoparlante Bluetooth con Lampada LED Lumisky SO PLAY",
@@ -137292,54 +137262,6 @@
     "height": "22",
     "depth": "33",
     "weight": "1.48",
-    "visible": true,
-    "zone": "sidebar"
-  },
-  {
-    "id": "S7191070",
-    "sku": "S7191070",
-    "name": "Drone Telecomandato Mondo Ultradrone X13 Luce LED",
-    "description": "I bambini meritano il meglio, per questo ti presentiamo <b>Drone Telecomandato Mondo Ultradrone X13 Luce LED</b>, ideale per coloro che cercano prodotti di qualità per i più piccoli! Scopri <b>Mondo</b> ai migliori prezzi!<br><br><ul><li>Funziona a batterie: Sì</li><li>Include: <ul><li>Telecomando</li><li>cavo di ricarica USB</li></ul></li><li>Caratteristiche: <ul><li>Radiocomando</li><li>Luce LED</li></ul></li><li>Numero di batterie: 4</li><li>Tipo di batterie: AA</li><li>Batterie incluse: Sì</li><li>Colore: <ul><li>Giallo</li><li>Bianco</li><li>Multicolore</li></ul></li><li>Funzioni: Luce</li><li>Dimensioni appross.: 13 cm</li><li>Materiale: Plastica</li><li>Età consigliata: + 3 anni</li></ul>",
-    "brand": "2849",
-    "category": "smart-living",
-    "zenovaCategory": "smart-living",
-    "zenovaCategories": [
-      "smart-living"
-    ],
-    "zenovaSubcategory": "smart-led-illuminazione",
-    "price": 57.39,
-    "pvd": 48.78,
-    "stock": 10,
-    "images": [
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R01.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R11.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R61.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R21.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R31.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R41.jpg"
-      },
-      {
-        "url": "https://cdnbigbuy.com/images/8001011637096_R51.jpg"
-      }
-    ],
-    "imageCount": 7,
-    "video": "0",
-    "ean": "8001011637096",
-    "width": "24.9",
-    "height": "8.1",
-    "depth": "24.7",
-    "weight": "0.244",
     "visible": true,
     "zone": "sidebar"
   },
@@ -153528,5 +153450,35 @@
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
     }
+  },
+  {
+    "id": "S05119513",
+    "sku": "S05119513",
+    "name": "Candela Profumata Alyssa Ashley Oceanic Breeze 145 g",
+    "description": "Se ti piace curare ogni singolo dettaglio della casa ed essere sempre alla moda in tema di prodotti che ti renderanno la vità più facile, compra <b>Candela Profumata Alyssa Ashley Oceanic Breeze 145 g</b> al miglior prezzo.<br><br><ul><li>Tipo: Candela Profumata</li><li>Capacità: 145 g</li></ul>",
+    "brand": "1284",
+    "category": "natural-wellness",
+    "zenovaCategory": "natural-wellness",
+    "zenovaCategories": [
+      "natural-wellness"
+    ],
+    "zenovaSubcategory": "oli-essenziali",
+    "price": 17.31,
+    "pvd": 15.23,
+    "stock": 0,
+    "images": [
+      {
+        "url": "https://cdnbigbuy.com/images/3495080702260_S05119513_P00.jpg"
+      }
+    ],
+    "imageCount": 1,
+    "video": "0",
+    "ean": "3495080702260",
+    "width": "7",
+    "height": "8",
+    "depth": "7",
+    "weight": "0.3",
+    "visible": true,
+    "zone": "sidebar"
   }
 ]

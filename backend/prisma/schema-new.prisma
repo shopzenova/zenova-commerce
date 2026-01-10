@@ -1,0 +1,182 @@
+// Prisma Schema per Zenova E-commerce - AGGIORNATO per PostgreSQL
+// Con TUTTI i campi da products.json
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== PRODOTTI (SCHEMA COMPLETO) =====
+
+model Product {
+  id                 String    @id // ID prodotto (es: "M0100360", "aw-asc-01")
+  name               String
+  description        String?   @db.Text
+  brand              String?
+  category           String?   // Categoria fornitore (es: "2507,2527,2537")
+  subcategory        String?
+  zenovaCategory     String?   @map("zenova_category")
+  zenovaSubcategory  String?   @map("zenova_subcategory")
+  price              Decimal   @db.Decimal(10, 2)
+  retailPrice        Decimal   @map("retail_price") @db.Decimal(10, 2)
+  wholesalePrice     Decimal?  @map("wholesale_price") @db.Decimal(10, 2)
+  stock              Int       @default(0)
+  images             String[]  // Array di URL immagini
+  image              String?   // Immagine principale
+  ean                String?
+  weight             Decimal?  @db.Decimal(10, 3)
+  dimensions         Json?     // {width, height, depth}
+  active             Boolean   @default(true)
+  visible            Boolean   @default(true)
+  zone               String?   // "home", "sidebar", "hidden"
+  source             String?   // "bigbuy", "aw", etc.
+  bigbuyId           String?   @map("bigbuy_id")
+  lastSync           DateTime? @map("last_sync")
+  zenovaCategories   String[]  @map("zenova_categories") // Array categorie
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
+
+  orderItems         OrderItem[]
+
+  @@index([zenovaCategory])
+  @@index([zenovaSubcategory])
+  @@index([source])
+  @@index([visible])
+  @@index([zone])
+  @@index([active])
+  @@index([bigbuyId])
+  @@map("products")
+}
+
+// ===== CLIENTI =====
+
+model Customer {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  firstName        String   @map("first_name")
+  lastName         String   @map("last_name")
+  phone            String?
+  addressLine1     String?  @map("address_line1")
+  addressLine2     String?  @map("address_line2")
+  city             String?
+  postalCode       String?  @map("postal_code")
+  province         String?
+  country          String   @default("IT")
+  newsletter       Boolean  @default(false)
+  marketingConsent Boolean  @default(false) @map("marketing_consent")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  orders           Order[]
+
+  @@index([email])
+  @@map("customers")
+}
+
+// ===== ORDINI =====
+
+model Order {
+  id                Int       @id @default(autoincrement())
+  orderNumber       String    @unique @map("order_number")
+  customerId        Int?      @map("customer_id")
+  customerEmail     String    @map("customer_email")
+  customerName      String    @map("customer_name")
+  customerPhone     String?   @map("customer_phone")
+  shippingAddress   String    @map("shipping_address")
+  subtotal          Decimal   @db.Decimal(10, 2)
+  shippingCost      Decimal   @default(0) @map("shipping_cost") @db.Decimal(10, 2)
+  total             Decimal   @db.Decimal(10, 2)
+  paymentMethod     String    @default("stripe") @map("payment_method")
+  paymentStatus     String    @default("pending") @map("payment_status")
+  stripeSessionId   String?   @map("stripe_session_id")
+  stripePaymentId   String?   @map("stripe_payment_id")
+  paidAt            DateTime? @map("paid_at")
+  bigbuyOrderId     Int?      @map("bigbuy_order_id")
+  bigbuyStatus      String?   @map("bigbuy_status")
+  bigbuySentAt      DateTime? @map("bigbuy_sent_at")
+  status            String    @default("pending")
+  customerNotes     String?   @map("customer_notes")
+  internalNotes     String?   @map("internal_notes")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  customer          Customer?  @relation(fields: [customerId], references: [id])
+  items             OrderItem[]
+  shipment          Shipment?
+
+  @@index([orderNumber])
+  @@index([customerId])
+  @@index([customerEmail])
+  @@index([status])
+  @@index([paymentStatus])
+  @@map("orders")
+}
+
+// ===== DETTAGLIO ORDINI =====
+
+model OrderItem {
+  id           Int      @id @default(autoincrement())
+  orderId      Int      @map("order_id")
+  productId    String?  @map("product_id") // Cambiato a String per match con Product.id
+  sku          String
+  productName  String   @map("product_name")
+  productImage String?  @map("product_image")
+  unitPrice    Decimal  @map("unit_price") @db.Decimal(10, 2)
+  quantity     Int      @default(1)
+  totalPrice   Decimal  @map("total_price") @db.Decimal(10, 2)
+  costPrice    Decimal? @map("cost_price") @db.Decimal(10, 2)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  order        Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product      Product? @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ===== SPEDIZIONI =====
+
+model Shipment {
+  id                  Int       @id @default(autoincrement())
+  orderId             Int       @unique @map("order_id")
+  trackingNumber      String?   @map("tracking_number")
+  carrier             String?
+  carrierService      String?   @map("carrier_service")
+  shippedAt           DateTime? @map("shipped_at")
+  estimatedDelivery   DateTime? @map("estimated_delivery")
+  deliveredAt         DateTime? @map("delivered_at")
+  status              String    @default("pending")
+  trackingEmailSent   Boolean   @default(false) @map("tracking_email_sent")
+  deliveryEmailSent   Boolean   @default(false) @map("delivery_email_sent")
+  trackingEvents      String?   @map("tracking_events")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+
+  order               Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([trackingNumber])
+  @@map("shipments")
+}
+
+// ===== LOG SINCRONIZZAZIONI =====
+
+model SyncLog {
+  id              Int      @id @default(autoincrement())
+  syncType        String   @map("sync_type")
+  status          String
+  itemsProcessed  Int      @default(0) @map("items_processed")
+  errorMessage    String?  @map("error_message")
+  syncData        String?  @map("sync_data")
+  durationMs      Int?     @map("duration_ms")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([syncType])
+  @@index([createdAt])
+  @@map("sync_log")
+}

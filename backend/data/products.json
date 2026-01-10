@@ -152394,7 +152394,12 @@
       "duration": "12 settimane",
       "origin": "GBR",
       "includes": "Bastoncini di rattan indonesiano inclusi"
-    }
+    },
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-eid-64",
@@ -152428,7 +152433,12 @@
       "type": "Coni a riflusso (backflow)",
       "origin": "India",
       "use": "Utilizzare con bruciatore a riflusso per effetto cascata"
-    }
+    },
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-coni",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-eid-63",
@@ -152462,7 +152472,12 @@
       "type": "Coni a riflusso (backflow)",
       "origin": "India",
       "use": "Utilizzare con bruciatore a riflusso per effetto cascata"
-    }
+    },
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-coni",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-abfi-06",
@@ -152504,7 +152519,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-01",
@@ -152541,7 +152561,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-02",
@@ -152580,7 +152605,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-03",
@@ -152617,7 +152647,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-04",
@@ -152654,7 +152689,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-05",
@@ -152691,7 +152731,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-06",
@@ -152728,7 +152773,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-07",
@@ -152765,7 +152815,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-09",
@@ -152803,7 +152858,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-aromabf-10",
@@ -152841,7 +152901,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-bfbf-02",
@@ -152881,7 +152946,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-bfbf-03",
@@ -152921,7 +152991,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-bfbf-04",
@@ -152960,7 +153035,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-bfbf-05",
@@ -153000,7 +153080,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-bfbf-06",
@@ -153040,7 +153125,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-backfi-02",
@@ -153080,7 +153170,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-backfi-01",
@@ -153118,7 +153213,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-coni",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-01ds",
@@ -153154,7 +153254,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-02ds",
@@ -153190,7 +153295,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-03ds",
@@ -153226,7 +153336,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-04ds",
@@ -153262,7 +153377,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-05ds",
@@ -153298,7 +153418,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-06ds",
@@ -153334,7 +153459,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-07ds",
@@ -153370,7 +153500,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-08ds",
@@ -153406,7 +153541,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-09ds",
@@ -153442,7 +153582,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-isatyabf-10ds",
@@ -153478,7 +153623,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-riflusso",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-eid-62",
@@ -153515,7 +153665,12 @@
     },
     "zenovaCategories": [
       "natural-wellness"
-    ]
+    ],
+    "source": "aw",
+    "visible": true,
+    "zone": "sidebar",
+    "zenovaSubcategory": "incenso-coni",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-01",
@@ -153526,7 +153681,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 0,
     "images": [
@@ -153550,7 +153705,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-02",
@@ -153561,7 +153719,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 207,
     "images": [
@@ -153585,7 +153743,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-03",
@@ -153596,7 +153757,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 286,
     "images": [
@@ -153620,7 +153781,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-04",
@@ -153631,7 +153795,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 0,
     "images": [
@@ -153655,7 +153819,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-05",
@@ -153666,7 +153833,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 0,
     "images": [
@@ -153690,7 +153857,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-asc-06",
@@ -153701,7 +153871,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 198,
     "images": [
@@ -153725,7 +153895,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-04",
@@ -153736,7 +153909,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 1309,
     "images": [
@@ -153768,7 +153941,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-01",
@@ -153779,7 +153955,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 1098,
     "images": [
@@ -153811,7 +153987,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-02",
@@ -153822,7 +154001,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 1333,
     "images": [
@@ -153854,7 +154033,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-05",
@@ -153865,7 +154047,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 604,
     "images": [
@@ -153897,7 +154079,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-06",
@@ -153908,7 +154093,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 4,
     "images": [
@@ -153940,7 +154125,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-atc-03",
@@ -153951,7 +154139,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 769,
     "images": [
@@ -153987,7 +154175,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-01",
@@ -153998,7 +154189,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 308,
     "images": [
@@ -154025,7 +154216,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-02",
@@ -154036,7 +154230,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 283,
     "images": [
@@ -154065,7 +154259,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-03",
@@ -154076,7 +154273,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 314,
     "images": [
@@ -154103,7 +154300,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-04",
@@ -154114,7 +154314,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 403,
     "images": [
@@ -154141,7 +154341,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-05",
@@ -154152,7 +154355,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 506,
     "images": [
@@ -154179,7 +154382,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-06",
@@ -154190,7 +154396,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 170,
     "images": [
@@ -154217,7 +154423,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-07",
@@ -154228,7 +154437,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 372,
     "images": [
@@ -154255,7 +154464,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-chkcc-08",
@@ -154266,7 +154478,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 185,
     "images": [
@@ -154293,7 +154505,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-hhc-02",
@@ -154304,7 +154519,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 377,
     "images": [
@@ -154331,7 +154546,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-hhc-03",
@@ -154342,7 +154560,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 313,
     "images": [
@@ -154369,7 +154587,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-hhc-01",
@@ -154380,7 +154601,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 0,
     "images": [
@@ -154409,7 +154630,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-pc-06",
@@ -154443,7 +154667,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-pc-05",
@@ -154480,7 +154707,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-qsalt-29",
@@ -154491,7 +154721,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "portacandele",
     "supplier": "aw-dropship",
     "stock": 32,
     "images": [
@@ -154514,7 +154744,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-qsalt-31",
@@ -154525,7 +154758,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "portacandele",
     "supplier": "aw-dropship",
     "stock": 80,
     "images": [
@@ -154551,7 +154784,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-qsalt-44",
@@ -154562,7 +154798,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "portacandele",
     "supplier": "aw-dropship",
     "stock": 43,
     "images": [
@@ -154588,7 +154824,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-selch-08",
@@ -154599,7 +154838,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "portacandele",
     "supplier": "aw-dropship",
     "stock": 244,
     "images": [
@@ -154626,7 +154865,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-selch-07",
@@ -154637,7 +154879,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "portacandele",
     "supplier": "aw-dropship",
     "stock": 87,
     "images": [
@@ -154663,7 +154905,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-01",
@@ -154674,7 +154919,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 822,
     "images": [
@@ -154700,7 +154945,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-02",
@@ -154711,7 +154959,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 737,
     "images": [
@@ -154737,7 +154985,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-03",
@@ -154748,7 +154999,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 737,
     "images": [
@@ -154774,7 +155025,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-04",
@@ -154785,7 +155039,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 826,
     "images": [
@@ -154811,7 +155065,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-05",
@@ -154822,7 +155079,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 730,
     "images": [
@@ -154848,7 +155105,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-06",
@@ -154859,7 +155119,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 683,
     "images": [
@@ -154885,7 +155145,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-07",
@@ -154896,7 +155159,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 708,
     "images": [
@@ -154922,7 +155185,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-08",
@@ -154933,7 +155199,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 764,
     "images": [
@@ -154959,7 +155225,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-09",
@@ -154970,7 +155239,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 859,
     "images": [
@@ -154994,7 +155263,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-10",
@@ -155005,7 +155277,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 710,
     "images": [
@@ -155031,7 +155303,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-11",
@@ -155042,7 +155317,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 771,
     "images": [
@@ -155068,7 +155343,10 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   },
   {
     "id": "aw-zcc-12",
@@ -155079,7 +155357,7 @@
     "zenovaCategories": [
       "natural-wellness"
     ],
-    "zenovaSubcategory": "candele-gel-profumati-sali-bagno",
+    "zenovaSubcategory": "candele-profumate",
     "supplier": "aw-dropship",
     "stock": 801,
     "images": [
@@ -155107,6 +155385,9 @@
     "metadata": {
       "type": "Candele e Portacandele",
       "use": "Aromaterapia e decorazione"
-    }
+    },
+    "source": "aw",
+    "zone": "sidebar",
+    "zenovaCategory": "natural-wellness"
   }
 ]

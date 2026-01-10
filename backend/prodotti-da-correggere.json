@@ -1,0 +1,247 @@
+[
+  {
+    "id": "MWCS-01",
+    "name": "Portacandele in Legno di Mango - Hamsa - Piccolo 18x11cm",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "MWCS-02",
+    "name": "Portacandele in Legno di Mango - Hamsa - Grande 25x18cm",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "MWCS-03",
+    "name": "Portacandele Classico - Bianco Anticato -  23x10cm - Piccolo",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "MWCS-04",
+    "name": "Portacandele Classico - Bianco Anticato -  30x10cm - Medio",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "MWCS-05",
+    "name": "Portacandele Classico - Bianco Anticato - 37x10cm - Grande",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-12",
+    "name": "Set 2 Portacandele Fiore -  Ambra Antica",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-15",
+    "name": "Set 2 Portacandele Fiore -  Giada del Giardino",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-14",
+    "name": "Set 2 Portacandele Fiore -  Rosso Vampiro",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-11",
+    "name": "Set 2 Portacandele Fiore - Blu Reale",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-24",
+    "name": "Set 2 Portacandele Facce di Buddha - Giada del Giardino",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-23",
+    "name": "Set 2 Portacandele Facce di Buddha - Grigio Notte",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-21",
+    "name": "Set 2 Portacandele Facce di Buddha - Blu Reale",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-18",
+    "name": "Set 2 Portacandele Fungo - Grigio Notte",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-16",
+    "name": "Set 2 Portacandele Fungo - Blu Reale",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-19",
+    "name": "Set 2 Portacandele Fungo - Rosso Vampiro",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-02",
+    "name": "Set 2 Portacandele Vintage -  Ambra Antica",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-01",
+    "name": "Set 2 Portacandele Vintage - Blu Reale",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-04",
+    "name": "Set 2 Portacandele Vintage - Rosso Vampiro",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "GCHD-05",
+    "name": "Set 2 Portacandele Vintage - Giada del Giardino",
+    "currentSubcat": "diffusori"
+  },
+  {
+    "id": "ACGP-01",
+    "name": "Cofanetto Regalo - Rabarbaro (Candela) + Fico Bianco & Frutti di Bosco (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "ACGP-02",
+    "name": "Cofanetto Regalo - Caffè & Noce (Candela) + Peonie & Fiori Giapponesi (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "ACGP-03",
+    "name": "Cofanetto Regalo - Agrumi Freschi (Candela) + Clementine & Mor.Roll (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "ACGP-04",
+    "name": "Cofanetto Regalo - Violetta di Parma (Candela) + Sale Marino & Muschio (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "ACGP-05",
+    "name": "Cofanetto Regalo - Luna di Velluto (Candela) + Windermere & Agrumi (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "ACGP-06",
+    "name": "Cofanetto Regalo - Pietra di Luna (Candela) + Provenza & Tè e Rose (Fizzer)",
+    "currentSubcat": "kit-benessere-cofanetti-regalo"
+  },
+  {
+    "id": "BinC-02",
+    "name": "Bulk  Incense Cones - Apple Cinnamon",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-03",
+    "name": "Bulk  Incense Cones - Citronella",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-04",
+    "name": "Bulk  Incense Cones - Dragons Blood",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-05",
+    "name": "Bulk  Incense Cones - Frank & Myrrh",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-06",
+    "name": "Bulk  Incense Cones - Honeysuckle",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-07",
+    "name": "Bulk  Incense Cones - Jasmine",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-08",
+    "name": "Bulk  Incense Cones - Lavender",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-09",
+    "name": "Bulk  Incense Cones - Strawberry",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-10",
+    "name": "Bulk  Incense Cones - Vertiver Gold",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-11",
+    "name": "Bulk  Incense Cones - Tulsi Basil",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-12",
+    "name": "Bulk  Incense Cones - Opium",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-13",
+    "name": "Bulk  Incense Cones - Nagchampa",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-14",
+    "name": "Bulk  Incense Cones - Coconut",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-15",
+    "name": "Bulk  Incense Cones - Tibetan Musk",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-16",
+    "name": "Bulk  Incense Cones - Patchouli",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-17",
+    "name": "Bulk  Incense Cones - Peach Mango",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-18",
+    "name": "Bulk  Incense Cones - Sandalwood",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-19",
+    "name": "Bulk  Incense Cones - Lemon",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-20",
+    "name": "Bulk  Incense Cones - Orange & Cinnamon",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-21",
+    "name": "Bulk  Incense Cones - Vanilla",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-22",
+    "name": "Bulk  Incense Cones - Violet",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-23",
+    "name": "Bulk  Incense Cones - Midnight  Rose",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-24",
+    "name": "Bulk  Incense Cones - Ylang Ylang",
+    "currentSubcat": "incenso"
+  },
+  {
+    "id": "BinC-01",
+    "name": "Bulk  Incense Cones - Amber",
+    "currentSubcat": "incenso"
+  }
+]

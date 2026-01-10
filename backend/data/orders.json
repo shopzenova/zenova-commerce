@@ -1,5 +1,43 @@
 [
   {
+    "id": "ZN-1767773555618-225",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "363733333333",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "M0125751",
+        "bigbuyId": "M0125751",
+        "name": "Profumo Unisex Tom Ford Oud Minerale EDP 100 ml",
+        "price": 126.64,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/0888066144254_S8316956_P00.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 126.64,
+      "shipping": 0,
+      "total": 126.64
+    },
+    "payment": {
+      "method": "stripe_card",
+      "sessionId": "pi_3Smrr5FfFbDwiUWS1hir8HG2",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2026-01-07T08:12:35.618Z",
+    "updatedAt": "2026-01-07T08:12:35.618Z"
+  },
+  {
     "id": "ZN-1767204895303-1072",
     "status": "pending",
     "customer": {
