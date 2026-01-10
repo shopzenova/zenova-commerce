@@ -722,15 +722,20 @@ function createProductCard(product) {
     const statusClass = product.available ? 'available' : 'unavailable';
     const statusText = product.available ? '✅ Disponibile' : '❌ Esaurito';
 
+    const displayPrice = product.retailPrice || product.price;
+
     card.innerHTML = `
         <span class="drag-handle">⋮⋮</span>
         <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
         <div class="product-admin-info">
             <h4>${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</h4>
-            <p class="product-price">€ ${product.price.toFixed(2)}</p>
+            <p class="product-price" id="price-${product.id}">€ ${displayPrice.toFixed(2)}</p>
             <span class="product-status ${statusClass}">${statusText}</span>
         </div>
         <div class="product-actions">
+            <button class="btn-icon" title="Modifica prezzo" onclick="editProductPrice('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${displayPrice}, ${product.price || 0})">
+                💰
+            </button>
             <button class="btn-icon" title="${product.visible ? 'Nascondi' : 'Mostra'}" onclick="toggleProductVisibility('${product.id}', '${product.name.replace(/'/g, "\\'")}', ${product.visible})">
                 ${product.visible ? '👁️' : '👁️‍🗨️'}
             </button>
@@ -1059,6 +1064,86 @@ async function deleteProduct(productId, productName) {
     } catch (error) {
         console.error('Errore eliminazione:', error);
         alert(`❌ Errore durante l'eliminazione: ${error.message}`);
+    }
+}
+
+// Modifica prezzo prodotto
+async function editProductPrice(productId, productName, currentPrice, wholesalePrice) {
+    if (!IS_LOCAL) {
+        alert('⚠️ Modifica prezzi disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare i prezzi.');
+        return;
+    }
+
+    const newPriceStr = prompt(
+        `💰 MODIFICA PREZZO VENDITA\n\n` +
+        `Prodotto: ${productName}\n\n` +
+        `Prezzo attuale: €${currentPrice.toFixed(2)}\n` +
+        `Prezzo acquisto: €${wholesalePrice.toFixed(2)}\n\n` +
+        `Inserisci nuovo prezzo di vendita:`,
+        currentPrice.toFixed(2)
+    );
+
+    // User cancelled
+    if (newPriceStr === null) return;
+
+    const newPrice = parseFloat(newPriceStr);
+
+    // Validazione input
+    if (isNaN(newPrice) || newPrice <= 0) {
+        alert('❌ Prezzo non valido!\n\nInserisci un numero maggiore di 0.');
+        return;
+    }
+
+    // Validazione: prezzo vendita >= prezzo acquisto
+    if (newPrice < wholesalePrice) {
+        alert(`❌ Prezzo vendita troppo basso!\n\n` +
+              `Il prezzo di vendita (€${newPrice.toFixed(2)}) non può essere inferiore al prezzo di acquisto (€${wholesalePrice.toFixed(2)}).`);
+        return;
+    }
+
+    // Calcola margine
+    const margine = ((newPrice - wholesalePrice) / newPrice * 100).toFixed(1);
+
+    const confirmed = confirm(
+        `💰 CONFERMA MODIFICA PREZZO\n\n` +
+        `Prodotto: ${productName}\n\n` +
+        `€${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)}\n` +
+        `Margine: ${margine}%\n\n` +
+        `Confermi la modifica?`
+    );
+
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/${productId}/price`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ retailPrice: newPrice })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(`✅ Prezzo aggiornato: ${productName} - €${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)} (margine ${margine}%)`);
+
+            // Aggiorna il prezzo visualizzato nella card senza ricaricare tutta la lista
+            const priceElement = document.getElementById(`price-${productId}`);
+            if (priceElement) {
+                priceElement.textContent = `€ ${newPrice.toFixed(2)}`;
+            }
+
+            alert(`✅ Prezzo aggiornato con successo!\n\n${productName}\n€${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)}\nMargine: ${margine}%`);
+
+            // Ricarica i prodotti per sincronizzare tutto
+            await loadProducts();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore modifica prezzo:', error);
+        alert(`❌ Errore durante la modifica del prezzo: ${error.message}`);
     }
 }
 
