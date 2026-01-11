@@ -926,7 +926,7 @@ function createProductCard(product) {
             ${wishlistIcon}
         </button>
         <div class="product-image">
-            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}">` : (product.icon || '📦')}
+            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}" loading="lazy">` : (product.icon || '📦')}
         </div>
         <div class="product-info">
             <div class="product-category">${displayCategory}</div>
@@ -1305,7 +1305,7 @@ function updateCart() {
             let imageHtml = '';
             const imageUrl = getAbsoluteImageUrl(item.image);
             if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
-                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" loading="lazy">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
             } else {
@@ -1433,7 +1433,7 @@ function updateWishlist() {
             <div class="wishlist-item">
                 <button class="wishlist-remove-btn" onclick="removeFromWishlist(${item.id})">&times;</button>
                 <div class="wishlist-item-image">
-                    ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}">` : item.icon}
+                    ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}" loading="lazy">` : item.icon}
                 </div>
                 <div class="wishlist-item-info">
                     <div class="wishlist-item-category">${item.category}</div>
@@ -1957,7 +1957,7 @@ function setupSearch() {
             return `
                 <div class="search-result-item" onclick="handleSearchResultClick('${product.id}')">
                     <div class="search-result-icon">
-                        ${searchImageUrl ? `<img src="${searchImageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : '📦'}
+                        ${searchImageUrl ? `<img src="${searchImageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);" loading="lazy">` : '📦'}
                     </div>
                     <div class="search-result-info">
                         <div class="search-result-category">${product.zenovaSubcategory || product.category || 'Prodotto'}</div>
@@ -2258,7 +2258,7 @@ function updateGallery() {
     // Accept both absolute URLs (http/data) and relative paths (starting with /)
     if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
         console.log('✅ Impostando immagine:', imageUrl);
-        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
+        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;" loading="lazy">`;
     } else if (typeof currentImage === 'string' && currentImage.includes('<svg')) {
         console.log('✅ Impostando SVG');
         imageContainer.innerHTML = currentImage;
@@ -2822,7 +2822,7 @@ function renderTestimonials() {
                 <p class="testimonial-text">${testimonial.text}</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">
-                        <img src="${testimonial.avatar}" alt="${testimonial.name}">
+                        <img src="${testimonial.avatar}" alt="${testimonial.name}" loading="lazy">
                     </div>
                     <div class="testimonial-info">
                         <h4 class="testimonial-name">${testimonial.name}</h4>
