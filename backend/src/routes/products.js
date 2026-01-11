@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
+// Force Railway redeploy - products DB updated
 const bigbuy = require('../integrations/BigBuyClient');
 const logger = require('../utils/logger');
 const productFilters = require('../../config/product-filters');
