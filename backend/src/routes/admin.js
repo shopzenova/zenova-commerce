@@ -6,6 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 const logger = require('../utils/logger');
 const productsRouter = require('./products');
 const orderService = require('../services/OrderService');
+const { syncBigBuyToPostgres } = require('../../sync-bigbuy-to-postgres');
 
 // Prisma Client per PostgreSQL
 const prisma = new PrismaClient();
@@ -286,32 +287,32 @@ router.get('/sync/status', (req, res) => {
   }
 });
 
-// POST /api/admin/sync/now - Avvia sincronizzazione manuale
+// POST /api/admin/sync/now - Avvia sincronizzazione manuale BigBuy
 router.post('/sync/now', async (req, res) => {
   try {
-    // Per ora simula sync
-    // TODO: implementare sincronizzazione reale con BigBuy
+    logger.info('🔄 Sincronizzazione manuale BigBuy avviata dall\'admin');
 
-    logger.info('🔄 Sincronizzazione manuale avviata');
+    // Esegui sincronizzazione reale
+    const stats = await syncBigBuyToPostgres();
 
-    // Simula delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    logger.info('✅ Sincronizzazione BigBuy completata:', stats);
 
     res.json({
       success: true,
-      message: 'Sincronizzazione completata',
+      message: 'Sincronizzazione BigBuy completata con successo',
       data: {
-        productsUpdated: PRODUCTS.length,
-        newProducts: 0,
-        priceUpdates: 0,
-        stockUpdates: 0
+        productsUpdated: stats.updated,
+        totalProducts: stats.totalProducts,
+        inStock: stats.inStock,
+        outOfStock: stats.outOfStock,
+        errors: stats.errors
       }
     });
   } catch (error) {
-    logger.error('Errore /api/admin/sync/now:', error);
+    logger.error('❌ Errore sincronizzazione BigBuy:', error);
     res.status(500).json({
       success: false,
-      error: 'Errore sincronizzazione'
+      error: 'Errore durante la sincronizzazione: ' + error.message
     });
   }
 });
