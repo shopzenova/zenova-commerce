@@ -6,7 +6,7 @@ const { PrismaClient } = require('@prisma/client');
 const logger = require('../utils/logger');
 const productsRouter = require('./products');
 const orderService = require('../services/OrderService');
-const { syncBigBuyToPostgres } = require('../../sync-bigbuy-to-postgres');
+const { syncBigBuyToPostgres } = require('../services/SyncBigBuyService');
 
 // Prisma Client per PostgreSQL
 const prisma = new PrismaClient();
