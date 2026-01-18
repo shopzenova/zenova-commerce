@@ -64,11 +64,17 @@ async function syncBigBuyToPostgres() {
       return stats;
     }
 
-    // 2. Estrai IDs BigBuy (sono stringhe come "M0100360")
+    // 2. Estrai IDs BigBuy (possono essere "3058424" o "S3058424")
+    // Estrae la parte numerica anche da SKU alfanumerici
     const bigbuyIds = bigbuyProducts
-      .map(p => p.bigbuyId)
-      .filter(id => id && !isNaN(parseInt(id)))
-      .map(id => parseInt(id));
+      .map(p => {
+        const id = p.bigbuyId;
+        if (!id) return null;
+        // Estrae solo i numeri dallo SKU (es. "S3058424" -> 3058424)
+        const numericPart = id.toString().replace(/\D/g, '');
+        return numericPart ? parseInt(numericPart) : null;
+      })
+      .filter(id => id !== null);
 
     console.log(`🔑 Richiesta stock per ${bigbuyIds.length} prodotti BigBuy...\n`);
 
@@ -143,8 +149,9 @@ async function syncBigBuyToPostgres() {
     console.log('💾 Aggiornamento database PostgreSQL...\n');
 
     for (const product of bigbuyProducts) {
-      const bigbuyId = parseInt(product.bigbuyId);
-      const stockInfo = stockMap[bigbuyId];
+      // Estrae parte numerica (es. "S3058424" -> 3058424)
+      const numericId = product.bigbuyId ? parseInt(product.bigbuyId.toString().replace(/\D/g, '')) : null;
+      const stockInfo = numericId ? stockMap[numericId] : null;
 
       if (stockInfo) {
         try {
