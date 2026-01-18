@@ -667,7 +667,7 @@ router.post('/products/import', async (req, res) => {
   }
 });
 
-// GET /api/admin/products/preview/:sku - Ottieni anteprima prodotto da CSV senza importare
+// GET /api/admin/products/preview/:sku - Ottieni anteprima prodotto (API o CSV)
 router.get('/products/preview/:sku', async (req, res) => {
   try {
     const sku = req.params.sku;
@@ -679,59 +679,97 @@ router.get('/products/preview/:sku', async (req, res) => {
       });
     }
 
-    logger.info(`🔍 Anteprima prodotto CSV BigBuy con SKU: ${sku}`);
+    logger.info(`🔍 Anteprima prodotto BigBuy con SKU: ${sku}`);
 
-    // Cerca il prodotto nei CSV locali
+    let foundProduct = null;
+    let productSource = null;
+
+    // METODO 1: Cerca nei CSV locali (se disponibili)
     const csv = require('csv-parser');
     const CSV_DIR = path.join(__dirname, '../../bigbuy-data/bigbuy-complete');
 
-    if (!fs.existsSync(CSV_DIR)) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cartella CSV non trovata. Scarica i CSV BigBuy prima.'
-      });
+    if (fs.existsSync(CSV_DIR)) {
+      const csvFiles = fs.readdirSync(CSV_DIR)
+        .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
+
+      // Parsing CSV con gestione BOM
+      async function parseCSV(filePath) {
+        return new Promise((resolve, reject) => {
+          const products = [];
+          fs.createReadStream(filePath)
+            .pipe(csv({ separator: ';' }))
+            .on('data', (row) => {
+              const cleanedRow = {};
+              for (const [key, value] of Object.entries(row)) {
+                const cleanKey = key.replace(/^\uFEFF/, '');
+                cleanedRow[cleanKey] = value;
+              }
+              products.push(cleanedRow);
+            })
+            .on('end', () => resolve(products))
+            .on('error', reject);
+        });
+      }
+
+      // Cerca in tutti i CSV
+      for (const file of csvFiles) {
+        const filePath = path.join(CSV_DIR, file);
+        const products = await parseCSV(filePath);
+        const product = products.find(p => p.ID === sku);
+
+        if (product) {
+          foundProduct = product;
+          productSource = 'csv';
+          break;
+        }
+      }
     }
 
-    const csvFiles = fs.readdirSync(CSV_DIR)
-      .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
+    // METODO 2: Se non trovato nei CSV, usa API BigBuy
+    if (!foundProduct) {
+      logger.info('🌐 CSV non disponibili, uso API BigBuy per preview...');
 
-    let foundProduct = null;
+      try {
+        const apiProduct = await bigbuyClient.getProduct(sku);
 
-    // Parsing CSV con gestione BOM
-    async function parseCSV(filePath) {
-      return new Promise((resolve, reject) => {
-        const products = [];
-        fs.createReadStream(filePath)
-          .pipe(csv({ separator: ';' }))
-          .on('data', (row) => {
-            const cleanedRow = {};
-            for (const [key, value] of Object.entries(row)) {
-              const cleanKey = key.replace(/^\uFEFF/, '');
-              cleanedRow[cleanKey] = value;
-            }
-            products.push(cleanedRow);
-          })
-          .on('end', () => resolve(products))
-          .on('error', reject);
-      });
-    }
+        if (apiProduct) {
+          // Recupera stock separatamente
+          let stockQuantity = 0;
+          try {
+            const stockData = await bigbuyClient.getProductStock(sku);
+            stockQuantity = parseInt(stockData?.quantity || stockData?.stock || 0);
+          } catch (stockError) {
+            logger.warn('⚠️ Impossibile recuperare stock per preview');
+          }
 
-    // Cerca in tutti i CSV
-    for (const file of csvFiles) {
-      const filePath = path.join(CSV_DIR, file);
-      const products = await parseCSV(filePath);
-      const product = products.find(p => p.ID === sku);
-
-      if (product) {
-        foundProduct = product;
-        break;
+          // Converte formato API a formato CSV-like per compatibilità
+          foundProduct = {
+            ID: apiProduct.id || sku,
+            NAME: apiProduct.name || `Prodotto ${sku}`,
+            DESCRIPTION: apiProduct.description || '',
+            BRAND: apiProduct.brand || '',
+            PVP_BIGBUY: apiProduct.retailPrice || apiProduct.price || 0,
+            PVD: apiProduct.wholesalePrice || 0,
+            STOCK: stockQuantity,
+            EAN13: apiProduct.ean || ''
+          };
+          // Aggiungi immagini
+          if (apiProduct.images && apiProduct.images.length > 0) {
+            apiProduct.images.forEach((img, i) => {
+              foundProduct[`IMAGE${i + 1}`] = img.url || img;
+            });
+          }
+          productSource = 'api';
+        }
+      } catch (apiError) {
+        logger.error('❌ Errore API BigBuy preview:', apiError.message);
       }
     }
 
     if (!foundProduct) {
       return res.status(404).json({
         success: false,
-        error: 'Prodotto non trovato nei CSV BigBuy'
+        error: 'Prodotto non trovato (né nei CSV né via API BigBuy)'
       });
     }
 
