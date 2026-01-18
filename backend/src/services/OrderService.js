@@ -1,64 +1,20 @@
-const fs = require('fs');
-const path = require('path');
+/**
+ * ORDER SERVICE - PostgreSQL con Prisma
+ * Gestisce ordini persistenti nel database
+ */
+
+const { PrismaClient } = require('@prisma/client');
 const logger = require('../utils/logger');
 
+const prisma = new PrismaClient();
+
 class OrderService {
-  constructor() {
-    this.ordersFile = path.join(__dirname, '..', '..', 'data', 'orders.json');
-    this.ensureDataDirectory();
-    this.loadOrders();
-  }
-
   /**
-   * Assicura che la directory data esista
+   * Genera numero ordine unico (formato: ZN-timestamp-random)
    */
-  ensureDataDirectory() {
-    const dataDir = path.dirname(this.ordersFile);
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-      logger.info('📁 Directory data creata');
-    }
-  }
-
-  /**
-   * Carica ordini da file
-   */
-  loadOrders() {
-    try {
-      if (fs.existsSync(this.ordersFile)) {
-        const data = fs.readFileSync(this.ordersFile, 'utf8');
-        this.orders = JSON.parse(data);
-        logger.info(`📦 Caricati ${this.orders.length} ordini`);
-      } else {
-        this.orders = [];
-        this.saveOrders();
-        logger.info('📦 File ordini creato');
-      }
-    } catch (error) {
-      logger.error('Errore caricamento ordini:', error);
-      this.orders = [];
-    }
-  }
-
-  /**
-   * Salva ordini su file
-   */
-  saveOrders() {
-    try {
-      fs.writeFileSync(this.ordersFile, JSON.stringify(this.orders, null, 2));
-      logger.info(`💾 Salvati ${this.orders.length} ordini`);
-    } catch (error) {
-      logger.error('Errore salvataggio ordini:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Genera ID ordine unico
-   */
-  generateOrderId() {
+  generateOrderNumber() {
     const timestamp = Date.now();
-    const random = Math.floor(Math.random() * 10000);
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     return `ZN-${timestamp}-${random}`;
   }
 
@@ -67,153 +23,334 @@ class OrderService {
    * @param {Object} orderData - Dati ordine
    * @returns {Object} - Ordine creato
    */
-  createOrder(orderData) {
-    const order = {
-      id: this.generateOrderId(),
-      status: 'pending', // pending, processing, shipped, delivered, cancelled
-      customer: {
-        name: orderData.customer.name || '',
-        email: orderData.customer.email,
-        phone: orderData.customer.phone || '',
-        address: orderData.customer.address || {}
-      },
-      items: orderData.items.map(item => ({
-        productId: item.productId || item.id,
-        bigbuyId: item.bigbuyId,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image || (item.images && item.images[0])
-      })),
-      totals: {
-        subtotal: orderData.totals?.subtotal || 0,
-        shipping: orderData.totals?.shipping || 0,
-        total: orderData.totals?.total || 0
-      },
-      payment: {
-        method: orderData.payment?.method || 'stripe',
-        sessionId: orderData.payment?.sessionId || '',
-        status: orderData.payment?.status || 'pending'
-      },
-      shipping: {
-        carrier: orderData.shipping?.carrier || '',
-        trackingNumber: orderData.shipping?.trackingNumber || '',
-        estimatedDelivery: orderData.shipping?.estimatedDelivery || ''
-      },
-      notes: orderData.notes || '',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
+  async createOrder(orderData) {
+    try {
+      const orderNumber = this.generateOrderNumber();
 
-    this.orders.unshift(order); // Aggiungi all'inizio
-    this.saveOrders();
+      // Prepara indirizzo come stringa JSON
+      const shippingAddress = JSON.stringify({
+        street: orderData.customer?.address?.street || '',
+        city: orderData.customer?.address?.city || '',
+        postalCode: orderData.customer?.address?.postalCode || '',
+        province: orderData.customer?.address?.province || '',
+        country: orderData.customer?.address?.country || 'IT'
+      });
 
-    logger.info(`✅ Ordine creato: ${order.id} - Cliente: ${order.customer.email}`);
-    return order;
+      // Crea ordine nel database
+      const order = await prisma.order.create({
+        data: {
+          orderNumber,
+          customerEmail: orderData.customer?.email || '',
+          customerName: orderData.customer?.name || '',
+          customerPhone: orderData.customer?.phone || '',
+          shippingAddress,
+          subtotal: orderData.totals?.subtotal || 0,
+          shippingCost: orderData.totals?.shipping || 0,
+          total: orderData.totals?.total || 0,
+          paymentMethod: orderData.payment?.method || 'stripe',
+          paymentStatus: orderData.payment?.status || 'pending',
+          stripeSessionId: orderData.payment?.sessionId || null,
+          status: 'pending',
+          customerNotes: orderData.notes || null,
+          items: {
+            create: (orderData.items || []).map(item => ({
+              sku: item.productId || item.id || item.bigbuyId || '',
+              productId: item.productId || item.id || null,
+              productName: item.name || '',
+              productImage: item.image || (item.images && item.images[0]) || null,
+              unitPrice: item.price || 0,
+              quantity: item.quantity || 1,
+              totalPrice: (item.price || 0) * (item.quantity || 1),
+              costPrice: item.wholesalePrice || null
+            }))
+          }
+        },
+        include: {
+          items: true
+        }
+      });
+
+      logger.info(`✅ Ordine creato: ${orderNumber} - Cliente: ${order.customerEmail}`);
+
+      // Ritorna in formato compatibile con vecchio sistema
+      return this.formatOrderForAPI(order);
+
+    } catch (error) {
+      logger.error('Errore creazione ordine:', error);
+      throw error;
+    }
   }
 
   /**
    * Recupera tutti gli ordini
-   * @param {Object} filters - Filtri opzionali (status, limit, offset)
+   * @param {Object} filters - Filtri opzionali (status, limit, offset, email)
    * @returns {Array} - Lista ordini
    */
-  getAllOrders(filters = {}) {
-    let filtered = [...this.orders];
+  async getAllOrders(filters = {}) {
+    try {
+      const where = {};
 
-    // Filtra per stato
-    if (filters.status) {
-      filtered = filtered.filter(o => o.status === filters.status);
+      if (filters.status) {
+        where.status = filters.status;
+      }
+
+      if (filters.email) {
+        where.customerEmail = filters.email;
+      }
+
+      const orders = await prisma.order.findMany({
+        where,
+        include: {
+          items: true,
+          shipment: true
+        },
+        orderBy: {
+          createdAt: 'desc'
+        },
+        skip: filters.offset || 0,
+        take: filters.limit || 100
+      });
+
+      return orders.map(order => this.formatOrderForAPI(order));
+
+    } catch (error) {
+      logger.error('Errore recupero ordini:', error);
+      return [];
     }
-
-    // Filtra per email cliente
-    if (filters.email) {
-      filtered = filtered.filter(o => o.customer.email === filters.email);
-    }
-
-    // Paginazione
-    const offset = filters.offset || 0;
-    const limit = filters.limit || filtered.length;
-
-    return filtered.slice(offset, offset + limit);
   }
 
   /**
-   * Recupera ordine per ID
-   * @param {string} orderId - ID ordine
+   * Recupera ordine per ID (supporta sia ID numerico che orderNumber)
+   * @param {string|number} orderId - ID ordine o orderNumber
    * @returns {Object|null} - Ordine o null
    */
-  getOrderById(orderId) {
-    return this.orders.find(o => o.id === orderId) || null;
+  async getOrderById(orderId) {
+    try {
+      let order;
+
+      // Se è un numero, cerca per id
+      if (!isNaN(orderId)) {
+        order = await prisma.order.findUnique({
+          where: { id: parseInt(orderId) },
+          include: { items: true, shipment: true }
+        });
+      }
+
+      // Se non trovato o è stringa, cerca per orderNumber
+      if (!order) {
+        order = await prisma.order.findUnique({
+          where: { orderNumber: String(orderId) },
+          include: { items: true, shipment: true }
+        });
+      }
+
+      return order ? this.formatOrderForAPI(order) : null;
+
+    } catch (error) {
+      logger.error('Errore recupero ordine:', error);
+      return null;
+    }
   }
 
   /**
    * Aggiorna stato ordine
-   * @param {string} orderId - ID ordine
+   * @param {string|number} orderId - ID ordine
    * @param {string} status - Nuovo stato
    * @returns {Object|null} - Ordine aggiornato o null
    */
-  updateOrderStatus(orderId, status) {
-    const order = this.getOrderById(orderId);
-    if (!order) return null;
+  async updateOrderStatus(orderId, status) {
+    try {
+      const existingOrder = await this.getOrderById(orderId);
+      if (!existingOrder) return null;
 
-    order.status = status;
-    order.updatedAt = new Date().toISOString();
-    this.saveOrders();
+      const updateData = { status };
 
-    logger.info(`📝 Ordine ${orderId} aggiornato: ${status}`);
-    return order;
+      // Se stato è "processing", aggiorna anche paymentStatus
+      if (status === 'processing') {
+        updateData.paymentStatus = 'paid';
+        updateData.paidAt = new Date();
+      }
+
+      const order = await prisma.order.update({
+        where: { orderNumber: existingOrder.id },
+        data: updateData,
+        include: { items: true, shipment: true }
+      });
+
+      logger.info(`📝 Ordine ${order.orderNumber} aggiornato: ${status}`);
+      return this.formatOrderForAPI(order);
+
+    } catch (error) {
+      logger.error('Errore aggiornamento stato ordine:', error);
+      return null;
+    }
   }
 
   /**
    * Aggiorna tracking spedizione
-   * @param {string} orderId - ID ordine
+   * @param {string|number} orderId - ID ordine
    * @param {Object} trackingData - Dati tracking
    * @returns {Object|null} - Ordine aggiornato o null
    */
-  updateTracking(orderId, trackingData) {
-    const order = this.getOrderById(orderId);
-    if (!order) return null;
+  async updateTracking(orderId, trackingData) {
+    try {
+      const existingOrder = await this.getOrderById(orderId);
+      if (!existingOrder) return null;
 
-    order.shipping = {
-      ...order.shipping,
-      ...trackingData
-    };
-    order.updatedAt = new Date().toISOString();
-    this.saveOrders();
+      // Trova l'ordine reale nel database
+      const dbOrder = await prisma.order.findUnique({
+        where: { orderNumber: existingOrder.id }
+      });
 
-    logger.info(`📦 Tracking aggiornato per ordine ${orderId}`);
-    return order;
+      if (!dbOrder) return null;
+
+      // Crea o aggiorna shipment
+      await prisma.shipment.upsert({
+        where: { orderId: dbOrder.id },
+        update: {
+          trackingNumber: trackingData.trackingNumber || null,
+          carrier: trackingData.carrier || null,
+          estimatedDelivery: trackingData.estimatedDelivery ? new Date(trackingData.estimatedDelivery) : null,
+          shippedAt: trackingData.trackingNumber ? new Date() : null,
+          status: trackingData.trackingNumber ? 'shipped' : 'pending'
+        },
+        create: {
+          orderId: dbOrder.id,
+          trackingNumber: trackingData.trackingNumber || null,
+          carrier: trackingData.carrier || null,
+          estimatedDelivery: trackingData.estimatedDelivery ? new Date(trackingData.estimatedDelivery) : null,
+          shippedAt: trackingData.trackingNumber ? new Date() : null,
+          status: trackingData.trackingNumber ? 'shipped' : 'pending'
+        }
+      });
+
+      // Se c'è tracking, aggiorna stato ordine a shipped
+      if (trackingData.trackingNumber) {
+        await prisma.order.update({
+          where: { id: dbOrder.id },
+          data: { status: 'shipped' }
+        });
+      }
+
+      logger.info(`📦 Tracking aggiornato per ordine ${existingOrder.id}`);
+
+      return this.getOrderById(orderId);
+
+    } catch (error) {
+      logger.error('Errore aggiornamento tracking:', error);
+      return null;
+    }
   }
 
   /**
    * Statistiche ordini
    * @returns {Object} - Statistiche
    */
-  getStats() {
-    const stats = {
-      total: this.orders.length,
-      byStatus: {
-        pending: 0,
-        processing: 0,
-        shipped: 0,
-        delivered: 0,
-        cancelled: 0
+  async getStats() {
+    try {
+      const [
+        total,
+        pending,
+        processing,
+        shipped,
+        delivered,
+        cancelled,
+        revenueResult
+      ] = await Promise.all([
+        prisma.order.count(),
+        prisma.order.count({ where: { status: 'pending' } }),
+        prisma.order.count({ where: { status: 'processing' } }),
+        prisma.order.count({ where: { status: 'shipped' } }),
+        prisma.order.count({ where: { status: 'delivered' } }),
+        prisma.order.count({ where: { status: 'cancelled' } }),
+        prisma.order.aggregate({
+          _sum: { total: true },
+          where: {
+            paymentStatus: 'paid',
+            status: { not: 'cancelled' }
+          }
+        })
+      ]);
+
+      const totalRevenue = parseFloat(revenueResult._sum.total || 0);
+      const paidOrders = processing + shipped + delivered;
+
+      return {
+        total,
+        byStatus: {
+          pending,
+          processing,
+          shipped,
+          delivered,
+          cancelled
+        },
+        totalRevenue,
+        averageOrderValue: paidOrders > 0 ? totalRevenue / paidOrders : 0
+      };
+
+    } catch (error) {
+      logger.error('Errore statistiche ordini:', error);
+      return {
+        total: 0,
+        byStatus: { pending: 0, processing: 0, shipped: 0, delivered: 0, cancelled: 0 },
+        totalRevenue: 0,
+        averageOrderValue: 0
+      };
+    }
+  }
+
+  /**
+   * Formatta ordine dal database per API (compatibilità con vecchio sistema)
+   */
+  formatOrderForAPI(order) {
+    let shippingAddress = {};
+    try {
+      shippingAddress = JSON.parse(order.shippingAddress || '{}');
+    } catch (e) {
+      shippingAddress = { raw: order.shippingAddress };
+    }
+
+    return {
+      id: order.orderNumber,
+      dbId: order.id,
+      status: order.status,
+      customer: {
+        name: order.customerName,
+        email: order.customerEmail,
+        phone: order.customerPhone || '',
+        address: shippingAddress
       },
-      totalRevenue: 0,
-      averageOrderValue: 0
+      items: (order.items || []).map(item => ({
+        productId: item.productId || item.sku,
+        sku: item.sku,
+        name: item.productName,
+        price: parseFloat(item.unitPrice),
+        quantity: item.quantity,
+        image: item.productImage
+      })),
+      totals: {
+        subtotal: parseFloat(order.subtotal),
+        shipping: parseFloat(order.shippingCost),
+        total: parseFloat(order.total)
+      },
+      payment: {
+        method: order.paymentMethod,
+        sessionId: order.stripeSessionId || '',
+        status: order.paymentStatus,
+        paidAt: order.paidAt
+      },
+      shipping: {
+        carrier: order.shipment?.carrier || '',
+        trackingNumber: order.shipment?.trackingNumber || '',
+        estimatedDelivery: order.shipment?.estimatedDelivery || '',
+        status: order.shipment?.status || 'pending'
+      },
+      notes: order.customerNotes || '',
+      createdAt: order.createdAt.toISOString(),
+      updatedAt: order.updatedAt.toISOString()
     };
-
-    this.orders.forEach(order => {
-      stats.byStatus[order.status] = (stats.byStatus[order.status] || 0) + 1;
-      stats.totalRevenue += order.totals.total;
-    });
-
-    stats.averageOrderValue = stats.total > 0
-      ? stats.totalRevenue / stats.total
-      : 0;
-
-    return stats;
   }
 }
 
+// Esporta istanza singleton
 module.exports = new OrderService();

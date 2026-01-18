@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
     const session = await stripe.createCheckoutSession(checkoutData);
 
     // 4. Salva ordine nel database
-    const order = orderService.createOrder({
+    const order = await orderService.createOrder({
       customer: {
         name: customer.name,
         email: customer.email,
@@ -125,12 +125,12 @@ router.get('/success', async (req, res) => {
     const session = await stripe.getSession(session_id);
 
     // Trova e aggiorna l'ordine corrispondente
-    const orders = orderService.getAllOrders();
+    const orders = await orderService.getAllOrders();
     const order = orders.find(o => o.payment.sessionId === session_id);
 
     if (order) {
       // Aggiorna stato ordine a "processing" (pagamento confermato)
-      orderService.updateOrderStatus(order.id, 'processing');
+      await orderService.updateOrderStatus(order.id, 'processing');
       logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
     }
 

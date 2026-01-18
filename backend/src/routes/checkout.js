@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('../integrations/StripeClient');
 const bigbuy = require('../integrations/BigBuyClient');
+const AWDropshipClient = require('../integrations/AWDropshipClient');
 const shippingService = require('../services/ShippingService');
 const orderService = require('../services/OrderService');
 const logger = require('../utils/logger');
+
+const awDropship = new AWDropshipClient();
 
 // POST /api/checkout - Crea sessione checkout Stripe
 router.post('/', async (req, res) => {
@@ -26,25 +29,59 @@ router.post('/', async (req, res) => {
       });
     }
 
-    // 1. Verifica stock su BigBuy
-    const productIds = items.map(item => item.bigbuyId || item.productId);
-    const stockData = await bigbuy.checkMultipleStock(productIds);
+    // 1. Separa prodotti per fornitore
+    const bigbuyItems = items.filter(item => item.source === 'bigbuy');
+    const awItems = items.filter(item => item.source === 'aw' || item.source === 'aw-dropship');
 
-    // Controlla disponibilità
-    for (const item of items) {
-      const productId = item.bigbuyId || item.productId;
-      const stock = stockData.stocks?.find(s => s.productId === productId);
+    logger.info(`📦 Checkout: ${bigbuyItems.length} prodotti BigBuy, ${awItems.length} prodotti AW`);
 
-      if (!stock || !stock.available || stock.quantity < item.quantity) {
-        return res.status(400).json({
-          success: false,
-          error: `Prodotto "${item.name}" non disponibile o quantità insufficiente`,
-          productId
-        });
+    // 2. Verifica stock BigBuy
+    if (bigbuyItems.length > 0) {
+      const productIds = bigbuyItems.map(item => item.bigbuyId || item.productId);
+      const stockData = await bigbuy.checkMultipleStock(productIds);
+
+      for (const item of bigbuyItems) {
+        const productId = item.bigbuyId || item.productId;
+        const stock = stockData.stocks?.find(s => s.productId === productId);
+
+        if (!stock || !stock.available || stock.quantity < item.quantity) {
+          logger.warn(`❌ BigBuy: Prodotto ${productId} non disponibile`);
+          return res.status(400).json({
+            success: false,
+            error: `Prodotto "${item.name}" non disponibile o quantità insufficiente`,
+            productId
+          });
+        }
       }
+      logger.info(`✅ Stock BigBuy verificato per ${bigbuyItems.length} prodotti`);
     }
 
-    // 2. Prepara dati per Stripe
+    // 3. Verifica stock AW Dropship
+    if (awItems.length > 0) {
+      for (const item of awItems) {
+        const productId = item.awId || item.productId || item.id;
+
+        // Usa stock dal database se disponibile, altrimenti chiama API
+        if (item.stock !== undefined && item.stock >= item.quantity) {
+          continue; // Stock sufficiente dal database
+        }
+
+        // Fallback: verifica via API AW
+        const productData = await awDropship.getProduct(productId);
+
+        if (!productData || !productData.stock || productData.stock < item.quantity) {
+          logger.warn(`❌ AW: Prodotto ${productId} non disponibile`);
+          return res.status(400).json({
+            success: false,
+            error: `Prodotto "${item.name}" non disponibile o quantità insufficiente`,
+            productId
+          });
+        }
+      }
+      logger.info(`✅ Stock AW verificato per ${awItems.length} prodotti`);
+    }
+
+    // 4. Prepara dati per Stripe
     const checkoutData = {
       items: items.map(item => ({
         name: item.name,
@@ -62,11 +99,11 @@ router.post('/', async (req, res) => {
       }
     };
 
-    // 3. Crea sessione Stripe
+    // 5. Crea sessione Stripe
     const session = await stripe.createCheckoutSession(checkoutData);
 
-    // 4. Salva ordine nel database
-    const order = orderService.createOrder({
+    // 6. Salva ordine nel database
+    const order = await orderService.createOrder({
       customer: {
         name: customer.name,
         email: customer.email,
@@ -125,12 +162,12 @@ router.get('/success', async (req, res) => {
     const session = await stripe.getSession(session_id);
 
     // Trova e aggiorna l'ordine corrispondente
-    const orders = orderService.getAllOrders();
+    const orders = await orderService.getAllOrders();
     const order = orders.find(o => o.payment.sessionId === session_id);
 
     if (order) {
       // Aggiorna stato ordine a "processing" (pagamento confermato)
-      orderService.updateOrderStatus(order.id, 'processing');
+      await orderService.updateOrderStatus(order.id, 'processing');
       logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
     }
 

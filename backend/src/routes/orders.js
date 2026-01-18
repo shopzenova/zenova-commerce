@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     }
 
     // Crea ordine con formato compatibile con OrderService
-    const order = orderService.createOrder({
+    const order = await orderService.createOrder({
       customer: {
         name: `${orderData.shipping.firstName || ''} ${orderData.shipping.lastName || ''}`.trim(),
         email: orderData.shipping.email,
@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
   try {
     const { status, limit, offset } = req.query;
 
-    const orders = orderService.getAllOrders({
+    const orders = await orderService.getAllOrders({
       status,
       limit: limit ? parseInt(limit) : undefined,
       offset: offset ? parseInt(offset) : undefined
@@ -95,7 +95,7 @@ router.get('/', async (req, res) => {
 // GET /api/orders/stats - Statistiche ordini
 router.get('/stats', async (req, res) => {
   try {
-    const stats = orderService.getStats();
+    const stats = await orderService.getStats();
 
     res.json({
       success: true,
@@ -114,7 +114,7 @@ router.get('/stats', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const order = orderService.getOrderById(id);
+    const order = await orderService.getOrderById(id);
 
     if (!order) {
       return res.status(404).json({
@@ -157,7 +157,7 @@ router.patch('/:id/status', async (req, res) => {
       });
     }
 
-    const order = orderService.updateOrderStatus(id, status);
+    const order = await orderService.updateOrderStatus(id, status);
 
     if (!order) {
       return res.status(404).json({
@@ -191,7 +191,7 @@ router.patch('/:id/tracking', async (req, res) => {
     if (carrier) trackingData.carrier = carrier;
     if (estimatedDelivery) trackingData.estimatedDelivery = estimatedDelivery;
 
-    const order = orderService.updateTracking(id, trackingData);
+    const order = await orderService.updateTracking(id, trackingData);
 
     if (!order) {
       return res.status(404).json({
@@ -218,7 +218,7 @@ router.patch('/:id/tracking', async (req, res) => {
 router.get('/:id/tracking', async (req, res) => {
   try {
     const { id } = req.params;
-    const order = orderService.getOrderById(id);
+    const order = await orderService.getOrderById(id);
 
     if (!order) {
       return res.status(404).json({

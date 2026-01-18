@@ -94,7 +94,7 @@ router.post('/create-order', async (req, res) => {
     }
 
     // 4. Salva ordine nel database come pending
-    const order = orderService.createOrder({
+    const order = await orderService.createOrder({
       customer: {
         name: customer.name,
         email: customer.email,
@@ -168,11 +168,11 @@ router.post('/capture-order', async (req, res) => {
     }
 
     // Aggiorna ordine nel database
-    const orders = orderService.getAllOrders();
+    const orders = await orderService.getAllOrders();
     const order = orders.find(o => o.payment.paypalOrderId === orderId);
 
     if (order) {
-      orderService.updateOrderStatus(order.id, 'processing');
+      await orderService.updateOrderStatus(order.id, 'processing');
       logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
     }
 
@@ -252,10 +252,10 @@ router.post('/webhook', async (req, res) => {
         logger.info(`✅ Ordine completato: ${event.resource.id}`);
 
         // Aggiorna ordine nel DB
-        const orders = orderService.getAllOrders();
+        const orders = await orderService.getAllOrders();
         const order = orders.find(o => o.payment.paypalOrderId === event.resource.id);
         if (order) {
-          orderService.updateOrderStatus(order.id, 'processing');
+          await orderService.updateOrderStatus(order.id, 'processing');
         }
         break;
 

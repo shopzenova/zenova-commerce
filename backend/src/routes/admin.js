@@ -94,14 +94,14 @@ try {
 }
 
 // GET /api/admin/stats - Statistiche per dashboard
-router.get('/stats', (req, res) => {
+router.get('/stats', async (req, res) => {
   try {
     // Calcola statistiche reali dai prodotti
     const totalProducts = PRODUCTS.length;
     const availableProducts = PRODUCTS.filter(p => p.stock > 0).length;
 
     // Calcola ordini e vendite di oggi dal database
-    const allOrders = orderService.getAllOrders();
+    const allOrders = await orderService.getAllOrders();
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Inizio giornata
 
