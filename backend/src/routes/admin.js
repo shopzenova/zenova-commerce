@@ -538,6 +538,16 @@ router.post('/products/import', async (req, res) => {
         const apiProduct = await bigbuyClient.getProduct(sku);
 
         if (apiProduct) {
+          // Recupera stock separatamente (BigBuy non lo include nel dettaglio prodotto)
+          let stockQuantity = 0;
+          try {
+            const stockData = await bigbuyClient.getProductStock(sku);
+            stockQuantity = parseInt(stockData?.quantity || stockData?.stock || 0);
+            logger.info(`📦 Stock recuperato da API: ${stockQuantity}`);
+          } catch (stockError) {
+            logger.warn('⚠️ Impossibile recuperare stock, impostato a 0');
+          }
+
           foundProduct = {
             id: apiProduct.id || apiProduct.sku || sku,
             name: apiProduct.name || `Prodotto ${sku}`,
@@ -545,7 +555,7 @@ router.post('/products/import', async (req, res) => {
             brand: apiProduct.brand || '',
             price: parseFloat(apiProduct.retailPrice || apiProduct.price || 0),
             wholesalePrice: parseFloat(apiProduct.wholesalePrice || apiProduct.pvd || 0),
-            stock: parseInt(apiProduct.stock || apiProduct.quantity || 0),
+            stock: stockQuantity,
             ean: apiProduct.ean || '',
             weight: parseFloat(apiProduct.weight || 0),
             width: parseFloat(apiProduct.width || 0),
