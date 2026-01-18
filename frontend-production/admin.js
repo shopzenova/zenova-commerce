@@ -1,7 +1,11 @@
 // Admin Panel JavaScript
 
-// API Configuration
-const API_BASE = 'http://localhost:3000/api';
+// API Configuration - rileva ambiente automaticamente
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const IS_ZENOVA = window.location.hostname.includes('zenova.ovh');
+const API_BASE = IS_LOCAL
+    ? 'http://localhost:3000/api'
+    : 'https://zenova-commerce-production.up.railway.app/api';
 
 // Authentication
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -1911,7 +1915,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/api/admin/products/${productId}/category`, {
+                const response = await fetch(`${API_BASE}/admin/products/${productId}/category`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1964,8 +1968,8 @@ async function loadOrders(statusFilter = '') {
         container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
 
         const url = statusFilter
-            ? `http://localhost:3000/api/orders?status=${statusFilter}`
-            : 'http://localhost:3000/api/orders';
+            ? `${API_BASE}/orders?status=${statusFilter}`
+            : `${API_BASE}/orders`;
 
         const response = await fetch(url);
         const result = await response.json();
@@ -2084,7 +2088,7 @@ function addOrderEventListeners(orderId) {
  */
 async function updateOrderStatus(orderId, newStatus) {
     try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+        const response = await fetch(`${API_BASE}/orders/${orderId}/status`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -2113,7 +2117,7 @@ async function updateOrderStatus(orderId, newStatus) {
  */
 async function showOrderDetails(orderId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/orders/${orderId}`);
+        const response = await fetch(`${API_BASE}/orders/${orderId}`);
         const result = await response.json();
 
         if (!result.success) {
