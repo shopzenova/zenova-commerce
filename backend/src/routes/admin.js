@@ -7,6 +7,7 @@ const logger = require('../utils/logger');
 const productsRouter = require('./products');
 const orderService = require('../services/OrderService');
 const { syncBigBuyToPostgres } = require('../services/SyncBigBuyService');
+const bigbuyClient = require('../integrations/BigBuyClient');
 
 // Prisma Client per PostgreSQL
 const prisma = new PrismaClient();
@@ -433,7 +434,7 @@ router.get('/activity', (req, res) => {
 
 // Helper: Ricarica prodotti rimosso - ora usa la funzione all'inizio del file
 
-// POST /api/admin/products/import - Importa prodotto da BigBuy per SKU (cerca nei CSV locali)
+// POST /api/admin/products/import - Importa prodotto da BigBuy per SKU (API o CSV)
 router.post('/products/import', async (req, res) => {
   try {
     const { sku, category } = req.body;
@@ -452,61 +453,7 @@ router.post('/products/import', async (req, res) => {
       });
     }
 
-    logger.info(`🔍 Ricerca prodotto nei CSV BigBuy con SKU: ${sku}`);
-
-    // Cerca il prodotto nei CSV locali
-    const csv = require('csv-parser');
-    const CSV_DIR = path.join(__dirname, '../../bigbuy-data/bigbuy-complete');
-
-    if (!fs.existsSync(CSV_DIR)) {
-      return res.status(500).json({
-        success: false,
-        error: 'Cartella CSV non trovata. Scarica i CSV BigBuy prima.'
-      });
-    }
-
-    const csvFiles = fs.readdirSync(CSV_DIR)
-      .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
-
-    let foundProduct = null;
-
-    // Parsing CSV con gestione BOM
-    async function parseCSV(filePath) {
-      return new Promise((resolve, reject) => {
-        const products = [];
-        fs.createReadStream(filePath)
-          .pipe(csv({ separator: ';' }))
-          .on('data', (row) => {
-            const cleanedRow = {};
-            for (const [key, value] of Object.entries(row)) {
-              const cleanKey = key.replace(/^\uFEFF/, '');
-              cleanedRow[cleanKey] = value;
-            }
-            products.push(cleanedRow);
-          })
-          .on('end', () => resolve(products))
-          .on('error', reject);
-      });
-    }
-
-    // Cerca in tutti i CSV
-    for (const file of csvFiles) {
-      const filePath = path.join(CSV_DIR, file);
-      const products = await parseCSV(filePath);
-      const product = products.find(p => p.ID === sku);
-
-      if (product) {
-        foundProduct = product;
-        break;
-      }
-    }
-
-    if (!foundProduct) {
-      return res.status(404).json({
-        success: false,
-        error: 'Prodotto non trovato nei CSV BigBuy'
-      });
-    }
+    logger.info(`🔍 Ricerca prodotto BigBuy con SKU: ${sku}`);
 
     // ✅ Verifica che non esista già su PostgreSQL
     const existingProduct = await prisma.product.findUnique({
@@ -519,12 +466,108 @@ router.post('/products/import', async (req, res) => {
       });
     }
 
-    // Raccogli immagini
-    const images = [];
-    for (let i = 1; i <= 8; i++) {
-      const imgField = `IMAGE${i}`;
-      if (foundProduct[imgField]) images.push({ url: foundProduct[imgField] });
+    let foundProduct = null;
+    let productSource = null;
+
+    // METODO 1: Cerca nei CSV locali (se disponibili)
+    const CSV_DIR = path.join(__dirname, '../../bigbuy-data/bigbuy-complete');
+
+    if (fs.existsSync(CSV_DIR)) {
+      logger.info('📁 CSV trovati, cerco nel catalogo locale...');
+
+      const csv = require('csv-parser');
+      const csvFiles = fs.readdirSync(CSV_DIR)
+        .filter(f => f.startsWith('general-products-csv-') && f.endsWith('.csv'));
+
+      // Parsing CSV con gestione BOM
+      async function parseCSV(filePath) {
+        return new Promise((resolve, reject) => {
+          const products = [];
+          fs.createReadStream(filePath)
+            .pipe(csv({ separator: ';' }))
+            .on('data', (row) => {
+              const cleanedRow = {};
+              for (const [key, value] of Object.entries(row)) {
+                const cleanKey = key.replace(/^\uFEFF/, '');
+                cleanedRow[cleanKey] = value;
+              }
+              products.push(cleanedRow);
+            })
+            .on('end', () => resolve(products))
+            .on('error', reject);
+        });
+      }
+
+      // Cerca in tutti i CSV
+      for (const file of csvFiles) {
+        const filePath = path.join(CSV_DIR, file);
+        const products = await parseCSV(filePath);
+        const product = products.find(p => p.ID === sku);
+
+        if (product) {
+          foundProduct = {
+            id: product.ID,
+            name: product.NAME || product.ID,
+            description: product.DESCRIPTION || '',
+            brand: product.BRAND || '',
+            price: parseFloat(product.PVP_BIGBUY || 0),
+            wholesalePrice: parseFloat(product.PVD || 0),
+            stock: parseInt(product.STOCK || 0),
+            ean: product.EAN13 || '',
+            weight: parseFloat(product.WEIGHT || 0),
+            width: parseFloat(product.WIDTH || 0),
+            height: parseFloat(product.HEIGHT || 0),
+            depth: parseFloat(product.DEPTH || 0),
+            images: []
+          };
+          // Raccogli immagini
+          for (let i = 1; i <= 8; i++) {
+            if (product[`IMAGE${i}`]) foundProduct.images.push(product[`IMAGE${i}`]);
+          }
+          productSource = 'csv';
+          break;
+        }
+      }
     }
+
+    // METODO 2: Se non trovato nei CSV, usa API BigBuy
+    if (!foundProduct) {
+      logger.info('🌐 CSV non disponibili o prodotto non trovato, uso API BigBuy...');
+
+      try {
+        const apiProduct = await bigbuyClient.getProduct(sku);
+
+        if (apiProduct) {
+          foundProduct = {
+            id: apiProduct.id || apiProduct.sku || sku,
+            name: apiProduct.name || `Prodotto ${sku}`,
+            description: apiProduct.description || '',
+            brand: apiProduct.brand || '',
+            price: parseFloat(apiProduct.retailPrice || apiProduct.price || 0),
+            wholesalePrice: parseFloat(apiProduct.wholesalePrice || apiProduct.pvd || 0),
+            stock: parseInt(apiProduct.stock || apiProduct.quantity || 0),
+            ean: apiProduct.ean || '',
+            weight: parseFloat(apiProduct.weight || 0),
+            width: parseFloat(apiProduct.width || 0),
+            height: parseFloat(apiProduct.height || 0),
+            depth: parseFloat(apiProduct.depth || 0),
+            images: (apiProduct.images || []).map(img => img.url || img)
+          };
+          productSource = 'api';
+        }
+      } catch (apiError) {
+        logger.error('❌ Errore API BigBuy:', apiError.message);
+      }
+    }
+
+    if (!foundProduct) {
+      return res.status(404).json({
+        success: false,
+        error: 'Prodotto non trovato (né nei CSV né via API BigBuy)'
+      });
+    }
+
+    logger.info(`✅ Prodotto trovato via ${productSource}: ${foundProduct.name}`);
 
     // Mappa sottocategorie di default per ogni categoria principale
     const defaultSubcategories = {
@@ -535,37 +578,34 @@ router.post('/products/import', async (req, res) => {
       'tech-innovation': 'gadget-tech'
     };
 
-    // Raccogli URL immagini (array di stringhe per PostgreSQL)
-    const imageUrls = images.map(img => img.url || img);
-
     // ✅ SALVA SU POSTGRESQL
     const newProduct = await prisma.product.create({
       data: {
-        id: foundProduct.ID,
-        name: foundProduct.NAME || foundProduct.ID,
-        description: foundProduct.DESCRIPTION || '',
-        brand: foundProduct.BRAND || '',
+        id: foundProduct.id,
+        name: foundProduct.name,
+        description: foundProduct.description,
+        brand: foundProduct.brand,
         category: category,
         zenovaCategory: category,
         zenovaCategories: [category],
         zenovaSubcategory: defaultSubcategories[category] || 'altri',
-        price: parseFloat(foundProduct.PVP_BIGBUY || 0),
-        retailPrice: parseFloat(foundProduct.PVP_BIGBUY || 0),
-        wholesalePrice: parseFloat(foundProduct.PVD || 0),
-        stock: parseInt(foundProduct.STOCK || 0),
-        images: imageUrls,
-        image: imageUrls[0] || null,
-        ean: foundProduct.EAN13 || '',
-        weight: parseFloat(foundProduct.WEIGHT || 0),
+        price: foundProduct.price,
+        retailPrice: foundProduct.price,
+        wholesalePrice: foundProduct.wholesalePrice,
+        stock: foundProduct.stock,
+        images: foundProduct.images,
+        image: foundProduct.images[0] || null,
+        ean: foundProduct.ean,
+        weight: foundProduct.weight,
         dimensions: {
-          width: parseFloat(foundProduct.WIDTH || 0),
-          height: parseFloat(foundProduct.HEIGHT || 0),
-          depth: parseFloat(foundProduct.DEPTH || 0)
+          width: foundProduct.width,
+          height: foundProduct.height,
+          depth: foundProduct.depth
         },
         visible: true,
         zone: 'sidebar',
         source: 'bigbuy',
-        bigbuyId: foundProduct.ID
+        bigbuyId: foundProduct.id
       }
     });
 
