@@ -534,14 +534,18 @@ router.post('/products/import', async (req, res) => {
     if (!foundProduct) {
       logger.info('🌐 CSV non disponibili o prodotto non trovato, uso API BigBuy...');
 
+      // Estrae parte numerica dallo SKU (es. "S3057817" -> "3057817")
+      const numericId = sku.replace(/\D/g, '');
+      logger.info(`🔑 SKU: ${sku} -> ID numerico: ${numericId}`);
+
       try {
-        const apiProduct = await bigbuyClient.getProduct(sku);
+        const apiProduct = await bigbuyClient.getProduct(numericId);
 
         if (apiProduct) {
           // Recupera stock separatamente (BigBuy non lo include nel dettaglio prodotto)
           let stockQuantity = 0;
           try {
-            const stockData = await bigbuyClient.getProductStock(sku);
+            const stockData = await bigbuyClient.getProductStock(numericId);
             stockQuantity = parseInt(stockData?.quantity || stockData?.stock || 0);
             logger.info(`📦 Stock recuperato da API: ${stockQuantity}`);
           } catch (stockError) {
@@ -729,14 +733,18 @@ router.get('/products/preview/:sku', async (req, res) => {
     if (!foundProduct) {
       logger.info('🌐 CSV non disponibili, uso API BigBuy per preview...');
 
+      // Estrae parte numerica dallo SKU (es. "S3057817" -> "3057817")
+      const numericId = sku.replace(/\D/g, '');
+      logger.info(`🔑 SKU: ${sku} -> ID numerico: ${numericId}`);
+
       try {
-        const apiProduct = await bigbuyClient.getProduct(sku);
+        const apiProduct = await bigbuyClient.getProduct(numericId);
 
         if (apiProduct) {
           // Recupera stock separatamente
           let stockQuantity = 0;
           try {
-            const stockData = await bigbuyClient.getProductStock(sku);
+            const stockData = await bigbuyClient.getProductStock(numericId);
             stockQuantity = parseInt(stockData?.quantity || stockData?.stock || 0);
           } catch (stockError) {
             logger.warn('⚠️ Impossibile recuperare stock per preview');
