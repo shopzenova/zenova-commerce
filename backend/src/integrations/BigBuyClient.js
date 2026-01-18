@@ -192,13 +192,20 @@ class BigBuyClient {
     }
 
     try {
+      logger.info(`🔄 BigBuy API: getProduct(${productId})`);
       const response = await this.client.get(
         `/rest/catalog/product/${productId}.json`,
         { params: { isoCode: 'it' } }
       );
+      logger.info(`✅ BigBuy API: prodotto ${productId} trovato`);
       return response.data;
     } catch (error) {
-      logger.error(`Errore BigBuy getProduct ${productId}:`, error.message);
+      logger.error(`❌ BigBuy getProduct ${productId} FAILED:`, {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        message: error.message
+      });
       throw error;
     }
   }
