@@ -6,6 +6,16 @@ class BigBuyClient {
     this.baseURL = process.env.BIGBUY_API_URL || 'https://api.bigbuy.eu';
     this.apiKey = process.env.BIGBUY_API_KEY;
 
+    // DEBUG: mostra info chiave API (mascherata per sicurezza)
+    if (this.apiKey) {
+      const keyLength = this.apiKey.length;
+      const firstChars = this.apiKey.substring(0, 4);
+      const lastChars = this.apiKey.substring(keyLength - 4);
+      logger.info(`🔑 BigBuy API Key: ${firstChars}...${lastChars} (${keyLength} caratteri)`);
+    } else {
+      logger.warn('⚠️ BigBuy API Key: NON IMPOSTATA');
+    }
+
     // Verifica se siamo in modalità mock
     this.isMockMode = !this.apiKey ||
                       this.apiKey === 'your_bigbuy_api_key_here' ||

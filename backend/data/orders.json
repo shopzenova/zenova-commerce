@@ -1,5 +1,81 @@
 [
   {
+    "id": "ZN-1768721907665-5894",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "363733333333",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "S71013640",
+        "bigbuyId": "S71013640",
+        "name": "Ghirlanda di Luci LED Lumisky Nero",
+        "price": 100.55,
+        "quantity": 1,
+        "image": "https://cdnbigbuy.com/images/3666162005887_S71013640_P00.jpg"
+      }
+    ],
+    "totals": {
+      "subtotal": 100.55,
+      "shipping": 0,
+      "total": 100.55
+    },
+    "payment": {
+      "method": "stripe_card",
+      "sessionId": "pi_3SqqZ2FfFbDwiUWS1N46SI1A",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2026-01-18T07:38:27.665Z",
+    "updatedAt": "2026-01-18T07:38:27.665Z"
+  },
+  {
+    "id": "ZN-1768721850567-2684",
+    "status": "pending",
+    "customer": {
+      "name": "giorgio frongillo",
+      "email": "giorgio.frongillo@yahoo.it",
+      "phone": "363733333333",
+      "address": "via guerrazzi 149"
+    },
+    "items": [
+      {
+        "productId": "EOUL-71",
+        "bigbuyId": "EOUL-71",
+        "name": "10x Olio Essenziale di Legno di Ho 10ml Senza Etichetta",
+        "price": 40.6,
+        "quantity": 1,
+        "image": "https://media.aiku.io/nMnT2hRf2m8sbNTIWZmfObId1QJNQD1Qr7cAUxRy7MU/bG9jYWw6Ly9tZWRpYS9ISy9FQy82MFIzMEMxRzZHUzNFQ0hLLzc4NzEwMmQ0LmpwZWc"
+      }
+    ],
+    "totals": {
+      "subtotal": 40.6,
+      "shipping": 9.9,
+      "total": 50.5
+    },
+    "payment": {
+      "method": "stripe_card",
+      "sessionId": "pi_3SqqY7FfFbDwiUWS0TsxC68u",
+      "status": "pending"
+    },
+    "shipping": {
+      "carrier": "",
+      "trackingNumber": "",
+      "estimatedDelivery": ""
+    },
+    "notes": "",
+    "createdAt": "2026-01-18T07:37:30.569Z",
+    "updatedAt": "2026-01-18T07:37:30.570Z"
+  },
+  {
     "id": "ZN-1767773555618-225",
     "status": "pending",
     "customer": {

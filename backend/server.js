@@ -11,6 +11,9 @@ const logger = require('./src/utils/logger');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy per Railway/Vercel (necessario per rate-limit corretto)
+app.set('trust proxy', 1);
+
 // ===== MIDDLEWARE =====
 
 // Sicurezza - Helmet con CSP configurato per development
