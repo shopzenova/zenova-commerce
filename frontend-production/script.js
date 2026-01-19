@@ -779,112 +779,89 @@ window.autoOpenCategoryFromHash = function() {
     }
 };
 
-// Filter Products By Subcategory
+// Filter Products By Subcategory - OTTIMIZZATO per performance
 window.filterProductsBySubcategory = function(subcategory) {
-    console.log('🔍 Filtraggio prodotti per subcategory:', subcategory);
-
     const productCards = document.querySelectorAll('.product-card');
     let visibleCount = 0;
 
-    console.log(`📦 Totale product-card trovate: ${productCards.length}`);
+    // Pre-calcola le categorie di ricerca una sola volta
+    const searchCategories = subcategory !== 'all' ? subcategory.split(',').map(s => s.trim()) : null;
 
-    if (subcategory === 'all') {
-        // TUTTI I PRODOTTI: mostra solo 4 prodotti per categoria ordinati per prezzo
-        console.log('📊 Modalità "Tutti i Prodotti": 4 prodotti per categoria');
-        console.log('📦 Totale card trovate:', productCards.length);
+    // Batch DOM updates con requestAnimationFrame
+    requestAnimationFrame(() => {
+        if (subcategory === 'all') {
+            // TUTTI I PRODOTTI: mostra solo 4 prodotti per categoria
+            const cardsBySubcategory = {};
 
-        // Raggruppa le card per subcategory
-        const cardsBySubcategory = {};
+            // Prima passata: raggruppa le card (senza modificare il DOM)
+            productCards.forEach(card => {
+                const cardSubcategory = card.getAttribute('data-subcategory');
+                if (!cardSubcategory) return;
 
-        productCards.forEach((card, idx) => {
-            const cardSubcategory = card.getAttribute('data-subcategory');
-
-            if (idx < 3) {
-                console.log(`  Debug card ${idx}: subcategory="${cardSubcategory}"`);
-            }
-
-            if (!cardSubcategory) {
-                console.warn(`  ⚠️ Card ${idx} non ha data-subcategory`);
-                return;
-            }
-
-            if (!cardsBySubcategory[cardSubcategory]) {
-                cardsBySubcategory[cardSubcategory] = [];
-            }
-            cardsBySubcategory[cardSubcategory].push(card);
-        });
-
-        console.log('📊 Sottocategorie trovate:', Object.keys(cardsBySubcategory).length);
-
-        // Per ogni sottocategoria, ordina per prezzo e mostra solo i primi 4
-        Object.keys(cardsBySubcategory).forEach(subcat => {
-            const cards = cardsBySubcategory[subcat];
-
-            // Ordina le card per prezzo crescente
-            cards.sort((a, b) => {
-                const priceA = parseFloat(a.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
-                const priceB = parseFloat(b.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
-                return priceA - priceB;
+                if (!cardsBySubcategory[cardSubcategory]) {
+                    cardsBySubcategory[cardSubcategory] = [];
+                }
+                cardsBySubcategory[cardSubcategory].push(card);
             });
 
-            // Mostra solo i primi 4
-            let hiddenCount = 0;
-            cards.forEach((card, index) => {
-                if (index < 4) {
-                    card.style.display = 'block';
+            // Seconda passata: aggiorna il DOM in batch
+            const toShow = [];
+            const toHide = [];
+
+            Object.values(cardsBySubcategory).forEach(cards => {
+                // Ordina per prezzo (usa data attribute se disponibile per velocità)
+                cards.sort((a, b) => {
+                    const priceA = parseFloat(a.dataset.price) || parseFloat(a.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
+                    const priceB = parseFloat(b.dataset.price) || parseFloat(b.querySelector('.product-price')?.textContent.replace('€', '').replace(',', '.')) || 0;
+                    return priceA - priceB;
+                });
+
+                cards.forEach((card, index) => {
+                    if (index < 4) {
+                        toShow.push(card);
+                        visibleCount++;
+                    } else {
+                        toHide.push(card);
+                    }
+                });
+            });
+
+            // Applica modifiche DOM in batch
+            toShow.forEach(card => card.style.display = 'block');
+            toHide.forEach(card => card.style.display = 'none');
+
+        } else {
+            // SOTTOCATEGORIA SPECIFICA: mostra TUTTI i prodotti matching
+            const toShow = [];
+            const toHide = [];
+
+            productCards.forEach(card => {
+                const cardSubcategory = card.getAttribute('data-subcategory');
+
+                // Match veloce
+                let hasMatch = false;
+                if (cardSubcategory === subcategory) {
+                    hasMatch = true;
+                } else if (cardSubcategory) {
+                    const categories = cardSubcategory.split(',');
+                    hasMatch = searchCategories.some(searchCat =>
+                        categories.includes(searchCat)
+                    );
+                }
+
+                if (hasMatch) {
+                    toShow.push(card);
                     visibleCount++;
-
-                    // Debug: verifica che lo stile sia stato applicato
-                    if (index === 0 && Object.keys(cardsBySubcategory).indexOf(subcat) < 2) {
-                        console.log(`    ✅ Card ${index} display set to: "${card.style.display}"`);
-                    }
                 } else {
-                    card.style.display = 'none';
-                    hiddenCount++;
-
-                    // Debug: verifica che lo stile sia stato applicato
-                    if (index === 4 && Object.keys(cardsBySubcategory).indexOf(subcat) < 2) {
-                        console.log(`    ❌ Card ${index} display set to: "${card.style.display}"`);
-                    }
+                    toHide.push(card);
                 }
             });
 
-            console.log(`  📂 ${subcat}: mostra ${Math.min(4, cards.length)}/${cards.length} (nascosti: ${hiddenCount})`);
-        });
-    } else {
-        // SOTTOCATEGORIA SPECIFICA: mostra TUTTI i prodotti
-        console.log('📂 Modalità sottocategoria specifica: mostra tutti i prodotti');
-
-        productCards.forEach((card, index) => {
-            const cardSubcategory = card.getAttribute('data-subcategory');
-
-            if (index < 3) {
-                console.log(`  Card ${index}: subcategory="${cardSubcategory}"`);
-            }
-
-            // Check se la categoria del prodotto contiene la subcategory cercata
-            // Es: cardSubcategory = "2399,2435,2440" contiene subcategory = "2399"
-            const categories = cardSubcategory ? cardSubcategory.split(',') : [];
-            const searchCategories = subcategory.split(',');
-
-            // Match se almeno una categoria corrisponde
-            const hasMatch = searchCategories.some(searchCat =>
-                categories.some(cat => cat.trim() === searchCat.trim())
-            );
-
-            if (hasMatch || cardSubcategory === subcategory) {
-                card.style.display = 'block';
-                visibleCount++;
-                if (visibleCount <= 3) {
-                    console.log(`  ✅ MATCH: "${cardSubcategory}" contiene "${subcategory}"`);
-                }
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    console.log(`✅ Mostrati ${visibleCount} prodotti su ${productCards.length}`);
+            // Applica modifiche DOM in batch
+            toShow.forEach(card => card.style.display = 'block');
+            toHide.forEach(card => card.style.display = 'none');
+        }
+    });
 };
 
 // ===== PRODUCT CARD CREATION =====
@@ -897,6 +874,7 @@ function createProductCard(product) {
     productCard.className = 'product-card';
     productCard.setAttribute('data-subcategory', product.zenovaSubcategory || product.subcategory);
     productCard.setAttribute('data-product-id', product.id);
+    productCard.setAttribute('data-price', product.price || 0); // Per ordinamento veloce
 
     const isInWishlist = wishlist.some(item => item.id === product.id);
     const wishlistClass = isInWishlist ? 'in-wishlist' : '';
