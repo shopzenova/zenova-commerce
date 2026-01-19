@@ -950,10 +950,32 @@ body {
     border-radius: var(--radius-lg);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-soft);
-    height: fit-content;
     position: sticky;
     top: 20px;
     align-self: flex-start;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-gold) var(--secondary-beige);
+}
+
+/* Scrollbar styling per webkit browsers */
+.categories-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.categories-sidebar::-webkit-scrollbar-track {
+    background: var(--secondary-beige);
+    border-radius: 3px;
+}
+
+.categories-sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-gold);
+    border-radius: 3px;
+}
+
+.categories-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--deep-brown);
 }
 
 .sidebar-header {
