@@ -1447,4 +1447,96 @@ router.get('/auto-sync/status', (req, res) => {
   }
 });
 
+// ===== SYNC TRADUZIONI INCENSO AW =====
+
+// POST /api/admin/sync-incenso-aw - Sincronizza traduzioni coni incenso al DB
+router.post('/sync-incenso-aw', async (req, res) => {
+  try {
+    logger.info('🔄 Sincronizzazione traduzioni coni incenso AW...');
+
+    // Dizionario traduzioni nomi
+    const nameTranslations = {
+      'Bulk  Incense Cones': 'Coni di Incenso Sfusi',
+      'Bulk Incense Cones': 'Coni di Incenso Sfusi',
+      'Honeysuckle': 'Caprifoglio',
+      'Lavender': 'Lavanda',
+      'Jasmine': 'Gelsomino',
+      'Sandalwood': 'Sandalo',
+      'Vanilla': 'Vaniglia',
+      'Cinnamon': 'Cannella',
+      'Lemon': 'Limone',
+      'Orange': 'Arancia',
+      'Strawberry': 'Fragola',
+      'Coconut': 'Cocco',
+      'Rose': 'Rosa',
+      'Amber': 'Ambra',
+      'Apple Cinnamon': 'Mela Cannella',
+      'Citronella': 'Citronella',
+      'Dragons Blood': 'Sangue di Drago',
+      'Frank & Myrrh': 'Incenso e Mirra',
+      'Tibetan Musk': 'Muschio Tibetano',
+      'Patchouli': 'Patchouli',
+      'Peach Mango': 'Pesca Mango',
+      'Vertiver Gold': 'Vetiver Oro',
+      'Tulsi Basil': 'Tulsi Basilico',
+      'Opium': 'Oppio',
+      'Nagchampa': 'Nag Champa',
+      'Violet': 'Violetta',
+      'Midnight  Rose': 'Rosa di Mezzanotte',
+      'Ylang Ylang': 'Ylang Ylang'
+    };
+
+    // Descrizione italiana standard per coni
+    const italianDescription = `Questi coni di incenso indiano con il loro colore straordinario e la fragranza esotica sono davvero fantastici. Con 25 mm di altezza sono più grandi della media. Accendi la punta del cono, soffia sulla fiamma e lascia che il cono bruci lentamente, rilasciando il fumo infuso con il profumo. Confezione da 1,6 kg.`;
+
+    // Trova tutti i coni incenso (BinC-XX) nel database
+    const coniProducts = await prisma.product.findMany({
+      where: {
+        source: 'aw',
+        id: { startsWith: 'BinC-' }
+      }
+    });
+
+    logger.info(`📦 Trovati ${coniProducts.length} coni incenso da aggiornare`);
+
+    let updated = 0;
+
+    for (const product of coniProducts) {
+      // Traduci nome
+      let newName = product.name;
+      const sortedKeys = Object.keys(nameTranslations).sort((a, b) => b.length - a.length);
+      for (const eng of sortedKeys) {
+        const ita = nameTranslations[eng];
+        newName = newName.replace(new RegExp(eng, 'gi'), ita);
+      }
+
+      // Aggiorna prodotto
+      await prisma.product.update({
+        where: { id: product.id },
+        data: {
+          name: newName,
+          description: italianDescription,
+          weight: 1.6
+        }
+      });
+
+      logger.info(`✅ ${product.id}: ${newName}`);
+      updated++;
+    }
+
+    res.json({
+      success: true,
+      message: `Aggiornati ${updated} coni incenso con traduzioni e peso 1.6 kg`,
+      updated
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore sync incenso AW:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;
