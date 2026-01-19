@@ -30,6 +30,7 @@ model Product {
   image              String?   // Immagine principale
   ean                String?
   weight             Decimal?  @db.Decimal(10, 3)
+  weightUnit         String?   @map("weight_unit") // "kg", "g", "pz" (pezzi)
   dimensions         Json?     // {width, height, depth}
   active             Boolean   @default(true)
   visible            Boolean   @default(true)

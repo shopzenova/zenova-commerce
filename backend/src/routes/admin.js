@@ -1549,6 +1549,7 @@ router.post('/fix-palo-santo', async (req, res) => {
       where: { id: 'Msanto-01' },
       data: {
         weight: 138,
+        weightUnit: 'pz',
         description: `Bastoncini di legno di Palo Santo di prima qualità (1° Grado).
 
 Il Palo Santo è un legno sacro sudamericano utilizzato da secoli per:
@@ -1566,6 +1567,7 @@ Confezione da 138 bastoncini di prima scelta, selezionati per qualità e profumo
       where: { id: 'Msanto-02' },
       data: {
         weight: 138,
+        weightUnit: 'pz',
         description: `Bastoncini di legno di Palo Santo di seconda qualità (2° Grado).
 
 Il Palo Santo è un legno sacro sudamericano utilizzato da secoli per:

@@ -2160,11 +2160,17 @@ function openProductDetailModal(productId) {
         }
 
         if (product.weight) {
-            // Converti grammi in kg se >= 1, altrimenti mostra in kg con 3 decimali
-            const weightDisplay = product.weight >= 1
-                ? `${product.weight.toFixed(2)} kg`
-                : `${(product.weight * 1000).toFixed(0)} g`;
-            techInfo.push({ label: 'Peso', value: weightDisplay });
+            // Se c'è weightUnit personalizzato (es: "pz" per pezzi), usalo
+            if (product.weightUnit && product.weightUnit !== 'kg') {
+                const weightDisplay = `${Math.round(product.weight)} ${product.weightUnit}`;
+                techInfo.push({ label: 'Quantità', value: weightDisplay });
+            } else {
+                // Converti grammi in kg se >= 1, altrimenti mostra in kg con 3 decimali
+                const weightDisplay = product.weight >= 1
+                    ? `${product.weight.toFixed(2)} kg`
+                    : `${(product.weight * 1000).toFixed(0)} g`;
+                techInfo.push({ label: 'Peso', value: weightDisplay });
+            }
         }
 
         if (product.brand) techInfo.push({ label: 'Produttore', value: product.brand });
