@@ -1539,4 +1539,60 @@ router.post('/sync-incenso-aw', async (req, res) => {
   }
 });
 
+// POST /api/admin/fix-palo-santo - Aggiorna prodotti Palo Santo con quantità
+router.post('/fix-palo-santo', async (req, res) => {
+  try {
+    logger.info('🔄 Aggiornamento prodotti Palo Santo...');
+
+    // Msanto-01: 1° Grado - 138 bastoncini
+    await prisma.product.update({
+      where: { id: 'Msanto-01' },
+      data: {
+        weight: 138,
+        description: `Bastoncini di legno di Palo Santo di prima qualità (1° Grado).
+
+Il Palo Santo è un legno sacro sudamericano utilizzato da secoli per:
+• Purificazione energetica degli ambienti
+• Meditazione e pratiche spirituali
+• Aromaterapia naturale
+• Allontanare energie negative
+
+Confezione da 138 bastoncini di prima scelta, selezionati per qualità e profumo intenso.`
+      }
+    });
+
+    // Msanto-02: 2° Grado - 138 bastoncini
+    await prisma.product.update({
+      where: { id: 'Msanto-02' },
+      data: {
+        weight: 138,
+        description: `Bastoncini di legno di Palo Santo di seconda qualità (2° Grado).
+
+Il Palo Santo è un legno sacro sudamericano utilizzato da secoli per:
+• Purificazione energetica degli ambienti
+• Meditazione e pratiche spirituali
+• Aromaterapia naturale
+• Allontanare energie negative
+
+Confezione da 138 bastoncini. Ottimo rapporto qualità-prezzo.`
+      }
+    });
+
+    logger.info('✅ Prodotti Palo Santo aggiornati');
+
+    res.json({
+      success: true,
+      message: 'Aggiornati 2 prodotti Palo Santo con quantità 138 bastoncini',
+      products: ['Msanto-01', 'Msanto-02']
+    });
+
+  } catch (error) {
+    logger.error('❌ Errore fix Palo Santo:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;
