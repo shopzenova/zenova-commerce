@@ -251,6 +251,7 @@ router.get('/', async (req, res) => {
       image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : null),
       ean: p.ean,
       weight: parseFloat(p.weight) || 0,
+      weightUnit: p.weightUnit || null,  // "kg", "g", "pz" (pezzi)
       dimensions: {
         width: parseFloat(p.width) || 0,
         height: parseFloat(p.height) || 0,
@@ -380,6 +381,7 @@ router.get('/:id', async (req, res) => {
       video: enrichedProduct.video,
       ean: enrichedProduct.ean,
       weight: parseFloat(enrichedProduct.weight) || 0,
+      weightUnit: enrichedProduct.weightUnit || null,  // "kg", "g", "pz" (pezzi)
       dimensions: {
         width: parseFloat(enrichedProduct.width) || 0,
         height: parseFloat(enrichedProduct.height) || 0,
