@@ -4,6 +4,15 @@ let products = [];
 // Product Layout - Controls visibility (home/sidebar/hidden)
 let productLayout = { home: [], sidebar: [], hidden: [] };
 
+// ===== CACHE & LAZY LOADING CONFIG =====
+const CACHE_KEY = 'zenova_products_cache';
+const CACHE_LAYOUT_KEY = 'zenova_layout_cache';
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minuti
+const LAZY_LOAD_BATCH_SIZE = 50; // Prodotti per batch
+let lazyLoadOffset = 0;
+let isLoadingMore = false;
+let allProductsLoaded = false;
+
 // =======================
 // IMAGE URL HELPER
 // =======================
@@ -49,6 +58,122 @@ function getAbsoluteImageUrl(path) {
 
     return path;
 }
+
+// =======================
+// CACHE HELPERS
+// =======================
+
+function getCachedProducts() {
+    try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        const isExpired = Date.now() - timestamp > CACHE_DURATION;
+
+        if (isExpired) {
+            sessionStorage.removeItem(CACHE_KEY);
+            console.log('🗑️ Cache prodotti scaduta');
+            return null;
+        }
+
+        console.log(`✅ Cache valida (${Math.round((CACHE_DURATION - (Date.now() - timestamp)) / 60000)} min rimanenti)`);
+        return data;
+    } catch (e) {
+        console.warn('⚠️ Errore lettura cache:', e);
+        return null;
+    }
+}
+
+function setCachedProducts(data) {
+    try {
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+        console.log(`💾 ${data.length} prodotti salvati in cache`);
+    } catch (e) {
+        console.warn('⚠️ Errore salvataggio cache:', e);
+    }
+}
+
+function getCachedLayout() {
+    try {
+        const cached = sessionStorage.getItem(CACHE_LAYOUT_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CACHE_DURATION) {
+            sessionStorage.removeItem(CACHE_LAYOUT_KEY);
+            return null;
+        }
+        return data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function setCachedLayout(data) {
+    try {
+        sessionStorage.setItem(CACHE_LAYOUT_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.warn('⚠️ Errore salvataggio cache layout:', e);
+    }
+}
+
+// Skeleton loading per UX migliorata
+function showLoadingSkeletons(gridId, count = 12) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+
+    const skeletonHTML = `
+        <div class="product-card skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-price"></div>
+        </div>
+    `;
+
+    grid.innerHTML = skeletonHTML.repeat(count);
+}
+
+// Aggiungi stili skeleton dinamicamente
+(function addSkeletonStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .skeleton-card {
+            pointer-events: none;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+        .skeleton-image {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 12px;
+        }
+        .skeleton-title {
+            width: 80%;
+            height: 20px;
+            margin-bottom: 8px;
+        }
+        .skeleton-price {
+            width: 40%;
+            height: 24px;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
 
 // Static products as fallback (kept for offline mode)
 const staticProducts = [
@@ -461,10 +586,21 @@ function getIconForCategory(category) {
 }
 
 /**
- * Load products from backend OR static JSON
+ * Load products from backend OR static JSON (con CACHE)
  */
 async function loadProductsFromBackend() {
     console.log('🔄 Caricamento prodotti...');
+
+    // === STEP 1: Prova a caricare dalla cache ===
+    const cachedProducts = getCachedProducts();
+    const cachedLayout = getCachedLayout();
+
+    if (cachedProducts && cachedLayout) {
+        console.log('⚡ Caricamento ISTANTANEO da cache!');
+        products = cachedProducts;
+        productLayout = cachedLayout;
+        return true;
+    }
 
     try {
         // Check if ZenovaAPI is available (backend mode)
@@ -475,6 +611,7 @@ async function loadProductsFromBackend() {
             // Load layout first (to know which products to hide)
             console.log('📂 Caricamento layout prodotti...');
             productLayout = await ZenovaAPI.getLayout();
+            setCachedLayout(productLayout);
             console.log('✅ Layout caricato:', {
                 inVetrina: productLayout.home.length,
                 nascosti: productLayout.hidden.length
@@ -500,6 +637,9 @@ async function loadProductsFromBackend() {
                     return !isHidden;
                 });
 
+                // Salva in cache
+                setCachedProducts(products);
+
                 console.log('✅ Prodotti convertiti e pronti:', products.length);
                 console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
                 console.log('📦 Tutte le categorie BigBuy caricate correttamente');
@@ -514,6 +654,7 @@ async function loadProductsFromBackend() {
         try {
             const layoutResponse = await fetch('./product-layout.json');
             productLayout = await layoutResponse.json();
+            setCachedLayout(productLayout);
             console.log('✅ Layout caricato:', {
                 home: productLayout.home?.length || 0,
                 featured: productLayout.featured?.length || 0,
@@ -524,11 +665,10 @@ async function loadProductsFromBackend() {
         }
 
         // Carica da Railway API invece di file statico (o localhost se locale)
-        const cacheBuster = Date.now();
         const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
           ? 'http://localhost:3000/api'
           : 'https://zenova-commerce-production.up.railway.app/api';
-        const response = await fetch(`${apiUrl}/products?pageSize=5000&v=${cacheBuster}`);
+        const response = await fetch(`${apiUrl}/products?pageSize=5000`);
         const jsonResponse = await response.json();
 
         // L'API restituisce {success: true, data: [...]} oppure array diretto
@@ -552,8 +692,13 @@ async function loadProductsFromBackend() {
                     image: p.image || (p.images && p.images[0]) || '',
                     images: p.images || [p.image],
                     active: p.active !== false,
-                    zone: p.zone || 'home'
+                    zone: p.zone || 'home',
+                    weight: p.weight || 0,
+                    weightUnit: p.weightUnit || null
                 }));
+
+            // Salva in cache
+            setCachedProducts(products);
 
             console.log('✅ Prodotti pronti:', products.length);
             return true;
@@ -596,12 +741,22 @@ window.handleCheckoutClick = async function() {
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load products from backend first
+    // Mostra skeleton loading SUBITO (prima di caricare i dati)
+    const productsGrid = document.getElementById('productsGrid');
+    const featuredGrid = document.getElementById('featuredProductsGrid');
+
+    if (productsGrid) {
+        showLoadingSkeletons('productsGrid', 12);
+    }
+    if (featuredGrid) {
+        showLoadingSkeletons('featuredProductsGrid', 8);
+    }
+
+    // Load products from backend (usa cache se disponibile)
     await loadProductsFromBackend();
 
     // Then render and setup everything
     // Check if we're on prodotti.html or index.html
-    const productsGrid = document.getElementById('productsGrid');
     if (productsGrid) {
         // We're on prodotti.html - render all products
         console.log('📄 Detected prodotti.html - rendering all products');
