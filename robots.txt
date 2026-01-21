@@ -1,0 +1,11 @@
+# Robots.txt per Zenova
+User-agent: *
+Allow: /
+
+# Blocca pagine admin
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /backend/
+
+# Sitemap
+Sitemap: https://zenova.ovh/sitemap.xml
