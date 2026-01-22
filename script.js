@@ -1437,8 +1437,8 @@ function updateCart() {
             // Get image URL or fallback
             let imageHtml = '';
             const imageUrl = getAbsoluteImageUrl(item.image);
-            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
-                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" loading="lazy">`;
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" loading="lazy" onerror="this.parentElement.innerHTML='📦'">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
             } else {

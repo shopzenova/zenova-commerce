@@ -7,6 +7,12 @@
 /* Hide desktop elements on mobile */
 @media (max-width: 968px) {
 
+    /* Global touch optimization - elimina ritardo 300ms */
+    button, a, .product-card, .qty-btn, .cart-item-remove {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
     /* Hide desktop nav menu and icons */
     .nav-menu {
         display: none !important;
@@ -560,6 +566,10 @@
         border: none !important;
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
         margin: 10px auto 0 auto !important;
+        /* Fix mobile touch delay */
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+        cursor: pointer !important;
     }
 
     .add-to-cart-btn::before {
