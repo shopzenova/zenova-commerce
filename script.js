@@ -59,6 +59,18 @@ function getAbsoluteImageUrl(path) {
     return path;
 }
 
+// Helper to get product image URL
+function getProductImageUrl(product) {
+    let imgUrl = null;
+    if (product.images && product.images.length > 0) {
+        const img = product.images[0];
+        imgUrl = typeof img === 'object' ? (img.thumbnail || img.url) : img;
+    } else if (product.image) {
+        imgUrl = product.image;
+    }
+    return getAbsoluteImageUrl(imgUrl);
+}
+
 // =======================
 // CACHE HELPERS
 // =======================
@@ -1059,7 +1071,7 @@ function createProductCard(product) {
             ${wishlistIcon}
         </button>
         <div class="product-image">
-            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}" loading="lazy">` : (product.icon || '📦')}
+            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}" loading="lazy" decoding="async" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">` : (product.icon || '📦')}
         </div>
         <div class="product-info">
             <div class="product-category">${displayCategory}</div>
@@ -1129,6 +1141,18 @@ function renderFeaturedProducts() {
         `;
         return;
     }
+
+    // Preload first 4 images for faster display
+    featuredProducts.slice(0, 4).forEach(product => {
+        const imgUrl = getProductImageUrl(product);
+        if (imgUrl) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = imgUrl;
+            document.head.appendChild(link);
+        }
+    });
 
     // Render featured products using same card template
     featuredProducts.forEach(product => {
