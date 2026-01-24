@@ -2,6 +2,12 @@
 node_modules
 npm-debug.log
 
+# Environment files - USE RAILWAY VARIABLES!
+.env
+.env.local
+.env.production
+.env.railway
+
 # Development files
 .env.example
 *.md

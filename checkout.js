@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeStripe() {
         if (!stripe && typeof Stripe !== 'undefined') {
             console.log('🔄 Inizializzazione Stripe...');
-            stripe = Stripe('pk_test_51SfJ1xFfFbDwiUWSTV0kv3h36Jeg9lBjIwPVRrrOQh43MRyj3ewtWP4UJGDPg2PUHUIj9DE4eTaUy29QCU95qhRf00kQYhOy5G');
+            stripe = Stripe('pk_live_51SfJ1lC0nY4hhNaNPFaiL8GBrsNcViJAlGvyInmZNCjPRwcfFx1hqaMYvFkOISWayWzamO9UEKabrXlfxK6tvPVk00zvGlfwAC');
             elements = stripe.elements();
             cardElement = elements.create('card', {
                 style: {
