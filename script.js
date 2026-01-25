@@ -103,6 +103,11 @@ function getCachedProducts() {
 
 function setCachedProducts(data) {
     try {
+        // Skip cache se troppi prodotti (evita QuotaExceededError)
+        if (data.length > 500) {
+            console.log(`⏭️ Cache skip: ${data.length} prodotti troppi per sessionStorage`);
+            return;
+        }
         sessionStorage.setItem(CACHE_KEY, JSON.stringify({
             data,
             timestamp: Date.now()
