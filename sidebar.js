@@ -673,6 +673,22 @@ function filterProductsBySubcategory(subcategory) {
     });
 
     console.log(`✅ Visible products: ${visibleCount} out of ${productCards.length}`);
+
+    // Ordina i prodotti visibili per prezzo crescente
+    const visibleCards = Array.from(productCards).filter(card => card.style.display !== 'none');
+    visibleCards.sort((a, b) => {
+        const priceA = parseFloat(a.dataset.price) || 0;
+        const priceB = parseFloat(b.dataset.price) || 0;
+        return priceA - priceB;
+    });
+
+    // Riordina nel DOM
+    const grid = document.getElementById('productsGrid');
+    if (grid && visibleCards.length > 0) {
+        visibleCards.forEach(card => grid.appendChild(card));
+        console.log('📊 Products sorted by price (ascending)');
+    }
+
     console.log('📊 Unique subcategories in products:');
     Array.from(uniqueSubcategories).sort().forEach(sub => {
         console.log(`  - "${sub}"`);
