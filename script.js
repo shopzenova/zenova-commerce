@@ -1385,6 +1385,14 @@ function renderProductsByCategory(searchTerm) {
 
     console.log(`📦 Found ${filteredProducts.length} visible products for "${searchTerm}"`);
 
+    // Ordina per prezzo crescente
+    filteredProducts.sort((a, b) => {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB;
+    });
+    console.log('📊 Products sorted by price (ascending)');
+
     // Clear grid
     productsGrid.innerHTML = '';
 
