@@ -35,8 +35,12 @@ function getAbsoluteImageUrl(path) {
         return path;
     }
 
-    // Se è già un URL assoluto o data URI, restituiscilo così com'è
+    // Se è già un URL assoluto o data URI
     if (path.startsWith('http') || path.startsWith('data:')) {
+        // Le immagini AW (aroma-zone, aiku) richiedono proxy per evitare 403
+        if (path.includes('aroma-zone.com') || path.includes('aiku.io') || path.includes('retina.net')) {
+            return `https://zenova-commerce-production.up.railway.app/api/proxy-image?url=${encodeURIComponent(path)}`;
+        }
         return path;
     }
 
