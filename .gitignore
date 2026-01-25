@@ -17,3 +17,6 @@ backend/*-NEW.csv
 # Node modules
 node_modules/
 backend/node_modules/
+
+.vercel
+backend/backups/

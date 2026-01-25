@@ -16,9 +16,10 @@ class ShippingService {
 
     // Tariffe per paese (costo fisso - spedizione gratis DISATTIVATA per ora)
     // NOTA: freeAbove impostato a 99999 = spedizione sempre a pagamento
+    // AGGIORNATO 2026-01-25: Italia ridotta a €5 (compensata da +€4 su ogni prodotto)
     this.shippingRates = {
       // Zone 1: Italia (priorità)
-      'IT': { cost: 9.90, freeAbove: 99999, zone: 'Italia' },
+      'IT': { cost: 5.00, freeAbove: 99999, zone: 'Italia' },
 
       // Zone 2: Spagna + Paesi vicini EU
       'ES': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 1' },
