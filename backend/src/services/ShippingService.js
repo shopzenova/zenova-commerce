@@ -16,55 +16,55 @@ class ShippingService {
 
     // Tariffe per paese (costo fisso - spedizione gratis DISATTIVATA per ora)
     // NOTA: freeAbove impostato a 99999 = spedizione sempre a pagamento
-    // AGGIORNATO 2026-01-25: Italia ridotta a €5 (compensata da +€4 su ogni prodotto)
+    // AGGIORNATO 2026-01-25: -€4 su tutte le tariffe (compensato da +€4 su ogni prodotto)
     this.shippingRates = {
       // Zone 1: Italia (priorità)
       'IT': { cost: 5.00, freeAbove: 99999, zone: 'Italia' },
 
-      // Zone 2: Spagna + Paesi vicini EU
-      'ES': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 1' },
-      'PT': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 1' },
-      'FR': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 1' },
+      // Zone 2: Spagna + Paesi vicini EU (era 12.90)
+      'ES': { cost: 8.90, freeAbove: 99999, zone: 'EU Zone 1' },
+      'PT': { cost: 8.90, freeAbove: 99999, zone: 'EU Zone 1' },
+      'FR': { cost: 8.90, freeAbove: 99999, zone: 'EU Zone 1' },
 
-      // Zone 3: Europa Centrale
-      'DE': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 2' },
-      'AT': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 2' },
-      'BE': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 2' },
-      'NL': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 2' },
-      'LU': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 2' },
+      // Zone 3: Europa Centrale (era 14.90)
+      'DE': { cost: 10.90, freeAbove: 99999, zone: 'EU Zone 2' },
+      'AT': { cost: 10.90, freeAbove: 99999, zone: 'EU Zone 2' },
+      'BE': { cost: 10.90, freeAbove: 99999, zone: 'EU Zone 2' },
+      'NL': { cost: 10.90, freeAbove: 99999, zone: 'EU Zone 2' },
+      'LU': { cost: 10.90, freeAbove: 99999, zone: 'EU Zone 2' },
 
-      // Zone 4: Europa Est
-      'PL': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'CZ': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'SK': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'HU': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'SI': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'HR': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'RO': { cost: 18.90, freeAbove: 99999, zone: 'EU Zone 3' },
-      'BG': { cost: 18.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      // Zone 4: Europa Est (era 16.90/18.90)
+      'PL': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'CZ': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'SK': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'HU': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'SI': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'HR': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'RO': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 3' },
+      'BG': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 3' },
 
-      // Zone 5: Europa Nord/Sud
-      'GR': { cost: 19.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'CY': { cost: 22.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'MT': { cost: 22.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'DK': { cost: 16.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'SE': { cost: 18.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'FI': { cost: 19.90, freeAbove: 99999, zone: 'EU Zone 4' },
-      'NO': { cost: 22.90, freeAbove: 99999, zone: 'Extra EU' },
-      'CH': { cost: 22.90, freeAbove: 99999, zone: 'Extra EU' },
+      // Zone 5: Europa Nord/Sud (era 16.90-22.90)
+      'GR': { cost: 15.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'CY': { cost: 18.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'MT': { cost: 18.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'DK': { cost: 12.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'SE': { cost: 14.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'FI': { cost: 15.90, freeAbove: 99999, zone: 'EU Zone 4' },
+      'NO': { cost: 18.90, freeAbove: 99999, zone: 'Extra EU' },
+      'CH': { cost: 18.90, freeAbove: 99999, zone: 'Extra EU' },
 
-      // Zone 6: Baltico
-      'EE': { cost: 19.90, freeAbove: 99999, zone: 'EU Baltic' },
-      'LV': { cost: 19.90, freeAbove: 99999, zone: 'EU Baltic' },
-      'LT': { cost: 19.90, freeAbove: 99999, zone: 'EU Baltic' },
-      'IE': { cost: 18.90, freeAbove: 99999, zone: 'EU West' },
+      // Zone 6: Baltico (era 18.90-19.90)
+      'EE': { cost: 15.90, freeAbove: 99999, zone: 'EU Baltic' },
+      'LV': { cost: 15.90, freeAbove: 99999, zone: 'EU Baltic' },
+      'LT': { cost: 15.90, freeAbove: 99999, zone: 'EU Baltic' },
+      'IE': { cost: 14.90, freeAbove: 99999, zone: 'EU West' },
 
-      // Zone 7: UK
-      'GB': { cost: 19.90, freeAbove: 99999, zone: 'UK' },
+      // Zone 7: UK (era 19.90)
+      'GB': { cost: 15.90, freeAbove: 99999, zone: 'UK' },
 
-      // Zone 8: Extra EU
-      'US': { cost: 29.90, freeAbove: 99999, zone: 'USA' },
-      'AU': { cost: 34.90, freeAbove: 99999, zone: 'Australia' }
+      // Zone 8: Extra EU (era 29.90/34.90)
+      'US': { cost: 25.90, freeAbove: 99999, zone: 'USA' },
+      'AU': { cost: 30.90, freeAbove: 99999, zone: 'Australia' }
     };
 
     logger.info('✅ ShippingService inizializzato (Tariffe fisse intelligenti)');
