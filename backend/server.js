@@ -162,8 +162,10 @@ app.get('/api/proxy-image', async (req, res) => {
         res.set('Content-Type', proxyRes.headers['content-type']);
       }
 
-      // Set CORS headers
+      // Set CORS headers - IMPORTANTE per evitare ERR_BLOCKED_BY_RESPONSE
       res.set('Access-Control-Allow-Origin', '*');
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+      res.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
 
       // CACHE AGGRESSIVO - 1 anno
       res.set('Cache-Control', 'public, max-age=31536000, immutable');
