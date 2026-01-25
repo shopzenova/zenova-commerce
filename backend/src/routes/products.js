@@ -33,23 +33,25 @@ function getWholesalePrice(product) {
 }
 
 function getRetailPrice(product) {
-  // Riconosce automaticamente il formato in base al fornitore
+  // SEMPRE usa retailPrice dal database (già calcolato con margine)
+  // Questo permette di modificare i prezzi direttamente nel DB
+  if (product.retailPrice) {
+    return parseFloat(product.retailPrice) || 0;
+  }
+
+  // Fallback per prodotti senza retailPrice (legacy)
   const source = product.source || product.supplier;
 
   if (source === 'bigbuy') {
-    // BigBuy: price = prezzo di vendita consigliato
     return parseFloat(product.price) || 0;
   } else if (source === 'aw-dropship' || source === 'aw') {
-    // AW Dropship: originalPrice = prezzo di vendita dall'API reale
-    // Se non presente, calcola con margine 30% su wholesale
     if (product.originalPrice) {
       return parseFloat(product.originalPrice);
     }
     const wholesale = parseFloat(product.price) || 0;
-    return Math.round(wholesale * 1.3 * 100) / 100; // margine 30%, arrotondato
+    return Math.round(wholesale * 1.3 * 100) / 100;
   }
 
-  // Fallback
   return parseFloat(product.price) || 0;
 }
 
