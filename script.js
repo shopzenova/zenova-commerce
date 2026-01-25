@@ -1013,9 +1013,24 @@ window.filterProductsBySubcategory = function(subcategory) {
                 }
             });
 
+            // Ordina per prezzo crescente
+            toShow.sort((a, b) => {
+                const priceA = parseFloat(a.dataset.price) || 0;
+                const priceB = parseFloat(b.dataset.price) || 0;
+                return priceA - priceB;
+            });
+
             // Applica modifiche DOM in batch
-            toShow.forEach(card => card.style.display = 'block');
             toHide.forEach(card => card.style.display = 'none');
+
+            // Riordina nel DOM per prezzo crescente
+            const grid = document.getElementById('productsGrid');
+            if (grid) {
+                toShow.forEach(card => {
+                    card.style.display = 'block';
+                    grid.appendChild(card); // Sposta in fondo = nuovo ordine
+                });
+            }
         }
     });
 };
