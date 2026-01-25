@@ -44,6 +44,12 @@ router.post('/create-payment-intent', async (req, res) => {
 
     logger.info(`💰 Totale ordine: €${total.toFixed(2)} (${amountInCents} cents)`);
 
+    // Crea descrizione dettagliata con nomi prodotti
+    const productNames = items.map(item => item.name || item.title || 'Prodotto').join(', ');
+    const shortDescription = productNames.length > 200
+      ? productNames.substring(0, 197) + '...'
+      : productNames;
+
     // Crea payment intent Stripe
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
@@ -60,9 +66,10 @@ router.post('/create-payment-intent', async (req, res) => {
         shipping_country: customer.country || '',
         items_count: items.length,
         subtotal: subtotal.toFixed(2),
-        shipping_cost: shippingCost.toFixed(2)
+        shipping_cost: shippingCost.toFixed(2),
+        products: shortDescription
       },
-      description: `Ordine Zenova - ${items.length} prodotti`
+      description: shortDescription
     });
 
     logger.info(`✅ Payment intent creato: ${paymentIntent.id}`);
