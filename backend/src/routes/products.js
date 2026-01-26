@@ -179,12 +179,49 @@ try {
   logger.error('❌ Errore caricamento top-100-products.json:', error);
 }
 
-// GET /api/products/layout - Restituisce il layout salvato
-router.get('/layout', (req, res) => {
-  res.json({
-    success: true,
-    data: productLayout
-  });
+// GET /api/products/layout - Restituisce il layout dal DATABASE (persistente tra deploy)
+router.get('/layout', async (req, res) => {
+  try {
+    // Leggi zone dal database PostgreSQL (fonte primaria, persistente)
+    const homeProducts = await prisma.product.findMany({
+      where: { zone: 'home', visible: true },
+      select: { id: true }
+    });
+    const sidebarProducts = await prisma.product.findMany({
+      where: { zone: 'sidebar', visible: true },
+      select: { id: true }
+    });
+    const hiddenProducts = await prisma.product.findMany({
+      where: { zone: 'hidden' },
+      select: { id: true }
+    });
+    const featuredProducts = await prisma.product.findMany({
+      where: { zone: 'featured', visible: true },
+      select: { id: true }
+    });
+
+    const dbLayout = {
+      home: homeProducts.map(p => p.id),
+      sidebar: sidebarProducts.map(p => p.id),
+      hidden: hiddenProducts.map(p => p.id),
+      featured: featuredProducts.map(p => p.id)
+    };
+
+    // Se il DB ha prodotti home, usa il DB (fonte affidabile)
+    if (dbLayout.home.length > 0) {
+      logger.info(`📋 Layout da DB: ${dbLayout.home.length} home, ${dbLayout.sidebar.length} sidebar`);
+      return res.json({ success: true, data: dbLayout });
+    }
+
+    // Fallback: usa file JSON se il DB non ha zone configurate
+    logger.info(`📋 Layout da file JSON (fallback): ${productLayout.home.length} home`);
+    res.json({ success: true, data: productLayout });
+
+  } catch (error) {
+    logger.error('Errore /api/products/layout:', error);
+    // Fallback al file JSON in caso di errore DB
+    res.json({ success: true, data: productLayout });
+  }
 });
 
 // GET /api/products - Lista tutti i prodotti (da PostgreSQL)

@@ -233,7 +233,7 @@ function isFeatured(productId) {
 }
 
 // PUT /api/admin/products/layout - Salva layout prodotti
-router.put('/products/layout', (req, res) => {
+router.put('/products/layout', async (req, res) => {
   try {
     const { layout } = req.body;
 
@@ -244,15 +244,48 @@ router.put('/products/layout', (req, res) => {
       });
     }
 
-    // Salva nel file
+    // Salva nel file (backup locale)
     productLayout = layout;
     fs.writeFileSync(LAYOUT_FILE, JSON.stringify(layout, null, 2));
 
-    logger.info('✅ Layout prodotti salvato');
+    // SALVA ANCHE NEL DATABASE (persistente tra deploy)
+    logger.info('💾 Salvataggio zone nel database PostgreSQL...');
+
+    // Reset tutte le zone a 'sidebar' (default)
+    await prisma.product.updateMany({
+      where: { zone: { not: null } },
+      data: { zone: 'sidebar' }
+    });
+
+    // Imposta zona 'home'
+    if (layout.home.length > 0) {
+      await prisma.product.updateMany({
+        where: { id: { in: layout.home } },
+        data: { zone: 'home' }
+      });
+    }
+
+    // Imposta zona 'hidden'
+    if (layout.hidden.length > 0) {
+      await prisma.product.updateMany({
+        where: { id: { in: layout.hidden } },
+        data: { zone: 'hidden' }
+      });
+    }
+
+    // Imposta zona 'featured'
+    if (layout.featured && layout.featured.length > 0) {
+      await prisma.product.updateMany({
+        where: { id: { in: layout.featured } },
+        data: { zone: 'featured' }
+      });
+    }
+
+    logger.info(`✅ Layout salvato: ${layout.home.length} home, ${layout.sidebar.length} sidebar, ${layout.hidden.length} hidden (DB + file)`);
 
     res.json({
       success: true,
-      message: 'Layout salvato con successo'
+      message: 'Layout salvato con successo (database + file)'
     });
   } catch (error) {
     logger.error('Errore /api/admin/products/layout:', error);
