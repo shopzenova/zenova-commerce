@@ -167,20 +167,20 @@ class ZenovaAPI {
   }
 
   /**
-   * GET - Layout prodotti (home/sidebar/hidden)
+   * GET - Layout prodotti (home/sidebar/hidden) dal DATABASE (persistente tra deploy)
    */
   static async getLayout() {
     try {
-      const response = await fetch(`${API_BASE_URL}/admin/products?zone=all`);
+      const response = await fetch(`${API_BASE_URL}/products/layout`);
       const data = await response.json();
 
       if (data.success) {
-        return data.layout; // Returns { home: [], sidebar: [], hidden: [] }
+        return data.data; // Returns { home: [], sidebar: [], hidden: [], featured: [] }
       }
       throw new Error('Errore caricamento layout');
     } catch (error) {
       console.error('Errore getLayout:', error);
-      return { home: [], sidebar: [], hidden: [] };
+      return { home: [], sidebar: [], hidden: [], featured: [] };
     }
   }
 }
