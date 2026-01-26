@@ -637,7 +637,7 @@ router.post('/products/import', async (req, res) => {
         zenovaCategories: [category],
         zenovaSubcategory: defaultSubcategories[category] || 'altri',
         price: foundProduct.price,
-        retailPrice: foundProduct.price,
+        retailPrice: foundProduct.price + 4, // +€4 margine spedizione
         wholesalePrice: foundProduct.wholesalePrice,
         stock: foundProduct.stock,
         images: foundProduct.images,

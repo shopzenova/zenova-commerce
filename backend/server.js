@@ -73,13 +73,30 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting - max 100 richieste per 15 minuti
+// Rate limiting - protezione API
+// Limite generale: 500 richieste per 15 minuti (era 100 - troppo basso!)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: 'Troppi tentativi, riprova tra 15 minuti'
+  max: 500,
+  message: { error: 'Troppi tentativi, riprova tra qualche minuto' },
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Non limitare le richieste di prodotti/layout (frequenti e leggere)
+  skip: (req) => {
+    return req.path.startsWith('/api/products') && req.method === 'GET';
+  }
 });
 app.use('/api/', limiter);
+
+// Rate limiting più stretto solo per checkout/pagamenti (anti-abuse)
+const paymentLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: { error: 'Troppi tentativi di pagamento, riprova tra qualche minuto' }
+});
+app.use('/api/checkout', paymentLimiter);
+app.use('/api/stripe', paymentLimiter);
+app.use('/api/paypal', paymentLimiter);
 
 // Logging richieste
 app.use((req, res, next) => {
