@@ -1095,7 +1095,7 @@ function createProductCard(product) {
             ${wishlistIcon}
         </button>
         <div class="product-image">
-            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}" loading="lazy" decoding="async" onload="this.style.opacity=1" style="opacity:0;transition:opacity 0.3s">` : (product.icon || '📦')}
+            ${thumbnailUrl ? `<div class="img-skeleton"></div><img src="${thumbnailUrl}" alt="${product.name}" loading="lazy" decoding="async" onload="this.style.opacity=1;if(this.previousElementSibling)this.previousElementSibling.remove()" onerror="this.dataset.retries=(parseInt(this.dataset.retries||0)+1);if(this.dataset.retries<2){setTimeout(()=>{this.src=this.src+'&r='+this.dataset.retries},1500)}else{this.style.display='none';if(this.previousElementSibling)this.previousElementSibling.innerHTML='📦'}" style="opacity:0;transition:opacity 0.3s">` : (product.icon || '📦')}
         </div>
         <div class="product-info">
             <div class="product-category">${displayCategory}</div>
