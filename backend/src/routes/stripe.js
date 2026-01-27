@@ -75,6 +75,9 @@ router.post('/create-payment-intent', async (req, res) => {
 
     logger.info(`✅ Payment intent creato: ${paymentIntent.id}`);
 
+    // Calcola IVA (prezzi sono IVA inclusa al 22%)
+    const vatAmount = Math.round((total - (total / 1.22)) * 100) / 100;
+
     // Salva ordine nel database come "pending"
     const orderData = {
       customer,
@@ -82,7 +85,8 @@ router.post('/create-payment-intent', async (req, res) => {
       totals: {
         subtotal: subtotal,
         shipping: shippingCost,
-        total: total
+        total: total,
+        vatAmount: vatAmount
       },
       payment: {
         method: 'stripe_card',

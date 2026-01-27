@@ -426,6 +426,12 @@
     color: #28A745;
 }
 
+.summary-row.iva-row {
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+}
+
 .promo-code {
     display: flex;
     gap: 8px;

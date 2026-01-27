@@ -13,6 +13,12 @@ const prisma = new PrismaClient();
 
 logger.info(`✅ PostgreSQL Database connesso - products API ready`);
 
+// ===== IVA =====
+const IVA_RATE = 0.22;
+function applyIVA(price) {
+  return Math.round(price * (1 + IVA_RATE) * 100) / 100;
+}
+
 // ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
 // Gestisce automaticamente formati diversi da BigBuy e AW Dropship
 
@@ -284,7 +290,7 @@ router.get('/', async (req, res) => {
       brand: p.brand || 'Zenova',
       category: p.raw && p.raw.CATEGORY ? p.raw.CATEGORY : p.category,  // USA categorie ID BigBuy raw
       price: getWholesalePrice(p),        // Prezzo di acquisto (BigBuy o AW)
-      retailPrice: getRetailPrice(p),     // Prezzo di vendita (BigBuy o AW)
+      retailPrice: applyIVA(getRetailPrice(p)),     // Prezzo di vendita IVA inclusa
       stock: p.stock,
       images: p.images,
       image: p.images && p.images[0] && p.images[0].url ? p.images[0].url : (p.images && p.images[0] ? p.images[0] : null),
@@ -413,7 +419,7 @@ router.get('/:id', async (req, res) => {
       brand: enrichedProduct.brand || 'Zenova',
       category: enrichedProduct.zenovaCategories ? enrichedProduct.zenovaCategories.join(', ') : enrichedProduct.category,
       price: getWholesalePrice(enrichedProduct),        // Prezzo di acquisto (BigBuy o AW)
-      retailPrice: getRetailPrice(enrichedProduct),     // Prezzo di vendita (BigBuy o AW)
+      retailPrice: applyIVA(getRetailPrice(enrichedProduct)),     // Prezzo di vendita IVA inclusa
       stock: enrichedProduct.stock,
       available: enrichedProduct.available !== false,   // Disponibilità per acquisto (default true se non specificato)
       images: enrichedProduct.images,

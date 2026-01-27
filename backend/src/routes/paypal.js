@@ -89,6 +89,11 @@ router.post('/create-order', async (req, res) => {
     }
 
     // 4. Salva ordine nel database come pending
+    const ppSubtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const ppShipping = customer.shippingCost || 0;
+    const ppTotal = ppSubtotal + ppShipping;
+    const ppVatAmount = Math.round((ppTotal - (ppTotal / 1.22)) * 100) / 100;
+
     const order = await orderService.createOrder({
       customer: {
         name: customer.name,
@@ -98,9 +103,10 @@ router.post('/create-order', async (req, res) => {
       },
       items: items,
       totals: {
-        subtotal: items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-        shipping: customer.shippingCost || 0,
-        total: items.reduce((sum, item) => sum + (item.price * item.quantity), 0) + (customer.shippingCost || 0)
+        subtotal: ppSubtotal,
+        shipping: ppShipping,
+        total: ppTotal,
+        vatAmount: ppVatAmount
       },
       payment: {
         method: 'paypal',

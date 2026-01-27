@@ -92,6 +92,7 @@ model Order {
   subtotal          Decimal   @db.Decimal(10, 2)
   shippingCost      Decimal   @default(0) @map("shipping_cost") @db.Decimal(10, 2)
   total             Decimal   @db.Decimal(10, 2)
+  vatAmount         Decimal?  @map("vat_amount") @db.Decimal(10, 2)
   paymentMethod     String    @default("stripe") @map("payment_method")
   paymentStatus     String    @default("pending") @map("payment_status")
   stripeSessionId   String?   @map("stripe_session_id")

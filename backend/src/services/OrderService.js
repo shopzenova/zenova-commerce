@@ -47,6 +47,7 @@ class OrderService {
           subtotal: orderData.totals?.subtotal || 0,
           shippingCost: orderData.totals?.shipping || 0,
           total: orderData.totals?.total || 0,
+          vatAmount: orderData.totals?.vatAmount || null,
           paymentMethod: orderData.payment?.method || 'stripe',
           paymentStatus: orderData.payment?.status || 'pending',
           stripeSessionId: orderData.payment?.sessionId || null,
@@ -331,7 +332,8 @@ class OrderService {
       totals: {
         subtotal: parseFloat(order.subtotal),
         shipping: parseFloat(order.shippingCost),
-        total: parseFloat(order.total)
+        total: parseFloat(order.total),
+        vatAmount: order.vatAmount ? parseFloat(order.vatAmount) : null
       },
       payment: {
         method: order.paymentMethod,

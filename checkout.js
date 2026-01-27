@@ -544,7 +544,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const total = subtotal - discount + shippingCost;
 
+        // Calcola IVA (i prezzi sono gia' IVA inclusa, scorporo per mostrare il dettaglio)
+        const ivaAmount = total - (total / 1.22);
+
         document.getElementById('summarySubtotal').textContent = `€${subtotal.toFixed(2)}`;
+        document.getElementById('summaryIVA').textContent = `€${ivaAmount.toFixed(2)}`;
         document.getElementById('summaryTotal').textContent = `€${total.toFixed(2)}`;
     }
 
