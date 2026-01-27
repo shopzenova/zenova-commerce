@@ -5,6 +5,7 @@ const bigbuy = require('../integrations/BigBuyClient');
 const AWDropshipClient = require('../integrations/AWDropshipClient');
 const shippingService = require('../services/ShippingService');
 const orderService = require('../services/OrderService');
+const supplierOrderService = require('../services/SupplierOrderService');
 const logger = require('../utils/logger');
 
 const awDropship = new AWDropshipClient();
@@ -169,6 +170,19 @@ router.get('/success', async (req, res) => {
       // Aggiorna stato ordine a "processing" (pagamento confermato)
       await orderService.updateOrderStatus(order.id, 'processing');
       logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
+
+      // Inoltra ordine ai fornitori (async, non blocca la risposta)
+      const { PrismaClient } = require('@prisma/client');
+      const prismaCheckout = new PrismaClient();
+      const dbOrder = await prismaCheckout.order.findFirst({
+        where: { stripeSessionId: session_id }
+      });
+      if (dbOrder) {
+        supplierOrderService.forwardToSupplier(dbOrder)
+          .then(r => logger.info(`📦 Ordine ${order.id} inoltrato ai fornitori:`, JSON.stringify(r)))
+          .catch(e => logger.error(`❌ Errore inoltro fornitore per ${order.id}:`, e.message));
+      }
+      await prismaCheckout.$disconnect();
     }
 
     res.json({

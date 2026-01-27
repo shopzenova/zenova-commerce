@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const orderService = require('../services/OrderService');
+const supplierOrderService = require('../services/SupplierOrderService');
 const logger = require('../utils/logger');
 
 /**
@@ -136,11 +137,35 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
       const paymentIntent = event.data.object;
       logger.info(`✅ Payment succeeded: ${paymentIntent.id}`);
 
-      // Aggiorna ordine nel database
-      await orderService.updateOrderStatus(
-        { paymentIntentId: paymentIntent.id },
-        'confirmed'
-      );
+      // Trova ordine per stripeSessionId (il payment intent ID)
+      try {
+        const { PrismaClient } = require('@prisma/client');
+        const prisma = new PrismaClient();
+
+        const dbOrder = await prisma.order.findFirst({
+          where: { stripeSessionId: paymentIntent.id }
+        });
+
+        if (dbOrder) {
+          // Aggiorna stato ordine
+          await prisma.order.update({
+            where: { id: dbOrder.id },
+            data: { status: 'processing', paymentStatus: 'paid', paidAt: new Date() }
+          });
+          logger.info(`📝 Ordine ${dbOrder.orderNumber} aggiornato a processing`);
+
+          // Inoltra ordine ai fornitori (async, non blocca il webhook)
+          supplierOrderService.forwardToSupplier(dbOrder)
+            .then(result => logger.info(`📦 Ordine ${dbOrder.orderNumber} inoltrato ai fornitori:`, JSON.stringify(result)))
+            .catch(err => logger.error(`❌ Errore inoltro fornitore per ${dbOrder.orderNumber}:`, err.message));
+        } else {
+          logger.warn(`⚠️ Ordine non trovato per payment intent: ${paymentIntent.id}`);
+        }
+
+        await prisma.$disconnect();
+      } catch (err) {
+        logger.error(`❌ Errore gestione payment_intent.succeeded:`, err.message);
+      }
       break;
 
     case 'payment_intent.payment_failed':

@@ -1,12 +1,63 @@
-// Checkout System - PayPal Only
+// Checkout System - Card (Stripe) + PayPal
+
+// API Configuration - Auto-detect environment
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : 'https://zenova-commerce-production.up.railway.app/api';
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Checkout system loaded - PayPal only mode');
+    console.log('Checkout system loaded - Card + PayPal mode');
+    console.log('Environment:', IS_LOCAL ? 'LOCAL' : 'PRODUCTION');
+    console.log('API Base:', API_BASE);
 
     // Get cart data
     const cart = JSON.parse(localStorage.getItem('zenova-cart') || '[]');
     let shippingData = {};
     let currentStep = 1;
     let calculatedShippingCost = 0; // Will be calculated dynamically
+
+    // ===== STRIPE INITIALIZATION (lazy loading) =====
+    let stripe = null;
+    let elements = null;
+    let cardElement = null;
+    let cardElementMounted = false;
+
+    function initializeStripe() {
+        if (!stripe && typeof Stripe !== 'undefined') {
+            console.log('🔄 Inizializzazione Stripe...');
+            stripe = Stripe('pk_live_51SfJ1lC0nY4hhNaNPFaiL8GBrsNcViJAlGvyInmZNCjPRwcfFx1hqaMYvFkOISWayWzamO9UEKabrXlfxK6tvPVk00zvGlfwAC');
+            elements = stripe.elements();
+            cardElement = elements.create('card', {
+                style: {
+                    base: {
+                        fontSize: '16px',
+                        color: '#32325d',
+                        fontFamily: '"Quicksand", sans-serif',
+                        '::placeholder': {
+                            color: '#aab7c4'
+                        }
+                    },
+                    invalid: {
+                        color: '#e74c3c',
+                        iconColor: '#e74c3c'
+                    }
+                }
+            });
+
+            // Handle real-time validation errors from card Element
+            cardElement.on('change', function(event) {
+                const displayError = document.getElementById('card-errors');
+                if (displayError) {
+                    if (event.error) {
+                        displayError.textContent = event.error.message;
+                    } else {
+                        displayError.textContent = '';
+                    }
+                }
+            });
+
+            console.log('✅ Stripe inizializzato');
+        }
+    }
 
     // Check if user is logged in
     const currentUser = getCurrentUser();
@@ -54,13 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             console.log('📦 Calcolo costi spedizione per:', { country, postalCode, cartItems: cart.length });
 
-            // Prepare cart items for shipping calculation
+            // Prepare cart items for shipping calculation (include price for free shipping logic)
             const items = cart.map(item => ({
                 id: item.bigbuyId || item.id,
-                quantity: item.quantity
+                quantity: item.quantity,
+                price: item.price
             }));
 
-            const response = await fetch('http://localhost:3000/api/checkout/calculate-shipping', {
+            const response = await fetch(`${API_BASE}/checkout/calculate-shipping`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -149,8 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Move to payment step
         console.log('➡️ Passo allo step 2 (pagamento)...');
         goToStep(2);
-        // Render PayPal button automatically
-        renderPayPalButton();
     });
 
 
@@ -175,6 +225,257 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // ===== PAYPAL REDIRECT BUTTON =====
+    const paypalRedirectButton = document.getElementById('paypal-redirect-button');
+
+    paypalRedirectButton.addEventListener('click', async function() {
+        console.log('💳 Redirect a PayPal... Dati spedizione:', shippingData);
+
+        // Disable button
+        paypalRedirectButton.disabled = true;
+        paypalRedirectButton.textContent = 'Creazione ordine...';
+
+        try {
+            // Verify shipping data
+            if (!shippingData.email || !shippingData.firstName) {
+                console.error('❌ Dati spedizione mancanti:', shippingData);
+                throw new Error('Compila prima i dati di spedizione');
+            }
+
+            console.log('✅ Dati spedizione OK, preparo carrello...');
+
+            // *** CHECK STOCK AVAILABILITY ***
+            console.log('📦 Verifica disponibilità prodotti...');
+            const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
+
+            if (unavailableProducts.length > 0) {
+                const productNames = unavailableProducts.map(p => p.name).join(', ');
+                alert(`❌ Prodotti non disponibili o quantità insufficiente:\n\n${productNames}\n\nRimuovili dal carrello prima di procedere.`);
+                paypalRedirectButton.disabled = false;
+                paypalRedirectButton.textContent = 'Paga con PayPal';
+                return;
+            }
+
+            // Prepare cart items
+            const cartItems = cart.map(item => ({
+                productId: item.id,
+                source: item.source || 'bigbuy',
+                bigbuyId: item.bigbuyId || (item.source === 'bigbuy' ? item.id : null),
+                awId: item.awId || (item.source === 'aw' ? item.id : null),
+                name: item.name,
+                description: item.description || '',
+                price: item.price,
+                quantity: item.quantity,
+                images: item.images || []
+            }));
+
+            // Create order via backend API
+            const response = await fetch(`${API_BASE}/paypal/create-order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: cartItems,
+                    customer: {
+                        email: shippingData.email,
+                        name: `${shippingData.firstName} ${shippingData.lastName}`,
+                        phone: shippingData.phone,
+                        address: shippingData.address,
+                        city: shippingData.city,
+                        postalCode: shippingData.postalCode,
+                        country: shippingData.country,
+                        shippingCost: calculatedShippingCost
+                    }
+                })
+            });
+
+            const result = await response.json();
+            console.log('✅ Ordine PayPal creato:', result);
+
+            if (!result.success) {
+                throw new Error(result.error || 'Errore creazione ordine');
+            }
+
+            // Redirect to PayPal
+            if (result.data.approvalUrl) {
+                console.log('➡️ Redirect a PayPal:', result.data.approvalUrl);
+                window.location.href = result.data.approvalUrl;
+            } else {
+                throw new Error('URL PayPal mancante');
+            }
+
+        } catch (error) {
+            console.error('❌ Errore creazione ordine PayPal:', error);
+            alert('Errore durante la creazione dell\'ordine. Riprova.');
+
+            // Re-enable button
+            paypalRedirectButton.disabled = false;
+            paypalRedirectButton.innerHTML = '<svg style="width: 24px; height: 24px; fill: white;" viewBox="0 0 24 24"><path d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg> Paga con PayPal';
+        }
+    });
+
+    // ===== PAYMENT METHOD TABS =====
+    const paymentTabs = document.querySelectorAll('.payment-tab');
+    const cardContainer = document.getElementById('cardContainer');
+    const paypalContainer = document.getElementById('paypalContainer');
+
+    paymentTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const method = this.getAttribute('data-method');
+
+            // Update active tab
+            paymentTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            // Show/hide payment containers
+            if (method === 'card') {
+                cardContainer.classList.remove('hidden');
+                paypalContainer.classList.add('hidden');
+
+                // Initialize Stripe if not already done
+                initializeStripe();
+
+                // Mount Stripe card element if not already mounted
+                if (!cardElementMounted && cardElement) {
+                    cardElement.mount('#card-element');
+                    cardElementMounted = true;
+                    console.log('✅ Stripe card element mounted');
+                }
+
+                // Update card total
+                const total = calculateTotal();
+                document.getElementById('card-total').textContent = total.toFixed(2);
+            } else if (method === 'paypal') {
+                cardContainer.classList.add('hidden');
+                paypalContainer.classList.remove('hidden');
+            }
+        });
+    });
+
+    // ===== STRIPE CARD PAYMENT =====
+    const cardPaymentButton = document.getElementById('card-payment-button');
+
+    cardPaymentButton.addEventListener('click', async function() {
+        console.log('💳 Processando pagamento con carta...');
+
+        // Initialize Stripe if not already done
+        initializeStripe();
+
+        if (!stripe || !cardElement) {
+            alert('Errore: Stripe non inizializzato. Ricarica la pagina.');
+            return;
+        }
+
+        // Disable button
+        cardPaymentButton.disabled = true;
+        cardPaymentButton.textContent = 'Elaborazione...';
+
+        try {
+            // Verify shipping data
+            if (!shippingData.email || !shippingData.firstName) {
+                throw new Error('Compila prima i dati di spedizione');
+            }
+
+            // *** CHECK STOCK AVAILABILITY ***
+            console.log('📦 Verifica disponibilità prodotti...');
+            const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
+
+            if (unavailableProducts.length > 0) {
+                const productNames = unavailableProducts.map(p => p.name).join(', ');
+                alert(`❌ Prodotti non disponibili o quantità insufficiente:\n\n${productNames}\n\nRimuovili dal carrello prima di procedere.`);
+                cardPaymentButton.disabled = false;
+                cardPaymentButton.textContent = 'Paga con Carta';
+                return;
+            }
+
+            // Prepare cart items
+            const cartItems = cart.map(item => ({
+                productId: item.id,
+                source: item.source || 'bigbuy',
+                bigbuyId: item.bigbuyId || (item.source === 'bigbuy' ? item.id : null),
+                awId: item.awId || (item.source === 'aw' ? item.id : null),
+                name: item.name,
+                description: item.description || '',
+                price: item.price,
+                quantity: item.quantity,
+                images: item.images || []
+            }));
+
+            // Create payment intent via backend
+            const response = await fetch(`${API_BASE}/stripe/create-payment-intent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    items: cartItems,
+                    customer: {
+                        email: shippingData.email,
+                        name: `${shippingData.firstName} ${shippingData.lastName}`,
+                        phone: shippingData.phone,
+                        address: shippingData.address,
+                        city: shippingData.city,
+                        postalCode: shippingData.postalCode,
+                        country: shippingData.country,
+                        shippingCost: calculatedShippingCost
+                    }
+                })
+            });
+
+            const result = await response.json();
+            console.log('✅ Payment intent creato:', result);
+
+            if (!result.success) {
+                throw new Error(result.error || 'Errore creazione payment intent');
+            }
+
+            // Confirm card payment
+            const { error, paymentIntent } = await stripe.confirmCardPayment(
+                result.data.clientSecret,
+                {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: `${shippingData.firstName} ${shippingData.lastName}`,
+                            email: shippingData.email,
+                            phone: shippingData.phone,
+                            address: {
+                                line1: shippingData.address,
+                                city: shippingData.city,
+                                postal_code: shippingData.postalCode,
+                                country: shippingData.country
+                            }
+                        }
+                    }
+                }
+            );
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            if (paymentIntent.status === 'succeeded') {
+                console.log('✅ Pagamento completato!', paymentIntent.id);
+
+                // Clear cart
+                localStorage.removeItem('zenova-cart');
+
+                // Redirect to success page
+                window.location.href = `checkout-success.html?stripe_payment=${paymentIntent.id}&db_order=${result.data.dbOrderId}`;
+            }
+
+        } catch (error) {
+            console.error('❌ Errore pagamento carta:', error);
+            document.getElementById('card-errors').textContent = error.message;
+
+            // Re-enable button
+            cardPaymentButton.disabled = false;
+            const total = calculateTotal();
+            cardPaymentButton.innerHTML = `Paga €<span id="card-total">${total.toFixed(2)}</span>`;
+        }
+    });
+
     // Functions
     function loadOrderSummary() {
         const summaryItems = document.getElementById('summaryItems');
@@ -186,10 +487,31 @@ document.addEventListener('DOMContentLoaded', function() {
             const itemTotal = item.price * item.quantity;
             subtotal += itemTotal;
 
+            // Gestione immagine prodotto (come nel carrello)
+            let imageHtml = '';
+            let imageUrl = item.image;
+
+            // Convert relative URLs to absolute
+            if (imageUrl && typeof imageUrl === 'string') {
+                if (Array.isArray(imageUrl)) imageUrl = imageUrl[0];
+                if (!imageUrl.startsWith('http') && !imageUrl.startsWith('data:') && imageUrl.startsWith('/')) {
+                    imageUrl = 'https://zenova-commerce-production.up.railway.app' + imageUrl;
+                }
+            }
+
+            // Generate image HTML
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            } else if (item.icon) {
+                imageHtml = item.icon;
+            } else {
+                imageHtml = '📦';
+            }
+
             const itemEl = document.createElement('div');
             itemEl.className = 'summary-item';
             itemEl.innerHTML = `
-                <div class="item-image">${item.icon || '📦'}</div>
+                <div class="item-image">${imageHtml}</div>
                 <div class="item-details">
                     <div class="item-name">${item.name}</div>
                     <div class="item-quantity">Quantità: ${item.quantity}</div>
@@ -277,6 +599,25 @@ document.addEventListener('DOMContentLoaded', function() {
             if (shippingCard) shippingCard.classList.add('hidden');
             if (paymentCard) paymentCard.classList.remove('hidden');
             if (confirmationCard) confirmationCard.classList.add('hidden');
+
+            // Initialize Stripe
+            initializeStripe();
+
+            // Mount Stripe card element if not already mounted
+            if (!cardElementMounted && cardElement) {
+                setTimeout(() => {
+                    cardElement.mount('#card-element');
+                    cardElementMounted = true;
+                    console.log('✅ Stripe card element mounted on step 2');
+                }, 100);
+            }
+
+            // Update card total
+            const total = calculateTotal();
+            const cardTotalElement = document.getElementById('card-total');
+            if (cardTotalElement) {
+                cardTotalElement.textContent = total.toFixed(2);
+            }
         } else if (step === 3) {
             console.log('   👉 Mostro card CONFERMA');
             if (shippingCard) shippingCard.classList.add('hidden');
@@ -327,148 +668,58 @@ document.addEventListener('DOMContentLoaded', function() {
         // This is where you would send the order to your backend
         // and integrate with dropshipping suppliers
 
-        console.log('Order placed:', order);
+        console.log('📤 Invio ordine al server:', order.orderId);
 
-        // Send order to backend
-        fetch('http://localhost:3000/api/orders', {
+        // Send order to backend with improved error handling
+        fetch(`${API_BASE}/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(order)
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('📡 Risposta server - Status:', response.status, 'OK:', response.ok);
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            console.log('Order sent to server:', data);
-
-            // If using dropshipping automation:
-            // Your server would then forward the order to the supplier's API
+            console.log('✅ Ordine salvato sul server:', data);
+            if (data.success) {
+                console.log('✅ Ordine confermato dal backend con ID:', data.orderId || data.data?.id);
+            } else {
+                console.warn('⚠️ Server ha risposto ma senza successo:', data);
+                showServerSyncWarning();
+            }
         })
         .catch(error => {
-            console.error('Error sending order:', error);
+            console.error('❌ ERRORE invio ordine al server:', error);
+            console.error('❌ Ordine ID:', order.orderId);
+            console.error('❌ API Base:', API_BASE);
+            showServerSyncWarning();
+
+            // Save failed order for retry
+            const failedOrders = JSON.parse(localStorage.getItem('zenova_failed_orders') || '[]');
+            failedOrders.push({ order, timestamp: Date.now(), error: error.message });
+            localStorage.setItem('zenova_failed_orders', JSON.stringify(failedOrders));
         });
     }
 
-    function renderPayPalButton() {
-        // Clear existing button
-        document.getElementById('paypal-button-container').innerHTML = '';
+    function showServerSyncWarning() {
+        // Show visible warning that order may need manual verification
+        const warningDiv = document.createElement('div');
+        warningDiv.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #ff9800; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-width: 90%; text-align: center;';
+        warningDiv.innerHTML = '⚠️ Ordine ricevuto ma sincronizzazione server in corso.<br>Controlla la tua email per la conferma.';
+        document.body.appendChild(warningDiv);
 
-        // Render PayPal button (SANDBOX mode)
-        paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color: 'gold',
-                shape: 'rect',
-                label: 'paypal'
-            },
-            createOrder: async function(data, actions) {
-                console.log('🔄 Creazione ordine PayPal via backend...');
-
-                try {
-                    // Verify shipping data is complete
-                    if (!shippingData.email || !shippingData.firstName) {
-                        throw new Error('Dati di spedizione mancanti. Compila il form di spedizione prima di procedere.');
-                    }
-
-                    // Prepare cart items
-                    const cartItems = cart.map(item => ({
-                        productId: item.id,
-                        source: item.source || 'bigbuy',
-                        bigbuyId: item.bigbuyId || (item.source === 'bigbuy' ? item.id : null),
-                        awId: item.awId || (item.source === 'aw' ? item.id : null),
-                        name: item.name,
-                        description: item.description || '',
-                        price: item.price,
-                        quantity: item.quantity,
-                        images: item.images || []
-                    }));
-
-                    // Create order via backend API
-                    const response = await fetch('http://localhost:3000/api/paypal/create-order', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            items: cartItems,
-                            customer: {
-                                email: shippingData.email,
-                                name: `${shippingData.firstName} ${shippingData.lastName}`,
-                                phone: shippingData.phone,
-                                address: shippingData.address,
-                                city: shippingData.city,
-                                postalCode: shippingData.postalCode,
-                                country: shippingData.country,
-                                shippingCost: calculatedShippingCost
-                            }
-                        })
-                    });
-
-                    const result = await response.json();
-                    console.log('✅ Ordine PayPal creato:', result);
-
-                    if (!result.success) {
-                        throw new Error(result.error || 'Errore creazione ordine');
-                    }
-
-                    // Redirect diretto invece di usare popup (risolve problema popup blocker)
-                    if (result.data.approvalUrl) {
-                        console.log('➡️ Redirect a PayPal:', result.data.approvalUrl);
-                        window.location.href = result.data.approvalUrl;
-                        return; // Non ritornare orderId per evitare popup
-                    }
-
-                    return result.data.orderId;
-
-                } catch (error) {
-                    console.error('❌ Errore creazione ordine PayPal:', error);
-                    alert('Errore durante la creazione dell\'ordine. Riprova.');
-                    throw error;
-                }
-            },
-            onApprove: async function(data, actions) {
-                console.log('💳 Cattura pagamento PayPal...');
-
-                try {
-                    // Capture payment via backend
-                    const response = await fetch('http://localhost:3000/api/paypal/capture-order', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            orderId: data.orderID
-                        })
-                    });
-
-                    const result = await response.json();
-                    console.log('✅ Pagamento catturato:', result);
-
-                    if (result.success) {
-                        // Clear cart
-                        localStorage.removeItem('zenova-cart');
-
-                        // Redirect to success page
-                        window.location.href = `checkout-success.html?paypal_order=${data.orderID}&db_order=${result.data.dbOrderId}`;
-                    } else {
-                        throw new Error(result.error || 'Errore cattura pagamento');
-                    }
-
-                } catch (error) {
-                    console.error('❌ Errore cattura pagamento:', error);
-                    alert('Errore durante la finalizzazione del pagamento. Contattaci per assistenza.');
-                }
-            },
-            onCancel: function(data) {
-                console.log('❌ Pagamento PayPal annullato');
-                alert('Hai annullato il pagamento. Puoi riprovare quando vuoi.');
-            },
-            onError: function(err) {
-                console.error('❌ Errore PayPal:', err);
-                alert('Si è verificato un errore con PayPal. Riprova o scegli un altro metodo di pagamento.');
-            }
-        }).render('#paypal-button-container');
+        setTimeout(() => {
+            warningDiv.style.transition = 'opacity 0.5s';
+            warningDiv.style.opacity = '0';
+            setTimeout(() => warningDiv.remove(), 500);
+        }, 8000);
     }
 
-    // PayPal is now fully integrated with backend API
+    // PayPal redirect is now handled by custom button (paypalRedirectButton)
 
     // Redirect if cart is empty
     if (cart.length === 0) {

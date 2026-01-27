@@ -302,12 +302,19 @@ app.use((err, req, res, next) => {
   });
 });
 
+// ===== JOBS =====
+
+const orderStatusJob = require('./src/jobs/OrderStatusJob');
+
 // ===== START SERVER =====
 
 app.listen(PORT, () => {
   logger.info(`🚀 Server Zenova avviato su porta ${PORT}`);
   logger.info(`📝 Ambiente: ${process.env.NODE_ENV}`);
   logger.info(`🌐 Frontend URL: ${process.env.FRONTEND_URL}`);
+
+  // Avvia job controllo stato ordini fornitori
+  orderStatusJob.start();
 });
 
 module.exports = app;

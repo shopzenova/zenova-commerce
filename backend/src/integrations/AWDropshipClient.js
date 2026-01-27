@@ -83,6 +83,8 @@ class AWDropshipClient {
           response = await this.client.post(url, data, config);
         } else if (method === 'put') {
           response = await this.client.put(url, data, config);
+        } else if (method === 'patch') {
+          response = await this.client.patch(url, data, config);
         } else if (method === 'delete') {
           response = await this.client.delete(url, config);
         }
@@ -196,27 +198,120 @@ class AWDropshipClient {
   }
 
   // ===== ORDINI =====
+  // Flusso AW: 1) Crea ordine vuoto → 2) Aggiungi prodotti (transazioni) → 3) Invia ordine
 
   /**
-   * Crea un nuovo ordine
-   * @param {Object} orderData - Dati ordine
-   * @returns {Promise<Object>}
+   * Crea un ordine completo su AW (3 step: create → add items → submit)
+   * @param {Object} orderData - { customerClientId, items: [{ portfolioId, quantity }] }
+   * @returns {Promise<Object>} - Ordine AW con ID e stato
    */
   async createOrder(orderData) {
     if (this.isMockMode) {
-      logger.info('🎭 AW Mock: createOrder', orderData);
-      return { id: 'MOCK-AW-' + Date.now(), status: 'pending', ...orderData };
+      logger.info('🎭 AW Mock: createOrder', JSON.stringify(orderData));
+      return {
+        id: 'MOCK-AW-' + Date.now(),
+        reference: 'MOCK-REF-' + Math.floor(Math.random() * 10000),
+        state: 'submitted',
+        items: orderData.items || []
+      };
     }
 
     try {
-      logger.info('📦 AW Dropship: createOrder');
+      const { customerClientId, items } = orderData;
 
-      const response = await this._makeRequest('post', '/orders', orderData);
+      if (!customerClientId) {
+        throw new Error('AW: customerClientId richiesto per creare ordine');
+      }
+      if (!items || items.length === 0) {
+        throw new Error('AW: almeno un prodotto richiesto');
+      }
 
+      // Step 1: Crea ordine vuoto per il cliente
+      logger.info(`📦 AW Step 1/3: Creazione ordine per cliente ${customerClientId}`);
+      const createResponse = await this._makeRequest(
+        'post',
+        `/dropshipping/order/client/${customerClientId}/store`
+      );
+      const awOrder = createResponse.data.data || createResponse.data;
+      const awOrderId = awOrder.id;
+      logger.info(`✅ AW: Ordine creato con ID ${awOrderId}`);
+
+      // Step 2: Aggiungi ogni prodotto come transazione
+      for (const item of items) {
+        logger.info(`📦 AW Step 2/3: Aggiunta prodotto portfolio=${item.portfolioId}, qty=${item.quantity}`);
+        await this.addTransaction(awOrderId, item.portfolioId, item.quantity);
+      }
+      logger.info(`✅ AW: ${items.length} prodotti aggiunti all'ordine ${awOrderId}`);
+
+      // Step 3: Invia ordine
+      logger.info(`📦 AW Step 3/3: Invio ordine ${awOrderId}`);
+      const submitResponse = await this.submitOrder(awOrderId);
+      logger.info(`✅ AW: Ordine ${awOrderId} inviato con successo`);
+
+      return submitResponse;
+    } catch (error) {
+      logger.error('❌ Errore AW createOrder:', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Aggiunge una transazione (prodotto) a un ordine
+   * @param {number} orderId - ID ordine AW
+   * @param {string} portfolioId - ID portfolio prodotto
+   * @param {number} quantity - Quantità
+   * @returns {Promise<Object>}
+   */
+  async addTransaction(orderId, portfolioId, quantity = 1) {
+    try {
+      const response = await this._makeRequest(
+        'post',
+        `/dropshipping/order/${orderId}/portfolio/${portfolioId}/store`,
+        new URLSearchParams({ quantity_ordered: quantity }).toString(),
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+      );
       return response.data;
     } catch (error) {
-      logger.error('Errore AW createOrder:', error.message);
+      logger.error(`❌ AW addTransaction (order=${orderId}, portfolio=${portfolioId}):`, error.message);
       throw error;
+    }
+  }
+
+  /**
+   * Invia (submit) un ordine AW
+   * @param {number} orderId - ID ordine AW
+   * @returns {Promise<Object>}
+   */
+  async submitOrder(orderId) {
+    try {
+      const response = await this._makeRequest(
+        'patch',
+        `/dropshipping/order/${orderId}/submit`
+      );
+      return response.data.data || response.data;
+    } catch (error) {
+      logger.error(`❌ AW submitOrder (${orderId}):`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Lista clienti AW
+   * @returns {Promise<Array>}
+   */
+  async getClients() {
+    if (this.isMockMode) {
+      return [{ id: 'MOCK-CLIENT-1', name: 'Mock Client' }];
+    }
+
+    try {
+      const response = await this._makeRequest('get', '/dropshipping/clients', null, {
+        params: { active: true, per_page: 100 }
+      });
+      return response.data.data || [];
+    } catch (error) {
+      logger.error('❌ AW getClients:', error.message);
+      return [];
     }
   }
 
@@ -227,15 +322,13 @@ class AWDropshipClient {
    */
   async getOrder(orderId) {
     if (this.isMockMode) {
-      return { id: orderId, status: 'processing', tracking: 'MOCK123' };
+      return { id: orderId, state: 'submitted', reference: 'MOCK-REF' };
     }
 
     try {
       logger.info(`🔄 AW Dropship: getOrder (${orderId})`);
-
-      const response = await this._makeRequest('get', `/orders/${orderId}`);
-
-      return response.data;
+      const response = await this._makeRequest('get', `/dropshipping/order/${orderId}`);
+      return response.data.data || response.data;
     } catch (error) {
       logger.error(`Errore AW getOrder (${orderId}):`, error.message);
       return null;

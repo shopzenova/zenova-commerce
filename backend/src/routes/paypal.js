@@ -4,6 +4,7 @@ const paypalService = require('../../services/paypalService');
 const bigbuy = require('../integrations/BigBuyClient'); // Già singleton
 const AWDropshipClient = require('../integrations/AWDropshipClient');
 const orderService = require('../services/OrderService');
+const supplierOrderService = require('../services/SupplierOrderService');
 const logger = require('../utils/logger');
 
 const awDropship = new AWDropshipClient();
@@ -33,55 +34,49 @@ router.post('/create-order', async (req, res) => {
 
     logger.info(`📦 Creazione ordine PayPal per ${customer.email}, ${items.length} prodotti`);
 
-    // TODO: Riabilitare verifica stock quando BigBuy API funzionerà correttamente
-    // TEMPORANEAMENTE DISABILITATO PER TEST PAYPAL
-    /*
-    // 1. Verifica stock BigBuy
-    const bigbuyItems = items.filter(item => item.source === 'bigbuy');
-    if (bigbuyItems.length > 0) {
-      logger.info(`🔍 Verifica stock per ${bigbuyItems.length} prodotti BigBuy`);
+    // Verifica stock (best-effort: se API fallisce, ordine passa comunque)
+    try {
+      const bigbuyItems = items.filter(item => item.source === 'bigbuy');
+      if (bigbuyItems.length > 0) {
+        logger.info(`Verifica stock per ${bigbuyItems.length} prodotti BigBuy`);
+        const productIds = bigbuyItems.map(item => item.bigbuyId || item.productId);
+        const stockData = await bigbuy.checkMultipleStock(productIds);
 
-      const productIds = bigbuyItems.map(item => item.bigbuyId || item.productId);
-      const stockData = await bigbuy.checkMultipleStock(productIds);
-
-      for (const item of bigbuyItems) {
-        const productId = item.bigbuyId || item.productId;
-        const stock = stockData.stocks?.find(s => s.productId === productId);
-
-        if (!stock || !stock.available || stock.quantity < item.quantity) {
-          logger.warn(`❌ BigBuy: Prodotto ${productId} non disponibile`);
-          return res.status(400).json({
-            success: false,
-            error: `Prodotto "${item.name}" non disponibile o quantità insufficiente`,
-            productId
-          });
+        for (const item of bigbuyItems) {
+          const productId = item.bigbuyId || item.productId;
+          const stock = stockData.stocks?.find(s => s.productId === productId);
+          if (stock && (!stock.available || stock.quantity < item.quantity)) {
+            logger.warn(`BigBuy: Prodotto ${productId} non disponibile`);
+            return res.status(400).json({
+              success: false,
+              error: `Prodotto "${item.name}" non disponibile o quantita' insufficiente`,
+              productId
+            });
+          }
         }
+        logger.info('Stock BigBuy verificato');
       }
-      logger.info(`✅ Stock BigBuy verificato con successo`);
-    }
 
-    // 2. Verifica stock AW Dropship
-    const awItems = items.filter(item => item.source === 'aw');
-    if (awItems.length > 0) {
-      logger.info(`🔍 Verifica stock per ${awItems.length} prodotti AW Dropship`);
-
-      for (const item of awItems) {
-        const productId = item.awId || item.productId;
-        const productData = await awDropship.getProduct(productId);
-
-        if (!productData || !productData.stock || productData.stock < item.quantity) {
-          logger.warn(`❌ AW: Prodotto ${productId} non disponibile`);
-          return res.status(400).json({
-            success: false,
-            error: `Prodotto "${item.name}" non disponibile o quantità insufficiente`,
-            productId
-          });
+      const awItems = items.filter(item => item.source === 'aw');
+      if (awItems.length > 0) {
+        logger.info(`Verifica stock per ${awItems.length} prodotti AW`);
+        for (const item of awItems) {
+          const productId = item.awId || item.productId;
+          const productData = await awDropship.getProduct(productId);
+          if (productData && productData.stock !== undefined && productData.stock < item.quantity) {
+            logger.warn(`AW: Prodotto ${productId} non disponibile`);
+            return res.status(400).json({
+              success: false,
+              error: `Prodotto "${item.name}" non disponibile o quantita' insufficiente`,
+              productId
+            });
+          }
         }
+        logger.info('Stock AW verificato');
       }
-      logger.info(`✅ Stock AW Dropship verificato con successo`);
+    } catch (stockError) {
+      logger.warn(`Verifica stock fallita (ordine procede comunque): ${stockError.message}`);
     }
-    */
-    logger.warn('⚠️  Verifica stock DISABILITATA temporaneamente per test PayPal');
 
     // 3. Crea ordine PayPal
     const result = await paypalService.createOrder(items, customer);
@@ -109,7 +104,7 @@ router.post('/create-order', async (req, res) => {
       },
       payment: {
         method: 'paypal',
-        paypalOrderId: result.orderId,
+        sessionId: result.orderId, // PayPal order ID salvato in stripeSessionId
         status: 'pending'
       },
       shipping: {
@@ -167,14 +162,34 @@ router.post('/capture-order', async (req, res) => {
       });
     }
 
-    // Aggiorna ordine nel database
-    const orders = await orderService.getAllOrders();
-    const order = orders.find(o => o.payment.paypalOrderId === orderId);
+    // Trova ordine nel DB tramite stripeSessionId (dove salviamo il PayPal order ID)
+    const { PrismaClient } = require('@prisma/client');
+    const prisma = new PrismaClient();
 
-    if (order) {
-      await orderService.updateOrderStatus(order.id, 'processing');
-      logger.info(`✅ Ordine ${order.id} aggiornato a processing`);
+    const dbOrder = await prisma.order.findFirst({
+      where: { stripeSessionId: orderId }
+    });
+
+    let orderNumber = null;
+
+    if (dbOrder) {
+      // Aggiorna stato ordine
+      await prisma.order.update({
+        where: { id: dbOrder.id },
+        data: { status: 'processing', paymentStatus: 'paid', paidAt: new Date() }
+      });
+      orderNumber = dbOrder.orderNumber;
+      logger.info(`✅ Ordine ${orderNumber} aggiornato a processing`);
+
+      // Inoltra ordine ai fornitori (async, non blocca la risposta)
+      supplierOrderService.forwardToSupplier(dbOrder)
+        .then(res => logger.info(`📦 Ordine ${orderNumber} inoltrato ai fornitori:`, JSON.stringify(res)))
+        .catch(err => logger.error(`❌ Errore inoltro fornitore per ${orderNumber}:`, err.message));
+    } else {
+      logger.warn(`⚠️ Ordine DB non trovato per PayPal order ID: ${orderId}`);
     }
+
+    await prisma.$disconnect();
 
     logger.info(`✅ Pagamento catturato: ${result.captureId}, €${result.amount}`);
 
@@ -186,7 +201,7 @@ router.post('/capture-order', async (req, res) => {
         captureId: result.captureId,
         amount: result.amount,
         payer: result.payer,
-        dbOrderId: order ? order.id : null
+        dbOrderId: orderNumber
       }
     });
 
@@ -251,11 +266,27 @@ router.post('/webhook', async (req, res) => {
       case 'CHECKOUT.ORDER.COMPLETED':
         logger.info(`✅ Ordine completato: ${event.resource.id}`);
 
-        // Aggiorna ordine nel DB
-        const orders = await orderService.getAllOrders();
-        const order = orders.find(o => o.payment.paypalOrderId === event.resource.id);
-        if (order) {
-          await orderService.updateOrderStatus(order.id, 'processing');
+        // Trova e aggiorna ordine nel DB
+        try {
+          const prismaWh = new (require('@prisma/client').PrismaClient)();
+          const whOrder = await prismaWh.order.findFirst({
+            where: { stripeSessionId: event.resource.id }
+          });
+          if (whOrder) {
+            await prismaWh.order.update({
+              where: { id: whOrder.id },
+              data: { status: 'processing', paymentStatus: 'paid', paidAt: new Date() }
+            });
+            logger.info(`📝 Ordine ${whOrder.orderNumber} aggiornato a processing (webhook)`);
+
+            // Inoltra ai fornitori
+            supplierOrderService.forwardToSupplier(whOrder)
+              .then(r => logger.info(`📦 Ordine ${whOrder.orderNumber} inoltrato (webhook):`, JSON.stringify(r)))
+              .catch(e => logger.error(`❌ Errore inoltro ${whOrder.orderNumber}:`, e.message));
+          }
+          await prismaWh.$disconnect();
+        } catch (whErr) {
+          logger.error('❌ Errore webhook CHECKOUT.ORDER.COMPLETED:', whErr.message);
         }
         break;
 
