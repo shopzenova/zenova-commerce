@@ -296,6 +296,46 @@ class AWDropshipClient {
   }
 
   /**
+   * Crea un cliente su AW
+   * @param {Object} clientData - { name, email, phone, address }
+   * @returns {Promise<Object>} - Cliente creato con ID
+   */
+  async createClient(clientData) {
+    if (this.isMockMode) {
+      logger.info('AW Mock: createClient', JSON.stringify(clientData));
+      return { id: 'MOCK-CLIENT-' + Date.now(), name: clientData.name };
+    }
+
+    try {
+      logger.info(`AW: Creazione cliente ${clientData.name} (${clientData.email})`);
+
+      const payload = {
+        company_name: clientData.company || clientData.name || '',
+        contact_name: clientData.name || '',
+        email: clientData.email || '',
+        phone: clientData.phone || '',
+        address: {
+          country_code: clientData.address?.country || 'IT',
+          address_line_1: clientData.address?.street || clientData.address?.addressLine1 || '',
+          address_line_2: clientData.address?.addressLine2 || '',
+          sorting_code: '',
+          postal_code: clientData.address?.postalCode || '',
+          locality: clientData.address?.city || ''
+        }
+      };
+
+      const response = await this._makeRequest('post', '/dropshipping/client/store', payload);
+      const client = response.data.data || response.data;
+      logger.info(`AW: Cliente creato con ID ${client.id}`);
+      return client;
+
+    } catch (error) {
+      logger.error(`AW createClient: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
    * Lista clienti AW
    * @returns {Promise<Array>}
    */

@@ -184,23 +184,40 @@ class SupplierOrderService {
   async _sendToAW(dbOrder, items, shippingAddress) {
     const orderNumber = dbOrder.orderNumber;
 
-    // Prepara payload AW
-    // AW usa customerClientId e portfolioId per ogni prodotto
-    // TODO: Per ora usa AW_DEFAULT_CLIENT_ID dalla config
-    // Quando AW abiliterà la creazione clienti via API, questo andrà aggiornato
-    const customerClientId = process.env.AW_DEFAULT_CLIENT_ID;
-
-    if (!customerClientId) {
-      const errMsg = 'AW_DEFAULT_CLIENT_ID non configurato nel .env';
-      logger.error(`❌ AW: ${errMsg}`);
-      await emailService.sendSupplierOrderError(dbOrder, 'aw', errMsg, 0);
-      return { success: false, error: errMsg };
+    // Crea cliente AW con i dati del compratore
+    let customerClientId;
+    try {
+      const nameParts = (dbOrder.customerName || '').split(' ');
+      const awClient = await awDropship.createClient({
+        name: dbOrder.customerName || '',
+        company: '',
+        email: dbOrder.customerEmail || '',
+        phone: dbOrder.customerPhone || '',
+        address: {
+          country: shippingAddress.country || 'IT',
+          street: shippingAddress.street || shippingAddress.addressLine1 || '',
+          addressLine2: shippingAddress.addressLine2 || '',
+          city: shippingAddress.city || '',
+          postalCode: shippingAddress.postalCode || ''
+        }
+      });
+      customerClientId = awClient.id;
+      logger.info(`AW: Cliente creato ID ${customerClientId} per ordine ${orderNumber}`);
+    } catch (clientError) {
+      // Fallback: usa AW_DEFAULT_CLIENT_ID se la creazione fallisce
+      customerClientId = process.env.AW_DEFAULT_CLIENT_ID;
+      if (!customerClientId) {
+        const errMsg = `AW: impossibile creare cliente e AW_DEFAULT_CLIENT_ID non configurato - ${clientError.message}`;
+        logger.error(errMsg);
+        await emailService.sendSupplierOrderError(dbOrder, 'aw', errMsg, 0);
+        return { success: false, error: errMsg };
+      }
+      logger.warn(`AW: creazione cliente fallita, uso default ${customerClientId}: ${clientError.message}`);
     }
 
     const awPayload = {
       customerClientId,
       items: items.map(item => ({
-        // Il portfolioId corrisponde al productId AW o al codice prodotto
         portfolioId: item.productId || item.sku,
         quantity: item.quantity
       }))
