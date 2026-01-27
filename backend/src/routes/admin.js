@@ -12,6 +12,12 @@ const bigbuyClient = require('../integrations/BigBuyClient');
 // Prisma Client per PostgreSQL
 const prisma = new PrismaClient();
 
+// ===== IVA =====
+const IVA_RATE = 0.22;
+function applyIVA(price) {
+  return Math.round(price * (1 + IVA_RATE) * 100) / 100;
+}
+
 // ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
 function getWholesalePrice(product) {
   const source = product.source || product.supplier;
@@ -171,8 +177,8 @@ router.get('/products', async (req, res) => {
         id: p.id,
         name: p.name,
         brand: p.brand || 'Zenova',
-        price: getWholesalePrice(p),  // Prezzo acquisto
-        retailPrice: getRetailPrice(p),  // Prezzo vendita (usa originalPrice se presente)
+        price: getWholesalePrice(p),  // Prezzo acquisto (netto)
+        retailPrice: applyIVA(getRetailPrice(p)),  // Prezzo vendita IVA inclusa
         stock: p.stock,
         available: p.stock > 0,
         image: p.image || (p.images && p.images[0]) || null,
