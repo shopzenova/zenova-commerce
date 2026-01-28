@@ -305,6 +305,7 @@ app.use((err, req, res, next) => {
 // ===== JOBS =====
 
 const orderStatusJob = require('./src/jobs/OrderStatusJob');
+const stockSyncJob = require('./src/jobs/StockSyncJob');
 
 // ===== START SERVER =====
 
@@ -315,6 +316,9 @@ app.listen(PORT, () => {
 
   // Avvia job controllo stato ordini fornitori
   orderStatusJob.start();
+
+  // Avvia job sincronizzazione stock automatica (ogni 4h)
+  stockSyncJob.start();
 });
 
 module.exports = app;

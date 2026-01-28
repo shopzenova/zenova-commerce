@@ -268,6 +268,99 @@ class EmailService {
   }
 
   /**
+   * Invia email alert stock admin con riepilogo sync
+   * @param {Object} stats - Statistiche sync
+   * @returns {Promise<boolean>}
+   */
+  async sendStockAlertEmail(stats) {
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+    const hasOutOfStock = stats.newlyOutOfStock && stats.newlyOutOfStock.length > 0;
+    const subject = hasOutOfStock
+      ? `[ZENOVA] Stock Alert: ${stats.newlyOutOfStock.length} prodotti esauriti`
+      : `[ZENOVA] Stock Sync: ${stats.totalErrors} errori durante sincronizzazione`;
+
+    const outOfStockRows = (stats.newlyOutOfStock || []).map(p => `
+      <tr>
+        <td style="padding: 8px; border-bottom: 1px solid #E8DCC4;">${p.name}</td>
+        <td style="padding: 8px; border-bottom: 1px solid #E8DCC4;">${p.id}</td>
+        <td style="padding: 8px; border-bottom: 1px solid #E8DCC4;">${p.source.toUpperCase()}</td>
+        <td style="padding: 8px; border-bottom: 1px solid #E8DCC4;">${p.previousStock} &rarr; 0</td>
+      </tr>
+    `).join('');
+
+    const durationSec = ((stats.durationMs || 0) / 1000).toFixed(1);
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: 'Arial', sans-serif; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; }
+          .header { text-align: center; margin-bottom: 20px; }
+          .logo { font-size: 28px; font-weight: bold; color: #8B6F47; }
+          .alert { background: #FFE0E0; border-left: 4px solid #FF4444; padding: 15px; margin: 15px 0; }
+          .info { background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; margin: 15px 0; }
+          .stats { background: #F5F5F5; padding: 15px; border-radius: 8px; margin: 15px 0; }
+          .label { font-weight: bold; color: #666; }
+          table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+          th { background: #8B6F47; color: white; padding: 10px; text-align: left; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">ZENOVA - Stock Sync Report</div>
+          </div>
+
+          ${hasOutOfStock ? `
+          <div class="alert">
+            <strong>${stats.newlyOutOfStock.length} prodotti appena esauriti!</strong><br>
+            Questi prodotti avevano stock disponibile e ora sono a 0.
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Prodotto</th>
+                <th>ID</th>
+                <th>Fonte</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${outOfStockRows}
+            </tbody>
+          </table>
+          ` : ''}
+
+          ${stats.totalErrors > 0 ? `
+          <div class="alert">
+            <strong>${stats.totalErrors} errori durante la sincronizzazione.</strong>
+          </div>
+          ` : `
+          <div class="info">
+            <strong>Sincronizzazione completata con successo.</strong>
+          </div>
+          `}
+
+          <div class="stats">
+            <h3>Riepilogo</h3>
+            <p><span class="label">BigBuy:</span> ${stats.bigbuy.updated}/${stats.bigbuy.total} aggiornati (${stats.bigbuy.inStock} disponibili, ${stats.bigbuy.outOfStock} esauriti, ${stats.bigbuy.errors} errori)</p>
+            <p><span class="label">AW:</span> ${stats.aw.updated}/${stats.aw.total} aggiornati (${stats.aw.inStock} disponibili, ${stats.aw.outOfStock} esauriti, ${stats.aw.errors} errori)</p>
+            <p><span class="label">Totale aggiornati:</span> ${stats.totalUpdated}</p>
+            <p><span class="label">Durata:</span> ${durationSec}s</p>
+            <p><span class="label">Data:</span> ${new Date().toLocaleString('it-IT')}</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    return this._sendEmail(adminEmail, subject, html);
+  }
+
+  /**
    * Invia email generica
    * @private
    */
