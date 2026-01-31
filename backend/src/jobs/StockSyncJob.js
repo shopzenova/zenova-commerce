@@ -142,8 +142,13 @@ class StockSyncJob {
 
   /**
    * Sync stock BigBuy: usa BigBuyClient.checkMultipleStock (stesso client usato dal checkout)
+   * TEMPORANEAMENTE DISABILITATO - API BigBuy richiede ID interni non disponibili nei CSV
    */
   async _syncBigBuy(stats) {
+    // TODO: Riabilitare quando avremo gli ID corretti per l'API BigBuy productsstock
+    logger.info('StockSyncJob: sync BigBuy DISABILITATO (API richiede ID interni non disponibili)');
+    return;
+
     try {
       logger.info('StockSyncJob: inizio sync BigBuy...');
 
