@@ -3,15 +3,15 @@
  * Sincronizza automaticamente lo stock di tutti i prodotti da BigBuy e AW
  *
  * Flusso:
- * 1. Sync BigBuy: batch di 100 prodotti via POST /rest/catalog/productsstock.json
- * 2. Sync AW: per ogni prodotto AW, chiama getProduct(id) e legge il campo stock
+ * 1. Sync BigBuy: usa BigBuyClient.checkMultipleStock (batch di 100)
+ * 2. Sync AW: scarica tutti i prodotti AW via getProducts paginato, matcha per code/id/name
  * 3. Rileva prodotti andati a stock 0 (prima avevano stock > 0)
  * 4. Salva log in SyncLog table
  * 5. Invia email admin con riepilogo (prodotti esauriti, aggiornati, errori)
  */
 
 const { PrismaClient } = require('@prisma/client');
-const axios = require('axios');
+const bigbuy = require('../integrations/BigBuyClient');
 const AWDropshipClient = require('../integrations/AWDropshipClient');
 const emailService = require('../integrations/EmailService');
 const logger = require('../utils/logger');
@@ -26,16 +26,6 @@ class StockSyncJob {
     this.intervalId = null;
     // Intervallo configurabile via env (default 4 ore)
     this.intervalMs = parseInt(process.env.STOCK_SYNC_INTERVAL_MS) || 4 * 60 * 60 * 1000;
-
-    // BigBuy API setup
-    this.bigbuyAPI = axios.create({
-      baseURL: process.env.BIGBUY_API_URL || 'https://api.bigbuy.eu',
-      headers: {
-        'Authorization': `Bearer ${process.env.BIGBUY_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      timeout: 60000
-    });
   }
 
   /**
@@ -105,11 +95,11 @@ class StockSyncJob {
           status: totalErrors > 0 ? 'completed_with_errors' : 'success',
           itemsProcessed: totalUpdated,
           errorMessage: totalErrors > 0 ? `${totalErrors} errori durante sync` : null,
-          syncData: {
+          syncData: JSON.stringify({
             bigbuy: stats.bigbuy,
             aw: stats.aw,
             newlyOutOfStock: stats.newlyOutOfStock.length
-          },
+          }),
           durationMs
         }
       });
@@ -151,7 +141,7 @@ class StockSyncJob {
   }
 
   /**
-   * Sync stock BigBuy: batch di 100 prodotti via API
+   * Sync stock BigBuy: usa BigBuyClient.checkMultipleStock (stesso client usato dal checkout)
    */
   async _syncBigBuy(stats) {
     try {
@@ -199,69 +189,38 @@ class StockSyncJob {
         batches.push(bigbuyIds.slice(i, i + BATCH_SIZE));
       }
 
-      // Processa batch e ottieni stock
+      logger.info(`StockSyncJob: ${batches.length} batch da processare`);
+
+      // Processa batch usando BigBuyClient (stesso client del checkout, gia' testato)
       let stockData = [];
 
       for (let i = 0; i < batches.length; i++) {
         try {
-          // Formato: { products: [{ id: 12345 }, { id: 12346 }, ...] }
-          const response = await this.bigbuyAPI.post('/rest/catalog/productsstock.json', {
-            products: batches[i].map(id => ({ id }))
-          });
+          const result = await bigbuy.checkMultipleStock(batches[i]);
 
-          if (response.data && Array.isArray(response.data)) {
-            stockData.push(...response.data);
+          // Il risultato puo' essere { stocks: [...] } o direttamente [...]
+          if (Array.isArray(result)) {
+            stockData.push(...result);
+          } else if (result && result.stocks && Array.isArray(result.stocks)) {
+            stockData.push(...result.stocks);
+          } else if (result) {
+            // Log formato inatteso per debug
+            logger.warn(`StockSyncJob: BigBuy batch ${i + 1} formato inatteso: ${JSON.stringify(result).substring(0, 200)}`);
+          }
+
+          if (i === 0) {
+            logger.info(`StockSyncJob: BigBuy batch 1 OK — formato risposta: ${Array.isArray(result) ? 'array' : typeof result}`);
           }
         } catch (error) {
-          // Log dettagliato solo per il primo errore
           if (stats.bigbuy.errors === 0) {
-            logger.error(`StockSyncJob: dettaglio errore BigBuy batch ${i + 1}: ${JSON.stringify(error.response?.data || error.message)}`);
-            logger.error(`StockSyncJob: IDs inviati nel batch (primi 5): ${batches[i].slice(0, 5).join(', ')}`);
+            logger.error(`StockSyncJob: BigBuy batch ${i + 1} dettaglio errore: ${JSON.stringify(error.response?.data || error.message).substring(0, 500)}`);
           }
-          logger.error(`StockSyncJob: errore batch BigBuy ${i + 1}/${batches.length}: ${error.response?.status} ${error.message}`);
+          logger.error(`StockSyncJob: errore batch BigBuy ${i + 1}/${batches.length}: ${error.response?.status || ''} ${error.message}`);
           stats.bigbuy.errors++;
-
-          // Se primo batch fallisce con 400, prova formato alternativo (array diretto)
-          if (i === 0 && error.response?.status === 400) {
-            logger.info('StockSyncJob: BigBuy 400 - provo formato alternativo (array diretto)...');
-            try {
-              const retryResponse = await this.bigbuyAPI.post('/rest/catalog/productsstock.json', {
-                products: batches[i]
-              });
-              if (retryResponse.data && Array.isArray(retryResponse.data)) {
-                stockData.push(...retryResponse.data);
-                // Formato array diretto funziona, usa quello per i prossimi batch
-                logger.info('StockSyncJob: formato array diretto funziona!');
-                this._bigbuyStockFormat = 'array';
-                stats.bigbuy.errors--; // annulla errore precedente
-              }
-            } catch (retryError) {
-              logger.error(`StockSyncJob: anche formato alternativo fallito: ${JSON.stringify(retryError.response?.data || retryError.message)}`);
-            }
-          }
         }
 
         // 500ms pausa tra batch
         if (i < batches.length - 1) {
-          await this._delay(500);
-        }
-      }
-
-      // Se il primo batch ha scoperto il formato giusto, riprocessa i batch falliti
-      if (this._bigbuyStockFormat === 'array' && stats.bigbuy.errors > 0) {
-        logger.info('StockSyncJob: riprocesso batch BigBuy con formato array diretto...');
-        for (let i = 1; i < batches.length; i++) {
-          try {
-            const response = await this.bigbuyAPI.post('/rest/catalog/productsstock.json', {
-              products: batches[i]
-            });
-            if (response.data && Array.isArray(response.data)) {
-              stockData.push(...response.data);
-              stats.bigbuy.errors--;
-            }
-          } catch (error) {
-            // gia' contato come errore
-          }
           await this._delay(500);
         }
       }
@@ -331,13 +290,12 @@ class StockSyncJob {
 
   /**
    * Sync stock AW: scarica tutti i prodotti via getProducts paginato e aggiorna stock
-   * (Non usa getProduct singolo perche' gli ID nel DB sono SKU Zenova, non portfolio ID AW)
    */
   async _syncAW(stats) {
     try {
       logger.info('StockSyncJob: inizio sync AW...');
 
-      // Carica tutti i prodotti AW dal database (source puo' essere 'aw' o 'aw-dropship')
+      // Carica tutti i prodotti AW dal database (source puo' essere 'aw' o 'aw-dropship' ecc)
       const awProducts = await prisma.product.findMany({
         where: {
           source: { startsWith: 'aw' }
@@ -358,6 +316,10 @@ class StockSyncJob {
       }
 
       logger.info(`StockSyncJob: ${awProducts.length} prodotti AW da sincronizzare`);
+
+      // Log campione DB per debug matching
+      const dbSample = awProducts.slice(0, 5).map(p => `${p.id} (${(p.name || '').substring(0, 30)})`);
+      logger.info(`StockSyncJob: campione prodotti DB AW: ${dbSample.join(', ')}`);
 
       // 1. Scarica tutti i prodotti AW dall'API con paginazione
       const awApiProducts = [];
@@ -390,21 +352,35 @@ class StockSyncJob {
         return;
       }
 
+      // Log campione API per debug matching — mostra TUTTI i campi del primo prodotto
+      if (awApiProducts.length > 0) {
+        const sampleKeys = Object.keys(awApiProducts[0]);
+        logger.info(`StockSyncJob: campi prodotto AW API: ${sampleKeys.join(', ')}`);
+        const apiSample = awApiProducts.slice(0, 3).map(p =>
+          `id=${p.id}, code=${p.code}, slug=${p.slug}, name=${(p.name || '').substring(0, 30)}, stock=${p.stock}, quantity=${p.quantity}`
+        );
+        apiSample.forEach(s => logger.info(`StockSyncJob: AW API campione: ${s}`));
+      }
+
       // 2. Crea mappe di lookup per matching (code, id, slug, name)
       const awByCode = {};
       const awById = {};
       const awByName = {};
+      const awBySlug = {};
 
       awApiProducts.forEach(p => {
         if (p.code) awByCode[p.code.toLowerCase()] = p;
         if (p.id) awById[String(p.id)] = p;
-        if (p.slug) awByCode[p.slug.toLowerCase()] = p;
+        if (p.slug) awBySlug[p.slug.toLowerCase()] = p;
         if (p.name) awByName[p.name.toLowerCase().trim()] = p;
       });
+
+      logger.info(`StockSyncJob: mappe AW — ${Object.keys(awByCode).length} by code, ${Object.keys(awById).length} by id, ${Object.keys(awBySlug).length} by slug, ${Object.keys(awByName).length} by name`);
 
       // 3. Matcha prodotti DB con prodotti API e aggiorna stock
       let matched = 0;
       let unmatched = 0;
+      const unmatchedSamples = [];
 
       for (const product of awProducts) {
         // Prova diversi modi di matching
@@ -415,6 +391,8 @@ class StockSyncJob {
           awByCode[idClean] ||
           awById[product.id] ||
           awById[idClean] ||
+          awBySlug[idLower] ||
+          awBySlug[idClean] ||
           (product.name ? awByName[product.name.toLowerCase().trim()] : null);
 
         if (awMatch) {
@@ -455,7 +433,14 @@ class StockSyncJob {
           }
         } else {
           unmatched++;
+          if (unmatchedSamples.length < 5) {
+            unmatchedSamples.push(product.id);
+          }
         }
+      }
+
+      if (unmatchedSamples.length > 0) {
+        logger.warn(`StockSyncJob: AW prodotti non matchati (campione): ${unmatchedSamples.join(', ')}`);
       }
 
       logger.info(`StockSyncJob: AW completato — ${matched} matchati, ${unmatched} non trovati nell'API, ${stats.aw.updated} aggiornati, ${stats.aw.outOfStock} esauriti, ${stats.aw.errors} errori`);
