@@ -170,15 +170,10 @@ class StockSyncJob {
 
       logger.info(`StockSyncJob: ${bigbuyProducts.length} prodotti BigBuy da sincronizzare`);
 
-      // Estrai IDs BigBuy (parte numerica, filtra valori invalidi)
+      // Estrai IDs BigBuy come stringhe (es. "M0125658", "S0563513")
       const bigbuyIds = bigbuyProducts
-        .map(p => {
-          const id = p.bigbuyId;
-          if (!id) return null;
-          const numericPart = id.toString().replace(/\D/g, '');
-          return numericPart ? parseInt(numericPart) : null;
-        })
-        .filter(id => id !== null && id > 0 && !isNaN(id));
+        .map(p => p.bigbuyId?.toString().trim())
+        .filter(id => id && id.length > 0);
 
       logger.info(`StockSyncJob: ${bigbuyIds.length} IDs BigBuy validi (campione: ${bigbuyIds.slice(0, 5).join(', ')})`);
 
@@ -239,8 +234,10 @@ class StockSyncJob {
 
       // Aggiorna database
       for (const product of bigbuyProducts) {
-        const numericId = product.bigbuyId ? parseInt(product.bigbuyId.toString().replace(/\D/g, '')) : null;
-        const stockInfo = numericId ? stockMap[numericId] : null;
+        // Prova match con ID stringa o ID numerico (BigBuy API potrebbe restituire entrambi)
+        const stringId = product.bigbuyId?.toString().trim();
+        const numericId = stringId ? stringId.replace(/\D/g, '') : null;
+        const stockInfo = stockMap[stringId] || stockMap[numericId] || null;
 
         if (stockInfo) {
           try {
