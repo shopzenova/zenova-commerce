@@ -3,7 +3,7 @@
  * Sincronizza automaticamente lo stock di tutti i prodotti da BigBuy e AW
  *
  * Flusso:
- * 1. Sync BigBuy: DISABILITATO (API richiede ID interni non disponibili)
+ * 1. Sync BigBuy: usa /productsstockbyhandlingdays.json (match per SKU)
  * 2. Sync AW: usa Data Feed API /my-products-data-feed-json (catalogo completo)
  * 3. Rileva prodotti andati a stock 0 (prima avevano stock > 0)
  * 4. Salva log in SyncLog table
@@ -140,26 +140,21 @@ class StockSyncJob {
   }
 
   /**
-   * Sync stock BigBuy: usa BigBuyClient.checkMultipleStock (stesso client usato dal checkout)
-   * TEMPORANEAMENTE DISABILITATO - API BigBuy richiede ID interni non disponibili nei CSV
+   * Sync stock BigBuy: usa endpoint /productsstockbyhandlingdays
+   * Match per SKU (che corrisponde all'ID prodotto nel nostro DB)
+   * Somma quantity da tutti i warehouse/handling days
    */
   async _syncBigBuy(stats) {
-    // TODO: Riabilitare quando avremo gli ID corretti per l'API BigBuy productsstock
-    logger.info('StockSyncJob: sync BigBuy DISABILITATO (API richiede ID interni non disponibili)');
-    return;
-
     try {
-      logger.info('StockSyncJob: inizio sync BigBuy...');
+      logger.info('StockSyncJob: inizio sync BigBuy via Stock API...');
 
       // Carica tutti i prodotti BigBuy dal database
       const bigbuyProducts = await prisma.product.findMany({
         where: {
-          source: 'bigbuy',
-          bigbuyId: { not: null }
+          source: 'bigbuy'
         },
         select: {
           id: true,
-          bigbuyId: true,
           name: true,
           stock: true
         }
@@ -168,85 +163,70 @@ class StockSyncJob {
       stats.bigbuy.total = bigbuyProducts.length;
 
       if (bigbuyProducts.length === 0) {
-        logger.info('StockSyncJob: nessun prodotto BigBuy trovato');
+        logger.info('StockSyncJob: nessun prodotto BigBuy trovato nel DB');
         return;
       }
 
       logger.info(`StockSyncJob: ${bigbuyProducts.length} prodotti BigBuy da sincronizzare`);
 
-      // Estrai IDs BigBuy come stringhe (es. "M0125658", "S0563513")
-      const bigbuyIds = bigbuyProducts
-        .map(p => p.bigbuyId?.toString().trim())
-        .filter(id => id && id.length > 0);
+      // Crea set di SKU dal database per match veloce
+      const dbSkus = new Set(bigbuyProducts.map(p => p.id.toUpperCase()));
 
-      logger.info(`StockSyncJob: ${bigbuyIds.length} IDs BigBuy validi (campione: ${bigbuyIds.slice(0, 5).join(', ')})`);
+      // Scarica stock da API BigBuy (paginato)
+      const stockBySku = {};
+      let page = 0;
+      let hasMore = true;
+      const PAGE_SIZE = 1000;
 
-      // Dividi in batch di 100
-      const BATCH_SIZE = 100;
-      const batches = [];
-      for (let i = 0; i < bigbuyIds.length; i += BATCH_SIZE) {
-        batches.push(bigbuyIds.slice(i, i + BATCH_SIZE));
-      }
-
-      logger.info(`StockSyncJob: ${batches.length} batch da processare`);
-
-      // Processa batch usando BigBuyClient (stesso client del checkout, gia' testato)
-      let stockData = [];
-
-      for (let i = 0; i < batches.length; i++) {
+      while (hasMore) {
         try {
-          const result = await bigbuy.checkMultipleStock(batches[i]);
+          const stockData = await bigbuy.getStockByHandlingDays(page, PAGE_SIZE);
 
-          // Il risultato puo' essere { stocks: [...] } o direttamente [...]
-          if (Array.isArray(result)) {
-            stockData.push(...result);
-          } else if (result && result.stocks && Array.isArray(result.stocks)) {
-            stockData.push(...result.stocks);
-          } else if (result) {
-            // Log formato inatteso per debug
-            logger.warn(`StockSyncJob: BigBuy batch ${i + 1} formato inatteso: ${JSON.stringify(result).substring(0, 200)}`);
+          if (!stockData || stockData.length === 0) {
+            hasMore = false;
+            break;
           }
 
-          if (i === 0) {
-            logger.info(`StockSyncJob: BigBuy batch 1 OK — formato risposta: ${Array.isArray(result) ? 'array' : typeof result}`);
+          logger.info(`StockSyncJob: BigBuy pagina ${page} — ${stockData.length} prodotti stock`);
+
+          // Processa ogni prodotto
+          stockData.forEach(item => {
+            const sku = (item.sku || '').toUpperCase();
+            if (sku && dbSkus.has(sku)) {
+              // Somma quantity da tutti i warehouse
+              const totalQty = (item.stocks || []).reduce((sum, s) => sum + (s.quantity || 0), 0);
+              stockBySku[sku] = totalQty;
+            }
+          });
+
+          // Verifica se ci sono altre pagine
+          if (stockData.length < PAGE_SIZE) {
+            hasMore = false;
+          } else {
+            page++;
+            await this._delay(3000); // Rate limit BigBuy (3s tra richieste)
           }
+
         } catch (error) {
-          if (stats.bigbuy.errors === 0) {
-            logger.error(`StockSyncJob: BigBuy batch ${i + 1} dettaglio errore: ${JSON.stringify(error.response?.data || error.message).substring(0, 500)}`);
-          }
-          logger.error(`StockSyncJob: errore batch BigBuy ${i + 1}/${batches.length}: ${error.response?.status || ''} ${error.message}`);
+          logger.error(`StockSyncJob: errore BigBuy pagina ${page}: ${error.message}`);
           stats.bigbuy.errors++;
-        }
-
-        // 500ms pausa tra batch
-        if (i < batches.length - 1) {
-          await this._delay(500);
+          hasMore = false;
         }
       }
 
-      logger.info(`StockSyncJob: ricevuti dati stock per ${stockData.length} prodotti BigBuy`);
-
-      // Crea mappa BigBuyID → Stock
-      const stockMap = {};
-      stockData.forEach(item => {
-        const id = item.productId || item.id;
-        stockMap[id] = {
-          stock: item.quantity || 0,
-          inStock: item.available || ((item.quantity || 0) > 0)
-        };
-      });
+      logger.info(`StockSyncJob: BigBuy stock ricevuto per ${Object.keys(stockBySku).length} SKU matchati`);
 
       // Aggiorna database
-      for (const product of bigbuyProducts) {
-        // Prova match con ID stringa o ID numerico (BigBuy API potrebbe restituire entrambi)
-        const stringId = product.bigbuyId?.toString().trim();
-        const numericId = stringId ? stringId.replace(/\D/g, '') : null;
-        const stockInfo = stockMap[stringId] || stockMap[numericId] || null;
+      let matched = 0;
+      let unmatched = 0;
 
-        if (stockInfo) {
+      for (const product of bigbuyProducts) {
+        const skuUpper = product.id.toUpperCase();
+        const newStock = stockBySku[skuUpper];
+
+        if (newStock !== undefined) {
           try {
             const previousStock = product.stock || 0;
-            const newStock = stockInfo.stock;
 
             await prisma.product.update({
               where: { id: product.id },
@@ -257,8 +237,9 @@ class StockSyncJob {
             });
 
             stats.bigbuy.updated++;
+            matched++;
 
-            if (stockInfo.inStock) {
+            if (newStock > 0) {
               stats.bigbuy.inStock++;
             } else {
               stats.bigbuy.outOfStock++;
@@ -278,10 +259,12 @@ class StockSyncJob {
             logger.error(`StockSyncJob: errore aggiornamento BigBuy ${product.id}: ${error.message}`);
             stats.bigbuy.errors++;
           }
+        } else {
+          unmatched++;
         }
       }
 
-      logger.info(`StockSyncJob: BigBuy completato — ${stats.bigbuy.updated} aggiornati, ${stats.bigbuy.outOfStock} esauriti, ${stats.bigbuy.errors} errori`);
+      logger.info(`StockSyncJob: BigBuy completato — ${matched}/${bigbuyProducts.length} matchati, ${stats.bigbuy.updated} aggiornati, ${stats.bigbuy.outOfStock} esauriti, ${stats.bigbuy.errors} errori`);
 
     } catch (error) {
       logger.error(`StockSyncJob: errore fatale sync BigBuy: ${error.message}`);

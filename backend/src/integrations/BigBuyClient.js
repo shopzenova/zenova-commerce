@@ -282,6 +282,67 @@ class BigBuyClient {
     }
   }
 
+  /**
+   * Ottiene stock di tutti i prodotti per handling days (paginato)
+   * Endpoint: /rest/catalog/productsstockbyhandlingdays.json
+   * Risposta: [{ id, sku, stocks: [{ quantity, minHandlingDays, maxHandlingDays, warehouse }] }]
+   */
+  async getStockByHandlingDays(page = 0, pageSize = 1000) {
+    if (this.isMockMode) {
+      return [];
+    }
+
+    try {
+      logger.info(`🔄 BigBuy: getStockByHandlingDays (page=${page}, pageSize=${pageSize})`);
+
+      const response = await this._makeRequest('get', '/rest/catalog/productsstockbyhandlingdays.json', {
+        params: { page, pageSize }
+      });
+
+      const data = Array.isArray(response.data) ? response.data : [];
+      logger.info(`✅ BigBuy: ricevuti ${data.length} prodotti stock`);
+
+      return data;
+    } catch (error) {
+      logger.error('❌ Errore BigBuy getStockByHandlingDays:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
+      throw error;
+    }
+  }
+
+  /**
+   * Ottiene stock variazioni prodotti per handling days (paginato)
+   * Per prodotti con varianti (taglie, colori, ecc.)
+   */
+  async getVariationsStockByHandlingDays(page = 0, pageSize = 1000) {
+    if (this.isMockMode) {
+      return [];
+    }
+
+    try {
+      logger.info(`🔄 BigBuy: getVariationsStockByHandlingDays (page=${page}, pageSize=${pageSize})`);
+
+      const response = await this._makeRequest('get', '/rest/catalog/productsvariationsstockbyhandlingdays.json', {
+        params: { page, pageSize }
+      });
+
+      const data = Array.isArray(response.data) ? response.data : [];
+      logger.info(`✅ BigBuy: ricevuti ${data.length} variazioni stock`);
+
+      return data;
+    } catch (error) {
+      logger.error('❌ Errore BigBuy getVariationsStockByHandlingDays:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data
+      });
+      throw error;
+    }
+  }
+
   // ===== ORDINI =====
 
   async createOrder(orderData) {
