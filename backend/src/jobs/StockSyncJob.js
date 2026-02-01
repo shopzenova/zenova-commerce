@@ -3,21 +3,20 @@
  * Sincronizza automaticamente lo stock di tutti i prodotti da BigBuy e AW
  *
  * Flusso:
- * 1. Sync BigBuy: usa BigBuyClient.checkMultipleStock (batch di 100)
- * 2. Sync AW: scarica tutti i prodotti AW via getProducts paginato, matcha per code/id/name
+ * 1. Sync BigBuy: DISABILITATO (API richiede ID interni non disponibili)
+ * 2. Sync AW: usa Data Feed API /my-products-data-feed-json (catalogo completo)
  * 3. Rileva prodotti andati a stock 0 (prima avevano stock > 0)
  * 4. Salva log in SyncLog table
  * 5. Invia email admin con riepilogo (prodotti esauriti, aggiornati, errori)
  */
 
 const { PrismaClient } = require('@prisma/client');
+const axios = require('axios');
 const bigbuy = require('../integrations/BigBuyClient');
-const AWDropshipClient = require('../integrations/AWDropshipClient');
 const emailService = require('../integrations/EmailService');
 const logger = require('../utils/logger');
 
 const prisma = new PrismaClient();
-const awDropship = new AWDropshipClient();
 
 class StockSyncJob {
 
@@ -291,13 +290,15 @@ class StockSyncJob {
   }
 
   /**
-   * Sync stock AW: scarica tutti i prodotti via getProducts paginato e aggiorna stock
+   * Sync stock AW: usa Data Feed API per scaricare catalogo completo
+   * Endpoint: /dropshipping/my-products-data-feed-json
+   * Campi feed: [0]=active, [1]=code, [4]=ean, [10]=name, [22]=stock
    */
   async _syncAW(stats) {
     try {
-      logger.info('StockSyncJob: inizio sync AW...');
+      logger.info('StockSyncJob: inizio sync AW via Data Feed API...');
 
-      // Carica tutti i prodotti AW dal database (source puo' essere 'aw' o 'aw-dropship' ecc)
+      // Carica tutti i prodotti AW dal database
       const awProducts = await prisma.product.findMany({
         where: {
           source: { startsWith: 'aw' }
@@ -305,103 +306,95 @@ class StockSyncJob {
         select: {
           id: true,
           name: true,
-          stock: true,
-          ean: true
+          stock: true
         }
       });
 
       stats.aw.total = awProducts.length;
 
       if (awProducts.length === 0) {
-        logger.info('StockSyncJob: nessun prodotto AW trovato');
+        logger.info('StockSyncJob: nessun prodotto AW trovato nel DB');
         return;
       }
 
       logger.info(`StockSyncJob: ${awProducts.length} prodotti AW da sincronizzare`);
 
-      // Log campione DB per debug matching
-      const dbSample = awProducts.slice(0, 5).map(p => `${p.id} (${(p.name || '').substring(0, 30)})`);
-      logger.info(`StockSyncJob: campione prodotti DB AW: ${dbSample.join(', ')}`);
+      // 1. Scarica Data Feed completo dall'API AW
+      const baseURL = process.env.AW_API_URL || 'https://app.aiku.io/app/re-api';
+      const token = process.env.AW_API_TOKEN;
 
-      // 1. Scarica tutti i prodotti AW dall'API con paginazione
-      const awApiProducts = [];
-      let page = 1;
-      let lastPage = 1;
-
-      do {
-        try {
-          const result = await awDropship.getProducts(page, 100);
-          if (result.data && result.data.length > 0) {
-            awApiProducts.push(...result.data);
-            lastPage = result.pagination?.lastPage || 1;
-            logger.info(`StockSyncJob: AW pagina ${page}/${lastPage} — ${result.data.length} prodotti`);
-          } else {
-            break;
-          }
-        } catch (error) {
-          logger.error(`StockSyncJob: errore AW pagina ${page}: ${error.message}`);
-          stats.aw.errors++;
-          break;
-        }
-        page++;
-        await this._delay(2000); // 2s rate limit
-      } while (page <= lastPage);
-
-      logger.info(`StockSyncJob: scaricati ${awApiProducts.length} prodotti AW dall'API`);
-
-      if (awApiProducts.length === 0) {
-        logger.warn('StockSyncJob: nessun prodotto AW ricevuto dall\'API, skip aggiornamento');
+      if (!token) {
+        logger.error('StockSyncJob: AW_API_TOKEN non configurato!');
+        stats.aw.errors++;
         return;
       }
 
-      // Log campione API per debug matching — mostra TUTTI i campi del primo prodotto
-      if (awApiProducts.length > 0) {
-        const sampleKeys = Object.keys(awApiProducts[0]);
-        logger.info(`StockSyncJob: campi prodotto AW API: ${sampleKeys.join(', ')}`);
-        const apiSample = awApiProducts.slice(0, 3).map(p =>
-          `id=${p.id}, code=${p.code}, slug=${p.slug}, name=${(p.name || '').substring(0, 30)}, stock=${p.stock}, quantity=${p.quantity}`
-        );
-        apiSample.forEach(s => logger.info(`StockSyncJob: AW API campione: ${s}`));
+      const feedUrl = `${baseURL}/dropshipping/my-products-data-feed-json`;
+      logger.info(`StockSyncJob: scaricamento feed da ${feedUrl}...`);
+
+      let feedProducts;
+      try {
+        const response = await axios.get(feedUrl, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+          },
+          timeout: 120000 // 2 minuti timeout per catalogo grande
+        });
+
+        feedProducts = response.data.data || response.data;
+
+        if (!Array.isArray(feedProducts)) {
+          logger.error('StockSyncJob: risposta feed AW non valida');
+          stats.aw.errors++;
+          return;
+        }
+
+        logger.info(`StockSyncJob: ricevuti ${feedProducts.length} prodotti dal feed AW`);
+
+      } catch (error) {
+        logger.error(`StockSyncJob: errore download feed AW: ${error.response?.status || ''} ${error.message}`);
+        stats.aw.errors++;
+        return;
       }
 
-      // 2. Crea mappe di lookup per matching (code, id, slug, name)
-      const awByCode = {};
-      const awById = {};
-      const awByName = {};
-      const awBySlug = {};
+      // 2. Crea mappa code → stock dal feed
+      // Struttura feed: [0]=active, [1]=code, [4]=ean, [10]=name, [22]=stock
+      const feedByCode = {};
 
-      awApiProducts.forEach(p => {
-        if (p.code) awByCode[p.code.toLowerCase()] = p;
-        if (p.id) awById[String(p.id)] = p;
-        if (p.slug) awBySlug[p.slug.toLowerCase()] = p;
-        if (p.name) awByName[p.name.toLowerCase().trim()] = p;
+      feedProducts.forEach(p => {
+        // Il feed puo' avere indici numerici o chiavi stringa
+        const code = (p[1] || p['1'] || '').toString().toLowerCase();
+        const stock = parseInt(p[22] ?? p['22'] ?? 0) || 0;
+        const name = p[10] || p['10'] || '';
+
+        if (code) {
+          feedByCode[code] = { stock, name };
+        }
       });
 
-      logger.info(`StockSyncJob: mappe AW — ${Object.keys(awByCode).length} by code, ${Object.keys(awById).length} by id, ${Object.keys(awBySlug).length} by slug, ${Object.keys(awByName).length} by name`);
+      logger.info(`StockSyncJob: mappa feed AW creata con ${Object.keys(feedByCode).length} prodotti`);
 
-      // 3. Matcha prodotti DB con prodotti API e aggiorna stock
+      // Log campione per debug
+      const sampleCodes = Object.keys(feedByCode).slice(0, 5);
+      logger.info(`StockSyncJob: campione codici feed: ${sampleCodes.join(', ')}`);
+
+      // 3. Matcha e aggiorna prodotti DB
       let matched = 0;
       let unmatched = 0;
       const unmatchedSamples = [];
 
       for (const product of awProducts) {
-        // Prova diversi modi di matching
         const idLower = product.id.toLowerCase();
-        const idClean = idLower.replace(/^aw-/, '');
-        const awMatch =
-          awByCode[idLower] ||
-          awByCode[idClean] ||
-          awById[product.id] ||
-          awById[idClean] ||
-          awBySlug[idLower] ||
-          awBySlug[idClean] ||
-          (product.name ? awByName[product.name.toLowerCase().trim()] : null);
+        // Prova match diretto, poi senza prefisso "aw-"
+        const idWithoutPrefix = idLower.replace(/^aw-/, '');
 
-        if (awMatch) {
+        const feedMatch = feedByCode[idLower] || feedByCode[idWithoutPrefix];
+
+        if (feedMatch) {
           try {
             const previousStock = product.stock || 0;
-            // Stock puo' essere in diversi campi
-            const newStock = awMatch.stock ?? awMatch.quantity ?? awMatch.total_stock ?? 0;
+            const newStock = feedMatch.stock;
 
             await prisma.product.update({
               where: { id: product.id },
@@ -420,6 +413,7 @@ class StockSyncJob {
               stats.aw.outOfStock++;
             }
 
+            // Rileva prodotti appena andati a stock 0
             if (previousStock > 0 && newStock === 0) {
               stats.newlyOutOfStock.push({
                 id: product.id,
@@ -445,7 +439,7 @@ class StockSyncJob {
         logger.warn(`StockSyncJob: AW prodotti non matchati (campione): ${unmatchedSamples.join(', ')}`);
       }
 
-      logger.info(`StockSyncJob: AW completato — ${matched} matchati, ${unmatched} non trovati nell'API, ${stats.aw.updated} aggiornati, ${stats.aw.outOfStock} esauriti, ${stats.aw.errors} errori`);
+      logger.info(`StockSyncJob: AW completato — ${matched}/${awProducts.length} matchati, ${stats.aw.updated} aggiornati, ${stats.aw.outOfStock} esauriti, ${stats.aw.errors} errori`);
 
     } catch (error) {
       logger.error(`StockSyncJob: errore fatale sync AW: ${error.message}`);
