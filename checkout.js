@@ -499,9 +499,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Generate image HTML
+            // Generate image HTML - con fallback se immagine non carica
             if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
-                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" loading="lazy" onerror="this.parentElement.innerHTML='📦'">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
             } else {
