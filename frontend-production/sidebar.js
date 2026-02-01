@@ -95,13 +95,18 @@ const anchorToSubcategoryMap = {
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'oli-essenziali',
     'oli-fragranza': 'oli-fragranza',
-    'oli-per-fragranza': 'oli-fragranza',
-    'candele-gel-profumati-sali-bagno': 'diffusori',
+    'oli-per-fragranza': 'oli-per-fragranza',
+    'candele-profumate': 'candele-profumate',
+    'candele-gel-profumati-sali-bagno': 'candele-gel-profumati-sali-bagno',
     'diffusori-aromatici': 'diffusori-aromatici',
     'diffusori-oli': 'diffusori-oli',
     'vestiario-wellness': 'vestiario-wellness',
     'pietre-preziose': 'pietre-preziose',
     'incenso': 'incenso',
+    'incenso-riflusso': 'incenso-riflusso',
+    'incenso-coni': 'incenso-coni',
+    'portacandele': 'portacandele',
+    'kit-benessere-cofanetti-regalo': 'kit-benessere-cofanetti-regalo',
 
     // TECH INNOVATION
     'gadget-tech': 'gadget-tech',
@@ -216,10 +221,19 @@ const subcategoryToCategoryMap = {
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'natural-wellness',
     'oli-fragranza': 'natural-wellness',
+    'oli-per-fragranza': 'natural-wellness',
+    'candele-profumate': 'natural-wellness',
+    'candele-gel-profumati-sali-bagno': 'natural-wellness',
     'diffusori': 'natural-wellness',
+    'diffusori-aromatici': 'natural-wellness',
+    'diffusori-oli': 'natural-wellness',
     'vestiario-wellness': 'natural-wellness',
     'pietre-preziose': 'natural-wellness',
     'incenso': 'natural-wellness',
+    'incenso-riflusso': 'natural-wellness',
+    'incenso-coni': 'natural-wellness',
+    'portacandele': 'natural-wellness',
+    'kit-benessere-cofanetti-regalo': 'natural-wellness',
     'wellness': 'natural-wellness',
 
     // TECH INNOVATION
