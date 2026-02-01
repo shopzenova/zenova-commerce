@@ -104,7 +104,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve file statici del frontend (dalla directory parent)
+// Serve uploads dalla cartella backend/uploads (per Railway)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  maxAge: '1y',
+  immutable: true,
+  setHeaders: (res, filePath) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  }
+}));
+
+// Serve file statici del frontend (dalla directory parent - per dev locale)
 // Aggiungi header CORS e CACHE per tutti i file statici
 app.use(express.static(path.join(__dirname, '..'), {
   maxAge: '1y', // Cache 1 anno
