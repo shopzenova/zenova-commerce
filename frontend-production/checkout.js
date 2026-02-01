@@ -491,11 +491,19 @@ document.addEventListener('DOMContentLoaded', function() {
             let imageHtml = '';
             let imageUrl = item.image;
 
-            // Convert relative URLs to absolute
+            // Se è un array, prendi il primo elemento
+            if (Array.isArray(imageUrl)) {
+                imageUrl = imageUrl[0];
+            }
+
+            // Convert relative URLs to absolute e usa proxy per immagini AW
             if (imageUrl && typeof imageUrl === 'string') {
-                if (Array.isArray(imageUrl)) imageUrl = imageUrl[0];
                 if (!imageUrl.startsWith('http') && !imageUrl.startsWith('data:') && imageUrl.startsWith('/')) {
                     imageUrl = 'https://zenova-commerce-production.up.railway.app' + imageUrl;
+                }
+                // Proxy per immagini AW (aroma-zone, aiku, retina) che danno 403
+                if (imageUrl.includes('aroma-zone.com') || imageUrl.includes('aiku.io') || imageUrl.includes('retina.net')) {
+                    imageUrl = `https://zenova-commerce-production.up.railway.app/api/proxy-image?url=${encodeURIComponent(imageUrl)}`;
                 }
             }
 
