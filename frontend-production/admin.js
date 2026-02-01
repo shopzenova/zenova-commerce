@@ -1755,9 +1755,19 @@ const SUBCATEGORIES_MAP = {
         { value: 'tech-wellness', label: 'Tech Wellness' }
     ],
     'natural-wellness': [
-        { value: 'aromaterapia', label: 'Aromaterapia' },
-        { value: 'yoga-meditazione', label: 'Yoga & Meditazione' },
-        { value: 'decorazione-zen', label: 'Decorazione Zen' }
+        { value: 'oli-essenziali', label: 'Oli Essenziali' },
+        { value: 'oli-per-fragranza', label: 'Oli per Fragranza' },
+        { value: 'candele-profumate', label: 'Candele Profumate' },
+        { value: 'candele-gel-profumati-sali-bagno', label: 'Candele Gel Profumati e Sali da Bagno' },
+        { value: 'diffusori-aromatici', label: 'Diffusori Aromatici' },
+        { value: 'diffusori-oli', label: 'Diffusori Oli' },
+        { value: 'pietre-preziose', label: 'Pietre Preziose' },
+        { value: 'incenso', label: 'Incenso' },
+        { value: 'incenso-riflusso', label: 'Incenso Riflusso' },
+        { value: 'incenso-coni', label: 'Incenso Coni' },
+        { value: 'portacandele', label: 'Portacandele' },
+        { value: 'vestiario-wellness', label: 'Vestiario Wellness' },
+        { value: 'kit-benessere-cofanetti-regalo', label: 'Kit Benessere e Cofanetti Regalo' }
     ]
 };
 
