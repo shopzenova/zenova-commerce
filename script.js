@@ -3277,3 +3277,136 @@ function hideCookieBanner() {
 
 // Inizializza cookie banner
 document.addEventListener('DOMContentLoaded', initCookieBanner);
+
+// ========================================
+// ANDROID BACK BUTTON SUPPORT
+// ========================================
+// Quando l'utente preme "Indietro" sul telefono, chiude la modal invece di uscire dal sito
+
+let modalHistoryState = false;
+
+// Funzione per pushare stato quando si apre una modal
+function pushModalState() {
+    if (!modalHistoryState) {
+        history.pushState({ modal: true }, '');
+        modalHistoryState = true;
+        console.log('📱 History state pushed for modal');
+    }
+}
+
+// Funzione per rimuovere stato quando si chiude una modal
+function popModalState() {
+    if (modalHistoryState) {
+        modalHistoryState = false;
+        console.log('📱 Modal state cleared');
+    }
+}
+
+// Controlla se c'è una modal aperta
+function isAnyModalOpen() {
+    const productModal = document.getElementById('productDetailModal');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const wishlistSidebar = document.getElementById('wishlistSidebar');
+    const searchModal = document.getElementById('searchModal');
+
+    return (productModal && productModal.classList.contains('active')) ||
+           (cartSidebar && cartSidebar.classList.contains('active')) ||
+           (wishlistSidebar && wishlistSidebar.classList.contains('active')) ||
+           (searchModal && searchModal.classList.contains('active'));
+}
+
+// Chiude tutte le modal aperte
+function closeAllModals() {
+    let closed = false;
+
+    // Chiudi product modal
+    const productModal = document.getElementById('productDetailModal');
+    if (productModal && productModal.classList.contains('active')) {
+        if (typeof closeProductDetailModal === 'function') {
+            closeProductDetailModal();
+        } else {
+            productModal.classList.remove('active');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+        }
+        closed = true;
+        console.log('📱 Chiusa product modal con Back button');
+    }
+
+    // Chiudi cart sidebar
+    const cartSidebar = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('overlay');
+    if (cartSidebar && cartSidebar.classList.contains('active')) {
+        cartSidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        closed = true;
+        console.log('📱 Chiuso carrello con Back button');
+    }
+
+    // Chiudi wishlist sidebar
+    const wishlistSidebar = document.getElementById('wishlistSidebar');
+    if (wishlistSidebar && wishlistSidebar.classList.contains('active')) {
+        wishlistSidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        closed = true;
+        console.log('📱 Chiusa wishlist con Back button');
+    }
+
+    // Chiudi search modal
+    const searchModal = document.getElementById('searchModal');
+    if (searchModal && searchModal.classList.contains('active')) {
+        searchModal.classList.remove('active');
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        closed = true;
+        console.log('📱 Chiusa ricerca con Back button');
+    }
+
+    return closed;
+}
+
+// Listener per il tasto Indietro (popstate)
+window.addEventListener('popstate', (e) => {
+    if (isAnyModalOpen()) {
+        // C'è una modal aperta, chiudila invece di navigare indietro
+        closeAllModals();
+        // Re-push state per permettere un altro "back" se ci sono ancora modal
+        if (isAnyModalOpen()) {
+            history.pushState({ modal: true }, '');
+        } else {
+            modalHistoryState = false;
+        }
+        console.log('📱 Back button intercettato - modal chiusa');
+    }
+});
+
+// Observer per rilevare quando si aprono le modal e pushare lo state
+const modalObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const target = mutation.target;
+            if (target.classList.contains('active')) {
+                // Una modal è stata aperta
+                pushModalState();
+            }
+        }
+    });
+});
+
+// Inizializza l'observer quando il DOM è pronto
+document.addEventListener('DOMContentLoaded', () => {
+    const modalsToWatch = [
+        document.getElementById('productDetailModal'),
+        document.getElementById('cartSidebar'),
+        document.getElementById('wishlistSidebar'),
+        document.getElementById('searchModal')
+    ];
+
+    modalsToWatch.forEach(modal => {
+        if (modal) {
+            modalObserver.observe(modal, { attributes: true });
+        }
+    });
+
+    console.log('📱 Android Back Button support inizializzato');
+});
