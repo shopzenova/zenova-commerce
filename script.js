@@ -2649,26 +2649,64 @@ function closeProductDetailModal() {
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
 
-    // ✅ Se c'era una ricerca attiva, riapri la ricerca con gli stessi risultati
+    // ✅ Se c'era una ricerca attiva, mostra tutti i prodotti filtrati nella griglia
     if (savedSearchQuery && savedSearchQuery.length > 0) {
-        console.log('🔍 Riapro ricerca con query:', savedSearchQuery);
-        const searchModal = document.getElementById('searchModal');
-        const searchInput = document.getElementById('searchInput');
+        console.log('🔍 Mostro prodotti filtrati per:', savedSearchQuery);
+        const query = savedSearchQuery;
+        savedSearchQuery = null; // Resetta subito per evitare loop
 
-        if (searchModal && searchInput) {
-            // Riapri la modal di ricerca
-            searchModal.classList.add('active');
-            searchInput.value = savedSearchQuery;
-            searchInput.focus();
+        // Filtra i prodotti per la query di ricerca
+        const productsArray = products.length > 0 ? products : (window.products || []);
+        const filteredProducts = productsArray.filter(product => {
+            if (product.visible === false) return false;
+            const q = query.toLowerCase();
+            return (product.name || '').toLowerCase().includes(q) ||
+                   (product.brand || '').toLowerCase().includes(q) ||
+                   (product.category || '').toLowerCase().includes(q) ||
+                   (product.zenovaSubcategory || '').toLowerCase().includes(q);
+        });
 
-            // Trigger la ricerca
-            const event = new Event('input', { bubbles: true });
-            searchInput.dispatchEvent(event);
+        console.log(`📦 Trovati ${filteredProducts.length} prodotti per "${query}"`);
 
-            // Resetta la query salvata
-            savedSearchQuery = null;
+        // Se siamo su prodotti.html, mostra i risultati nella griglia
+        const productsGrid = document.getElementById('productsGrid');
+        if (productsGrid && filteredProducts.length > 0) {
+            productsGrid.innerHTML = '';
+
+            // Aggiungi titolo ricerca
+            const searchHeader = document.createElement('div');
+            searchHeader.style.cssText = 'grid-column: 1 / -1; padding: 1rem; background: #f5f0eb; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;';
+            searchHeader.innerHTML = `
+                <span style="font-size: 1.1rem; color: #333;">
+                    🔍 Risultati per "<strong>${query}</strong>" (${filteredProducts.length} prodotti)
+                </span>
+                <button onclick="window.resetToFeaturedProducts(); this.parentElement.remove();"
+                        style="background: #8B6F47; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
+                    ✕ Chiudi ricerca
+                </button>
+            `;
+            productsGrid.appendChild(searchHeader);
+
+            // Render prodotti filtrati
+            const fragment = document.createDocumentFragment();
+            filteredProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                fragment.appendChild(productCard);
+            });
+            productsGrid.appendChild(fragment);
+
+            // Scroll in alto per vedere i risultati
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            console.log('✅ Griglia aggiornata con risultati ricerca');
+            return; // Non eseguire il resto
         }
-        return; // Non eseguire il resto (ripristino sidebar)
+
+        // Se non siamo su prodotti.html, vai lì con il filtro
+        if (!productsGrid) {
+            window.location.href = `prodotti.html?search=${encodeURIComponent(query)}`;
+            return;
+        }
     }
 
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
