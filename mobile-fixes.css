@@ -97,12 +97,10 @@
         position: relative;
     }
 
-    /* FORZA VISIBILITA BOTTONE CERCA */
+    /* NASCONDI BOTTONE CERCA SU MOBILE - solo carrello */
     #searchBtnMobile,
     .nav-icons-mobile .search-btn {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        display: none !important;
     }
 
     .nav-icons-mobile .cart-btn svg,
