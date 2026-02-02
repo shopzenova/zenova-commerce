@@ -1338,11 +1338,39 @@ function renderProducts() {
 
     console.log(`✨ Rendering ${productsToRender.length} prodotti in evidenza`);
 
-    // Render featured products
-    productsToRender.forEach(product => {
+    // ✅ PERFORMANCE: Usa DocumentFragment per batch insert
+    const fragment = document.createDocumentFragment();
+
+    // ✅ PERFORMANCE: Caricamento progressivo - prima 20, poi il resto
+    const initialBatch = productsToRender.slice(0, 20);
+    const remainingBatch = productsToRender.slice(20);
+
+    // Render primo batch immediatamente
+    initialBatch.forEach(product => {
         const productCard = createProductCard(product);
-        productsGrid.appendChild(productCard);
+        fragment.appendChild(productCard);
     });
+    productsGrid.appendChild(fragment);
+
+    // Render resto con requestIdleCallback per non bloccare UI
+    if (remainingBatch.length > 0) {
+        const renderRemaining = () => {
+            const remainingFragment = document.createDocumentFragment();
+            remainingBatch.forEach(product => {
+                const productCard = createProductCard(product);
+                remainingFragment.appendChild(productCard);
+            });
+            productsGrid.appendChild(remainingFragment);
+            console.log(`📦 Caricati altri ${remainingBatch.length} prodotti`);
+        };
+
+        // Usa requestIdleCallback se disponibile, altrimenti setTimeout
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(renderRemaining, { timeout: 500 });
+        } else {
+            setTimeout(renderRemaining, 100);
+        }
+    }
 
     // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
     console.log('✅ Prodotti featured renderizzati, cards ora cliccabili');
@@ -1417,11 +1445,35 @@ function renderProductsByCategory(searchTerm) {
         return;
     }
 
-    // Render filtered products
-    filteredProducts.forEach(product => {
+    // ✅ PERFORMANCE: Usa DocumentFragment e caricamento progressivo
+    const fragment = document.createDocumentFragment();
+    const initialBatch = filteredProducts.slice(0, 20);
+    const remainingBatch = filteredProducts.slice(20);
+
+    // Render primo batch immediatamente
+    initialBatch.forEach(product => {
         const productCard = createProductCard(product);
-        productsGrid.appendChild(productCard);
+        fragment.appendChild(productCard);
     });
+    productsGrid.appendChild(fragment);
+
+    // Render resto dopo
+    if (remainingBatch.length > 0) {
+        const renderRemaining = () => {
+            const remainingFragment = document.createDocumentFragment();
+            remainingBatch.forEach(product => {
+                const productCard = createProductCard(product);
+                remainingFragment.appendChild(productCard);
+            });
+            productsGrid.appendChild(remainingFragment);
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(renderRemaining, { timeout: 500 });
+        } else {
+            setTimeout(renderRemaining, 100);
+        }
+    }
 
     // Make cards clickable
     makeProductCardsClickable();
