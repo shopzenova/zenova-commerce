@@ -81,18 +81,19 @@
         padding: 0.5rem 0 !important;
     }
 
-    /* Mobile icons styling - HEADER: icone grandi e visibili */
+    /* Mobile icons styling - HEADER: icone GRANDI e visibili */
     .nav-icons-mobile .cart-btn,
     .nav-icons-mobile .search-btn,
     .nav-icons-mobile button,
     .nav-icons-mobile a {
-        width: 60px !important;
-        height: 60px !important;
+        width: 56px !important;
+        height: 56px !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
         background: transparent !important;
-        border: none !important;
+        border: 2px solid #333 !important;
+        border-radius: 12px !important;
         cursor: pointer;
         position: relative;
     }
@@ -106,8 +107,8 @@
     .nav-icons-mobile .cart-btn svg,
     .nav-icons-mobile .search-btn svg,
     .nav-icons-mobile button svg {
-        width: 36px !important;
-        height: 36px !important;
+        width: 30px !important;
+        height: 30px !important;
         stroke: #333 !important;
         stroke-width: 2.5 !important;
     }
