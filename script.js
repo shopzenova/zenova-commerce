@@ -2907,22 +2907,39 @@ document.addEventListener('DOMContentLoaded', () => {
  * Gestisce l'apertura/chiusura dei dropdown categorie su mobile
  * Su mobile, :hover non funziona, serve click
  */
+let mobileDropdownsInitialized = false;
+
 function initMobileCategoryDropdowns() {
     // Solo su mobile (max-width: 768px)
     if (window.innerWidth > 768) return;
 
-    const dropdowns = document.querySelectorAll('.category-nav-dropdown');
+    // Evita inizializzazioni multiple
+    if (mobileDropdownsInitialized) return;
+    mobileDropdownsInitialized = true;
 
-    dropdowns.forEach(dropdown => {
+    console.log('📱 Inizializzazione dropdown mobile...');
+
+    const dropdowns = document.querySelectorAll('.category-nav-dropdown');
+    console.log(`📱 Trovati ${dropdowns.length} dropdown`);
+
+    dropdowns.forEach((dropdown, index) => {
         const trigger = dropdown.querySelector('.category-nav-item');
         const menu = dropdown.querySelector('.category-dropdown-menu');
+        const isMegaMenu = menu && menu.classList.contains('mega-menu');
 
-        if (!trigger || !menu) return;
+        if (!trigger || !menu) {
+            console.log(`📱 Dropdown ${index}: trigger o menu mancante`);
+            return;
+        }
+
+        console.log(`📱 Dropdown ${index}: ${trigger.textContent.trim()}, mega-menu: ${isMegaMenu}`);
 
         // Previeni il comportamento di default del link
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
+
+            console.log(`📱 Click su: ${trigger.textContent.trim()}`);
 
             // Chiudi tutti gli altri dropdown
             dropdowns.forEach(other => {
@@ -2935,11 +2952,17 @@ function initMobileCategoryDropdowns() {
             const isOpening = !dropdown.classList.contains('open');
             dropdown.classList.toggle('open');
 
-            // Se sto aprendo, posiziona il menu correttamente (position: fixed)
-            if (isOpening) {
+            console.log(`📱 Dropdown ${isOpening ? 'aperto' : 'chiuso'}`);
+
+            // Posiziona menu - ma NON per mega-menu (gestito da CSS)
+            if (isOpening && !isMegaMenu) {
                 const rect = trigger.getBoundingClientRect();
                 menu.style.top = `${rect.bottom + 5}px`;
                 menu.style.left = `${rect.left}px`;
+            } else if (isOpening && isMegaMenu) {
+                // Per mega-menu, solo top position
+                const rect = trigger.getBoundingClientRect();
+                menu.style.top = `${rect.bottom + 5}px`;
             }
         });
     });
@@ -2954,9 +2977,17 @@ function initMobileCategoryDropdowns() {
     });
 }
 
-// Inizializza al caricamento e al resize
+// Inizializza al caricamento
 document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
-window.addEventListener('resize', initMobileCategoryDropdowns);
+
+// Re-inizializza se si passa da desktop a mobile
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768 && !mobileDropdownsInitialized) {
+        initMobileCategoryDropdowns();
+    } else if (window.innerWidth > 768) {
+        mobileDropdownsInitialized = false; // Reset per permettere re-init se torna mobile
+    }
+});
 
 // ========================================
 // COOKIE BANNER GDPR

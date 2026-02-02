@@ -81,13 +81,14 @@
         padding: 0.5rem 0 !important;
     }
 
-    /* Mobile icons styling - CARRELLO GRANDE E VISIBILE */
+    /* Mobile icons styling - CARRELLO E CERCA GRANDI E VISIBILI */
     .nav-icons-mobile .cart-btn,
-    .nav-icons-mobile button:not(.search-btn),
-    .nav-icons-mobile a:not(.search-btn) {
+    .nav-icons-mobile .search-btn,
+    .nav-icons-mobile button,
+    .nav-icons-mobile a {
         width: 70px !important;
         height: 70px !important;
-        display: flex;
+        display: flex !important;
         align-items: center;
         justify-content: center;
         background: transparent !important;
@@ -97,8 +98,19 @@
         position: relative;
     }
 
+    /* FORZA VISIBILITA BOTTONE CERCA */
+    #searchBtnMobile,
+    .nav-icons-mobile .search-btn {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 70px !important;
+        height: 70px !important;
+    }
+
     .nav-icons-mobile .cart-btn svg,
-    .nav-icons-mobile button:not(.search-btn) svg {
+    .nav-icons-mobile .search-btn svg,
+    .nav-icons-mobile button svg {
         width: 40px !important;
         height: 40px !important;
         stroke: #333 !important;
@@ -393,10 +405,7 @@
 
 @media (max-width: 768px) {
 
-    /* === 1. NASCONDI BARRA CERCA SU MOBILE - solo carrello visibile === */
-    .search-btn {
-        display: none !important;
-    }
+    /* === 1. CERCA E CARRELLO SU MOBILE === */
 
     /* === 2. CATEGORIE SCROLL ORIZZONTALE (solo HOME) === */
     /* Su prodotti.html, nascondere categories-nav e usare solo sidebar */
@@ -480,9 +489,56 @@
 
     /* Dropdown aperto tramite JavaScript (classe .open aggiunta al click) */
     .category-nav-dropdown.open .category-dropdown-menu {
+        display: block !important; /* Forza display anche per mega-menu */
         opacity: 1 !important;
         visibility: visible !important;
         transform: translateY(0) !important;
+    }
+
+    /* Assicura che mega-menu sia visibile quando dropdown e' aperto */
+    .category-nav-dropdown.open .mega-menu,
+    .category-nav-mega-dropdown.open .mega-menu,
+    .category-nav-item-wrapper.open .mega-menu,
+    .open > .mega-menu,
+    .open .category-dropdown-menu.mega-menu {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* MEGA MENU BEAUTY - override dimensioni per mobile */
+    .category-dropdown-menu.mega-menu {
+        min-width: unset !important;
+        max-width: 95vw !important;
+        width: 95vw !important;
+        left: 2.5vw !important;
+        right: 2.5vw !important;
+        transform: none !important;
+        flex-direction: column !important;
+        padding: 15px !important;
+    }
+
+    .mega-menu-column {
+        width: 100% !important;
+        margin-bottom: 15px !important;
+        padding-bottom: 15px !important;
+        border-bottom: 1px solid #eee !important;
+    }
+
+    .mega-menu-column:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+    }
+
+    .mega-menu-column h4 {
+        font-size: 1.1rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .dropdown-sublink {
+        display: block !important;
+        padding: 10px 0 !important;
+        font-size: 1rem !important;
     }
 
     .category-dropdown {
