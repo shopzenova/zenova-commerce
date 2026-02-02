@@ -1478,6 +1478,12 @@ function renderProductsByCategory(searchTerm) {
     // Make cards clickable
     makeProductCardsClickable();
 
+    // Scroll in alto per vedere i prodotti
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+        productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
     console.log('✅ Prodotti renderizzati per categoria');
 }
 
