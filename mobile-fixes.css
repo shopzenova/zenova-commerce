@@ -719,7 +719,27 @@
         padding-left: 15px !important;
     }
 
-    /* === 6. PRODUCT MODAL FIX === */
+    /* === 6. SEARCH MODAL FULL SCREEN === */
+    .search-modal {
+        padding-top: 0 !important;
+        align-items: stretch !important;
+    }
+
+    .search-modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 100vh !important;
+        height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+
+    .search-results {
+        max-height: calc(100vh - 140px) !important;
+        overflow-y: auto !important;
+    }
+
+    /* === 7. PRODUCT MODAL FIX === */
     .product-detail-modal {
         padding: 20px 10px !important;
     }
