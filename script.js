@@ -2698,6 +2698,11 @@ function closeProductDetailModal() {
             // Scroll in alto per vedere i risultati
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
+            // Scroll anche al productsGrid per mobile
+            setTimeout(() => {
+                productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
             console.log('✅ Griglia aggiornata con risultati ricerca');
             return; // Non eseguire il resto
         }
