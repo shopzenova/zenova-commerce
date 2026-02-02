@@ -81,13 +81,13 @@
         padding: 0.5rem 0 !important;
     }
 
-    /* Mobile icons styling - MINIMAL: solo icone senza bordi */
+    /* Mobile icons styling - HEADER: icone grandi e visibili */
     .nav-icons-mobile .cart-btn,
     .nav-icons-mobile .search-btn,
     .nav-icons-mobile button,
     .nav-icons-mobile a {
-        width: 50px !important;
-        height: 50px !important;
+        width: 60px !important;
+        height: 60px !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
@@ -106,22 +106,22 @@
     .nav-icons-mobile .cart-btn svg,
     .nav-icons-mobile .search-btn svg,
     .nav-icons-mobile button svg {
-        width: 32px !important;
-        height: 32px !important;
+        width: 36px !important;
+        height: 36px !important;
         stroke: #333 !important;
         stroke-width: 2.5 !important;
     }
 
     .cart-count-mobile {
         position: absolute;
-        top: -5px;
-        right: -5px;
+        top: 0px;
+        right: 0px;
         background: #ff4757;
         color: white;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         font-weight: bold;
-        padding: 3px 7px;
-        border-radius: 10px;
+        padding: 4px 8px;
+        border-radius: 12px;
         min-width: 26px;
         text-align: center;
         border: 3px solid white;
