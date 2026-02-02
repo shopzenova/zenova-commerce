@@ -225,7 +225,7 @@
 
     /* Carrello Mobile - Icona Visibile */
     .cart-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #8B6F47 0%, #D4A373 100%) !important;
         padding: 1.5rem !important;
         border-bottom: none !important;
     }
@@ -393,34 +393,9 @@
 
 @media (max-width: 768px) {
 
-    /* === 1. BARRA CERCA ESTESA (non piccola) === */
+    /* === 1. NASCONDI BARRA CERCA SU MOBILE - solo carrello visibile === */
     .search-btn {
-        width: 100% !important;
-        height: 44px !important;
-        background: transparent !important;
-        border: 1px solid #ddd !important;
-        border-radius: 8px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 10px !important;
-        padding: 0 15px !important;
-        cursor: pointer !important;
-        margin: 10px 0 !important;
-    }
-
-    .search-btn::before {
-        content: "Cerca prodotti..." !important;
-        font-size: 0.95rem !important;
-        color: #999 !important;
-    }
-
-    .search-btn svg {
-        display: block !important;
-        width: 20px !important;
-        height: 20px !important;
-        stroke: #999 !important;
-        flex-shrink: 0 !important;
+        display: none !important;
     }
 
     /* === 2. CATEGORIE SCROLL ORIZZONTALE (solo HOME) === */
@@ -466,12 +441,13 @@
         align-items: center !important;
         white-space: nowrap !important;
         padding: 12px 20px !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        color: white !important;
+        background: transparent !important;
+        color: #333 !important;
+        border: 1px solid #ddd !important;
         border-radius: 25px !important;
         font-size: 0.95rem !important;
         font-weight: 600 !important;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        box-shadow: none !important;
         transition: transform 0.2s !important;
     }
 
@@ -562,9 +538,9 @@
         align-items: center !important;
         justify-content: center !important;
         font-size: 0 !important; /* Nasconde il testo */
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: linear-gradient(135deg, #8B6F47 0%, #D4A373 100%) !important;
         border: none !important;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+        box-shadow: 0 4px 12px rgba(139, 111, 71, 0.3) !important;
         margin: 10px auto 0 auto !important;
         /* Fix mobile touch delay */
         touch-action: manipulation !important;
