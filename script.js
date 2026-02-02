@@ -2001,8 +2001,87 @@ function setupSearch() {
     });
 
     function closeSearchModal() {
+        const query = searchInput.value.trim().toLowerCase();
         searchModal.classList.remove('active');
         searchInput.value = '';
+
+        // Se c'era una ricerca, porta alla categoria correlata
+        // Ma solo se NON siamo già su prodotti.html
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+        if (query.length >= 3 && currentPage !== 'prodotti.html') {
+            const category = findCategoryFromSearch(query);
+            if (category) {
+                console.log(`🔍 Ricerca "${query}" -> categoria "${category}"`);
+                window.location.href = `prodotti.html#${category}`;
+            }
+        }
+    }
+
+    // Trova la categoria più rilevante dalla ricerca
+    function findCategoryFromSearch(query) {
+        // Mappa di parole chiave -> categoria
+        const categoryMap = {
+            // Incensi
+            'incens': 'incenso',
+            'bastoncin': 'incenso',
+            'backflow': 'incenso',
+            // Candele
+            'candel': 'candele-profumate',
+            'cera': 'candele-profumate',
+            // Diffusori
+            'diffusor': 'diffusori-oli',
+            'oli essenzial': 'diffusori-oli',
+            'aroma': 'diffusori-oli',
+            // Profumi
+            'profum': 'profumi-donne',
+            'parfum': 'profumi-donne',
+            'eau de': 'profumi-donne',
+            // Trucco
+            'trucco': 'trucco-viso',
+            'makeup': 'trucco-viso',
+            'rossett': 'trucco-labbra',
+            'mascara': 'trucco-occhi',
+            'ombrett': 'trucco-occhi',
+            // Cura corpo
+            'crema': 'cura-corpo',
+            'sapone': 'cura-corpo',
+            'bagno': 'sali-bagno',
+            'sale': 'sali-bagno',
+            // Tech
+            'lampada': 'lampade-led',
+            'led': 'lampade-led',
+            'umidificat': 'umidificatori',
+            // Meditazione
+            'yoga': 'accessori-yoga',
+            'meditazion': 'accessori-meditazione',
+            'chakra': 'accessori-meditazione',
+            // Tè
+            'te ': 'te-infusi',
+            'tea': 'te-infusi',
+            'infus': 'te-infusi',
+            'tisana': 'te-infusi'
+        };
+
+        // Cerca corrispondenza nelle parole chiave
+        for (const [keyword, category] of Object.entries(categoryMap)) {
+            if (query.includes(keyword)) {
+                return category;
+            }
+        }
+
+        // Cerca corrispondenza diretta nelle sottocategorie dei prodotti
+        const productsArray = products.length > 0 ? products : (window.products || []);
+        const matchingProduct = productsArray.find(p =>
+            p.name.toLowerCase().includes(query) ||
+            (p.zenovaSubcategory || '').toLowerCase().includes(query)
+        );
+
+        if (matchingProduct && matchingProduct.zenovaSubcategory) {
+            return matchingProduct.zenovaSubcategory;
+        }
+
+        return null;
     }
 
     // Real-time search with debouncing (300ms delay)
