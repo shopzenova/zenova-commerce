@@ -2303,9 +2303,14 @@ function setupSearch() {
 
 // Handle clicking on a search result
 window.handleSearchResultClick = function(productId) {
+    // Salva la query di ricerca PRIMA di chiudere
+    const searchInput = document.getElementById('searchInput');
+    savedSearchQuery = searchInput ? searchInput.value.trim() : null;
+    console.log('🔍 Salvata query ricerca:', savedSearchQuery);
+
     // Close search modal
     document.getElementById('searchModal').classList.remove('active');
-    document.getElementById('searchInput').value = '';
+    searchInput.value = '';
 
     // Get product info
     const productsArray = products.length > 0 ? products : (window.products || []);
@@ -2338,6 +2343,7 @@ let savedScrollPosition = 0;
 let savedSidebarState = []; // Salva stato sidebar
 let currentProductCategory = null; // Categoria del prodotto corrente
 let currentProductSubcategory = null; // Sottocategoria del prodotto corrente
+let savedSearchQuery = null; // Salva la ricerca per riaprirla dopo chiusura prodotto
 
 // Gallery state
 let currentGalleryIndex = 0;
@@ -2642,6 +2648,28 @@ function closeProductDetailModal() {
     // Restore body scroll and padding (prevent page shift)
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
+
+    // ✅ Se c'era una ricerca attiva, riapri la ricerca con gli stessi risultati
+    if (savedSearchQuery && savedSearchQuery.length > 0) {
+        console.log('🔍 Riapro ricerca con query:', savedSearchQuery);
+        const searchModal = document.getElementById('searchModal');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchModal && searchInput) {
+            // Riapri la modal di ricerca
+            searchModal.classList.add('active');
+            searchInput.value = savedSearchQuery;
+            searchInput.focus();
+
+            // Trigger la ricerca
+            const event = new Event('input', { bubbles: true });
+            searchInput.dispatchEvent(event);
+
+            // Resetta la query salvata
+            savedSearchQuery = null;
+        }
+        return; // Non eseguire il resto (ripristino sidebar)
+    }
 
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {
