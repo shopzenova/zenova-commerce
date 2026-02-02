@@ -97,10 +97,10 @@
         position: relative;
     }
 
-    /* NASCONDI BOTTONE CERCA SU MOBILE - solo carrello */
+    /* Bottone cerca visibile su mobile */
     #searchBtnMobile,
     .nav-icons-mobile .search-btn {
-        display: none !important;
+        display: flex !important;
     }
 
     .nav-icons-mobile .cart-btn svg,
@@ -580,19 +580,20 @@
     }
 
     /* Bottone "Aggiungi al carrello" - solo icona su mobile */
+    /* BOTTONE CARRELLO PRODOTTI - MINIMAL (solo icona) */
     .add-to-cart-btn {
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 50% !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 8px !important;
         padding: 0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         font-size: 0 !important; /* Nasconde il testo */
-        background: linear-gradient(135deg, #8B6F47 0%, #D4A373 100%) !important;
+        background: transparent !important;
         border: none !important;
-        box-shadow: 0 4px 12px rgba(139, 111, 71, 0.3) !important;
-        margin: 10px auto 0 auto !important;
+        box-shadow: none !important;
+        margin: 5px auto 0 auto !important;
         /* Fix mobile touch delay */
         touch-action: manipulation !important;
         -webkit-tap-highlight-color: transparent !important;
@@ -601,12 +602,13 @@
 
     .add-to-cart-btn::before {
         content: "🛒" !important;
-        font-size: 1.5rem !important;
+        font-size: 1.4rem !important;
         display: block !important;
     }
 
     .add-to-cart-btn:active {
-        transform: scale(0.95) !important;
+        transform: scale(0.9) !important;
+        opacity: 0.7 !important;
     }
 
     /* === 4. SIDEBAR CATEGORIE MOBILE (prodotti.html) - IN ALTO === */
