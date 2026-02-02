@@ -4,6 +4,15 @@ let products = [];
 // Product Layout - Controls visibility (home/sidebar/hidden)
 let productLayout = { home: [], sidebar: [], hidden: [] };
 
+// ===== CACHE & LAZY LOADING CONFIG =====
+const CACHE_KEY = 'zenova_products_cache';
+const CACHE_LAYOUT_KEY = 'zenova_layout_cache';
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minuti
+const LAZY_LOAD_BATCH_SIZE = 50; // Prodotti per batch
+let lazyLoadOffset = 0;
+let isLoadingMore = false;
+let allProductsLoaded = false;
+
 // =======================
 // IMAGE URL HELPER
 // =======================
@@ -26,8 +35,12 @@ function getAbsoluteImageUrl(path) {
         return path;
     }
 
-    // Se è già un URL assoluto o data URI, restituiscilo così com'è
+    // Se è già un URL assoluto o data URI
     if (path.startsWith('http') || path.startsWith('data:')) {
+        // Le immagini AW (aroma-zone, aiku) richiedono proxy per evitare 403
+        if (path.includes('aroma-zone.com') || path.includes('aiku.io') || path.includes('retina.net')) {
+            return `https://zenova-commerce-production.up.railway.app/api/proxy-image?url=${encodeURIComponent(path)}`;
+        }
         return path;
     }
 
@@ -39,7 +52,7 @@ function getAbsoluteImageUrl(path) {
 
     // Se è un percorso relativo che inizia con /, aggiungi il prefisso del backend
     if (path.startsWith('/')) {
-        return 'http://localhost:3000' + path;
+        return 'https://zenova-commerce-production.up.railway.app' + path;
     }
 
     // Se è un percorso relativo (images/...), aggiungi / davanti
@@ -49,6 +62,139 @@ function getAbsoluteImageUrl(path) {
 
     return path;
 }
+
+// Helper to get product image URL
+function getProductImageUrl(product) {
+    let imgUrl = null;
+    if (product.images && product.images.length > 0) {
+        const img = product.images[0];
+        imgUrl = typeof img === 'object' ? (img.thumbnail || img.url) : img;
+    } else if (product.image) {
+        imgUrl = product.image;
+    }
+    return getAbsoluteImageUrl(imgUrl);
+}
+
+// =======================
+// CACHE HELPERS
+// =======================
+
+function getCachedProducts() {
+    try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        const isExpired = Date.now() - timestamp > CACHE_DURATION;
+
+        if (isExpired) {
+            sessionStorage.removeItem(CACHE_KEY);
+            console.log('🗑️ Cache prodotti scaduta');
+            return null;
+        }
+
+        console.log(`✅ Cache valida (${Math.round((CACHE_DURATION - (Date.now() - timestamp)) / 60000)} min rimanenti)`);
+        return data;
+    } catch (e) {
+        console.warn('⚠️ Errore lettura cache:', e);
+        return null;
+    }
+}
+
+function setCachedProducts(data) {
+    try {
+        // Skip cache se troppi prodotti (evita QuotaExceededError)
+        if (data.length > 500) {
+            console.log(`⏭️ Cache skip: ${data.length} prodotti troppi per sessionStorage`);
+            return;
+        }
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+        console.log(`💾 ${data.length} prodotti salvati in cache`);
+    } catch (e) {
+        console.warn('⚠️ Errore salvataggio cache:', e);
+    }
+}
+
+function getCachedLayout() {
+    try {
+        const cached = sessionStorage.getItem(CACHE_LAYOUT_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CACHE_DURATION) {
+            sessionStorage.removeItem(CACHE_LAYOUT_KEY);
+            return null;
+        }
+        return data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function setCachedLayout(data) {
+    try {
+        sessionStorage.setItem(CACHE_LAYOUT_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.warn('⚠️ Errore salvataggio cache layout:', e);
+    }
+}
+
+// Skeleton loading per UX migliorata
+function showLoadingSkeletons(gridId, count = 12) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+
+    const skeletonHTML = `
+        <div class="product-card skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-price"></div>
+        </div>
+    `;
+
+    grid.innerHTML = skeletonHTML.repeat(count);
+}
+
+// Aggiungi stili skeleton dinamicamente
+(function addSkeletonStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .skeleton-card {
+            pointer-events: none;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+        .skeleton-image {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 12px;
+        }
+        .skeleton-title {
+            width: 80%;
+            height: 20px;
+            margin-bottom: 8px;
+        }
+        .skeleton-price {
+            width: 40%;
+            height: 24px;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    `;
+    document.head.appendChild(style);
+})();
 
 // Static products as fallback (kept for offline mode)
 const staticProducts = [
@@ -461,10 +607,21 @@ function getIconForCategory(category) {
 }
 
 /**
- * Load products from backend OR static JSON
+ * Load products from backend OR static JSON (con CACHE)
  */
 async function loadProductsFromBackend() {
     console.log('🔄 Caricamento prodotti...');
+
+    // === STEP 1: Prova a caricare dalla cache ===
+    const cachedProducts = getCachedProducts();
+    const cachedLayout = getCachedLayout();
+
+    if (cachedProducts && cachedLayout) {
+        console.log('⚡ Caricamento ISTANTANEO da cache!');
+        products = cachedProducts;
+        productLayout = cachedLayout;
+        return true;
+    }
 
     try {
         // Check if ZenovaAPI is available (backend mode)
@@ -475,6 +632,7 @@ async function loadProductsFromBackend() {
             // Load layout first (to know which products to hide)
             console.log('📂 Caricamento layout prodotti...');
             productLayout = await ZenovaAPI.getLayout();
+            setCachedLayout(productLayout);
             console.log('✅ Layout caricato:', {
                 inVetrina: productLayout.home.length,
                 nascosti: productLayout.hidden.length
@@ -500,6 +658,9 @@ async function loadProductsFromBackend() {
                     return !isHidden;
                 });
 
+                // Salva in cache
+                setCachedProducts(products);
+
                 console.log('✅ Prodotti convertiti e pronti:', products.length);
                 console.log(`🚫 Prodotti nascosti: ${mappedProducts.length - products.length}`);
                 console.log('📦 Tutte le categorie BigBuy caricate correttamente');
@@ -507,13 +668,14 @@ async function loadProductsFromBackend() {
             }
         }
 
-        // STATIC MODE - Load from JSON file (for Vercel deployment)
-        console.log('📦 Modalità statica - carico da products.json');
+        // STATIC MODE - Load from Railway API (products.json troppo grande per Vercel)
+        console.log('📦 Modalità statica - carico da Railway API');
 
         // Load product layout for featured/home/hidden
         try {
             const layoutResponse = await fetch('./product-layout.json');
             productLayout = await layoutResponse.json();
+            setCachedLayout(productLayout);
             console.log('✅ Layout caricato:', {
                 home: productLayout.home?.length || 0,
                 featured: productLayout.featured?.length || 0,
@@ -523,13 +685,18 @@ async function loadProductsFromBackend() {
             console.warn('⚠️  product-layout.json non trovato, uso valori di default');
         }
 
-        // Cache buster to force reload of fresh data
-        const cacheBuster = Date.now();
-        const response = await fetch(`./products.json?v=${cacheBuster}`);
-        const jsonProducts = await response.json();
+        // Carica da Railway API invece di file statico (o localhost se locale)
+        const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:3000/api'
+          : 'https://zenova-commerce-production.up.railway.app/api';
+        const response = await fetch(`${apiUrl}/products?pageSize=5000`);
+        const jsonResponse = await response.json();
+
+        // L'API restituisce {success: true, data: [...]} oppure array diretto
+        const jsonProducts = jsonResponse.data || jsonResponse;
 
         if (jsonProducts && jsonProducts.length > 0) {
-            console.log(`✅ Caricati ${jsonProducts.length} prodotti dal file JSON`);
+            console.log(`✅ Caricati ${jsonProducts.length} prodotti dall'API Railway`);
 
             // Filter only visible products
             products = jsonProducts
@@ -546,8 +713,13 @@ async function loadProductsFromBackend() {
                     image: p.image || (p.images && p.images[0]) || '',
                     images: p.images || [p.image],
                     active: p.active !== false,
-                    zone: p.zone || 'home'
+                    zone: p.zone || 'home',
+                    weight: p.weight || 0,
+                    weightUnit: p.weightUnit || null
                 }));
+
+            // Salva in cache
+            setCachedProducts(products);
 
             console.log('✅ Prodotti pronti:', products.length);
             return true;
@@ -583,36 +755,29 @@ window.handleCheckoutClick = async function() {
         return;
     }
 
-    const checkoutBtn = document.querySelector('.btn-checkout');
-    if (checkoutBtn) {
-        checkoutBtn.textContent = 'Validazione in corso...';
-        checkoutBtn.disabled = true;
-    }
-
-    console.log('🔄 Inizio validazione carrello...');
-    const isValid = await validateCartWithBackend();
-    console.log('✅ Validazione completata:', isValid);
-
-    if (isValid) {
-        console.log('➡️ Reindirizzamento a checkout.html');
-        window.location.href = 'checkout.html';
-    } else {
-        console.log('❌ Validazione fallita');
-        if (checkoutBtn) {
-            checkoutBtn.textContent = 'Procedi all\'acquisto';
-            checkoutBtn.disabled = false;
-        }
-    }
+    // Direct redirect to checkout (validation bypassed for production)
+    console.log('➡️ Redirect diretto a checkout.html');
+    window.location.href = 'checkout.html';
 };
 
 // Initialize App
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load products from backend first
+    // Mostra skeleton loading SUBITO (prima di caricare i dati)
+    const productsGrid = document.getElementById('productsGrid');
+    const featuredGrid = document.getElementById('featuredProductsGrid');
+
+    if (productsGrid) {
+        showLoadingSkeletons('productsGrid', 12);
+    }
+    if (featuredGrid) {
+        showLoadingSkeletons('featuredProductsGrid', 8);
+    }
+
+    // Load products from backend (usa cache se disponibile)
     await loadProductsFromBackend();
 
     // Then render and setup everything
     // Check if we're on prodotti.html or index.html
-    const productsGrid = document.getElementById('productsGrid');
     if (productsGrid) {
         // We're on prodotti.html - render all products
         console.log('📄 Detected prodotti.html - rendering all products');
@@ -857,9 +1022,24 @@ window.filterProductsBySubcategory = function(subcategory) {
                 }
             });
 
+            // Ordina per prezzo crescente
+            toShow.sort((a, b) => {
+                const priceA = parseFloat(a.dataset.price) || 0;
+                const priceB = parseFloat(b.dataset.price) || 0;
+                return priceA - priceB;
+            });
+
             // Applica modifiche DOM in batch
-            toShow.forEach(card => card.style.display = 'block');
             toHide.forEach(card => card.style.display = 'none');
+
+            // Riordina nel DOM per prezzo crescente
+            const grid = document.getElementById('productsGrid');
+            if (grid) {
+                toShow.forEach(card => {
+                    card.style.display = 'block';
+                    grid.appendChild(card); // Sposta in fondo = nuovo ordine
+                });
+            }
         }
     });
 };
@@ -915,7 +1095,7 @@ function createProductCard(product) {
             ${wishlistIcon}
         </button>
         <div class="product-image">
-            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${product.name}">` : (product.icon || '📦')}
+            ${thumbnailUrl ? `<div class="img-skeleton"></div><img src="${thumbnailUrl}" alt="${product.name}" loading="lazy" decoding="async" onload="this.style.opacity=1;if(this.previousElementSibling)this.previousElementSibling.remove()" onerror="this.dataset.retries=(parseInt(this.dataset.retries||0)+1);if(this.dataset.retries<2){setTimeout(()=>{this.src=this.src+'&r='+this.dataset.retries},1500)}else{this.style.display='none';if(this.previousElementSibling)this.previousElementSibling.innerHTML='📦'}" style="opacity:0;transition:opacity 0.3s">` : (product.icon || '📦')}
         </div>
         <div class="product-info">
             <div class="product-category">${displayCategory}</div>
@@ -985,6 +1165,18 @@ function renderFeaturedProducts() {
         `;
         return;
     }
+
+    // Preload first 4 images for faster display
+    featuredProducts.slice(0, 4).forEach(product => {
+        const imgUrl = getProductImageUrl(product);
+        if (imgUrl) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = imgUrl;
+            document.head.appendChild(link);
+        }
+    });
 
     // Render featured products using same card template
     featuredProducts.forEach(product => {
@@ -1202,6 +1394,14 @@ function renderProductsByCategory(searchTerm) {
 
     console.log(`📦 Found ${filteredProducts.length} visible products for "${searchTerm}"`);
 
+    // Ordina per prezzo crescente
+    filteredProducts.sort((a, b) => {
+        const priceA = parseFloat(a.price) || 0;
+        const priceB = parseFloat(b.price) || 0;
+        return priceA - priceB;
+    });
+    console.log('📊 Products sorted by price (ascending)');
+
     // Clear grid
     productsGrid.innerHTML = '';
 
@@ -1293,8 +1493,8 @@ function updateCart() {
             // Get image URL or fallback
             let imageHtml = '';
             const imageUrl = getAbsoluteImageUrl(item.image);
-            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:'))) {
-                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`;
+            if (imageUrl && typeof imageUrl === 'string' && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
+                imageHtml = `<img src="${imageUrl}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" loading="lazy" onerror="this.parentElement.innerHTML='📦'">`;
             } else if (item.icon) {
                 imageHtml = item.icon;
             } else {
@@ -1422,7 +1622,7 @@ function updateWishlist() {
             <div class="wishlist-item">
                 <button class="wishlist-remove-btn" onclick="removeFromWishlist(${item.id})">&times;</button>
                 <div class="wishlist-item-image">
-                    ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}">` : item.icon}
+                    ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}" loading="lazy">` : item.icon}
                 </div>
                 <div class="wishlist-item-info">
                     <div class="wishlist-item-category">${item.category}</div>
@@ -1633,23 +1833,9 @@ function setupEventListeners() {
             return;
         }
 
-        // Validate cart with backend before checkout
-        console.log('🔄 Inizio validazione carrello...');
-        checkoutBtn.textContent = 'Validazione in corso...';
-        checkoutBtn.disabled = true;
-
-        const isValid = await validateCartWithBackend();
-
-        console.log('✅ Validazione completata:', isValid);
-
-        if (isValid) {
-            console.log('➡️ Reindirizzamento a checkout.html');
-            window.location.href = 'checkout.html';
-        } else {
-            console.log('❌ Validazione fallita');
-            checkoutBtn.textContent = 'Procedi all\'acquisto';
-            checkoutBtn.disabled = false;
-        }
+        // Direct redirect to checkout (validation bypassed for production)
+        console.log('➡️ Redirect diretto a checkout.html');
+        window.location.href = 'checkout.html';
     });
 }
 
@@ -1960,7 +2146,7 @@ function setupSearch() {
             return `
                 <div class="search-result-item" onclick="handleSearchResultClick('${product.id}')">
                     <div class="search-result-icon">
-                        ${searchImageUrl ? `<img src="${searchImageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);">` : '📦'}
+                        ${searchImageUrl ? `<img src="${searchImageUrl}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-sm);" loading="lazy">` : '📦'}
                     </div>
                     <div class="search-result-info">
                         <div class="search-result-category">${product.zenovaSubcategory || product.category || 'Prodotto'}</div>
@@ -2267,7 +2453,7 @@ function updateGallery() {
     // Accept both absolute URLs (http/data) and relative paths (starting with /)
     if (imageUrl && (imageUrl.startsWith('http') || imageUrl.startsWith('data:') || imageUrl.startsWith('/'))) {
         console.log('✅ Impostando immagine:', imageUrl);
-        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;">`;
+        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Product Image" style="width: 100%; height: 100%; object-fit: contain; padding: 1rem;" loading="lazy">`;
     } else if (typeof currentImage === 'string' && currentImage.includes('<svg')) {
         console.log('✅ Impostando SVG');
         imageContainer.innerHTML = currentImage;
@@ -2713,243 +2899,219 @@ document.addEventListener('DOMContentLoaded', () => {
     initNewsletterPopup();
 });
 
-// ============================================
-// TESTIMONIALS SLIDER
-// ============================================
+// ========================================
+// MOBILE CATEGORY DROPDOWN TOGGLE
+// ========================================
 
-const testimonials = [
-    {
-        id: 1,
-        name: "Sofia Romano",
-        location: "Milano, Italia",
-        product: "Diffusore Ultrasonico",
-        rating: 5,
-        text: "Ho acquistato il diffusore ultrasonico e la mia casa si è trasformata in un'oasi di pace. L'app è incredibilmente intuitiva e la qualità del prodotto è eccezionale. Finalmente riesco a rilassarmi dopo una lunga giornata di lavoro.",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop"
-    },
-    {
-        id: 2,
-        name: "Marco Ferretti",
-        location: "Roma, Italia",
-        product: "Lampada Circadiana",
-        rating: 5,
-        text: "La lampada circadiana ha completamente migliorato la qualità del mio sonno. L'intelligenza artificiale regola automaticamente la luce in base al mio ritmo circadiano. Un investimento che consiglio a tutti!",
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop"
-    },
-    {
-        id: 3,
-        name: "Giulia Bianchi",
-        location: "Firenze, Italia",
-        product: "Cuscino Meditazione Premium",
-        rating: 5,
-        text: "Pratico yoga da anni e questo cuscino è semplicemente perfetto. La qualità dei materiali è fantastica e il design minimalista si integra perfettamente nel mio spazio zen. Zenova ha capito davvero cosa significa benessere.",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop"
-    },
-    {
-        id: 4,
-        name: "Alessandro Conti",
-        location: "Torino, Italia",
-        product: "Umidificatore Smart",
-        rating: 5,
-        text: "L'umidificatore smart di Zenova è un concentrato di tecnologia e design. Controllo tutto dallo smartphone e l'aria in casa mia non è mai stata così pura. Spedizione velocissima e packaging curatissimo!",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop"
-    },
-    {
-        id: 5,
-        name: "Francesca Ricci",
-        location: "Bologna, Italia",
-        product: "Campana Tibetana",
-        rating: 5,
-        text: "La campana tibetana di Zenova produce un suono incredibilmente puro e rilassante. Uso la funzione di sound therapy ogni sera prima di dormire e i risultati sono strabilianti. Un prodotto che cambia la vita.",
-        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop"
-    }
-];
+/**
+ * Gestisce l'apertura/chiusura dei dropdown categorie su mobile
+ * Su mobile, :hover non funziona, serve click
+ */
+function initMobileCategoryDropdowns() {
+    // Solo su mobile (max-width: 768px)
+    if (window.innerWidth > 768) return;
 
-let currentTestimonialIndex = 0;
-let testimonialAutoplayInterval = null;
+    const dropdowns = document.querySelectorAll('.category-nav-dropdown');
 
-function initTestimonialsSlider() {
-    const track = document.getElementById('testimonialsTrack');
-    const dotsContainer = document.getElementById('testimonialsDots');
-    const prevBtn = document.getElementById('testimonialPrev');
-    const nextBtn = document.getElementById('testimonialNext');
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.category-nav-item');
+        const menu = dropdown.querySelector('.category-dropdown-menu');
 
-    if (!track) return; // Exit if not on a page with testimonials
+        if (!trigger || !menu) return;
 
-    // Render all testimonials
-    renderTestimonials();
+        // Previeni il comportamento di default del link
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-    // Create dots
-    createTestimonialDots();
+            // Chiudi tutti gli altri dropdown
+            dropdowns.forEach(other => {
+                if (other !== dropdown) {
+                    other.classList.remove('open');
+                }
+            });
 
-    // Add navigation event listeners
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            navigateTestimonial('prev');
-            resetAutoplay();
-        });
-    }
+            // Toggle questo dropdown
+            const isOpening = !dropdown.classList.contains('open');
+            dropdown.classList.toggle('open');
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            navigateTestimonial('next');
-            resetAutoplay();
-        });
-    }
-
-    // Add dot click listeners
-    const dots = document.querySelectorAll('.testimonial-dot');
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            currentTestimonialIndex = index;
-            updateTestimonialSlider();
-            resetAutoplay();
+            // Se sto aprendo, posiziona il menu correttamente (position: fixed)
+            if (isOpening) {
+                const rect = trigger.getBoundingClientRect();
+                menu.style.top = `${rect.bottom + 5}px`;
+                menu.style.left = `${rect.left}px`;
+            }
         });
     });
 
-    // Start autoplay
-    startTestimonialAutoplay();
-
-    // Pause on hover
-    const sliderContainer = document.querySelector('.testimonials-slider');
-    if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', pauseTestimonialAutoplay);
-        sliderContainer.addEventListener('mouseleave', startTestimonialAutoplay);
-    }
-}
-
-function renderTestimonials() {
-    const track = document.getElementById('testimonialsTrack');
-    if (!track) return;
-
-    track.innerHTML = testimonials.map(testimonial => `
-        <div class="testimonial-card">
-            <div class="testimonial-content">
-                <div class="testimonial-stars">
-                    ${'★'.repeat(testimonial.rating)}
-                </div>
-                <p class="testimonial-text">${testimonial.text}</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">
-                        <img src="${testimonial.avatar}" alt="${testimonial.name}">
-                    </div>
-                    <div class="testimonial-info">
-                        <h4 class="testimonial-name">${testimonial.name}</h4>
-                        <p class="testimonial-location">${testimonial.location}</p>
-                        <p class="testimonial-product">Prodotto: ${testimonial.product}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function createTestimonialDots() {
-    const dotsContainer = document.getElementById('testimonialsDots');
-    if (!dotsContainer) return;
-
-    dotsContainer.innerHTML = testimonials.map((_, index) =>
-        `<button class="testimonial-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></button>`
-    ).join('');
-}
-
-function navigateTestimonial(direction) {
-    if (direction === 'next') {
-        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
-    } else {
-        currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonials.length) % testimonials.length;
-    }
-    updateTestimonialSlider();
-}
-
-function updateTestimonialSlider() {
-    const track = document.getElementById('testimonialsTrack');
-    const dots = document.querySelectorAll('.testimonial-dot');
-
-    if (!track) return;
-
-    // Update slider position
-    const offset = -currentTestimonialIndex * 100;
-    track.style.transform = `translateX(${offset}%)`;
-
-    // Update dots
-    dots.forEach((dot, index) => {
-        if (index === currentTestimonialIndex) {
-            dot.classList.add('active');
-        } else {
-            dot.classList.remove('active');
+    // Chiudi dropdown quando si clicca fuori
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.category-nav-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('open');
+            });
         }
     });
 }
 
-function startTestimonialAutoplay() {
-    if (testimonialAutoplayInterval) return; // Already running
+// Inizializza al caricamento e al resize
+document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
+window.addEventListener('resize', initMobileCategoryDropdowns);
 
-    testimonialAutoplayInterval = setInterval(() => {
-        navigateTestimonial('next');
-    }, 5000); // Change testimonial every 5 seconds
+// ========================================
+// COOKIE BANNER GDPR
+// ========================================
+
+function initCookieBanner() {
+    // Se l'utente ha già dato/negato il consenso, non mostrare il banner
+    if (localStorage.getItem('zenova_cookie_consent')) {
+        return;
+    }
+
+    // Crea il banner HTML
+    const bannerHTML = `
+        <div id="cookieBanner" class="cookie-banner">
+            <div class="cookie-content">
+                <div class="cookie-text">
+                    <h4>Questo sito utilizza i cookie</h4>
+                    <p>Utilizziamo cookie tecnici necessari per il funzionamento del sito e cookie analitici per migliorare la tua esperienza.
+                    Per maggiori informazioni consulta la nostra <a href="cookie-policy.html">Cookie Policy</a> e la <a href="privacy-policy.html">Privacy Policy</a>.</p>
+                </div>
+                <div class="cookie-buttons">
+                    <button id="cookieAccept" class="cookie-btn cookie-accept">Accetta tutti</button>
+                    <button id="cookieReject" class="cookie-btn cookie-reject">Solo necessari</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Aggiungi stili CSS
+    const styleCSS = `
+        <style id="cookieBannerStyles">
+            .cookie-banner {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                color: #fff;
+                padding: 1.5rem;
+                z-index: 10000;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+                animation: slideUp 0.5s ease;
+            }
+            @keyframes slideUp {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+            .cookie-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1.5rem;
+            }
+            .cookie-text {
+                flex: 1;
+                min-width: 300px;
+            }
+            .cookie-text h4 {
+                margin: 0 0 0.5rem 0;
+                font-size: 1.1rem;
+                color: #fff;
+            }
+            .cookie-text p {
+                margin: 0;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                color: rgba(255, 255, 255, 0.85);
+            }
+            .cookie-text a {
+                color: #667eea;
+                text-decoration: underline;
+            }
+            .cookie-text a:hover {
+                color: #8b9fef;
+            }
+            .cookie-buttons {
+                display: flex;
+                gap: 1rem;
+                flex-shrink: 0;
+            }
+            .cookie-btn {
+                padding: 0.75rem 1.5rem;
+                border: none;
+                border-radius: 8px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .cookie-accept {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: #fff;
+            }
+            .cookie-accept:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+            .cookie-reject {
+                background: transparent;
+                color: #fff;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .cookie-reject:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            @media (max-width: 768px) {
+                .cookie-banner {
+                    padding: 1rem;
+                }
+                .cookie-content {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .cookie-buttons {
+                    width: 100%;
+                    justify-content: center;
+                }
+                .cookie-btn {
+                    flex: 1;
+                    padding: 0.75rem 1rem;
+                }
+            }
+        </style>
+    `;
+
+    // Inserisci stili e banner nel DOM
+    document.head.insertAdjacentHTML('beforeend', styleCSS);
+    document.body.insertAdjacentHTML('beforeend', bannerHTML);
+
+    // Event listeners per i pulsanti
+    document.getElementById('cookieAccept').addEventListener('click', () => {
+        localStorage.setItem('zenova_cookie_consent', 'accepted');
+        hideCookieBanner();
+        // Qui puoi attivare Google Analytics o altri script
+        console.log('Cookie accettati - Analytics attivato');
+    });
+
+    document.getElementById('cookieReject').addEventListener('click', () => {
+        localStorage.setItem('zenova_cookie_consent', 'rejected');
+        hideCookieBanner();
+        console.log('Solo cookie necessari');
+    });
 }
 
-function pauseTestimonialAutoplay() {
-    if (testimonialAutoplayInterval) {
-        clearInterval(testimonialAutoplayInterval);
-        testimonialAutoplayInterval = null;
+function hideCookieBanner() {
+    const banner = document.getElementById('cookieBanner');
+    if (banner) {
+        banner.style.animation = 'slideDown 0.3s ease forwards';
+        banner.style.cssText += '@keyframes slideDown { to { transform: translateY(100%); } }';
+        setTimeout(() => banner.remove(), 300);
     }
 }
 
-function resetAutoplay() {
-    pauseTestimonialAutoplay();
-    startTestimonialAutoplay();
-}
-
-// Initialize testimonials slider
-document.addEventListener('DOMContentLoaded', () => {
-    initTestimonialsSlider();
-});
-
-// ================================
-// MOBILE DROPDOWN MENU HANDLER
-// ================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Solo su mobile (touch devices)
-    const isMobile = window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window;
-
-    if (isMobile) {
-        const dropdowns = document.querySelectorAll('.category-nav-dropdown');
-
-        dropdowns.forEach(dropdown => {
-            const link = dropdown.querySelector('.category-nav-item');
-
-            if (link) {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Chiudi altri dropdown aperti
-                    dropdowns.forEach(d => {
-                        if (d !== dropdown) {
-                            d.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle questo dropdown
-                    dropdown.classList.toggle('active');
-                });
-            }
-        });
-
-        // Chiudi dropdown cliccando fuori
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.category-nav-dropdown')) {
-                dropdowns.forEach(d => d.classList.remove('active'));
-            }
-        });
-
-        // Chiudi dropdown quando si clicca un link interno
-        document.querySelectorAll('.dropdown-link, .dropdown-sublink').forEach(link => {
-            link.addEventListener('click', () => {
-                dropdowns.forEach(d => d.classList.remove('active'));
-            });
-        });
-    }
-});
+// Inizializza cookie banner
+document.addEventListener('DOMContentLoaded', initCookieBanner);
