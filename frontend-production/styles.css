@@ -2250,6 +2250,12 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Nascondi forme decorative su mobile */
+    .header-background,
+    .floating-shape {
+        display: none;
+    }
+
     .nav-menu {
         display: none;
     }
@@ -2269,6 +2275,41 @@ body {
     .category-nav-item {
         font-size: 0.95rem;
         padding: 0.4rem 0.8rem;
+    }
+
+    /* Mobile dropdown - click invece di hover */
+    .category-dropdown-menu {
+        position: fixed;
+        top: auto;
+        left: 5%;
+        right: 5%;
+        width: 90%;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 9999;
+    }
+
+    .category-nav-dropdown.active .category-dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Mega menu mobile - singola colonna */
+    .category-nav-mega-dropdown .category-dropdown-menu.mega-menu {
+        min-width: unset;
+        max-width: unset;
+        left: 5%;
+        right: 5%;
+        width: 90%;
+        transform: none;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .category-nav-mega-dropdown.active .category-dropdown-menu.mega-menu {
+        transform: none;
     }
 
     .category-dropdown {
