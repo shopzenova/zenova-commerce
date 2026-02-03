@@ -373,7 +373,6 @@ class EmailService {
    */
   async sendContactForm({ name, email, subject, message }) {
     const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
-    logger.info(`📧 sendContactForm: to=${adminEmail}, from=${this.from}, replyTo=${email}`);
     const emailSubject = `[ZENOVA Contatto] ${subject}`;
 
     const escapedMessage = message.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
