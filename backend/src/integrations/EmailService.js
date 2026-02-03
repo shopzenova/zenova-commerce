@@ -449,7 +449,8 @@ class EmailService {
       return true;
 
     } catch (error) {
-      logger.error('Errore invio email (replyTo):', error.message || error.code || JSON.stringify(error));
+      logger.error('Errore invio email (replyTo):', error.message || error.code || 'unknown');
+      logger.error('Dettaglio errore:', error.stack || error.response || String(error));
       return false;
     }
   }
@@ -476,7 +477,8 @@ class EmailService {
       return true;
 
     } catch (error) {
-      logger.error('Errore invio email:', error.message);
+      logger.error('Errore invio email:', error.message || error.code || 'unknown');
+      logger.error('Dettaglio errore:', error.stack || error.response || String(error));
       return false;
     }
   }
