@@ -67,4 +67,19 @@ router.post('/', contactValidation, async (req, res) => {
   }
 });
 
+// GET /api/contact/test-smtp - Test connessione SMTP (temporaneo, rimuovere dopo debug)
+router.get('/test-smtp', async (req, res) => {
+  try {
+    const result = await emailService.testConnection();
+    res.json({ success: result, smtp: {
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      user: process.env.EMAIL_USER ? '***configurato***' : 'MANCANTE',
+      from: process.env.EMAIL_FROM || 'non impostato'
+    }});
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
+
 module.exports = router;
