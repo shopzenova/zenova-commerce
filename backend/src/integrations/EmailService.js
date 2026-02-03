@@ -361,6 +361,99 @@ class EmailService {
   }
 
   /**
+   * Invia email dal form contatti
+   * @param {Object} params - Dati form contatto
+   * @param {string} params.name - Nome mittente
+   * @param {string} params.email - Email mittente
+   * @param {string} params.subject - Oggetto
+   * @param {string} params.message - Messaggio
+   * @returns {Promise<boolean>}
+   */
+  async sendContactForm({ name, email, subject, message }) {
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+    const emailSubject = `[ZENOVA Contatto] ${subject}`;
+
+    const escapedMessage = message.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: 'Arial', sans-serif; color: #333; background: #F5F1E8; }
+          .container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; }
+          .header { text-align: center; margin-bottom: 30px; }
+          .logo { font-size: 32px; font-weight: bold; color: #8B6F47; }
+          .tagline { color: #A8B5A0; font-size: 14px; }
+          .content { margin: 30px 0; }
+          .sender-info { background: #F5F1E8; padding: 20px; border-radius: 10px; margin-bottom: 25px; }
+          .sender-info p { margin: 5px 0; }
+          .label { font-weight: bold; color: #8B6F47; }
+          .message-box { background: #FAFAFA; border-left: 4px solid #8B6F47; padding: 20px; border-radius: 0 8px 8px 0; margin: 20px 0; line-height: 1.6; }
+          .footer { text-align: center; margin-top: 40px; color: #999; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <div class="logo">ZENOVA</div>
+            <div class="tagline">Nuovo messaggio dal form contatti</div>
+          </div>
+
+          <div class="content">
+            <div class="sender-info">
+              <p><span class="label">Da:</span> ${name}</p>
+              <p><span class="label">Email:</span> ${email}</p>
+              <p><span class="label">Oggetto:</span> ${subject}</p>
+            </div>
+
+            <h3 style="color: #8B6F47;">Messaggio:</h3>
+            <div class="message-box">
+              ${escapedMessage}
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>Rispondi direttamente a questa email per contattare il cliente.</p>
+            <p>Zenova - Form Contatti</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    return this._sendEmailWithReplyTo(adminEmail, emailSubject, html, email);
+  }
+
+  /**
+   * Invia email con reply-to personalizzato
+   * @private
+   */
+  async _sendEmailWithReplyTo(to, subject, html, replyTo) {
+    if (this.isMockMode) {
+      logger.info(`MOCK Email inviata a ${to} (reply-to: ${replyTo}): "${subject}"`);
+      return true;
+    }
+
+    try {
+      const info = await this.transporter.sendMail({
+        from: this.from,
+        to,
+        replyTo,
+        subject,
+        html
+      });
+
+      logger.info(`Email inviata: ${info.messageId}`);
+      return true;
+
+    } catch (error) {
+      logger.error('Errore invio email:', error.message);
+      return false;
+    }
+  }
+
+  /**
    * Invia email generica
    * @private
    */

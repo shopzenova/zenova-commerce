@@ -98,6 +98,14 @@ app.use('/api/checkout', paymentLimiter);
 app.use('/api/stripe', paymentLimiter);
 app.use('/api/paypal', paymentLimiter);
 
+// Rate limiting stretto per form contatti (anti-spam)
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: 'Troppi messaggi inviati, riprova tra qualche minuto' }
+});
+app.use('/api/contact', contactLimiter);
+
 // Logging richieste
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.path}`);
@@ -294,6 +302,7 @@ app.use('/api/checkout', require('./src/routes/checkout'));
 app.use('/api/paypal', require('./src/routes/paypal'));  // PayPal Advanced Checkout
 app.use('/api/stripe', require('./src/routes/stripe'));  // Stripe Card Payments
 app.use('/api/orders', require('./src/routes/orders'));
+app.use('/api/contact', require('./src/routes/contact'));  // Form contatti
 app.use('/api/admin', require('./src/routes/admin'));  // Admin panel API
 app.use('/api/admin/sync', require('./src/routes/admin-sync'));  // BigBuy FTP Sync
 app.use('/webhook', require('./src/routes/webhooks'));
