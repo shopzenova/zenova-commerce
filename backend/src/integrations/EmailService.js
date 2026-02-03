@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const logger = require('../utils/logger');
 
 class EmailService {
@@ -424,7 +425,39 @@ class EmailService {
       </html>
     `;
 
+    // Usa Resend API (HTTPS) invece di SMTP per evitare blocchi porte su Railway
+    if (process.env.RESEND_API_KEY) {
+      return this._sendViaResend(adminEmail, emailSubject, html, email);
+    }
     return this._sendEmail(adminEmail, emailSubject, html, email);
+  }
+
+  /**
+   * Invia email via Resend API (HTTPS, no SMTP)
+   * @private
+   */
+  async _sendViaResend(to, subject, html, replyTo) {
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const { data, error } = await resend.emails.send({
+        from: 'Zenova Contatti <onboarding@resend.dev>',
+        to: [to],
+        replyTo: replyTo || undefined,
+        subject,
+        html
+      });
+
+      if (error) {
+        logger.error(`Errore Resend API: ${JSON.stringify(error)}`);
+        return false;
+      }
+
+      logger.info(`✅ Email inviata via Resend: ${data.id}`);
+      return true;
+    } catch (error) {
+      logger.error(`Errore Resend: ${error.message}`);
+      return false;
+    }
   }
 
   /**
