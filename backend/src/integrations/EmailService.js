@@ -424,54 +424,23 @@ class EmailService {
       </html>
     `;
 
-    return this._sendEmailWithReplyTo(adminEmail, emailSubject, html, email);
-  }
-
-  /**
-   * Invia email con reply-to personalizzato
-   * @private
-   */
-  async _sendEmailWithReplyTo(to, subject, html, replyTo) {
-    if (this.isMockMode) {
-      logger.info(`MOCK Email inviata a ${to} (reply-to: ${replyTo}): "${subject}"`);
-      return true;
-    }
-
-    try {
-      const info = await this.transporter.sendMail({
-        from: this.from,
-        to,
-        replyTo,
-        subject,
-        html
-      });
-
-      logger.info(`Email inviata: ${info.messageId}`);
-      return true;
-
-    } catch (error) {
-      logger.error(`Errore invio email (replyTo): ${error.message || error.code || 'unknown'} | response: ${error.response || 'none'} | responseCode: ${error.responseCode || 'none'} | command: ${error.command || 'none'} | stack: ${error.stack || String(error)}`);
-      return false;
-    }
+    return this._sendEmail(adminEmail, emailSubject, html, email);
   }
 
   /**
    * Invia email generica
    * @private
    */
-  async _sendEmail(to, subject, html) {
+  async _sendEmail(to, subject, html, replyTo) {
     if (this.isMockMode) {
       logger.info(`MOCK Email inviata a ${to}: "${subject}"`);
       return true;
     }
 
     try {
-      const info = await this.transporter.sendMail({
-        from: this.from,
-        to,
-        subject,
-        html
-      });
+      const mailOptions = { from: this.from, to, subject, html };
+      if (replyTo) mailOptions.replyTo = replyTo;
+      const info = await this.transporter.sendMail(mailOptions);
 
       logger.info(`Email inviata: ${info.messageId}`);
       return true;
