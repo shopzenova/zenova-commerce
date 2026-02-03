@@ -3310,6 +3310,10 @@ window.addEventListener('resize', () => {
 // ========================================
 
 function initCookieBanner() {
+    // Guard: evita doppia esecuzione (es. se cookie-banner.js è già caricato)
+    if (document.getElementById('cookieBanner') || window._cookieBannerInitialized) return;
+    window._cookieBannerInitialized = true;
+
     // Se l'utente ha già dato/negato il consenso, non mostrare il banner
     if (localStorage.getItem('zenova_cookie_consent')) {
         return;
