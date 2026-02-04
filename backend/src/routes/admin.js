@@ -13,9 +13,10 @@ const bigbuyClient = require('../integrations/BigBuyClient');
 const prisma = new PrismaClient();
 
 // ===== IVA =====
+// retailPrice nel DB include già IVA - nessun ricalcolo necessario
 const IVA_RATE = 0.22;
 function applyIVA(price) {
-  return Math.round(price * (1 + IVA_RATE) * 100) / 100;
+  return parseFloat(price) || 0;
 }
 
 // ===== HELPER FUNCTIONS - Normalizzazione prezzi multi-fornitore =====
