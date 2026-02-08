@@ -1,3 +1,130 @@
+// ========== TITOLI CATEGORIE ==========
+const categoryTitles = {
+    // CATEGORIE PRINCIPALI
+    'home-ambience': {
+        title: 'HOME AMBIENCE',
+        subtitle: 'Tecnologia progettata per la calma'
+    },
+    'profumi-fragranze': {
+        title: 'PROFUMI E FRAGRANZE',
+        subtitle: 'Fragranze che definiscono la presenza'
+    },
+    'massaggio-benessere': {
+        title: 'MASSAGGIO E BENESSERE',
+        subtitle: 'Rilascio Profondo'
+    },
+    'natural-wellness': {
+        title: 'NATURAL WELLNESS',
+        subtitle: 'Benessere naturale per corpo e mente'
+    },
+
+    // SUBCATEGORIE HOME AMBIENCE
+    'smart-led-illuminazione': {
+        title: 'SMART LED & ILLUMINAZIONE',
+        subtitle: 'Luce intelligente per ogni ambiente'
+    },
+    'domotica-smart-home': {
+        title: 'HOME DECOR',
+        subtitle: 'Atmosfere per la Casa'
+    },
+
+    // SUBCATEGORIE PROFUMI
+    'profumi-donne': {
+        title: 'PROFUMI DONNA',
+        subtitle: 'Fragranze che definiscono la presenza'
+    },
+    'profumi-uomini': {
+        title: 'PROFUMI UOMO',
+        subtitle: 'Fragranze che definiscono la presenza'
+    },
+
+    // SUBCATEGORIE MASSAGGIO
+    'set-massaggio': {
+        title: 'SET MASSAGGIO',
+        subtitle: 'Rilascio Profondo'
+    },
+    'cuscini-terapeutici': {
+        title: 'CUSCINI TERAPEUTICI',
+        subtitle: 'Comfort e sollievo naturale'
+    },
+
+    // SUBCATEGORIE NATURAL WELLNESS
+    'oli-essenziali': {
+        title: 'OLI ESSENZIALI',
+        subtitle: 'Essenza Pura'
+    },
+    'oli-per-fragranza': {
+        title: 'OLI PER FRAGRANZA',
+        subtitle: 'Fragranze Professionali'
+    },
+    'candele-profumate': {
+        title: 'CANDELE PROFUMATE',
+        subtitle: 'Luce, profumo, atmosfera'
+    },
+    'candele-gel-profumati-sali-bagno': {
+        title: 'CANDELE, CERE E SALI DA BAGNO',
+        subtitle: 'Rituali di Calore & Acqua'
+    },
+    'diffusori-aromatici': {
+        title: 'DIFFUSORI AROMATICI',
+        subtitle: 'Respiro Aromatico'
+    },
+    'diffusori-oli': {
+        title: 'DIFFUSORI OLIO',
+        subtitle: 'Diffusione Silenziosa'
+    },
+    'pietre-preziose': {
+        title: 'PIETRE PREZIOSE',
+        subtitle: 'Luce che Respira'
+    },
+    'incenso': {
+        title: 'INCENSO',
+        subtitle: 'Gesto Antico'
+    },
+    'incenso-riflusso': {
+        title: 'INCENSO A RIFLUSSO',
+        subtitle: 'Fumo che scende, mente che sale'
+    },
+    'incenso-coni': {
+        title: 'INCENSO IN CONI',
+        subtitle: 'Gesto Antico'
+    },
+    'portacandele': {
+        title: 'PORTACANDELE',
+        subtitle: 'Custodi di luce'
+    },
+    'vestiario-wellness': {
+        title: 'VESTIARIO WELLNESS',
+        subtitle: 'Tessuti che Accompagnano'
+    },
+    'kit-benessere-cofanetti-regalo': {
+        title: 'KIT BENESSERE E COFANETTI REGALO',
+        subtitle: 'Il Dono che Cura'
+    }
+};
+
+// Funzione per aggiornare il titolo della categoria
+function updateCategoryHeader(subcategory) {
+    const headerEl = document.getElementById('categoryHeader');
+    const titleEl = document.getElementById('categoryTitle');
+    const subtitleEl = document.getElementById('categorySubtitle');
+
+    if (!headerEl || !titleEl || !subtitleEl) return;
+
+    const info = categoryTitles[subcategory];
+
+    if (info) {
+        titleEl.textContent = info.title;
+        subtitleEl.textContent = info.subtitle;
+        headerEl.style.display = 'block';
+    } else {
+        headerEl.style.display = 'none';
+    }
+}
+
+// Make function globally accessible
+window.updateCategoryHeader = updateCategoryHeader;
+
 // Mapping anchor links from home page to actual BigBuy categories
 const anchorToSubcategoryMap = {
     // ======== NUOVE 5 CATEGORIE ZENOVA ========
@@ -312,6 +439,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add active class to clicked link
             this.classList.add('active');
 
+            // Update category header
+            if (typeof window.updateCategoryHeader === 'function') {
+                window.updateCategoryHeader(subcategory);
+            }
+
             // Render products by category (from script.js)
             if (typeof window.renderProductsByCategory === 'function') {
                 window.renderProductsByCategory(subcategory);
@@ -370,6 +502,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Add active class to clicked link
             this.classList.add('active');
+
+            // Update category header
+            if (typeof window.updateCategoryHeader === 'function') {
+                window.updateCategoryHeader(subcategory);
+            }
 
             // Render products by category (from script.js)
             if (typeof window.renderProductsByCategory === 'function') {
