@@ -2,7 +2,7 @@
 let products = [];
 
 // Product Layout - Controls visibility (home/sidebar/hidden)
-let productLayout = { home: [], sidebar: [], hidden: [], vetrina2: [] };
+let productLayout = { home: [], sidebar: [], hidden: [] };
 
 // ===== CACHE & LAZY LOADING CONFIG =====
 const CACHE_KEY = 'zenova_products_cache';
@@ -781,22 +781,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (productsGrid) {
         // We're on prodotti.html - render all products
         console.log('📄 Detected prodotti.html - rendering all products');
-
-        // Controlla se c'è un parametro di ricerca nell'URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('search');
-
-        if (searchQuery) {
-            console.log('🔍 Ricerca da URL:', searchQuery);
-            // Rimuovi il parametro dall'URL (pulizia)
-            window.history.replaceState({}, '', window.location.pathname + window.location.hash);
-            // Mostra risultati ricerca
-            setTimeout(() => {
-                window.showSearchResultsInGrid(searchQuery);
-            }, 100);
-        } else {
-            renderProducts();
-        }
+        renderProducts();
     } else {
         // We're on index.html - render only featured
         renderFeaturedProducts();
@@ -1151,88 +1136,55 @@ function createProductCard(product) {
 
 /**
  * Render featured products (ONLY for homepage - index.html)
- * Vetrina 1: 5 prodotti (Best Seller)
- * Vetrina 2: 10 prodotti (Scopri Anche)
  */
 function renderFeaturedProducts() {
-    const vetrina1Grid = document.getElementById('vetrina1Grid');
-    const vetrina2Grid = document.getElementById('vetrina2Grid');
-
-    // Fallback to old grid if new ones don't exist
     const featuredGrid = document.getElementById('featuredProductsGrid');
+    if (!featuredGrid) return; // Not on homepage
 
-    if (!vetrina1Grid && !vetrina2Grid && !featuredGrid) return; // Not on homepage
+    console.log('🏠 Rendering featured products for homepage...');
+    featuredGrid.innerHTML = '';
 
-    console.log('🏠 Rendering vetrine for homepage...');
-
-    // === VETRINA 1 (5 prodotti) ===
-    if (vetrina1Grid) {
-        vetrina1Grid.innerHTML = '';
-
-        // Get products for vetrina 1 (use "home" array, limit to 5)
-        const vetrina1Products = products.filter(p => {
-            if (productLayout.home.length > 0) {
-                return productLayout.home.includes(p.id);
-            }
-            return p.zone === 'home';
-        }).slice(0, 5); // Limit to 5
-
-        console.log(`✨ Vetrina 1: ${vetrina1Products.length} prodotti`);
-
-        if (vetrina1Products.length === 0) {
-            vetrina1Grid.innerHTML = '<div class="no-products-message"><p>Nessun prodotto in vetrina 1</p></div>';
-        } else {
-            vetrina1Products.forEach(product => {
-                const card = createProductCard(product);
-                vetrina1Grid.appendChild(card);
-            });
+    // Filter products that are in the "home" layout
+    // Support both backend mode (productLayout.home) and static mode (product.zone)
+    const featuredProducts = products.filter(p => {
+        // Backend mode: use productLayout
+        if (productLayout.home.length > 0) {
+            return productLayout.home.includes(p.id);
         }
+        // Static mode: use zone field
+        return p.zone === 'home';
+    });
+
+    console.log(`✨ Featured products: ${featuredProducts.length} out of ${products.length} total`);
+
+    if (featuredProducts.length === 0) {
+        featuredGrid.innerHTML = `
+            <div class="no-products-message">
+                <p>Nessun prodotto in vetrina. <a href="admin.html">Vai al pannello admin</a> per selezionare i prodotti da mostrare in homepage.</p>
+            </div>
+        `;
+        return;
     }
 
-    // === VETRINA 2 (10 prodotti) ===
-    if (vetrina2Grid) {
-        vetrina2Grid.innerHTML = '';
-
-        // Get products for vetrina 2 (use "vetrina2" or "sidebar" array, limit to 10)
-        const vetrina2Products = products.filter(p => {
-            if (productLayout.vetrina2 && productLayout.vetrina2.length > 0) {
-                return productLayout.vetrina2.includes(p.id);
-            }
-            if (productLayout.sidebar.length > 0) {
-                return productLayout.sidebar.includes(p.id);
-            }
-            return p.zone === 'sidebar';
-        }).slice(0, 10); // Limit to 10
-
-        console.log(`✨ Vetrina 2: ${vetrina2Products.length} prodotti`);
-
-        if (vetrina2Products.length === 0) {
-            vetrina2Grid.innerHTML = '<div class="no-products-message"><p>Nessun prodotto in vetrina 2</p></div>';
-        } else {
-            vetrina2Products.forEach(product => {
-                const card = createProductCard(product);
-                vetrina2Grid.appendChild(card);
-            });
+    // Preload first 4 images for faster display
+    featuredProducts.slice(0, 4).forEach(product => {
+        const imgUrl = getProductImageUrl(product);
+        if (imgUrl) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = imgUrl;
+            document.head.appendChild(link);
         }
-    }
+    });
 
-    // === FALLBACK: Old single grid ===
-    if (featuredGrid && !vetrina1Grid && !vetrina2Grid) {
-        featuredGrid.innerHTML = '';
-        const featuredProducts = products.filter(p => {
-            if (productLayout.home.length > 0) {
-                return productLayout.home.includes(p.id);
-            }
-            return p.zone === 'home';
-        });
+    // Render featured products using same card template
+    featuredProducts.forEach(product => {
+        const card = createProductCard(product);
+        featuredGrid.appendChild(card);
+    });
 
-        featuredProducts.forEach(product => {
-            const card = createProductCard(product);
-            featuredGrid.appendChild(card);
-        });
-    }
-
-    console.log('✅ Vetrine rendered');
+    console.log('✅ Featured products rendered');
 }
 
 /**
@@ -1386,39 +1338,11 @@ function renderProducts() {
 
     console.log(`✨ Rendering ${productsToRender.length} prodotti in evidenza`);
 
-    // ✅ PERFORMANCE: Usa DocumentFragment per batch insert
-    const fragment = document.createDocumentFragment();
-
-    // ✅ PERFORMANCE: Caricamento progressivo - prima 20, poi il resto
-    const initialBatch = productsToRender.slice(0, 20);
-    const remainingBatch = productsToRender.slice(20);
-
-    // Render primo batch immediatamente
-    initialBatch.forEach(product => {
+    // Render featured products
+    productsToRender.forEach(product => {
         const productCard = createProductCard(product);
-        fragment.appendChild(productCard);
+        productsGrid.appendChild(productCard);
     });
-    productsGrid.appendChild(fragment);
-
-    // Render resto con requestIdleCallback per non bloccare UI
-    if (remainingBatch.length > 0) {
-        const renderRemaining = () => {
-            const remainingFragment = document.createDocumentFragment();
-            remainingBatch.forEach(product => {
-                const productCard = createProductCard(product);
-                remainingFragment.appendChild(productCard);
-            });
-            productsGrid.appendChild(remainingFragment);
-            console.log(`📦 Caricati altri ${remainingBatch.length} prodotti`);
-        };
-
-        // Usa requestIdleCallback se disponibile, altrimenti setTimeout
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(renderRemaining, { timeout: 500 });
-        } else {
-            setTimeout(renderRemaining, 100);
-        }
-    }
 
     // ✅ FIX: Assicurati che le card siano cliccabili dopo il rendering
     console.log('✅ Prodotti featured renderizzati, cards ora cliccabili');
@@ -1431,76 +1355,6 @@ function renderProducts() {
 window.resetToFeaturedProducts = function() {
     console.log('🔄 Reset a prodotti featured');
     renderProducts();
-};
-
-// Mostra risultati ricerca nella griglia principale
-window.showSearchResultsInGrid = function(query) {
-    const productsGrid = document.getElementById('productsGrid');
-    if (!productsGrid || !query) return;
-
-    console.log('🔍 Mostro prodotti filtrati per:', query);
-
-    // Filtra i prodotti per la query di ricerca
-    const productsArray = products.length > 0 ? products : (window.products || []);
-    const filteredProducts = productsArray.filter(product => {
-        if (product.visible === false) return false;
-        const q = query.toLowerCase();
-        return (product.name || '').toLowerCase().includes(q) ||
-               (product.brand || '').toLowerCase().includes(q) ||
-               (product.category || '').toLowerCase().includes(q) ||
-               (product.zenovaSubcategory || '').toLowerCase().includes(q) ||
-               (product.description || '').toLowerCase().includes(q);
-    });
-
-    console.log(`📦 Trovati ${filteredProducts.length} prodotti per "${query}"`);
-
-    if (filteredProducts.length === 0) {
-        productsGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
-                <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;">🔍</div>
-                <h3 style="color: #666; margin-bottom: 1rem;">Nessun risultato per "${query}"</h3>
-                <p style="color: #999;">Prova con parole chiave diverse</p>
-                <button onclick="window.resetToFeaturedProducts()"
-                        style="margin-top: 1rem; background: #8B6F47; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
-                    Torna ai prodotti in evidenza
-                </button>
-            </div>
-        `;
-        return;
-    }
-
-    productsGrid.innerHTML = '';
-
-    // Aggiungi header con risultati
-    const searchHeader = document.createElement('div');
-    searchHeader.style.cssText = 'grid-column: 1 / -1; padding: 1rem; background: #f5f0eb; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;';
-    searchHeader.innerHTML = `
-        <span style="font-size: 1.1rem; color: #333;">
-            🔍 Risultati per "<strong>${query}</strong>" (${filteredProducts.length} prodotti)
-        </span>
-        <button onclick="window.resetToFeaturedProducts(); this.parentElement.remove();"
-                style="background: #8B6F47; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
-            ✕ Chiudi ricerca
-        </button>
-    `;
-    productsGrid.appendChild(searchHeader);
-
-    // Render prodotti filtrati
-    const fragment = document.createDocumentFragment();
-    filteredProducts.forEach(product => {
-        const productCard = createProductCard(product);
-        fragment.appendChild(productCard);
-    });
-    productsGrid.appendChild(fragment);
-
-    // Scroll in alto
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-        productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-
-    makeProductCardsClickable();
-    console.log('✅ Griglia aggiornata con risultati ricerca');
 };
 
 // NEW: Render products filtered by specific category/subcategory
@@ -1563,44 +1417,14 @@ function renderProductsByCategory(searchTerm) {
         return;
     }
 
-    // ✅ PERFORMANCE: Usa DocumentFragment e caricamento progressivo
-    const fragment = document.createDocumentFragment();
-    const initialBatch = filteredProducts.slice(0, 20);
-    const remainingBatch = filteredProducts.slice(20);
-
-    // Render primo batch immediatamente
-    initialBatch.forEach(product => {
+    // Render filtered products
+    filteredProducts.forEach(product => {
         const productCard = createProductCard(product);
-        fragment.appendChild(productCard);
+        productsGrid.appendChild(productCard);
     });
-    productsGrid.appendChild(fragment);
-
-    // Render resto dopo
-    if (remainingBatch.length > 0) {
-        const renderRemaining = () => {
-            const remainingFragment = document.createDocumentFragment();
-            remainingBatch.forEach(product => {
-                const productCard = createProductCard(product);
-                remainingFragment.appendChild(productCard);
-            });
-            productsGrid.appendChild(remainingFragment);
-        };
-
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(renderRemaining, { timeout: 500 });
-        } else {
-            setTimeout(renderRemaining, 100);
-        }
-    }
 
     // Make cards clickable
     makeProductCardsClickable();
-
-    // Scroll in alto per vedere i prodotti
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-        productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
 
     console.log('✅ Prodotti renderizzati per categoria');
 }
@@ -2177,87 +2001,8 @@ function setupSearch() {
     });
 
     function closeSearchModal() {
-        const query = searchInput.value.trim().toLowerCase();
         searchModal.classList.remove('active');
         searchInput.value = '';
-
-        // Se c'era una ricerca, porta alla categoria correlata
-        // Ma solo se NON siamo già su prodotti.html
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-        if (query.length >= 3 && currentPage !== 'prodotti.html') {
-            const category = findCategoryFromSearch(query);
-            if (category) {
-                console.log(`🔍 Ricerca "${query}" -> categoria "${category}"`);
-                window.location.href = `prodotti.html#${category}`;
-            }
-        }
-    }
-
-    // Trova la categoria più rilevante dalla ricerca
-    function findCategoryFromSearch(query) {
-        // Mappa di parole chiave -> categoria
-        const categoryMap = {
-            // Incensi
-            'incens': 'incenso',
-            'bastoncin': 'incenso',
-            'backflow': 'incenso',
-            // Candele
-            'candel': 'candele-profumate',
-            'cera': 'candele-profumate',
-            // Diffusori
-            'diffusor': 'diffusori-oli',
-            'oli essenzial': 'diffusori-oli',
-            'aroma': 'diffusori-oli',
-            // Profumi
-            'profum': 'profumi-donne',
-            'parfum': 'profumi-donne',
-            'eau de': 'profumi-donne',
-            // Trucco
-            'trucco': 'trucco-viso',
-            'makeup': 'trucco-viso',
-            'rossett': 'trucco-labbra',
-            'mascara': 'trucco-occhi',
-            'ombrett': 'trucco-occhi',
-            // Cura corpo
-            'crema': 'cura-corpo',
-            'sapone': 'cura-corpo',
-            'bagno': 'sali-bagno',
-            'sale': 'sali-bagno',
-            // Tech
-            'lampada': 'lampade-led',
-            'led': 'lampade-led',
-            'umidificat': 'umidificatori',
-            // Meditazione
-            'yoga': 'accessori-yoga',
-            'meditazion': 'accessori-meditazione',
-            'chakra': 'accessori-meditazione',
-            // Tè
-            'te ': 'te-infusi',
-            'tea': 'te-infusi',
-            'infus': 'te-infusi',
-            'tisana': 'te-infusi'
-        };
-
-        // Cerca corrispondenza nelle parole chiave
-        for (const [keyword, category] of Object.entries(categoryMap)) {
-            if (query.includes(keyword)) {
-                return category;
-            }
-        }
-
-        // Cerca corrispondenza diretta nelle sottocategorie dei prodotti
-        const productsArray = products.length > 0 ? products : (window.products || []);
-        const matchingProduct = productsArray.find(p =>
-            p.name.toLowerCase().includes(query) ||
-            (p.zenovaSubcategory || '').toLowerCase().includes(query)
-        );
-
-        if (matchingProduct && matchingProduct.zenovaSubcategory) {
-            return matchingProduct.zenovaSubcategory;
-        }
-
-        return null;
     }
 
     // Real-time search with debouncing (300ms delay)
@@ -2283,29 +2028,6 @@ function setupSearch() {
             searchTimeout = setTimeout(() => {
                 performSearch(query);
             }, 300);
-        }
-    });
-
-    // Enter key: vai direttamente ai risultati nella griglia
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const query = searchInput.value.trim();
-            if (query.length >= 2) {
-                // Chiudi search modal
-                searchModal.classList.remove('active');
-
-                // Vai a prodotti.html con i risultati filtrati
-                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                if (currentPage === 'prodotti.html') {
-                    // Già su prodotti, mostra i risultati nella griglia
-                    savedSearchQuery = query;
-                    showSearchResultsInGrid(query);
-                } else {
-                    // Vai a prodotti.html
-                    window.location.href = `prodotti.html?search=${encodeURIComponent(query)}`;
-                }
-            }
         }
     });
 
@@ -2450,14 +2172,9 @@ function setupSearch() {
 
 // Handle clicking on a search result
 window.handleSearchResultClick = function(productId) {
-    // Salva la query di ricerca PRIMA di chiudere
-    const searchInput = document.getElementById('searchInput');
-    savedSearchQuery = searchInput ? searchInput.value.trim() : null;
-    console.log('🔍 Salvata query ricerca:', savedSearchQuery);
-
     // Close search modal
     document.getElementById('searchModal').classList.remove('active');
-    searchInput.value = '';
+    document.getElementById('searchInput').value = '';
 
     // Get product info
     const productsArray = products.length > 0 ? products : (window.products || []);
@@ -2490,7 +2207,6 @@ let savedScrollPosition = 0;
 let savedSidebarState = []; // Salva stato sidebar
 let currentProductCategory = null; // Categoria del prodotto corrente
 let currentProductSubcategory = null; // Sottocategoria del prodotto corrente
-let savedSearchQuery = null; // Salva la ricerca per riaprirla dopo chiusura prodotto
 
 // Gallery state
 let currentGalleryIndex = 0;
@@ -2795,71 +2511,6 @@ function closeProductDetailModal() {
     // Restore body scroll and padding (prevent page shift)
     document.body.style.paddingRight = '';
     document.body.style.overflow = '';
-
-    // ✅ Se c'era una ricerca attiva, mostra tutti i prodotti filtrati nella griglia
-    if (savedSearchQuery && savedSearchQuery.length > 0) {
-        console.log('🔍 Mostro prodotti filtrati per:', savedSearchQuery);
-        const query = savedSearchQuery;
-        savedSearchQuery = null; // Resetta subito per evitare loop
-
-        // Filtra i prodotti per la query di ricerca
-        const productsArray = products.length > 0 ? products : (window.products || []);
-        const filteredProducts = productsArray.filter(product => {
-            if (product.visible === false) return false;
-            const q = query.toLowerCase();
-            return (product.name || '').toLowerCase().includes(q) ||
-                   (product.brand || '').toLowerCase().includes(q) ||
-                   (product.category || '').toLowerCase().includes(q) ||
-                   (product.zenovaSubcategory || '').toLowerCase().includes(q);
-        });
-
-        console.log(`📦 Trovati ${filteredProducts.length} prodotti per "${query}"`);
-
-        // Se siamo su prodotti.html, mostra i risultati nella griglia
-        const productsGrid = document.getElementById('productsGrid');
-        if (productsGrid && filteredProducts.length > 0) {
-            productsGrid.innerHTML = '';
-
-            // Aggiungi titolo ricerca
-            const searchHeader = document.createElement('div');
-            searchHeader.style.cssText = 'grid-column: 1 / -1; padding: 1rem; background: #f5f0eb; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;';
-            searchHeader.innerHTML = `
-                <span style="font-size: 1.1rem; color: #333;">
-                    🔍 Risultati per "<strong>${query}</strong>" (${filteredProducts.length} prodotti)
-                </span>
-                <button onclick="window.resetToFeaturedProducts(); this.parentElement.remove();"
-                        style="background: #8B6F47; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
-                    ✕ Chiudi ricerca
-                </button>
-            `;
-            productsGrid.appendChild(searchHeader);
-
-            // Render prodotti filtrati
-            const fragment = document.createDocumentFragment();
-            filteredProducts.forEach(product => {
-                const productCard = createProductCard(product);
-                fragment.appendChild(productCard);
-            });
-            productsGrid.appendChild(fragment);
-
-            // Scroll in alto per vedere i risultati
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Scroll anche al productsGrid per mobile
-            setTimeout(() => {
-                productsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-
-            console.log('✅ Griglia aggiornata con risultati ricerca');
-            return; // Non eseguire il resto
-        }
-
-        // Se non siamo su prodotti.html, vai lì con il filtro
-        if (!productsGrid) {
-            window.location.href = `prodotti.html?search=${encodeURIComponent(query)}`;
-            return;
-        }
-    }
 
     // ✅ Ripristina lo stato della sidebar (riapri le categorie che erano aperte)
     setTimeout(() => {
@@ -3256,39 +2907,22 @@ document.addEventListener('DOMContentLoaded', () => {
  * Gestisce l'apertura/chiusura dei dropdown categorie su mobile
  * Su mobile, :hover non funziona, serve click
  */
-let mobileDropdownsInitialized = false;
-
 function initMobileCategoryDropdowns() {
     // Solo su mobile (max-width: 768px)
     if (window.innerWidth > 768) return;
 
-    // Evita inizializzazioni multiple
-    if (mobileDropdownsInitialized) return;
-    mobileDropdownsInitialized = true;
-
-    console.log('📱 Inizializzazione dropdown mobile...');
-
     const dropdowns = document.querySelectorAll('.category-nav-dropdown');
-    console.log(`📱 Trovati ${dropdowns.length} dropdown`);
 
-    dropdowns.forEach((dropdown, index) => {
+    dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.category-nav-item');
         const menu = dropdown.querySelector('.category-dropdown-menu');
-        const isMegaMenu = menu && menu.classList.contains('mega-menu');
 
-        if (!trigger || !menu) {
-            console.log(`📱 Dropdown ${index}: trigger o menu mancante`);
-            return;
-        }
-
-        console.log(`📱 Dropdown ${index}: ${trigger.textContent.trim()}, mega-menu: ${isMegaMenu}`);
+        if (!trigger || !menu) return;
 
         // Previeni il comportamento di default del link
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-
-            console.log(`📱 Click su: ${trigger.textContent.trim()}`);
 
             // Chiudi tutti gli altri dropdown
             dropdowns.forEach(other => {
@@ -3301,17 +2935,11 @@ function initMobileCategoryDropdowns() {
             const isOpening = !dropdown.classList.contains('open');
             dropdown.classList.toggle('open');
 
-            console.log(`📱 Dropdown ${isOpening ? 'aperto' : 'chiuso'}`);
-
-            // Posiziona menu - ma NON per mega-menu (gestito da CSS)
-            if (isOpening && !isMegaMenu) {
+            // Se sto aprendo, posiziona il menu correttamente (position: fixed)
+            if (isOpening) {
                 const rect = trigger.getBoundingClientRect();
                 menu.style.top = `${rect.bottom + 5}px`;
                 menu.style.left = `${rect.left}px`;
-            } else if (isOpening && isMegaMenu) {
-                // Per mega-menu, solo top position
-                const rect = trigger.getBoundingClientRect();
-                menu.style.top = `${rect.bottom + 5}px`;
             }
         });
     });
@@ -3326,27 +2954,15 @@ function initMobileCategoryDropdowns() {
     });
 }
 
-// Inizializza al caricamento
+// Inizializza al caricamento e al resize
 document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
-
-// Re-inizializza se si passa da desktop a mobile
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 768 && !mobileDropdownsInitialized) {
-        initMobileCategoryDropdowns();
-    } else if (window.innerWidth > 768) {
-        mobileDropdownsInitialized = false; // Reset per permettere re-init se torna mobile
-    }
-});
+window.addEventListener('resize', initMobileCategoryDropdowns);
 
 // ========================================
 // COOKIE BANNER GDPR
 // ========================================
 
 function initCookieBanner() {
-    // Guard: evita doppia esecuzione (es. se cookie-banner.js è già caricato)
-    if (document.getElementById('cookieBanner') || window._cookieBannerInitialized) return;
-    window._cookieBannerInitialized = true;
-
     // Se l'utente ha già dato/negato il consenso, non mostrare il banner
     if (localStorage.getItem('zenova_cookie_consent')) {
         return;
@@ -3499,136 +3115,3 @@ function hideCookieBanner() {
 
 // Inizializza cookie banner
 document.addEventListener('DOMContentLoaded', initCookieBanner);
-
-// ========================================
-// ANDROID BACK BUTTON SUPPORT
-// ========================================
-// Quando l'utente preme "Indietro" sul telefono, chiude la modal invece di uscire dal sito
-
-let modalHistoryState = false;
-
-// Funzione per pushare stato quando si apre una modal
-function pushModalState() {
-    if (!modalHistoryState) {
-        history.pushState({ modal: true }, '');
-        modalHistoryState = true;
-        console.log('📱 History state pushed for modal');
-    }
-}
-
-// Funzione per rimuovere stato quando si chiude una modal
-function popModalState() {
-    if (modalHistoryState) {
-        modalHistoryState = false;
-        console.log('📱 Modal state cleared');
-    }
-}
-
-// Controlla se c'è una modal aperta
-function isAnyModalOpen() {
-    const productModal = document.getElementById('productDetailModal');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const wishlistSidebar = document.getElementById('wishlistSidebar');
-    const searchModal = document.getElementById('searchModal');
-
-    return (productModal && productModal.classList.contains('active')) ||
-           (cartSidebar && cartSidebar.classList.contains('active')) ||
-           (wishlistSidebar && wishlistSidebar.classList.contains('active')) ||
-           (searchModal && searchModal.classList.contains('active'));
-}
-
-// Chiude tutte le modal aperte
-function closeAllModals() {
-    let closed = false;
-
-    // Chiudi product modal
-    const productModal = document.getElementById('productDetailModal');
-    if (productModal && productModal.classList.contains('active')) {
-        if (typeof closeProductDetailModal === 'function') {
-            closeProductDetailModal();
-        } else {
-            productModal.classList.remove('active');
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-        }
-        closed = true;
-        console.log('📱 Chiusa product modal con Back button');
-    }
-
-    // Chiudi cart sidebar
-    const cartSidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('overlay');
-    if (cartSidebar && cartSidebar.classList.contains('active')) {
-        cartSidebar.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        closed = true;
-        console.log('📱 Chiuso carrello con Back button');
-    }
-
-    // Chiudi wishlist sidebar
-    const wishlistSidebar = document.getElementById('wishlistSidebar');
-    if (wishlistSidebar && wishlistSidebar.classList.contains('active')) {
-        wishlistSidebar.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        closed = true;
-        console.log('📱 Chiusa wishlist con Back button');
-    }
-
-    // Chiudi search modal
-    const searchModal = document.getElementById('searchModal');
-    if (searchModal && searchModal.classList.contains('active')) {
-        searchModal.classList.remove('active');
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) searchInput.value = '';
-        closed = true;
-        console.log('📱 Chiusa ricerca con Back button');
-    }
-
-    return closed;
-}
-
-// Listener per il tasto Indietro (popstate)
-window.addEventListener('popstate', (e) => {
-    if (isAnyModalOpen()) {
-        // C'è una modal aperta, chiudila invece di navigare indietro
-        closeAllModals();
-        // Re-push state per permettere un altro "back" se ci sono ancora modal
-        if (isAnyModalOpen()) {
-            history.pushState({ modal: true }, '');
-        } else {
-            modalHistoryState = false;
-        }
-        console.log('📱 Back button intercettato - modal chiusa');
-    }
-});
-
-// Observer per rilevare quando si aprono le modal e pushare lo state
-const modalObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-            const target = mutation.target;
-            if (target.classList.contains('active')) {
-                // Una modal è stata aperta
-                pushModalState();
-            }
-        }
-    });
-});
-
-// Inizializza l'observer quando il DOM è pronto
-document.addEventListener('DOMContentLoaded', () => {
-    const modalsToWatch = [
-        document.getElementById('productDetailModal'),
-        document.getElementById('cartSidebar'),
-        document.getElementById('wishlistSidebar'),
-        document.getElementById('searchModal')
-    ];
-
-    modalsToWatch.forEach(modal => {
-        if (modal) {
-            modalObserver.observe(modal, { attributes: true });
-        }
-    });
-
-    console.log('📱 Android Back Button support inizializzato');
-});

@@ -2438,3 +2438,211 @@ document.addEventListener('DOMContentLoaded', function() {
 
 console.log('Modal modifica categoria inizializzato ✅');
 console.log('Gestione ordini inizializzata ✅');
+
+// ==========================================
+// GESTIONE VETRINE HOMEPAGE
+// ==========================================
+
+let vetrinaProducts = [];
+let vetrina1Selected = [];
+let vetrina2Selected = [];
+
+// Carica dati vetrine
+async function loadVetrinaData() {
+    try {
+        // Carica tutti i prodotti
+        const products = HAS_BACKEND
+            ? await fetch(`${API_BASE}/products`).then(r => r.json())
+            : await loadProductsFromJSON();
+
+        vetrinaProducts = products.filter(p => !p.hidden);
+
+        // Carica layout corrente
+        const layoutResponse = await fetch('/product-layout.json');
+        const layout = await layoutResponse.json();
+
+        vetrina1Selected = layout.home || [];
+        vetrina2Selected = layout.vetrina2 || [];
+
+        renderVetrinaProducts(1);
+        renderVetrinaProducts(2);
+        setupVetrinaSearch(1);
+        setupVetrinaSearch(2);
+
+        console.log('✅ Vetrine caricate:', vetrina1Selected.length, 'in V1,', vetrina2Selected.length, 'in V2');
+    } catch (error) {
+        console.error('❌ Errore caricamento vetrine:', error);
+    }
+}
+
+// Renderizza i prodotti selezionati per una vetrina
+function renderVetrinaProducts(vetrinaNum) {
+    const container = document.getElementById(`vetrina${vetrinaNum}Products`);
+    const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+    const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+    if (!container) return;
+
+    let html = `<div class="vetrina-selected-products">`;
+    html += `<p class="vetrina-count">${selected.length}/${maxProducts} prodotti selezionati</p>`;
+
+    if (selected.length === 0) {
+        html += `<p class="vetrina-empty">Nessun prodotto selezionato. Usa la ricerca per aggiungere prodotti.</p>`;
+    } else {
+        html += `<div class="vetrina-product-list">`;
+        selected.forEach((productId, index) => {
+            const product = vetrinaProducts.find(p => p.id === productId);
+            if (product) {
+                html += `
+                    <div class="vetrina-product-item" data-id="${product.id}">
+                        <span class="vetrina-product-order">${index + 1}</span>
+                        <img src="${product.images?.[0] || '/placeholder.jpg'}" alt="${product.name}" class="vetrina-product-thumb">
+                        <span class="vetrina-product-name">${product.name.substring(0, 40)}${product.name.length > 40 ? '...' : ''}</span>
+                        <span class="vetrina-product-price">€${product.retailPrice?.toFixed(2) || '0.00'}</span>
+                        <button onclick="removeFromVetrina(${vetrinaNum}, '${product.id}')" class="vetrina-remove-btn">✕</button>
+                    </div>
+                `;
+            }
+        });
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+// Setup ricerca prodotti per vetrina
+function setupVetrinaSearch(vetrinaNum) {
+    const searchInput = document.getElementById(`searchVetrina${vetrinaNum}`);
+    const resultsContainer = document.getElementById(`searchResults${vetrinaNum}`);
+
+    if (!searchInput || !resultsContainer) return;
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+
+        if (query.length < 2) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+        const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+        // Filtra prodotti non già selezionati
+        const results = vetrinaProducts
+            .filter(p => !selected.includes(p.id))
+            .filter(p => p.name.toLowerCase().includes(query) || (p.sku && p.sku.toLowerCase().includes(query)))
+            .slice(0, 10);
+
+        if (results.length === 0) {
+            resultsContainer.innerHTML = '<div class="search-no-results">Nessun prodotto trovato</div>';
+            resultsContainer.style.display = 'block';
+            return;
+        }
+
+        let html = '';
+        results.forEach(product => {
+            const canAdd = selected.length < maxProducts;
+            html += `
+                <div class="search-result-item ${canAdd ? '' : 'disabled'}">
+                    <img src="${product.images?.[0] || '/placeholder.jpg'}" alt="${product.name}">
+                    <div class="search-result-info">
+                        <span class="search-result-name">${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</span>
+                        <span class="search-result-price">€${product.retailPrice?.toFixed(2) || '0.00'}</span>
+                    </div>
+                    ${canAdd ? `<button onclick="addToVetrina(${vetrinaNum}, '${product.id}')" class="search-add-btn">+ Aggiungi</button>` : '<span class="vetrina-full">Vetrina piena</span>'}
+                </div>
+            `;
+        });
+
+        resultsContainer.innerHTML = html;
+        resultsContainer.style.display = 'block';
+    });
+
+    // Chiudi risultati cliccando fuori
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+            resultsContainer.style.display = 'none';
+        }
+    });
+}
+
+// Aggiungi prodotto a vetrina
+function addToVetrina(vetrinaNum, productId) {
+    const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+    const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+    if (selected.length >= maxProducts) {
+        showNotification(`❌ Vetrina ${vetrinaNum} piena (max ${maxProducts} prodotti)`, 'error');
+        return;
+    }
+
+    if (!selected.includes(productId)) {
+        selected.push(productId);
+        renderVetrinaProducts(vetrinaNum);
+
+        // Pulisci ricerca
+        const searchInput = document.getElementById(`searchVetrina${vetrinaNum}`);
+        const resultsContainer = document.getElementById(`searchResults${vetrinaNum}`);
+        if (searchInput) searchInput.value = '';
+        if (resultsContainer) resultsContainer.style.display = 'none';
+
+        showNotification(`✅ Prodotto aggiunto a Vetrina ${vetrinaNum}`, 'success');
+    }
+}
+
+// Rimuovi prodotto da vetrina
+function removeFromVetrina(vetrinaNum, productId) {
+    if (vetrinaNum === 1) {
+        vetrina1Selected = vetrina1Selected.filter(id => id !== productId);
+    } else {
+        vetrina2Selected = vetrina2Selected.filter(id => id !== productId);
+    }
+
+    renderVetrinaProducts(vetrinaNum);
+    showNotification(`🗑️ Prodotto rimosso da Vetrina ${vetrinaNum}`, 'success');
+}
+
+// Salva vetrina
+async function saveVetrina(vetrinaNum) {
+    try {
+        // Carica layout corrente
+        const layoutResponse = await fetch('/product-layout.json');
+        const layout = await layoutResponse.json();
+
+        // Aggiorna la vetrina appropriata
+        if (vetrinaNum === 1) {
+            layout.home = vetrina1Selected;
+        } else {
+            layout.vetrina2 = vetrina2Selected;
+        }
+
+        // Salva via API
+        const response = await fetch(`${API_BASE}/layout`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(layout)
+        });
+
+        if (!response.ok) throw new Error('Errore salvataggio');
+
+        showNotification(`✅ Vetrina ${vetrinaNum} salvata con successo!`, 'success');
+    } catch (error) {
+        console.error('Errore salvataggio vetrina:', error);
+        showNotification(`❌ Errore salvataggio: ${error.message}`, 'error');
+    }
+}
+
+// Inizializza vetrine quando si apre la sezione
+document.addEventListener('DOMContentLoaded', function() {
+    const layoutNavBtn = document.querySelector('[data-section="layout"]');
+    if (layoutNavBtn) {
+        layoutNavBtn.addEventListener('click', () => {
+            setTimeout(loadVetrinaData, 100);
+        });
+    }
+});
+
+console.log('Gestione vetrine homepage inizializzata ✅');

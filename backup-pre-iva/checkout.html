@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ZENOVA | Aura Experience</title>
+    <link rel="stylesheet" href="styles.css?v=20251108f">
+    <link rel="stylesheet" href="checkout.css?v=20251108">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- PayPal SDK - LIVE MODE con Carta -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQFp3HVb7joYeJnIZIBPehGoQtJGaOAM5gALJmIpz5AYwvSbOrPLLZF3tlyEOgsnoq5LYjLR2jnjVGSv&currency=EUR&intent=capture&components=buttons,funding-eligibility"></script>
+    <!-- Stripe SDK -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-background">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <img src="logo-aura.png" alt="Zenova Logo">
+                    </div>
+                    <div class="logo-text">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></a></h1>
+                        <p class="tagline">Where Technology Meets Calm Wellness</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-header">
+                <h1>Checkout</h1>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Spedizione</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Pagamento</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Conferma</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-grid">
+                <!-- Left Column - Forms -->
+                <div class="checkout-main">
+                    <!-- User Info Alert -->
+                    <div class="user-info-alert" id="userInfoAlert">
+                        <p>Non hai effettuato l'accesso. <a href="auth.html">Accedi</a> o continua come ospite.</p>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="checkout-card" id="shippingCard">
+                        <div class="card-header">
+                            <h2>Informazioni di Spedizione</h2>
+                        </div>
+                        <form class="checkout-form" id="shippingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">Nome *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Cognome *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Telefono *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+39">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Indirizzo *</label>
+                                <input type="text" id="address" name="address" required placeholder="Via, Numero civico">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Città *</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode">CAP *</label>
+                                    <input type="text" id="postalCode" name="postalCode" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="country">Paese *</label>
+                                <select id="country" name="country" required>
+                                    <option value="">Seleziona paese...</option>
+                                    <option value="IT" selected>🇮🇹 Italia</option>
+                                    <option disabled>──────────</option>
+                                    <option value="AT">🇦🇹 Austria</option>
+                                    <option value="BE">🇧🇪 Belgio</option>
+                                    <option value="BG">🇧🇬 Bulgaria</option>
+                                    <option value="HR">🇭🇷 Croazia</option>
+                                    <option value="CY">🇨🇾 Cipro</option>
+                                    <option value="CZ">🇨🇿 Repubblica Ceca</option>
+                                    <option value="DK">🇩🇰 Danimarca</option>
+                                    <option value="EE">🇪🇪 Estonia</option>
+                                    <option value="FI">🇫🇮 Finlandia</option>
+                                    <option value="FR">🇫🇷 Francia</option>
+                                    <option value="DE">🇩🇪 Germania</option>
+                                    <option value="GR">🇬🇷 Grecia</option>
+                                    <option value="HU">🇭🇺 Ungheria</option>
+                                    <option value="IE">🇮🇪 Irlanda</option>
+                                    <option value="LV">🇱🇻 Lettonia</option>
+                                    <option value="LT">🇱🇹 Lituania</option>
+                                    <option value="LU">🇱🇺 Lussemburgo</option>
+                                    <option value="MT">🇲🇹 Malta</option>
+                                    <option value="NL">🇳🇱 Paesi Bassi</option>
+                                    <option value="PL">🇵🇱 Polonia</option>
+                                    <option value="PT">🇵🇹 Portogallo</option>
+                                    <option value="RO">🇷🇴 Romania</option>
+                                    <option value="SK">🇸🇰 Slovacchia</option>
+                                    <option value="SI">🇸🇮 Slovenia</option>
+                                    <option value="ES">🇪🇸 Spagna</option>
+                                    <option value="SE">🇸🇪 Svezia</option>
+                                    <option disabled>──────────</option>
+                                    <option value="CH">🇨🇭 Svizzera</option>
+                                    <option value="NO">🇳🇴 Norvegia</option>
+                                    <option value="GB">🇬🇧 Regno Unito</option>
+                                    <option disabled>──────────</option>
+                                    <option value="AU">🇦🇺 Australia</option>
+                                    <option value="US">🇺🇸 Stati Uniti</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes">Note per la consegna (opzionale)</label>
+                                <textarea id="notes" name="notes" rows="3" placeholder="Es: Citofono rotto, chiamare al telefono"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Continua al Pagamento</button>
+                        </form>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="checkout-card hidden" id="paymentCard">
+                        <div class="card-header">
+                            <h2>Metodo di Pagamento</h2>
+                        </div>
+
+                        <!-- Payment Method Tabs -->
+                        <div class="payment-tabs">
+                            <button class="payment-tab active" data-method="card">
+                                💳 Carta di Credito/Debito
+                            </button>
+                            <button class="payment-tab" data-method="paypal">
+                                <svg style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;" viewBox="0 0 24 24"><path fill="currentColor" d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg>
+                                PayPal
+                            </button>
+                        </div>
+
+                        <!-- Card Payment Container -->
+                        <div class="payment-method-container" id="cardContainer">
+                            <div class="payment-info">
+                                <p style="margin-bottom: 1.5rem; color: #666;">
+                                    Paga in modo sicuro con carta di credito o debito. Accettiamo:
+                                </p>
+                                <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
+                                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" style="height: 30px;">
+                                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" style="height: 30px;">
+                                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex" style="height: 30px;">
+                                </div>
+                            </div>
+
+                            <div class="payment-form-container">
+                                <!-- Stripe Card Element -->
+                                <div id="card-element" style="padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; background: white;"></div>
+                                <div id="card-errors" role="alert" style="color: #e74c3c; margin-top: 10px; font-size: 14px;"></div>
+                                <button type="button" class="btn btn-primary" id="card-payment-button" style="margin-top: 20px; width: 100%;">
+                                    Paga €<span id="card-total">0.00</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- PayPal Container -->
+                        <div class="payment-method-container hidden" id="paypalContainer">
+                            <div class="payment-info">
+                                <p style="margin-bottom: 1.5rem; color: #666;">
+                                    Paga in modo sicuro con PayPal. Puoi usare il tuo account PayPal o pagare con carta di credito/debito senza account.
+                                </p>
+                            </div>
+                            <div class="payment-form-container">
+                                <button type="button" class="btn btn-primary" id="paypal-redirect-button" style="width: 100%; background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                    <svg style="width: 24px; height: 24px; fill: white;" viewBox="0 0 24 24"><path d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg>
+                                    Paga con PayPal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Confirmation -->
+                    <div class="checkout-card hidden" id="confirmationCard">
+                        <div class="confirmation-success">
+                            <div class="success-icon">✓</div>
+                            <h2>Ordine Confermato!</h2>
+                            <p class="order-number">Numero ordine: <strong id="orderNumber">#ZN-000000</strong></p>
+                            <p>Grazie per il tuo acquisto. Riceverai una email di conferma a breve.</p>
+                            <div class="confirmation-actions">
+                                <a href="index.html" class="btn btn-primary">Torna alla Home</a>
+                                <a href="prodotti.html" class="btn btn-secondary">Continua lo Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="checkout-sidebar">
+                    <div class="order-summary">
+                        <h3>Riepilogo Ordine</h3>
+                        <div class="summary-items" id="summaryItems">
+                            <!-- Items will be loaded by JavaScript -->
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Subtotale</span>
+                            <span id="summarySubtotal">€0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Spedizione</span>
+                            <span id="summaryShipping">Gratis</span>
+                        </div>
+                        <div class="summary-row discount hidden" id="discountRow">
+                            <span>Sconto</span>
+                            <span id="summaryDiscount">-€0.00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row total">
+                            <span>Totale</span>
+                            <span id="summaryTotal">€0.00</span>
+                        </div>
+                        <div class="promo-code">
+                            <input type="text" id="promoCode" placeholder="Codice promozionale">
+                            <button class="btn-apply" id="applyPromo">Applica</button>
+                        </div>
+                    </div>
+
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <span class="badge-icon">🔒</span>
+                            <span class="badge-text">Pagamento Sicuro SSL</span>
+                        </div>
+                        <div class="badge">
+                            <span class="badge-icon">📦</span>
+                            <span class="badge-text">Spedizione Tracciata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ZENOVA | Aura Experience</h4>
+                    <p>Where Technology Meets Calm Wellness</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contatti</h4>
+                    <p>Email: info@zenova.it</p>
+                    <p>Tel: +39 123 456 7890</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Seguici</h4>
+                    <p>Instagram | Facebook | Pinterest</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ZENOVA | Aura Experience. Tutti i diritti riservati.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em; opacity: 0.8;">Foto fornite da <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Unsplash</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="api-client.js?v=20251105e"></script>
+    <script src="auth.js?v=20251105e"></script>
+    <script src="checkout.js?v=20251225stripe"></script>
+</body>
+</html>

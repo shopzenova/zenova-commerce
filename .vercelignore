@@ -1,0 +1,16 @@
+# Backend (deployed separately on Railway)
+backend/
+node_modules/
+
+# Large data files
+*.csv
+*.xml
+bigbuy-data/
+
+# Git
+.git/
+
+# Development files
+*.log
+.env
+.env.local

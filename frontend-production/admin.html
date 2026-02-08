@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pannello Admin - ZENOVA</title>
-    <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +28,7 @@
                     <input type="password" id="password" placeholder="Inserisci password" required>
                 </div>
                 <button type="submit" class="btn-login">Accedi</button>
+                <p class="login-hint">Demo: admin / admin123</p>
             </form>
         </div>
     </div>
@@ -425,50 +425,48 @@
                 </div>
             </section>
 
-            <!-- Layout Section - Vetrine Homepage -->
+            <!-- Layout Section -->
             <section id="layout" class="admin-section">
                 <div class="section-header">
-                    <h1>Vetrine Homepage</h1>
-                    <p>Seleziona i prodotti da mostrare nelle vetrine della homepage</p>
+                    <h1>Layout Sito</h1>
+                    <p>Personalizza l'aspetto delle pagine</p>
                 </div>
 
                 <div class="layout-settings">
-                    <!-- Vetrina 1 - Best Seller (5 prodotti) -->
-                    <div class="setting-card vetrina-card">
-                        <h3>🏆 Vetrina 1 - Best Seller</h3>
-                        <p class="vetrina-info">Massimo 5 prodotti</p>
-
-                        <div class="vetrina-search">
-                            <input type="text" id="searchVetrina1" placeholder="Cerca prodotto da aggiungere..." class="form-input">
-                            <div id="searchResults1" class="search-results-dropdown"></div>
+                    <div class="setting-card">
+                        <h3>Homepage</h3>
+                        <div class="setting-option">
+                            <label>Prodotti in evidenza:</label>
+                            <select class="form-select">
+                                <option value="3">3 prodotti</option>
+                                <option value="6" selected>6 prodotti</option>
+                                <option value="9">9 prodotti</option>
+                            </select>
                         </div>
-
-                        <div class="vetrina-products" id="vetrina1Products">
-                            <p class="empty-vetrina">Caricamento prodotti...</p>
+                        <div class="setting-option">
+                            <label>Layout griglia:</label>
+                            <select class="form-select">
+                                <option value="2">2 colonne</option>
+                                <option value="3" selected>3 colonne</option>
+                                <option value="4">4 colonne</option>
+                            </select>
                         </div>
-
-                        <button onclick="saveVetrina(1)" class="btn-primary btn-save-vetrina">
-                            💾 Salva Vetrina 1
-                        </button>
                     </div>
 
-                    <!-- Vetrina 2 - Scopri Anche (10 prodotti) -->
-                    <div class="setting-card vetrina-card">
-                        <h3>✨ Vetrina 2 - Scopri Anche</h3>
-                        <p class="vetrina-info">Massimo 10 prodotti</p>
-
-                        <div class="vetrina-search">
-                            <input type="text" id="searchVetrina2" placeholder="Cerca prodotto da aggiungere..." class="form-input">
-                            <div id="searchResults2" class="search-results-dropdown"></div>
+                    <div class="setting-card">
+                        <h3>Sidebar</h3>
+                        <div class="setting-option">
+                            <label>Mostra sidebar:</label>
+                            <input type="checkbox" checked> Attiva
                         </div>
-
-                        <div class="vetrina-products" id="vetrina2Products">
-                            <p class="empty-vetrina">Caricamento prodotti...</p>
+                        <div class="setting-option">
+                            <label>Prodotti sidebar:</label>
+                            <select class="form-select">
+                                <option value="3">3 prodotti</option>
+                                <option value="4" selected>4 prodotti</option>
+                                <option value="5">5 prodotti</option>
+                            </select>
                         </div>
-
-                        <button onclick="saveVetrina(2)" class="btn-primary btn-save-vetrina">
-                            💾 Salva Vetrina 2
-                        </button>
                     </div>
                 </div>
             </section>
