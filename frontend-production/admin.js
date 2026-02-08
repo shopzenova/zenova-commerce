@@ -2451,11 +2451,14 @@ let vetrina2Selected = [];
 async function loadVetrinaData() {
     try {
         // Carica tutti i prodotti
-        const products = HAS_BACKEND
+        const response = HAS_BACKEND
             ? await fetch(`${API_BASE}/products`).then(r => r.json())
             : await loadProductsFromJSON();
 
-        vetrinaProducts = products.filter(p => !p.hidden);
+        // L'API può restituire { products: [...] } o direttamente [...]
+        const products = Array.isArray(response) ? response : (response.products || []);
+
+        vetrinaProducts = products.filter(p => p.visible !== false);
 
         // Carica layout corrente
         const layoutResponse = await fetch('/product-layout.json');
