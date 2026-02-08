@@ -1,11 +1,34 @@
 // Admin Panel JavaScript
 
-// API Configuration - rileva ambiente automaticamente
+// API Configuration - Auto-detect environment
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const IS_RAILWAY = window.location.hostname.includes('railway.app');
 const IS_ZENOVA = window.location.hostname.includes('zenova.ovh');
 const API_BASE = IS_LOCAL
     ? 'http://localhost:3000/api'
-    : 'https://zenova-commerce-production.up.railway.app/api';
+    : (IS_RAILWAY ? '/api' : (IS_ZENOVA ? 'https://zenova-commerce-production.up.railway.app/api' : null));
+
+// Check if we have backend access (local, Railway, or Zenova)
+const HAS_BACKEND = API_BASE !== null;
+
+// Products cache (used when online without backend)
+let PRODUCTS_CACHE = null;
+
+// Load products from JSON (fallback for online mode)
+async function loadProductsFromJSON() {
+    if (PRODUCTS_CACHE) return PRODUCTS_CACHE;
+
+    try {
+        const response = await fetch('/products.json');
+        const products = await response.json();
+        PRODUCTS_CACHE = products;
+        console.log(`📦 Loaded ${products.length} products from products.json (online mode)`);
+        return products;
+    } catch (error) {
+        console.error('❌ Error loading products.json:', error);
+        return [];
+    }
+}
 
 // Authentication
 document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -151,6 +174,11 @@ function updateZoneCounts() {
 
 // Save product layout to server and localStorage
 async function saveProductLayout() {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Salvataggio layout disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare il layout.');
+        return;
+    }
+
     const layout = {
         home: [],
         sidebar: [],
@@ -245,6 +273,11 @@ priceInputs.forEach(inputId => {
 
 // Sync Now Function
 async function syncNow() {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Sincronizzazione BigBuy disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per sincronizzare il catalogo.');
+        return;
+    }
+
     const syncBtn = document.querySelector('.btn-sync');
     const syncSpinner = document.querySelector('.sync-spinner');
     const syncStatusText = document.querySelector('.sync-status-text');
@@ -376,11 +409,29 @@ document.head.appendChild(style);
 // Load dashboard statistics from API
 async function loadDashboardStats() {
     try {
-        const response = await fetch(`${API_BASE}/admin/stats`);
-        const result = await response.json();
+        let stats;
 
-        if (result.success) {
-            const stats = result.data;
+        if (HAS_BACKEND) {
+            // Backend connected: use API
+            const response = await fetch(`${API_BASE}/admin/stats`);
+            const result = await response.json();
+            if (result.success) {
+                stats = result.data;
+            }
+        } else {
+            // No backend: calculate from products.json
+            const products = await loadProductsFromJSON();
+            stats = {
+                totalProducts: products.length,
+                availableProducts: products.filter(p => p.stock > 0).length,
+                outOfStock: products.filter(p => p.stock === 0).length,
+                todayOrders: 0,
+                todaySales: 0,
+                lastSync: new Date().toISOString()
+            };
+        }
+
+        if (stats) {
 
             // Update stat cards
             document.querySelector('.stat-card:nth-child(1) h3').textContent = stats.totalProducts;
@@ -402,20 +453,50 @@ let allProducts = [];
 // Load products from API
 async function loadProducts() {
     try {
-        const response = await fetch(`${API_BASE}/admin/products?zone=all`);
-        const result = await response.json();
+        if (HAS_BACKEND) {
+            // Backend connected: use API
+            const response = await fetch(`${API_BASE}/admin/products?zone=all&pageSize=10000`);
+            const result = await response.json();
 
-        if (result.success) {
-            allProducts = result.data;
-            console.log(`✅ Caricati ${allProducts.length} prodotti`);
+            if (result.success) {
+                allProducts = result.data;
+                console.log(`✅ Caricati ${allProducts.length} prodotti (local mode)`);
 
-            // Popola le zone con i prodotti reali
-            populateProductZones(allProducts);
+                // Popola le zone con i prodotti reali
+                populateProductZones(allProducts);
 
-            // Salva il layout dal server
-            if (result.layout) {
-                localStorage.setItem('zenova_product_layout', JSON.stringify(result.layout));
+                // Salva il layout dal server
+                if (result.layout) {
+                    localStorage.setItem('zenova_product_layout', JSON.stringify(result.layout));
+                }
             }
+        } else {
+            // Online mode: load from products.json
+            const products = await loadProductsFromJSON();
+
+            // Convert to admin format (add zone and other metadata)
+            allProducts = products.map(p => {
+                // Handle image: if it's an array, take first element, otherwise use as is
+                const imageUrl = Array.isArray(p.image) ? p.image[0] : p.image;
+                const imagesArray = p.images || (imageUrl ? [imageUrl] : []);
+
+                return {
+                    id: p.sku || p.id,
+                    name: p.name,
+                    price: p.price,
+                    stock: p.stock || 0,
+                    available: p.stock > 0,
+                    image: imageUrl || '',
+                    images: imagesArray,
+                    category: p.category,
+                    subcategory: p.subcategory,
+                    zone: p.zone || 'hidden', // Default to hidden if no zone
+                    featured: p.featured || false
+                };
+            });
+
+            console.log(`✅ Caricati ${allProducts.length} prodotti (online mode)`);
+            populateProductZones(allProducts);
         }
     } catch (error) {
         console.error('❌ Errore caricamento prodotti:', error);
@@ -500,7 +581,7 @@ function populateAllProductsList(products) {
                  class="product-list-img">
             <div class="product-list-info">
                 <h4>${product.name}</h4>
-                <p class="product-price">€ ${product.price.toFixed(2)}</p>
+                <p class="product-price">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             </div>
             <select class="product-zone-select" data-product-id="${product.id}">
                 <option value="sidebar" ${product.zone === 'sidebar' || !product.zone ? 'selected' : ''}>Sidebar (Shop)</option>
@@ -653,7 +734,7 @@ function createProductCard(product) {
         <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
         <div class="product-admin-info">
             <h4>${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</h4>
-            <p class="product-price">€ ${product.price.toFixed(2)}</p>
+            <p class="product-price">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             <span class="product-status ${statusClass}">${statusText}</span>
         </div>
         <div class="product-actions">
@@ -689,6 +770,16 @@ function setupDragAndDrop(card) {
 // Load activity log
 async function loadActivity() {
     try {
+        if (!HAS_BACKEND) {
+            // Online mode: no activity data available
+            const activityList = document.querySelector('.activity-list');
+            if (activityList) {
+                activityList.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Attività disponibili solo in modalità locale</p>';
+            }
+            return;
+        }
+
+        // Local mode: fetch from API
         const response = await fetch(`${API_BASE}/admin/activity`);
         const result = await response.json();
 
@@ -830,7 +921,7 @@ async function searchProductPreview() {
             document.getElementById('previewImage').src = result.data.images[0] || 'https://via.placeholder.com/120';
             document.getElementById('previewName').textContent = result.data.name;
             document.getElementById('previewBrand').innerHTML = `<strong>Brand:</strong> ${result.data.brand}`;
-            document.getElementById('previewPrice').innerHTML = `<strong>Prezzo vendita:</strong> €${result.data.price.toFixed(2)}`;
+            document.getElementById('previewPrice').innerHTML = `<strong>Prezzo vendita:</strong> €${(result.data.retailPrice || result.data.price).toFixed(2)}`;
             document.getElementById('previewCost').innerHTML = `<strong>Tuo costo:</strong> €${result.data.cost.toFixed(2)}`;
             document.getElementById('previewMargin').innerHTML = `<strong>Margine:</strong> €${result.data.margin}`;
             document.getElementById('previewStock').innerHTML = `<strong>Stock:</strong> ${result.data.stock}`;
@@ -907,6 +998,11 @@ function cancelImport() {
 
 // Toggle visibilità prodotto
 async function toggleProductVisibility(productId, productName, currentVisibility) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
+        return;
+    }
+
     const newVisibility = !currentVisibility;
     const action = newVisibility ? 'visibile' : 'nascosto';
 
@@ -943,6 +1039,11 @@ async function toggleProductVisibility(productId, productName, currentVisibility
 
 // Elimina prodotto
 async function deleteProduct(productId, productName) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
+        return;
+    }
+
     const confirmed = confirm(`🗑️ Sei sicuro di voler eliminare questo prodotto?\n\n"${productName}"\n\nQuesta azione è irreversibile!`);
 
     if (!confirmed) return;
@@ -968,8 +1069,93 @@ async function deleteProduct(productId, productName) {
     }
 }
 
+// Modifica prezzo prodotto
+async function editProductPrice(productId, productName, currentPrice, wholesalePrice) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Modifica prezzi disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare i prezzi.');
+        return;
+    }
+
+    const newPriceStr = prompt(
+        `💰 MODIFICA PREZZO VENDITA\n\n` +
+        `Prodotto: ${productName}\n\n` +
+        `Prezzo attuale: €${currentPrice.toFixed(2)}\n` +
+        `Prezzo acquisto: €${wholesalePrice.toFixed(2)}\n\n` +
+        `Inserisci nuovo prezzo di vendita:`,
+        currentPrice.toFixed(2)
+    );
+
+    // User cancelled
+    if (newPriceStr === null) return;
+
+    const newPrice = parseFloat(newPriceStr);
+
+    // Validazione input
+    if (isNaN(newPrice) || newPrice <= 0) {
+        alert('❌ Prezzo non valido!\n\nInserisci un numero maggiore di 0.');
+        return;
+    }
+
+    // Validazione: prezzo vendita >= prezzo acquisto
+    if (newPrice < wholesalePrice) {
+        alert(`❌ Prezzo vendita troppo basso!\n\n` +
+              `Il prezzo di vendita (€${newPrice.toFixed(2)}) non può essere inferiore al prezzo di acquisto (€${wholesalePrice.toFixed(2)}).`);
+        return;
+    }
+
+    // Calcola margine
+    const margine = ((newPrice - wholesalePrice) / newPrice * 100).toFixed(1);
+
+    const confirmed = confirm(
+        `💰 CONFERMA MODIFICA PREZZO\n\n` +
+        `Prodotto: ${productName}\n\n` +
+        `€${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)}\n` +
+        `Margine: ${margine}%\n\n` +
+        `Confermi la modifica?`
+    );
+
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/admin/products/${productId}/price`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ retailPrice: newPrice })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            console.log(`✅ Prezzo aggiornato: ${productName} - €${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)} (margine ${margine}%)`);
+
+            // Aggiorna il prezzo visualizzato nella card senza ricaricare tutta la lista
+            const priceElement = document.getElementById(`price-${productId}`);
+            if (priceElement) {
+                priceElement.textContent = `€ ${newPrice.toFixed(2)}`;
+            }
+
+            alert(`✅ Prezzo aggiornato con successo!\n\n${productName}\n€${currentPrice.toFixed(2)} → €${newPrice.toFixed(2)}\nMargine: ${margine}%`);
+
+            // Ricarica i prodotti per sincronizzare tutto
+            await loadProducts();
+        } else {
+            alert(`❌ Errore: ${result.error}`);
+        }
+    } catch (error) {
+        console.error('Errore modifica prezzo:', error);
+        alert(`❌ Errore durante la modifica del prezzo: ${error.message}`);
+    }
+}
+
 // Toggle featured product
 async function toggleFeatured(productId, productName, currentlyFeatured) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Funzionalità non disponibile: backend non connesso.');
+        return;
+    }
+
     try {
         const action = currentlyFeatured ? 'rimuovere da' : 'mettere in';
         const confirmed = confirm(`⭐ ${action.toUpperCase()} evidenza?\n\n"${productName}"\n\n${currentlyFeatured ? 'Non verrà più mostrato tra i prodotti in evidenza.' : 'Verrà mostrato tra i 100 prodotti in evidenza nello shop.'}`);
@@ -1012,6 +1198,15 @@ let catalogState = {
 // Carica prodotti dal catalogo FTP
 async function loadCatalogProducts(page = 1) {
     try {
+        if (!HAS_BACKEND) {
+            // Online mode: catalog not available
+            const catalogGrid = document.getElementById('catalogProductsGrid');
+            if (catalogGrid) {
+                catalogGrid.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Catalogo BigBuy</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>https://zenova-commerce-production.up.railway.app/admin.html</code> per accedere al catalogo completo</p></div>';
+            }
+            return;
+        }
+
         const category = document.getElementById('catalogCategory').value;
         const search = document.getElementById('catalogSearch').value;
 
@@ -1192,6 +1387,11 @@ function renderCatalogPagination(currentPage, totalPages) {
 
 // Import product from catalog to curated catalog
 async function importCatalogProduct(productId) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Importazione prodotti disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per importare prodotti dal catalogo BigBuy.');
+        return;
+    }
+
     try {
         const confirmed = confirm(`📦 Importare questo prodotto nel catalogo curato Zenova?\n\nSKU: ${productId}\n\nIl prodotto sarà subito disponibile sul sito.`);
 
@@ -1448,7 +1648,7 @@ function createCategoryProductCard(product) {
             <h5 style="margin: 0 0 5px 0; font-size: 13px; line-height: 1.3; height: 40px; overflow: hidden;">
                 ${product.name.substring(0, 60)}${product.name.length > 60 ? '...' : ''}
             </h5>
-            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #667eea;">€ ${product.price.toFixed(2)}</p>
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #667eea;">€ ${(product.retailPrice || product.price).toFixed(2)}</p>
             ${product.visible === false ?
                 '<p style="margin: 5px 0 0 0; font-size: 11px; color: #e74c3c; font-weight: bold;">🚫 NASCOSTO</p>' :
                 '<p style="margin: 5px 0 0 0; font-size: 11px; color: #43e97b; font-weight: bold;">✅ VISIBILE</p>'
@@ -1529,12 +1729,9 @@ function attachMoveCategoryListeners() {
 
     console.log('🔗 Attacco event delegation per pulsanti Sposta Categoria');
 
-    // Event delegation sul main content
-    const mainContent = document.querySelector('.admin-content');
-    if (!mainContent) return;
-
-    mainContent.addEventListener('click', function(e) {
-        // Ignora se il click viene dal modal
+    // Event delegation sul document body per catturare anche i modali
+    document.body.addEventListener('click', function(e) {
+        // Ignora se il click viene dal modal di modifica categoria
         if (e.target.closest('#editCategoryModal')) {
             return;
         }
@@ -1734,7 +1931,7 @@ console.log('Pannello Admin Zenova caricato ✅');
 const SUBCATEGORIES_MAP = {
     'smart-living': [
         { value: 'smart-led-illuminazione', label: 'Smart LED Illuminazione' },
-        { value: 'domotica-smart-home', label: 'Domotica & Smart Home' }
+        { value: 'domotica-smart-home', label: 'Home & Decor' }
     ],
     'beauty': [
         { value: 'makeup', label: 'Makeup' },
@@ -1924,6 +2121,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            if (!HAS_BACKEND) {
+                alert('⚠️ Modifica categoria disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per modificare le categorie.');
+                return;
+            }
+
             try {
                 const response = await fetch(`${API_BASE}/admin/products/${productId}/category`, {
                     method: 'PATCH',
@@ -1973,6 +2175,11 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadOrders(statusFilter = '') {
     const container = document.getElementById('ordersContainer');
     if (!container) return;
+
+    if (!HAS_BACKEND) {
+        container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;"><p style="font-size: 1.2rem; margin-bottom: 0.5rem;">📦 Gestione Ordini</p><p>Disponibile solo in modalità locale</p><p style="font-size: 0.9rem; margin-top: 1rem;">Apri <code>https://zenova-commerce-production.up.railway.app/admin.html</code> per gestire gli ordini</p></div>';
+        return;
+    }
 
     try {
         container.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">Caricamento ordini...</p>';
@@ -2097,6 +2304,11 @@ function addOrderEventListeners(orderId) {
  * Aggiorna stato ordine
  */
 async function updateOrderStatus(orderId, newStatus) {
+    if (!HAS_BACKEND) {
+        alert('⚠️ Gestione ordini disponibile solo in modalità locale.\n\nApri https://zenova-commerce-production.up.railway.app/admin.html per gestire gli ordini.');
+        return;
+    }
+
     try {
         const response = await fetch(`${API_BASE}/orders/${orderId}/status`, {
             method: 'PATCH',
@@ -2226,3 +2438,211 @@ document.addEventListener('DOMContentLoaded', function() {
 
 console.log('Modal modifica categoria inizializzato ✅');
 console.log('Gestione ordini inizializzata ✅');
+
+// ==========================================
+// GESTIONE VETRINE HOMEPAGE
+// ==========================================
+
+let vetrinaProducts = [];
+let vetrina1Selected = [];
+let vetrina2Selected = [];
+
+// Carica dati vetrine
+async function loadVetrinaData() {
+    try {
+        // Carica tutti i prodotti
+        const products = HAS_BACKEND
+            ? await fetch(`${API_BASE}/products`).then(r => r.json())
+            : await loadProductsFromJSON();
+
+        vetrinaProducts = products.filter(p => !p.hidden);
+
+        // Carica layout corrente
+        const layoutResponse = await fetch('/product-layout.json');
+        const layout = await layoutResponse.json();
+
+        vetrina1Selected = layout.home || [];
+        vetrina2Selected = layout.vetrina2 || [];
+
+        renderVetrinaProducts(1);
+        renderVetrinaProducts(2);
+        setupVetrinaSearch(1);
+        setupVetrinaSearch(2);
+
+        console.log('✅ Vetrine caricate:', vetrina1Selected.length, 'in V1,', vetrina2Selected.length, 'in V2');
+    } catch (error) {
+        console.error('❌ Errore caricamento vetrine:', error);
+    }
+}
+
+// Renderizza i prodotti selezionati per una vetrina
+function renderVetrinaProducts(vetrinaNum) {
+    const container = document.getElementById(`vetrina${vetrinaNum}Products`);
+    const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+    const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+    if (!container) return;
+
+    let html = `<div class="vetrina-selected-products">`;
+    html += `<p class="vetrina-count">${selected.length}/${maxProducts} prodotti selezionati</p>`;
+
+    if (selected.length === 0) {
+        html += `<p class="vetrina-empty">Nessun prodotto selezionato. Usa la ricerca per aggiungere prodotti.</p>`;
+    } else {
+        html += `<div class="vetrina-product-list">`;
+        selected.forEach((productId, index) => {
+            const product = vetrinaProducts.find(p => p.id === productId);
+            if (product) {
+                html += `
+                    <div class="vetrina-product-item" data-id="${product.id}">
+                        <span class="vetrina-product-order">${index + 1}</span>
+                        <img src="${product.images?.[0] || '/placeholder.jpg'}" alt="${product.name}" class="vetrina-product-thumb">
+                        <span class="vetrina-product-name">${product.name.substring(0, 40)}${product.name.length > 40 ? '...' : ''}</span>
+                        <span class="vetrina-product-price">€${product.retailPrice?.toFixed(2) || '0.00'}</span>
+                        <button onclick="removeFromVetrina(${vetrinaNum}, '${product.id}')" class="vetrina-remove-btn">✕</button>
+                    </div>
+                `;
+            }
+        });
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+// Setup ricerca prodotti per vetrina
+function setupVetrinaSearch(vetrinaNum) {
+    const searchInput = document.getElementById(`searchVetrina${vetrinaNum}`);
+    const resultsContainer = document.getElementById(`searchResults${vetrinaNum}`);
+
+    if (!searchInput || !resultsContainer) return;
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+
+        if (query.length < 2) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+        const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+        // Filtra prodotti non già selezionati
+        const results = vetrinaProducts
+            .filter(p => !selected.includes(p.id))
+            .filter(p => p.name.toLowerCase().includes(query) || (p.sku && p.sku.toLowerCase().includes(query)))
+            .slice(0, 10);
+
+        if (results.length === 0) {
+            resultsContainer.innerHTML = '<div class="search-no-results">Nessun prodotto trovato</div>';
+            resultsContainer.style.display = 'block';
+            return;
+        }
+
+        let html = '';
+        results.forEach(product => {
+            const canAdd = selected.length < maxProducts;
+            html += `
+                <div class="search-result-item ${canAdd ? '' : 'disabled'}">
+                    <img src="${product.images?.[0] || '/placeholder.jpg'}" alt="${product.name}">
+                    <div class="search-result-info">
+                        <span class="search-result-name">${product.name.substring(0, 50)}${product.name.length > 50 ? '...' : ''}</span>
+                        <span class="search-result-price">€${product.retailPrice?.toFixed(2) || '0.00'}</span>
+                    </div>
+                    ${canAdd ? `<button onclick="addToVetrina(${vetrinaNum}, '${product.id}')" class="search-add-btn">+ Aggiungi</button>` : '<span class="vetrina-full">Vetrina piena</span>'}
+                </div>
+            `;
+        });
+
+        resultsContainer.innerHTML = html;
+        resultsContainer.style.display = 'block';
+    });
+
+    // Chiudi risultati cliccando fuori
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+            resultsContainer.style.display = 'none';
+        }
+    });
+}
+
+// Aggiungi prodotto a vetrina
+function addToVetrina(vetrinaNum, productId) {
+    const selected = vetrinaNum === 1 ? vetrina1Selected : vetrina2Selected;
+    const maxProducts = vetrinaNum === 1 ? 5 : 10;
+
+    if (selected.length >= maxProducts) {
+        showNotification(`❌ Vetrina ${vetrinaNum} piena (max ${maxProducts} prodotti)`, 'error');
+        return;
+    }
+
+    if (!selected.includes(productId)) {
+        selected.push(productId);
+        renderVetrinaProducts(vetrinaNum);
+
+        // Pulisci ricerca
+        const searchInput = document.getElementById(`searchVetrina${vetrinaNum}`);
+        const resultsContainer = document.getElementById(`searchResults${vetrinaNum}`);
+        if (searchInput) searchInput.value = '';
+        if (resultsContainer) resultsContainer.style.display = 'none';
+
+        showNotification(`✅ Prodotto aggiunto a Vetrina ${vetrinaNum}`, 'success');
+    }
+}
+
+// Rimuovi prodotto da vetrina
+function removeFromVetrina(vetrinaNum, productId) {
+    if (vetrinaNum === 1) {
+        vetrina1Selected = vetrina1Selected.filter(id => id !== productId);
+    } else {
+        vetrina2Selected = vetrina2Selected.filter(id => id !== productId);
+    }
+
+    renderVetrinaProducts(vetrinaNum);
+    showNotification(`🗑️ Prodotto rimosso da Vetrina ${vetrinaNum}`, 'success');
+}
+
+// Salva vetrina
+async function saveVetrina(vetrinaNum) {
+    try {
+        // Carica layout corrente
+        const layoutResponse = await fetch('/product-layout.json');
+        const layout = await layoutResponse.json();
+
+        // Aggiorna la vetrina appropriata
+        if (vetrinaNum === 1) {
+            layout.home = vetrina1Selected;
+        } else {
+            layout.vetrina2 = vetrina2Selected;
+        }
+
+        // Salva via API
+        const response = await fetch(`${API_BASE}/layout`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(layout)
+        });
+
+        if (!response.ok) throw new Error('Errore salvataggio');
+
+        showNotification(`✅ Vetrina ${vetrinaNum} salvata con successo!`, 'success');
+    } catch (error) {
+        console.error('Errore salvataggio vetrina:', error);
+        showNotification(`❌ Errore salvataggio: ${error.message}`, 'error');
+    }
+}
+
+// Inizializza vetrine quando si apre la sezione
+document.addEventListener('DOMContentLoaded', function() {
+    const layoutNavBtn = document.querySelector('[data-section="layout"]');
+    if (layoutNavBtn) {
+        layoutNavBtn.addEventListener('click', () => {
+            setTimeout(loadVetrinaData, 100);
+        });
+    }
+});
+
+console.log('Gestione vetrine homepage inizializzata ✅');
