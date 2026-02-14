@@ -2451,11 +2451,16 @@ let vetrina2Selected = [];
 async function loadVetrinaData() {
     try {
         // Carica tutti i prodotti
-        const products = HAS_BACKEND
-            ? await fetch(`${API_BASE}/products`).then(r => r.json())
-            : await loadProductsFromJSON();
+        let products;
+        if (HAS_BACKEND) {
+            const response = await fetch(`${API_BASE}/products?pageSize=10000`);
+            const json = await response.json();
+            products = json.data || json;
+        } else {
+            products = await loadProductsFromJSON();
+        }
 
-        vetrinaProducts = products.filter(p => !p.hidden);
+        vetrinaProducts = Array.isArray(products) ? products.filter(p => !p.hidden) : [];
 
         // Carica layout corrente
         const layoutResponse = await fetch('/product-layout.json');
