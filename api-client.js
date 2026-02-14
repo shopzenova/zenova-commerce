@@ -175,12 +175,12 @@ class ZenovaAPI {
       const data = await response.json();
 
       if (data.success) {
-        return data.data; // Returns { home: [], sidebar: [], hidden: [], featured: [] }
+        return data.data; // Returns { home: [], sidebar: [], hidden: [], featured: [], vetrina2: [] }
       }
       throw new Error('Errore caricamento layout');
     } catch (error) {
       console.error('Errore getLayout:', error);
-      return { home: [], sidebar: [], hidden: [], featured: [] };
+      return { home: [], sidebar: [], hidden: [], featured: [], vetrina2: [] };
     }
   }
 }

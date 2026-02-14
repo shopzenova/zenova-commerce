@@ -2462,9 +2462,10 @@ async function loadVetrinaData() {
 
         vetrinaProducts = Array.isArray(products) ? products.filter(p => !p.hidden) : [];
 
-        // Carica layout corrente
-        const layoutResponse = await fetch('/product-layout.json');
-        const layout = await layoutResponse.json();
+        // Carica layout corrente dal backend (database)
+        const layoutResponse = await fetch(`${API_BASE}/products/layout`);
+        const layoutData = await layoutResponse.json();
+        const layout = layoutData.data || layoutData;
 
         vetrina1Selected = layout.home || [];
         vetrina2Selected = layout.vetrina2 || [];
@@ -2613,9 +2614,10 @@ function removeFromVetrina(vetrinaNum, productId) {
 // Salva vetrina
 async function saveVetrina(vetrinaNum) {
     try {
-        // Carica layout corrente
-        const layoutResponse = await fetch('/product-layout.json');
-        const layout = await layoutResponse.json();
+        // Carica layout corrente dal backend
+        const layoutResponse = await fetch(`${API_BASE}/products/layout`);
+        const layoutData = await layoutResponse.json();
+        const layout = layoutData.data || layoutData;
 
         // Aggiorna la vetrina appropriata
         if (vetrinaNum === 1) {
@@ -2624,11 +2626,15 @@ async function saveVetrina(vetrinaNum) {
             layout.vetrina2 = vetrina2Selected;
         }
 
-        // Salva via API
-        const response = await fetch(`${API_BASE}/layout`, {
-            method: 'POST',
+        // Assicura che tutti i campi esistano
+        layout.sidebar = layout.sidebar || [];
+        layout.hidden = layout.hidden || [];
+
+        // Salva via API (PUT /api/admin/products/layout)
+        const response = await fetch(`${API_BASE}/admin/products/layout`, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(layout)
+            body: JSON.stringify({ layout })
         });
 
         if (!response.ok) throw new Error('Errore salvataggio');

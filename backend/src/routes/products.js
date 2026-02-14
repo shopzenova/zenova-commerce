@@ -206,12 +206,17 @@ router.get('/layout', async (req, res) => {
       where: { zone: 'featured', visible: true },
       select: { id: true }
     });
+    const vetrina2Products = await prisma.product.findMany({
+      where: { zone: 'vetrina2', visible: true },
+      select: { id: true }
+    });
 
     const dbLayout = {
       home: homeProducts.map(p => p.id),
       sidebar: sidebarProducts.map(p => p.id),
       hidden: hiddenProducts.map(p => p.id),
-      featured: featuredProducts.map(p => p.id)
+      featured: featuredProducts.map(p => p.id),
+      vetrina2: vetrina2Products.map(p => p.id)
     };
 
     // Se il DB ha prodotti home, usa il DB (fonte affidabile)

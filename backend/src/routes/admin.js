@@ -288,7 +288,15 @@ router.put('/products/layout', async (req, res) => {
       });
     }
 
-    logger.info(`✅ Layout salvato: ${layout.home.length} home, ${layout.sidebar.length} sidebar, ${layout.hidden.length} hidden (DB + file)`);
+    // Imposta zona 'vetrina2'
+    if (layout.vetrina2 && layout.vetrina2.length > 0) {
+      await prisma.product.updateMany({
+        where: { id: { in: layout.vetrina2 } },
+        data: { zone: 'vetrina2' }
+      });
+    }
+
+    logger.info(`✅ Layout salvato: ${layout.home.length} home, ${layout.sidebar.length} sidebar, ${layout.hidden.length} hidden, ${(layout.vetrina2 || []).length} vetrina2 (DB + file)`);
 
     res.json({
       success: true,
