@@ -1,11 +1,11 @@
-// Checkout System - Card (Stripe) + PayPal
+// Checkout System - PayPal Only
 
 // API Configuration - Auto-detect environment
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : 'https://zenova-commerce-production.up.railway.app/api';
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Checkout system loaded - Card + PayPal mode');
+    console.log('Checkout system loaded - PayPal only mode');
     console.log('Environment:', IS_LOCAL ? 'LOCAL' : 'PRODUCTION');
     console.log('API Base:', API_BASE);
 
@@ -14,50 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let shippingData = {};
     let currentStep = 1;
     let calculatedShippingCost = 0; // Will be calculated dynamically
-
-    // ===== STRIPE INITIALIZATION (lazy loading) =====
-    let stripe = null;
-    let elements = null;
-    let cardElement = null;
-    let cardElementMounted = false;
-
-    function initializeStripe() {
-        if (!stripe && typeof Stripe !== 'undefined') {
-            console.log('🔄 Inizializzazione Stripe...');
-            stripe = Stripe('pk_live_51SfJ1lC0nY4hhNaNPFaiL8GBrsNcViJAlGvyInmZNCjPRwcfFx1hqaMYvFkOISWayWzamO9UEKabrXlfxK6tvPVk00zvGlfwAC');
-            elements = stripe.elements();
-            cardElement = elements.create('card', {
-                style: {
-                    base: {
-                        fontSize: '16px',
-                        color: '#32325d',
-                        fontFamily: '"Quicksand", sans-serif',
-                        '::placeholder': {
-                            color: '#aab7c4'
-                        }
-                    },
-                    invalid: {
-                        color: '#e74c3c',
-                        iconColor: '#e74c3c'
-                    }
-                }
-            });
-
-            // Handle real-time validation errors from card Element
-            cardElement.on('change', function(event) {
-                const displayError = document.getElementById('card-errors');
-                if (displayError) {
-                    if (event.error) {
-                        displayError.textContent = event.error.message;
-                    } else {
-                        displayError.textContent = '';
-                    }
-                }
-            });
-
-            console.log('✅ Stripe inizializzato');
-        }
-    }
 
     // Check if user is logged in
     const currentUser = getCurrentUser();
@@ -312,167 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Re-enable button
             paypalRedirectButton.disabled = false;
             paypalRedirectButton.innerHTML = '<svg style="width: 24px; height: 24px; fill: white;" viewBox="0 0 24 24"><path d="M8.32 21.97a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58a1310.1 1310.1 0 0 1 .48-4.44c.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm2.99-2.17a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82-.04.69-.14 1.45-.25 2.63-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14zm-7.98-8.32a.546.546 0 0 1-.26-.32c-.03-.15-.01-.24.22-2.58.23-2.34.37-3.74.48-4.44.02-.2.03-.29.08-.39.06-.14.17-.25.3-.31.11-.05.14-.05.42-.05h.3l.13.06c.29.14.49.4.54.71.02.1.02.13-.02.82a624.95 624.95 0 0 1-.25 2.63c-.16 1.57-.21 2.08-.21 2.25 0 .3-.09.51-.27.66-.14.12-.3.17-.51.16-.16-.01-.27-.05-.38-.14z"/></svg> Paga con PayPal';
-        }
-    });
-
-    // ===== PAYMENT METHOD TABS =====
-    const paymentTabs = document.querySelectorAll('.payment-tab');
-    const cardContainer = document.getElementById('cardContainer');
-    const paypalContainer = document.getElementById('paypalContainer');
-
-    paymentTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const method = this.getAttribute('data-method');
-
-            // Update active tab
-            paymentTabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-
-            // Show/hide payment containers
-            if (method === 'card') {
-                cardContainer.classList.remove('hidden');
-                paypalContainer.classList.add('hidden');
-
-                // Initialize Stripe if not already done
-                initializeStripe();
-
-                // Mount Stripe card element if not already mounted
-                if (!cardElementMounted && cardElement) {
-                    cardElement.mount('#card-element');
-                    cardElementMounted = true;
-                    console.log('✅ Stripe card element mounted');
-                }
-
-                // Update card total
-                const total = calculateTotal();
-                document.getElementById('card-total').textContent = total.toFixed(2);
-            } else if (method === 'paypal') {
-                cardContainer.classList.add('hidden');
-                paypalContainer.classList.remove('hidden');
-            }
-        });
-    });
-
-    // ===== STRIPE CARD PAYMENT =====
-    const cardPaymentButton = document.getElementById('card-payment-button');
-
-    cardPaymentButton.addEventListener('click', async function() {
-        console.log('💳 Processando pagamento con carta...');
-
-        // Initialize Stripe if not already done
-        initializeStripe();
-
-        if (!stripe || !cardElement) {
-            alert('Errore: Stripe non inizializzato. Ricarica la pagina.');
-            return;
-        }
-
-        // Disable button
-        cardPaymentButton.disabled = true;
-        cardPaymentButton.textContent = 'Elaborazione...';
-
-        try {
-            // Verify shipping data
-            if (!shippingData.email || !shippingData.firstName) {
-                throw new Error('Compila prima i dati di spedizione');
-            }
-
-            // *** CHECK STOCK AVAILABILITY ***
-            console.log('📦 Verifica disponibilità prodotti...');
-            const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
-
-            if (unavailableProducts.length > 0) {
-                const productNames = unavailableProducts.map(p => p.name).join(', ');
-                alert(`❌ Prodotti non disponibili o quantità insufficiente:\n\n${productNames}\n\nRimuovili dal carrello prima di procedere.`);
-                cardPaymentButton.disabled = false;
-                cardPaymentButton.textContent = 'Paga con Carta';
-                return;
-            }
-
-            // Prepare cart items
-            const cartItems = cart.map(item => ({
-                productId: item.id,
-                source: item.source || 'bigbuy',
-                bigbuyId: item.bigbuyId || (item.source === 'bigbuy' ? item.id : null),
-                awId: item.awId || (item.source === 'aw' ? item.id : null),
-                name: item.name,
-                description: item.description || '',
-                price: item.price,
-                quantity: item.quantity,
-                images: item.images || []
-            }));
-
-            // Create payment intent via backend
-            const response = await fetch(`${API_BASE}/stripe/create-payment-intent`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    items: cartItems,
-                    customer: {
-                        email: shippingData.email,
-                        name: `${shippingData.firstName} ${shippingData.lastName}`,
-                        phone: shippingData.phone,
-                        address: shippingData.address,
-                        city: shippingData.city,
-                        postalCode: shippingData.postalCode,
-                        country: shippingData.country,
-                        shippingCost: calculatedShippingCost
-                    }
-                })
-            });
-
-            const result = await response.json();
-            console.log('✅ Payment intent creato:', result);
-
-            if (!result.success) {
-                throw new Error(result.error || 'Errore creazione payment intent');
-            }
-
-            // Confirm card payment
-            const { error, paymentIntent } = await stripe.confirmCardPayment(
-                result.data.clientSecret,
-                {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: `${shippingData.firstName} ${shippingData.lastName}`,
-                            email: shippingData.email,
-                            phone: shippingData.phone,
-                            address: {
-                                line1: shippingData.address,
-                                city: shippingData.city,
-                                postal_code: shippingData.postalCode,
-                                country: shippingData.country
-                            }
-                        }
-                    }
-                }
-            );
-
-            if (error) {
-                throw new Error(error.message);
-            }
-
-            if (paymentIntent.status === 'succeeded') {
-                console.log('✅ Pagamento completato!', paymentIntent.id);
-
-                // Clear cart
-                localStorage.removeItem('zenova-cart');
-
-                // Redirect to success page
-                window.location.href = `checkout-success.html?stripe_payment=${paymentIntent.id}&db_order=${result.data.dbOrderId}`;
-            }
-
-        } catch (error) {
-            console.error('❌ Errore pagamento carta:', error);
-            document.getElementById('card-errors').textContent = error.message;
-
-            // Re-enable button
-            cardPaymentButton.disabled = false;
-            const total = calculateTotal();
-            cardPaymentButton.innerHTML = `Paga €<span id="card-total">${total.toFixed(2)}</span>`;
         }
     });
 
