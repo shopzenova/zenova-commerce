@@ -3,7 +3,7 @@
  * Sincronizza automaticamente lo stock di tutti i prodotti da BigBuy e AW
  *
  * Flusso:
- * 1. Sync BigBuy: usa /productsstockbyhandlingdays.json (match per SKU)
+ * 1. Sync BigBuy: scarica CSV stock via FTP (product_2399_it.csv)
  * 2. Sync AW: usa Data Feed API /my-products-data-feed-json (catalogo completo)
  * 3. Rileva prodotti andati a stock 0 (prima avevano stock > 0)
  * 4. Salva log in SyncLog table
@@ -12,7 +12,8 @@
 
 const { PrismaClient } = require('@prisma/client');
 const axios = require('axios');
-const bigbuy = require('../integrations/BigBuyClient');
+const ftp = require('basic-ftp');
+const { Readable } = require('stream');
 const emailService = require('../integrations/EmailService');
 const logger = require('../utils/logger');
 
@@ -140,24 +141,19 @@ class StockSyncJob {
   }
 
   /**
-   * Sync stock BigBuy: usa endpoint /productsstockbyhandlingdays
-   * Match per SKU (che corrisponde all'ID prodotto nel nostro DB)
-   * Somma quantity da tutti i warehouse/handling days
+   * Sync stock BigBuy: scarica CSV via FTP e aggiorna stock
+   * File: /files/products/csv/standard/product_2399_it.csv
+   * Formato CSV (separatore ;):
+   *   Col 0: ID (SKU), Col 20: STOCK, Col 15: EAN13
    */
   async _syncBigBuy(stats) {
     try {
-      logger.info('StockSyncJob: inizio sync BigBuy via Stock API...');
+      logger.info('StockSyncJob: inizio sync BigBuy via FTP/CSV...');
 
       // Carica tutti i prodotti BigBuy dal database
       const bigbuyProducts = await prisma.product.findMany({
-        where: {
-          source: 'bigbuy'
-        },
-        select: {
-          id: true,
-          name: true,
-          stock: true
-        }
+        where: { source: 'bigbuy' },
+        select: { id: true, bigbuyId: true, ean: true, name: true, stock: true }
       });
 
       stats.bigbuy.total = bigbuyProducts.length;
@@ -169,60 +165,127 @@ class StockSyncJob {
 
       logger.info(`StockSyncJob: ${bigbuyProducts.length} prodotti BigBuy da sincronizzare`);
 
-      // Crea set di SKU dal database per match veloce
-      const dbSkus = new Set(bigbuyProducts.map(p => p.id.toUpperCase()));
+      // Crea mappe per match: bigbuyId -> product, id -> product, ean -> product
+      const byBigbuyId = {};
+      const byId = {};
+      const byEan = {};
+      for (const p of bigbuyProducts) {
+        if (p.bigbuyId) byBigbuyId[p.bigbuyId.toUpperCase()] = p;
+        byId[p.id.toUpperCase()] = p;
+        if (p.ean) byEan[p.ean.toUpperCase()] = p;
+      }
+      const totalKeys = Object.keys(byBigbuyId).length + Object.keys(byId).length;
+      logger.info(`StockSyncJob: mappe match create — ${Object.keys(byBigbuyId).length} bigbuyId, ${Object.keys(byId).length} id, ${Object.keys(byEan).length} ean`);
 
-      // Scarica stock da API BigBuy (paginato)
+      // Scarica CSV via FTP
+      const ftpHost = process.env.BIGBUY_FTP_HOST || 'www.dropshippers.com.es';
+      const ftpUser = process.env.BIGBUY_FTP_USER;
+      const ftpPass = process.env.BIGBUY_FTP_PASSWORD;
+
+      if (!ftpUser || !ftpPass) {
+        logger.error('StockSyncJob: credenziali FTP BigBuy non configurate!');
+        stats.bigbuy.errors++;
+        return;
+      }
+
       const stockBySku = {};
-      let page = 0;
-      let hasMore = true;
-      const PAGE_SIZE = 1000;
+      const client = new ftp.Client();
+      client.ftp.verbose = false;
 
-      while (hasMore) {
-        try {
-          const stockData = await bigbuy.getStockByHandlingDays(page, PAGE_SIZE);
+      try {
+        await client.access({
+          host: ftpHost,
+          user: ftpUser,
+          password: ftpPass,
+          secure: false
+        });
 
-          if (!stockData || stockData.length === 0) {
-            hasMore = false;
-            break;
-          }
+        logger.info('StockSyncJob: connesso al FTP BigBuy');
 
-          logger.info(`StockSyncJob: BigBuy pagina ${page} — ${stockData.length} prodotti stock`);
+        // Scarica CSV da tutte le categorie rilevanti
+        // 2507=Profumeria/Cosmesi, 2501=Salute/Bellezza, 2399=Casa/Giardino, 2609=Elettronica
+        const csvFiles = [
+          'product_2507_it.csv',
+          'product_2501_it.csv',
+          'product_2399_it.csv',
+          'product_2609_it.csv'
+        ];
 
-          // Processa ogni prodotto
-          stockData.forEach(item => {
-            const sku = (item.sku || '').toUpperCase();
-            if (sku && dbSkus.has(sku)) {
-              // Somma quantity da tutti i warehouse
-              const totalQty = (item.stocks || []).reduce((sum, s) => sum + (s.quantity || 0), 0);
-              stockBySku[sku] = totalQty;
+        const matchedProductIds = new Set();
+
+        for (const csvFile of csvFiles) {
+          const csvPath = `/files/products/csv/standard/${csvFile}`;
+          const chunks = [];
+
+          const writable = new (require('stream').Writable)({
+            write(chunk, encoding, callback) {
+              chunks.push(chunk);
+              callback();
             }
           });
 
-          // Verifica se ci sono altre pagine
-          if (stockData.length < PAGE_SIZE) {
-            hasMore = false;
-          } else {
-            page++;
-            await this._delay(3000); // Rate limit BigBuy (3s tra richieste)
+          try {
+            await client.downloadTo(writable, csvPath);
+            const csvContent = Buffer.concat(chunks).toString('utf-8');
+
+            logger.info(`StockSyncJob: ${csvFile} scaricato (${Math.round(csvContent.length / 1024)} KB)`);
+
+            const lines = csvContent.split('\n');
+            const header = lines[0].replace(/^\uFEFF/, '');
+            const columns = header.split(';');
+
+            const idIdx = columns.findIndex(c => c.trim().toUpperCase() === 'ID');
+            const stockIdx = columns.findIndex(c => c.trim().toUpperCase() === 'STOCK');
+            const eanIdx = columns.findIndex(c => c.trim().toUpperCase() === 'EAN13');
+
+            if (idIdx === -1 || stockIdx === -1) {
+              logger.warn(`StockSyncJob: colonne non trovate in ${csvFile}, skip`);
+              continue;
+            }
+
+            let fileMatched = 0;
+            for (let i = 1; i < lines.length; i++) {
+              const line = lines[i].trim();
+              if (!line) continue;
+
+              const fields = this._parseCSVLine(line, ';');
+              if (fields.length <= Math.max(idIdx, stockIdx)) continue;
+
+              const csvId = (fields[idIdx] || '').replace(/"/g, '').trim().toUpperCase();
+              const stockVal = parseInt((fields[stockIdx] || '').replace(/"/g, '').trim()) || 0;
+              const csvEan = eanIdx >= 0 && fields[eanIdx] ? fields[eanIdx].replace(/"/g, '').trim().toUpperCase() : '';
+
+              const product = byBigbuyId[csvId] || byId[csvId] || (csvEan && byEan[csvEan]) || null;
+
+              if (product && !matchedProductIds.has(product.id)) {
+                matchedProductIds.add(product.id);
+                stockBySku[product.id] = stockVal;
+                fileMatched++;
+              }
+            }
+
+            logger.info(`StockSyncJob: ${csvFile} — ${fileMatched} nuovi match (totale: ${matchedProductIds.size})`);
+          } catch (dlError) {
+            logger.warn(`StockSyncJob: errore download ${csvFile}: ${dlError.message}`);
           }
-
-        } catch (error) {
-          logger.error(`StockSyncJob: errore BigBuy pagina ${page}: ${error.message}`);
-          stats.bigbuy.errors++;
-          hasMore = false;
         }
-      }
 
-      logger.info(`StockSyncJob: BigBuy stock ricevuto per ${Object.keys(stockBySku).length} SKU matchati`);
+        logger.info(`StockSyncJob: BigBuy CSV — ${matchedProductIds.size} prodotti matchati totali`);
+
+      } catch (error) {
+        logger.error(`StockSyncJob: errore FTP BigBuy: ${error.message}`);
+        stats.bigbuy.errors++;
+        return;
+      } finally {
+        client.close();
+      }
 
       // Aggiorna database
       let matched = 0;
       let unmatched = 0;
 
       for (const product of bigbuyProducts) {
-        const skuUpper = product.id.toUpperCase();
-        const newStock = stockBySku[skuUpper];
+        const newStock = stockBySku[product.id];
 
         if (newStock !== undefined) {
           try {
@@ -270,6 +333,29 @@ class StockSyncJob {
       logger.error(`StockSyncJob: errore fatale sync BigBuy: ${error.message}`);
       stats.bigbuy.errors++;
     }
+  }
+
+  /**
+   * Parsa una riga CSV rispettando i campi tra virgolette
+   */
+  _parseCSVLine(line, separator) {
+    const fields = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === separator && !inQuotes) {
+        fields.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    fields.push(current);
+    return fields;
   }
 
   /**
