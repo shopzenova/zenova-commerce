@@ -34,8 +34,10 @@ function client() {
  */
 async function createOrder(items, customer) {
   try {
-    // Calcola totale
-    const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Calcola totali
+    const itemTotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shippingCost = customer.shippingCost || 0;
+    const total = itemTotal + shippingCost;
 
     // Costruisci request
     const request = new checkoutNodeJssdk.orders.OrdersCreateRequest();
@@ -72,7 +74,11 @@ async function createOrder(items, customer) {
           breakdown: {
             item_total: {
               currency_code: 'EUR',
-              value: total.toFixed(2)
+              value: itemTotal.toFixed(2)
+            },
+            shipping: {
+              currency_code: 'EUR',
+              value: shippingCost.toFixed(2)
             }
           }
         },
