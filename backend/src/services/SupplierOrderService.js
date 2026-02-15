@@ -184,10 +184,10 @@ class SupplierOrderService {
   async _sendToAW(dbOrder, items, shippingAddress) {
     const orderNumber = dbOrder.orderNumber;
 
-    // Crea cliente AW con i dati del compratore
+    // Trova o crea cliente AW
     let customerClientId;
     try {
-      const nameParts = (dbOrder.customerName || '').split(' ');
+      // Prima prova a creare un nuovo client con i dati dell'acquirente
       const awClient = await awDropship.createClient({
         name: dbOrder.customerName || '',
         company: '',
@@ -195,24 +195,34 @@ class SupplierOrderService {
         phone: dbOrder.customerPhone || '',
         address: {
           country: shippingAddress.country || 'IT',
-          street: shippingAddress.street || shippingAddress.addressLine1 || '',
+          street: shippingAddress.street || shippingAddress.addressLine1 || 'N/A',
           addressLine2: shippingAddress.addressLine2 || '',
-          city: shippingAddress.city || '',
-          postalCode: shippingAddress.postalCode || ''
+          city: shippingAddress.city || 'N/A',
+          postalCode: shippingAddress.postalCode || '00000'
         }
       });
       customerClientId = awClient.id;
       logger.info(`AW: Cliente creato ID ${customerClientId} per ordine ${orderNumber}`);
     } catch (clientError) {
-      // Fallback: usa AW_DEFAULT_CLIENT_ID se la creazione fallisce
-      customerClientId = process.env.AW_DEFAULT_CLIENT_ID;
+      // Fallback: usa il client Zenova principale (ID numerico!)
+      // Prende dalla lista clienti il primo disponibile, oppure usa env var
+      logger.warn(`AW: creazione cliente fallita: ${clientError.message}, cerco client esistente...`);
+      try {
+        const clients = await awDropship.getClients();
+        if (clients.length > 0) {
+          customerClientId = clients[0].id;
+          logger.info(`AW: Uso client esistente ID ${customerClientId} (${clients[0].name})`);
+        }
+      } catch (e) {
+        logger.error(`AW: getClients fallito: ${e.message}`);
+      }
+
       if (!customerClientId) {
-        const errMsg = `AW: impossibile creare cliente e AW_DEFAULT_CLIENT_ID non configurato - ${clientError.message}`;
+        const errMsg = `AW: impossibile creare o trovare cliente - ${clientError.message}`;
         logger.error(errMsg);
         await emailService.sendSupplierOrderError(dbOrder, 'aw', errMsg, 0);
         return { success: false, error: errMsg };
       }
-      logger.warn(`AW: creazione cliente fallita, uso default ${customerClientId}: ${clientError.message}`);
     }
 
     const awPayload = {
