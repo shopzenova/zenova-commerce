@@ -30,7 +30,7 @@ class AWDropshipClient {
 
     // Rate limiting
     this.lastRequestTime = 0;
-    this.MIN_REQUEST_DELAY = 2000; // 2 secondi tra richieste
+    this.MIN_REQUEST_DELAY = 500; // 500ms tra richieste
     this.requestQueue = Promise.resolve();
 
     this.client = axios.create({
@@ -42,6 +42,15 @@ class AWDropshipClient {
       },
       timeout: 60000 // 60 secondi timeout
     });
+
+    // Pre-carica mappa prodotti all'avvio (async, non blocca)
+    if (!this.isMockMode) {
+      setTimeout(() => {
+        this._getProductCodeToIdMap()
+          .then(map => logger.info(`✅ AW: Mappa prodotti pre-caricata (${map.size} codici)`))
+          .catch(err => logger.error(`❌ AW: Pre-caricamento mappa fallito: ${err.message}`));
+      }, 10000); // 10 sec dopo avvio per non intasare
+    }
   }
 
   _getCacheKey(method, params) {
