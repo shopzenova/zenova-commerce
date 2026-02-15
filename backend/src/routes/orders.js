@@ -245,4 +245,26 @@ router.get('/:id/tracking', async (req, res) => {
   }
 });
 
+// POST /api/orders/:id/forward - Inoltra manualmente ordine ai fornitori
+router.post('/:id/forward', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await orderService.getOrderById(id);
+
+    if (!order) {
+      return res.status(404).json({ success: false, error: 'Ordine non trovato' });
+    }
+
+    const supplierOrderService = require('../services/SupplierOrderService');
+    const result = await supplierOrderService.forwardToSupplier(order);
+
+    logger.info(`📦 Inoltro manuale ordine ${id}:`, JSON.stringify(result));
+
+    res.json({ success: true, data: result });
+  } catch (error) {
+    logger.error(`Errore POST /api/orders/${req.params.id}/forward:`, error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 module.exports = router;
