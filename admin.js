@@ -2387,6 +2387,7 @@ async function showOrderDetails(orderId) {
         modalContainer.innerHTML = `
             <div style="background: white; padding: 30px; border-radius: 8px; max-height: 80vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
                 ${detailsHtml}
+                ${order.payment?.status === 'paid' ? `<button onclick="forwardOrderToSupplier('${order.id}')" style="margin-top: 20px; padding: 10px 20px; background: #2E7D32; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px;">Inoltra al Fornitore</button>` : ''}
                 <button onclick="this.closest('div[style*=fixed]').remove()" style="margin-top: 20px; padding: 10px 20px; background: #8B6F47; color: white; border: none; border-radius: 4px; cursor: pointer;">Chiudi</button>
             </div>
         `;
@@ -2402,6 +2403,31 @@ async function showOrderDetails(orderId) {
     } catch (error) {
         console.error('Errore caricamento dettagli:', error);
         showNotification(`❌ Errore: ${error.message}`, 'error');
+    }
+}
+
+async function forwardOrderToSupplier(orderId) {
+    if (!confirm('Inoltrare questo ordine al fornitore?')) return;
+
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Inoltro in corso...';
+
+    try {
+        const response = await fetch(`${API_BASE}/orders/${orderId}/forward`, { method: 'POST' });
+        const result = await response.json();
+
+        if (result.success) {
+            showNotification('Ordine inoltrato al fornitore!', 'success');
+            btn.textContent = 'Inoltrato!';
+            btn.style.background = '#666';
+        } else {
+            throw new Error(result.error || 'Errore inoltro');
+        }
+    } catch (error) {
+        showNotification(`Errore inoltro: ${error.message}`, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Inoltra al Fornitore';
     }
 }
 
