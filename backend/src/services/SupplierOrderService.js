@@ -217,10 +217,12 @@ class SupplierOrderService {
 
     const awPayload = {
       customerClientId,
-      items: items.map(item => ({
-        portfolioId: item.productId || item.sku,
-        quantity: item.quantity
-      }))
+      items: items.map(item => {
+        // Rimuovi prefisso "aw-" dal productId (il catalogo AW usa codici senza prefisso)
+        let code = item.productId || item.sku || '';
+        code = code.replace(/^aw-/i, '');
+        return { portfolioId: code, quantity: item.quantity };
+      })
     };
 
     // Retry loop
@@ -277,11 +279,11 @@ class SupplierOrderService {
    */
   _guessSource(productId, sku) {
     const id = (productId || sku || '').toLowerCase();
-    // AW: prefissi aw-, aw_, awpfo-, fobp-, fobi-, fobc-, etc.
-    if (id.startsWith('aw-') || id.startsWith('aw_') || id.startsWith('awpfo-') || id.startsWith('fob')) return 'aw';
-    // BigBuy: numeri puri, M-prefix (profumi), bb-, S/V prefix
-    if (id.match(/^\d+$/) || id.startsWith('m') || id.startsWith('bb-') || id.startsWith('s') || id.startsWith('v')) return 'bigbuy';
-    return 'unknown';
+    // BigBuy: numeri puri (EAN), M-prefix (profumi dedup), S/V prefix (bigbuyId)
+    if (id.match(/^\d{5,}$/) || id.match(/^m-/)) return 'bigbuy';
+    // Tutto il resto è AW (ha centinaia di prefissi diversi)
+    // Il match definitivo avviene via resolveProductId nel catalogo AW
+    return 'aw';
   }
 
   _delay(ms) {
