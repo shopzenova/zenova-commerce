@@ -47,8 +47,8 @@ async function createOrder(items, customer) {
         landing_page: 'BILLING',
         shipping_preference: 'SET_PROVIDED_ADDRESS',
         user_action: 'PAY_NOW',
-        return_url: `${process.env.FRONTEND_URL}/success.html`,
-        cancel_url: `${process.env.FRONTEND_URL}/checkout.html`
+        return_url: `${process.env.PAYPAL_RETURN_URL || 'https://shop.zenova.ovh/checkout-success.html'}`,
+        cancel_url: `${process.env.PAYPAL_CANCEL_URL || 'https://shop.zenova.ovh/checkout.html'}`
       },
       payer: {
         name: {
