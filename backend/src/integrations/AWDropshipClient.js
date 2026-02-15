@@ -24,6 +24,10 @@ class AWDropshipClient {
     this.cache = new Map();
     this.CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore
 
+    // Mappa codice prodotto → ID numerico AW (necessaria per addTransaction)
+    this._productCodeToIdMap = null;
+    this._productCodeToIdMapTimestamp = 0;
+
     // Rate limiting
     this.lastRequestTime = 0;
     this.MIN_REQUEST_DELAY = 2000; // 2 secondi tra richieste
@@ -197,6 +201,65 @@ class AWDropshipClient {
     }
   }
 
+  /**
+   * Carica mappa codice prodotto → ID numerico AW (con cache 24h)
+   * Necessaria perché addTransaction richiede l'ID numerico, non il codice stringa
+   * @returns {Promise<Map<string, number>>}
+   */
+  async _getProductCodeToIdMap() {
+    // Usa cache se fresca
+    if (this._productCodeToIdMap && (Date.now() - this._productCodeToIdMapTimestamp) < this.CACHE_TTL) {
+      return this._productCodeToIdMap;
+    }
+
+    logger.info('🔄 AW: Caricamento mappa codice→ID prodotti...');
+    const map = new Map();
+    let page = 1;
+    const perPage = 500;
+
+    while (true) {
+      try {
+        const response = await this._makeRequest('get', '/dropshipping/products', null, {
+          params: { page, per_page: perPage }
+        });
+
+        const products = response.data.data || [];
+        for (const p of products) {
+          if (p.code && p.id) {
+            map.set(p.code.toUpperCase(), p.id);
+          }
+        }
+
+        const lastPage = response.data.meta?.last_page || response.data.last_page || 1;
+        if (page >= lastPage) break;
+        page++;
+      } catch (error) {
+        logger.error(`❌ AW: Errore caricamento mappa prodotti (page ${page}): ${error.message}`);
+        break;
+      }
+    }
+
+    logger.info(`✅ AW: Mappa prodotti caricata: ${map.size} codici`);
+    this._productCodeToIdMap = map;
+    this._productCodeToIdMapTimestamp = Date.now();
+    return map;
+  }
+
+  /**
+   * Risolve un codice prodotto nel suo ID numerico AW
+   * @param {string} code - Codice prodotto (es. "FOBP-219")
+   * @returns {Promise<number|null>}
+   */
+  async resolveProductId(code) {
+    // Se è già un numero, usalo direttamente
+    if (!isNaN(code) && Number.isInteger(Number(code))) {
+      return Number(code);
+    }
+
+    const map = await this._getProductCodeToIdMap();
+    return map.get(String(code).toUpperCase()) || null;
+  }
+
   // ===== ORDINI =====
   // Flusso AW: 1) Crea ordine vuoto → 2) Aggiungi prodotti (transazioni) → 3) Invia ordine
 
@@ -235,28 +298,16 @@ class AWDropshipClient {
     const awOrderId = awOrder.id;
     logger.info(`✅ AW: Ordine vuoto creato con ID ${awOrderId}`);
 
-    // Step 2: Tenta di aggiungere prodotti (endpoint noto per dare Server Error)
-    let addTransactionFailed = false;
-    let addTransactionError = null;
+    // Step 2: Aggiungi prodotti (usa ID numerico, non codice stringa)
     for (const item of items) {
-      try {
-        logger.info(`📦 AW Step 2/3: Aggiunta prodotto portfolio=${item.portfolioId}, qty=${item.quantity}`);
-        await this.addTransaction(awOrderId, item.portfolioId, item.quantity);
-      } catch (error) {
-        addTransactionFailed = true;
-        addTransactionError = error;
-        logger.warn(`⚠️ AW addTransaction fallita (Server Error noto): ${error.message}`);
-        break; // Non provare gli altri prodotti
+      const numericId = await this.resolveProductId(item.portfolioId);
+      if (!numericId) {
+        throw new Error(`AW: prodotto "${item.portfolioId}" non trovato nel catalogo AW. Impossibile risolvere ID numerico.`);
       }
+      logger.info(`📦 AW Step 2/3: Aggiunta prodotto ${item.portfolioId} (ID=${numericId}), qty=${item.quantity}`);
+      await this.addTransaction(awOrderId, numericId, item.quantity);
     }
-
-    if (addTransactionFailed) {
-      // Ritorna l'ordine vuoto con flag per inoltro manuale
-      const err = new Error(`AW addTransaction fallita: ${addTransactionError.message}. L'ordine ${awOrderId} è stato creato vuoto su AW e richiede inoltro manuale dei prodotti.`);
-      err.awOrderId = awOrderId;
-      err.needsManualForward = true;
-      throw err;
-    }
+    logger.info(`✅ AW: ${items.length} prodotti aggiunti all'ordine ${awOrderId}`);
 
     // Step 3: Invia ordine (solo se i prodotti sono stati aggiunti)
     logger.info(`📦 AW Step 3/3: Invio ordine ${awOrderId}`);
@@ -278,8 +329,7 @@ class AWDropshipClient {
       const response = await this._makeRequest(
         'post',
         `/dropshipping/order/${orderId}/portfolio/${portfolioId}/store`,
-        new URLSearchParams({ quantity_ordered: quantity }).toString(),
-        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+        { quantity_ordered: quantity }
       );
       return response.data;
     } catch (error) {
