@@ -32,8 +32,12 @@ const BIGBUY_STATUS_MAP = {
 
 // Mappatura stati AW → stato interno
 const AW_STATUS_MAP = {
+  'creating': 'processing',
   'submitted': 'processing',
   'in-process': 'processing',
+  'in_warehouse': 'processing',
+  'in-warehouse': 'processing',
+  'manual_required': 'processing',
   'dispatched': 'shipped',
   'shipped': 'shipped',
   'delivered': 'delivered',
@@ -158,7 +162,7 @@ class OrderStatusJob {
     }
 
     // Controlla AW
-    if (order.awOrderId && order.awStatus !== 'delivered') {
+    if (order.awOrderId && order.awStatus !== 'delivered' && order.awStatus !== 'manual_required') {
       const awUpdated = await this._checkAWOrder(order);
       if (awUpdated) updated = true;
     }
@@ -226,7 +230,15 @@ class OrderStatusJob {
    */
   async _checkAWOrder(order) {
     try {
-      const awOrder = await awDropship.getOrder(order.awOrderId);
+      let awOrder = await awDropship.getOrder(order.awOrderId);
+
+      // Fallback: se getOrder fallisce, cerca nella lista ordini
+      if (!awOrder) {
+        logger.warn(`OrderStatusJob: getOrder(${order.awOrderId}) null, provo listOrders`);
+        const allOrders = await awDropship.listOrders();
+        awOrder = allOrders.find(o => String(o.id) === String(order.awOrderId));
+      }
+
       if (!awOrder) return false;
 
       const rawStatus = (awOrder.state || awOrder.status || '').toLowerCase();

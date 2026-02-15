@@ -216,43 +216,54 @@ class AWDropshipClient {
       };
     }
 
-    try {
-      const { customerClientId, items } = orderData;
+    const { customerClientId, items } = orderData;
 
-      if (!customerClientId) {
-        throw new Error('AW: customerClientId richiesto per creare ordine');
-      }
-      if (!items || items.length === 0) {
-        throw new Error('AW: almeno un prodotto richiesto');
-      }
+    if (!customerClientId) {
+      throw new Error('AW: customerClientId richiesto per creare ordine');
+    }
+    if (!items || items.length === 0) {
+      throw new Error('AW: almeno un prodotto richiesto');
+    }
 
-      // Step 1: Crea ordine vuoto per il cliente
-      logger.info(`📦 AW Step 1/3: Creazione ordine per cliente ${customerClientId}`);
-      const createResponse = await this._makeRequest(
-        'post',
-        `/dropshipping/order/client/${customerClientId}/store`
-      );
-      const awOrder = createResponse.data.data || createResponse.data;
-      const awOrderId = awOrder.id;
-      logger.info(`✅ AW: Ordine creato con ID ${awOrderId}`);
+    // Step 1: Crea ordine vuoto per il cliente (usa ID numerico)
+    logger.info(`📦 AW Step 1/3: Creazione ordine per cliente ${customerClientId}`);
+    const createResponse = await this._makeRequest(
+      'post',
+      `/dropshipping/order/client/${customerClientId}/store`
+    );
+    const awOrder = createResponse.data.data || createResponse.data;
+    const awOrderId = awOrder.id;
+    logger.info(`✅ AW: Ordine vuoto creato con ID ${awOrderId}`);
 
-      // Step 2: Aggiungi ogni prodotto come transazione
-      for (const item of items) {
+    // Step 2: Tenta di aggiungere prodotti (endpoint noto per dare Server Error)
+    let addTransactionFailed = false;
+    let addTransactionError = null;
+    for (const item of items) {
+      try {
         logger.info(`📦 AW Step 2/3: Aggiunta prodotto portfolio=${item.portfolioId}, qty=${item.quantity}`);
         await this.addTransaction(awOrderId, item.portfolioId, item.quantity);
+      } catch (error) {
+        addTransactionFailed = true;
+        addTransactionError = error;
+        logger.warn(`⚠️ AW addTransaction fallita (Server Error noto): ${error.message}`);
+        break; // Non provare gli altri prodotti
       }
-      logger.info(`✅ AW: ${items.length} prodotti aggiunti all'ordine ${awOrderId}`);
-
-      // Step 3: Invia ordine
-      logger.info(`📦 AW Step 3/3: Invio ordine ${awOrderId}`);
-      const submitResponse = await this.submitOrder(awOrderId);
-      logger.info(`✅ AW: Ordine ${awOrderId} inviato con successo`);
-
-      return submitResponse;
-    } catch (error) {
-      logger.error('❌ Errore AW createOrder:', error.message);
-      throw error;
     }
+
+    if (addTransactionFailed) {
+      // Ritorna l'ordine vuoto con flag per inoltro manuale
+      const err = new Error(`AW addTransaction fallita: ${addTransactionError.message}. L'ordine ${awOrderId} è stato creato vuoto su AW e richiede inoltro manuale dei prodotti.`);
+      err.awOrderId = awOrderId;
+      err.needsManualForward = true;
+      throw err;
+    }
+
+    // Step 3: Invia ordine (solo se i prodotti sono stati aggiunti)
+    logger.info(`📦 AW Step 3/3: Invio ordine ${awOrderId}`);
+    const submitResponse = await this.submitOrder(awOrderId);
+    logger.info(`✅ AW: Ordine ${awOrderId} inviato con successo`);
+
+    return submitResponse;
   }
 
   /**
@@ -324,7 +335,7 @@ class AWDropshipClient {
         }
       };
 
-      const response = await this._makeRequest('post', '/dropshipping/client/store', payload);
+      const response = await this._makeRequest('post', '/dropshipping/clients', payload);
       const client = response.data.data || response.data;
       logger.info(`AW: Cliente creato con ID ${client.id}`);
       return client;
@@ -372,6 +383,27 @@ class AWDropshipClient {
     } catch (error) {
       logger.error(`Errore AW getOrder (${orderId}):`, error.message);
       return null;
+    }
+  }
+
+  /**
+   * Lista ordini AW (per tracking batch)
+   * @returns {Promise<Array>}
+   */
+  async listOrders() {
+    if (this.isMockMode) {
+      return [];
+    }
+
+    try {
+      logger.info('🔄 AW Dropship: listOrders');
+      const response = await this._makeRequest('get', '/dropshipping/order', null, {
+        params: { per_page: 100 }
+      });
+      return response.data.data || [];
+    } catch (error) {
+      logger.error('❌ AW listOrders:', error.message);
+      return [];
     }
   }
 

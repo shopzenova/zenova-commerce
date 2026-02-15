@@ -363,6 +363,114 @@ class EmailService {
   }
 
   /**
+   * Invia email admin per inoltro manuale ordine AW
+   * Quando addTransaction fallisce (Server Error API), l'admin deve inoltrare manualmente su aiku.io
+   * @param {Object} order - Ordine dal DB
+   * @param {Array} items - Items da inoltrare (con product incluso)
+   * @param {string} errorMessage - Messaggio errore
+   * @returns {Promise<boolean>}
+   */
+  async sendAWManualForwardEmail(order, items, errorMessage) {
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+    const subject = `[ZENOVA] Ordine AW da inoltrare MANUALMENTE - ${order.orderNumber || order.id}`;
+
+    let shippingAddress = {};
+    try {
+      shippingAddress = JSON.parse(order.shippingAddress || '{}');
+    } catch (e) { /* ignore */ }
+
+    const itemRows = items.map(item => `
+      <tr>
+        <td style="padding: 10px; border-bottom: 1px solid #E8DCC4;">${item.product?.name || item.productName || 'N/A'}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #E8DCC4;">${item.productId || item.sku || 'N/A'}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #E8DCC4; text-align: center;">${item.quantity}</td>
+        <td style="padding: 10px; border-bottom: 1px solid #E8DCC4;">&euro;${(item.unitPrice || item.price || 0).toFixed(2)}</td>
+      </tr>
+    `).join('');
+
+    const html = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: 'Arial', sans-serif; color: #333; }
+          .container { max-width: 650px; margin: 0 auto; background: white; padding: 40px; }
+          .alert { background: #FFF3E0; border-left: 4px solid #FF9800; padding: 20px; margin: 20px 0; }
+          .details { background: #F5F5F5; padding: 20px; border-radius: 8px; margin: 20px 0; }
+          .label { font-weight: bold; color: #666; }
+          .error-msg { background: #FFEBEE; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 12px; margin: 10px 0; }
+          table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+          th { background: #8B6F47; color: white; padding: 10px; text-align: left; }
+          .steps { background: #E8F5E9; padding: 20px; border-radius: 8px; margin: 20px 0; }
+          .steps ol { margin: 10px 0; }
+          .steps li { margin: 8px 0; }
+          .button { display: inline-block; background: #8B6F47; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h2>Ordine AW da inoltrare manualmente</h2>
+
+          <div class="alert">
+            <strong>L'API AW (addTransaction) ha restituito un errore.</strong><br>
+            L'ordine e' stato creato vuoto su AW ma i prodotti non sono stati aggiunti automaticamente.<br>
+            <strong>Devi inoltrare i prodotti manualmente dal pannello AW.</strong>
+          </div>
+
+          <div class="details">
+            <p><span class="label">Ordine Zenova:</span> ${order.orderNumber || order.id}</p>
+            <p><span class="label">Cliente:</span> ${order.customerName || 'N/A'}</p>
+            <p><span class="label">Email:</span> ${order.customerEmail || 'N/A'}</p>
+            <p><span class="label">Telefono:</span> ${order.customerPhone || 'N/A'}</p>
+            <p><span class="label">Indirizzo:</span> ${shippingAddress.street || ''}, ${shippingAddress.city || ''} ${shippingAddress.postalCode || ''} ${shippingAddress.country || 'IT'}</p>
+            <p><span class="label">Totale ordine:</span> &euro;${(order.total || 0).toFixed(2)}</p>
+          </div>
+
+          <h3>Prodotti da ordinare su AW:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Prodotto</th>
+                <th>Codice</th>
+                <th>Qty</th>
+                <th>Prezzo</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemRows}
+            </tbody>
+          </table>
+
+          <div class="steps">
+            <h3>Istruzioni per inoltro manuale:</h3>
+            <ol>
+              <li>Vai su <a href="https://app.aiku.io" target="_blank">app.aiku.io</a> e accedi</li>
+              <li>Vai nella sezione <strong>Ordini Dropshipping</strong></li>
+              <li>Crea un nuovo ordine o cerca l'ordine vuoto appena creato</li>
+              <li>Aggiungi i prodotti elencati sopra con le quantita' indicate</li>
+              <li>Inserisci l'indirizzo di spedizione del cliente</li>
+              <li>Invia l'ordine</li>
+            </ol>
+            <a href="https://app.aiku.io" class="button" target="_blank">Apri Pannello AW</a>
+          </div>
+
+          <div class="error-msg">
+            <strong>Errore tecnico:</strong><br>
+            ${errorMessage}
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // Usa Resend se disponibile (Railway blocca SMTP)
+    if (process.env.RESEND_API_KEY) {
+      return this._sendViaResend(adminEmail, subject, html);
+    }
+    return this._sendEmail(adminEmail, subject, html);
+  }
+
+  /**
    * Invia email dal form contatti
    * @param {Object} params - Dati form contatto
    * @param {string} params.name - Nome mittente

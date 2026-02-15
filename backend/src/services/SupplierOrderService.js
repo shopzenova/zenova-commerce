@@ -247,6 +247,32 @@ class SupplierOrderService {
         return { success: true, orderId: awOrderId, attempt };
 
       } catch (error) {
+        // Se addTransaction fallisce (Server Error noto), salva ordine vuoto e notifica admin
+        if (error.needsManualForward && error.awOrderId) {
+          logger.warn(`⚠️ AW: addTransaction fallita per ordine ${orderNumber}, richiede inoltro manuale`);
+
+          await prisma.order.update({
+            where: { id: dbOrder.id },
+            data: {
+              awOrderId: String(error.awOrderId),
+              awStatus: 'manual_required',
+              supplierError: `AW: ${error.message}`,
+              supplierRetries: attempt
+            }
+          });
+
+          // Invia email admin con dettagli per inoltro manuale
+          await emailService.sendAWManualForwardEmail(dbOrder, items, error.message);
+
+          return {
+            success: false,
+            needsManualForward: true,
+            awOrderId: String(error.awOrderId),
+            error: error.message,
+            attempt
+          };
+        }
+
         logger.error(`❌ AW tentativo ${attempt}/${MAX_RETRIES} fallito: ${error.message}`);
 
         // Salva errore nel DB
