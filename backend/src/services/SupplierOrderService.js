@@ -277,8 +277,10 @@ class SupplierOrderService {
    */
   _guessSource(productId, sku) {
     const id = (productId || sku || '').toLowerCase();
-    if (id.startsWith('aw-') || id.startsWith('aw_')) return 'aw';
-    if (id.match(/^\d+$/) || id.startsWith('M') || id.startsWith('bb-')) return 'bigbuy';
+    // AW: prefissi aw-, aw_, awpfo-, fobp-, fobi-, fobc-, etc.
+    if (id.startsWith('aw-') || id.startsWith('aw_') || id.startsWith('awpfo-') || id.startsWith('fob')) return 'aw';
+    // BigBuy: numeri puri, M-prefix (profumi), bb-, S/V prefix
+    if (id.match(/^\d+$/) || id.startsWith('m') || id.startsWith('bb-') || id.startsWith('s') || id.startsWith('v')) return 'bigbuy';
     return 'unknown';
   }
 
