@@ -204,25 +204,9 @@ class SupplierOrderService {
       customerClientId = awClient.id;
       logger.info(`AW: Cliente creato ID ${customerClientId} per ordine ${orderNumber}`);
     } catch (clientError) {
-      // Fallback: usa il client Zenova principale (ID numerico!)
-      // Prende dalla lista clienti il primo disponibile, oppure usa env var
-      logger.warn(`AW: creazione cliente fallita: ${clientError.message}, cerco client esistente...`);
-      try {
-        const clients = await awDropship.getClients();
-        if (clients.length > 0) {
-          customerClientId = clients[0].id;
-          logger.info(`AW: Uso client esistente ID ${customerClientId} (${clients[0].name})`);
-        }
-      } catch (e) {
-        logger.error(`AW: getClients fallito: ${e.message}`);
-      }
-
-      if (!customerClientId) {
-        const errMsg = `AW: impossibile creare o trovare cliente - ${clientError.message}`;
-        logger.error(errMsg);
-        await emailService.sendSupplierOrderError(dbOrder, 'aw', errMsg, 0);
-        return { success: false, error: errMsg };
-      }
+      // Fallback: usa il client Zenova principale (ID numerico)
+      customerClientId = parseInt(process.env.AW_DEFAULT_CLIENT_ID) || 167812;
+      logger.warn(`AW: creazione cliente fallita (${clientError.message}), uso default ID ${customerClientId}`);
     }
 
     const awPayload = {
