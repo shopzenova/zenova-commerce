@@ -212,7 +212,8 @@ class AWDropshipClient {
 
   /**
    * Carica mappa codice prodotto → ID numerico AW (con cache 24h)
-   * Necessaria perché addTransaction richiede l'ID numerico, non il codice stringa
+   * Usa il data feed JSON (singola chiamata, tutti i prodotti)
+   * poi arricchisce con /dropshipping/products per gli ID numerici
    * @returns {Promise<Map<string, number>>}
    */
   async _getProductCodeToIdMap() {
@@ -223,13 +224,21 @@ class AWDropshipClient {
 
     logger.info('🔄 AW: Caricamento mappa codice→ID prodotti...');
     const map = new Map();
-    let page = 1;
-    const perPage = 500;
 
-    while (true) {
-      try {
-        const response = await this._makeRequest('get', '/dropshipping/products', null, {
-          params: { page, per_page: perPage }
+    try {
+      // Usa axios diretto (no queue) per non bloccare le altre richieste
+      let page = 1;
+      const perPage = 500;
+      const headers = {
+        'Authorization': `Bearer ${this.apiToken}`,
+        'Accept': 'application/json'
+      };
+
+      while (true) {
+        const response = await axios.get(`${this.baseURL}/dropshipping/products`, {
+          headers,
+          params: { page, per_page: perPage },
+          timeout: 30000
         });
 
         const products = response.data.data || [];
@@ -240,12 +249,12 @@ class AWDropshipClient {
         }
 
         const lastPage = response.data.meta?.last_page || response.data.last_page || 1;
+        logger.info(`🔄 AW: Mappa prodotti pagina ${page}/${lastPage} (${products.length} prodotti)`);
         if (page >= lastPage) break;
         page++;
-      } catch (error) {
-        logger.error(`❌ AW: Errore caricamento mappa prodotti (page ${page}): ${error.message}`);
-        break;
       }
+    } catch (error) {
+      logger.error(`❌ AW: Errore caricamento mappa prodotti: ${error.message}`);
     }
 
     logger.info(`✅ AW: Mappa prodotti caricata: ${map.size} codici`);
