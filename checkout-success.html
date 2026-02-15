@@ -158,15 +158,41 @@
     </footer>
 
     <script>
-        // Extract order number from URL
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const sessionId = urlParams.get('session_id');
+        // API Configuration
+        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = IS_LOCAL ? 'http://localhost:3000/api' : 'https://zenova-commerce-production.up.railway.app/api';
 
-            if (sessionId) {
-                // Generate a readable order number from session ID
-                const orderNumber = `ZN-${sessionId.substring(sessionId.length - 8).toUpperCase()}`;
-                document.getElementById('orderNumber').textContent = `Numero ordine: #${orderNumber}`;
+        document.addEventListener('DOMContentLoaded', async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token'); // PayPal order ID
+            const payerId = urlParams.get('PayerID');
+
+            if (token) {
+                // PayPal flow: capture the payment
+                const orderNumberEl = document.getElementById('orderNumber');
+                orderNumberEl.textContent = 'Elaborazione pagamento in corso...';
+
+                try {
+                    const response = await fetch(`${API_BASE}/paypal/capture-order`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ orderId: token })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        const orderNum = result.data.dbOrderId || token.substring(0, 13);
+                        orderNumberEl.textContent = `Numero ordine: #${orderNum}`;
+                        console.log('✅ Pagamento catturato:', result.data);
+                    } else {
+                        orderNumberEl.textContent = 'Pagamento in verifica...';
+                        console.error('❌ Errore cattura:', result.error);
+                    }
+                } catch (error) {
+                    orderNumberEl.textContent = 'Pagamento in verifica...';
+                    console.error('❌ Errore:', error);
+                }
             }
 
             // Clear cart
