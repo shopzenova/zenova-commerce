@@ -132,7 +132,7 @@ class AWDropshipClient {
       logger.info(`🔄 AW Dropship: getProducts (page=${page}, perPage=${perPage})`);
 
       const response = await this._makeRequest('get', '/dropshipping/products', null, {
-        params: { page, per_page: perPage, sort: 'name', ...filters }
+        params: { page, per_page: perPage, sort: 'code', ...filters }
       });
 
       const result = {
@@ -222,20 +222,22 @@ class AWDropshipClient {
       return this._productCodeToIdMap;
     }
 
-    logger.info('🔄 AW: Caricamento mappa codice→ID prodotti...');
+    logger.info('🔄 AW: Caricamento mappa codice→ID dal portfolio (my-products)...');
     const map = new Map();
 
     try {
-      // Usa axios diretto (no queue) per non bloccare le altre richieste
-      let page = 1;
-      const perPage = 500;
+      // Usa /dropshipping/products/my-products (portfolio attivo)
+      // Questo endpoint restituisce i prodotti con my_product_id necessario per creare ordini
       const headers = {
         'Authorization': `Bearer ${this.apiToken}`,
         'Accept': 'application/json'
       };
 
+      let page = 1;
+      const perPage = 200;
+
       while (true) {
-        const response = await axios.get(`${this.baseURL}/dropshipping/products`, {
+        const response = await axios.get(`${this.baseURL}/dropshipping/products/my-products`, {
           headers,
           params: { page, per_page: perPage },
           timeout: 30000
@@ -249,15 +251,15 @@ class AWDropshipClient {
         }
 
         const lastPage = response.data.meta?.last_page || response.data.last_page || 1;
-        logger.info(`🔄 AW: Mappa prodotti pagina ${page}/${lastPage} (${products.length} prodotti)`);
+        logger.info(`🔄 AW: Portfolio pagina ${page}/${lastPage} (${products.length} prodotti)`);
         if (page >= lastPage) break;
         page++;
       }
     } catch (error) {
-      logger.error(`❌ AW: Errore caricamento mappa prodotti: ${error.message}`);
+      logger.error(`❌ AW: Errore caricamento mappa portfolio: ${error.message}`);
     }
 
-    logger.info(`✅ AW: Mappa prodotti caricata: ${map.size} codici`);
+    logger.info(`✅ AW: Mappa portfolio caricata: ${map.size} codici`);
     this._productCodeToIdMap = map;
     this._productCodeToIdMapTimestamp = Date.now();
     return map;

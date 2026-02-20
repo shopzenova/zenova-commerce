@@ -94,12 +94,23 @@ router.post('/create-order', async (req, res) => {
     const ppTotal = ppSubtotal + ppShipping;
     const ppVatAmount = Math.round((ppTotal - (ppTotal / 1.22)) * 100) / 100;
 
+    // Build proper address object from flat customer fields
+    const customerAddress = (typeof customer.address === 'object' && customer.address !== null && !Array.isArray(customer.address))
+      ? customer.address
+      : {
+          street: customer.address || '',
+          city: customer.city || '',
+          postalCode: customer.postalCode || '',
+          province: customer.province || '',
+          country: customer.country || 'IT'
+        };
+
     const order = await orderService.createOrder({
       customer: {
         name: customer.name,
         email: customer.email,
         phone: customer.phone,
-        address: customer.address || {}
+        address: customerAddress
       },
       items: items,
       totals: {

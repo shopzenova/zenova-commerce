@@ -215,6 +215,7 @@ class SupplierOrderService {
         // Rimuovi prefisso "aw-" dal productId (il catalogo AW usa codici senza prefisso)
         let code = item.productId || item.sku || '';
         code = code.replace(/^aw-/i, '');
+        logger.info(`📦 AW: Item ${item.productName || item.productId} → codice "${code}"`);
         return { portfolioId: code, quantity: item.quantity };
       })
     };
