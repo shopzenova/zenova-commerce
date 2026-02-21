@@ -1,6 +1,17 @@
-/* Hide Google Translate logo */
-.goog-logo-link, .goog-te-gadget > span {
+/* Hide Google Translate logo and branding */
+.goog-logo-link,
+.goog-te-gadget > span,
+.goog-te-gadget-icon,
+#google_translate_element img,
+.goog-te-gadget .goog-te-gadget-simple .goog-te-gadget-icon {
     display: none !important;
+}
+.goog-te-gadget-simple {
+    background: transparent !important;
+    border: none !important;
+}
+.goog-te-gadget a {
+    color: #8B6914 !important;
 }
 
 /* Reset & Base Styles */
