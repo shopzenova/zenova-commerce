@@ -1,3 +1,8 @@
+/* Hide Google Translate logo */
+.goog-logo-link, .goog-te-gadget > span {
+    display: none !important;
+}
+
 /* Reset & Base Styles */
 * {
     margin: 0;
