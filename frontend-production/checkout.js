@@ -200,6 +200,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('✅ Dati spedizione OK, preparo carrello...');
 
+            // *** CHECK MIN QUANTITY ***
+            const minQtyViolations = cart.filter(item => {
+                const minQty = item.minQuantity || 1;
+                return item.quantity < minQty;
+            });
+            if (minQtyViolations.length > 0) {
+                const msgs = minQtyViolations.map(p => `${p.name}: minimo ${p.minQuantity} pz`).join('\n');
+                alert(`Quantità insufficiente:\n\n${msgs}\n\nModifica le quantità nel carrello.`);
+                paypalRedirectButton.disabled = false;
+                paypalRedirectButton.textContent = 'Paga con PayPal';
+                return;
+            }
+
             // *** CHECK STOCK AVAILABILITY ***
             console.log('📦 Verifica disponibilità prodotti...');
             const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);

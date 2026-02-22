@@ -396,6 +396,19 @@
                         <ul id="productDetailFeatures"></ul>
                     </div>
 
+                    <!-- Quantity Selector -->
+                    <div class="modal-quantity-section" id="modalQuantitySection">
+                        <div class="modal-min-quantity-notice" id="modalMinQuantityNotice" style="display: none;"></div>
+                        <div class="modal-quantity-selector">
+                            <label>Quantità:</label>
+                            <div class="modal-qty-controls">
+                                <button class="modal-qty-btn" id="modalQtyMinus">-</button>
+                                <input type="number" class="modal-qty-input" id="modalQtyInput" value="1" min="1">
+                                <button class="modal-qty-btn" id="modalQtyPlus">+</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Actions -->
                     <div class="product-detail-actions">
                         <button class="product-detail-add-btn" id="productDetailAddBtn">

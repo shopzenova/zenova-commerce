@@ -26,6 +26,7 @@ model Product {
   originalPrice      Decimal?  @map("original_price") @db.Decimal(10, 2)
   wholesalePrice     Decimal?  @map("wholesale_price") @db.Decimal(10, 2)
   stock              Int       @default(0)
+  minQuantity        Int?      @map("min_quantity") @default(1)
   images             String[]  // Array di URL immagini
   image              String?   // Immagine principale
   ean                String?

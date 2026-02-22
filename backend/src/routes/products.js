@@ -318,6 +318,7 @@ router.get('/', async (req, res) => {
       source: p.source || 'bigbuy',
       bigbuyId: p.bigbuyId || (p.source === 'bigbuy' ? p.id : null),
       awId: p.awId || (p.source === 'aw' ? p.id : null),
+      minQuantity: p.minQuantity || 1,
       active: true
     }));
 

@@ -1233,17 +1233,19 @@ function renderProductsByCategory(searchTerm) {
 window.renderProductsByCategory = renderProductsByCategory;
 
 // Add to Cart
-function addToCart(productId) {
+function addToCart(productId, qty) {
     const productsArray = products.length > 0 ? products : (window.products || []);
     const product = productsArray.find(p => p.id === productId);
+    const minQty = (product && product.minQuantity) ? product.minQuantity : 1;
+    const addQty = qty || minQty;
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += addQty;
     } else {
         cart.push({
             ...product,
-            quantity: 1
+            quantity: addQty
         });
     }
 
@@ -1263,9 +1265,19 @@ function removeFromCart(productId) {
 function updateQuantity(productId, change) {
     const item = cart.find(item => item.id === productId);
     if (item) {
+        const minQty = item.minQuantity || 1;
         item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(productId);
+        if (item.quantity < minQty) {
+            if (change < 0 && item.quantity <= 0) {
+                removeFromCart(productId);
+            } else {
+                item.quantity = minQty;
+                saveCart();
+                updateCart();
+                if (minQty > 1) {
+                    showNotification(`Quantità minima: ${minQty} pezzi`);
+                }
+            }
         } else {
             saveCart();
             updateCart();
@@ -1301,12 +1313,16 @@ function updateCart() {
                 imageHtml = '📦';
             }
 
+            const itemMinQty = item.minQuantity || 1;
+            const minQtyNotice = itemMinQty > 1 ? `<div class="cart-min-qty-notice">Min: ${itemMinQty} pz</div>` : '';
+
             return `
                 <div class="cart-item">
                     <div class="cart-item-image">${imageHtml}</div>
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-item-price">€${(item.price || 0).toFixed(2)}</div>
+                        ${minQtyNotice}
                         <div class="cart-item-quantity">
                             <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
                             <span>${item.quantity}</span>
@@ -2217,6 +2233,23 @@ function openProductDetailModal(productId) {
     const featuresList = document.getElementById('productDetailFeatures');
     featuresList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
 
+    // Setup quantity selector in modal
+    const minQty = product.minQuantity || 1;
+    const qtyInput = document.getElementById('modalQtyInput');
+    const minNotice = document.getElementById('modalMinQuantityNotice');
+    if (qtyInput) {
+        qtyInput.value = minQty;
+        qtyInput.min = minQty;
+    }
+    if (minNotice) {
+        if (minQty > 1) {
+            minNotice.textContent = `Quantità minima: ${minQty} pezzi`;
+            minNotice.style.display = 'block';
+        } else {
+            minNotice.style.display = 'none';
+        }
+    }
+
     // Update wishlist button state
     updateWishlistButtonInModal();
 
@@ -2510,10 +2543,40 @@ function setupProductDetailModal() {
         }
     });
 
+    // Modal quantity buttons
+    const modalQtyMinus = document.getElementById('modalQtyMinus');
+    const modalQtyPlus = document.getElementById('modalQtyPlus');
+    const modalQtyInput = document.getElementById('modalQtyInput');
+
+    if (modalQtyMinus) {
+        modalQtyMinus.addEventListener('click', () => {
+            const min = parseInt(modalQtyInput.min) || 1;
+            let val = parseInt(modalQtyInput.value) || min;
+            if (val > min) {
+                modalQtyInput.value = val - 1;
+            }
+        });
+    }
+    if (modalQtyPlus) {
+        modalQtyPlus.addEventListener('click', () => {
+            let val = parseInt(modalQtyInput.value) || 1;
+            modalQtyInput.value = val + 1;
+        });
+    }
+    if (modalQtyInput) {
+        modalQtyInput.addEventListener('change', () => {
+            const min = parseInt(modalQtyInput.min) || 1;
+            let val = parseInt(modalQtyInput.value) || min;
+            if (val < min) modalQtyInput.value = min;
+        });
+    }
+
     // Add to cart button
     addBtn.addEventListener('click', () => {
         if (currentProductId) {
-            addToCart(currentProductId);
+            const qtyInput = document.getElementById('modalQtyInput');
+            const qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+            addToCart(currentProductId, qty);
             closeProductDetailModal();
             showNotification('Prodotto aggiunto al carrello!');
         }

@@ -34,6 +34,33 @@ router.post('/create-order', async (req, res) => {
 
     logger.info(`📦 Creazione ordine PayPal per ${customer.email}, ${items.length} prodotti`);
 
+    // Validazione minQuantity dal DB
+    try {
+      const { PrismaClient: PrismaClientMQ } = require('@prisma/client');
+      const prismaMQ = new PrismaClientMQ();
+      const productIds = items.map(item => item.productId).filter(Boolean);
+      const dbProducts = await prismaMQ.product.findMany({
+        where: { id: { in: productIds } },
+        select: { id: true, name: true, minQuantity: true }
+      });
+      await prismaMQ.$disconnect();
+
+      for (const item of items) {
+        const dbProduct = dbProducts.find(p => p.id === item.productId);
+        const minQty = dbProduct?.minQuantity || 1;
+        if (item.quantity < minQty) {
+          logger.warn(`minQuantity violation: ${item.productId} qty=${item.quantity} min=${minQty}`);
+          return res.status(400).json({
+            success: false,
+            error: `Quantità minima per "${item.name}": ${minQty} pezzi`,
+            productId: item.productId
+          });
+        }
+      }
+    } catch (mqError) {
+      logger.warn(`Validazione minQuantity fallita (ordine procede): ${mqError.message}`);
+    }
+
     // Verifica stock (best-effort: se API fallisce, ordine passa comunque)
     try {
       const bigbuyItems = items.filter(item => item.source === 'bigbuy');
