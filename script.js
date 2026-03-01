@@ -1697,7 +1697,7 @@ function updateCart() {
     cartTotal.textContent = `€${total.toFixed(2)}`;
 
     // Avviso ordine minimo €15
-    const checkoutBtn = document.getElementById('checkoutBtn');
+    const checkoutBtn = document.querySelector('.btn-checkout');
     let minOrderWarning = document.getElementById('minOrderWarning');
     if (!minOrderWarning) {
         minOrderWarning = document.createElement('div');
