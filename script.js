@@ -1113,9 +1113,10 @@ function createProductCard(product) {
             <h3 class="product-name">${product.name}</h3>
             <div class="product-footer">
                 <span class="product-price">€${productPrice}</span>
-                <button class="add-to-cart-btn" data-product-id="${product.id}">
-                    Aggiungi al carrello
-                </button>
+                ${(product.stock === 0 || product.available === false) ?
+                    `<button class="add-to-cart-btn" disabled style="opacity:0.5;cursor:not-allowed;background:#ccc;color:#666;">Non disponibile</button>` :
+                    `<button class="add-to-cart-btn" data-product-id="${product.id}">Aggiungi al carrello</button>`
+                }
             </div>
         </div>
     `;
