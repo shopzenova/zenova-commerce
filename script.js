@@ -1133,7 +1133,7 @@ function createProductCard(product) {
 
     cartBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        addToCart(product.id);
+        if (!cartBtn.disabled) addToCart(product.id);
     });
 
     // Open product detail modal when clicking on card
@@ -2600,6 +2600,17 @@ function openProductDetailModal(productId) {
             stockElement.textContent = '✓ Disponibile';
             stockElement.className = 'product-stock';
         }
+    }
+
+    // Disabilita bottone carrello nel modale se prodotto non disponibile
+    const detailAddBtn = document.getElementById('productDetailAddBtn');
+    if (detailAddBtn) {
+        const notAvailable = product.stock === 0 || product.available === false;
+        detailAddBtn.disabled = notAvailable;
+        detailAddBtn.textContent = notAvailable ? 'Non disponibile' : 'Aggiungi al carrello';
+        detailAddBtn.style.opacity = notAvailable ? '0.5' : '1';
+        detailAddBtn.style.cursor = notAvailable ? 'not-allowed' : 'pointer';
+        detailAddBtn.style.background = notAvailable ? '#ccc' : '';
     }
 
     // Description
