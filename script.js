@@ -568,7 +568,7 @@ function mapBackendProductToFrontend(backendProduct) {
         name: backendProduct.name,
         category: category,
         subcategory: subcategory,
-        price: backendProduct.retailPrice || backendProduct.price || 0,
+        price: backendProduct.price || backendProduct.retailPrice || 0,
         description: backendProduct.description || '',
         icon: icon,
         image: imageUrl,
