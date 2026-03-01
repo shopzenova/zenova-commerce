@@ -200,6 +200,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('✅ Dati spedizione OK, preparo carrello...');
 
+            // *** CHECK ORDINE MINIMO €15 ***
+            const subtotaleOrdine = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (subtotaleOrdine < 15) {
+                alert(`❌ Ordine minimo €15.00\n\nIl tuo carrello è di €${subtotaleOrdine.toFixed(2)}.\nAggiungi altri prodotti per procedere.`);
+                paypalRedirectButton.disabled = false;
+                paypalRedirectButton.textContent = 'Paga con PayPal';
+                return;
+            }
+
             // *** CHECK STOCK AVAILABILITY ***
             console.log('📦 Verifica disponibilità prodotti...');
             const unavailableProducts = cart.filter(item => !item.stock || item.stock <= 0 || item.stock < item.quantity);
