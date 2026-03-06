@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error('❌ Errore creazione ordine PayPal:', error);
-            alert('Errore durante la creazione dell\'ordine. Riprova.');
+            alert(error.message || 'Errore durante la creazione dell\'ordine. Riprova.');
 
             // Re-enable button
             paypalRedirectButton.disabled = false;
@@ -414,8 +414,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (paymentCard) paymentCard.classList.remove('hidden');
             if (confirmationCard) confirmationCard.classList.add('hidden');
 
-            // Initialize Stripe
-            initializeStripe();
+            // Initialize Stripe (disabled)
+            if (typeof initializeStripe === 'function') initializeStripe();
 
             // Mount Stripe card element if not already mounted
             if (!cardElementMounted && cardElement) {
