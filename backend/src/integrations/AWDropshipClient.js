@@ -85,7 +85,9 @@ class AWDropshipClient {
   }
 
   async _makeRequest(method, url, data = null, config = {}) {
-    return this.requestQueue = this.requestQueue.then(async () => {
+    // Esegui la richiesta in coda — ma aggiorna la coda con una promise
+    // che NON rigetta, così un errore non rompe le chiamate successive
+    const requestPromise = this.requestQueue.then(async () => {
       await this._waitForRateLimit();
 
       try {
@@ -108,6 +110,11 @@ class AWDropshipClient {
         throw error;
       }
     });
+
+    // La coda non deve rompersi se una singola richiesta fallisce
+    this.requestQueue = requestPromise.catch(() => {});
+
+    return requestPromise;
   }
 
   // ===== PRODOTTI =====
