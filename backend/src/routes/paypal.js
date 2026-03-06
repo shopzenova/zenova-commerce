@@ -3,6 +3,7 @@ const router = express.Router();
 const paypalService = require('../../services/paypalService');
 const bigbuy = require('../integrations/BigBuyClient'); // Già singleton
 const AWDropshipClient = require('../integrations/AWDropshipClient');
+const emailService = require('../integrations/EmailService');
 const orderService = require('../services/OrderService');
 const supplierOrderService = require('../services/SupplierOrderService');
 const logger = require('../utils/logger');
@@ -211,7 +212,8 @@ router.post('/capture-order', async (req, res) => {
     const prisma = new PrismaClient();
 
     const dbOrder = await prisma.order.findFirst({
-      where: { stripeSessionId: orderId }
+      where: { stripeSessionId: orderId },
+      include: { items: true }
     });
 
     let orderNumber = null;
@@ -224,6 +226,22 @@ router.post('/capture-order', async (req, res) => {
       });
       orderNumber = dbOrder.orderNumber;
       logger.info(`✅ Ordine ${orderNumber} aggiornato a processing`);
+
+      // Invia email conferma al cliente (async, non blocca)
+      emailService.sendOrderConfirmation({
+        orderNumber: dbOrder.orderNumber,
+        customerName: dbOrder.customerName,
+        customerEmail: dbOrder.customerEmail,
+        items: (dbOrder.items || []).map(item => ({
+          productName: item.productName,
+          quantity: item.quantity,
+          unitPrice: parseFloat(item.unitPrice),
+          totalPrice: parseFloat(item.unitPrice) * item.quantity
+        })),
+        total: parseFloat(dbOrder.total),
+        vatAmount: dbOrder.vatAmount ? parseFloat(dbOrder.vatAmount) : null
+      }).then(() => logger.info(`📧 Email conferma inviata a ${dbOrder.customerEmail}`))
+        .catch(err => logger.error(`❌ Errore email conferma: ${err.message}`));
 
       // Inoltra ordine ai fornitori (async, non blocca la risposta)
       supplierOrderService.forwardToSupplier(dbOrder)
