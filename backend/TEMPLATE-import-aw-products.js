@@ -64,15 +64,19 @@ fs.createReadStream(CSV_FILE)
       // Usa la descrizione completa dal CSV se disponibile
       const description = descriptionPlain || `${DESCRIZIONE_DEFAULT} ${name}.`;
 
+      // Formula prezzi definitiva: retailPrice = wholesale × 1.50 + €3
+      const retailPrice = Math.round((costPrice * 1.50 + 3) * 100) / 100;
+
       // Crea prodotto
       const newProduct = {
         id: sku,
         sku: sku,
         name: name,
         description: description,
-        price: rrpPrice,
-        originalPrice: rrpPrice,
-        costPrice: costPrice,
+        price: costPrice,           // wholesale AW (costo)
+        retailPrice: retailPrice,   // prezzo di vendita (usato dal frontend)
+        wholesalePrice: costPrice,
+        originalPrice: retailPrice,
         images: imageUrls,
         mainImage: imageUrls[0] || '',
         category: 'natural-wellness',
@@ -96,7 +100,7 @@ fs.createReadStream(CSV_FILE)
       importedCount++;
 
       console.log(`✅ ${sku}: ${name}`);
-      console.log(`   💰 Prezzo: €${rrpPrice.toFixed(2)} (RRP) | Costo: €${costPrice.toFixed(2)}`);
+      console.log(`   💰 Wholesale: €${costPrice.toFixed(2)} | Vendita: €${retailPrice.toFixed(2)} (×1.50 +€3)`);
       console.log(`   📦 Stock: ${stock} unità`);
       console.log(`   🖼️  Immagini: ${imageUrls.length}`);
       console.log('');
