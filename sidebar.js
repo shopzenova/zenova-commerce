@@ -247,6 +247,12 @@ const subcategoryToCategoryMap = {
     'wireless': 'home-ambience',
     'smart-led-illuminazione': 'home-ambience',
     'domotica-smart-home': 'home-ambience',
+    'lampade-sale': 'home-ambience',
+    'portacandele-vetro': 'home-ambience',
+    'portacandele-selenite': 'home-ambience',
+    'lampade-selenite': 'home-ambience',
+    'cupole-luminose': 'home-ambience',
+    'lampade-touch': 'home-ambience',
     '2399': 'home-ambience',
     '2399,2400,2421': 'home-ambience',
     '2609': 'home-ambience',
@@ -263,6 +269,7 @@ const subcategoryToCategoryMap = {
     // MASSAGGIO E BENESSERE
     'set-massaggio': 'massaggio-benessere',
     'cuscini-terapeutici': 'massaggio-benessere',
+    'rulli-viso': 'massaggio-benessere',
 
     // NATURAL WELLNESS - AW Dropship
     'oli-essenziali': 'natural-wellness',
@@ -279,6 +286,9 @@ const subcategoryToCategoryMap = {
     'incenso-riflusso': 'natural-wellness',
     'incenso-coni': 'natural-wellness',
     'portacandele': 'natural-wellness',
+    'wax-melts': 'natural-wellness',
+    'bruciatori-buddha': 'natural-wellness',
+    'buddha-collezione': 'natural-wellness',
     'kit-benessere-cofanetti-regalo': 'natural-wellness',
     'wellness': 'natural-wellness'
 };
