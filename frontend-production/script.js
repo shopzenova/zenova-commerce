@@ -759,7 +759,11 @@ window.autoOpenCategoryFromHash = function() {
     // Filter by subcategory if present
     if (subcategory) {
         console.log('📂 Filtering products for subcategory:', subcategory);
-        filterProductsBySubcategory(subcategory);
+        if (typeof window.renderProductsByCategory === 'function') {
+            window.renderProductsByCategory(subcategory);
+        } else {
+            filterProductsBySubcategory(subcategory);
+        }
     }
 
     // Open product modal if productId present
