@@ -4658,6 +4658,41 @@ body.dark-mode .vetrina-2 {
     background: linear-gradient(180deg, rgba(42, 37, 32, 0.5) 0%, rgba(42, 37, 32, 0.8) 100%);
 }
 
+/* Vetrina: bottone carrello solo icona, nessun sfondo */
+.vetrina-grid .add-to-cart-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    padding: 0;
+    font-size: 0;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.vetrina-grid .add-to-cart-btn:hover {
+    background: transparent;
+    transform: scale(1.15);
+    box-shadow: none;
+}
+
+.vetrina-grid .add-to-cart-btn::before {
+    content: "🛒";
+    font-size: 1.4rem;
+    display: block;
+}
+
+.vetrina-grid .add-to-cart-btn[disabled] {
+    background: transparent;
+    opacity: 0.4;
+}
+
+.vetrina-grid .add-to-cart-btn[disabled]::before {
+    content: "✕";
+    font-size: 1rem;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
     .vetrina-title {
