@@ -794,6 +794,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             setTimeout(() => {
                 window.showSearchResultsInGrid(searchQuery);
             }, 100);
+        } else if (window.location.hash) {
+            // Hash presente: renderizza subito i prodotti della sottocategoria
+            // Evita race condition con requestIdleCallback di renderProducts()
+            const hashSubcat = window.location.hash.substring(1).split('&')[0];
+            console.log('🔗 Hash trovato al caricamento:', hashSubcat);
+            if (hashSubcat) renderProductsByCategory(hashSubcat);
         } else {
             renderProducts();
         }
@@ -825,7 +831,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Apply hash-based filtering AFTER products are rendered
         if (typeof window.autoOpenCategoryFromHash === 'function' && window.location.hash) {
-            console.log('🎯 Calling autoOpenCategoryFromHash after products loaded');
+            console.log('🎯 Calling autoOpenCategoryFromHash (sidebar only) after products loaded');
             window.autoOpenCategoryFromHash();
         } else {
             // Se non c'è un hash nell'URL, applica il filtro "Tutti i Prodotti" (4 per categoria)

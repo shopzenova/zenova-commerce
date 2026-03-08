@@ -616,7 +616,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (productsGrid) {
         // We're on prodotti.html - render all products
         console.log('📄 Detected prodotti.html - rendering all products');
-        renderProducts();
+        if (window.location.hash) {
+            // Hash presente: renderizza subito i prodotti della sottocategoria
+            const hashSubcat = window.location.hash.substring(1).split('&')[0];
+            console.log('🔗 Hash trovato al caricamento:', hashSubcat);
+            if (hashSubcat) renderProductsByCategory(hashSubcat);
+        } else {
+            renderProducts();
+        }
     } else {
         // We're on index.html - render only featured
         renderFeaturedProducts();
@@ -645,7 +652,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Apply hash-based filtering AFTER products are rendered
         if (typeof window.autoOpenCategoryFromHash === 'function' && window.location.hash) {
-            console.log('🎯 Calling autoOpenCategoryFromHash after products loaded');
+            console.log('🎯 Calling autoOpenCategoryFromHash (sidebar only) after products loaded');
             window.autoOpenCategoryFromHash();
         } else {
             // Se non c'è un hash nell'URL, applica il filtro "Tutti i Prodotti" (4 per categoria)
