@@ -675,34 +675,40 @@ window.autoOpenCategoryFromHash = function() {
         }
     }
 
-    // Map subcategories to main categories
+    // Map subcategories to main categories (allineato con sidebar prodotti.html)
     const subcategoryToCategory = {
-        // Smart Living
-        'smart-led': 'smart-living',
-        'smart-led-illuminazione': 'smart-living',
-        'domotica': 'smart-living',
-        'domotica-smart-home': 'smart-living',
-        // Beauty
-        'makeup': 'beauty',
-        'skincare': 'beauty',
-        'profumi': 'beauty',
-        'corpo': 'beauty',
-        // Health & Personal Care
-        'hair-care': 'health-personal-care',
-        'barba': 'health-personal-care',
-        'massaggio-benessere': 'health-personal-care',
-        'protezione-solare': 'health-personal-care',
-        // Tech Innovation
-        'gadget-tech': 'tech-innovation',
+        // Home Ambience
+        'smart-led': 'home-ambience',
+        'smart-led-illuminazione': 'home-ambience',
+        'domotica': 'home-ambience',
+        'domotica-smart-home': 'home-ambience',
+        'lampade-sale': 'home-ambience',
+        'portacandele-vetro': 'home-ambience',
+        'portacandele-selenite': 'home-ambience',
+        'lampade-selenite': 'home-ambience',
+        'cupole-luminose': 'home-ambience',
+        'lampade-touch': 'home-ambience',
+        // Profumi e Fragranze
+        'profumi-donne': 'profumi-fragranze',
+        'profumi-uomini': 'profumi-fragranze',
+        // Massaggio e Benessere
+        'set-massaggio': 'massaggio-benessere',
+        'cuscini-terapeutici': 'massaggio-benessere',
+        'rulli-viso': 'massaggio-benessere',
         // Natural Wellness
         'oli-essenziali': 'natural-wellness',
         'oli-per-fragranza': 'natural-wellness',
+        'candele-profumate': 'natural-wellness',
         'candele-gel-profumati-sali-bagno': 'natural-wellness',
         'diffusori-aromatici': 'natural-wellness',
         'diffusori-oli': 'natural-wellness',
+        'wax-melts': 'natural-wellness',
         'pietre-preziose': 'natural-wellness',
+        'bruciatori-buddha': 'natural-wellness',
+        'buddha-collezione': 'natural-wellness',
         'incenso': 'natural-wellness',
-        'vestiario-wellness': 'natural-wellness'
+        'vestiario-wellness': 'natural-wellness',
+        'kit-benessere-cofanetti-regalo': 'natural-wellness'
     };
 
     // Open the parent category in sidebar if subcategory is present

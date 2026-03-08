@@ -862,12 +862,19 @@ window.autoOpenCategoryFromHash = function() {
         'smart-led-illuminazione': 'home-ambience',
         'domotica': 'home-ambience',
         'domotica-smart-home': 'home-ambience',
+        'lampade-sale': 'home-ambience',
+        'portacandele-vetro': 'home-ambience',
+        'portacandele-selenite': 'home-ambience',
+        'lampade-selenite': 'home-ambience',
+        'cupole-luminose': 'home-ambience',
+        'lampade-touch': 'home-ambience',
         // Profumi e Fragranze
         'profumi-donne': 'profumi-fragranze',
         'profumi-uomini': 'profumi-fragranze',
         // Massaggio e Benessere
         'set-massaggio': 'massaggio-benessere',
         'cuscini-terapeutici': 'massaggio-benessere',
+        'rulli-viso': 'massaggio-benessere',
         // Natural Wellness
         'oli-essenziali': 'natural-wellness',
         'oli-per-fragranza': 'natural-wellness',
@@ -875,7 +882,10 @@ window.autoOpenCategoryFromHash = function() {
         'candele-gel-profumati-sali-bagno': 'natural-wellness',
         'diffusori-aromatici': 'natural-wellness',
         'diffusori-oli': 'natural-wellness',
+        'wax-melts': 'natural-wellness',
         'pietre-preziose': 'natural-wellness',
+        'bruciatori-buddha': 'natural-wellness',
+        'buddha-collezione': 'natural-wellness',
         'incenso': 'natural-wellness',
         'vestiario-wellness': 'natural-wellness',
         'kit-benessere-cofanetti-regalo': 'natural-wellness'
