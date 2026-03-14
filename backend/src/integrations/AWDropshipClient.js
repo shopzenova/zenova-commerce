@@ -306,7 +306,7 @@ class AWDropshipClient {
       };
     }
 
-    const { customerClientId, items } = orderData;
+    const { customerClientId, items, deliveryAddress } = orderData;
 
     if (!customerClientId) {
       throw new Error('AW: customerClientId richiesto per creare ordine');
@@ -324,6 +324,11 @@ class AWDropshipClient {
     const awOrder = createResponse.data.data || createResponse.data;
     const awOrderId = awOrder.id;
     logger.info(`✅ AW: Ordine vuoto creato con ID ${awOrderId}`);
+
+    // Step 1b: Aggiorna delivery address con indirizzo reale del cliente (se fornito)
+    if (deliveryAddress && deliveryAddress.street) {
+      await this.updateDeliveryAddress(awOrderId, deliveryAddress);
+    }
 
     // Step 2: Aggiungi prodotti (usa ID numerico, non codice stringa)
     for (const item of items) {
@@ -362,6 +367,32 @@ class AWDropshipClient {
     } catch (error) {
       logger.error(`❌ AW addTransaction (order=${orderId}, portfolio=${portfolioId}):`, error.message);
       throw error;
+    }
+  }
+
+  /**
+   * Aggiorna l'indirizzo di consegna di un ordine AW
+   * @param {number} orderId - ID ordine AW
+   * @param {Object} address - { street, city, postalCode, country }
+   * @returns {Promise<boolean>}
+   */
+  async updateDeliveryAddress(orderId, address) {
+    try {
+      const payload = {
+        delivery_address: {
+          country_code: (address.country || 'IT').trim(),
+          address_line_1: (address.street || '').trim(),
+          address_line_2: '',
+          postal_code: (address.postalCode || '').trim(),
+          locality: (address.city || '').trim()
+        }
+      };
+      await this._makeRequest('patch', `/dropshipping/order/${orderId}`, payload);
+      logger.info(`✅ AW: Delivery address aggiornato per ordine ${orderId} → ${payload.delivery_address.address_line_1}, ${payload.delivery_address.locality}`);
+      return true;
+    } catch (error) {
+      logger.warn(`⚠️ AW: Impossibile aggiornare delivery address ordine ${orderId}: ${error.response?.data?.message || error.message}`);
+      return false;
     }
   }
 

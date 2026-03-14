@@ -211,6 +211,12 @@ class SupplierOrderService {
 
     const awPayload = {
       customerClientId,
+      deliveryAddress: {
+        street: shippingAddress.street || shippingAddress.addressLine1 || '',
+        city: shippingAddress.city || '',
+        postalCode: shippingAddress.postalCode || '',
+        country: shippingAddress.country || 'IT'
+      },
       items: items.map(item => {
         // Rimuovi prefisso "aw-" dal productId (il catalogo AW usa codici senza prefisso)
         let code = item.productId || item.sku || '';
