@@ -98,6 +98,10 @@ class EmailService {
       </html>
     `;
 
+    // Usa Resend se disponibile (Railway blocca SMTP)
+    if (process.env.RESEND_API_KEY) {
+      return this._sendViaResend(order.customerEmail, subject, html);
+    }
     return this._sendEmail(order.customerEmail, subject, html);
   }
 
