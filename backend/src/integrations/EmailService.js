@@ -81,10 +81,7 @@ class EmailService {
               `).join('')}
             </div>
 
-            <p style="font-size: 14px; color: #666; margin-top: 15px;">
-              di cui IVA (22%): €${order.vatAmount ? order.vatAmount.toFixed(2) : (order.total - (order.total / 1.22)).toFixed(2)}
-            </p>
-            <p class="total">Totale (IVA inclusa): €${order.total.toFixed(2)}</p>
+            <p class="total">Totale: €${order.total.toFixed(2)}</p>
 
             <p>Riceverai un'email con il tracking non appena il tuo pacco sarà spedito.</p>
           </div>
