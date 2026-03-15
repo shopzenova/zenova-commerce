@@ -281,6 +281,7 @@ const subcategoryToCategoryMap = {
     'incenso': 'natural-wellness',
     'incenso-riflusso': 'natural-wellness',
     'incenso-coni': 'natural-wellness',
+    'bruciatori-oli': 'natural-wellness',
     'portacandele': 'natural-wellness',
     'wax-melts': 'natural-wellness',
     'bruciatori-buddha': 'natural-wellness',

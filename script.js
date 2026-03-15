@@ -894,6 +894,7 @@ window.autoOpenCategoryFromHash = function() {
         'buddha-collezione': 'natural-wellness',
         'incenso': 'natural-wellness',
         'incenso-riflusso': 'natural-wellness',
+        'bruciatori-oli': 'natural-wellness',
         'vestiario-wellness': 'natural-wellness',
         'kit-benessere-cofanetti-regalo': 'natural-wellness'
     };
