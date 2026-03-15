@@ -880,7 +880,6 @@ window.autoOpenCategoryFromHash = function() {
         'profumi-uomini': 'profumi-fragranze',
         // Massaggio e Benessere
         'set-massaggio': 'massaggio-benessere',
-        'cuscini-terapeutici': 'massaggio-benessere',
         'rulli-viso': 'massaggio-benessere',
         // Natural Wellness
         'oli-essenziali': 'natural-wellness',

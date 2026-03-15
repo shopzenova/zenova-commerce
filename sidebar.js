@@ -43,10 +43,6 @@ const categoryTitles = {
         title: 'SET MASSAGGIO',
         subtitle: 'Rilascio Profondo'
     },
-    'cuscini-terapeutici': {
-        title: 'CUSCINI TERAPEUTICI',
-        subtitle: 'Comfort e sollievo naturale'
-    },
 
     // SUBCATEGORIE NATURAL WELLNESS
     'oli-essenziali': {
@@ -269,7 +265,6 @@ const subcategoryToCategoryMap = {
 
     // MASSAGGIO E BENESSERE
     'set-massaggio': 'massaggio-benessere',
-    'cuscini-terapeutici': 'massaggio-benessere',
     'rulli-viso': 'massaggio-benessere',
 
     // NATURAL WELLNESS - AW Dropship
