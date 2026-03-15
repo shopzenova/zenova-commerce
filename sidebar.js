@@ -253,6 +253,7 @@ const subcategoryToCategoryMap = {
     'lampade-selenite': 'home-ambience',
     'cupole-luminose': 'home-ambience',
     'lampade-touch': 'home-ambience',
+    'copriletti-arazzi': 'home-ambience',
     '2399': 'home-ambience',
     '2399,2400,2421': 'home-ambience',
     '2609': 'home-ambience',
