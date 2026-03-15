@@ -100,6 +100,18 @@ const categoryTitles = {
     'kit-benessere-cofanetti-regalo': {
         title: 'KIT BENESSERE E COFANETTI REGALO',
         subtitle: 'Il Dono che Cura'
+    },
+    'bruciatori-oli': {
+        title: 'BRUCIATORI DI OLI',
+        subtitle: 'Per oli essenziali e aromaterapia'
+    },
+    'wax-melts': {
+        title: 'WAX MELTS',
+        subtitle: 'Cere profumate da sciogliere'
+    },
+    'buddha-collezione': {
+        title: 'COLLEZIONE BUDDHA',
+        subtitle: 'Arte e spiritualità'
     }
 };
 
@@ -359,6 +371,9 @@ const subcategoryToCategoryMap = {
     'portacandele': 'natural-wellness',
     'kit-benessere-cofanetti-regalo': 'natural-wellness',
     'wellness': 'natural-wellness',
+    'bruciatori-oli': 'natural-wellness',
+    'wax-melts': 'natural-wellness',
+    'buddha-collezione': 'natural-wellness',
 
     // TECH INNOVATION
     'gadget-tech': 'tech-innovation',

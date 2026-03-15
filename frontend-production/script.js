@@ -711,7 +711,6 @@ window.autoOpenCategoryFromHash = function() {
         'diffusori-oli': 'natural-wellness',
         'wax-melts': 'natural-wellness',
         'pietre-preziose': 'natural-wellness',
-        'bruciatori-buddha': 'natural-wellness',
         'buddha-collezione': 'natural-wellness',
         'incenso': 'natural-wellness',
         'incenso-riflusso': 'natural-wellness',
