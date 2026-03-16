@@ -200,14 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('✅ Dati spedizione OK, preparo carrello...');
 
-            // *** CHECK MIN QUANTITY ***
-            const minQtyViolations = cart.filter(item => {
-                const minQty = item.minQuantity || 1;
-                return item.quantity < minQty;
-            });
-            if (minQtyViolations.length > 0) {
-                const msgs = minQtyViolations.map(p => `${p.name}: minimo ${p.minQuantity} pz`).join('\n');
-                alert(`Quantità insufficiente:\n\n${msgs}\n\nModifica le quantità nel carrello.`);
+            // *** CHECK ORDINE MINIMO €10 ***
+            const subtotaleOrdine = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (subtotaleOrdine < 10) {
+                alert(`❌ Ordine minimo €10.00\n\nIl tuo carrello è di €${subtotaleOrdine.toFixed(2)}.\nAggiungi altri prodotti per procedere.`);
                 paypalRedirectButton.disabled = false;
                 paypalRedirectButton.textContent = 'Paga con PayPal';
                 return;
@@ -276,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error('❌ Errore creazione ordine PayPal:', error);
-            alert('Errore durante la creazione dell\'ordine. Riprova.');
+            alert(error.message || 'Errore durante la creazione dell\'ordine. Riprova.');
 
             // Re-enable button
             paypalRedirectButton.disabled = false;
@@ -418,8 +414,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (paymentCard) paymentCard.classList.remove('hidden');
             if (confirmationCard) confirmationCard.classList.add('hidden');
 
-            // Initialize Stripe
-            initializeStripe();
+            // Initialize Stripe (disabled)
+            if (typeof initializeStripe === 'function') initializeStripe();
 
             // Mount Stripe card element if not already mounted
             if (!cardElementMounted && cardElement) {

@@ -1717,7 +1717,7 @@ function updateCart() {
     const total = cart.reduce((sum, item) => sum + ((item.price || 0) * item.quantity), 0);
     cartTotal.textContent = `€${total.toFixed(2)}`;
 
-    // Avviso ordine minimo €15
+    // Avviso ordine minimo €10
     const checkoutBtn = document.querySelector('.btn-checkout');
     let minOrderWarning = document.getElementById('minOrderWarning');
     if (!minOrderWarning) {
@@ -1726,8 +1726,8 @@ function updateCart() {
         minOrderWarning.style.cssText = 'color:#e74c3c;font-size:13px;margin-top:8px;text-align:center;';
         cartTotal.parentNode.appendChild(minOrderWarning);
     }
-    if (total > 0 && total < 15) {
-        minOrderWarning.textContent = `Ordine minimo €15.00 — mancano €${(15 - total).toFixed(2)}`;
+    if (total > 0 && total < 10) {
+        minOrderWarning.textContent = `Ordine minimo €10.00 — mancano €${(10 - total).toFixed(2)}`;
         if (checkoutBtn) checkoutBtn.disabled = true;
     } else {
         minOrderWarning.textContent = '';

@@ -200,10 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log('✅ Dati spedizione OK, preparo carrello...');
 
-            // *** CHECK ORDINE MINIMO €15 ***
+            // *** CHECK ORDINE MINIMO €10 ***
             const subtotaleOrdine = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            if (subtotaleOrdine < 15) {
-                alert(`❌ Ordine minimo €15.00\n\nIl tuo carrello è di €${subtotaleOrdine.toFixed(2)}.\nAggiungi altri prodotti per procedere.`);
+            if (subtotaleOrdine < 10) {
+                alert(`❌ Ordine minimo €10.00\n\nIl tuo carrello è di €${subtotaleOrdine.toFixed(2)}.\nAggiungi altri prodotti per procedere.`);
                 paypalRedirectButton.disabled = false;
                 paypalRedirectButton.textContent = 'Paga con PayPal';
                 return;
