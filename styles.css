@@ -3167,8 +3167,9 @@ body {
 }
 
 .tech-features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--spacing-md);
     width: 100%;
     margin: 0 auto;
@@ -3187,6 +3188,8 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 180px;
+    width: 250px;
+    flex: 0 1 250px;
 }
 
 .tech-feature-card:hover {
