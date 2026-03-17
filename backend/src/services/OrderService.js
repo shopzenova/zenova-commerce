@@ -89,7 +89,9 @@ class OrderService {
    */
   async getAllOrders(filters = {}) {
     try {
-      const where = {};
+      const where = {
+        paidAt: { not: null } // Mostra solo ordini con pagamento completato
+      };
 
       if (filters.status) {
         where.status = filters.status;
