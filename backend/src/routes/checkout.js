@@ -341,14 +341,10 @@ router.post('/calculate-shipping', async (req, res) => {
     let totalWeightKg = 0;
     items.forEach(item => {
       const rawWeight = weightMap[item.id];
-      let weightKg;
-      if (rawWeight === null || rawWeight === undefined) {
-        weightKg = DEFAULT_WEIGHT_KG;
-      } else if (rawWeight > 10) {
-        weightKg = rawWeight / 1000; // grammi → kg
-      } else {
-        weightKg = rawWeight; // già in kg
-      }
+      // Il DB ora ha tutto in kg (conversione da grammi completata)
+      const weightKg = (rawWeight !== null && rawWeight !== undefined)
+        ? parseFloat(rawWeight)
+        : DEFAULT_WEIGHT_KG;
       totalWeightKg += weightKg * (item.quantity || 1);
     });
 

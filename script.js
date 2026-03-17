@@ -2683,8 +2683,8 @@ function openProductDetailModal(productId) {
                 const weightDisplay = `${Math.round(product.weight)} ${product.weightUnit}`;
                 techInfo.push({ label: 'Quantità', value: weightDisplay });
             } else {
-                // weight > 10 = grammi (vecchi prodotti), weight <= 10 = kg (nuovi)
-                let weightKg = product.weight > 10 ? product.weight / 1000 : product.weight;
+                // Il peso nel DB è sempre in kg
+                const weightKg = parseFloat(product.weight);
                 const weightDisplay = weightKg >= 1
                     ? `${weightKg.toFixed(2)} kg`
                     : `${(weightKg * 1000).toFixed(0)} g`;
@@ -3040,7 +3040,7 @@ function getProductFeatures(product) {
             features.push(`Disponibilità: ${product.stock} unità`);
         }
         if (product.weight) {
-            let weightKg = product.weight > 10 ? product.weight / 1000 : product.weight;
+            const weightKg = parseFloat(product.weight);
             const weightDisplay = weightKg >= 1
                 ? `${weightKg.toFixed(2)} kg`
                 : `${(weightKg * 1000).toFixed(0)} g`;
