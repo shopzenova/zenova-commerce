@@ -315,7 +315,7 @@ router.post('/calculate-shipping', async (req, res) => {
 
     logger.info(`🚚 Calcolo spedizione per ${items.length} prodotti verso ${destination.country}`);
 
-    // Calcola totale ordine per spedizione gratis
+    // Calcola totale ordine
     const orderTotal = items.reduce((sum, item) => {
       const price = item.price || 0;
       const quantity = item.quantity || 1;
@@ -324,6 +324,36 @@ router.post('/calculate-shipping', async (req, res) => {
 
     logger.info(`💰 Totale ordine: €${orderTotal.toFixed(2)}`);
 
+    // Calcola peso totale dal DB
+    const { PrismaClient } = require('@prisma/client');
+    const prismaShip = new PrismaClient();
+    const productIds = items.map(item => item.id).filter(Boolean);
+    const dbProducts = await prismaShip.product.findMany({
+      where: { id: { in: productIds } },
+      select: { id: true, weight: true }
+    });
+    await prismaShip.$disconnect();
+
+    const weightMap = {};
+    dbProducts.forEach(p => { weightMap[p.id] = p.weight ? parseFloat(p.weight) : null; });
+
+    const DEFAULT_WEIGHT_KG = 0.5; // fallback per prodotti senza peso
+    let totalWeightKg = 0;
+    items.forEach(item => {
+      const rawWeight = weightMap[item.id];
+      let weightKg;
+      if (rawWeight === null || rawWeight === undefined) {
+        weightKg = DEFAULT_WEIGHT_KG;
+      } else if (rawWeight > 10) {
+        weightKg = rawWeight / 1000; // grammi → kg
+      } else {
+        weightKg = rawWeight; // già in kg
+      }
+      totalWeightKg += weightKg * (item.quantity || 1);
+    });
+
+    logger.info(`⚖️ Peso totale carrello: ${totalWeightKg.toFixed(3)} kg`);
+
     // Prepara dati prodotti
     const products = items.map(item => ({
       reference: item.id,
@@ -331,11 +361,11 @@ router.post('/calculate-shipping', async (req, res) => {
       price: item.price || 0
     }));
 
-    // Usa ShippingService con tariffe fisse intelligenti
+    // Usa ShippingService con tariffe intelligenti
     const result = await shippingService.calculateShippingCost(products, {
       country: destination.country,
       postcode: destination.postcode || ''
-    }, orderTotal);
+    }, orderTotal, totalWeightKg);
 
     if (!result.success) {
       return res.status(400).json({

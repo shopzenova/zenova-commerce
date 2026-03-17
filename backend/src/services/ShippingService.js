@@ -14,11 +14,17 @@ class ShippingService {
       'SK', 'US'
     ];
 
+    // Tariffe Italia per fascia di peso
+    this.italyWeightRates = [
+      { maxKg: 2,  cost: 5.00 },
+      { maxKg: 5,  cost: 7.00 },
+      { maxKg: 30, cost: 9.00 }
+    ];
+
     // Tariffe per paese (costo fisso - spedizione gratis DISATTIVATA per ora)
     // NOTA: freeAbove impostato a 99999 = spedizione sempre a pagamento
-    // AGGIORNATO 2026-01-25: -€4 su tutte le tariffe (compensato da +€4 su ogni prodotto)
     this.shippingRates = {
-      // Zone 1: Italia (priorità)
+      // Zone 1: Italia — tariffe a fasce di peso (vedi italyWeightRates)
       'IT': { cost: 5.00, freeAbove: 99999, zone: 'Italia' },
 
       // Zone 2: Spagna + Paesi vicini EU (era 12.90)
@@ -77,7 +83,7 @@ class ShippingService {
    * @param {Number} orderTotal - Totale ordine (opzionale, per spedizione gratis)
    * @returns {Object} - {success, cost, carrier, isFree}
    */
-  async calculateShippingCost(products, destination, orderTotal = 0) {
+  async calculateShippingCost(products, destination, orderTotal = 0, totalWeightKg = null) {
     const countryCode = destination.country.toUpperCase();
 
     // Verifica paese supportato
@@ -117,9 +123,17 @@ class ShippingService {
         }, 0);
       }
 
+      // Per l'Italia: tariffa a fasce di peso
+      let shippingCost = rate.cost;
+      if (countryCode === 'IT' && totalWeightKg !== null) {
+        const tier = this.italyWeightRates.find(t => totalWeightKg <= t.maxKg) || this.italyWeightRates[this.italyWeightRates.length - 1];
+        shippingCost = tier.cost;
+        logger.info(`⚖️ IT peso ${totalWeightKg.toFixed(2)} kg → fascia ≤${tier.maxKg}kg → €${shippingCost}`);
+      }
+
       // Spedizione gratis sopra soglia?
       const isFree = orderTotal >= rate.freeAbove;
-      const shippingCost = isFree ? 0 : rate.cost;
+      if (isFree) shippingCost = 0;
 
       logger.info(`🚚 Spedizione ${countryCode} (${rate.zone}): €${shippingCost} ${isFree ? '(GRATIS! Ordine > €' + rate.freeAbove + ')' : ''}`);
 
