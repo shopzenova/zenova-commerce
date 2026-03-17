@@ -2666,10 +2666,12 @@ function openProductDetailModal(productId) {
         if (product.dimensions) {
             if (typeof product.dimensions === 'object') {
                 const dims = product.dimensions;
-                techInfo.push({
-                    label: 'Dimensioni',
-                    value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
-                });
+                if (dims.width || dims.height || dims.depth) {
+                    techInfo.push({
+                        label: 'Dimensioni',
+                        value: `${dims.width || '-'} x ${dims.height || '-'} x ${dims.depth || '-'} cm`
+                    });
+                }
             } else if (typeof product.dimensions === 'string') {
                 techInfo.push({ label: 'Dimensioni', value: product.dimensions });
             }
@@ -2681,10 +2683,11 @@ function openProductDetailModal(productId) {
                 const weightDisplay = `${Math.round(product.weight)} ${product.weightUnit}`;
                 techInfo.push({ label: 'Quantità', value: weightDisplay });
             } else {
-                // Converti grammi in kg se >= 1, altrimenti mostra in kg con 3 decimali
-                const weightDisplay = product.weight >= 1
-                    ? `${product.weight.toFixed(2)} kg`
-                    : `${(product.weight * 1000).toFixed(0)} g`;
+                // weight > 10 = grammi (vecchi prodotti), weight <= 10 = kg (nuovi)
+                let weightKg = product.weight > 10 ? product.weight / 1000 : product.weight;
+                const weightDisplay = weightKg >= 1
+                    ? `${weightKg.toFixed(2)} kg`
+                    : `${(weightKg * 1000).toFixed(0)} g`;
                 techInfo.push({ label: 'Peso', value: weightDisplay });
             }
         }
@@ -3037,9 +3040,10 @@ function getProductFeatures(product) {
             features.push(`Disponibilità: ${product.stock} unità`);
         }
         if (product.weight) {
-            const weightDisplay = product.weight >= 1000
-                ? `${(product.weight / 1000).toFixed(2)} kg`
-                : `${product.weight} g`;
+            let weightKg = product.weight > 10 ? product.weight / 1000 : product.weight;
+            const weightDisplay = weightKg >= 1
+                ? `${weightKg.toFixed(2)} kg`
+                : `${(weightKg * 1000).toFixed(0)} g`;
             features.push(`Peso: ${weightDisplay}`);
         }
         if (product.dimensions) {
