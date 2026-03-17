@@ -3228,7 +3228,8 @@ body {
     padding: 0;
     overflow: hidden;
     background: var(--deep-brown);
-    grid-column: 1 / -1;
+    width: 100% !important;
+    flex: 0 0 100% !important;
     min-height: 500px;
     max-height: 500px;
 }
