@@ -212,6 +212,7 @@ class SupplierOrderService {
     const awPayload = {
       customerClientId,
       deliveryAddress: {
+        name: dbOrder.customerName || '',
         street: shippingAddress.street || shippingAddress.addressLine1 || '',
         city: shippingAddress.city || '',
         postalCode: shippingAddress.postalCode || '',

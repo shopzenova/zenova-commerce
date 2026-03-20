@@ -380,6 +380,7 @@ class AWDropshipClient {
     try {
       const payload = {
         delivery_address: {
+          contact_name: (address.name || '').trim(),
           country_code: (address.country || 'IT').trim(),
           address_line_1: (address.street || '').trim(),
           address_line_2: '',
