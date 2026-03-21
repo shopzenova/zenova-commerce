@@ -875,6 +875,7 @@ window.autoOpenCategoryFromHash = function() {
         'cupole-luminose': 'home-ambience',
         'lampade-touch': 'home-ambience',
         'copriletti-arazzi': 'home-ambience',
+        'fiori-sapone': 'home-ambience',
         // Profumi e Fragranze
         'profumi-donne': 'profumi-fragranze',
         'profumi-uomini': 'profumi-fragranze',

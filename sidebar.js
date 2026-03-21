@@ -108,6 +108,10 @@ const categoryTitles = {
     'buddha-collezione': {
         title: 'COLLEZIONE BUDDHA',
         subtitle: 'Arte e spiritualità'
+    },
+    'fiori-sapone': {
+        title: 'FIORI DI SAPONE',
+        subtitle: 'Regali floreali eterni'
     }
 };
 
@@ -262,6 +266,7 @@ const subcategoryToCategoryMap = {
     'cupole-luminose': 'home-ambience',
     'lampade-touch': 'home-ambience',
     'copriletti-arazzi': 'home-ambience',
+    'fiori-sapone': 'home-ambience',
     '2399': 'home-ambience',
     '2399,2400,2421': 'home-ambience',
     '2609': 'home-ambience',
