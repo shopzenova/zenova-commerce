@@ -112,6 +112,10 @@ const categoryTitles = {
     'buddha-collezione': {
         title: 'COLLEZIONE BUDDHA',
         subtitle: 'Arte e spiritualità'
+    },
+    'fiori-sapone': {
+        title: 'FIORI DI SAPONE',
+        subtitle: 'Regali floreali eterni'
     }
 };
 
@@ -374,6 +378,9 @@ const subcategoryToCategoryMap = {
     'bruciatori-oli': 'natural-wellness',
     'wax-melts': 'natural-wellness',
     'buddha-collezione': 'natural-wellness',
+
+    // HOME AMBIENCE - AW
+    'fiori-sapone': 'home-ambience',
 
     // TECH INNOVATION
     'gadget-tech': 'tech-innovation',
