@@ -1459,11 +1459,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Mappa nomi categorie user-friendly
 const categoryNames = {
-    'beauty': 'Beauty',
-    'health-personal-care': 'Health & Personal Care',
-    'smart-living': 'Smart Living',
-    'natural-wellness': 'Natural Wellness',
-    'tech': 'Tech Innovation'
+    'home-ambience': 'Home Ambience',
+    'profumi-fragranze': 'Profumi e Fragranze',
+    'massaggio-benessere': 'Massaggio e Benessere',
+    'natural-wellness': 'Natural Wellness'
 };
 
 // Carica e visualizza prodotti raggruppati per categoria
@@ -1929,33 +1928,31 @@ console.log('Pannello Admin Zenova caricato ✅');
 
 // Mapping delle sottocategorie per ogni categoria principale
 const SUBCATEGORIES_MAP = {
-    'smart-living': [
-        { value: 'smart-led-illuminazione', label: 'Smart LED Illuminazione' },
+    'home-ambience': [
+        { value: 'lampade-sale', label: 'Lampade di Sale' },
+        { value: 'portacandele-vetro', label: 'Portacandele in Vetro' },
+        { value: 'portacandele-selenite', label: 'Portacandele Selenite' },
+        { value: 'lampade-selenite', label: 'Lampade Selenite' },
+        { value: 'cupole-luminose', label: 'Cupole Luminose Floreali' },
+        { value: 'lampade-touch', label: 'Lampade Touch Ricaricabili' },
+        { value: 'copriletti-arazzi', label: 'Copriletti & Arazzi' },
+        { value: 'fiori-sapone', label: 'Fiori di Sapone' },
         { value: 'domotica-smart-home', label: 'Home & Decor' }
     ],
-    'beauty': [
-        { value: 'makeup', label: 'Makeup' },
-        { value: 'skincare', label: 'Skincare' },
-        { value: 'profumi', label: 'Profumi' },
-        { value: 'corpo', label: 'Corpo' }
+    'profumi-fragranze': [
+        { value: 'profumi-donne', label: 'Profumi Donna' },
+        { value: 'profumi-uomini', label: 'Profumi Uomo' },
+        { value: 'profumi-bambini', label: 'Profumi Bambini' }
     ],
-    'health-personal-care': [
-        { value: 'hair-care', label: 'Hair Care' },
-        { value: 'barba', label: 'Barba' },
-        { value: 'massaggio-benessere', label: 'Massaggio & Benessere' },
-        { value: 'protezione-solare', label: 'Protezione Solare' }
-    ],
-    'tech-innovation': [
-        { value: 'gadget-tech', label: 'Gadget Tech' },
-        { value: 'smart-devices', label: 'Smart Devices' },
-        { value: 'wearable-tech', label: 'Wearable Tech' },
-        { value: 'tech-wellness', label: 'Tech Wellness' }
+    'massaggio-benessere': [
+        { value: 'rulli-viso', label: 'Rulli Viso' },
+        { value: 'set-massaggio', label: 'Set Massaggio' }
     ],
     'natural-wellness': [
         { value: 'oli-essenziali', label: 'Oli Essenziali' },
         { value: 'oli-per-fragranza', label: 'Oli per Fragranza' },
         { value: 'candele-profumate', label: 'Candele Profumate' },
-        { value: 'candele-gel-profumati-sali-bagno', label: 'Candele Gel Profumati e Sali da Bagno' },
+        { value: 'candele-gel-profumati-sali-bagno', label: 'Candele Gel e Sali da Bagno' },
         { value: 'diffusori-aromatici', label: 'Diffusori Aromatici' },
         { value: 'diffusori-oli', label: 'Diffusori Oli' },
         { value: 'pietre-preziose', label: 'Pietre Preziose' },
@@ -1963,6 +1960,9 @@ const SUBCATEGORIES_MAP = {
         { value: 'incenso-riflusso', label: 'Incenso Riflusso' },
         { value: 'incenso-coni', label: 'Incenso Coni' },
         { value: 'portacandele', label: 'Portacandele' },
+        { value: 'wax-melts', label: 'Wax Melts' },
+        { value: 'buddha-collezione', label: 'Collezione Buddha' },
+        { value: 'bruciatori-oli', label: 'Bruciatori di Oli' },
         { value: 'vestiario-wellness', label: 'Vestiario Wellness' },
         { value: 'kit-benessere-cofanetti-regalo', label: 'Kit Benessere e Cofanetti Regalo' }
     ]
