@@ -29,13 +29,9 @@ const categoryTitles = {
     },
 
     // SUBCATEGORIE PROFUMI
-    'profumi-donne': {
-        title: 'PROFUMI DONNA',
-        subtitle: 'Fragranze che definiscono la presenza'
-    },
-    'profumi-uomini': {
-        title: 'PROFUMI UOMO',
-        subtitle: 'Fragranze che definiscono la presenza'
+    'spray-ambienti': {
+        title: 'SPRAY & FRAGRANZE',
+        subtitle: 'Profuma i tuoi spazi'
     },
 
     // SUBCATEGORIE MASSAGGIO
@@ -185,7 +181,7 @@ const anchorToSubcategoryMap = {
     'profumi-fragranze': 'profumi-unisex',
     'profumi-bambini': 'profumi-unisex',
     'candele-essenze': 'profumi-unisex',
-    'profumi-donne': 'profumi-donne',
+    'spray-ambienti': 'spray-ambienti',
     'eau-fraiche': 'profumi-unisex',
     'nebulizzatori': 'profumi-unisex',
     'oli-essenziali-profumi': 'profumi-unisex',

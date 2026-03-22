@@ -877,8 +877,7 @@ window.autoOpenCategoryFromHash = function() {
         'copriletti-arazzi': 'home-ambience',
         'fiori-sapone': 'home-ambience',
         // Profumi e Fragranze
-        'profumi-donne': 'profumi-fragranze',
-        'profumi-uomini': 'profumi-fragranze',
+        'spray-ambienti': 'profumi-fragranze',
         // Massaggio e Benessere
         'set-massaggio': 'massaggio-benessere',
         'rulli-viso': 'massaggio-benessere',
