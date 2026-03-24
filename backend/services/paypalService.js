@@ -57,13 +57,7 @@ async function createOrder(items, customer) {
           given_name: customer.name.split(' ')[0] || customer.name,
           surname: customer.name.split(' ').slice(1).join(' ') || customer.name
         },
-        email_address: customer.email,
-        phone: {
-          phone_type: 'MOBILE',
-          phone_number: {
-            national_number: customer.phone
-          }
-        }
+        email_address: customer.email
       },
       purchase_units: [{
         reference_id: `ZENOVA-${Date.now()}`,
