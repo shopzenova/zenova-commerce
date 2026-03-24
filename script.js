@@ -1086,13 +1086,13 @@ function createProductCard(product) {
     productCard.className = 'product-card';
     productCard.setAttribute('data-subcategory', product.zenovaSubcategory || product.subcategory);
     productCard.setAttribute('data-product-id', product.id);
-    productCard.setAttribute('data-price', product.price || 0); // Per ordinamento veloce
+    productCard.setAttribute('data-price', product.retailPrice || product.price || 0); // Per ordinamento veloce
 
     const isInWishlist = wishlist.some(item => item.id === product.id);
     const wishlistClass = isInWishlist ? 'in-wishlist' : '';
     const wishlistIcon = isInWishlist ? '♥' : '♡';
 
-    const productPrice = (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
+    const productPrice = (product.retailPrice && product.retailPrice > 0) ? product.retailPrice.toFixed(2) : (product.price && product.price > 0) ? product.price.toFixed(2) : '0.00';
 
     // Get category name (support both zenovaCategory and category)
     const categoryName = product.zenovaCategory || product.category || 'Prodotti';
@@ -3293,10 +3293,7 @@ function initNewsletterPopup() {
     });
 }
 
-// Initialize newsletter popup
-document.addEventListener('DOMContentLoaded', () => {
-    initNewsletterPopup();
-});
+// Newsletter popup disabilitato
 
 // ========================================
 // MOBILE CATEGORY DROPDOWN TOGGLE
