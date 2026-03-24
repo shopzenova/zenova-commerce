@@ -232,17 +232,16 @@ class AWDropshipClient {
     logger.info('🔄 AW: Caricamento mappa codice→ID dal portfolio (my-products)...');
     const map = new Map();
 
+    const headers = {
+      'Authorization': `Bearer ${this.apiToken}`,
+      'Accept': 'application/json'
+    };
+
+    let page = 1;
+    const perPage = 200;
+    let loadedOk = false;
+
     try {
-      // Usa /dropshipping/products/my-products (portfolio attivo)
-      // Questo endpoint restituisce i prodotti con my_product_id necessario per creare ordini
-      const headers = {
-        'Authorization': `Bearer ${this.apiToken}`,
-        'Accept': 'application/json'
-      };
-
-      let page = 1;
-      const perPage = 200;
-
       while (true) {
         const response = await axios.get(`${this.baseURL}/dropshipping/products/my-products`, {
           headers,
@@ -259,17 +258,24 @@ class AWDropshipClient {
 
         const lastPage = response.data.meta?.last_page || response.data.last_page || 1;
         logger.info(`🔄 AW: Portfolio pagina ${page}/${lastPage} (${products.length} prodotti)`);
-        if (page >= lastPage) break;
+        if (page >= lastPage) { loadedOk = true; break; }
         page++;
+        await new Promise(r => setTimeout(r, 200)); // piccola pausa tra pagine
       }
     } catch (error) {
-      logger.error(`❌ AW: Errore caricamento mappa portfolio: ${error.message}`);
+      logger.error(`❌ AW: Errore caricamento mappa portfolio a pagina ${page}: ${error.message}`);
     }
 
-    logger.info(`✅ AW: Mappa portfolio caricata: ${map.size} codici`);
-    this._productCodeToIdMap = map;
-    this._productCodeToIdMapTimestamp = Date.now();
-    return map;
+    if (loadedOk) {
+      logger.info(`✅ AW: Mappa portfolio caricata: ${map.size} codici`);
+      this._productCodeToIdMap = map;
+      this._productCodeToIdMapTimestamp = Date.now();
+    } else {
+      // Caricamento parziale — non salvare in cache, verrà ritentato alla prossima chiamata
+      logger.warn(`⚠️ AW: Mappa portfolio caricata parzialmente (${map.size} codici, fino a pagina ${page}) — cache non aggiornata`);
+      if (map.size > 0) return map; // usa il parziale solo per questa chiamata
+    }
+    return this._productCodeToIdMap || map;
   }
 
   /**
