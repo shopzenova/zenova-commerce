@@ -321,28 +321,20 @@ class AWDropshipClient {
       throw new Error('AW: almeno un prodotto richiesto');
     }
 
-    // Step 1: Crea ordine per il cliente, passando delivery address nel POST body
+    // Step 1: Crea ordine vuoto per il cliente
     logger.info(`📦 AW Step 1/3: Creazione ordine per cliente ${customerClientId}`);
-    const createBody = {};
-    if (deliveryAddress && deliveryAddress.street) {
-      createBody.delivery_address = {
-        contact_name: (deliveryAddress.name || '').trim(),
-        country_code: (deliveryAddress.country || 'IT').trim(),
-        address_line_1: (deliveryAddress.street || '').trim(),
-        address_line_2: '',
-        postal_code: (deliveryAddress.postalCode || '').trim(),
-        locality: (deliveryAddress.city || '').trim()
-      };
-      logger.info(`📍 AW: Indirizzo nel POST: ${JSON.stringify(createBody.delivery_address)}`);
-    }
     const createResponse = await this._makeRequest(
       'post',
-      `/dropshipping/order/client/${customerClientId}/store`,
-      createBody
+      `/dropshipping/order/client/${customerClientId}/store`
     );
     const awOrder = createResponse.data.data || createResponse.data;
     const awOrderId = awOrder.id;
-    logger.info(`✅ AW: Ordine creato con ID ${awOrderId}, risposta: ${JSON.stringify(awOrder)}`);
+    logger.info(`✅ AW: Ordine vuoto creato con ID ${awOrderId}`);
+
+    // Step 1b: Aggiorna delivery address con PATCH /update
+    if (deliveryAddress && deliveryAddress.street) {
+      await this.updateDeliveryAddress(awOrderId, deliveryAddress);
+    }
 
     // Step 2: Aggiungi prodotti (usa ID numerico, non codice stringa)
     for (const item of items) {
@@ -403,7 +395,7 @@ class AWDropshipClient {
     };
     logger.info(`📍 AW: updateDeliveryAddress ordine ${orderId} → payload: ${JSON.stringify(payload)}`);
     try {
-      const response = await this._makeRequest('patch', `/dropshipping/order/${orderId}`, payload);
+      const response = await this._makeRequest('patch', `/dropshipping/order/${orderId}/update`, payload);
       logger.info(`✅ AW: updateDeliveryAddress risposta: ${JSON.stringify(response?.data || response)}`);
       return true;
     } catch (error) {
