@@ -2386,28 +2386,33 @@ function setupSearch() {
             return;
         }
 
-        // Filter only visible products and limit results
-        const results = products
-            .filter(product => {
-                // Skip hidden products
-                if (product.visible === false) return false;
+        // Filter only visible products and separate by match priority
+        const nameMatches = [];
+        const descMatches = [];
 
-                // Search in multiple fields
-                const nameMatch = product.name.toLowerCase().includes(query);
-                const categoryMatch = (product.category || '').toLowerCase().includes(query);
-                const subcategoryMatch = (product.zenovaSubcategory || '').toLowerCase().includes(query);
-                const brandMatch = (product.brand || '').toLowerCase().includes(query);
-                const skuMatch = (product.sku || '').toLowerCase().includes(query);
-                const idMatch = (product.id || '').toLowerCase().includes(query);
+        for (const product of products) {
+            if (product.visible === false) continue;
 
+            const nameMatch = product.name.toLowerCase().includes(query);
+            const categoryMatch = (product.category || '').toLowerCase().includes(query);
+            const subcategoryMatch = (product.zenovaSubcategory || '').toLowerCase().includes(query);
+            const brandMatch = (product.brand || '').toLowerCase().includes(query);
+            const skuMatch = (product.sku || '').toLowerCase().includes(query);
+            const idMatch = (product.id || '').toLowerCase().includes(query);
+
+            if (nameMatch || categoryMatch || subcategoryMatch || brandMatch || skuMatch || idMatch) {
+                nameMatches.push(product);
+            } else {
                 // Search in description (cleaned from HTML)
                 const descMatch = product.description
                     ? product.description.replace(/<[^>]*>/g, '').toLowerCase().includes(query)
                     : false;
+                if (descMatch) descMatches.push(product);
+            }
+        }
 
-                return nameMatch || categoryMatch || subcategoryMatch || brandMatch || skuMatch || idMatch || descMatch;
-            })
-            .slice(0, 30); // Limit to first 30 results for performance
+        // Name/category matches first, description-only matches after
+        const results = [...nameMatches, ...descMatches].slice(0, 30);
 
         const endTime = performance.now();
         console.log(`🔍 Search completed in ${(endTime - startTime).toFixed(2)}ms - Found ${results.length} results`);
