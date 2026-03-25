@@ -3077,6 +3077,22 @@ function setupProductDetailModal() {
     if (prevBtn) prevBtn.addEventListener('click', prevGalleryImage);
     if (nextBtn) nextBtn.addEventListener('click', nextGalleryImage);
 
+    // Touch swipe support for gallery
+    const galleryContainer = document.getElementById('productDetailImage');
+    if (galleryContainer) {
+        let touchStartX = 0;
+        galleryContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        galleryContainer.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+                if (diff > 0) nextGalleryImage();
+                else prevGalleryImage();
+            }
+        }, { passive: true });
+    }
+
     // Close button
     closeBtn.addEventListener('click', closeProductDetailModal);
 
