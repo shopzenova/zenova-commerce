@@ -3355,9 +3355,14 @@ function initMobileCategoryDropdowns() {
                 const rect = trigger.getBoundingClientRect();
                 menu.style.position = 'fixed';
                 menu.style.top = `${rect.bottom + 5}px`;
-                menu.style.left = '50%';
-                menu.style.transform = 'translateX(-50%)';
+                menu.style.left = '0px';
+                menu.style.transform = 'none';
                 menu.style.zIndex = '9999';
+                // Dopo il render, misura la larghezza reale e centra
+                requestAnimationFrame(() => {
+                    const w = menu.offsetWidth || 180;
+                    menu.style.left = `${Math.max(8, (window.innerWidth - w) / 2)}px`;
+                });
             } else {
                 menu.style.position = '';
                 menu.style.top = '';
