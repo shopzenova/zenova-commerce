@@ -321,20 +321,28 @@ class AWDropshipClient {
       throw new Error('AW: almeno un prodotto richiesto');
     }
 
-    // Step 1: Crea ordine vuoto per il cliente (usa ID numerico)
+    // Step 1: Crea ordine per il cliente, passando delivery address nel POST body
     logger.info(`📦 AW Step 1/3: Creazione ordine per cliente ${customerClientId}`);
+    const createBody = {};
+    if (deliveryAddress && deliveryAddress.street) {
+      createBody.delivery_address = {
+        contact_name: (deliveryAddress.name || '').trim(),
+        country_code: (deliveryAddress.country || 'IT').trim(),
+        address_line_1: (deliveryAddress.street || '').trim(),
+        address_line_2: '',
+        postal_code: (deliveryAddress.postalCode || '').trim(),
+        locality: (deliveryAddress.city || '').trim()
+      };
+      logger.info(`📍 AW: Indirizzo nel POST: ${JSON.stringify(createBody.delivery_address)}`);
+    }
     const createResponse = await this._makeRequest(
       'post',
-      `/dropshipping/order/client/${customerClientId}/store`
+      `/dropshipping/order/client/${customerClientId}/store`,
+      createBody
     );
     const awOrder = createResponse.data.data || createResponse.data;
     const awOrderId = awOrder.id;
-    logger.info(`✅ AW: Ordine vuoto creato con ID ${awOrderId}`);
-
-    // Step 1b: Aggiorna delivery address con indirizzo reale del cliente (se fornito)
-    if (deliveryAddress && deliveryAddress.street) {
-      await this.updateDeliveryAddress(awOrderId, deliveryAddress);
-    }
+    logger.info(`✅ AW: Ordine creato con ID ${awOrderId}, risposta: ${JSON.stringify(awOrder)}`);
 
     // Step 2: Aggiungi prodotti (usa ID numerico, non codice stringa)
     for (const item of items) {
