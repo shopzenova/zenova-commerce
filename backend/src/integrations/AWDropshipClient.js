@@ -383,22 +383,23 @@ class AWDropshipClient {
    * @returns {Promise<boolean>}
    */
   async updateDeliveryAddress(orderId, address) {
+    const payload = {
+      delivery_address: {
+        contact_name: (address.name || '').trim(),
+        country_code: (address.country || 'IT').trim(),
+        address_line_1: (address.street || '').trim(),
+        address_line_2: '',
+        postal_code: (address.postalCode || '').trim(),
+        locality: (address.city || '').trim()
+      }
+    };
+    logger.info(`📍 AW: updateDeliveryAddress ordine ${orderId} → payload: ${JSON.stringify(payload)}`);
     try {
-      const payload = {
-        delivery_address: {
-          contact_name: (address.name || '').trim(),
-          country_code: (address.country || 'IT').trim(),
-          address_line_1: (address.street || '').trim(),
-          address_line_2: '',
-          postal_code: (address.postalCode || '').trim(),
-          locality: (address.city || '').trim()
-        }
-      };
-      await this._makeRequest('patch', `/dropshipping/order/${orderId}`, payload);
-      logger.info(`✅ AW: Delivery address aggiornato per ordine ${orderId} → ${payload.delivery_address.address_line_1}, ${payload.delivery_address.locality}`);
+      const response = await this._makeRequest('patch', `/dropshipping/order/${orderId}`, payload);
+      logger.info(`✅ AW: updateDeliveryAddress risposta: ${JSON.stringify(response?.data || response)}`);
       return true;
     } catch (error) {
-      logger.warn(`⚠️ AW: Impossibile aggiornare delivery address ordine ${orderId}: ${error.response?.data?.message || error.message}`);
+      logger.error(`❌ AW: updateDeliveryAddress FALLITO ordine ${orderId}: status=${error.response?.status} body=${JSON.stringify(error.response?.data)} msg=${error.message}`);
       return false;
     }
   }
