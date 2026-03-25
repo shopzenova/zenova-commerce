@@ -492,11 +492,21 @@
 @media (max-width: 1024px) {
     .checkout-grid {
         grid-template-columns: 1fr;
+        max-width: 100%;
     }
 
     .checkout-sidebar {
         position: static;
         order: -1;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .order-summary {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 }
 
