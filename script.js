@@ -3350,15 +3350,20 @@ function initMobileCategoryDropdowns() {
 
             console.log(`📱 Dropdown ${isOpening ? 'aperto' : 'chiuso'}`);
 
-            // Posiziona menu - ma NON per mega-menu (gestito da CSS)
-            if (isOpening && !isMegaMenu) {
+            // Posiziona menu centrato nel viewport su mobile
+            if (isOpening) {
                 const rect = trigger.getBoundingClientRect();
+                menu.style.position = 'fixed';
                 menu.style.top = `${rect.bottom + 5}px`;
-                menu.style.left = `${rect.left}px`;
-            } else if (isOpening && isMegaMenu) {
-                // Per mega-menu, solo top position
-                const rect = trigger.getBoundingClientRect();
-                menu.style.top = `${rect.bottom + 5}px`;
+                menu.style.left = '50%';
+                menu.style.transform = 'translateX(-50%)';
+                menu.style.zIndex = '9999';
+            } else {
+                menu.style.position = '';
+                menu.style.top = '';
+                menu.style.left = '';
+                menu.style.transform = '';
+                menu.style.zIndex = '';
             }
         });
     });
@@ -3375,6 +3380,17 @@ function initMobileCategoryDropdowns() {
 
 // Inizializza al caricamento
 document.addEventListener('DOMContentLoaded', initMobileCategoryDropdowns);
+
+// Logo cliccabile → torna alla home (su tutte le pagine)
+document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo');
+    if (logo) {
+        logo.style.cursor = 'pointer';
+        logo.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
+});
 
 // Re-inizializza se si passa da desktop a mobile
 window.addEventListener('resize', () => {
