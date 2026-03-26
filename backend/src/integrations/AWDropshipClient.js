@@ -447,17 +447,28 @@ class AWDropshipClient {
         }
       } catch (e) { /* ignora errori nella ricerca */ }
 
+      // Mappa country_code → country_id (richiesto da AW API)
+      const countryIdMap = {
+        'IT': 88, 'DE': 57, 'FR': 67, 'ES': 193, 'GB': 222, 'AT': 13, 'BE': 21,
+        'NL': 145, 'PT': 165, 'PL': 163, 'SE': 196, 'DK': 56, 'FI': 65, 'NO': 153,
+        'CH': 200, 'GR': 74, 'CZ': 55, 'HU': 83, 'RO': 168, 'BG': 31, 'HR': 49,
+        'SK': 185, 'SI': 183, 'EE': 61, 'LV': 115, 'LT': 118, 'LU': 119, 'CY': 54,
+        'MT': 131, 'IE': 86, 'AU': 12, 'US': 225
+      };
+      const countryCode = clientData.address?.country || 'IT';
+      const countryId = countryIdMap[countryCode] || 88;
+
       const payload = {
         contact_name: clientData.name || '',
         email: clientData.email || '',
-        phone: clientData.phone || '',
+        phone: (clientData.phone || '').replace(/^\+39/, '').replace(/^\+/, ''),
         address: {
-          country_code: clientData.address?.country || 'IT',
+          country_code: countryCode,
+          country_id: countryId,
           address_line_1: clientData.address?.street || clientData.address?.addressLine1 || '',
-          address_line_2: clientData.address?.addressLine2 || '',
           postal_code: clientData.address?.postalCode || '',
           locality: clientData.address?.city || '',
-          administrative_area: clientData.address?.province || ''
+          administrative_area: clientData.address?.province || clientData.address?.city || ''
         }
       };
 
