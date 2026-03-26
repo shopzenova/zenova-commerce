@@ -436,8 +436,18 @@ class AWDropshipClient {
     try {
       logger.info(`AW: Creazione cliente ${clientData.name} (${clientData.email})`);
 
+      // Prima cerca se il cliente esiste già per email
+      try {
+        const existing = await this._makeRequest('get', '/dropshipping/clients', null, { params: { per_page: 100 } });
+        const clients = existing.data.data || [];
+        const found = clients.find(c => c.email === clientData.email);
+        if (found) {
+          logger.info(`AW: Cliente esistente trovato ID ${found.id} per ${clientData.email}`);
+          return found;
+        }
+      } catch (e) { /* ignora errori nella ricerca */ }
+
       const payload = {
-        company_name: clientData.company || clientData.name || '',
         contact_name: clientData.name || '',
         email: clientData.email || '',
         phone: clientData.phone || '',
@@ -445,19 +455,20 @@ class AWDropshipClient {
           country_code: clientData.address?.country || 'IT',
           address_line_1: clientData.address?.street || clientData.address?.addressLine1 || '',
           address_line_2: clientData.address?.addressLine2 || '',
-          sorting_code: '',
           postal_code: clientData.address?.postalCode || '',
-          locality: clientData.address?.city || ''
+          locality: clientData.address?.city || '',
+          administrative_area: clientData.address?.province || ''
         }
       };
 
+      logger.info(`AW: createClient payload: ${JSON.stringify(payload)}`);
       const response = await this._makeRequest('post', '/dropshipping/clients', payload);
       const client = response.data.data || response.data;
       logger.info(`AW: Cliente creato con ID ${client.id}`);
       return client;
 
     } catch (error) {
-      logger.error(`AW createClient: ${error.message}`);
+      logger.error(`AW createClient: ${error.response?.data ? JSON.stringify(error.response.data) : error.message}`);
       throw error;
     }
   }
