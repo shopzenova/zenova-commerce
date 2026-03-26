@@ -1100,7 +1100,7 @@ function createProductCard(product) {
         .replace('beauty', 'Beauty')
         .replace('health-personal-care', 'Health & Personal Care')
         .replace('smart-living', 'Smart Living')
-        .replace('natural-wellness', 'Benessere Naturale')
+        .replace('natural-wellness', 'Natural Wellness')
         .replace('tech', 'Tech Innovation');
 
     // Get thumbnail for grid (small, fast loading) and full image for modal
