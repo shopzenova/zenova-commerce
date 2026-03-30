@@ -438,7 +438,7 @@ class AWDropshipClient {
 
       // Prima cerca se il cliente esiste già per email
       try {
-        const existing = await this._makeRequest('get', '/dropshipping/clients', null, { params: { per_page: 100 } });
+        const existing = await this._makeRequest('get', '/dropshipping/clients', null, { params: { per_page: 100, sort: 'created_at' } });
         const clients = existing.data.data || [];
         const found = clients.find(c => c.email === clientData.email);
         if (found) {
