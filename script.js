@@ -1629,7 +1629,8 @@ window.renderProductsByCategory = renderProductsByCategory;
 // Add to Cart
 function addToCart(productId) {
     const productsArray = products.length > 0 ? products : (window.products || []);
-    const product = productsArray.find(p => p.id === productId);
+    const product = productsArray.find(p => p.id === productId)
+        || wishlist.find(item => item.id === productId);
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {

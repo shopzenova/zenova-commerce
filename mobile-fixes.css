@@ -89,6 +89,11 @@
         display: block;
     }
 
+    /* Header: permetti al dropdown di uscire fuori */
+    .header {
+        overflow: visible !important;
+    }
+
     /* Mobile nav layout */
     .nav {
         display: flex !important;
