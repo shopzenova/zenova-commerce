@@ -67,9 +67,26 @@
         transform: rotate(-45deg) translate(7px, -7px);
     }
 
-    /* Nascondi logo su mobile - semplifica navigazione */
+    /* Logo su mobile: mostra solo icona come link home */
     .logo {
+        display: flex !important;
+        align-items: center;
+        text-decoration: none;
+    }
+    .logo-home-link {
+        display: flex !important;
+        align-items: center;
+        text-decoration: none;
+    }
+    .logo .logo-text,
+    .logo-home-link .logo-text {
         display: none !important;
+    }
+    .logo .logo-icon img,
+    .logo-home-link .logo-icon img {
+        width: 42px !important;
+        height: 42px !important;
+        display: block;
     }
 
     /* Mobile nav layout */
@@ -79,6 +96,52 @@
         align-items: center !important;
         gap: 0.5rem;
         padding: 0.5rem 0 !important;
+        position: relative;
+    }
+
+    /* Menu mobile aperto (hamburger) */
+    .nav-menu.mobile-open {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: -1rem;
+        right: -1rem;
+        background: var(--bg-primary, #fff);
+        padding: 0.5rem 1rem 1rem;
+        z-index: 999;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        border-top: 1px solid rgba(0,0,0,0.08);
+        gap: 0;
+    }
+    .nav-menu.mobile-open li {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-menu.mobile-open li:last-child {
+        border-bottom: none;
+    }
+    .nav-menu.mobile-open .nav-link {
+        display: block;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+    }
+
+    /* Wishlist count badge su mobile */
+    .wishlist-count-mobile {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        background: #ff4757;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 4px 8px;
+        border-radius: 12px;
+        min-width: 26px;
+        text-align: center;
+        border: 3px solid white;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.3);
     }
 
     /* Mobile icons styling - HEADER: icone GRANDI e visibili */

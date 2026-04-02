@@ -81,16 +81,16 @@
         </div>
         <div class="container">
             <nav class="nav">
-                <div class="logo">
+                <a href="index.html" class="logo logo-home-link" style="text-decoration:none;color:inherit;">
                     <div class="logo-icon">
                         <img src="logo-aura.png" alt="ZENOVA Aura Experience Logo">
                     </div>
                     <div class="logo-text">
-                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></a></h1>
+                        <h1>ZENOVA <span class="logo-separator">|</span> <span class="logo-aura">AURA</span></h1>
                         <p class="logo-experience">Experience</p>
                         <p class="tagline">where technology meets calm and wellness</p>
                     </div>
-                </div>
+                </a>
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link">
                         <span class="link-text">Home</span>
@@ -109,8 +109,17 @@
                         <span class="link-underline"></span>
                     </a></li>
                 </ul>
-                <!-- Mobile Icons (search + cart) -->
+                <!-- Mobile Icons (hamburger + wishlist + search + cart) -->
                 <div class="nav-icons-mobile">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <button class="wishlist-btn" id="wishlistBtnMobile" title="I miei preferiti" style="position:relative;">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="wishlist-count-mobile" id="wishlistCountMobile">0</span>
+                    </button>
                     <button class="search-btn" id="searchBtnMobile">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
@@ -538,5 +547,38 @@
     <script src="api-client.js?v=20260125-DBLAYOUT"></script>
     <script src="script.js?v=20260125-IMGCACHE"></script>
     <script src="sidebar.js?v=20260125-IMGPROXY"></script>
+    <script>
+    // Hamburger menu mobile
+    (function() {
+        var toggle = document.getElementById('mobileMenuToggle');
+        var navMenu = document.querySelector('.nav-menu');
+        if (toggle && navMenu) {
+            toggle.addEventListener('click', function() {
+                toggle.classList.toggle('active');
+                navMenu.classList.toggle('mobile-open');
+            });
+            navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    toggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-open');
+                });
+            });
+        }
+        // Wishlist mobile → apre la wishlist sidebar esistente
+        var wishlistBtnMobile = document.getElementById('wishlistBtnMobile');
+        var wishlistBtn = document.getElementById('wishlistBtn');
+        if (wishlistBtnMobile && wishlistBtn) {
+            wishlistBtnMobile.addEventListener('click', function() { wishlistBtn.click(); });
+        }
+        // Sync wishlist count su mobile
+        var wishlistCount = document.getElementById('wishlistCount');
+        if (wishlistCount) {
+            new MutationObserver(function() {
+                var countMobile = document.getElementById('wishlistCountMobile');
+                if (countMobile) countMobile.textContent = wishlistCount.textContent;
+            }).observe(wishlistCount, { childList: true, characterData: true, subtree: true });
+        }
+    })();
+    </script>
 </body>
 </html>
