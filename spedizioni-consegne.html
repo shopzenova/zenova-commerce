@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="logo-aura.png">
     <link rel="apple-touch-icon" href="logo-aura.png">
     <link rel="stylesheet" href="styles.css?v=20251127ALL">
+    <link rel="stylesheet" href="mobile-fixes.css?v=20260402">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -120,7 +121,7 @@
         </div>
         <div class="container">
             <nav class="nav">
-                <div class="logo">
+                <a href="index.html" class="logo logo-home-link" style="text-decoration:none;color:inherit;">
                     <div class="logo-icon">
                         <img src="logo-aura.png" alt="Zenova Aura Experience Logo">
                     </div>
@@ -129,7 +130,7 @@
                         <p class="logo-experience">Experience</p>
                         <p class="tagline">where technology meets calm and wellness</p>
                     </div>
-                </div>
+                </a>
                 <ul class="nav-menu">
                     <li><a href="index.html" class="nav-link">
                         <span class="link-text">Home</span>
@@ -148,6 +149,17 @@
                         <span class="link-underline"></span>
                     </a></li>
                 </ul>
+                <!-- Mobile Icons -->
+                <div class="nav-icons-mobile">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <a href="prodotti.html" class="cart-btn" title="Vai allo shop">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 17 7 17C8.105 17 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
             </nav>
         </div>
     </header>
@@ -208,6 +220,51 @@
             </div>
 
             <div class="legal-section">
+                <h2><span class="icon-text">🌍</span> Spedizioni in Europa</h2>
+                <p>Spediamo in tutta Europa tramite i nostri corrieri partner (Packeta, DPD, GLS). Le tariffe variano per paese e fascia di peso. Di seguito i costi indicativi per ordini tipici (0–2 kg).</p>
+                <div class="info-box warning">
+                    <p>⚠️ Il costo esatto viene calcolato automaticamente al checkout in base al paese di destinazione e al peso dell'ordine.</p>
+                </div>
+                <table style="width:100%; border-collapse:collapse; margin: 1.5rem 0; font-size:0.95rem;">
+                    <thead>
+                        <tr style="background:#f0f4ff;">
+                            <th style="padding:0.6rem 0.8rem; text-align:left; border-bottom:2px solid #667eea;">Paese</th>
+                            <th style="padding:0.6rem 0.8rem; text-align:left; border-bottom:2px solid #667eea;">Da (0–2 kg)</th>
+                            <th style="padding:0.6rem 0.8rem; text-align:left; border-bottom:2px solid #667eea;">Fino a 5 kg</th>
+                            <th style="padding:0.6rem 0.8rem; text-align:left; border-bottom:2px solid #667eea;">Tempi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇦🇹 Austria</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€5.10</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€5.70</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">2–3 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇧🇪 Belgio</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.00</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€10.70</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3–4 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇧🇬 Bulgaria</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€5.30</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€6.35</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3–4 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇭🇷 Croazia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€4.90</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€5.95</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇨🇿 Repubblica Ceca</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€3.90</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€4.85</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">1–2 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇩🇰 Danimarca</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.50</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€10.65</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇪🇪 Estonia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€8.60</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€9.40</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4–5 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇫🇮 Finlandia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€11.45</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€16.85</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4–5 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇫🇷 Francia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€7.80</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€12.90</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇩🇪 Germania</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€5.85</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€7.85</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">2–3 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇬🇷 Grecia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.10</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€9.15</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">5–7 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇭🇺 Ungheria</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€4.50</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€4.80</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">1–2 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇮🇪 Irlanda</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€10.70</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€14.60</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4–5 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇱🇻 Lettonia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.30</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€7.50</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4–5 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇱🇹 Lituania</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.30</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€6.80</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4–5 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇱🇺 Lussemburgo</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.70</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€10.50</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3–4 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇳🇱 Paesi Bassi</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.70</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€10.50</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">4 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇵🇱 Polonia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€4.40</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€5.00</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">1–2 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇵🇹 Portogallo</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€7.80</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€8.20</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">6–8 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇷🇴 Romania</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€6.90</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€9.50</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">2–3 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇸🇰 Slovacchia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€2.70</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€2.90</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">1–2 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇸🇮 Slovenia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€5.40</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€5.50</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">2–3 gg</td></tr>
+                        <tr><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇪🇸 Spagna</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€7.85</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€8.20</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">3–4 gg</td></tr>
+                        <tr style="background:#fafafa;"><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">🇸🇪 Svezia</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;"><strong>€9.60</strong></td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">€15.10</td><td style="padding:0.5rem 0.8rem; border-bottom:1px solid #eee;">5 gg</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.9rem; color:#888;">* Tempi di consegna dalla spedizione, esclusi sabato e domenica. Tutti gli ordini includono tracking.</p>
+            </div>
+
+            <div class="legal-section">
                 <h2><span class="icon-text">📧</span> Tracking e Notifiche</h2>
                 <p>Riceverai automaticamente un'email con il numero di tracking non appena il tuo pacco viene affidato al corriere. Potrai seguire la consegna in tempo reale sul sito del corriere.</p>
 
@@ -231,7 +288,7 @@
             <div class="legal-section">
                 <h2><span class="icon-text">📄</span> Note</h2>
                 <p>Tutti i prodotti Zenova vengono spediti direttamente dai nostri magazzini partner in Europa. L'imballaggio è curato per garantire che ogni articolo arrivi in perfette condizioni.</p>
-                <p>Per le spedizioni verso altri paesi europei, le tariffe e i tempi saranno comunicati prossimamente.</p>
+                <p>Tutti i prodotti Zenova vengono spediti direttamente dai magazzini del nostro partner in Europa (Ancient Wisdom, Sheffield UK) con corrieri tracciati. La spedizione è disponibile in tutti i principali paesi europei — consulta la tabella qui sopra per le tariffe per paese.</p>
             </div>
 
             <a href="index.html" class="back-link">← Torna alla Home</a>
@@ -302,5 +359,23 @@
         </svg>
     </a>
     <script src="cookie-banner.js"></script>
+    <script>
+    (function() {
+        var toggle = document.getElementById('mobileMenuToggle');
+        var navMenu = document.querySelector('.nav-menu');
+        if (toggle && navMenu) {
+            toggle.addEventListener('click', function() {
+                toggle.classList.toggle('active');
+                navMenu.classList.toggle('mobile-open');
+            });
+            navMenu.querySelectorAll('.nav-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    toggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-open');
+                });
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
