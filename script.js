@@ -1858,7 +1858,6 @@ function updateWishlist() {
 // Add to cart from wishlist
 function addToCartFromWishlist(productId) {
     addToCart(productId);
-    showNotification('Aggiunto al carrello!');
 }
 
 // Update wishlist button in modal
