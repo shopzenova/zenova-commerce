@@ -1842,7 +1842,7 @@ function updateWishlist() {
                     <div class="wishlist-item-price">€${(item.price || 0).toFixed(2)}</div>
                     <div class="wishlist-item-actions">
                         <button class="wishlist-add-cart-btn" onclick="addToCartFromWishlist('${item.id}')">
-                            Aggiungi al Carrello
+                            🛒 Al Carrello
                         </button>
                     </div>
                 </div>

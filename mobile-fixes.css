@@ -850,6 +850,41 @@
     }
 }
 
+/* Wishlist items su mobile */
+@media (max-width: 480px) {
+    .wishlist-item {
+        flex-wrap: wrap;
+    }
+
+    .wishlist-item-image {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    .wishlist-item-info {
+        min-width: 0;
+    }
+
+    .wishlist-item-name {
+        font-size: 0.9rem !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .wishlist-item-price {
+        font-size: 1rem !important;
+    }
+
+    .wishlist-add-cart-btn {
+        font-size: 0.78rem !important;
+        padding: 0.4rem 0.3rem !important;
+        white-space: nowrap;
+    }
+}
+
 /* Migliorie generali touch */
 @media (hover: none) and (pointer: coarse) {
 
