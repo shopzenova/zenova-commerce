@@ -1832,7 +1832,7 @@ function updateWishlist() {
             const imageUrl = getAbsoluteImageUrl(item.image);
             return `
             <div class="wishlist-item">
-                <button class="wishlist-remove-btn" onclick="removeFromWishlist(${item.id})">&times;</button>
+                <button class="wishlist-remove-btn" onclick="removeFromWishlist('${item.id}')">&times;</button>
                 <div class="wishlist-item-image">
                     ${imageUrl ? `<img src="${imageUrl}" alt="${item.name}" loading="lazy">` : item.icon}
                 </div>
@@ -1882,7 +1882,7 @@ function updateProductCardsWishlist() {
     const wishlistButtons = document.querySelectorAll('.product-card-wishlist-btn');
 
     wishlistButtons.forEach(button => {
-        const productId = parseInt(button.getAttribute('data-product-id'));
+        const productId = button.getAttribute('data-product-id');
         const isInList = isInWishlist(productId);
 
         if (isInList) {
