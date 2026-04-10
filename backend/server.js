@@ -326,6 +326,7 @@ app.use((err, req, res, next) => {
 
 const orderStatusJob = require('./src/jobs/OrderStatusJob');
 const stockSyncJob = require('./src/jobs/StockSyncJob');
+const ebayOrderJob = require('./src/jobs/EbayOrderJob');
 
 // ===== START SERVER =====
 
@@ -339,6 +340,9 @@ app.listen(PORT, () => {
 
   // Avvia job sincronizzazione stock automatica (ogni 4h)
   stockSyncJob.start();
+
+  // Avvia job polling ordini eBay (ogni 20 minuti)
+  ebayOrderJob.start();
 });
 
 module.exports = app;
