@@ -26,12 +26,33 @@ const POLL_INTERVAL_MS = parseInt(process.env.EBAY_POLL_INTERVAL_MS) || 20 * 60 
 // Aggiornare ogni volta che si aggiunge un nuovo listing eBay
 // ─────────────────────────────────────────────────────────────────────────────
 const EBAY_ITEM_TO_AW = {
-  // Candele Zodiaco
+  // Candele Zodiaco (ordine alfabetico italiano)
+  '298209498500': 'ZCC-01', // Acquario
+  '298209437999': 'ZCC-02', // Ariete
+  '298209492536': 'ZCC-03', // Bilancia
+  '298209481126': 'ZCC-04', // Cancro
+  '298209416973': 'ZCC-05', // Capricorno
+  '298209465125': 'ZCC-06', // Gemelli
   '298209462210': 'ZCC-07', // Leone
-  // TODO: aggiungere ItemID degli altri listing eBay
-  // '1234567890': 'aw-zcc-01', // Acquario
-  // '1234567891': 'aw-zcc-02', // Pesci
-  // ecc.
+  '298209514634': 'ZCC-08', // Pesci
+  '298209376092': 'ZCC-09', // Sagittario
+  '298209495138': 'ZCC-10', // Scorpione
+  '298209451255': 'ZCC-11', // Toro
+  '298209488985': 'ZCC-12', // Vergine
+
+  // Candele Chakra (ordine chakra: Radice → Corona + Set completo)
+  '298209807713': 'CHKCC-01', // Radice — Diaspro Rosso e Agata Nera
+  '298209842786': 'CHKCC-02', // Sacrale — Occhio di Tigre e Quarzo Rosa
+  '298209862915': 'CHKCC-03', // Plesso Solare — Ametista e Agata Nera
+  '298209865178': 'CHKCC-04', // Cuore — Quarzo Rosa e Giada
+  '298209874620': 'CHKCC-05', // Gola — Sodalite e Giada
+  '298209889127': 'CHKCC-06', // Terzo Occhio — Ametista e Quarzo Rosa
+  '298209900837': 'CHKCC-07', // Corona — Celestite e Selenite
+  '298209909930': 'CHKCC-08', // 7 Chakra — Sette Pietre Preziose
+
+  // LSF Bouquet — varianti multiple: Custom Label per variante richiesto su eBay
+  // 298211307269 = Bouquet Rosa rossa e garofano (6 varianti) → LSF-01..06 via Custom Label
+  // 298212478034 = Bouquet Cuore 24 Rose (4 varianti) → LSF-19.. via Custom Label
 };
 // Finestra ordini: ultimi 2 giorni (per non perdere ordini se il server era down)
 const ORDER_WINDOW_HOURS = 48;
@@ -303,7 +324,7 @@ class EbayOrderJob {
   async _resolveAwSku(item) {
     // 1. Custom Label impostato al codice AW
     if (item.sku && !item.sku.match(/^\d+$/)) {
-      return item.sku;
+      return item.sku.toUpperCase();
     }
 
     // 2. Ricerca nel DB per titolo
