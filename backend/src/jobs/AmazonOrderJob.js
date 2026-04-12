@@ -30,12 +30,11 @@ const POLL_INTERVAL_MS = parseInt(process.env.AMAZON_POLL_INTERVAL_MS) || 30 * 6
 // Set manuale (più codici): invia N righe ad AW (1 per ogni componente)
 // ─────────────────────────────────────────────────────────────────────────────
 const ASIN_TO_AW = {
-  // Set 3 Incensi Smudge con Cristallo (da completare con i 3 codici CGi dopo approvazione)
+  // Set 3 Incensi Smudge con Cristallo — Ametista Lavanda + Quarzo Rosa + Occhio di Tigre Vaniglia
   'B0GWXNM13C': [
-    // TODO: aggiungere i 3 codici CGi scelti per il set
-    // { sku: 'CGi-01', quantity: 1 },
-    // { sku: 'CGi-03', quantity: 1 },
-    // { sku: 'CGi-05', quantity: 1 },
+    { sku: 'CGi-01', quantity: 1 }, // Amethyst / Lavender
+    { sku: 'CGi-02', quantity: 1 }, // Rose Quartz / Rose
+    { sku: 'CGi-04', quantity: 1 }, // Tiger Eye / Vanilla
   ],
 
   // Kit Palo Santo 3 in 1 — bundle AW (1 codice)
