@@ -107,7 +107,9 @@ model Order {
   awSentAt          DateTime? @map("aw_sent_at")
   ebayOrderId       String?   @map("ebay_order_id")
   ebayTrackingSent  Boolean   @default(false) @map("ebay_tracking_sent")
-  source            String?   @default("shop") // "shop", "ebay"
+  amazonOrderId     String?   @map("amazon_order_id")
+  amazonTrackingSent Boolean  @default(false) @map("amazon_tracking_sent")
+  source            String?   @default("shop") // "shop", "ebay", "amazon"
   supplierError     String?   @map("supplier_error")
   supplierRetries   Int       @default(0) @map("supplier_retries")
   status            String    @default("pending")

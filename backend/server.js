@@ -324,9 +324,10 @@ app.use((err, req, res, next) => {
 
 // ===== JOBS =====
 
-const orderStatusJob = require('./src/jobs/OrderStatusJob');
-const stockSyncJob = require('./src/jobs/StockSyncJob');
-const ebayOrderJob = require('./src/jobs/EbayOrderJob');
+const orderStatusJob  = require('./src/jobs/OrderStatusJob');
+const stockSyncJob    = require('./src/jobs/StockSyncJob');
+const ebayOrderJob    = require('./src/jobs/EbayOrderJob');
+const amazonOrderJob  = require('./src/jobs/AmazonOrderJob');
 
 // ===== START SERVER =====
 
@@ -343,6 +344,9 @@ app.listen(PORT, () => {
 
   // Avvia job polling ordini eBay (ogni 20 minuti)
   ebayOrderJob.start();
+
+  // Avvia job polling ordini Amazon (ogni 30 minuti)
+  amazonOrderJob.start();
 });
 
 module.exports = app;
