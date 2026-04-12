@@ -19,6 +19,20 @@ const awDropship = new AWDropshipClient();
 
 // Intervallo polling (default 20 minuti)
 const POLL_INTERVAL_MS = parseInt(process.env.EBAY_POLL_INTERVAL_MS) || 20 * 60 * 1000;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MAPPING eBay ItemID → codice AW
+// Usato quando il Custom Label del listing non è impostato al codice AW
+// Aggiornare ogni volta che si aggiunge un nuovo listing eBay
+// ─────────────────────────────────────────────────────────────────────────────
+const EBAY_ITEM_TO_AW = {
+  // Candele Zodiaco
+  '298209462210': 'ZCC-07', // Leone
+  // TODO: aggiungere ItemID degli altri listing eBay
+  // '1234567890': 'aw-zcc-01', // Acquario
+  // '1234567891': 'aw-zcc-02', // Pesci
+  // ecc.
+};
 // Finestra ordini: ultimi 2 giorni (per non perdere ordini se il server era down)
 const ORDER_WINDOW_HOURS = 48;
 
@@ -187,13 +201,17 @@ class EbayOrderJob {
       const awClientId = awClient?.id;
       if (!awClientId) throw new Error('createClient AW fallito');
 
-      // Costruisci items per AW (portfolioId = SKU del prodotto AW)
+      // Costruisci items per AW
+      // Priorità: 1) Custom Label (SKU eBay = codice AW) 2) Mapping ItemID → AW
       const awItems = eo.items
-        .filter(i => i.sku)
-        .map(i => ({
-          portfolioId: i.sku,
-          quantity:    i.quantity,
-        }));
+        .map(i => {
+          const awSku = i.sku && !i.sku.match(/^\d+$/)
+            ? i.sku                          // Custom Label = codice AW
+            : EBAY_ITEM_TO_AW[i.sku]         // fallback: mapping ItemID
+              || EBAY_ITEM_TO_AW[i.itemId];  // fallback: mapping ItemID diretto
+          return awSku ? { portfolioId: awSku, quantity: i.quantity } : null;
+        })
+        .filter(Boolean);
 
       if (awItems.length === 0) {
         throw new Error('Nessun item con SKU valido per AW');

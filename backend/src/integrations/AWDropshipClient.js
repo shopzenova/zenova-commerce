@@ -384,6 +384,7 @@ class AWDropshipClient {
    */
   async updateDeliveryAddress(orderId, address) {
     const payload = {
+      public_notes: '',
       delivery_address: {
         contact_name: (address.name || '').trim(),
         country_code: (address.country || 'IT').trim(),
