@@ -38,8 +38,7 @@ const ASIN_TO_AW = {
   ],
 
   // Kit Palo Santo 3 in 1 — bundle AW (1 codice)
-  // AMAZON_ASIN_PALOSANTO: da aggiungere quando approvato
-  // 'BXXXXXXXXX': [{ sku: 'B-61418-8425', quantity: 1 }],
+  'B0GWXMYYTP': [{ sku: 'B-61418-8425', quantity: 1 }],
 };
 
 class AmazonOrderJob {
