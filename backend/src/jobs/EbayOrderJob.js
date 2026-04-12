@@ -201,17 +201,16 @@ class EbayOrderJob {
       const awClientId = awClient?.id;
       if (!awClientId) throw new Error('createClient AW fallito');
 
-      // Costruisci items per AW
-      // Priorità: 1) Custom Label (SKU eBay = codice AW) 2) Mapping ItemID → AW
-      const awItems = eo.items
-        .map(i => {
-          const awSku = i.sku && !i.sku.match(/^\d+$/)
-            ? i.sku                          // Custom Label = codice AW
-            : EBAY_ITEM_TO_AW[i.sku]         // fallback: mapping ItemID
-              || EBAY_ITEM_TO_AW[i.itemId];  // fallback: mapping ItemID diretto
-          return awSku ? { portfolioId: awSku, quantity: i.quantity } : null;
-        })
-        .filter(Boolean);
+      // Costruisci items per AW — risoluzione automatica del codice AW
+      const awItems = [];
+      for (const i of eo.items) {
+        const awSku = await this._resolveAwSku(i);
+        if (awSku) {
+          awItems.push({ portfolioId: awSku, quantity: i.quantity });
+        } else {
+          logger.warn(`EbayOrderJob: impossibile risolvere AW SKU per item "${i.title}" (itemId=${i.itemId}, sku=${i.sku})`);
+        }
+      }
 
       if (awItems.length === 0) {
         throw new Error('Nessun item con SKU valido per AW');
@@ -292,6 +291,74 @@ class EbayOrderJob {
       }
       await this._delay(1000);
     }
+  }
+
+  /**
+   * Risolve il codice AW reale per un item eBay.
+   * Priorità:
+   * 1. Custom Label (se non numerico = già codice AW)
+   * 2. Ricerca nel DB per titolo prodotto
+   * 3. Mapping manuale EBAY_ITEM_TO_AW (fallback legacy)
+   */
+  async _resolveAwSku(item) {
+    // 1. Custom Label impostato al codice AW
+    if (item.sku && !item.sku.match(/^\d+$/)) {
+      return item.sku;
+    }
+
+    // 2. Ricerca nel DB per titolo
+    if (item.title) {
+      const keyword = this._extractKeyword(item.title);
+      if (keyword) {
+        const product = await prisma.product.findFirst({
+          where: {
+            source: 'aw',
+            name: { contains: keyword, mode: 'insensitive' }
+          },
+          select: { id: true, name: true }
+        });
+        if (product) {
+          const awCode = this._toAwCode(product.id);
+          logger.info(`EbayOrderJob: "${item.title}" → DB "${product.name}" → AW ${awCode}`);
+          return awCode;
+        }
+      }
+    }
+
+    // 3. Mapping manuale legacy
+    const manual = EBAY_ITEM_TO_AW[item.sku] || EBAY_ITEM_TO_AW[item.itemId];
+    if (manual) return manual;
+
+    return null;
+  }
+
+  /**
+   * Converte l'ID interno DB nel codice AW reale.
+   * aw-zcc-07  → ZCC-07
+   * CGi-01     → CGi-01
+   * B-61418-8425 → B-61418-8425
+   */
+  _toAwCode(dbId) {
+    if (dbId.startsWith('aw-')) {
+      return dbId.slice(3).toUpperCase();
+    }
+    return dbId;
+  }
+
+  /**
+   * Estrae la parola chiave più specifica dal titolo eBay.
+   * "Candela Cristallo Zodiaco Leone con Bracciale" → "Leone"
+   */
+  _extractKeyword(title) {
+    const stopWords = new Set(['con', 'di', 'il', 'la', 'le', 'un', 'una', 'set',
+      'regalo', 'e', 'da', 'per', 'in', 'con', 'del', 'dei', 'delle', 'dal',
+      'pietre', 'cristallo', 'naturale', 'bracciale', 'profumo', 'incenso']);
+    const words = title
+      .split(/[\s\-|–—]+/)
+      .map(w => w.replace(/[^a-zA-ZÀ-ú]/g, '').trim())
+      .filter(w => w.length > 3 && !stopWords.has(w.toLowerCase()));
+    // Prendi l'ultima parola significativa (di solito la più specifica)
+    return words[words.length - 1] || null;
   }
 
   _delay(ms) {
