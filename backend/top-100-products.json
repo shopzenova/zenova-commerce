@@ -153631,5 +153631,55 @@
     "reviews": 0,
     "weight": 0.044,
     "importedAt": "2026-03-30"
+  },
+  {
+    "id": "B-61418-8425",
+    "sku": "B-61418-8425",
+    "name": "Kit Palo Santo 3 in 1 — Bastoncini + Resina + Incenso Masala",
+    "description": "Un cofanetto completo dedicato al Palo Santo, il \"legno sacro\" utilizzato da secoli per purificare gli ambienti e favorire il benessere.\n\nIl set include:\n• Bastoncini Palo Santo Green Tree 50g (5-8 bastoncini) — brucia lentamente, profumo intenso e naturale\n• Resina Rituale Palo Santo su Bastoncino — l'essenza pura in formato comodo\n• Incenso Masala Botanico Palo Santo — miscela naturale con base Palo Santo\n\nIdeale come regalo o per uso personale. 100% naturale, provenienza sostenibile dal Perù ed Ecuador.",
+    "price": 9.47,
+    "retailPrice": 24.5,
+    "wholesalePrice": 9.47,
+    "originalPrice": 24.5,
+    "images": [
+      "https://media.aiku.io/pkP0A1GOs3cimhOAAksnCC7LU1Mxqhj2BIIoJoAAgDM/bG9jYWw6Ly9tZWRpYS8xUC9BRS82MFIzMEMxRzZNVjNBRTFQLzdhNTRkMzE0LmpwZWc",
+      "https://media.aiku.io/Sh9NIrdazA2oF8HXeQsKqLS-rRexM0yMUH9sBzmFUWs/bG9jYWw6Ly9tZWRpYS8xSi9BRS82MFIzMEMxRzZNVjNBRTFKL2Q4NjJmOTVlLmpwZWc",
+      "https://media.aiku.io/u--Kd9Jjl0zuJvVHW8L69Gk-iK2ftm-zGlbgaBs0mGw/bG9jYWw6Ly9tZWRpYS8xSy9BRS82MFIzMEMxRzZNVjNBRTFLL2Y2NGMwY2UyLmpwZWc",
+      "https://media.aiku.io/RszVn0a3Edat0dp5N3yKC0KjBh-pEaVd2Lr3zYrhyQ4/bG9jYWw6Ly9tZWRpYS8xTS9BRS82MFIzMEMxRzZNVjNBRTFNLzNmNjQwMTIyLmpwZWc",
+      "https://media.aiku.io/DZ1JL_OY2AQpxLqtO2rqs96CrMOUGss7EesqluAO7rs/bG9jYWw6Ly9tZWRpYS8xTi9BRS82MFIzMEMxRzZNVjNBRTFOLzdiYWU4MTg0LmpwZWc"
+    ],
+    "mainImage": "https://media.aiku.io/pkP0A1GOs3cimhOAAksnCC7LU1Mxqhj2BIIoJoAAgDM/bG9jYWw6Ly9tZWRpYS8xUC9BRS82MFIzMEMxRzZNVjNBRTFQLzdhNTRkMzE0LmpwZWc",
+    "category": "natural-wellness",
+    "categoryId": 4,
+    "zenovaCategory": "natural-wellness",
+    "zenovaSubcategory": "kit-benessere-cofanetti-regalo",
+    "subcategory": "kit-benessere-cofanetti-regalo",
+    "stock": 250,
+    "inStock": true,
+    "featured": false,
+    "tags": [
+      "palo santo",
+      "incenso",
+      "bundle",
+      "kit",
+      "cofanetto",
+      "purificazione",
+      "legno sacro",
+      "regalo"
+    ],
+    "source": "aw",
+    "supplier": "AW",
+    "awId": "B-61418-8425",
+    "isBundle": true,
+    "bundleComponents": [
+      "PSanto-02",
+      "RitRinc-09",
+      "NBoti-03"
+    ],
+    "weight": 0.134,
+    "dimensions": "24x16x1",
+    "rating": 4.5,
+    "reviews": 0,
+    "importedAt": "2026-04-12"
   }
 ]
