@@ -50,6 +50,9 @@ const EBAY_ITEM_TO_AW = {
   '298209900837': 'CHKCC-07', // Corona — Celestite e Selenite
   '298209909930': 'CHKCC-08', // 7 Chakra — Sette Pietre Preziose
 
+  // Set 6 Candele di Soia Profumate - Cofanetto Regalo Aromi Misti
+  '298220852371': 'B-61418-7061',
+
   // LSF Bouquet — varianti multiple: Custom Label per variante richiesto su eBay
   // 298211307269 = Bouquet Rosa rossa e garofano (6 varianti) → LSF-01..06 via Custom Label
   // 298212478034 = Bouquet Cuore 24 Rose (4 varianti) → LSF-19.. via Custom Label
