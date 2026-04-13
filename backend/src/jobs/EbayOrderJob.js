@@ -50,6 +50,9 @@ const EBAY_ITEM_TO_AW = {
   '298209900837': 'CHKCC-07', // Corona — Celestite e Selenite
   '298209909930': 'CHKCC-08', // 7 Chakra — Sette Pietre Preziose
 
+  // Kit Palo Santo 3 in 1
+  '298221078286': 'B-61418-8425',
+
   // Set 6 Candele di Soia Profumate - Cofanetto Regalo Aromi Misti
   '298220852371': 'B-61418-7061',
 
