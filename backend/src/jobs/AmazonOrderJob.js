@@ -39,6 +39,9 @@ const ASIN_TO_AW = {
 
   // Kit Palo Santo 3 in 1 — bundle AW (1 codice)
   'B0GWXMYYTP': [{ sku: 'B-61418-8425', quantity: 1 }],
+
+  // Set 6 Candele di Soia Profumate - Cofanetto Regalo Aromi Misti
+  'B0GX139SYS': [{ sku: 'B-61418-7061', quantity: 1 }],
 };
 
 class AmazonOrderJob {
