@@ -42,6 +42,9 @@ const ASIN_TO_AW = {
 
   // Set 6 Candele di Soia Profumate - Cofanetto Regalo Aromi Misti
   'B0GX139SYS': [{ sku: 'B-61418-7061', quantity: 1 }],
+
+  // Kit Relax Casa Aromaterapia – Diffusore LED + Candela Lavanda + 3 Oli Essenziali
+  'B0GX2H21Y4': [{ sku: 'B-61418-2192', quantity: 1 }],
 };
 
 class AmazonOrderJob {
