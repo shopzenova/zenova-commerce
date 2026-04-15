@@ -59,6 +59,9 @@ const EBAY_ITEM_TO_AW = {
   // Kit Relax Casa Aromaterapia – Diffusore LED + Candela Lavanda + 3 Oli Essenziali
   '298222485846': 'B-61418-2192',
 
+  // Set Bracciale Occhio di Tigre + Ciondolo Agata Nera
+  '298229715148': 'B-61418-1427',
+
   // LSF Bouquet — varianti multiple: Custom Label per variante richiesto su eBay
   // 298211307269 = Bouquet Rosa rossa e garofano (6 varianti) → LSF-01..06 via Custom Label
   // 298212478034 = Bouquet Cuore 24 Rose (4 varianti) → LSF-19.. via Custom Label
