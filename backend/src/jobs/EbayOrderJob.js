@@ -62,6 +62,9 @@ const EBAY_ITEM_TO_AW = {
   // Set Bracciale Occhio di Tigre + Ciondolo Agata Nera
   '298229715148': 'B-61418-1427',
 
+  // Bastoncini Palo Santo 1° Grado Premium 1kg
+  '298229825254': 'Msanto-01',
+
   // LSF Bouquet — varianti multiple: Custom Label per variante richiesto su eBay
   // 298211307269 = Bouquet Rosa rossa e garofano (6 varianti) → LSF-01..06 via Custom Label
   // 298212478034 = Bouquet Cuore 24 Rose (4 varianti) → LSF-19.. via Custom Label
