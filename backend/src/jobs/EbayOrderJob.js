@@ -26,19 +26,19 @@ const POLL_INTERVAL_MS = parseInt(process.env.EBAY_POLL_INTERVAL_MS) || 20 * 60 
 // Aggiornare ogni volta che si aggiunge un nuovo listing eBay
 // ─────────────────────────────────────────────────────────────────────────────
 const EBAY_ITEM_TO_AW = {
-  // Candele Zodiaco (ordine alfabetico italiano)
+  // Candele Zodiaco — codici AW reali verificati dal catalogo AW (apr 2026)
   '298209498500': 'ZCC-01', // Acquario
-  '298209437999': 'ZCC-02', // Ariete
-  '298209492536': 'ZCC-03', // Bilancia
-  '298209481126': 'ZCC-04', // Cancro
-  '298209416973': 'ZCC-05', // Capricorno
-  '298209465125': 'ZCC-06', // Gemelli
+  '298209514634': 'ZCC-02', // Pesci
+  '298209437999': 'ZCC-03', // Ariete
+  '298209451255': 'ZCC-04', // Toro
+  '298209465125': 'ZCC-05', // Gemelli
+  '298209481126': 'ZCC-06', // Cancro
   '298209462210': 'ZCC-07', // Leone
-  '298209514634': 'ZCC-08', // Pesci
-  '298209376092': 'ZCC-09', // Sagittario
+  '298209488985': 'ZCC-08', // Vergine
+  '298209492536': 'ZCC-09', // Bilancia
   '298209495138': 'ZCC-10', // Scorpione
-  '298209451255': 'ZCC-11', // Toro
-  '298209488985': 'ZCC-12', // Vergine
+  '298209376092': 'ZCC-11', // Sagittario
+  '298209416973': 'ZCC-12', // Capricorno
 
   // Candele Chakra (ordine chakra: Radice → Corona + Set completo)
   '298209807713': 'CHKCC-01', // Radice — Diaspro Rosso e Agata Nera
