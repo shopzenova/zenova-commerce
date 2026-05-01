@@ -59,6 +59,9 @@ const EBAY_ITEM_TO_AW = {
   // Kit Relax Casa Aromaterapia – Diffusore LED + Candela Lavanda + 3 Oli Essenziali
   '298222485846': 'B-61418-2192',
 
+  // Diffusore Aromi Medusa LED 7 Colori + Effetto Soffio
+  '298278635107': 'AATOM-44',
+
   // Set Bracciale Occhio di Tigre + Ciondolo Agata Nera
   '298229715148': 'B-61418-1427',
 
