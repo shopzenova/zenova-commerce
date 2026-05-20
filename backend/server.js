@@ -165,9 +165,9 @@ const url = require('url');
 const httpsAgent = new https.Agent({ keepAlive: true, maxSockets: 20, timeout: 15000 });
 const httpAgent = new http.Agent({ keepAlive: true, maxSockets: 20, timeout: 15000 });
 
-// Cache in memoria per immagini (max 200MB, TTL 2 ore)
+// Cache in memoria per immagini (max 50MB, TTL 2 ore)
 const imageCache = new Map();
-const IMAGE_CACHE_MAX_SIZE = 200 * 1024 * 1024; // 200MB
+const IMAGE_CACHE_MAX_SIZE = 50 * 1024 * 1024; // 50MB
 const IMAGE_CACHE_TTL = 2 * 60 * 60 * 1000; // 2 ore
 let imageCacheSize = 0;
 
@@ -183,6 +183,21 @@ function evictOldestCache() {
     imageCache.delete(oldest);
   }
 }
+
+// Pulizia periodica entry scadute + log memoria ogni 30 minuti
+setInterval(() => {
+  const now = Date.now();
+  let evicted = 0;
+  for (const [key, entry] of imageCache.entries()) {
+    if (now - entry.timestamp > IMAGE_CACHE_TTL) {
+      imageCacheSize -= entry.data.length;
+      imageCache.delete(key);
+      evicted++;
+    }
+  }
+  const mem = process.memoryUsage();
+  logger.info(`🧹 Cache immagini: ${imageCache.size} entry (${Math.round(imageCacheSize / 1024 / 1024)}MB), ${evicted} scadute rimosse | RAM RSS: ${Math.round(mem.rss / 1024 / 1024)}MB heap: ${Math.round(mem.heapUsed / 1024 / 1024)}MB`);
+}, 30 * 60 * 1000);
 
 // Image proxy endpoint for AW images (to bypass 403 Forbidden)
 app.get('/api/proxy-image', async (req, res) => {
@@ -351,4 +366,12 @@ app.listen(PORT, () => {
 
 module.exports = app;
 // Force redeploy - 2026-01-06-09:02
+
+process.on('uncaughtException', (err) => {
+  logger.error('❌ Uncaught Exception:', err.message, err.stack);
+});
+
+process.on('unhandledRejection', (reason) => {
+  logger.error('❌ Unhandled Rejection:', reason);
+});
 
