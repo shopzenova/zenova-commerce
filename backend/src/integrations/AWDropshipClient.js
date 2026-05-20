@@ -50,6 +50,19 @@ class AWDropshipClient {
           .then(map => logger.info(`✅ AW: Mappa prodotti pre-caricata (${map.size} codici)`))
           .catch(err => logger.error(`❌ AW: Pre-caricamento mappa fallito: ${err.message}`));
       }, 10000); // 10 sec dopo avvio per non intasare
+
+      // Pulizia periodica cache API ogni 6 ore
+      setInterval(() => {
+        const now = Date.now();
+        let evicted = 0;
+        for (const [key, entry] of this.cache.entries()) {
+          if (now - entry.timestamp > this.CACHE_TTL) {
+            this.cache.delete(key);
+            evicted++;
+          }
+        }
+        if (evicted > 0) logger.info(`🧹 AW cache: ${evicted} entry scadute rimosse, ${this.cache.size} rimaste`);
+      }, 6 * 60 * 60 * 1000);
     }
   }
 

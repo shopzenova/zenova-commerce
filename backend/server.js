@@ -346,7 +346,7 @@ const amazonOrderJob  = require('./src/jobs/AmazonOrderJob');
 
 // ===== START SERVER =====
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   logger.info(`🚀 Server Zenova avviato su porta ${PORT}`);
   logger.info(`📝 Ambiente: ${process.env.NODE_ENV}`);
   logger.info(`🌐 Frontend URL: ${process.env.FRONTEND_URL}`);
@@ -362,6 +362,17 @@ app.listen(PORT, () => {
 
   // Avvia job polling ordini Amazon (ogni 30 minuti)
   amazonOrderJob.start();
+});
+
+// Graceful shutdown — Railway manda SIGTERM prima di riavviare
+process.on('SIGTERM', () => {
+  logger.info('🛑 SIGTERM ricevuto — shutdown in corso...');
+  server.close(() => {
+    logger.info('✅ Server chiuso correttamente');
+    process.exit(0);
+  });
+  // Forza uscita dopo 10s se qualcosa si blocca
+  setTimeout(() => process.exit(1), 10000);
 });
 
 module.exports = app;
